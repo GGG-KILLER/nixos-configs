@@ -4,6 +4,7 @@
   imports = [
     ./groups
     ./modules
+    ./nixos
     ./secrets
     ./users
     ./console.nix
