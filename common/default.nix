@@ -5,6 +5,7 @@
     ./groups
     ./modules
     ./nixos
+    ./overlays
     ./secrets
     ./users
     ./console.nix
