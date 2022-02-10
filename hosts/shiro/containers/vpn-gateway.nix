@@ -30,21 +30,21 @@ in
           nameservers = consts.networking.vpnNameservers;
         };
 
-        systemd.services.mullvad-auto-restarter = {
-          description = "Service to fix mullvad if it's broken.";
-          after = [ "mullvad.service" ];
-          startAt = "*:0,15,30,45";
-          serviceConfig = {
-            Type = "oneshot";
-            ExecStart = "+" + (pkgs.writeScript "mullvad_fix" ''
-              if ! ${pkgs.mullvad-vpn}/bin/mullvad status ; then
-                echo "Restarting mullvad...";
-                TALPID_NET_CLS_MOUNT_DIR=/tmp/net_cls timeout 10 ${pkgs.mullvad-vpn}/bin/mullvad-daemon;
-                systemctl restart mullvad.service;
-              fi
-            '');
-          };
-        };
+        # systemd.services.mullvad-auto-restarter = {
+        #   description = "Service to fix mullvad if it's broken.";
+        #   after = [ "mullvad.service" ];
+        #   startAt = "*:0,15,30,45";
+        #   serviceConfig = {
+        #     Type = "oneshot";
+        #     ExecStart = "+" + (pkgs.writeScript "mullvad_fix" ''
+        #       if ! ${pkgs.mullvad-vpn}/bin/mullvad status ; then
+        #         echo "Restarting mullvad...";
+        #         TALPID_NET_CLS_MOUNT_DIR=/tmp/net_cls timeout 10 ${pkgs.mullvad-vpn}/bin/mullvad-daemon;
+        #         systemctl restart mullvad.service;
+        #       fi
+        #     '');
+        #   };
+        # };
 
         # NAT
         networking = {
