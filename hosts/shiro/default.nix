@@ -4,8 +4,7 @@ with lib;
 {
   imports = [
     <nixpkgs/nixos/modules/profiles/minimal.nix>
-    ../../configs
-    ../../overlays
+    ../../common
     ./configs
     ./containers
     ./services
