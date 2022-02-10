@@ -33,7 +33,6 @@ in
         systemd.services.mullvad-auto-restarter = {
           description = "Service to fix mullvad if it's broken.";
           after = [ "mullvad.service" ];
-          requisite = [ "mullvad.service" ];
           startAt = "*:0,15,30,45";
           serviceConfig = {
             Type = "oneshot";
