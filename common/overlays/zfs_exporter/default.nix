@@ -4,7 +4,7 @@ buildGoModule rec {
   pname = "prometheus-zfs-exporter";
   version = "2.2.5";
 
-  src = invalidateFetcherByDrvHash fetchFromGitHub {
+  src = fetchFromGitHub {
     owner = "pdf";
     repo = "zfs_exporter";
     rev = "v${version}";
