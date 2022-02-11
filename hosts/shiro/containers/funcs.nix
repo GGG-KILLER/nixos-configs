@@ -62,11 +62,10 @@ rec {
         in
         {
           imports = [
-            ../../../configs
+            ../../../common
             ../configs/networking/containers
             ../configs/networking/hosts.nix
             ../configs/nixos/gpu.nix
-            ../../../overlays
           ];
 
           options.container = {
