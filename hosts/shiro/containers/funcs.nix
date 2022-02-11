@@ -18,6 +18,7 @@ rec {
       netCfg = config.my.networking.${name};
       ipAddr = netCfg.ipAddrs;
       clanHash = substring 0 10 (builtins.hashString "sha1" name);
+      networking-hosts = config.networking.hosts;
     in
     {
       # This can be overriden by just defining it.
@@ -63,8 +64,6 @@ rec {
         {
           imports = [
             ../../../common
-            ../configs/networking/containers
-            ../configs/networking/hosts.nix
             ../configs/nixos/gpu.nix
           ];
 
@@ -88,6 +87,7 @@ rec {
 
             # Base network configs
             networking = {
+              hosts = networking-hosts;
               useDHCP = mkOverride 900 false;
               enableIPv6 = mkOverride 900 false;
               hostName = name;

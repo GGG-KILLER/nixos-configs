@@ -6,6 +6,13 @@ let
   consts = config.my.constants;
 in
 {
+  my.networking.vpn-gateway = {
+    ipAddrs = {
+      elan = "192.168.1.7";
+      # clan = "192.168.2.1";
+    };
+  };
+
   containers.vpn-gateway = mkContainer {
     name = "vpn-gateway";
 

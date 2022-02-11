@@ -1,7 +1,7 @@
 { pkgs }:
 {
   system = pkgs.lib.recurseIntoAttrs (
-    pkgs.nixos [ ./default.nix ]
+    pkgs.nixos [ ./configuration.nix ]
   );
 
   recurseForDerivations = true;
