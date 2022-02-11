@@ -3,5 +3,5 @@
   }
 }:
 {
-  shiro = pkgs.callPackage ./servers/shiro/test.nix { };
+  shiro = pkgs.callPackage ./hosts/shiro/test.nix { };
 }

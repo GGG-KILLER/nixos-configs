@@ -8,6 +8,7 @@ with lib;
     ./configs
     ./containers
     ./services
+    ./hardware-configuration.nix
   ];
 
   # We want xlibs because we want cached stuff.
