@@ -6,12 +6,6 @@ let
   scrape_interval = "5s";
 in
 {
-  services.grafana = rec {
-    enable = true;
-    domain = "grafana.shiro.lan";
-    rootUrl = "http://${domain}/";
-  };
-
   services.prometheus = {
     enable = true;
     exporters = {
@@ -54,22 +48,9 @@ in
     ];
   };
 
-  modules.services.node-exporter-smartmon.enable = true;
-  modules.services.zfs-exporter.enable = true;
-
-  services.nginx.virtualHosts = {
-    "grafana.shiro.lan" = {
-      locations."/" = {
-        proxyPass = with config.services.grafana; "${protocol}://${addr}:${toString port}";
-      };
-    };
-    "prometheus.shiro.lan" = {
-      locations."/" = {
-        proxyPass = "http://localhost:9090";
-      };
+  services.nginx.virtualHosts."prometheus.shiro.lan" = {
+    locations."/" = {
+      proxyPass = "http://localhost:9090";
     };
   };
-
-  networking.firewall.allowedTCPPorts = [ config.services.grafana.port ];
-  networking.firewall.allowedUDPPorts = [ config.services.grafana.port ];
 }
