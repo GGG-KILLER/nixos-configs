@@ -12,4 +12,7 @@
     ];
     packages = with pkgs; [ man git netcat tcpdump htop nmon restic ];
   };
+
+  users.users.root.openssh.authorizedKeys.keys =
+    config.users.users.ggg.openssh.authorizedKeys.keys;
 }
