@@ -3,6 +3,7 @@
 with lib;
 {
   imports = [
+    ./home-assistant.nix
     ./jellyfin.nix
     ./network-share.nix
     ./openspeedtest.nix
