@@ -21,6 +21,7 @@ in
       "zfs-main-pool/data/jellyfin"
       "zfs-main-pool/data/qbittorrent"
       "zfs-main-pool/data/sonarr"
+      "zfs-main-pool/data/home-assistant"
     ])
     {
       "/var/lib/grafana" = zmount "zfs-main-pool/data/monitoring/grafana";
