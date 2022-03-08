@@ -124,6 +124,13 @@ rec {
                 };
             };
 
+            # Configure the network setup to
+            systemd.services.network-setup.serviceConfig = mkIf netCfg.useVpn {
+              Restart = "on-failure";
+              RestartSec = "30s";
+              StartLimitIntervalSec = "0";
+            };
+
             # Enable the OpenSSH server.
             services.sshd.enable = true;
 
