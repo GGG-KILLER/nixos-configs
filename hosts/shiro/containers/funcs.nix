@@ -127,7 +127,7 @@ rec {
             # Configure the network setup to
             systemd.services.network-setup.serviceConfig = mkIf netCfg.useVpn {
               Restart = "on-failure";
-              RestartSec = "30s";
+              RestartSec = "5s";
               StartLimitIntervalSec = "0";
             };
 
