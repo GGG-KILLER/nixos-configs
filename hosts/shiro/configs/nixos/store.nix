@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  system.autoUpgrade.enable = true;
+  # system.autoUpgrade.enable = true;
 
   # Automatic garbage collect
   nix.gc = {
