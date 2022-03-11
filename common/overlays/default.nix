@@ -5,6 +5,6 @@
     # ./jackett.nix
     # ./qbittorrent.nix
     # ./sonarr.nix
-    ./zfs_exporter.nix
+    ./local.nix
   ];
 }
