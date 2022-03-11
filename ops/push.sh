@@ -1,5 +1,4 @@
-#! /usr/bin/env nix-shell
-#! nix-shell -p morph -i bash
+#! /usr/bin/env bash
 
 set -e
 
