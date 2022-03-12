@@ -22,6 +22,7 @@ in
       address = [
         "192.168.6.1/24"
         "192.168.7.1/24"
+        "192.168.8.1/24"
       ];
       dns = [
         "127.0.0.1"
@@ -37,8 +38,10 @@ in
         ${iptables} -D FORWARD -i ${inp-interface} -j ACCEPT
         ${iptables} -t nat -D POSTROUTING -s 192.168.6.0/24 -o ${out-interface} -j MASQUERADE
       '';
-      # Wing: 192.168.6.2/24
-      # GGG:  192.168.6.3/24
+      # Wing:     192.168.6.2/24
+      # GGG:      192.168.7.2/24
+      # Spar iOS: 192.168.8.2/24
+      # Spar PC1: 192.168.8.3/24
       peers = [
         # Wing
         {
@@ -51,6 +54,18 @@ in
           publicKey = "9e5veN+MDglv9wriGPbSXXZ73T6CI8W+voullqOSuiY=";
           presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.ggg;
           allowedIPs = [ "192.168.7.0/24" ];
+        }
+        # Spar iOS
+        {
+          publicKey = "rrmxFmEhFy0SxDIq2/kTouHPUBjXIvrweDlk9HvMuR0=";
+          presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.spar-ios;
+          allowedIPs = [ "192.168.8.0/24" ];
+        }
+        # Spar PC1
+        {
+          publicKey = "TQtHm4nt3tWg71tfCAwZsTrbc+Rk89VJkjos8V6pUUE=";
+          presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.spar-pc1;
+          allowedIPs = [ "192.168.8.0/24" ];
         }
       ];
     };
