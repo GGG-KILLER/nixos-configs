@@ -48,6 +48,11 @@ in
         default = [ ];
         description = "nameservers to use";
       };
+      setCheckReversePath = mkOption {
+        type = types.bool;
+        default = true;
+        description = "whether to set the networking.firewall.checkReversePath setting";
+      };
     };
   };
 
@@ -58,7 +63,7 @@ in
     networking.iproute2.enable = true;
 
     # See https://github.com/NixOS/nixpkgs/issues/113589
-    networking.firewall.checkReversePath = "loose";
+    networking.firewall.checkReversePath = mkIf mullvadConfig.setCheckReversePath "loose";
 
     environment.systemPackages = with pkgs; [
       mullvad-vpn
