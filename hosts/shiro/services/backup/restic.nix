@@ -13,9 +13,11 @@ in
           "/var/lib/grafana"
           # "/zfs-main-pool/data/animu"
           "/zfs-main-pool/data/etc"
+          "zfs-main-pool/data/gaming"
           "/zfs-main-pool/data/h"
           "/zfs-main-pool/data/jackett"
           "/zfs-main-pool/data/jellyfin"
+          "zfs-main-pool/data/monitoring/grafana"
           "/zfs-main-pool/data/qbittorrent"
           "/zfs-main-pool/data/sonarr"
         ];

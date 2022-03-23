@@ -22,6 +22,7 @@ in
       "zfs-main-pool/data/qbittorrent"
       "zfs-main-pool/data/sonarr"
       "zfs-main-pool/data/home-assistant"
+      "zfs-main-pool/data/gaming/pz-server"
     ])
     {
       "/var/lib/grafana" = zmount "zfs-main-pool/data/monitoring/grafana";
