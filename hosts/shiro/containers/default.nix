@@ -7,6 +7,7 @@ with lib;
     ./jellyfin.nix
     ./network-share.nix
     ./openspeedtest.nix
+    ./pz-server.nix
     ./qbittorrent.nix
     ./sonarr.nix
     ./vpn-gateway.nix

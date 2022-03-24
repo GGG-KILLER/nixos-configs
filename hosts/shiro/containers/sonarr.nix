@@ -45,6 +45,7 @@ in
         isReadOnly = false;
       };
     };
+
     config = { config, pkgs, ... }:
       {
         # Sonarr
