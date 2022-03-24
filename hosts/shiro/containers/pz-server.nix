@@ -44,7 +44,7 @@ in
           enable = true;
           serverName = "meandnight";
           serverDir = "/mnt/pz-server";
-          adminUserName = "gggadmin";
+          adminUserName = "admin";
           adminPassword = "adminggg";
         };
       };
