@@ -111,7 +111,7 @@ in
           {
             User = cfg.user;
             Group = cfg.group;
-            Restart = "on-success";
+            Restart = "always";
             WorkingDirectory = cfg.serverDir;
           };
       };
