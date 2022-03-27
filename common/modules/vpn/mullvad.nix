@@ -39,7 +39,7 @@ in
         description = "tunnel protocol";
       };
       location = mkOption {
-        type = types.nullOr (types.enum [ "no" "br" ]);
+        type = types.nullOr (types.enum [ "de" "no" "br" ]);
         default = "br";
         description = "default location";
       };

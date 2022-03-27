@@ -13,6 +13,10 @@
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   fileSystems."/" =
     {
       device = "/dev/disk/by-uuid/6987effb-3995-4ee5-a4bc-0c284b0ce610";
