@@ -5,7 +5,7 @@
     powershell
     helvum
     virt-manager
-    vscode-fhs
+    vscode
     rnix-lsp
   ];
 }
