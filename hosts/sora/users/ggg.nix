@@ -7,5 +7,6 @@
     virt-manager
     vscode
     rnix-lsp
+    morph
   ];
 }
