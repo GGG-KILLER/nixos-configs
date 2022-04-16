@@ -81,7 +81,7 @@ in
         # Spar iOS
         {
           publicKey = "rrmxFmEhFy0SxDIq2/kTouHPUBjXIvrweDlk9HvMuR0=";
-          presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.spar-ios;
+          # presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.spar-ios;
           allowedIPs = [ "192.168.8.0/24" ];
         }
         # Spar PC1
