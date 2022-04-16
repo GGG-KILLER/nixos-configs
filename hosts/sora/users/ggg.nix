@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, rnix-lsp, morph, ... }:
 
 {
   users.users.ggg.packages = with pkgs; [

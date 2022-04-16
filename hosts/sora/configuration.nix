@@ -2,24 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, nur, ... }:
 
-let
-  nur-no-pkgs = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {};
-in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ../../common
       ./audio.nix
       ./fonts.nix
       ./gnome.nix
       ./hardware-configuration.nix
-      ./nur.nix
       ./nvidia.nix
       ./users/ggg.nix
-      nur-no-pkgs.repos.ilya-fedin.modules.flatpak-fonts
-      nur-no-pkgs.repos.ilya-fedin.modules.flatpak-icons
+      nur.repos.ilya-fedin.modules.flatpak-fonts
+      nur.repos.ilya-fedin.modules.flatpak-icons
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -67,6 +64,13 @@ in
     enable = true;
     qemu.ovmf.enable = true;
   };
+
+    nix = {
+      package = pkgs.nixFlakes;
+      extraOptions = "experimental-features = nix-command flakes";
+      registry.nixpkgs.flake = inputs.nixpkgs;
+      nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

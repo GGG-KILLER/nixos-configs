@@ -4,82 +4,83 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+  ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usb_storage" "uas" "usbhid" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "none";
-      fsType = "tmpfs";
-    };
+  fileSystems."/" = {
+    device = "none";
+    fsType = "tmpfs";
+  };
 
-  fileSystems."/nix" =
-    { device = "rpool/nixos/nix";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/nix" = {
+    device = "rpool/nixos/nix";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/etc" =
-    { device = "rpool/nixos/etc";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/etc" = {
+    device = "rpool/nixos/etc";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/var" =
-    { device = "rpool/nixos/var";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/var" = {
+    device = "rpool/nixos/var";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/var/lib" =
-    { device = "rpool/nixos/var/lib";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/var/lib" = {
+    device = "rpool/nixos/var/lib";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/var/log" =
-    { device = "rpool/nixos/var/log";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/var/log" = {
+    device = "rpool/nixos/var/log";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/var/spool" =
-    { device = "rpool/nixos/var/spool";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/var/spool" = {
+    device = "rpool/nixos/var/spool";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/home" =
-    { device = "rpool/userdata/home";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/home" = {
+    device = "rpool/userdata/home";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/root" =
-    { device = "rpool/userdata/home/root";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/root" = {
+    device = "rpool/userdata/home/root";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/home/ggg" =
-    { device = "rpool/userdata/home/ggg";
-      fsType = "zfs";
-      options = [ "zfsutil" ];
-    };
+  fileSystems."/home/ggg" = {
+    device = "rpool/userdata/home/ggg";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/7DF6-078B";
-      fsType = "vfat";
-      options = [ "X-mount.mkdir" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/7DF6-078B";
+    fsType = "vfat";
+    options = [ "X-mount.mkdir" ];
+  };
 
   swapDevices = [
-    { device = "/dev/disk/by-id/ata-SanDisk_Ultra_II_960GB_170517421132-part2";
+    {
+      device = "/dev/disk/by-id/ata-SanDisk_Ultra_II_960GB_170517421132-part2";
       randomEncryption = true;
     }
   ];
