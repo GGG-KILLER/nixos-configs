@@ -13,6 +13,7 @@
       ./fonts.nix
       ./gnome.nix
       ./hardware-configuration.nix
+      ./home-manager.nix
       ./nvidia.nix
       ./users/ggg.nix
       nur.repos.ilya-fedin.modules.flatpak-fonts
