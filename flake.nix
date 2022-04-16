@@ -5,7 +5,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
     rnix-lsp.url = "github:nix-community/rnix-lsp";
-    morph.url = "github:DBCDK/morph";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +15,7 @@
     # };
   };
 
-  outputs = inputs @ { self, nixpkgs, nur, rnix-lsp, morph, home-manager/*, deploy-rs*/ }:
+  outputs = inputs @ { self, nixpkgs, nur, rnix-lsp, home-manager/*, deploy-rs*/ }:
     let
       lib = nixpkgs.lib;
       nurPkgs = system: import nur {
@@ -27,7 +26,7 @@
         inherit system;
 
         specialArgs = {
-          inherit system inputs nixpkgs rnix-lsp morph home-manager/*deploy-rs*/;
+          inherit system inputs nixpkgs rnix-lsp home-manager/*deploy-rs*/;
           nur = (nurPkgs system);
         };
 
@@ -63,9 +62,9 @@
       # };
     in
     {
-      nixosConfigurations = [
-        (mkNixosDevice { device = "sora"; })
-      ];
+      nixosConfigurations = {
+        sora = mkNixosDevice { device = "sora"; };
+      };
 
       # deploy.nodes = [
       #   (mkNixosServer { server = "shiro"; hostname = "shiro.lan"; })
