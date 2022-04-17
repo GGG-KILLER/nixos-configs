@@ -15,7 +15,7 @@
       ./gnome.nix
       ./hardware-configuration.nix
       ./home-manager.nix
-      ./nvidia.nix
+      ./video.nix
       ./users/ggg.nix
       nur.repos.ilya-fedin.modules.flatpak-fonts
       nur.repos.ilya-fedin.modules.flatpak-icons
@@ -69,6 +69,9 @@
 
   # I2C
   hardware.i2c.enable = true;
+
+  # Enable AMD Microcode Updating
+  hardware.cpu.amd.updateMicrocode = true;
 
   # Flakes
   nix = {
