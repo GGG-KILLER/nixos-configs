@@ -16,12 +16,13 @@
 
     fontDir.enable = true;
     fonts = with pkgs; [
+      cascadia-code
       dejavu_fonts
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
       (nerdfonts.override {
-        fonts = [ "FiraCode" "DroidSansMono" "DejaVuSansMono" "Noto" "Inconsolata" "CascadiaCode" "BitstreamVeraSansMono" ];
+        fonts = [ "FiraCode" "DroidSansMono" "DejaVuSansMono" "Noto" "Inconsolata" "BitstreamVeraSansMono" ];
       })
       liberation_ttf
       siji
