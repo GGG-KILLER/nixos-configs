@@ -10,6 +10,7 @@
       # Include the results of the hardware scan.
       ../../common
       ./audio.nix
+      ./docker.nix
       ./fonts.nix
       ./gnome.nix
       ./hardware-configuration.nix
@@ -38,9 +39,6 @@
   services.xserver.enable = true;
 
   # Packages
-  environment.systemPackages = with pkgs; [
-    #vscode
-  ];
   environment.shells = with pkgs; [ bash powershell ];
 
   # Enable CUPS to print documents.
@@ -88,4 +86,3 @@
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.05"; # Did you read the comment?
 }
-
