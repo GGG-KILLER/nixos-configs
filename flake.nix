@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
-    rnix-lsp.url = "github:nix-community/rnix-lsp";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,7 +14,7 @@
     # };
   };
 
-  outputs = inputs @ { self, nixpkgs, nur, rnix-lsp, home-manager/*, deploy-rs*/ }:
+  outputs = inputs @ { self, nixpkgs, nur, home-manager/*, deploy-rs*/ }:
     let
       lib = nixpkgs.lib;
       nurPkgs = system: import nur {
@@ -26,7 +25,7 @@
         inherit system;
 
         specialArgs = {
-          inherit system inputs nixpkgs rnix-lsp home-manager/*deploy-rs*/;
+          inherit system inputs nixpkgs home-manager/* deploy-rs*/;
           nur = (nurPkgs system);
         };
 
