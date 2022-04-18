@@ -10,13 +10,13 @@ in
 {
   home-manager.users.ggg = {
     home.packages = with pkgs; [
-      powershell
-      helvum
-      virt-manager
-      rnix-lsp
-      morph
       (dotnet-sdk pkgs)
+      helvum
       mono
+      morph
+      powershell
+      rnix-lsp
+      virt-manager
     ];
 
     programs = {
@@ -24,9 +24,10 @@ in
       vscode = {
         enable = true;
         package = pkgs.vscode-fhsWithPackages (pkgs: with pkgs; [
-          rnix-lsp
           (dotnet-sdk pkgs)
           mono
+          morph
+          rnix-lsp
         ]);
       };
       git = {
