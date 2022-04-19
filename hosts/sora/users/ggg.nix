@@ -34,6 +34,10 @@ in
         enable = true;
         userName = "GGG";
         userEmail = "gggkiller2@gmail.com";
+        extraConfig = {
+          credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager-core";
+          credential.credentialStore = "secretservice";
+        };
       };
     };
   };

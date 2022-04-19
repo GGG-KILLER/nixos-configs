@@ -81,6 +81,13 @@
     nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
   };
 
+  # git-credential-manager has /usr/bin/which hardcoded.
+  system.activationScripts.usr-bin-which = ''
+    mkdir -p /usr/bin
+    rm /usr/bin/which
+    ln -sfn ${pkgs.which}/bin/which /usr/bin/which
+  '';
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
