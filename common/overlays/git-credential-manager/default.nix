@@ -1,14 +1,31 @@
 { lib
 , fetchzip
-, openssl
 , fontconfig
+, icu
 , libkrb5
+, libsecret
+, libunwind
+, libX11
+, openssl_1_1
 , zlib
 , stdenv
 , autoPatchelfHook
-, which
+, makeWrapper
 }:
 
+let
+  libraries = [
+    fontconfig
+    icu
+    libkrb5
+    libsecret
+    libunwind
+    libX11
+    openssl_1_1
+    stdenv.cc.cc
+    zlib
+  ];
+in
 stdenv.mkDerivation rec {
   pname = "git-credential-manager";
   version = "2.0.696";
@@ -20,29 +37,29 @@ stdenv.mkDerivation rec {
     stripRoot = false;
   };
 
-  buildInputs = runtimeDependencies ++ [
-    stdenv.cc.cc
-    libkrb5
-    fontconfig
-    zlib
-  ];
+  buildInputs = libraries;
 
   nativeBuildInputs = [
     autoPatchelfHook
-  ];
-
-  runtimeDependencies = [
-    openssl
-    which
+    makeWrapper
   ];
 
   installPhase = ''
-    runHook preInstall
+    gcmlibs=$out/share/gcm
+    mkdir -p $gcmlibs
 
-    mkdir -p $out
-    cp -r . $out/
+    cp -r * $gcmlibs
 
-    runHook postInstall
+    chmod +x Atlassian.Bitbucket.UI
+    chmod +x GitHub.UI
+    chmod +x GitLab.UI
+    chmod +x git-credential-manager-core
+
+    mkdir -p $out/bin
+
+    makeWrapper $gcmlibs/git-credential-manager-core $out/bin/git-credential-manager-core \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libraries}" \
+      --set TERM xterm --set DOTNET_CLI_TELEMETRY_OPTOUT 1
   '';
 
   meta = with lib; {
