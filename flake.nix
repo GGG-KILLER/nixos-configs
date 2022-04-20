@@ -46,19 +46,21 @@
         shiro = {
           hostname = "shiro.lan";
           profiles.system = {
-            sshOpts = [ "-i" "~/.ssh/id_deploy" ];
             user = "root";
-            sshUser = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
+            sshOpts = [ "-i" "~/.ssh/id_deploy" ];
+            sshUser = "root";
+            autoRollback = false;
+            magicRollback = false;
           };
         };
         vpn-proxy = {
           hostname = "vpn-proxy.ggg.dev";
           profiles.system = {
-            sshOpts = [ "-i" "~/.ssh/id_deploy" "-p" "17606" ];
             user = "root";
-            sshUser = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vpn-proxy;
+            sshOpts = [ "-i" "~/.ssh/id_deploy" "-p" "17606" ];
+            sshUser = "root";
           };
         };
       };
