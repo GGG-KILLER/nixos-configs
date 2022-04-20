@@ -16,12 +16,12 @@
 
   outputs = inputs @ { self, nixpkgs, nur, home-manager, deploy-rs }:
     let
-      lib = nixpkgs.lib;
+      system = "x86_64-linux";
       nurPkgs = system: import nur {
         pkgs = import nixpkgs { inherit system; };
         nurpkgs = import nixpkgs { inherit system; };
       };
-      mkNixosDevice = { system ? "x86_64-linux", device }: lib.nixosSystem {
+      mkConfig = host: nixpkgs.lib.nixosSystem {
         inherit system;
 
         specialArgs = {
@@ -31,54 +31,33 @@
 
         modules = [
           ./common
-          (./hosts + "/${device}/configuration.nix")
+          (./hosts + "/${host}/configuration.nix")
         ];
-      };
-      mkNixosServer = { system ? "x86_64-linux", server, hostname }: {
-        inherit hostname;
-        profiles.system = {
-          user = "root";
-          sshOpts = [ "-A" ];
-          path = deploy-rs.lib.x86_64-linux.activate.nixos (lib.nixosSystem {
-            inherit system;
-
-            specialArgs = {
-              inherit system inputs nixpkgs home-manager deploy-rs;
-              nur = (nurPkgs system);
-              machineArgs = {
-                hostName = server;
-              };
-            };
-
-            modules = [
-              ./common
-              (./hosts + "/${server}/configuration.nix")
-            ];
-          });
-        };
       };
     in
     {
       nixosConfigurations = {
-        sora = mkNixosDevice { device = "sora"; };
-        shiro = mkNixosDevice { device = "shiro"; };
-        vpn-proxy = mkNixosDevice { device = "vpn-proxy"; };
+        sora = mkConfig "sora";
+        shiro = mkConfig "shiro";
+        vpn-proxy = mkConfig "vpn-proxy";
       };
 
       deploy.nodes = {
         shiro = {
           hostname = "shiro.lan";
           profiles.system = {
-            sshOpts = [ "-i" ./ops/deploy.privkey ];
+            sshOpts = [ "-i" "~/.ssh/id_deploy" ];
             user = "root";
+            sshUser = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
           };
         };
         vpn-proxy = {
           hostname = "vpn-proxy.ggg.dev";
           profiles.system = {
-            sshOpts = [ "-i" ./ops/deploy.privkey ];
+            sshOpts = [ "-i" "~/.ssh/id_deploy" "-p" "17606" ];
             user = "root";
+            sshUser = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vpn-proxy;
           };
         };
