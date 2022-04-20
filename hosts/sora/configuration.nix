@@ -76,14 +76,6 @@
   # easyeffects needs this
   programs.dconf.enable = true;
 
-  # Flakes
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-    registry.nixpkgs.flake = inputs.nixpkgs;
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-  };
-
   # git-credential-manager has /usr/bin/which hardcoded.
   system.activationScripts.usr-bin-which = ''
     mkdir -p /usr/bin
