@@ -73,6 +73,9 @@
   # Enable AMD Microcode Updating
   hardware.cpu.amd.updateMicrocode = true;
 
+  # easyeffects needs this
+  programs.dconf.enable = true;
+
   # Flakes
   nix = {
     package = pkgs.nixFlakes;
