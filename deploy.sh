@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+nix run github:serokell/deploy-rs
