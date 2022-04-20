@@ -7,12 +7,11 @@
 {
   imports =
     [
-      # Include the results of the hardware scan.
-      ../../common
       ./audio.nix
       ./docker.nix
       ./fonts.nix
       ./gnome.nix
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./home-manager.nix
       ./video.nix
@@ -75,6 +74,14 @@
 
   # easyeffects needs this
   programs.dconf.enable = true;
+
+  # Flakes
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  };
 
   # git-credential-manager has /usr/bin/which hardcoded.
   system.activationScripts.usr-bin-which = ''

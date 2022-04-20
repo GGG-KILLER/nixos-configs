@@ -1,10 +1,9 @@
-{ config, pkgs, lib, modulesPath, ... }:
+{ config, pkgs, lib, modulesPath, inputs, ... }:
 
 with lib;
 {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
-    ../../common
     ./configs
     ./containers
     ./services
@@ -21,6 +20,14 @@ with lib;
   };
 
   services.openssh.enable = true;
+
+  # Flakes
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = "experimental-features = nix-command flakes";
+    registry.nixpkgs.flake = inputs.nixpkgs;
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
