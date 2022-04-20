@@ -6,29 +6,28 @@ let
     sdk_5_0
     sdk_3_1
   ]);
+  devtools = pkgs: with pkgs; [
+    (dotnet-sdk pkgs)
+    mono
+    morph
+    powershell
+    rnix-lsp
+  ];
 in
 {
   home-manager.users.ggg = {
-    home.packages = with pkgs; [
-      (dotnet-sdk pkgs)
+    home.packages = (with pkgs; [
       helvum
-      mono
-      morph
-      powershell
-      rnix-lsp
       virt-manager
-    ];
+      openrgb
+      libguestfs-with-appliance
+    ]) ++ (devtools pkgs);
 
     programs = {
       home-manager.enable = true;
       vscode = {
         enable = true;
-        package = pkgs.vscode-fhsWithPackages (pkgs: with pkgs; [
-          (dotnet-sdk pkgs)
-          mono
-          morph
-          rnix-lsp
-        ]);
+        package = pkgs.vscode-fhsWithPackages devtools;
       };
       git = {
         enable = true;
