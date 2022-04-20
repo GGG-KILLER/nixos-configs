@@ -16,25 +16,42 @@ in
         autohint = true;
         enable = true;
       };
+      # defaultFonts.serif = [
+      #   "Times New Roman"
+      #   # "DejaVu Serif"
+      # ];
+      # defaultFonts.emoji = [
+      #   "Segoe UI Emoji"
+      #   # "Noto Color Emoji"
+      # ];
+      # defaultFonts.sansSerif = [
+      #   "Arial"
+      #   # "DejaVu Sans"
+      # ];
+      defaultFonts.monospace = [
+        "Cascadia Code"
+        "Consolas"
+      ];
     };
 
     fontDir.enable = true;
     fonts = with pkgs; [
       cascadia-code
-      dejavu_fonts
       noto-fonts
-      noto-fonts-cjk
+      noto-fonts-extra
       noto-fonts-emoji
-      (nerdfonts.override {
-        fonts = [ "FiraCode" "DroidSansMono" "DejaVuSansMono" "Noto" "Inconsolata" "BitstreamVeraSansMono" ];
-      })
-      liberation_ttf
-      siji
+      noto-fonts-cjk
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      noto-fonts-emoji-blob-bin
       unifont
       corefonts
       vistafonts
+      vistafonts-cht
+      vistafonts-chs
       source-sans-pro
       source-code-pro
+      # local.winfonts
     ];
   };
 }
