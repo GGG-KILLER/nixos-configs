@@ -3,7 +3,7 @@
 with lib;
 {
   imports = [
-    <nixpkgs/nixos/modules/profiles/minimal.nix>
+    "${modulesPath}/profiles/minimal.nix"
     ../../common
     ./configs
     ./containers
