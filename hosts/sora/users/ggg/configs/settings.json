@@ -82,7 +82,6 @@
     "jupyter.jupyterServerType": "local",
     "terminal.integrated.fontFamily": "monospace",
     "nix.enableLanguageServer": true,
-    "omnisharp.useGlobalMono": "always",
     "editor.fontLigatures": true,
     "editor.fontFamily": "'Cascadia Code'"
 }
