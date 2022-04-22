@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ system, nixpkgs-stable, pkgs, ... }:
 
 let
   inherit (builtins) fromJSON readFile map filter;
@@ -6,6 +6,9 @@ let
   settings = readJSON ./configs/settings.json;
   keybindings = readJSON ./configs/keybindings.json;
   inherit (pkgs.vscode-utils) extensionsFromVscodeMarketplace;
+  stablePkgs = import nixpkgs-stable { inherit system; };
+  omnisharp-roslyn = stablePkgs.omnisharp-roslyn;
+  ms-dotnettools-csharp = stablePkgs.vscode-extensions.ms-dotnettools.csharp;
 in
 {
   home-manager.users.ggg = {
@@ -14,7 +17,7 @@ in
       userSettings =
         settings //
         {
-          "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/omnisharp";
+          "omnisharp.path" = "${omnisharp-roslyn}/bin/omnisharp";
           # "omnisharp.loggingLevel" = "trace";
           "omnisharp.enableDecompilationSupport" = true;
           "extensions.autoCheckUpdates" = false;
@@ -94,9 +97,9 @@ in
       ];
     };
 
-    home.packages = with pkgs; [
+    home.packages = [
       omnisharp-roslyn
-      rust-analyzer
+      pkgs.rust-analyzer
     ];
   };
 }

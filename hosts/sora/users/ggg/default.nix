@@ -2,17 +2,21 @@
 
 let
   dotnet-sdk = pkgs: (with pkgs.dotnetCorePackages; combinePackages [
+    aspnetcore_6_0
     sdk_6_0
+    runtime_6_0
+    aspnetcore_5_0
     sdk_5_0
+    runtime_5_0
+    aspnetcore_3_1
     sdk_3_1
+    runtime_3_1
   ]);
   devtools = pkgs: with pkgs; [
     (dotnet-sdk pkgs)
     mono
-    morph
     powershell
     rnix-lsp
-    omnisharp-roslyn
   ];
 in
 {
