@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-21.11";
     nur.url = "github:nix-community/NUR";
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -14,7 +15,7 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nur, home-manager, deploy-rs }:
+  outputs = inputs @ { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs }:
     let
       system = "x86_64-linux";
       nurPkgs = system: import nur {
@@ -25,7 +26,7 @@
         inherit system;
 
         specialArgs = {
-          inherit system inputs nixpkgs home-manager deploy-rs;
+          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs;
           nur = (nurPkgs system);
         };
 
