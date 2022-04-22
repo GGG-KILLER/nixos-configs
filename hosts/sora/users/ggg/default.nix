@@ -41,6 +41,7 @@ in
         extraConfig = {
           credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager-core";
           credential.credentialStore = "secretservice";
+          init.defaultBranch = "main";
         };
       };
     };
