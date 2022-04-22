@@ -10,10 +10,13 @@
     extraPackages32 = with pkgs.pkgsi686Linux; [ nvidia-vaapi-driver libvdpau-va-gl vaapiVdpau ];
   };
 
-  # Optionally, you may need to select the appropriate driver version for your specific GPU.
+  # NVIDIA VA-API is fucked.
+  # It breaks VSCode and makes everything laggy.
+  # environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
+  # environment.sessionVariables.VDPAU_DRIVER = "nvidia";
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    modesetting.enable = true;
+    # modesetting.enable = true;
     powerManagement.enable = true;
   };
 
