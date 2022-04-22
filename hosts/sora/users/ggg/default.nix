@@ -12,9 +12,14 @@ let
     morph
     powershell
     rnix-lsp
+    omnisharp-roslyn
   ];
 in
 {
+  imports = [
+    ./vscode.nix
+  ];
+
   home-manager.users.ggg = {
     home.packages = (with pkgs; [
       helvum
@@ -25,10 +30,6 @@ in
 
     programs = {
       home-manager.enable = true;
-      vscode = {
-        enable = true;
-        package = pkgs.vscode-fhsWithPackages devtools;
-      };
       git = {
         enable = true;
         userName = "GGG";

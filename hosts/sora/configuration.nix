@@ -15,7 +15,7 @@
       ./hardware-configuration.nix
       ./home-manager.nix
       ./video.nix
-      ./users/ggg.nix
+      ./users/ggg
       nur.repos.ilya-fedin.modules.flatpak-fonts
       nur.repos.ilya-fedin.modules.flatpak-icons
     ];
