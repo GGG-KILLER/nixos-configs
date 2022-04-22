@@ -1,6 +1,4 @@
-// Place your settings in this file to overwrite the default settings
 {
-    // Word Wrapping
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "same",
     "editor.mouseWheelScrollSensitivity": 1.5,
@@ -20,10 +18,8 @@
     },
     "extensions.ignoreRecommendations": false,
 
-    // Disable minimap
     "editor.minimap.enabled": false,
 
-    // TS Formatting
     "typescript.format.enable": true,
     "typescript.format.insertSpaceAfterCommaDelimiter": true,
     "typescript.check.npmIsInstalled": true,
@@ -32,11 +28,9 @@
     "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
 
-    // TS Code Lens
     "typescript.implementationsCodeLens.enabled": true,
     "typescript.referencesCodeLens.enabled": true,
 
-    // CPP shit
     "C_Cpp.commentContinuationPatterns": [
         "/**",
         "/*"
@@ -45,10 +39,8 @@
     "C_Cpp.workspaceParsingPriority": "medium",
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
 
-    // Python shit
     "python.linting.enabled": false,
 
-    // Synchronization
     "editor.smoothScrolling": true,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
