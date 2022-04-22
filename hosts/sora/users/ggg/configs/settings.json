@@ -1,0 +1,127 @@
+// Place your settings in this file to overwrite the default settings
+{
+    "editor.insertSpaces": false,
+
+    // Word Wrapping
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "same",
+    "editor.mouseWheelScrollSensitivity": 1.5,
+    "editor.renderWhitespace": "boundary",
+    "editor.renderControlCharacters": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
+    "files.eol": "\n",
+    "files.trimTrailingWhitespace": true,
+    "files.autoSave": "onWindowChange",
+    "explorer.autoReveal": false,
+    "debug.inlineValues": true,
+    "html.format.indentInnerHtml": true,
+    "html.format.indentHandlebars": true,
+    "html.format.extraLiners": "",
+    "telemetry.enableTelemetry": false,
+    "files.associations": {
+    },
+    "extensions.ignoreRecommendations": false,
+
+    // Disable minimap
+    "editor.minimap.enabled": false,
+
+    // Set the terminal to use
+    "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
+
+    // TS Formatting
+    "typescript.format.enable": true,
+    "typescript.format.insertSpaceAfterCommaDelimiter": true,
+    "typescript.check.npmIsInstalled": true,
+    "typescript.format.insertSpaceAfterSemicolonInForStatements": true,
+    "typescript.format.insertSpaceAfterTypeAssertion": true,
+    "typescript.format.insertSpaceBeforeAndAfterBinaryOperators": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingJsxExpressionBraces": false,
+
+    // TS Code Lens
+    "typescript.implementationsCodeLens.enabled": true,
+    "typescript.referencesCodeLens.enabled": true,
+
+    // CPP shit
+    "C_Cpp.commentContinuationPatterns": [
+        "/**",
+        "/*"
+    ],
+    "C_Cpp.preferredPathSeparator": "Forward Slash",
+    "C_Cpp.workspaceParsingPriority": "medium",
+    "C_Cpp.intelliSenseEngineFallback": "Enabled",
+
+    // Lua shit
+    "lua.format.indentCount": 4,
+    "lua.format.singleQuote": true,
+    "lua.format.lineWidth": 120,
+    "lua.preferLuaCheckErrors": false,
+    "lua.targetVersion": "5.1",
+
+    // Python shit
+    "python.linting.enabled": false,
+
+    // PHP shit
+    "php.executablePath": "B:\\path\\_\\php-7.2\\php.exe",
+    "php.memoryLimit": "1024M",
+    "latex-workshop.message.update.show": false,
+
+    // Synchronization
+    "sync.gist": "f4ac2bf8bfe5b258c4b492ab0ddc1dbc",
+    "sync.quietSync": true,
+    "sync.askGistName": false,
+    "sync.removeExtensions": true,
+    "sync.syncExtensions": true,
+    "sync.autoDownload": false,
+    "sync.autoUpload": true,
+    "sync.forceDownload": false,
+    "editor.smoothScrolling": true,
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.jediEnabled": false,
+    "git.autofetch": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "git.confirmSync": false,
+    "sync.forceUpload": false,
+    "java.semanticHighlighting.enabled": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "rust-client.engine": "rust-analyzer",
+    "rust-client.updateOnStartup": true,
+    "rust.all_features": true,
+    "editor.largeFileOptimizations": false,
+    "editor.formatOnType": true,
+
+    "terraform.languageServer": {
+        "external": true,
+        "pathToBinary": "",
+        "args": [
+            "serve"
+        ],
+        "maxNumberOfProblems": 100,
+        "trace.server": "off"
+    },
+    "redhat.telemetry.enabled": false,
+    "githubPullRequests.fileListLayout": "tree",
+
+    "[nix]": {
+        "editor.detectIndentation": false,
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2
+    },
+    "python.languageServer": "Default",
+    "notebook.lineNumbers": "on",
+    "git.enableSmartCommit": true,
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "editor.maxTokenizationLineLength": 50000,
+    "jupyter.jupyterServerType": "local",
+    "terminal.integrated.fontFamily": "monospace",
+    "nix.enableLanguageServer": true,
+    "omnisharp.useGlobalMono": "always",
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "'Cascadia Code'"
+}
