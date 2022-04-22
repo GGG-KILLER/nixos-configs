@@ -35,6 +35,7 @@ in
         jnoortheen.nix-ide
         octref.vetur
         redhat.vscode-yaml
+        matklad.rust-analyzer
       ] ++ extensionsFromVscodeMarketplace [
         {
           publisher = "vscjava";
@@ -90,17 +91,12 @@ in
           version = "2021.12.0";
           sha256 = "QKtFxJn5ze0TbsLdQKQ7c4i6u64PzkmROqhdf2uLGvo=";
         }
-        {
-          publisher = "rust-lang";
-          name = "rust";
-          version = "0.7.8";
-          sha256 = "Y33agSNMVmaVCQdYd5mzwjiK5JTZTtzTkmSGTQrSNg0=";
-        }
       ];
     };
 
     home.packages = with pkgs; [
       omnisharp-roslyn
+      rust-analyzer
     ];
   };
 }
