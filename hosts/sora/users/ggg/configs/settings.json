@@ -1,7 +1,5 @@
 // Place your settings in this file to overwrite the default settings
 {
-    "editor.insertSpaces": false,
-
     // Word Wrapping
     "editor.wordWrap": "on",
     "editor.wrappingIndent": "same",
@@ -18,16 +16,12 @@
     "html.format.indentInnerHtml": true,
     "html.format.indentHandlebars": true,
     "html.format.extraLiners": "",
-    "telemetry.enableTelemetry": false,
     "files.associations": {
     },
     "extensions.ignoreRecommendations": false,
 
     // Disable minimap
     "editor.minimap.enabled": false,
-
-    // Set the terminal to use
-    "terminal.integrated.shell.windows": "C:\\Program Files\\PowerShell\\7\\pwsh.exe",
 
     // TS Formatting
     "typescript.format.enable": true,
@@ -51,39 +45,16 @@
     "C_Cpp.workspaceParsingPriority": "medium",
     "C_Cpp.intelliSenseEngineFallback": "Enabled",
 
-    // Lua shit
-    "lua.format.indentCount": 4,
-    "lua.format.singleQuote": true,
-    "lua.format.lineWidth": 120,
-    "lua.preferLuaCheckErrors": false,
-    "lua.targetVersion": "5.1",
-
     // Python shit
     "python.linting.enabled": false,
 
-    // PHP shit
-    "php.executablePath": "B:\\path\\_\\php-7.2\\php.exe",
-    "php.memoryLimit": "1024M",
-    "latex-workshop.message.update.show": false,
-
     // Synchronization
-    "sync.gist": "f4ac2bf8bfe5b258c4b492ab0ddc1dbc",
-    "sync.quietSync": true,
-    "sync.askGistName": false,
-    "sync.removeExtensions": true,
-    "sync.syncExtensions": true,
-    "sync.autoDownload": false,
-    "sync.autoUpload": true,
-    "sync.forceDownload": false,
     "editor.smoothScrolling": true,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "python.jediEnabled": false,
     "git.autofetch": true,
     "diffEditor.ignoreTrimWhitespace": false,
     "git.confirmSync": false,
-    "sync.forceUpload": false,
-    "java.semanticHighlighting.enabled": true,
     "typescript.updateImportsOnFileMove.enabled": "always",
     "rust-client.engine": "rust-analyzer",
     "rust-client.updateOnStartup": true,
@@ -97,11 +68,9 @@
         "args": [
             "serve"
         ],
-        "maxNumberOfProblems": 100,
         "trace.server": "off"
     },
     "redhat.telemetry.enabled": false,
-    "githubPullRequests.fileListLayout": "tree",
 
     "[nix]": {
         "editor.detectIndentation": false,
