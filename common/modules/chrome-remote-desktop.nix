@@ -3,6 +3,7 @@
 with lib;
 let
   cfg = config.services.chrome-remote-desktop;
+  chrome-remote-desktop = pkgs.chrome-remote-desktop.override { enableNewSession = cfg.newSession; };
 in
 {
   options.services.chrome-remote-desktop = {
@@ -14,20 +15,27 @@ in
       '';
       example = "alice";
     };
+    newSession = mkOption {
+      type = types.bool;
+      description = "Whether to start a new session";
+      default = false;
+      example = "true";
+    };
   };
 
   config = mkIf cfg.enable {
     environment = {
       etc = {
-        "chromium/native-messaging-hosts/com.google.chrome.remote_assistance.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_assistance.json";
-        "chromium/native-messaging-hosts/com.google.chrome.remote_desktop.json".source = "${pkgs.chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
+        "chromium/native-messaging-hosts/com.google.chrome.remote_assistance.json".source = "${chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_assistance.json";
+        "chromium/native-messaging-hosts/com.google.chrome.remote_desktop.json".source = "${chrome-remote-desktop}/etc/opt/chrome/native-messaging-hosts/com.google.chrome.remote_desktop.json";
       };
-      systemPackages = [ pkgs.chrome-remote-desktop ];
+      systemPackages = [ chrome-remote-desktop ];
     };
 
     security = {
-      wrappers.crd-user-session.source = "${pkgs.chrome-remote-desktop}/opt/google/chrome-remote-desktop/user-session";
-
+      wrappers.crd-user-session.source = "${chrome-remote-desktop}/opt/google/chrome-remote-desktop/user-session";
+      wrappers.crd-user-session.owner = cfg.user;
+      wrappers.crd-user-session.group = "chrome-remote-desktop";
       pam.services.chrome-remote-desktop.text = ''
         auth        required    pam_unix.so
         account     required    pam_unix.so
@@ -41,7 +49,7 @@ in
     users.users.${cfg.user}.extraGroups = [ "chrome-remote-desktop" ];
 
     systemd.packages = [
-      pkgs.chrome-remote-desktop
+      chrome-remote-desktop
     ];
 
     # Reference : ${pkgs.chrome-remote-desktop}/lib/systemd/system/chrome-remote-desktop@.service
@@ -55,9 +63,9 @@ in
         Environment = "XDG_SESSION_CLASS=user XDG_SESSION_TYPE=x11";
         PAMName = "chrome-remote-desktop";
         TTYPath = "/dev/chrome-remote-desktop";
-        ExecStart = "${pkgs.chrome-remote-desktop}/opt/google/chrome-remote-desktop/chrome-remote-desktop --start --new-session";
-        ExecReload = "${pkgs.chrome-remote-desktop}/opt/google/chrome-remote-desktop/chrome-remote-desktop --reload";
-        ExecStop = "${pkgs.chrome-remote-desktop}/opt/google/chrome-remote-desktop/chrome-remote-desktop --stop";
+        ExecStart = "${chrome-remote-desktop}/opt/google/chrome-remote-desktop/chrome-remote-desktop --start --new-session";
+        ExecReload = "${chrome-remote-desktop}/opt/google/chrome-remote-desktop/chrome-remote-desktop --reload";
+        ExecStop = "${chrome-remote-desktop}/opt/google/chrome-remote-desktop/chrome-remote-desktop --stop";
         StandardOutput = "journal";
         StandardError = "inherit";
         RestartForceExitStatus = "41";
