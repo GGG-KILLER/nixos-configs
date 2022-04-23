@@ -14,8 +14,9 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./home-manager.nix
-      ./video.nix
+      ./remote-desktop.nix
       ./users/ggg
+      ./video.nix
       nur.repos.ilya-fedin.modules.flatpak-fonts
       nur.repos.ilya-fedin.modules.flatpak-icons
     ];
