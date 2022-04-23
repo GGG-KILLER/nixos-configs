@@ -35,9 +35,6 @@
   networking.hostName = "sora";
   networking.hostId = "6967af45";
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
   # Packages
   environment.shells = with pkgs; [ bash powershell ];
 

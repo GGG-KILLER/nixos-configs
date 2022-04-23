@@ -1,12 +1,25 @@
-{ config, pkgs, ... }:
+{ lib, config, pkgs, ... }:
 
+with lib;
 {
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = {
+    enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+    # Enable the GNOME Desktop Environment.
+    displayManager.gdm = {
+      enable = true;
+      wayland = mkForce true;
+      # nvidiaWayland = true;
+    };
+
+    desktopManager.gnome.enable = true;
+  };
+
+  # Remote Desktop
+  services.gnome.gnome-remote-desktop.enable = true;
+  programs.xwayland.enable = true;
+
   environment.systemPackages = with pkgs; [
     gnomeExtensions.always-show-titles-in-overview
     gnomeExtensions.appindicator
@@ -19,12 +32,10 @@
     gnomeExtensions.dash-to-panel
     gnomeExtensions.arcmenu
     gnome.gnome-remote-desktop
+    gnome3.adwaita-icon-theme
   ];
   services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 
   # Configure keymap in X11
   services.xserver.layout = "br";
-
-  # Remote Desktop
-  services.gnome.gnome-remote-desktop.enable = true;
 }

@@ -6,8 +6,8 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-    # extraPackages = with pkgs; [ nvidia-vaapi-driver libvdpau-va-gl vaapiVdpau ];
-    # extraPackages32 = with pkgs.pkgsi686Linux; [ nvidia-vaapi-driver libvdpau-va-gl vaapiVdpau ];
+    extraPackages = with pkgs; [ nvidia-vaapi-driver libvdpau-va-gl vaapiVdpau ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [ nvidia-vaapi-driver libvdpau-va-gl vaapiVdpau ];
   };
 
   # NVIDIA VA-API is fucked.
@@ -16,7 +16,7 @@
   # environment.sessionVariables.VDPAU_DRIVER = "nvidia";
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # modesetting.enable = true;
+    modesetting.enable = true;
     powerManagement.enable = true;
   };
 
