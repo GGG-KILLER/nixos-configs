@@ -30,6 +30,7 @@ in
       virt-manager
       openrgb
       libguestfs-with-appliance
+      xca
     ]) ++ (devtools pkgs);
 
     programs = {
