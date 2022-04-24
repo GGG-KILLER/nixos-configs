@@ -23,6 +23,8 @@ in
       "zfs-main-pool/data/sonarr"
       "zfs-main-pool/data/home-assistant"
       "zfs-main-pool/data/gaming/pz-server"
+      "zfs-main-pool/data/dbs/pgsql-dev"
+      "zfs-main-pool/data/dbs/pgsql-prd"
     ])
     {
       "/var/lib/grafana" = zmount "zfs-main-pool/data/monitoring/grafana";
