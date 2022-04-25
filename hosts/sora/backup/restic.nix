@@ -29,6 +29,7 @@ in
           "--exclude=/home/ggg/.pki"
           "--exclude=/home/ggg/.templateengine"
           "--exclude=/home/ggg/.vscode"
+          "--exclude=/home/ggg/.var/app/com.valvesoftware.Steam/.local/share/Steam"
         ];
         pruneOpts = [
           "--keep-daily 7"
