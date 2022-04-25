@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, nur, ... }:
+{ config, pkgs, inputs, nur-no-pkgs, ... }:
 
 {
   imports =
@@ -18,8 +18,8 @@
       #./remote-desktop.nix
       ./users/ggg
       ./video.nix
-      nur.repos.ilya-fedin.modules.flatpak-fonts
-      nur.repos.ilya-fedin.modules.flatpak-icons
+      nur-no-pkgs.repos.ilya-fedin.modules.flatpak-fonts
+      nur-no-pkgs.repos.ilya-fedin.modules.flatpak-icons
     ];
 
   # Use the systemd-boot EFI boot loader.
