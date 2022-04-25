@@ -8,8 +8,8 @@ with lib;
 
     # Enable the GNOME Desktop Environment.
     displayManager = {
-      # gdm.enable = true;
-      xpra.enable = true;
+      gdm.enable = true;
+      # xpra.enable = true;
     };
 
     desktopManager.gnome.enable = true;
@@ -34,7 +34,4 @@ with lib;
     gnome3.adwaita-icon-theme
   ];
   services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
-
-  # Configure keymap in X11
-  services.xserver.layout = "br";
 }

@@ -29,9 +29,36 @@
     Option         "BaseMosaic" "off"
     Option         "AllowIndirectGLXProtocol" "off"
     Option         "TripleBuffer" "on"
+    Option         "VariableRefresh" "true"
     SubSection     "Display"
       Depth        24
       Modes        "1920x1080" "1366x768" "1280x720"
     EndSubSection
   '';
+
+  services.xserver.xrandrHeads = [
+    {
+      output = "DP-2";
+      primary = true;
+      monitorConfig = ''
+        Modeline "1920x1080_143.85"  452.00  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync
+        Modeline "1368x768_143.85"  226.25  1368 1480 1624 1880  768 771 781 838 -hsync +vsync
+        Modeline "1280x720_143.85"  198.75  1280 1384 1520 1760  720 723 728 786 -hsync +vsync
+        Option "PreferredMode" "1920x1080_143.85"
+      '';
+    }
+    {
+      output = "HDMI-1";
+      monitorConfig = ''
+        Modeline "1920x1080_74.97"  220.75  1920 2064 2264 2608  1080 1083 1088 1130 -hsync +vsync
+        Modeline "1368x768_74.97"  109.25  1368 1448 1592 1816  768 771 781 805 -hsync +vsync
+        Modeline "1280x720_74.97"   95.75  1280 1360 1488 1696  720 723 728 755 -hsync +vsync
+        Option "PreferredMode" "1920x1080_74.97"
+        Option "RightOf" "DP-2"
+      '';
+    }
+  ];
+
+  # Configure keymap in X11
+  services.xserver.layout = "br";
 }
