@@ -78,6 +78,18 @@
     options = [ "X-mount.mkdir" ];
   };
 
+  fileSystems."/mnt/DataInt" = {
+    device = "/dev/disk/by-id/ata-ST1000DM010-2EP102_ZN17GS17-part1";
+    fsType = "ntfs";
+    options = [ "nofail" ];
+  };
+
+  fileSystems."/mnt/DataExt" = {
+    device = "/dev/disk/by-id/usb-Seagate_Expansion_NAA4BEJR-0:0-part1";
+    fsType = "ntfs";
+    options = [ "nofail" ];
+  };
+
   swapDevices = [
     {
       device = "/dev/disk/by-id/ata-SanDisk_Ultra_II_960GB_170517421132-part2";
