@@ -8,6 +8,7 @@
   imports =
     [
       ./audio.nix
+      ./backup/restic.nix
       ./docker.nix
       ./fonts.nix
       ./gnome.nix
