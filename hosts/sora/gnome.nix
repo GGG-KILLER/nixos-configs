@@ -7,10 +7,9 @@ with lib;
     enable = true;
 
     # Enable the GNOME Desktop Environment.
-    displayManager.gdm = {
-      enable = true;
-      wayland = mkForce true;
-      # nvidiaWayland = true;
+    displayManager = {
+      # gdm.enable = true;
+      xpra.enable = true;
     };
 
     desktopManager.gnome.enable = true;
