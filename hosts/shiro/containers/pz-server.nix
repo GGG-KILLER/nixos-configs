@@ -46,7 +46,10 @@ in
         options.nix.settings.auto-optimise-store = mkOption {
           type = types.bool;
         };
+
         config = {
+          nixpkgs.config.allowUnfree = true;
+
           modules.services.pz-server = {
             enable = true;
             serverName = "meandnight";
