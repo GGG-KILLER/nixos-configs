@@ -3,8 +3,14 @@
 {
   # ZFS maintenance settings.
   services.zfs.trim.enable = true;
+
+  # Expand all devices on boot
+  services.zfs.expandOnBoot = "all";
+
+  # Enable auto-scrub
   services.zfs.autoScrub.enable = true;
-  services.zfs.autoScrub.pools = [ "rpool" ];
+
+  # Enable auto-snapshot
   services.zfs.autoSnapshot.enable = true;
 
   # Enable ZED's pushbullet compat
