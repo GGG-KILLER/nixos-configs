@@ -15,11 +15,14 @@
     };
   };
 
-  outputs = inputs @ { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs }:
+  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs } @ inputs:
     let
       system = "x86_64-linux";
       nurPkgs = system: import nur {
         pkgs = import nixpkgs { inherit system; };
+        nurpkgs = import nixpkgs { inherit system; };
+      };
+      nurNoPkgs = system: import nur {
         nurpkgs = import nixpkgs { inherit system; };
       };
       mkConfig = host: nixpkgs.lib.nixosSystem {
@@ -28,6 +31,7 @@
         specialArgs = {
           inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs;
           nur = (nurPkgs system);
+          nur-no-pkgs = (nurNoPkgs system);
         };
 
         modules = [
