@@ -1,4 +1,4 @@
-{ config, lib, ... }@args:
+{ config, lib, nixpkgs-stable, ... }@args:
 
 with lib;
 let
@@ -27,6 +27,8 @@ in
   containers.pz-server = mkContainer {
     name = "pz-server";
 
+    nixpkgs = nixpkgs-stable;
+
     includeAnimu = false;
     includeEtc = false;
     includeH = false;
@@ -38,14 +40,20 @@ in
       };
     };
 
-    config = { config, pkgs, ... }:
+    config = { lib, config, pkgs, ... }:
+      with lib;
       {
-        modules.services.pz-server = {
-          enable = true;
-          serverName = "meandnight";
-          serverDir = "/mnt/pz-server";
-          adminUserName = "admin";
-          adminPassword = "adminggg";
+        options.nix.settings.auto-optimise-store = mkOption {
+          type = types.bool;
+        };
+        config = {
+          modules.services.pz-server = {
+            enable = true;
+            serverName = "meandnight";
+            serverDir = "/mnt/pz-server";
+            adminUserName = "admin";
+            adminPassword = "adminggg";
+          };
         };
       };
   };
