@@ -55,8 +55,8 @@ in
           rcloneConfig = {
             type = "b2";
             hard_delete = true;
-            account = backblaze.backup.keyId;
-            key = backblaze.backup.applicationKey;
+            account = backblaze.backup-shiro.keyId;
+            key = backblaze.backup-shiro.applicationKey;
             download_url = "https://6397f2b4ff373fe3.ggg.dev";
           };
         }
