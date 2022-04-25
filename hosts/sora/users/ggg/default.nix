@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ system, pkgs, deploy-rs, ... }:
 
 let
   dotnet-sdk = pkgs: (with pkgs.dotnetCorePackages; combinePackages [
@@ -31,6 +31,8 @@ in
       openrgb
       libguestfs-with-appliance
       xca
+      xpra
+      deploy-rs.packages.${system}.deploy-rs
     ]) ++ (devtools pkgs);
 
     programs = {
