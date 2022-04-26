@@ -20,45 +20,67 @@
     powerManagement.enable = true;
   };
 
-  services.xserver.screenSection = ''
-    Option         "Stereo" "0"
-    Option         "nvidiaXineramaInfoOrder" "DFP-3"
-    Option         "metamodes" "DP-2: 1920x1080_144 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On, AllowGSYNCCompatible=On}, HDMI-1: 1920x1080_75 +1920+28 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On, AllowGSYNCCompatible=On}"
-    Option         "SLI" "Off"
-    Option         "MultiGPU" "Off"
-    Option         "BaseMosaic" "off"
-    Option         "AllowIndirectGLXProtocol" "off"
-    Option         "TripleBuffer" "on"
-    Option         "VariableRefresh" "true"
-    SubSection     "Display"
-      Depth        24
-      Modes        "1920x1080" "1366x768" "1280x720"
-    EndSubSection
-  '';
+  services.xserver = {
+    exportConfiguration = true;
 
-  services.xserver.xrandrHeads = [
-    {
-      output = "DP-2";
-      primary = true;
-      monitorConfig = ''
-        Modeline "1920x1080_143.85"  452.00  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync
-        Modeline "1368x768_143.85"  226.25  1368 1480 1624 1880  768 771 781 838 -hsync +vsync
-        Modeline "1280x720_143.85"  198.75  1280 1384 1520 1760  720 723 728 786 -hsync +vsync
-        Option "PreferredMode" "1920x1080_143.85"
-      '';
-    }
-    {
-      output = "HDMI-1";
-      monitorConfig = ''
-        Modeline "1920x1080_74.97"  220.75  1920 2064 2264 2608  1080 1083 1088 1130 -hsync +vsync
-        Modeline "1368x768_74.97"  109.25  1368 1448 1592 1816  768 771 781 805 -hsync +vsync
-        Modeline "1280x720_74.97"   95.75  1280 1360 1488 1696  720 723 728 755 -hsync +vsync
-        Option "PreferredMode" "1920x1080_74.97"
-        Option "RightOf" "DP-2"
-      '';
-    }
-  ];
+    deviceSection = ''
+      VendorName     "NVIDIA Corporation"
+      BoardName      "NVIDIA GeForce RTX 3080"
+    '';
 
-  # Configure keymap in X11
-  services.xserver.layout = "br";
+    screenSection = ''
+      DefaultDepth    24
+      Option         "Stereo" "0"
+      Option         "nvidiaXineramaInfoOrder" "DFP-3"
+      Option         "metamodes" "DP-2: 1920x1080_144 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On, AllowGSYNCCompatible=On}, HDMI-1: 1920x1080_75 +1920+28 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On, AllowGSYNCCompatible=On}"
+      Option         "SLI" "Off"
+      Option         "MultiGPU" "Off"
+      Option         "BaseMosaic" "off"
+      Option         "AllowIndirectGLXProtocol" "off"
+      Option         "TripleBuffer" "on"
+      Option         "VariableRefresh" "true"
+    '';
+
+    extraDisplaySettings = ''
+      Modes        "1920x1080_144" "1920x1080_75"
+    '';
+
+    xrandrHeads = [
+      {
+        output = "DP-2";
+        primary = true;
+        monitorConfig = ''
+          # HorizSync source: edid, VertRefresh source: edid
+          VendorName     "Acer"
+          ModelName      "Acer KG241Q P"
+          HorizSync       180.0 - 180.0
+          VertRefresh     48.0 - 144.0
+          DisplaySize     521.395 293.285
+          Modeline       "1920x1080_144"  452.50  1920 2088 2296 2672  1080 1083 1088 1177 -hsync +vsync
+          Modeline       "1368x768_144"  226.50  1368 1480 1624 1880  768 771 781 838 -hsync +vsync
+          Option         "PreferredMode" "1920x1080_144"
+          Option         "DPMS"
+        '';
+      }
+      {
+        output = "HDMI-1";
+        monitorConfig = ''
+          # HorizSync source: edid, VertRefresh source: edid
+          VendorName     "LG Electronics"
+          ModelName      "LG Electronics LG FULL HD 24MK430H-B"
+          HorizSync       30.0 - 85.0
+          VertRefresh     48.0 - 75.0
+          DisplaySize     527.04 296.46
+          Modeline       "1920x1080_75"  220.75  1920 2064 2264 2608  1080 1083 1088 1130 -hsync +vsync
+          Modeline       "1368x768_75"  109.50  1368 1448 1592 1816  768 771 781 805 -hsync +vsync
+          Option         "PreferredMode" "1920x1080_75"
+          Option         "Position" "+1920+28"
+          Option         "DPMS"
+        '';
+      }
+    ];
+
+    # Configure keymap in X11
+    layout = "br";
+  };
 }
