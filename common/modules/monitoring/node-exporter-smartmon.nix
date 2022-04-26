@@ -43,11 +43,15 @@ in
         PrivateTmp = true;
         WorkingDirectory = "/tmp";
       };
-      script = ''
-        mkdir -pm 0775 /var/lib/prometheus/node-exporter/text-files
-        set -euxo pipefail
-        ${./smartmon.sh} | sponge /var/lib/prometheus/node-exporter/text-files/smartmon.prom
-      '';
+      script =
+        let
+          script = pkgs.writeScript "smartmon.sh" (builtins.readFile ./smartmon.sh);
+        in
+        ''
+          mkdir -pm 0775 /var/lib/prometheus/node-exporter/text-files
+          set -euxo pipefail
+          ${script} | sponge /var/lib/prometheus/node-exporter/text-files/smartmon.prom
+        '';
     };
 
     # Add the text file flags to the node exporter config.
