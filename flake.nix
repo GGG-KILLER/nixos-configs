@@ -57,6 +57,7 @@
             sshUser = "root";
             autoRollback = false;
             magicRollback = false;
+            fastConnection = false;
           };
         };
         vpn-proxy = {
