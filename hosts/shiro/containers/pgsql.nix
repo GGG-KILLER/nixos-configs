@@ -42,6 +42,10 @@ let
             package = pgsql;
             dataDir = "/mnt/pgsql";
             enableTCPIP = true;
+            authentication = ''
+              # TYPE  DATABASE        USER            ADDRESS                 METHOD
+              host    all             all             192.168.1.0/24          scram-sha-256
+            '';
             settings = {
               # Resource Consumtion Settings (https://www.postgresql.org/docs/14/runtime-config-resource.html)
               shared_buffers = "512MB"; #       default: 128M
