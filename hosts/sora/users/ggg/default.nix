@@ -31,8 +31,11 @@ in
       openrgb
       libguestfs-with-appliance
       xca
-      xpra
       deploy-rs.packages.${system}.deploy-rs
+      # pgadmin # Broken
+      pgmodeler
+      pgformatter
+      postgresql_14
     ]) ++ (devtools pkgs);
 
     programs = {
