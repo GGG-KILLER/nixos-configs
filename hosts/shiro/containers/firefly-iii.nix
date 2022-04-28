@@ -66,10 +66,24 @@ rec {
         services.nginx = {
           enable = true;
           virtualHosts."money.lan" = {
-            root = "/var/www/firefly-iii";
-            locations."~ \.php$".extraConfig = ''
+            default = true;
+            root = "/var/www/firefly-iii/public";
+            extraConfig = ''
+              index index.html index.htm index.php;
+            '';
+            locations."/" = {
+              tryFiles = "$uri /index.php$is_args$args";
+              extraConfig = ''
+                autoindex on;
+                sendfile off;
+              '';
+            };
+            locations."~ \\.php$".extraConfig = ''
               fastcgi_pass  unix:${config.services.phpfpm.pools.mypool.socket};
               fastcgi_index index.php;
+              fastcgi_read_timeout 240;
+              fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+              fastcgi_split_path_info ^(.+.php)(/.+)$;
             '';
           };
         };
