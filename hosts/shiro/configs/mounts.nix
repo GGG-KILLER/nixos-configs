@@ -25,6 +25,7 @@ in
       "zfs-main-pool/data/gaming/pz-server"
       "zfs-main-pool/data/dbs/pgsql-dev"
       "zfs-main-pool/data/dbs/pgsql-prd"
+      "zfs-main-pool/data/firefly-iii"
     ])
     {
       "/var/lib/grafana" = zmount "zfs-main-pool/data/monitoring/grafana";
