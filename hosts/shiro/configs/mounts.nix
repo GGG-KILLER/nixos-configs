@@ -5,6 +5,7 @@ let
   zmount = name: {
     device = name;
     fsType = "zfs";
+    options = [ "zfsutil" ];
   };
   rootMount = name:
     { "/${name}" = zmount name; };
