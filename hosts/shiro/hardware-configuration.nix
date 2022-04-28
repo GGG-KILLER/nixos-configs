@@ -14,16 +14,19 @@
   fileSystems."/" = {
     device = "zfs-main-pool/system/root";
     fsType = "zfs";
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/nix" = {
     device = "zfs-main-pool/system/nix";
     fsType = "zfs";
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/var" = {
     device = "zfs-main-pool/system/var";
     fsType = "zfs";
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/boot" = {
