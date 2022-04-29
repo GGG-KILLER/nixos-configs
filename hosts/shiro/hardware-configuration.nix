@@ -1,5 +1,12 @@
 { config, lib, pkgs, modulesPath, ... }:
 
+let
+  zmount = name: {
+    device = name;
+    fsType = "zfs";
+    options = [ "zfsutil" "nofail" ];
+  };
+in
 {
   imports =
     [
@@ -32,6 +39,24 @@
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/3859-C504";
     fsType = "vfat";
+  };
+
+  fileSystems."/var/lib/grafana" = zmount "zfs-main-pool/data/monitoring/grafana";
+
+  fileSystems."/var/lib/prometheus2" = zmount "zfs-main-pool/data/monitoring/prometheus";
+
+  fileSystems."/var/lib/docker" = zmount "zfs-main-pool/system/var/lib/docker";
+
+  fileSystems."/mnt/backup" = {
+    device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS-part1";
+    fsType = "ext4";
+    options = [ "nofail" ];
+  };
+
+  fileSystems."/mnt/zfs-backup" = {
+    device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS-part2";
+    fsType = "ext4";
+    options = [ "nofail" ];
   };
 
   swapDevices = [ ];

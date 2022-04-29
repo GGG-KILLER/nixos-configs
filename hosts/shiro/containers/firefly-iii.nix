@@ -70,14 +70,14 @@ rec {
             root = "/var/www/firefly-iii/public";
             extraConfig = ''
               index index.html index.htm index.php;
+              fastcgi_param HTTP_PROXY "";
             '';
             locations."/" = {
-              tryFiles = "$uri /index.php$is_args$args";
-              extraConfig = ''
-                autoindex on;
-                sendfile off;
-              '';
+              tryFiles = "$uri @rewriteapp";
             };
+            locations."@rewriteapp".extraConfig = ''
+              rewrite ^(.*)$ /index.php$1 last;
+            '';
             locations."~ \\.php$".extraConfig = ''
               fastcgi_pass  unix:${config.services.phpfpm.pools.mypool.socket};
               fastcgi_index index.php;

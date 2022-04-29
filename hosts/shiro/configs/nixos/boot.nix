@@ -4,7 +4,7 @@
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.kernelParams = [ "nohibernate" ];
-  boot.initrd.supportedFilesystems = [ "zfs" ]; # boot from zfs
+  # boot.initrd.supportedFilesystems = [ "zfs" ]; # boot from zfs
   boot.supportedFilesystems = [ "zfs" ];
 
   boot.loader.grub = {
