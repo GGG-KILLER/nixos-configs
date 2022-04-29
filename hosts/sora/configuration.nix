@@ -33,7 +33,6 @@
 
   # ZFS boot settings.
   boot.supportedFilesystems = [ "zfs" "ntfs" ];
-  boot.zfs.devNodes = "/dev/";
 
   networking.hostName = "sora";
   networking.hostId = "6967af45";
