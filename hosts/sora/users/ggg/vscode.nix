@@ -38,6 +38,7 @@ in
         octref.vetur
         redhat.vscode-yaml
         matklad.rust-analyzer
+        ms-vscode-remote.remote-ssh
       ] ++ extensionsFromVscodeMarketplace [
         {
           publisher = "vscjava";

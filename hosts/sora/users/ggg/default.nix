@@ -28,6 +28,7 @@ in
     home.packages = (with pkgs; [
       helvum
       virt-manager
+      virt-viewer
       openrgb
       libguestfs-with-appliance
       xca
