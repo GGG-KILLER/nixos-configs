@@ -1,3 +1,4 @@
 *.privkey
 *.pubkey
 .gcroots
+common/overlays/winfonts/fonts.tar.gz
