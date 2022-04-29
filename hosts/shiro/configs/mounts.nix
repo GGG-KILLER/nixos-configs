@@ -31,14 +31,16 @@ in
     {
       "/var/lib/grafana" = zmount "zfs-main-pool/data/monitoring/grafana";
       "/var/lib/prometheus2" = zmount "zfs-main-pool/data/monitoring/prometheus";
-      "/var/lib/docker" = zmount "zfs-main-pool/system/var/docker";
+      "/var/lib/docker" = zmount "zfs-main-pool/system/var/lib/docker";
       "/mnt/backup" = {
         device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS-part1";
         fsType = "ext4";
+        options = [ "nofail" ];
       };
       "/mnt/zfs-backup" = {
         device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS-part2";
         fsType = "ext4";
+        options = [ "nofail" ];
       };
     }
   ];
