@@ -3,6 +3,7 @@
 with lib;
 {
   imports = [
+    ./firefly-iii.nix
     ./home-assistant.nix
     ./jellyfin.nix
     ./network-share.nix
