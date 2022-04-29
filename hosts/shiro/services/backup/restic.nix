@@ -1,8 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, my-lib, ... }:
 
 with lib;
 let
-  backblaze = config.my.secrets.services.backblaze;
+  inherit (my-lib) fs;
+  inherit (config.my.secrets.services) backblaze;
+  inherit (config.my.secrets) backup;
 in
 {
   services.restic.backups =
@@ -35,7 +37,10 @@ in
           "--keep-weekly 4"
           "--keep-monthly 12"
         ];
-        passwordFile = toString ./all-password;
+        passwordFile = toString (fs.writeSecretFile {
+          name = "restic-pw-shiro";
+          text = backup.passwords.shiro;
+        });
         timerConfig = {
           OnCalendar = "daily";
         };

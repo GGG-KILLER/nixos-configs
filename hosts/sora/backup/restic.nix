@@ -1,8 +1,10 @@
-{ config, lib, ... }:
+{ config, lib, my-lib, ... }:
 
 with lib;
 let
-  backblaze = config.my.secrets.services.backblaze;
+  inherit (my-lib) fs;
+  inherit (config.my.secrets.services) backblaze;
+  inherit (config.my.secrets) backup;
 in
 {
   services.restic.backups =
@@ -36,7 +38,10 @@ in
           "--keep-weekly 4"
           "--keep-monthly 12"
         ];
-        passwordFile = toString ./all-password;
+        passwordFile = toString (fs.writeSecretFile {
+          name = "restic-pw-sora";
+          text = backup.passwords.sora;
+        });
         timerConfig = {
           OnCalendar = "daily";
         };
@@ -58,7 +63,7 @@ in
             hard_delete = true;
             account = backblaze.backup-sora.keyId;
             key = backblaze.backup-sora.applicationKey;
-            download_url = "https://6397f2b4ff373fe3.ggg.dev";
+            download_url = "https://20f939184fd4f6b7.ggg.dev";
           };
         }
       ];

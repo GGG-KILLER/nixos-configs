@@ -18,18 +18,20 @@
   outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs } @ inputs:
     let
       system = "x86_64-linux";
+      pkgs = import nixpkgs { inherit system; };
       nurPkgs = system: import nur {
-        pkgs = import nixpkgs { inherit system; };
-        nurpkgs = import nixpkgs { inherit system; };
+        pkgs = pkgs;
+        nurpkgs = pkgs;
       };
       nurNoPkgs = system: import nur {
-        nurpkgs = import nixpkgs { inherit system; };
+        nurpkgs = pkgs;
       };
+      my-lib = pkgs.callPackage ./lib { };
       mkConfig = host: nixpkgs.lib.nixosSystem {
         inherit system;
 
         specialArgs = {
-          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs;
+          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs my-lib;
           nur = (nurPkgs system);
           nur-no-pkgs = (nurNoPkgs system);
         };
