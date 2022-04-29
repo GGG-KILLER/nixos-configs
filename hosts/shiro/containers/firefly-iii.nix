@@ -37,7 +37,8 @@ rec {
     config = { config, pkgs, ... }:
       {
         services.phpfpm.pools.mypool = {
-          user = "nobody";
+          user = "nginx";
+          group = "nginx";
           phpPackage = (pkgs.php.buildEnv {
             extensions = ({ enabled, all }: enabled ++ (with all;[
               bcmath

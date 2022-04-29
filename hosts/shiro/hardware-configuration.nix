@@ -36,16 +36,28 @@ in
     options = [ "zfsutil" ];
   };
 
+  fileSystems."/var/lib/grafana" = {
+    device = "zfs-main-pool/data/monitoring/grafana";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
+  fileSystems."/var/lib/prometheus2" = {
+    device = "zfs-main-pool/data/monitoring/prometheus";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
+  fileSystems."/var/lib/docker" = {
+    device = "zfs-main-pool/system/var/lib/docker";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/3859-C504";
     fsType = "vfat";
   };
-
-  fileSystems."/var/lib/grafana" = zmount "zfs-main-pool/data/monitoring/grafana";
-
-  fileSystems."/var/lib/prometheus2" = zmount "zfs-main-pool/data/monitoring/prometheus";
-
-  fileSystems."/var/lib/docker" = zmount "zfs-main-pool/system/var/lib/docker";
 
   fileSystems."/mnt/backup" = {
     device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS-part1";
