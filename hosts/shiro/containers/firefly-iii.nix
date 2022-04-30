@@ -79,7 +79,6 @@ rec {
           phpPackage = (pkgs.php.buildEnv {
             extensions = ({ enabled, all }: enabled ++ (with all;[
               bcmath
-              json
             ]));
           });
           settings = {
@@ -97,6 +96,7 @@ rec {
           enable = true;
           virtualHosts."money.lan" = {
             default = true;
+            rejectSSL = true;
             root = "/var/www/firefly-iii/public";
             extraConfig = ''
               fastcgi_param HTTP_PROXY "";
@@ -143,6 +143,7 @@ rec {
             '';
           };
           virtualHosts."importer.money.lan" = {
+            rejectSSL = true;
             root = "/var/www/firefly-iii-data-importer/public";
             extraConfig = ''
               fastcgi_param HTTP_PROXY "";
