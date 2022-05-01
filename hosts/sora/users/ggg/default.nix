@@ -17,12 +17,19 @@ let
     mono
     powershell
     rnix-lsp
+    wrangler
+    nodejs_latest
   ];
 in
 {
   imports = [
+    ./theme.nix
     ./vscode.nix
   ];
+
+  users.users.ggg = {
+    shell = pkgs.zsh;
+  };
 
   home-manager.users.ggg = {
     home.packages = (with pkgs; [
@@ -37,12 +44,33 @@ in
       pgmodeler
       pgformatter
       postgresql_14
+      tokei
+      ffmpeg_5
+      croc
+      p7zip
+      neofetch
     ]) ++ (devtools pkgs);
+
+    home.shellAliases = { };
 
     programs = {
       home-manager.enable = true;
+      bat.enable = true;
+      dircolors.enable = true;
+      exa = {
+        enable = true;
+        enableAliases = true;
+      };
+      gh = {
+        enable = true;
+        settings = {
+          editor = "code --wait";
+        };
+      };
       git = {
         enable = true;
+        delta.enable = true;
+        lfs.enable = true;
         userName = "GGG";
         userEmail = "gggkiller2@gmail.com";
         extraConfig = {
@@ -51,8 +79,47 @@ in
           init.defaultBranch = "main";
         };
       };
+      jq.enable = true;
+      mangohud = {
+        enable = true;
+        settingsPerApplication = {
+          mpv = {
+            no_display = true;
+          };
+        };
+      };
+      mpv = {
+        enable = true;
+        config = {
+          profile = "gpu-hq";
+          cache-default = 4000000;
+        };
+      };
+      tealdeer.enable = true;
+      zsh = {
+        enable = true;
+        enableAutosuggestions = true;
+        enableSyntaxHighlighting = true;
+        enableVteIntegration = true;
+        oh-my-zsh = {
+          enable = true;
+          plugins = [ "git" "sudo" ];
+        };
+      };
     };
+
+    services = {
+      flameshot.enable = true;
+      plex-mpv-shim = {
+        enable = true;
+        package = pkgs.jellyfin-mpv-shim;
+      };
+      rsibreak.enable = true;
+    };
+
+    # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
   };
 
   modules.home.mainUsers = [ "ggg" ];
+  environment.pathsToLink = [ "/share/zsh" ];
 }

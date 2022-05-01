@@ -19,19 +19,12 @@ with lib;
   services.gnome.gnome-remote-desktop.enable = true;
   programs.xwayland.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    gnomeExtensions.always-show-titles-in-overview
-    gnomeExtensions.appindicator
-    gnomeExtensions.mpris-indicator-button
-    gnomeExtensions.transparent-top-bar
-    gnomeExtensions.just-perfection
-    gnomeExtensions.status-area-horizontal-spacing
-    gnomeExtensions.user-themes
-    gnomeExtensions.static-background-in-overview
-    gnomeExtensions.dash-to-panel
-    gnomeExtensions.arcmenu
+  environment.systemPackages = (with pkgs; [
     gnome.gnome-remote-desktop
     gnome3.adwaita-icon-theme
-  ];
+    flat-remix-gtk
+    flat-remix-gnome
+    flat-remix-icon-theme
+  ]);
   services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
 }
