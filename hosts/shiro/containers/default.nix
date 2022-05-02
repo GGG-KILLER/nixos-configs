@@ -9,7 +9,7 @@ with lib;
     ./network-share.nix
     ./openspeedtest.nix
     ./pgsql.nix
-    ./pz-server.nix
+    #./pz-server.nix
     ./qbittorrent.nix
     ./sonarr.nix
     ./vpn-gateway.nix

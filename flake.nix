@@ -52,6 +52,7 @@
       deploy.nodes = {
         shiro = {
           hostname = "shiro.lan";
+          fastConnection = false;
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
@@ -59,11 +60,11 @@
             sshUser = "root";
             autoRollback = false;
             magicRollback = false;
-            fastConnection = false;
           };
         };
         vpn-proxy = {
           hostname = "vpn-proxy.ggg.dev";
+          fastConnection = false;
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vpn-proxy;
