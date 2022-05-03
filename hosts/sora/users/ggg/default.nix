@@ -23,6 +23,7 @@ let
 in
 {
   imports = [
+    ./jellyfin-mpv-shim.nix
     ./theme.nix
     ./vscode.nix
   ];
@@ -49,6 +50,7 @@ in
       croc
       p7zip
       neofetch
+      jellyfin-mpv-shim
     ]) ++ (devtools pkgs);
 
     home.shellAliases = { };
