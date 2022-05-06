@@ -51,6 +51,7 @@ in
       p7zip
       neofetch
       jellyfin-mpv-shim
+      steam-run
     ]) ++ (devtools pkgs);
 
     home.shellAliases = { };
