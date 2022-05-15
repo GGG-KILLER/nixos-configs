@@ -2,15 +2,9 @@
 
 let
   dotnet-sdk = pkgs: (with pkgs.dotnetCorePackages; combinePackages [
-    aspnetcore_6_0
     sdk_6_0
-    runtime_6_0
-    aspnetcore_5_0
     sdk_5_0
-    runtime_5_0
-    aspnetcore_3_1
-    sdk_3_1
-    runtime_3_1
+    #sdk_3_1 # (broken)
   ]);
   devtools = pkgs: with pkgs; [
     (dotnet-sdk pkgs)
@@ -19,6 +13,7 @@ let
     rnix-lsp
     wrangler
     nodejs_latest
+    jetbrains.rider
   ];
 in
 {
@@ -107,16 +102,13 @@ in
         oh-my-zsh = {
           enable = true;
           plugins = [ "git" "sudo" ];
+          theme = "candy";
         };
       };
     };
 
     services = {
       flameshot.enable = true;
-      plex-mpv-shim = {
-        enable = true;
-        package = pkgs.jellyfin-mpv-shim;
-      };
       rsibreak.enable = true;
     };
 
