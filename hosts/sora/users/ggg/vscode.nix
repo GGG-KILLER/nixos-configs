@@ -43,8 +43,8 @@ in
         {
           publisher = "vscjava";
           name = "vscode-java-debug";
-          version = "0.40.1";
-          sha256 = "Fd35SIwdOvoue7j94nuKluEJqjQrazg/Hi5c7nFF7/0=";
+          version = "0.40.2022041411";
+          sha256 = "DMProUHtP9XtWddm5zq2lm3HaZ2FQf8pmi+2PYLY320=";
         }
         {
           publisher = "cschlosser";
@@ -91,8 +91,14 @@ in
         {
           publisher = "ms-vscode";
           name = "powershell";
-          version = "2021.12.0";
-          sha256 = "QKtFxJn5ze0TbsLdQKQ7c4i6u64PzkmROqhdf2uLGvo=";
+          version = "2022.5.1";
+          sha256 = "SY6otM+g4ITOwTqb4N/aMkGrbuoNG1q4CS2BSvS88VE=";
+        }
+        {
+          publisher = "ms-vscode-remote";
+          name = "remote-containers";
+          version = "0.235.0";
+          sha256 = "5J9+/YCMn6fRTgPmVbvd3k5VaYXBUVkKupWPhJsL6Y0=";
         }
       ];
     };

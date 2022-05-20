@@ -14,6 +14,7 @@ let
     wrangler
     nodejs_latest
     jetbrains.rider
+    docker-compose
   ];
 in
 {
@@ -25,6 +26,7 @@ in
 
   users.users.ggg = {
     shell = pkgs.zsh;
+    extraGroups = [ "docker" ];
   };
 
   home-manager.users.ggg = {
