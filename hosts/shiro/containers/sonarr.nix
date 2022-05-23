@@ -71,11 +71,13 @@ in
           enable = true;
           virtualHosts = {
             "sonarr.lan" = {
+              rejectSSL = true;
               locations."/" = {
                 proxyPass = "http://localhost:8989";
               };
             };
             "jackett.lan" = {
+              rejectSSL = true;
               locations."/" = {
                 proxyPass = "http://localhost:9117";
               };

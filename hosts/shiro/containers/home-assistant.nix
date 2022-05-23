@@ -94,6 +94,7 @@ rec {
         services.nginx = {
           enable = true;
           virtualHosts."hass.lan" = {
+            rejectSSL = true;
             locations."/" = {
               extraConfig = ''
                 proxy_pass http://localhost:8123;
@@ -111,8 +112,7 @@ rec {
             };
           };
           virtualHosts."esphome.lan" = {
-            extraConfig = ''
-            '';
+            rejectSSL = true;
             locations."/" = {
               extraConfig = ''
                 proxy_pass http://localhost:6052;

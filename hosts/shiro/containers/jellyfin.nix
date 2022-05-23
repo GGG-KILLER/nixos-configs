@@ -61,6 +61,7 @@ in
           virtualHosts = {
             "jellyfin.lan" = {
               default = true;
+              rejectSSL = true;
               extraConfig = ''
                 # Security / XSS Mitigation Headers
                 add_header X-Frame-Options "SAMEORIGIN";

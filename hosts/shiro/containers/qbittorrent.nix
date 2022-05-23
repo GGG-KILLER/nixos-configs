@@ -85,6 +85,7 @@ in
           virtualHosts = {
             "flood.lan" = {
               default = true;
+              rejectSSL = true;
               root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
               locations."/" = {
                 tryFiles = "$uri /index.html";
@@ -101,6 +102,7 @@ in
               };
             };
             "qbittorrent.lan" = {
+              rejectSSL = true;
               locations."/" = {
                 proxyPass = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";
                 proxyWebsockets = true;

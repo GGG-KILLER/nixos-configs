@@ -10,6 +10,11 @@ let
       };
       ports = [
         {
+          protocol = "http";
+          port = 80;
+          description = "Nginx";
+        }
+        {
           protocol = "tcp";
           port = 5432;
           description = "PostgreSQL Port";
@@ -31,19 +36,28 @@ let
         };
       };
 
-      config = { lib, pkgs, ... }:
+      config = { lib, pkgs, config, ... }:
         with lib;
         let
           pgsql = pkgs.postgresql_14;
         in
         {
+          services.pgadmin = {
+            enable = true;
+            initialEmail = "gggkiller2@gmail.com";
+            initialPasswordFile = pkgs.writeText "p" "ggg2022!";
+          };
+
           services.postgresql = {
             enable = true;
             package = pgsql;
             dataDir = "/mnt/pgsql";
             enableTCPIP = true;
-            authentication = ''
+            authentication = mkForce ''
               # TYPE  DATABASE        USER            ADDRESS                 METHOD
+              local   all             all                                     trust
+              host    all             all             127.0.0.1/32            scram-sha-256
+              host    all             all             ::1/128                 scram-sha-256
               host    all             all             192.168.1.0/24          scram-sha-256
             '';
             settings = {
@@ -85,6 +99,28 @@ let
               pg_rational
               # pg_safeupdate
             ];
+          };
+
+          services.nginx = {
+            enable = true;
+            virtualHosts."pg${env}.shiro.lan" = {
+              rejectSSL = true;
+              locations."/" = {
+                extraConfig = ''
+                  proxy_pass http://localhost:${toString config.services.pgadmin.port};
+                  proxy_http_version 1.1;
+                  proxy_set_header Upgrade $http_upgrade;
+                  proxy_set_header Connection "upgrade";
+                  proxy_set_header Host $host;
+                  proxy_set_header X-Real-IP $remote_addr;
+                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header X-Forwarded-Proto $scheme;
+                  proxy_set_header X-Forwarded-Protocol $scheme;
+                  proxy_set_header X-Forwarded-Host $http_host;
+                  proxy_read_timeout 6h;
+                '';
+              };
+            };
           };
         };
     };
