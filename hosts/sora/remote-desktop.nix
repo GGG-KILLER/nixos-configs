@@ -1,8 +1,12 @@
 { pkgs, ... }:
 
 {
-  services.chrome-remote-desktop = {
+  # services.chrome-remote-desktop = {
+  #   enable = true;
+  #   user = "ggg";
+  # };
+  services.xrdp = {
     enable = true;
-    user = "ggg";
+    defaultWindowManager = "gnome-shell";
   };
 }

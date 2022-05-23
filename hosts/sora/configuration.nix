@@ -16,7 +16,7 @@
       ./hardware-configuration.nix
       ./home-manager.nix
       ./overrides.nix
-      #./remote-desktop.nix
+      ./remote-desktop.nix
       ./users/ggg
       ./video.nix
       ./zfs.nix
