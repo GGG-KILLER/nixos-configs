@@ -49,6 +49,7 @@ in
       neofetch
       jellyfin-mpv-shim
       steam-run
+      rclone
     ]) ++ (devtools pkgs);
 
     home.shellAliases = { };
