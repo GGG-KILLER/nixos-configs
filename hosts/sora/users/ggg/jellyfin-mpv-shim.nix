@@ -6,11 +6,9 @@ let
 in
 {
   home-manager.users.ggg = {
-    xdg.configFile."jellyfin-mpv-shim/conf.json" = {
-      source = jsonFormat.generate "conf.json" {
-        mpv_ext = true;
-        mpv_ext_path = "${pkgs.mpv}/bin/mpv";
-      };
+    xdg.configFile."jellyfin-mpv-shim/conf.json".text = builtins.toJSON {
+      mpv_ext = true;
+      mpv_ext_path = "${pkgs.mpv}/bin/mpv";
     };
 
     systemd.user.services.jellyfin-mpv-shim = {
