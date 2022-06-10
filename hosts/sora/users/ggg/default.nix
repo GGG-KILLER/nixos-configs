@@ -15,6 +15,7 @@ let
     nodejs_latest
     jetbrains.rider
     docker-compose
+    yarn
   ];
 in
 {
@@ -50,6 +51,7 @@ in
       jellyfin-mpv-shim
       steam-run
       rclone
+      chromium
     ]) ++ (devtools pkgs);
 
     home.shellAliases = { };
