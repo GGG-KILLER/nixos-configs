@@ -8,6 +8,7 @@
   };
 
   services.nginx.virtualHosts."grafana.shiro.lan" = {
+    rejectSSL = true;
     locations."/" = {
       proxyPass = with config.services.grafana; "${protocol}://${addr}:${toString port}";
     };

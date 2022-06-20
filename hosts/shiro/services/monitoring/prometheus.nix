@@ -21,6 +21,7 @@ with lib;
   };
 
   services.nginx.virtualHosts."prometheus.shiro.lan" = {
+    rejectSSL = true;
     locations."/" = {
       proxyPass = "http://localhost:9090";
     };
