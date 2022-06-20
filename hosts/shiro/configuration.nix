@@ -19,6 +19,10 @@ with lib;
     nixos.enable = true;
   };
 
+  environment.systemPackages = with pkgs; [
+    docker-compose
+  ];
+
   services.openssh.enable = true;
 
   # Flakes
