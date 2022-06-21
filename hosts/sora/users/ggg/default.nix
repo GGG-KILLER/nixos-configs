@@ -2,6 +2,7 @@
 
 let
   dotnet-sdk = pkgs: (with pkgs.dotnetCorePackages; combinePackages [
+    sdk_7_0
     sdk_6_0
     sdk_5_0
     sdk_3_1 # (broken)
