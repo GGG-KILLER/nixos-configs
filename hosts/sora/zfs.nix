@@ -11,7 +11,10 @@
   services.zfs.autoScrub.enable = true;
 
   # Enable auto-snapshot
-  services.zfs.autoSnapshot.enable = true;
+  services.zfs.autoSnapshot = {
+    enable = true;
+    monthly = 0;
+  };
 
   # Enable ZED's pushbullet compat
   services.zfs.zed.settings = {
