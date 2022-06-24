@@ -20,6 +20,7 @@
       ./remote-desktop.nix
       ./users/ggg
       ./video.nix
+      ./virtualisation.nix
       ./zfs.nix
       nur-no-pkgs.repos.ilya-fedin.modules.flatpak-fonts
       nur-no-pkgs.repos.ilya-fedin.modules.flatpak-icons
@@ -72,6 +73,9 @@
 
   # Enable AMD Microcode Updating
   hardware.cpu.amd.updateMicrocode = true;
+
+  # Android
+  programs.adb.enable = true;
 
   # easyeffects needs this
   programs.dconf.enable = true;

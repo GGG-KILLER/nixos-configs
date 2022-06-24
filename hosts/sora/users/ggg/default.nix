@@ -1,14 +1,14 @@
 { system, pkgs, deploy-rs, ... }:
 
 let
-  dotnet-sdk = pkgs: (with pkgs.dotnetCorePackages; combinePackages [
+  dotnet-sdk = with pkgs.dotnetCorePackages; combinePackages [
     sdk_7_0
     sdk_6_0
     sdk_5_0
-    sdk_3_1 # (broken)
-  ]);
-  devtools = pkgs: with pkgs; [
-    (dotnet-sdk pkgs)
+    sdk_3_1
+  ];
+  devtools = with pkgs; [
+    dotnet-sdk
     mono
     powershell
     rnix-lsp
@@ -28,24 +28,38 @@ in
 
   users.users.ggg = {
     shell = pkgs.zsh;
-    extraGroups = [ "docker" ];
+    extraGroups = [ "docker" "lxd" "adbusers" ];
   };
 
   home-manager.users.ggg = {
     home.packages = (with pkgs; [
+      # Audio
       helvum
-      virt-manager
-      virt-viewer
-      openrgb
-      libguestfs-with-appliance
-      xca
-      deploy-rs.packages.${system}.deploy-rs
-      # pgadmin # Broken
+      ffmpeg_5
+
+      # Android
+      android-tools
+      genymotion
+
+      # Database
       pgmodeler
       pgformatter
       postgresql_14
+
+      # Coding
       tokei
-      ffmpeg_5
+
+      # Hardware
+      openrgb
+
+      # VMs
+      virt-manager
+      virt-viewer
+
+      # Misc
+      libguestfs-with-appliance
+      xca
+      deploy-rs.packages.${system}.deploy-rs
       croc
       p7zip
       neofetch
@@ -53,7 +67,8 @@ in
       steam-run
       rclone
       chromium
-    ]) ++ (devtools pkgs);
+      virt-v2v
+    ]) ++ devtools;
 
     home.shellAliases = { };
 
