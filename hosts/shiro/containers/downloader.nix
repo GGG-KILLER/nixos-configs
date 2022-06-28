@@ -2,7 +2,7 @@
 
 {
   virtualisation.oci-containers.containers.downloader-frontend = {
-    image = "shiro.lan:5000/downloader/frontend:latest";
+    image = "shiro.lan:5000/downloader/frontend:1";
     ports = [ "9000:8080" ];
     dependsOn = [ "downloader-backend" ];
     extraOptions = [
@@ -15,7 +15,7 @@
   };
 
   virtualisation.oci-containers.containers.downloader-backend = {
-    image = "shiro.lan:5000/downloader/backend:latest";
+    image = "shiro.lan:5000/downloader/backend:1";
     volumes = [
       "pgo:/app/PGO"
       "/zfs-main-pool/data/animu:/mnt/animu"
