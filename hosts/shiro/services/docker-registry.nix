@@ -5,6 +5,9 @@
     enable = true;
     enableDelete = true;
     enableGarbageCollect = true;
-    listenAddress = "0.0.0.0";
+    listenAddress = "shiro.lan";
   };
+
+  networking.firewall.allowedTCPPorts = [ 5000 ];
+  networking.firewall.allowedUDPPorts = [ 5000 ];
 }
