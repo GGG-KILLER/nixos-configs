@@ -22,7 +22,6 @@
       "/zfs-main-pool/data/animu:/mnt/animu"
       "/zfs-main-pool/data/h:/mnt/h"
       "/zfs-main-pool/data/etc:/mnt/etc"
-      "--pull=always"
     ];
     environment = {
       ConnectionStrings__Main = config.my.secrets.downloader.connection-string;
@@ -33,6 +32,7 @@
       "--ipc=none"
       "--network=downloader"
       "--network-alias=backend"
+      "--pull=always"
     ];
   };
 
