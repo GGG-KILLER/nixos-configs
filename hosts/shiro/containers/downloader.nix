@@ -17,6 +17,7 @@
 
   virtualisation.oci-containers.containers.downloader-backend = {
     image = "shiro.lan:5000/downloader/backend:latest";
+    user = "downloader:data-members";
     volumes = [
       "pgo:/app/PGO"
       "/zfs-main-pool/data/animu:/mnt/animu"

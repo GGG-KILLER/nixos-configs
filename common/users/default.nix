@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./downloader.nix
     ./ggg.nix
     ./my-torrent.nix
     ./streamer.nix
