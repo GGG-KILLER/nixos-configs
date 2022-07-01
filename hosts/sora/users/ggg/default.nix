@@ -35,7 +35,7 @@ in
     home.packages = (with pkgs; [
       # Audio
       helvum
-      ffmpeg_5
+      ffmpeg_5-full
 
       # Android
       android-tools
