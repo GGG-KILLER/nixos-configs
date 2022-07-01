@@ -54,6 +54,8 @@ in
           group = "data-members";
         };
 
+        environment.systemPackages = with pkgs; [ ffmpeg ];
+
         # NGINX
         services.nginx = {
           enable = true;
