@@ -54,7 +54,7 @@ in
           group = "data-members";
         };
 
-        environment.systemPackages = with pkgs; [ ffmpeg ];
+        environment.systemPackages = with pkgs; [ jellyfin-ffmpeg ];
 
         # NGINX
         services.nginx = {
