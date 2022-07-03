@@ -16,7 +16,7 @@ in
       userSettings =
         settings //
         {
-          "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/omnisharp";
+          "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
           # "omnisharp.loggingLevel" = "trace";
           "omnisharp.enableDecompilationSupport" = true;
           "extensions.autoCheckUpdates" = false;
