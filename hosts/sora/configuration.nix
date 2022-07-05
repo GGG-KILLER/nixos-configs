@@ -18,6 +18,7 @@
       ./nix.nix
       ./overrides.nix
       ./remote-desktop.nix
+      ./secrets.nix
       ./users/ggg
       ./video.nix
       ./virtualisation.nix
