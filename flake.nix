@@ -61,7 +61,6 @@
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
-            sshOpts = [ "-i" "~/.ssh/id_deploy" ];
             sshUser = "root";
             autoRollback = false;
             magicRollback = false;
@@ -73,7 +72,7 @@
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vpn-proxy;
-            sshOpts = [ "-i" "~/.ssh/id_deploy" "-p" "17606" ];
+            sshOpts = [ "-p" "17606" ];
             sshUser = "root";
           };
         };
