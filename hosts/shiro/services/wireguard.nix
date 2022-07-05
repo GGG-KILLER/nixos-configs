@@ -15,7 +15,7 @@ with lib;
       ];
       listenPort = 61235;
       # Public key: 3FNvV2MhtG1ux/vSG+TW3y0Ebenm3qEtQjKZveAMSX0=
-      privateKey = config.my.secrets.wglan.privateKey;
+      privateKeyFile = config.age.secrets.wireguard-key.path;
       postUp = [
         "${iptables} -A FORWARD -i wglan -j ACCEPT"
         "${iptables} -A FORWARD -o wglan -j ACCEPT"
@@ -32,13 +32,13 @@ with lib;
         # Laptop
         {
           publicKey = "2BlZhHcZa+/88aonSC1EYly5A3uG2E1Hr5bpxZqs234=";
-          presharedKey = config.my.secrets.wglan.presharedKeys.laptop;
+          presharedKeyFile = config.age.secrets.wireguard-laptop-psk.path;
           allowedIPs = [ "192.168.5.2/32" ];
         }
         # Phone
         {
           publicKey = "2EqK/0ue4yZ05N8uq9VuDZRgJ3L6wsZXbnoLG9pNa3U=";
-          presharedKey = config.my.secrets.wglan.presharedKeys.phone;
+          presharedKeyFile = config.age.secrets.wireguard-phone-psk.path;
           allowedIPs = [ "192.168.5.3/32" ];
         }
       ];

@@ -15,6 +15,7 @@ in
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./secrets.nix
   ];
 
   networking.hostName = "vpn-proxy"; # Define your hostname.
@@ -51,7 +52,7 @@ in
       ];
       listenPort = wgPort;
       # Public key: aYbxhwwjdrU9YtvU6o1aWtV63iLL0lBlfh+RlRR4LVI=
-      privateKey = config.my.secrets.wgvpn-proxy.privateKey;
+      privateKeyFile = config.age.secrets.wireguard-key.path;
       postUp = ''
         ${iptables} -A FORWARD -i ${inp-interface} -j ACCEPT
         ${iptables} -t nat -A POSTROUTING -s 192.168.6.0/24 -o ${out-interface} -j MASQUERADE
@@ -68,25 +69,25 @@ in
         # Wing
         {
           publicKey = "ndEMfoPCV1g5rveRbQp/BAD3cXxtCvi4qlKvV1M9FjI=";
-          presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.wing;
+          presharedKeyFile = config.age.secrets.wireguard-wing-psk.path;
           allowedIPs = [ "192.168.6.0/24" ];
         }
         # GGG
         {
           publicKey = "9e5veN+MDglv9wriGPbSXXZ73T6CI8W+voullqOSuiY=";
-          presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.ggg;
+          presharedKeyFile = config.age.secrets.wireguard-ggg-psk.path;
           allowedIPs = [ "192.168.7.0/24" ];
         }
         # Spar iOS
         {
           publicKey = "rrmxFmEhFy0SxDIq2/kTouHPUBjXIvrweDlk9HvMuR0=";
-          # presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.spar-ios;
+          # presharedKeyFile = config.age.secrets.wireguard-spar-ios-psk.path;
           allowedIPs = [ "192.168.8.0/24" ];
         }
         # Spar PC1
         {
           publicKey = "TQtHm4nt3tWg71tfCAwZsTrbc+Rk89VJkjos8V6pUUE=";
-          presharedKey = config.my.secrets.wgvpn-proxy.presharedKeys.spar-pc1;
+          presharedKeyFile = config.age.secrets.wireguard-spar-pc1-psk.path;
           allowedIPs = [ "192.168.8.0/24" ];
         }
       ];
