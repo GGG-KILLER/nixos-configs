@@ -34,6 +34,7 @@ rec {
     name = "home-assistant";
 
     includeAnimu = false;
+    includeSeries = false;
     includeEtc = false;
     includeH = false;
 

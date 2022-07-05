@@ -68,6 +68,7 @@ in
           auth = "none";
           allowedpath = [
             "/mnt/animu"
+            "/mnt/series"
             "/mnt/h"
             "/mnt/etc"
           ];

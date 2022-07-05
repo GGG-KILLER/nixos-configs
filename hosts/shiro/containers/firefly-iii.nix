@@ -24,6 +24,7 @@ rec {
     name = "firefly-iii";
 
     includeAnimu = false;
+    includeSeries = false;
     includeEtc = false;
     includeH = false;
 

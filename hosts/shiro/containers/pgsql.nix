@@ -26,6 +26,7 @@ let
       name = "pgsql-${env}";
 
       includeAnimu = false;
+      includeSeries = false;
       includeEtc = false;
       includeH = false;
 

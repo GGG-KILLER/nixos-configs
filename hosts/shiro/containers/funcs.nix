@@ -10,6 +10,7 @@ rec {
   mkDefaultSettings =
     { name
     , includeAnimu ? true
+    , includeSeries ? true
     , includeH ? true
     , includeEtc ? true
     , ...
@@ -40,6 +41,12 @@ rec {
         (optionalAttrs includeAnimu {
           "/mnt/animu" = {
             hostPath = "/zfs-main-pool/data/animu";
+            isReadOnly = false;
+          };
+        })
+        (optionalAttrs includeSeries {
+          "/mnt/series" = {
+            hostPath = "/zfs-main-pool/data/series";
             isReadOnly = false;
           };
         })
@@ -142,6 +149,6 @@ rec {
 
   mkContainer = config: mkMerge [
     (mkDefaultSettings config)
-    (filterAttrs (name: val: all (unwantedName: name != unwantedName) [ "name" "includeAnimu" "includeH" "includeEtc" ]) config)
+    (filterAttrs (name: val: all (unwantedName: name != unwantedName) [ "name" "includeAnimu" "includeSeries" "includeH" "includeEtc" ]) config)
   ];
 }

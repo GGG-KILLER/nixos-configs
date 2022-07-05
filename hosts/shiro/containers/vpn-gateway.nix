@@ -17,6 +17,7 @@ in
     name = "vpn-gateway";
 
     includeAnimu = false;
+    includeSeries = false;
     includeEtc = false;
     includeH = false;
 

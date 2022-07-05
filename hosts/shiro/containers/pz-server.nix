@@ -30,6 +30,7 @@ in
     nixpkgs = nixpkgs-stable;
 
     includeAnimu = false;
+    includeSeries = false;
     includeEtc = false;
     includeH = false;
 

@@ -67,13 +67,17 @@ in
               "directory mask" = "0755";
               "acl group control" = "yes";
             };
+            Series = {
+              copy = "Animu";
+              path = "/mnt/series";
+            };
             H = {
-              copy = "animu";
+              copy = "Animu";
               path = "/mnt/h";
               "csc policy" = "disable";
             };
             Etc = {
-              copy = "animu";
+              copy = "Animu";
               path = "/mnt/etc";
             };
           };
