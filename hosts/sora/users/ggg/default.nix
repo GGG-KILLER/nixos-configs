@@ -1,4 +1,4 @@
-{ system, pkgs, deploy-rs, ... }:
+{ system, pkgs, deploy-rs, agenix, ... }:
 
 let
   dotnet-sdk = with pkgs.dotnetCorePackages; combinePackages [
@@ -34,20 +34,26 @@ in
   home-manager.users.ggg = {
     home.packages = (with pkgs; [
       # Audio
-      helvum
       ffmpeg_5-full
+      helvum
 
       # Android
       android-tools
       genymotion
 
       # Database
-      pgmodeler
       pgformatter
+      pgmodeler
       postgresql_14
 
       # Coding
       tokei
+
+      # Encryption
+      age
+      agenix.defaultPackage.${system}
+      step-cli
+      xca
 
       # Hardware
       openrgb
@@ -57,16 +63,15 @@ in
       virt-viewer
 
       # Misc
-      libguestfs-with-appliance
-      xca
-      deploy-rs.packages.${system}.deploy-rs
-      croc
-      p7zip
-      neofetch
-      jellyfin-mpv-shim
-      steam-run
-      rclone
       chromium
+      croc
+      deploy-rs.packages.${system}.deploy-rs
+      jellyfin-mpv-shim
+      libguestfs-with-appliance
+      neofetch
+      p7zip
+      rclone
+      steam-run
       virt-v2v
     ]) ++ devtools;
 

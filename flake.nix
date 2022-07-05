@@ -2,20 +2,24 @@
   description = "GGG NixOS configuration";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-21.11";
-    nur.url = "github:nix-community/NUR";
+    nixpkgs.url = github:nixos/nixpkgs/nixos-unstable;
+    nixpkgs-stable.url = github:nixos/nixpkgs/nixos-21.11;
+    nur.url = github:nix-community/NUR;
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = github:nix-community/home-manager;
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
-      url = "github:serokell/deploy-rs";
+      url = github:serokell/deploy-rs;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    agenix = {
+      url = github:ryantm/agenix;
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs } @ inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs, agenix } @ inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -31,7 +35,7 @@
         inherit system;
 
         specialArgs = {
-          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs my-lib;
+          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs my-lib agenix;
           nur = (nurPkgs system);
           nur-no-pkgs = (nurNoPkgs system);
         };
@@ -39,6 +43,7 @@
         modules = [
           ./common
           (./hosts + "/${host}/configuration.nix")
+          agenix.nixosModule
         ];
       };
     in
