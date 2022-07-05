@@ -1,0 +1,4 @@
+{ ... }:
+{
+  virtualisation.docker.storageDriver = "zfs";
+}
