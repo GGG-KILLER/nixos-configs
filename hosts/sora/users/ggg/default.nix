@@ -1,4 +1,4 @@
-{ system, pkgs, deploy-rs, agenix, ... }:
+{ system, pkgs, deploy-rs, agenix, git-crypt-agessh, ... }:
 
 let
   dotnet-sdk = with pkgs.dotnetCorePackages; combinePackages [
@@ -66,6 +66,7 @@ in
       chromium
       croc
       deploy-rs.packages.${system}.deploy-rs
+      git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
       libguestfs-with-appliance
       neofetch

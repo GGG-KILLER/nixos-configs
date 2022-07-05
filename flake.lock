@@ -58,12 +58,33 @@
         "type": "github"
       }
     },
-    "home-manager": {
+    "git-crypt-agessh": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ],
         "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1651509804,
+        "narHash": "sha256-cHZ+90dcvL7Um7vUROiRD90L+d9I2curZ0tTuw9NIq4=",
+        "owner": "mtoohey31",
+        "repo": "git-crypt-agessh",
+        "rev": "9965d84ea97ad2eb0e3f8afd00001316c53a5603",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mtoohey31",
+        "repo": "git-crypt-agessh",
+        "type": "github"
+      }
+    },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils_3"
       },
       "locked": {
         "lastModified": 1656367977,
@@ -130,6 +151,7 @@
       "inputs": {
         "agenix": "agenix",
         "deploy-rs": "deploy-rs",
+        "git-crypt-agessh": "git-crypt-agessh",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
@@ -152,6 +174,21 @@
       }
     },
     "utils_2": {
+      "locked": {
+        "lastModified": 1649676176,
+        "narHash": "sha256-OWKJratjt2RW151VUlJPRALb7OU2S5s+f0vLj4o1bHM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "a4b154ebbdc88c8498a5c7b01589addc9e9cb678",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_3": {
       "locked": {
         "lastModified": 1653893745,
         "narHash": "sha256-0jntwV3Z8//YwuOjzhV2sgJJPt+HY6KhU7VZUL0fKZQ=",

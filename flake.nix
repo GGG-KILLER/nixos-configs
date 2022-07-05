@@ -17,9 +17,13 @@
       url = github:ryantm/agenix;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    git-crypt-agessh = {
+      url = github:mtoohey31/git-crypt-agessh;
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs, agenix } @ inputs:
+  outputs = { self, nixpkgs, nixpkgs-stable, nur, home-manager, deploy-rs, agenix, git-crypt-agessh } @ inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; };
@@ -35,7 +39,7 @@
         inherit system;
 
         specialArgs = {
-          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs my-lib agenix;
+          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs my-lib agenix git-crypt-agessh;
           nur = (nurPkgs system);
           nur-no-pkgs = (nurNoPkgs system);
         };
