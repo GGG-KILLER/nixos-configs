@@ -27,6 +27,11 @@ rec {
         port = 80;
         description = "Local Nginx";
       }
+      {
+        protocol = "http";
+        port = 443;
+        description = "Local Nginx";
+      }
     ];
   };
 

@@ -15,6 +15,11 @@ let
           description = "Nginx";
         }
         {
+          protocol = "http";
+          port = 443;
+          description = "Local Nginx";
+        }
+        {
           protocol = "tcp";
           port = 5432;
           description = "PostgreSQL Port";

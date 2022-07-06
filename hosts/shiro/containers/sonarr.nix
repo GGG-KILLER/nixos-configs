@@ -29,6 +29,11 @@ in
         port = 80;
         description = "NGINX";
       }
+      {
+        protocol = "http";
+        port = 443;
+        description = "Local Nginx";
+      }
     ];
   };
 

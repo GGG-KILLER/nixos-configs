@@ -31,6 +31,11 @@ in
       }
       {
         protocol = "http";
+        port = 443;
+        description = "Local Nginx";
+      }
+      {
+        protocol = "http";
         port = config.modules.services.qbittorrent.web.port;
         description = "qBitTorrent Web UI";
       }
