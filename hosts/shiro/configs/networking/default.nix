@@ -50,7 +50,7 @@ in
 {
   imports = [
     ./hosts.nix
-    ./mitmproxy-cert.nix
+    ./pki.nix
   ];
 
   options.my.networking = mkOption {

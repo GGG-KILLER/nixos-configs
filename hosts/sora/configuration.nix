@@ -17,6 +17,7 @@
       ./home-manager.nix
       ./nix.nix
       ./overrides.nix
+      ./pki.nix
       ./remote-desktop.nix
       ./secrets.nix
       ./users/ggg
