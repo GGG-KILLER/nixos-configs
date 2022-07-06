@@ -10,10 +10,6 @@ let
   all = users ++ systems;
 in
 {
-  # Step CA
-  "stepca/intermediate_ca.crt".publicKeys = all;
-  "stepca/root_ca.crt".publicKeys = all;
-
   # Sora
   "sora/backup_password".publicKeys = [ ggg sora ];
 

@@ -10,7 +10,5 @@
 
     step-ca-intermediate-key.file = ../../secrets/shiro/stepca/intermediate_ca_key;
     step-ca-intermediate-key-password.file = ../../secrets/shiro/stepca/keys_password;
-    step-ca-intermediate-crt.file = ../../secrets/stepca/intermediate_ca.crt;
-    step-ca-root-crt.file = ../../secrets/stepca/root_ca.crt;
   };
 }

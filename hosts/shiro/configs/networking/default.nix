@@ -50,7 +50,7 @@ in
 {
   imports = [
     ./hosts.nix
-    ./pki.nix
+    ./mitmproxy.nix
   ];
 
   options.my.networking = mkOption {
@@ -69,6 +69,12 @@ in
         elan = "192.168.1.2";
         # clan = "192.168.2.7";
       };
+      extraNames = [
+        "grafana.shiro"
+        "prometheus.shiro"
+        "monit.shiro"
+        "step-ca.shiro"
+      ];
     };
   };
 }
