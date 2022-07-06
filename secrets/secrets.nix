@@ -11,9 +11,7 @@ let
 in
 {
   # Step CA
-  "stepca/intermediate_ca_key".publicKeys = [ ggg shiro ];
   "stepca/intermediate_ca.crt".publicKeys = all;
-  "stepca/root_ca_key".publicKeys = [ ggg shiro ];
   "stepca/root_ca.crt".publicKeys = all;
 
   # Sora
@@ -26,6 +24,10 @@ in
   "shiro/wireguard/private_key".publicKeys = [ ggg shiro ];
   "shiro/wireguard/laptop_psk".publicKeys = [ ggg shiro ];
   "shiro/wireguard/phone_psk".publicKeys = [ ggg shiro ];
+
+  # Shiro - Step CA
+  "shiro/stepca/intermediate_ca_key".publicKeys = [ ggg shiro ];
+  "shiro/stepca/keys_password".publicKeys = [ ggg shiro ];
 
   # VPN Proxy
   "vpn-proxy/wireguard/private_key".publicKeys = [ ggg vpn-proxy ];
