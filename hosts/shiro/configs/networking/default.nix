@@ -73,7 +73,7 @@ in
         "grafana.shiro"
         "prometheus.shiro"
         "monit.shiro"
-        "step-ca.shiro"
+        "ca"
       ];
     };
   };
