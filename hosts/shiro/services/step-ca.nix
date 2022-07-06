@@ -1,6 +1,7 @@
 { config, ... }:
 
 let
+  inherit (config.age) secrets;
   step-ca-port = 1443;
 in
 {
@@ -8,7 +9,7 @@ in
   security.acme = {
     acceptTerms = true; # kinda pointless since we never use upstream
     defaults = {
-      server = "https://127.0.0.1:${toString step-ca-port}/acme/acme/directory";
+      server = "https://ca.lan:${toString step-ca-port}/acme/acme/directory";
       renewInterval = "hourly";
     };
     certs."ca.lan".email = "ca@shiro.lan";
@@ -23,9 +24,10 @@ in
     locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;
   };
 
+  networking.firewall.allowedTCPPorts = [ step-ca-port ];
   services.step-ca = {
     enable = true;
-    address = "127.0.0.1";
+    address = "0.0.0.0";
     port = step-ca-port;
     intermediatePasswordFile = secrets.step-ca-intermediate-key-password.path;
     # See https://smallstep.com/docs/step-ca/configuration#basic-configuration-options
@@ -49,11 +51,6 @@ in
           minTLSCertDuration = "5m";
           maxTLSCertDuration = "24h";
           defaultTLSCertDuration = "24h";
-          policy = {
-            x509 = {
-              host = [ "*.*.lan" "*.lan" ];
-            };
-          };
         };
         backdate = "1m0s";
       };

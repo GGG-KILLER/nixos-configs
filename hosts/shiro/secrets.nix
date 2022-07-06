@@ -8,7 +8,15 @@
     wireguard-laptop-psk.file = ../../secrets/shiro/wireguard/laptop_psk;
     wireguard-phone-psk.file = ../../secrets/shiro/wireguard/phone_psk;
 
-    step-ca-intermediate-key.file = ../../secrets/shiro/stepca/intermediate_ca_key;
-    step-ca-intermediate-key-password.file = ../../secrets/shiro/stepca/keys_password;
+    step-ca-intermediate-key = {
+      file = ../../secrets/shiro/stepca/intermediate_ca_key;
+      owner = "step-ca";
+      group = "step-ca";
+    };
+    step-ca-intermediate-key-password = {
+      file = ../../secrets/shiro/stepca/keys_password;
+      owner = "step-ca";
+      group = "step-ca";
+    };
   };
 }
