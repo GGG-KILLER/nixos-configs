@@ -11,6 +11,10 @@ rec {
       elan = "192.168.1.9";
       # clan = "192.168.2.13";
     };
+    extraNames = [
+      "money"
+      "importer.money"
+    ];
     ports = [
       {
         protocol = "http";
@@ -93,11 +97,15 @@ rec {
           };
         };
 
+        security.acme.certs."money.lan".email = "money@firefly-iii.lan";
+        security.acme.certs."importer.money.lan".email = "importer.money@firefly-iii.lan";
+
         services.nginx = {
           enable = true;
           virtualHosts."money.lan" = {
             default = true;
-            rejectSSL = true;
+            enableACME = true;
+            addSSL = true;
             root = "/var/www/firefly-iii/public";
             extraConfig = ''
               fastcgi_param HTTP_PROXY "";
@@ -144,7 +152,8 @@ rec {
             '';
           };
           virtualHosts."importer.money.lan" = {
-            rejectSSL = true;
+            enableACME = true;
+            addSSL = true;
             root = "/var/www/firefly-iii-data-importer/public";
             extraConfig = ''
               fastcgi_param HTTP_PROXY "";

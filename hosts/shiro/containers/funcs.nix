@@ -131,6 +131,15 @@ rec {
                 };
             };
 
+            # ACME Settings
+            security.acme = {
+              acceptTerms = true; # kinda pointless since we never use upstream
+              defaults = {
+                server = "https://ca.lan/acme/acme/directory";
+                renewInterval = "hourly";
+              };
+            };
+
             # Configure the network setup to
             systemd.services.network-setup.serviceConfig = mkIf netCfg.useVpn {
               Restart = "on-failure";
