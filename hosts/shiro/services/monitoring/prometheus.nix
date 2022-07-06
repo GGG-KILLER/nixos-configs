@@ -20,8 +20,10 @@ with lib;
     ];
   };
 
+  security.acme.certs."prometheus.shiro.lan".email = "prometheus@shiro.lan";
   services.nginx.virtualHosts."prometheus.shiro.lan" = {
-    rejectSSL = true;
+    enableACME = true;
+    addSSL = true;
     locations."/" = {
       proxyPass = "http://localhost:9090";
     };

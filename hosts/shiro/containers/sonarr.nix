@@ -67,17 +67,21 @@ in
         };
 
         # NGINX
+        security.acme.certs."sonarr.lan".email = "sonarr@sonarr.lan";
+        security.acme.certs."jackett.lan".email = "jackett@soarr.lan";
         services.nginx = {
           enable = true;
           virtualHosts = {
             "sonarr.lan" = {
-              rejectSSL = true;
+              enableACME = true;
+              addSSL = true;
               locations."/" = {
                 proxyPass = "http://localhost:8989";
               };
             };
             "jackett.lan" = {
-              rejectSSL = true;
+              enableACME = true;
+              addSSL = true;
               locations."/" = {
                 proxyPass = "http://localhost:9117";
               };

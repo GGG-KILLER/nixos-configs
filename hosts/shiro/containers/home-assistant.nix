@@ -92,10 +92,13 @@ rec {
           };
         };
 
+        security.acme.certs."hass.lan".email = "hass@home-assistant.lan";
+        security.acme.certs."esphome.lan".email = "esphome@home-assistant.lan";
         services.nginx = {
           enable = true;
           virtualHosts."hass.lan" = {
-            rejectSSL = true;
+            enableACME = true;
+            addSSL = true;
             locations."/" = {
               extraConfig = ''
                 proxy_pass http://localhost:8123;
@@ -113,7 +116,8 @@ rec {
             };
           };
           virtualHosts."esphome.lan" = {
-            rejectSSL = true;
+            enableACME = true;
+            addSSL = true;
             locations."/" = {
               extraConfig = ''
                 proxy_pass http://localhost:6052;

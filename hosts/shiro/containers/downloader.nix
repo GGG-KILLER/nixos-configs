@@ -38,8 +38,10 @@
   };
 
   # This is only for the nginx config of the downloader.
+  security.acme.certs."downloader.lan".email = "downloader@shiro.lan";
   services.nginx.virtualHosts."downloader.lan" = {
-    rejectSSL = true;
+    enableACME = true;
+    addSSL = true;
     locations."/" = {
       proxyPass = "http://127.0.0.1:9000";
     };

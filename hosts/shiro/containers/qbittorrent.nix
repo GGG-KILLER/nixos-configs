@@ -80,13 +80,16 @@ in
         };
 
         # NGINX
+        security.acme.certs."flood.lan".email = "flood@qbittorrent.lan";
+        security.acme.certs."qbittorrent.lan".email = "qbittorrent@qbittorrent.lan";
         services.nginx = {
           enable = true;
           recommendedProxySettings = true;
           virtualHosts = {
             "flood.lan" = {
               default = true;
-              rejectSSL = true;
+              enableACME = true;
+              addSSL = true;
               root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
               locations."/" = {
                 tryFiles = "$uri /index.html";
@@ -103,7 +106,8 @@ in
               };
             };
             "qbittorrent.lan" = {
-              rejectSSL = true;
+              enableACME = true;
+              addSSL = true;
               locations."/" = {
                 proxyPass = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";
                 proxyWebsockets = true;

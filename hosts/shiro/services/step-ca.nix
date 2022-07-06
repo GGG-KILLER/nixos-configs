@@ -17,8 +17,8 @@ in
 
   # This is only for the nginx config of the downloader.
   services.nginx.virtualHosts."ca.lan" = {
-    addSSL = true;
     enableACME = true;
+    addSSL = true;
     locations."/".proxyPass = "https://127.0.0.1:${toString step-ca-port}";
     locations."= /root.crt".alias = config.my.secrets.pki.root-crt-path;
     locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;

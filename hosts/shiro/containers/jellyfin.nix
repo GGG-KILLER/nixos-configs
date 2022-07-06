@@ -57,13 +57,15 @@ in
         environment.systemPackages = with pkgs; [ jellyfin-ffmpeg ];
 
         # NGINX
+        security.acme.certs."jellyfin.lan".email = "jellyfin@jellyfin.lan";
         services.nginx = {
           enable = true;
           # recommendedProxySettings = true;
           virtualHosts = {
             "jellyfin.lan" = {
               default = true;
-              rejectSSL = true;
+              enableACME = true;
+              addSSL = true;
               extraConfig = ''
                 # Security / XSS Mitigation Headers
                 add_header X-Frame-Options "SAMEORIGIN";

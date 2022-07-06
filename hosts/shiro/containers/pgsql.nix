@@ -102,10 +102,12 @@ let
             ];
           };
 
+          security.acme.certs."pg${env}.shiro.lan".email = "pg${env}@pg${env}.lan";
           services.nginx = {
             enable = true;
             virtualHosts."pg${env}.shiro.lan" = {
-              rejectSSL = true;
+              enableACME = true;
+              addSSL = true;
               locations."/" = {
                 extraConfig = ''
                   proxy_pass http://localhost:${toString config.services.pgadmin.port};
