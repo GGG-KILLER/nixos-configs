@@ -69,6 +69,7 @@ in
       git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
       libguestfs-with-appliance
+      mullvad-vpn
       neofetch
       p7zip
       rclone
