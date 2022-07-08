@@ -10,4 +10,30 @@
 
   networking.firewall.allowedTCPPorts = [ 5000 ];
   networking.firewall.allowedUDPPorts = [ 5000 ];
+
+  virtualisation.oci-containers.containers.docker-registry-browser = {
+    image = "klausmeyer/docker-registry-browser";
+    ports = [ "9001:8080" ];
+    environment = {
+      ENABLE_COLLAPSE_NAMESPACES = "true";
+      ENABLE_DELETE_IMAGES = "true";
+      SORT_TAGS_BY = "version";
+      DOCKER_REGISTRY_URL = "http://127.0.0.1:5000";
+      PUBLIC_REGISTRY_URL = "https://docker.lan";
+    };
+    extraOptions = [
+      "--cap-drop=ALL"
+      "--dns=192.168.1.1"
+      "--ipc=none"
+      "--pull=always"
+    ];
+  };
+
+  security.acme.certs."docker.lan".email = "docker@shiro.lan";
+  services.nginx.virtualHosts."docker.lan" = {
+    enableACME = true;
+    addSSL = true;
+    locations."/".proxyPass = "http://127.0.0.1:9001";
+    locations."/v2/".proxyPass = "http://127.0.0.1:5000";
+  };
 }
