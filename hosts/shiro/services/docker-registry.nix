@@ -17,9 +17,8 @@
     environment = {
       ENABLE_COLLAPSE_NAMESPACES = "true";
       ENABLE_DELETE_IMAGES = "true";
-      SORT_TAGS_BY = "version";
-      DOCKER_REGISTRY_URL = "http://127.0.0.1:5000";
-      PUBLIC_REGISTRY_URL = "https://docker.lan";
+      DOCKER_REGISTRY_URL = "http://shiro.lan:5000";
+      PUBLIC_REGISTRY_URL = "docker.lan";
     };
     extraOptions = [
       "--cap-drop=ALL"
@@ -34,6 +33,6 @@
     enableACME = true;
     addSSL = true;
     locations."/".proxyPass = "http://127.0.0.1:9001";
-    locations."/v2/".proxyPass = "http://127.0.0.1:5000";
+    locations."/v2/".proxyPass = "http://shiro.lan:5000";
   };
 }
