@@ -16,5 +16,5 @@
   users.users.root.openssh.authorizedKeys.keys =
     config.users.users.ggg.openssh.authorizedKeys.keys;
 
-  nix.trustedUsers = [ "ggg" ];
+  nix.settings.trusted-users = [ "ggg" ];
 }
