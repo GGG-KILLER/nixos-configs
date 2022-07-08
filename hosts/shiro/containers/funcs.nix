@@ -89,6 +89,8 @@ rec {
           config = {
             container.name = name;
 
+            system.stateVersion = "22.11";
+
             # Enable X11 Libs
             environment.noXlibs = false;
 
