@@ -11,16 +11,6 @@ in
       mpv_ext_path = "${pkgs.mpv}/bin/mpv";
     };
 
-    systemd.user.services.jellyfin-mpv-shim = {
-      Unit = {
-        Description = "Jellyfin mpv shim";
-        After = [ "graphical-session-pre.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
-
-      Service = { ExecStart = "${pkgs.jellyfin-mpv-shim}/bin/jellyfin-mpv-shim"; };
-
-      Install = { WantedBy = [ "graphical-session.target" ]; };
-    };
+    systemd.user.services.jellyfin-mpv-shim.serviceConfig.ExecStart = "${pkgs.jellyfin-mpv-shim}/bin/jellyfin-mpv-shim";
   };
 }
