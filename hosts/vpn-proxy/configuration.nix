@@ -61,34 +61,34 @@ in
         ${iptables} -D FORWARD -i ${inp-interface} -j ACCEPT
         ${iptables} -t nat -D POSTROUTING -s 192.168.6.0/24 -o ${out-interface} -j MASQUERADE
       '';
-      # Wing:     192.168.6.2/24
-      # GGG:      192.168.7.2/24
-      # Spar iOS: 192.168.8.2/24
-      # Spar PC1: 192.168.8.3/24
+      # Wing:     192.168.6.2/32
+      # GGG:      192.168.7.2/32
+      # Spar iOS: 192.168.8.2/32
+      # Spar PC1: 192.168.8.3/32
       peers = [
         # Wing
         {
           publicKey = "ndEMfoPCV1g5rveRbQp/BAD3cXxtCvi4qlKvV1M9FjI=";
           presharedKeyFile = config.age.secrets.wireguard-wing-psk.path;
-          allowedIPs = [ "192.168.6.0/24" ];
+          allowedIPs = [ "192.168.6.2/32" ];
         }
         # GGG
         {
           publicKey = "9e5veN+MDglv9wriGPbSXXZ73T6CI8W+voullqOSuiY=";
           presharedKeyFile = config.age.secrets.wireguard-ggg-psk.path;
-          allowedIPs = [ "192.168.7.0/24" ];
+          allowedIPs = [ "192.168.7.2/32" ];
         }
         # Spar iOS
         {
-          publicKey = "rrmxFmEhFy0SxDIq2/kTouHPUBjXIvrweDlk9HvMuR0=";
-          # presharedKeyFile = config.age.secrets.wireguard-spar-ios-psk.path;
-          allowedIPs = [ "192.168.8.0/24" ];
+          publicKey = "lhXsrVjdAGKq216pLBjdufL1glLrwAkV1XrCk91OmUA=";
+          presharedKeyFile = config.age.secrets.wireguard-spar-ios-psk.path;
+          allowedIPs = [ "192.168.8.2/32" ];
         }
         # Spar PC1
         {
           publicKey = "TQtHm4nt3tWg71tfCAwZsTrbc+Rk89VJkjos8V6pUUE=";
           presharedKeyFile = config.age.secrets.wireguard-spar-pc1-psk.path;
-          allowedIPs = [ "192.168.8.0/24" ];
+          allowedIPs = [ "192.168.8.3/32" ];
         }
       ];
     };
