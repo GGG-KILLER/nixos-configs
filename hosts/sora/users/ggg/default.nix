@@ -74,7 +74,7 @@ in
       p7zip
       rclone
       steam-run
-      virt-v2v
+      #virt-v2v # Broken, can't be arsed to fix.
     ]) ++ devtools;
 
     home.shellAliases = { };
