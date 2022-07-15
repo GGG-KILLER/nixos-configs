@@ -1,4 +1,4 @@
-{ system, nixpkgs-stable, pkgs, ... }:
+{ system, nixpkgs-stable, pkgs, alejandra, ... }:
 
 let
   inherit (builtins) fromJSON readFile map filter;
@@ -6,8 +6,6 @@ let
   settings = readJSON ./configs/settings.json;
   keybindings = readJSON ./configs/keybindings.json;
   inherit (pkgs.vscode-utils) extensionsFromVscodeMarketplace;
-  # stablePkgs = import nixpkgs-stable { inherit system; };
-  # omnisharp-roslyn = stablePkgs.omnisharp-roslyn;
 in
 {
   home-manager.users.ggg = {
@@ -17,35 +15,37 @@ in
         settings //
         {
           "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
-          # "omnisharp.loggingLevel" = "trace";
           "omnisharp.enableDecompilationSupport" = true;
           "extensions.autoCheckUpdates" = false;
           "extensions.autoUpdate" = false;
+          "update.mode" = "none";
         };
       extensions = with pkgs.vscode-extensions; [
-        ms-vscode.cpptools
-        ms-dotnettools.csharp
-        ms-azuretools.vscode-docker
-        editorconfig.editorconfig
         dbaeumer.vscode-eslint
         eamodio.gitlens
+        editorconfig.editorconfig
+        foxundermoon.shell-format
         hashicorp.terraform
-        ms-toolsai.jupyter
-        redhat.java
         james-yu.latex-workshop
-        pkief.material-icon-theme
         jnoortheen.nix-ide
-        octref.vetur
-        redhat.vscode-yaml
+        kamadorueda.alejandra
         matklad.rust-analyzer
+        mhutchie.git-graph
+        mikestead.dotenv
+        ms-azuretools.vscode-docker
+        ms-dotnettools.csharp
+        ms-toolsai.jupyter
         ms-vscode-remote.remote-ssh
+        oderwat.indent-rainbow
+        pkief.material-icon-theme
+        redhat.vscode-yaml
+        svelte.svelte-vscode
+        timonwong.shellcheck
+        valentjn.vscode-ltex
+        wix.vscode-import-cost
+        redhat.java
+        octref.vetur
       ] ++ extensionsFromVscodeMarketplace [
-        {
-          publisher = "vscjava";
-          name = "vscode-java-debug";
-          version = "0.40.2022041411";
-          sha256 = "DMProUHtP9XtWddm5zq2lm3HaZ2FQf8pmi+2PYLY320=";
-        }
         {
           publisher = "cschlosser";
           name = "doxdocgen";
@@ -85,27 +85,29 @@ in
         {
           publisher = "visualstudioexptteam";
           name = "vscodeintellicode";
-          version = "1.2.20";
-          sha256 = "YfGpgIIKNK2yLE1X9vLtXBXzTD2EckiKVVOD9OnVvEA=";
+          version = "1.2.22";
+          sha256 = "KlDrAV2MlJx5opVzf6KggaWn8zkeWU/TDEiCW3rLb+s=";
         }
         {
           publisher = "ms-vscode";
           name = "powershell";
-          version = "2022.5.1";
-          sha256 = "SY6otM+g4ITOwTqb4N/aMkGrbuoNG1q4CS2BSvS88VE=";
+          version = "2022.6.3";
+          sha256 = "P8kakmpT3yAkKFroKttiLOV7PneOIoQOEtwImPIDHQY=";
         }
         {
           publisher = "ms-vscode-remote";
           name = "remote-containers";
-          version = "0.235.0";
-          sha256 = "5J9+/YCMn6fRTgPmVbvd3k5VaYXBUVkKupWPhJsL6Y0=";
+          version = "0.242.0";
+          sha256 = "cLHa0E0izNu2QYQBQ0qUlCIXsJmvc7Q6kgR6F3hnMX8=";
         }
       ];
     };
 
-    home.packages = [
-      pkgs.omnisharp-roslyn
-      pkgs.rust-analyzer
+    home.packages = with pkgs; [
+      omnisharp-roslyn
+      rust-analyzer
+      shellcheck
+      alejandra.defaultPackage.${system}
     ];
   };
 }
