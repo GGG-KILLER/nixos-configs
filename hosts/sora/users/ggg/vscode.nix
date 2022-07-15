@@ -36,15 +36,15 @@ in
         ms-dotnettools.csharp
         ms-toolsai.jupyter
         ms-vscode-remote.remote-ssh
+        octref.vetur
         oderwat.indent-rainbow
         pkief.material-icon-theme
+        redhat.java
         redhat.vscode-yaml
         svelte.svelte-vscode
         timonwong.shellcheck
         valentjn.vscode-ltex
         wix.vscode-import-cost
-        redhat.java
-        octref.vetur
       ] ++ extensionsFromVscodeMarketplace [
         {
           publisher = "cschlosser";
