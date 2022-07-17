@@ -1,9 +1,15 @@
-{ config, lib, nixpkgs-stable, ... }@args:
-
-with lib;
-let
+{
+  config,
+  lib,
+  nixpkgs-stable,
+  ...
+} @ args:
+with lib; let
   inherit (import ./funcs.nix args) mkContainer;
-  mkPgsql = { env, ip }: {
+  mkPgsql = {
+    env,
+    ip,
+  }: {
     my.networking."pgsql-${env}" = {
       ipAddrs = {
         elan = ip;
@@ -42,12 +48,20 @@ let
         };
       };
 
-      config = { lib, pkgs, config, ... }:
-        with lib;
-        let
+      config = {
+        lib,
+        pkgs,
+        config,
+        ...
+      }:
+        with lib; let
           pgsql = pkgs.postgresql_14;
-        in
-        {
+        in {
+          i18n.supportedLocales = [
+            "en_US.UTF-8/UTF-8"
+            "pt_BR.UTF-8/UTF-8"
+          ];
+
           services.pgadmin = {
             enable = true;
             initialEmail = "gggkiller2@gmail.com";
@@ -133,10 +147,15 @@ let
         };
     };
   };
-in
-{
+in {
   config = mkMerge [
-    (mkPgsql { env = "dev"; ip = "192.168.1.15"; })
-    (mkPgsql { env = "prd"; ip = "192.168.1.16"; })
+    (mkPgsql {
+      env = "dev";
+      ip = "192.168.1.15";
+    })
+    (mkPgsql {
+      env = "prd";
+      ip = "192.168.1.16";
+    })
   ];
 }
