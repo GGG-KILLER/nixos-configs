@@ -1,12 +1,18 @@
-{ system, pkgs, deploy-rs, agenix, git-crypt-agessh, ... }:
-
-let
-  dotnet-sdk = with pkgs.dotnetCorePackages; combinePackages [
-    #sdk_7_0
-    sdk_6_0
-    sdk_5_0
-    sdk_3_1
-  ];
+{
+  system,
+  pkgs,
+  deploy-rs,
+  agenix,
+  git-crypt-agessh,
+  ...
+}: let
+  dotnet-sdk = with pkgs.dotnetCorePackages;
+    combinePackages [
+      sdk_7_0
+      sdk_6_0
+      sdk_5_0
+      sdk_3_1
+    ];
   devtools = with pkgs; [
     dotnet-sdk
     mono
@@ -18,8 +24,7 @@ let
     docker-compose
     yarn
   ];
-in
-{
+in {
   imports = [
     ./jellyfin-mpv-shim.nix
     ./theme.nix
@@ -28,56 +33,58 @@ in
 
   users.users.ggg = {
     shell = pkgs.zsh;
-    extraGroups = [ "docker" "lxd" "adbusers" ];
+    extraGroups = ["docker" "lxd" "adbusers"];
   };
 
   home-manager.users.ggg = {
-    home.packages = (with pkgs; [
-      # Audio
-      ffmpeg_5-full
-      helvum
+    home.packages =
+      (with pkgs; [
+        # Audio
+        ffmpeg_5-full
+        helvum
 
-      # Android
-      android-tools
-      genymotion
+        # Android
+        android-tools
+        genymotion
 
-      # Database
-      pgformatter
-      pgmodeler
-      postgresql_14
+        # Database
+        pgformatter
+        pgmodeler
+        postgresql_14
 
-      # Coding
-      tokei
+        # Coding
+        tokei
 
-      # Encryption
-      age
-      agenix.defaultPackage.${system}
-      step-cli
-      xca
+        # Encryption
+        age
+        agenix.defaultPackage.${system}
+        step-cli
+        xca
 
-      # Hardware
-      openrgb
+        # Hardware
+        openrgb
 
-      # VMs
-      virt-manager
-      virt-viewer
+        # VMs
+        virt-manager
+        virt-viewer
 
-      # Misc
-      chromium
-      croc
-      deploy-rs.packages.${system}.deploy-rs
-      git-crypt-agessh.packages.${system}.default
-      jellyfin-mpv-shim
-      libguestfs-with-appliance
-      mullvad-vpn
-      neofetch
-      p7zip
-      rclone
-      steam-run
-      #virt-v2v # Broken, can't be arsed to fix.
-    ]) ++ devtools;
+        # Misc
+        chromium
+        croc
+        deploy-rs.packages.${system}.deploy-rs
+        git-crypt-agessh.packages.${system}.default
+        jellyfin-mpv-shim
+        libguestfs-with-appliance
+        mullvad-vpn
+        neofetch
+        p7zip
+        rclone
+        steam-run
+        #virt-v2v # Broken, can't be arsed to fix.
+      ])
+      ++ devtools;
 
-    home.shellAliases = { };
+    home.shellAliases = {};
 
     programs = {
       home-manager.enable = true;
@@ -129,7 +136,7 @@ in
         enableVteIntegration = true;
         oh-my-zsh = {
           enable = true;
-          plugins = [ "git" "sudo" ];
+          plugins = ["git" "sudo"];
           theme = "candy";
         };
       };
@@ -143,6 +150,6 @@ in
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
   };
 
-  modules.home.mainUsers = [ "ggg" ];
-  environment.pathsToLink = [ "/share/zsh" ];
+  modules.home.mainUsers = ["ggg"];
+  environment.pathsToLink = ["/share/zsh"];
 }
