@@ -6,15 +6,8 @@
   git-crypt-agessh,
   ...
 }: let
-  dotnet-sdk = with pkgs.dotnetCorePackages;
-    combinePackages [
-      sdk_7_0
-      sdk_6_0
-      sdk_5_0
-      sdk_3_1
-    ];
   devtools = with pkgs; [
-    dotnet-sdk
+    combined-dotnet-sdks
     mono
     powershell
     rnix-lsp
