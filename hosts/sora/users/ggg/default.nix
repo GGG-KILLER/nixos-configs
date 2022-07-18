@@ -19,7 +19,6 @@
   ];
 in {
   imports = [
-    ./jellyfin-mpv-shim.nix
     ./theme.nix
     ./vscode.nix
   ];
