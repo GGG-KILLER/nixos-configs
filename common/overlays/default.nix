@@ -1,6 +1,5 @@
 {...}: {
   imports = [
-    ./dotnet-6.0.nix
     ./dotnet-7.0.nix
     ./local.nix
     ./rclone.nix
