@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   services.dockerRegistry = {
     enable = true;
     enableDelete = true;
@@ -8,12 +6,12 @@
     listenAddress = "shiro.lan";
   };
 
-  networking.firewall.allowedTCPPorts = [ 5000 ];
-  networking.firewall.allowedUDPPorts = [ 5000 ];
+  networking.firewall.allowedTCPPorts = [5000];
+  networking.firewall.allowedUDPPorts = [5000];
 
   virtualisation.oci-containers.containers.docker-registry-browser = {
     image = "klausmeyer/docker-registry-browser";
-    ports = [ "9001:8080" ];
+    ports = ["9001:8080"];
     environment = {
       ENABLE_COLLAPSE_NAMESPACES = "true";
       ENABLE_DELETE_IMAGES = "true";
@@ -33,6 +31,11 @@
     enableACME = true;
     addSSL = true;
     locations."/".proxyPass = "http://127.0.0.1:9001";
-    locations."/v2/".proxyPass = "http://shiro.lan:5000";
+    locations."/v2/" = {
+      proxyPass = "http://shiro.lan:5000";
+      extraConfig = ''
+        client_max_body_size 0;
+      '';
+    };
   };
 }
