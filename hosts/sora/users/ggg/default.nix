@@ -6,17 +6,9 @@
   git-crypt-agessh,
   ...
 }: let
-  devtools = with pkgs; [
-    combined-dotnet-sdks
-    mono
-    powershell
-    rnix-lsp
-    wrangler
-    nodejs_latest
-    jetbrains.rider
-    docker-compose
-    yarn
-  ];
+  dotnetRoot = "${pkgs.combined-dotnet-sdks}";
+  dotnetSdk = "${pkgs.combined-dotnet-sdks}/sdk";
+  dotnetBinary = "${dotnetRoot}/bin/dotnet";
 in {
   imports = [
     ./theme.nix
@@ -29,56 +21,70 @@ in {
   };
 
   home-manager.users.ggg = {
-    home.packages =
-      (with pkgs; [
-        # Audio
-        ffmpeg_5-full
-        helvum
+    home.packages = with pkgs; [
+      # Audio
+      ffmpeg_5-full
+      helvum
 
-        # Android
-        android-tools
-        genymotion
+      # Android
+      android-tools
+      genymotion
 
-        # Database
-        pgformatter
-        pgmodeler
-        postgresql_14
+      # Database
+      pgformatter
+      pgmodeler
+      postgresql_14
 
-        # Coding
-        tokei
+      # Coding
+      combined-dotnet-sdks
+      docker-compose
+      jetbrains.rider
+      mono
+      nodejs_latest
+      powershell
+      rnix-lsp
+      tokei
+      wrangler
+      yarn
 
-        # Encryption
-        age
-        agenix.defaultPackage.${system}
-        step-cli
-        xca
+      # Encryption
+      age
+      agenix.defaultPackage.${system}
+      step-cli
+      xca
 
-        # Hardware
-        openrgb
+      # Hardware
+      openrgb
 
-        # VMs
-        virt-manager
-        virt-viewer
+      # VMs
+      virt-manager
+      virt-viewer
 
-        # Misc
-        chromium
-        croc
-        deploy-rs.packages.${system}.deploy-rs
-        git-crypt-agessh.packages.${system}.default
-        jellyfin-mpv-shim
-        libguestfs-with-appliance
-        mullvad-vpn
-        neofetch
-        p7zip
-        rclone
-        steam-run
-        #virt-v2v # Broken, can't be arsed to fix.
-      ])
-      ++ devtools;
+      # Misc
+      chromium
+      croc
+      deploy-rs.packages.${system}.deploy-rs
+      git-crypt-agessh.packages.${system}.default
+      jellyfin-mpv-shim
+      libguestfs-with-appliance
+      mullvad-vpn
+      neofetch
+      p7zip
+      rclone
+      steam-run
+      #virt-v2v # Broken, can't be arsed to fix.
+    ];
+
+    home.sessionVariables = {
+      DOTNET_ROOT = dotnetRoot;
+      MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
+      MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
+    };
 
     home.shellAliases = {};
 
     programs = {
+      command-not-found.enable = true;
       home-manager.enable = true;
       bat.enable = true;
       dircolors.enable = true;
