@@ -31,16 +31,6 @@
     "typescript.implementationsCodeLens.enabled": true,
     "typescript.referencesCodeLens.enabled": true,
 
-    "C_Cpp.commentContinuationPatterns": [
-        "/**",
-        "/*"
-    ],
-    "C_Cpp.preferredPathSeparator": "Forward Slash",
-    "C_Cpp.workspaceParsingPriority": "medium",
-    "C_Cpp.intelliSenseEngineFallback": "Enabled",
-
-    "python.linting.enabled": false,
-
     "editor.smoothScrolling": true,
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
@@ -48,9 +38,6 @@
     "diffEditor.ignoreTrimWhitespace": false,
     "git.confirmSync": false,
     "typescript.updateImportsOnFileMove.enabled": "always",
-    "rust-client.engine": "rust-analyzer",
-    "rust-client.updateOnStartup": true,
-    "rust.all_features": true,
     "editor.largeFileOptimizations": false,
     "editor.formatOnType": true,
 
@@ -69,7 +56,6 @@
         "editor.insertSpaces": true,
         "editor.tabSize": 2
     },
-    "python.languageServer": "Default",
     "notebook.lineNumbers": "on",
     "git.enableSmartCommit": true,
     "files.exclude": {
@@ -79,9 +65,15 @@
         "**/.factorypath": true
     },
     "editor.maxTokenizationLineLength": 50000,
-    "jupyter.jupyterServerType": "local",
     "terminal.integrated.fontFamily": "monospace",
     "nix.enableLanguageServer": true,
     "editor.fontLigatures": true,
-    "editor.fontFamily": "'Cascadia Code'"
+    "editor.fontFamily": "'Cascadia Code'",
+
+    "csharp.semanticHighlighting.enabled": true,
+    "omnisharp.enableAsyncCompletion": true,
+    "omnisharp.enableImportCompletion": true,
+    "omnisharp.enableRoslynAnalyzers": true,
+    "omnisharp.organizeImportsOnFormat": true,
+    "omnisharp.sdk.includePrereleases": true
 }
