@@ -1,6 +1,7 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p curl jq
-set -eu
+# shellcheck shell=bash
+set -euo pipefail
 
 if [[ $# != 1 ]]; then
     usage
