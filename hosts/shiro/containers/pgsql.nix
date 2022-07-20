@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  nixpkgs-stable,
   ...
 } @ args:
 with lib; let
