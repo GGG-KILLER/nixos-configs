@@ -1,14 +1,15 @@
-{ config, lib, nixpkgs-stable, ... }@args:
-
-with lib;
-let
-  inherit (import ./funcs.nix args) mkContainer;
-in
 {
+  config,
+  lib,
+  nixpkgs-stable,
+  ...
+} @ args:
+with lib; let
+  inherit (import ./funcs.nix args) mkContainer;
+in {
   my.networking.pz-server = {
     ipAddrs = {
       elan = "192.168.1.14";
-      # clan = "192.168.2.3";
     };
     ports = [
       {
@@ -41,9 +42,13 @@ in
       };
     };
 
-    config = { lib, config, pkgs, ... }:
-      with lib;
-      {
+    config = {
+      lib,
+      config,
+      pkgs,
+      ...
+    }:
+      with lib; {
         options.nix.settings.auto-optimise-store = mkOption {
           type = types.bool;
         };

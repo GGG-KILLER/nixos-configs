@@ -1,17 +1,17 @@
-{ config, lib, ... }@args:
-
-with lib;
-let
+{
+  config,
+  lib,
+  ...
+} @ args:
+with lib; let
   inherit (import ./funcs.nix args) mkContainer;
   consts = config.my.constants;
-in
-{
+in {
   my.networking.sonarr = {
     useVpn = true;
-    extraNames = [ "jackett" ];
+    extraNames = ["jackett"];
     ipAddrs = {
       elan = "192.168.1.5";
-      # clan = "192.168.2.5";
     };
     ports = [
       {
@@ -51,48 +51,51 @@ in
       };
     };
 
-    config = { config, pkgs, ... }:
-      {
-        # Sonarr
-        services.sonarr = {
-          enable = true;
-          openFirewall = true;
-          user = "my-sonarr";
-          group = "data-members";
-          dataDir = "/mnt/sonarr";
-        };
+    config = {
+      config,
+      pkgs,
+      ...
+    }: {
+      # Sonarr
+      services.sonarr = {
+        enable = true;
+        openFirewall = true;
+        user = "my-sonarr";
+        group = "data-members";
+        dataDir = "/mnt/sonarr";
+      };
 
-        # Jackett
-        services.jackett = {
-          enable = true;
-          openFirewall = true;
-          user = "my-sonarr";
-          group = "data-members";
-          dataDir = "/mnt/jackett";
-        };
+      # Jackett
+      services.jackett = {
+        enable = true;
+        openFirewall = true;
+        user = "my-sonarr";
+        group = "data-members";
+        dataDir = "/mnt/jackett";
+      };
 
-        # NGINX
-        security.acme.certs."sonarr.lan".email = "sonarr@sonarr.lan";
-        security.acme.certs."jackett.lan".email = "jackett@soarr.lan";
-        services.nginx = {
-          enable = true;
-          virtualHosts = {
-            "sonarr.lan" = {
-              enableACME = true;
-              addSSL = true;
-              locations."/" = {
-                proxyPass = "http://localhost:8989";
-              };
+      # NGINX
+      security.acme.certs."sonarr.lan".email = "sonarr@sonarr.lan";
+      security.acme.certs."jackett.lan".email = "jackett@soarr.lan";
+      services.nginx = {
+        enable = true;
+        virtualHosts = {
+          "sonarr.lan" = {
+            enableACME = true;
+            addSSL = true;
+            locations."/" = {
+              proxyPass = "http://localhost:8989";
             };
-            "jackett.lan" = {
-              enableACME = true;
-              addSSL = true;
-              locations."/" = {
-                proxyPass = "http://localhost:9117";
-              };
+          };
+          "jackett.lan" = {
+            enableACME = true;
+            addSSL = true;
+            locations."/" = {
+              proxyPass = "http://localhost:9117";
             };
           };
         };
       };
+    };
   };
 }

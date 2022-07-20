@@ -1,11 +1,9 @@
-{ lib, ... }:
-
-with lib;
-let
+{lib, ...}:
+with lib; let
   portOptions = {
     options = {
       protocol = mkOption {
-        type = types.enum [ "http" "tcp" "udp" ];
+        type = types.enum ["http" "tcp" "udp"];
       };
       port = mkOption {
         type = types.port;
@@ -27,7 +25,7 @@ let
       };
       extraNames = mkOption {
         type = with types; listOf str;
-        default = [ ];
+        default = [];
         description = "extra hostnames for this machine";
       };
       useVpn = mkOption {
@@ -41,13 +39,12 @@ let
       };
       ports = mkOption {
         type = with types; listOf (submodule portOptions);
-        default = [ ];
+        default = [];
         description = "the ports used by the machine";
       };
     };
   };
-in
-{
+in {
   imports = [
     ./hosts.nix
     ./mitmproxy.nix
@@ -59,7 +56,7 @@ in
 
   options.my.constants.networking.vpnNameservers = mkOption {
     type = with types; listOf str;
-    default = [ "1.1.1.1" "8.8.8.8" ];
+    default = ["1.1.1.1" "8.8.8.8"];
     description = "the nameservers to use when a device is connected to the VPN";
   };
 
@@ -67,7 +64,6 @@ in
     my.networking.shiro = {
       ipAddrs = {
         elan = "192.168.1.2";
-        # clan = "192.168.2.7";
       };
       extraNames = [
         "grafana.shiro"
