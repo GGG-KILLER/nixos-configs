@@ -76,7 +76,7 @@
     deploy.nodes = {
       shiro = {
         hostname = "shiro.lan";
-        fastConnection = false;
+        fastConnection = true;
         profiles.system = {
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
