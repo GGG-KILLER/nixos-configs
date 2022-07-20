@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   services.grafana = rec {
     enable = true;
     domain = "grafana.shiro.lan";

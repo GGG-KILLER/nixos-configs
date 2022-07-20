@@ -1,5 +1,13 @@
-{ lib, buildGoModule, fetchFromGitHub, makeWrapper, zfs, config, nixosTests, invalidateFetcherByDrvHash }:
-
+{
+  lib,
+  buildGoModule,
+  fetchFromGitHub,
+  makeWrapper,
+  zfs,
+  config,
+  nixosTests,
+  invalidateFetcherByDrvHash,
+}:
 buildGoModule rec {
   pname = "prometheus-zfs-exporter";
   version = "2.2.5";
@@ -13,7 +21,7 @@ buildGoModule rec {
 
   vendorSha256 = "sha256-jQiw3HlqWcsjdadDdovCsDMBB3rnWtacfbtzDb5rc9c=";
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [makeWrapper];
 
   postInstall = ''
     wrapProgram $out/bin/zfs_exporter \

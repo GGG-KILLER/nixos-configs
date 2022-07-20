@@ -1,8 +1,10 @@
-{ lib, pkgs, ... }:
-
-with lib;
-let
-  extensionPkgs = (with pkgs.gnomeExtensions; [
+{
+  lib,
+  pkgs,
+  ...
+}:
+with lib; let
+  extensionPkgs = with pkgs.gnomeExtensions; [
     always-show-titles-in-overview
     appindicator
     mpris-indicator-button
@@ -13,10 +15,10 @@ let
     static-background-in-overview
     dash-to-panel
     arcmenu
-  ]);
-in
-{
-  environment.systemPackages = [ ]
+  ];
+in {
+  environment.systemPackages =
+    []
     ++ extensionPkgs;
 
   home-manager.users.ggg = {

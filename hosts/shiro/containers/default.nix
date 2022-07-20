@@ -1,7 +1,9 @@
-{ config, lib, ... }:
-
-with lib;
 {
+  config,
+  lib,
+  ...
+}:
+with lib; {
   imports = [
     ./downloader.nix
     ./firefly-iii.nix
@@ -16,18 +18,18 @@ with lib;
     ./vpn-gateway.nix
   ];
 
-  systemd.services =
-    let
-      containersNeedingVpn = filterAttrs (n: v: v.useVpn) config.my.networking;
-      servicesNeedingVpn = mapAttrs'
-        (name: netCfg: {
-          name = "container@${name}";
-          value = {
-            after = mkIf netCfg.useVpn [ "container@vpn-gateway.service" ];
-          };
-        })
-        containersNeedingVpn;
-    in
+  systemd.services = let
+    containersNeedingVpn = filterAttrs (n: v: v.useVpn) config.my.networking;
+    servicesNeedingVpn =
+      mapAttrs'
+      (name: netCfg: {
+        name = "container@${name}";
+        value = {
+          after = mkIf netCfg.useVpn ["container@vpn-gateway.service"];
+        };
+      })
+      containersNeedingVpn;
+  in
     mkMerge [
       servicesNeedingVpn
       {

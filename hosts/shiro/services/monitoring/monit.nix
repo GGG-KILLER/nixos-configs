@@ -1,10 +1,7 @@
-{ lib, ... }:
-
-with lib;
-let
+{lib, ...}:
+with lib; let
   port = 9925;
-in
-{
+in {
   services.monit = {
     enable = true;
     config = ''

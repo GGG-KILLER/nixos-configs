@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   # config.age.secrets..path
   age.secrets = {
     wireguard-key.file = ../../secrets/vpn-proxy/wireguard/private_key;

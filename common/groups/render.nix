@@ -1,7 +1,5 @@
-{ lib, ... }:
-
-with lib;
-{
+{lib, ...}:
+with lib; {
   # users.groups.render = {
   #   gid = 108;
   # };

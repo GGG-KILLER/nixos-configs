@@ -1,12 +1,10 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   ##
   # AMD Driver
   ##
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  boot.kernelParams = [ "radeon.si_support=0" "amdgpu.si_support=1" ];
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  boot.initrd.kernelModules = ["amdgpu"];
+  boot.kernelParams = ["radeon.si_support=0" "amdgpu.si_support=1"];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   ##
   # OpenGL
@@ -40,4 +38,3 @@
     driversi686Linux.amdvlk
   ];
 }
-

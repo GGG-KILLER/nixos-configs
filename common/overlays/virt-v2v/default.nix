@@ -1,17 +1,17 @@
-{ autoPatchelfHook
-, dpkg
-, fetchurl
-, jansson
-, lib
-, libguestfs-with-appliance
-, libnbd
-, libosinfo
-, libvirt
-, libxml2
-, pcre2
-, stdenv
+{
+  autoPatchelfHook,
+  dpkg,
+  fetchurl,
+  jansson,
+  lib,
+  libguestfs-with-appliance,
+  libnbd,
+  libosinfo,
+  libvirt,
+  libxml2,
+  pcre2,
+  stdenv,
 }:
-
 stdenv.mkDerivation rec {
   pname = "virt-v2v";
   version = "2.0.6";
@@ -44,11 +44,14 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Tools for accessing and modifying virtual machine disk images";
-    license = with licenses; [ gpl2Plus lgpl21Plus ];
+    license = with licenses; [gpl2Plus lgpl21Plus];
     homepage = "https://libguestfs.org/";
-    maintainers = with maintainers; [ offline ];
+    maintainers = with maintainers; [offline];
     platforms = platforms.linux;
     # this is to avoid "output size exceeded"
-    hydraPlatforms = if appliance != null then appliance.meta.hydraPlatforms else platforms.linux;
+    hydraPlatforms =
+      if appliance != null
+      then appliance.meta.hydraPlatforms
+      else platforms.linux;
   };
 }

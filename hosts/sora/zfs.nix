@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   # ZFS maintenance settings.
   services.zfs.trim.enable = true;
 

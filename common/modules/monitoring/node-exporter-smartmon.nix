@@ -1,10 +1,12 @@
-{ config, pkgs, lib, ... }:
-with lib;
-let
-  cfg = config.modules.services.node-exporter-smartmon;
-in
 {
-
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.modules.services.node-exporter-smartmon;
+in {
   options.modules.services.node-exporter-smartmon = {
     enable = mkOption {
       type = types.bool;
@@ -25,8 +27,8 @@ in
     systemd.timers.prometheus-node-exporter-smartmon = {
       enable = true;
       description = "Update smartmon data";
-      wantedBy = [ "timers.target" ];
-      partOf = [ "prometheus-node-exporter.service" ];
+      wantedBy = ["timers.target"];
+      partOf = ["prometheus-node-exporter.service"];
       timerConfig = {
         OnCalendar = "*:*";
         Unit = "prometheus-node-exporter-smartmon.service";
@@ -37,26 +39,24 @@ in
     # Set up the smartmon text file generator service.
     systemd.services.prometheus-node-exporter-smartmon = {
       enable = true;
-      path = with pkgs; [ bash gawk moreutils smartmontools ];
+      path = with pkgs; [bash gawk moreutils smartmontools];
       serviceConfig = {
         Type = "oneshot";
         PrivateTmp = true;
         WorkingDirectory = "/tmp";
       };
-      script =
-        let
-          script = pkgs.writeScript "smartmon.sh" (builtins.readFile ./smartmon.sh);
-        in
-        ''
-          mkdir -pm 0775 /var/lib/prometheus/node-exporter/text-files
-          set -euxo pipefail
-          ${script} | sponge /var/lib/prometheus/node-exporter/text-files/smartmon.prom
-        '';
+      script = let
+        script = pkgs.writeScript "smartmon.sh" (builtins.readFile ./smartmon.sh);
+      in ''
+        mkdir -pm 0775 /var/lib/prometheus/node-exporter/text-files
+        set -euxo pipefail
+        ${script} | sponge /var/lib/prometheus/node-exporter/text-files/smartmon.prom
+      '';
     };
 
     # Add the text file flags to the node exporter config.
     services.prometheus.exporters.node = {
-      enabledCollectors = [ "textfile" ];
+      enabledCollectors = ["textfile"];
       extraFlags = [
         "--collector.textfile.directory=/var/lib/prometheus/node-exporter/text-files"
       ];

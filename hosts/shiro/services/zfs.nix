@@ -1,6 +1,4 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   # Expand all devices on boot
   services.zfs.expandOnBoot = "all";
 

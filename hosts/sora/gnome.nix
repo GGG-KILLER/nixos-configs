@@ -1,7 +1,10 @@
-{ lib, config, pkgs, ... }:
-
-with lib;
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+with lib; {
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -19,12 +22,12 @@ with lib;
   services.gnome.gnome-remote-desktop.enable = true;
   programs.xwayland.enable = true;
 
-  environment.systemPackages = (with pkgs; [
+  environment.systemPackages = with pkgs; [
     gnome.gnome-remote-desktop
     gnome3.adwaita-icon-theme
     flat-remix-gtk
     flat-remix-gnome
     flat-remix-icon-theme
-  ]);
-  services.udev.packages = with pkgs; [ gnome3.gnome-settings-daemon ];
+  ];
+  services.udev.packages = with pkgs; [gnome3.gnome-settings-daemon];
 }

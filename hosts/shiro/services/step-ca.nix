@@ -1,10 +1,7 @@
-{ config, ... }:
-
-let
+{config, ...}: let
   inherit (config.age) secrets;
   step-ca-port = 1443;
-in
-{
+in {
   # ACME Settings
   security.acme = {
     acceptTerms = true; # kinda pointless since we never use upstream
@@ -24,7 +21,7 @@ in
     locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;
   };
 
-  networking.firewall.allowedTCPPorts = [ step-ca-port ];
+  networking.firewall.allowedTCPPorts = [step-ca-port];
   services.step-ca = {
     enable = true;
     address = "0.0.0.0";
@@ -32,7 +29,7 @@ in
     intermediatePasswordFile = secrets.step-ca-intermediate-key-password.path;
     # See https://smallstep.com/docs/step-ca/configuration#basic-configuration-options
     settings = {
-      dnsNames = [ "ca.lan" ];
+      dnsNames = ["ca.lan"];
       root = config.my.secrets.pki.root-crt-path;
       crt = config.my.secrets.pki.intermediate-crt-path;
       key = secrets.step-ca-intermediate-key.path;
@@ -42,11 +39,13 @@ in
         badgerFileLoadingMode = "";
       };
       authority = {
-        provisioners = [{
-          type = "ACME";
-          name = "acme";
-          forceCN = true;
-        }];
+        provisioners = [
+          {
+            type = "ACME";
+            name = "acme";
+            forceCN = true;
+          }
+        ];
         claims = {
           minTLSCertDuration = "5m";
           maxTLSCertDuration = "24h";

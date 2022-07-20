@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   imports = [
     ./boot.nix
     ./gpu.nix

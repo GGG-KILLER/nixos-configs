@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "ggg" ];
+  users.extraGroups.vboxusers.members = ["ggg"];
 }

@@ -1,11 +1,12 @@
-{ config, pkgs, lib, ... }:
-with lib;
-let
-
-  cfg = config.modules.services.zfs-exporter;
-in
 {
-
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.modules.services.zfs-exporter;
+in {
   options.modules.services.zfs-exporter = {
     enable = mkOption {
       type = types.bool;
@@ -16,8 +17,8 @@ in
 
   config = mkIf cfg.enable {
     systemd.services."prometheus-zfs-exporter" = {
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
       serviceConfig = {
         Restart = "always";
         ExecStart = ''

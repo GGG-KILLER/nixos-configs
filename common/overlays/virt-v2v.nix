@@ -1,9 +1,7 @@
-{ ... }:
-
-{
+{...}: {
   nixpkgs.overlays = [
     (self: super: {
-      virt-v2v = super.callPackage ./virt-v2v { };
+      virt-v2v = super.callPackage ./virt-v2v {};
     })
   ];
 }

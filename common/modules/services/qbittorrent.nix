@@ -1,10 +1,12 @@
-{ config, pkgs, lib, ... }:
-
-with lib;
-let
-  cfg = config.modules.services.qbittorrent;
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.modules.services.qbittorrent;
+in {
   options.modules.services.qbittorrent = {
     enable = mkOption {
       type = types.bool;
@@ -41,14 +43,14 @@ in
     };
 
     users.groups = mkIf (cfg.user == "qbittorrent") {
-      "${cfg.group}" = { gid = null; };
+      "${cfg.group}" = {gid = null;};
     };
 
     systemd.services.qbittorrent = {
-      after = [ "network.target" ];
+      after = ["network.target"];
       description = "qBittorrent Daemon";
-      wantedBy = [ "multi-user.target" ];
-      path = [ pkgs.qbittorrent-nox ];
+      wantedBy = ["multi-user.target"];
+      path = [pkgs.qbittorrent-nox];
       serviceConfig = {
         ExecStart = ''
           ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox \

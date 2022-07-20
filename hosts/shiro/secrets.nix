@@ -1,6 +1,4 @@
-{ ... }:
-
-{
+{...}: {
   age.secrets = {
     backup-password.file = ../../secrets/shiro/backup_password;
 

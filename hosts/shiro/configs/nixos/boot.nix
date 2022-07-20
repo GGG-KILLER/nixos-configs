@@ -1,11 +1,14 @@
-{ lib, pkgs, config, ... }:
-
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}: {
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
-  boot.kernelParams = [ "nohibernate" ];
+  boot.kernelParams = ["nohibernate"];
   # boot.initrd.supportedFilesystems = [ "zfs" ]; # boot from zfs
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.supportedFilesystems = ["zfs"];
 
   boot.loader.grub = {
     enable = true;

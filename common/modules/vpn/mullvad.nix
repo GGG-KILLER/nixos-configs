@@ -1,11 +1,13 @@
-{ config, pkgs, lib, ... }:
-
-with lib;
-let
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
   mullvadConfig = config.modules.vpn.mullvad;
   TALPID_NET_CLS_MOUNT_DIR = "/tmp/net_cls";
-in
-{
+in {
   options.modules.vpn = {
     mullvad = {
       enable = mkOption {
@@ -34,18 +36,18 @@ in
         description = "allow lan connections";
       };
       tunnelProtocol = mkOption {
-        type = types.enum [ "wireguard" "openvpn" ];
+        type = types.enum ["wireguard" "openvpn"];
         default = "wireguard";
         description = "tunnel protocol";
       };
       location = mkOption {
-        type = types.nullOr (types.enum [ "de" "no" "br" ]);
+        type = types.nullOr (types.enum ["de" "no" "br"]);
         default = "br";
         description = "default location";
       };
       nameservers = mkOption {
         type = with types; listOf str;
-        default = [ ];
+        default = [];
         description = "nameservers to use";
       };
       setCheckReversePath = mkOption {
@@ -57,7 +59,7 @@ in
   };
 
   config = mkIf mullvadConfig.enable {
-    boot.kernelModules = [ "tun" ];
+    boot.kernelModules = ["tun"];
 
     # mullvad-daemon writes to /etc/iproute2/rt_tables
     networking.iproute2.enable = true;
@@ -75,8 +77,8 @@ in
 
     systemd.services.mullvad = {
       description = "Mullvad VPN daemon";
-      wantedBy = [ "multi-user.target" ];
-      wants = [ "network.target" ];
+      wantedBy = ["multi-user.target"];
+      wants = ["network.target"];
       after = [
         "network-online.target"
         "NetworkManager.service"
@@ -92,32 +94,46 @@ in
       environment = {
         inherit TALPID_NET_CLS_MOUNT_DIR;
       };
-      serviceConfig =
-        let
-          mullvad = "${pkgs.mullvad-vpn}/bin/mullvad";
-        in
+      serviceConfig = let
+        mullvad = "${pkgs.mullvad-vpn}/bin/mullvad";
+      in
         {
           ExecStart = "${pkgs.mullvad-vpn}/bin/mullvad-daemon -v --disable-stdout-timestamps";
           ExecStartPost = pkgs.writeShellScript "mullvad_setup" ''
-            ${mullvad} lan set ${if mullvadConfig.allowLan then "allow" else "block"}
+            ${mullvad} lan set ${
+              if mullvadConfig.allowLan
+              then "allow"
+              else "block"
+            }
 
-            ${optionalString (config.my.secrets.vpn.mullvad != null) "${mullvad} account set \"${builtins.replaceStrings [ " " ] [ "" ] config.my.secrets.vpn.mullvad.account}\""}
+            ${optionalString (config.my.secrets.vpn.mullvad != null) "${mullvad} account set \"${builtins.replaceStrings [" "] [""] config.my.secrets.vpn.mullvad.account}\""}
 
             ${mullvad} relay set tunnel-protocol ${mullvadConfig.tunnelProtocol}
-            ${optionalString (config.my.secrets.vpn.mullvad != null) "${mullvad} account set \"${builtins.replaceStrings [ " " ] [ "" ] config.my.secrets.vpn.mullvad.account}\""}
+            ${optionalString (config.my.secrets.vpn.mullvad != null) "${mullvad} account set \"${builtins.replaceStrings [" "] [""] config.my.secrets.vpn.mullvad.account}\""}
             ${optionalString (mullvadConfig.location != null) "${mullvad} relay set location ${mullvadConfig.location}"}
             ${optionalString mullvadConfig.autoConnect "${mullvad} connect"}
-            ${mullvad} always-require-vpn set ${if mullvadConfig.alwaysRequireVpn then "on" else "off"}
-            ${mullvad} auto-connect set ${if mullvadConfig.autoConnect then "on" else "off"}
+            ${mullvad} always-require-vpn set ${
+              if mullvadConfig.alwaysRequireVpn
+              then "on"
+              else "off"
+            }
+            ${mullvad} auto-connect set ${
+              if mullvadConfig.autoConnect
+              then "on"
+              else "off"
+            }
             ${optionalString (mullvadConfig.nameservers != []) "${mullvad} dns set custom ${concatStringsSep " " mullvadConfig.nameservers}"}
           '';
           Restart = "always";
           RestartSec = "5s";
-        } // (
-          if mullvadConfig.emergencyOnFail then {
+        }
+        // (
+          if mullvadConfig.emergencyOnFail
+          then {
             OnFailure = "emergency.target";
             OnFailureJobMode = "replace-irreversibly";
-          } else { }
+          }
+          else {}
         );
     };
   };

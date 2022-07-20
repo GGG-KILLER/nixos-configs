@@ -1,7 +1,9 @@
-{ config, lib, ... }:
-
-with lib;
 {
+  config,
+  lib,
+  ...
+}:
+with lib; {
   services.prometheus = {
     enable = true;
     retentionTime = "182d";
@@ -11,8 +13,8 @@ with lib;
         job_name = "prometheus";
         static_configs = [
           {
-            targets = [ "127.0.0.1:9090" ];
-            labels = { inherit (config.my.constants.prometheus) instance; };
+            targets = ["127.0.0.1:9090"];
+            labels = {inherit (config.my.constants.prometheus) instance;};
           }
         ];
         inherit (config.my.constants.prometheus) scrape_interval;

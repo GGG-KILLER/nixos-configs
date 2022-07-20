@@ -1,7 +1,5 @@
-{ lib, ... }:
-
-with lib;
-{
+{lib, ...}:
+with lib; {
   imports = [
     ./node-exporter-smartmon.nix
     ./node.nix

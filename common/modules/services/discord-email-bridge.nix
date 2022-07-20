@@ -1,10 +1,12 @@
-{ config, pkgs, lib, ... }:
-
-with lib;
-let
-  cfg = config.modules.services.discord-email-bridge;
-in
 {
+  config,
+  pkgs,
+  lib,
+  ...
+}:
+with lib; let
+  cfg = config.modules.services.discord-email-bridge;
+in {
   options.modules.services.discord-email-bridge = {
     enable = mkEnableOption "Whether to enable the DiscordEmailBridge service";
     serverName = mkOption {

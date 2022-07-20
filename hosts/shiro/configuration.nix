@@ -1,7 +1,12 @@
-{ config, pkgs, lib, modulesPath, inputs, ... }:
-
-with lib;
 {
+  config,
+  pkgs,
+  lib,
+  modulesPath,
+  inputs,
+  ...
+}:
+with lib; {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
     ./configs
@@ -31,7 +36,7 @@ with lib;
     package = pkgs.nixFlakes;
     extraOptions = "experimental-features = nix-command flakes";
     registry.nixpkgs.flake = inputs.nixpkgs;
-    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 
   # This value determines the NixOS release from which the default

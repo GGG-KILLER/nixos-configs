@@ -1,22 +1,21 @@
-{ stdenv
-, lib
-, fetchzip
-, fuse
-, installShellFiles
-, makeWrapper
+{
+  stdenv,
+  lib,
+  fetchzip,
+  fuse,
+  installShellFiles,
+  makeWrapper,
 }:
-
 stdenv.mkDerivation rec {
   pname = "rclone";
   version = "1.59.0-beta.6165.7361c98b2";
-
 
   src = fetchzip {
     url = "https://beta.rclone.org/v${version}/rclone-v${version}-linux-amd64.zip";
     hash = "sha256-uYtze09kGhveyFsX8KvWbB6T79tRJQmMwInAnnd5gWE=";
   };
 
-  buildInputs = [ fuse ];
+  buildInputs = [fuse];
 
   nativeBuildInputs = [
     installShellFiles
@@ -30,7 +29,7 @@ stdenv.mkDerivation rec {
     cp rclone $out/bin/
 
     wrapProgram $out/bin/rclone \
-                --suffix PATH : "${lib.makeBinPath [ fuse ] }" \
+                --suffix PATH : "${lib.makeBinPath [fuse]}" \
                 --prefix LD_LIBRARY_PATH : "${fuse}/lib"
   '';
 
@@ -47,11 +46,13 @@ stdenv.mkDerivation rec {
     description = "";
     homepage = "";
     license = licenses.mit;
-    maintainers = [{
-      email = "gggkiller2@gmail.com";
-      github = "GGG-KILLER";
-      name = "GGG";
-    }];
+    maintainers = [
+      {
+        email = "gggkiller2@gmail.com";
+        github = "GGG-KILLER";
+        name = "GGG";
+      }
+    ];
     platforms = platforms.all;
   };
 }

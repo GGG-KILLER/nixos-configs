@@ -1,10 +1,8 @@
-{ config, ... }:
-
-{
+{config, ...}: {
   virtualisation.oci-containers.containers.downloader-frontend = {
     image = "shiro.lan:5000/downloader/frontend:latest";
-    ports = [ "9000:8080" ];
-    dependsOn = [ "downloader-backend" ];
+    ports = ["9000:8080"];
+    dependsOn = ["downloader-backend"];
     extraOptions = [
       "--cap-drop=ALL"
       "--dns=192.168.1.1"

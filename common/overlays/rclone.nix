@@ -1,9 +1,7 @@
-{ ... }:
-
-{
+{...}: {
   nixpkgs.overlays = [
     (self: super: {
-      rclone = super.callPackage ./rclone { };
+      rclone = super.callPackage ./rclone {};
     })
   ];
 }
