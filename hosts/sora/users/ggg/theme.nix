@@ -12,7 +12,7 @@ with lib; let
     just-perfection
     status-area-horizontal-spacing
     user-themes
-    static-background-in-overview
+    #static-background-in-overview
     dash-to-panel
     arcmenu
   ];
