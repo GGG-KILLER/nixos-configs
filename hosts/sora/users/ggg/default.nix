@@ -8,7 +8,7 @@
 }: let
   dotnet-sdk = with pkgs.dotnetCorePackages;
     combinePackages [
-      #sdk_7_0
+      sdk_7_0
       sdk_6_0
       sdk_5_0
       sdk_3_1
@@ -23,6 +23,8 @@ in {
     shell = pkgs.zsh;
     extraGroups = ["docker" "lxd" "adbusers"];
   };
+
+  environment.systemPackages = [dotnet-sdk];
 
   home-manager.users.ggg = {
     home.packages = with pkgs; [
@@ -41,7 +43,7 @@ in {
 
       # Coding
       docker-compose
-      dotnet-sdk
+      #dotnet-sdk
       jetbrains.rider
       mono
       nodejs_latest
@@ -68,6 +70,7 @@ in {
       chromium
       croc
       deploy-rs.packages.${system}.deploy-rs
+      file
       git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
       libguestfs-with-appliance
