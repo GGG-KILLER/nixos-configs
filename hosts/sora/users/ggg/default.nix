@@ -13,6 +13,9 @@
       sdk_5_0
       sdk_3_1
     ];
+  dotnetRoot = "${dotnet-sdk}";
+  dotnetSdk = "${dotnet-sdk}/sdk";
+  dotnetBinary = "${dotnetRoot}/bin/dotnet";
 in {
   imports = [
     ./theme.nix
@@ -82,11 +85,11 @@ in {
       #virt-v2v # Broken, can't be arsed to fix.
     ];
 
-    # home.sessionVariables = {
-    #   DOTNET_ROOT = dotnetRoot;
-    #   MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
-    #   MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
-    # };
+    home.sessionVariables = {
+      DOTNET_ROOT = dotnetRoot;
+      MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
+      MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
+    };
 
     home.shellAliases = {};
 
