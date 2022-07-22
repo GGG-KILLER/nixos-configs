@@ -6,9 +6,13 @@
   git-crypt-agessh,
   ...
 }: let
-  dotnetRoot = "${pkgs.combined-dotnet-sdks}";
-  dotnetSdk = "${pkgs.combined-dotnet-sdks}/sdk";
-  dotnetBinary = "${dotnetRoot}/bin/dotnet";
+  dotnet-sdk = with pkgs.dotnetCorePackages;
+    combinePackages [
+      #sdk_7_0
+      sdk_6_0
+      sdk_5_0
+      sdk_3_1
+    ];
 in {
   imports = [
     ./theme.nix
@@ -36,8 +40,8 @@ in {
       postgresql_14
 
       # Coding
-      combined-dotnet-sdks
       docker-compose
+      dotnet-sdk
       jetbrains.rider
       mono
       nodejs_latest
@@ -75,11 +79,11 @@ in {
       #virt-v2v # Broken, can't be arsed to fix.
     ];
 
-    home.sessionVariables = {
-      DOTNET_ROOT = dotnetRoot;
-      MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
-      MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
-    };
+    # home.sessionVariables = {
+    #   DOTNET_ROOT = dotnetRoot;
+    #   MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
+    #   MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
+    # };
 
     home.shellAliases = {};
 

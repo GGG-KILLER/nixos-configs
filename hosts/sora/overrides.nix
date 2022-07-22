@@ -1,14 +1,14 @@
 {...}: {
   nixpkgs.overlays = [
-    (self: super: {
-      combined-dotnet-sdks = with super.dotnetCorePackages;
-        combinePackages [
-          sdk_7_0
-          sdk_6_0
-          sdk_5_0
-          sdk_3_1
-        ];
-    })
+    # (self: super: {
+    #   combined-dotnet-sdks = with super.dotnetCorePackages;
+    #     combinePackages [
+    #       #sdk_7_0
+    #       sdk_6_0
+    #       sdk_5_0
+    #       sdk_3_1
+    #     ];
+    # })
     # (self: super: {
     #   omnisharp-roslyn = super.omnisharp-roslyn.overrideAttrs (old: rec {
     #     postFixup = ''
