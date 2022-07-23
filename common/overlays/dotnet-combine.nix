@@ -21,6 +21,7 @@
           ln -s $out/dotnet $out/bin/.dotnet-wrapped
           cp ${cli}/bin/dotnet $out/bin/dotnet
         '';
+        passthru.icu = cli.icu;
       };
 in {
   nixpkgs.overlays = [
