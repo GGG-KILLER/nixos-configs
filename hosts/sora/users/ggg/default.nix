@@ -156,7 +156,7 @@ in {
       rsibreak.enable = true;
     };
 
-    xdg.configFile."nix/nix.conf".source = ''
+    xdg.configFile."nix/nix.conf".text = ''
       access-tokens = github.com=${config.my.secrets.users.ggg.nixGithubToken}
     '';
 
