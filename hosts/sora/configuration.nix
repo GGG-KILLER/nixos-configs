@@ -34,6 +34,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Zen kernel
+  boot.kernelPackages = pkgs.linuxPackages_zen;
+
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
 
