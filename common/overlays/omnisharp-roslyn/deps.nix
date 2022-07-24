@@ -45,9 +45,24 @@
     sha256 = "08pjgsq2vcsdy4vgff146izvxq5hpg02a8lvih0wcsgghv1m1qki";
   })
   (fetchNuGet {
+    pname = "Microsoft.AspNetCore.App.Runtime.linux-arm64";
+    version = "6.0.6";
+    sha256 = "1z50gqg0jimk98yd0zr2vxn087h3h1qn08fdcqbaxfgpcw30yi87";
+  })
+  (fetchNuGet {
     pname = "Microsoft.AspNetCore.App.Runtime.linux-x64";
     version = "6.0.6";
     sha256 = "0ndah9cqkgswhi60wrnni10j1d2hdg8jljij83lk1wbfqbng86jm";
+  })
+  (fetchNuGet {
+    pname = "Microsoft.AspNetCore.App.Runtime.osx-arm64";
+    version = "6.0.6";
+    sha256 = "1qp64z6m7sr5ln3sa5b39vj73yd52zs7asqlsws3a9jpisns6vds";
+  })
+  (fetchNuGet {
+    pname = "Microsoft.AspNetCore.App.Runtime.osx-x64";
+    version = "6.0.6";
+    sha256 = "0i00xs472gpxbrwx593z520sp8nv3lmqi8z3zrj9cshqckq8knnx";
   })
   (fetchNuGet {
     pname = "Microsoft.Bcl.AsyncInterfaces";
@@ -355,9 +370,24 @@
     sha256 = "06yakiyzgss399giivfx6xdrnfxqfsvy5fzm90scjanvandv0sdj";
   })
   (fetchNuGet {
+    pname = "Microsoft.NETCore.App.Host.linux-arm64";
+    version = "6.0.6";
+    sha256 = "0hlxq0k60ras0wj7d7q94dxd8nzjcry0kixxs6z1hyrbm4q0y3ls";
+  })
+  (fetchNuGet {
     pname = "Microsoft.NETCore.App.Host.linux-x64";
     version = "6.0.6";
     sha256 = "0hvawclkpp6srhbdl0b1ma2xsvf6yy8k8s1fp4by249qzpy26w7l";
+  })
+  (fetchNuGet {
+    pname = "Microsoft.NETCore.App.Host.osx-arm64";
+    version = "6.0.6";
+    sha256 = "1wwwjldbqy6l8x9dlw0512zqac9jplsmnn0rrrwzrlb0p5amz0a4";
+  })
+  (fetchNuGet {
+    pname = "Microsoft.NETCore.App.Host.osx-x64";
+    version = "6.0.6";
+    sha256 = "12b6ya9q5wszfq6yp38lpan8zws95gbp1vs9pydk3v82gai336r3";
   })
   (fetchNuGet {
     pname = "Microsoft.NETCore.App.Ref";
@@ -365,9 +395,24 @@
     sha256 = "146fr1gbs8bb5cbiz94xqddd29bnbi18ljnsd0yw2dqhf3ln0vpf";
   })
   (fetchNuGet {
+    pname = "Microsoft.NETCore.App.Runtime.linux-arm64";
+    version = "6.0.6";
+    sha256 = "117rz4gm7ihns5jlc2x05h7kdcgrl0ic4v67dzfbbr9kpra1bmcw";
+  })
+  (fetchNuGet {
     pname = "Microsoft.NETCore.App.Runtime.linux-x64";
     version = "6.0.6";
     sha256 = "0fjbjh7yxqc9h47ix37y963xi9f9y99jvl26cw3x3kvjlb8x0bgj";
+  })
+  (fetchNuGet {
+    pname = "Microsoft.NETCore.App.Runtime.osx-arm64";
+    version = "6.0.6";
+    sha256 = "04i4d7zhw7cqhfl84p93hpib8lhvkhmprip1li64sq5zrs36dxpx";
+  })
+  (fetchNuGet {
+    pname = "Microsoft.NETCore.App.Runtime.osx-x64";
+    version = "6.0.6";
+    sha256 = "0l15md6rzr2dvwvnk8xj1qz1dcjcbmp0aglnflrj8av60g5r1kwd";
   })
   (fetchNuGet {
     pname = "Microsoft.NETCore.Platforms";
@@ -432,14 +477,12 @@
   (fetchNuGet {
     pname = "Microsoft.TestPlatform.ObjectModel";
     version = "17.2.0";
-    sha256 = "01iwnq0z9b73s8crssg5yfd0cznbrdjz8pwsh6kzs60ncw4p926d";
-    url = "https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/d1622942-d16f-48e5-bc83-96f4539e7601/nuget/v3/flat2/microsoft.testplatform.objectmodel/17.2.0/microsoft.testplatform.objectmodel.17.2.0.nupkg";
+    sha256 = "0l05smcgjzdfa5f60f9q5lylap3i21aswxbava92s19bgv46w2rv";
   })
   (fetchNuGet {
     pname = "Microsoft.TestPlatform.TranslationLayer";
     version = "17.2.0";
-    sha256 = "10a8dh2bl9kgls5n7fqlg3c84qb2wxbabdw0c3in8vv5369bpaq9";
-    url = "https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/d1622942-d16f-48e5-bc83-96f4539e7601/nuget/v3/flat2/microsoft.testplatform.translationlayer/17.2.0/microsoft.testplatform.translationlayer.17.2.0.nupkg";
+    sha256 = "0yzwsmyb1pz761rg03zjimbqhngqj2vgzppp0ypqhdxbp5gmh2k9";
   })
   (fetchNuGet {
     pname = "Microsoft.VisualStudio.RemoteControl";
@@ -654,20 +697,17 @@
   (fetchNuGet {
     pname = "OmniSharp.Extensions.JsonRpc";
     version = "0.19.0";
-    sha256 = "1vxsf75bda1v20bjgyjd9n2jp1k6zdfnxqbg458iqrx7pc7078sl";
-    url = "https://az774065.vo.msecnd.net/artifacts/omnisharp/nuget/v3/flatcontainer/omnisharp.extensions.jsonrpc/0.19.0/omnisharp.extensions.jsonrpc.0.19.0.nupkg";
+    sha256 = "0m9lw21iz90ayl35f24ir3vbiydf4sjqw590qqgwknykpzsi1ai2";
   })
   (fetchNuGet {
     pname = "OmniSharp.Extensions.JsonRpc.Generators";
     version = "0.19.0";
-    sha256 = "1ll7yq4655d1i31yqv577k0lzsrmpizwpw3sjcwzw2sbzfh0c2rv";
-    url = "https://az774065.vo.msecnd.net/artifacts/omnisharp/nuget/v3/flatcontainer/omnisharp.extensions.jsonrpc.generators/0.19.0/omnisharp.extensions.jsonrpc.generators.0.19.0.nupkg";
+    sha256 = "17akjdh9dnyxr01lnlsa41ca52psqnny8j3wxz904zs15pz932ln";
   })
   (fetchNuGet {
     pname = "OmniSharp.Extensions.LanguageProtocol";
     version = "0.19.0";
-    sha256 = "1p78aawai6mlw2k38m709bw87j3q2indjs8iiapai3mb7pm12lm8";
-    url = "https://az774065.vo.msecnd.net/artifacts/omnisharp/nuget/v3/flatcontainer/omnisharp.extensions.languageprotocol/0.19.0/omnisharp.extensions.languageprotocol.0.19.0.nupkg";
+    sha256 = "06d4wakdaj42c9qnlhdyqrjnm97azp4hrvfg70f96ldl765y9vrf";
   })
   (fetchNuGet {
     pname = "OmniSharp.Extensions.LanguageServer";
@@ -677,8 +717,7 @@
   (fetchNuGet {
     pname = "OmniSharp.Extensions.LanguageServer.Shared";
     version = "0.19.0";
-    sha256 = "0z7h7219crwdpfgbs6y2w596rs5p14p0kf5gm4mkj8m9hlg5kyij";
-    url = "https://az774065.vo.msecnd.net/artifacts/omnisharp/nuget/v3/flatcontainer/omnisharp.extensions.languageserver.shared/0.19.0/omnisharp.extensions.languageserver.shared.0.19.0.nupkg";
+    sha256 = "0s3h9v5p043ip27g9jcvd0np9q3hn2pfv6gn539m45yb5d74a6i5";
   })
   (fetchNuGet {
     pname = "runtime.any.System.Collections";

@@ -1,7 +1,7 @@
 {...}: {
   nixpkgs.overlays = [
     (self: super: {
-      omnisharp-roslyn = super.callPackage ./omnisharp-roslyn {};
+      omnisharp-roslyn = super.callPackage ./omnisharp-roslyn/package.nix {};
     })
   ];
 }
