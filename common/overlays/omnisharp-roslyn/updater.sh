@@ -1,9 +1,10 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p curl jq common-updater-scripts nuget-to-nix gnused
+#! nix-shell -i bash -p curl jq common-updater-scripts nuget-to-nix gnugrep coreutils
 # shellcheck shell=bash
 
 set -euo pipefail
-SDK_VERSION=$(dotnet --version)
+SDK7_VERSION=$(dotnet --version)
+RUNTIME6_VERSION=$(dotnet --list-runtimes | grep -oP '(?<=Microsoft\.NETCore\.App )6\.0\.\d+')
 
 replaceInPlace(){
     local contents
@@ -39,11 +40,10 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 mkdir ./nuget_pkgs
 
-replaceInPlace global.json '7.0.100-preview.4.22252.9' "$SDK_VERSION"
+replaceInPlace global.json '7.0.100-preview.4.22252.9' "$SDK7_VERSION"
 
 for project in src/OmniSharp.Http.Driver/OmniSharp.Http.Driver.csproj src/OmniSharp.LanguageServerProtocol/OmniSharp.LanguageServerProtocol.csproj src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj; do
-  replaceInPlace $project '<RuntimeFrameworkVersion>6.0.0-preview.7.21317.1</RuntimeFrameworkVersion>' ""
-  replaceInPlace $project '<RollForward>LatestMajor</RollForward>' ""
+  replaceInPlace $project '<RuntimeFrameworkVersion>6.0.0-preview.7.21317.1</RuntimeFrameworkVersion>' "<RuntimeFrameworkVersion>$RUNTIME6_VERSION</RuntimeFrameworkVersion>"
   replaceInPlace $project '<RuntimeIdentifiers>win7-x64;win7-x86;win10-arm64</RuntimeIdentifiers>' '<RuntimeIdentifiers>linux-x64;linux-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>'
 done
 

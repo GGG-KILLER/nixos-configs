@@ -4,7 +4,15 @@
   buildDotnetModule,
   dotnetCorePackages,
 }: let
-  sdk-version = dotnetCorePackages.sdk_6_0.version;
+  sdkVersion = dotnetCorePackages.sdk_6_0.version;
+  runtimeVersion = dotnetCorePackages.runtime_6_0.version;
+  combined-sdk = with dotnetCorePackages;
+    combinePackages [
+      sdk_7_0
+      sdk_6_0
+      sdk_5_0
+      sdk_3_1
+    ];
 in
   buildDotnetModule rec {
     pname = "omnisharp-roslyn";
@@ -20,20 +28,25 @@ in
     projectFile = "src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj";
     nugetDeps = ./deps.nix;
 
-    dotnetInstallFlags = ["--framework net6.0" "--no-self-contained"];
-    dotnetBuildFlags = ["--framework net6.0" "--no-self-contained"];
+    dotnet-runtime = combined-sdk;
+
+    dotnetInstallFlags = [
+      "--framework net6.0"
+    ];
+    dotnetBuildFlags = [
+      "--framework net6.0"
+    ];
 
     executables = ["OmniSharp"];
 
     postPatch = ''
       # Relax the version requirement
       substituteInPlace global.json \
-        --replace '7.0.100-preview.4.22252.9' '${sdk-version}'
+        --replace '7.0.100-preview.4.22252.9' '${sdkVersion}'
       for project in src/OmniSharp.Http.Driver/OmniSharp.Http.Driver.csproj src/OmniSharp.LanguageServerProtocol/OmniSharp.LanguageServerProtocol.csproj src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj; do
         substituteInPlace $project \
-          --replace '<RuntimeFrameworkVersion>6.0.0-preview.7.21317.1</RuntimeFrameworkVersion>' "" \
-          --replace '<RollForward>LatestMajor</RollForward>' "" \
-          --replace '<RuntimeIdentifiers>win7-x64;win7-x86;win10-arm64</RuntimeIdentifiers>' ""
+          --replace '<RuntimeFrameworkVersion>6.0.0-preview.7.21317.1</RuntimeFrameworkVersion>' '<RuntimeFrameworkVersion>${runtimeVersion}</RuntimeFrameworkVersion>' \
+          --replace '<RuntimeIdentifiers>win7-x64;win7-x86;win10-arm64</RuntimeIdentifiers>' ''''''
       done
     '';
 
