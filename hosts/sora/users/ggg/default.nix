@@ -1,4 +1,5 @@
 {
+  config,
   system,
   pkgs,
   deploy-rs,
@@ -154,6 +155,10 @@ in {
       flameshot.enable = true;
       rsibreak.enable = true;
     };
+
+    xdg.configFile."nix/nix.conf".source = ''
+      access-tokens = github.com=${config.my.secrets.users.ggg.nixGithubToken}
+    '';
 
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
   };
