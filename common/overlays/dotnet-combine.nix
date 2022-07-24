@@ -2,6 +2,7 @@
   combinePackages = packages: {
     buildEnv,
     lib,
+    makeWrapper,
   }: let
     cli = builtins.head packages;
   in
@@ -12,14 +13,22 @@
              ];`'';
       buildEnv {
         name = "dotnet-core-combined";
+
         paths = packages;
-        pathsToLink = ["/host" "/packs" "/sdk" "/shared" "/templates"];
+        pathsToLink = ["/host" "/packs" "/sdk" "/sdk-manifests" "/shared" "/templates"];
         ignoreCollisions = true;
+
+        nativeBuildInputs = [
+          makeWrapper
+        ];
+
         postBuild = ''
+          cp -R ${cli}/{dotnet,LICENSE.txt,nix-support,ThirdPartyNotices.txt} $out/
+
           mkdir $out/bin
-          cp ${cli}/dotnet $out/dotnet
-          ln -s $out/dotnet $out/bin/.dotnet-wrapped
-          cp ${cli}/bin/dotnet $out/bin/dotnet
+          ln -s $out/dotnet $out/bin/dotnet
+          wrapProgram $out/bin/dotnet \
+            --prefix LD_LIBRARY_PATH : ${cli.icu}/lib
         '';
         passthru.icu = cli.icu;
       };
