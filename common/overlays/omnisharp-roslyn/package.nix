@@ -30,12 +30,8 @@ in
 
     dotnet-runtime = combined-sdk;
 
-    dotnetInstallFlags = [
-      "--framework net6.0"
-    ];
-    dotnetBuildFlags = [
-      "--framework net6.0"
-    ];
+    dotnetInstallFlags = ["--framework net6.0"];
+    dotnetBuildFlags = ["--framework net6.0"];
 
     executables = ["OmniSharp"];
 
