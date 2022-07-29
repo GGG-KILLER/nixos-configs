@@ -30,13 +30,10 @@
   outputs = {
     self,
     nixpkgs,
-    nixpkgs-stable,
     nur,
-    home-manager,
     deploy-rs,
     agenix,
-    git-crypt-agessh,
-    alejandra,
+    ...
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = import nixpkgs {inherit system;};
@@ -49,13 +46,12 @@
       import nur {
         nurpkgs = pkgs;
       };
-    my-lib = pkgs.callPackage ./lib {};
     mkConfig = host:
       nixpkgs.lib.nixosSystem {
         inherit system;
 
         specialArgs = {
-          inherit system inputs nixpkgs nixpkgs-stable home-manager deploy-rs my-lib agenix git-crypt-agessh alejandra;
+          inherit system inputs;
           nur = nurPkgs system;
           nur-no-pkgs = nurNoPkgs system;
         };
@@ -67,6 +63,8 @@
         ];
       };
   in {
+    inherit inputs;
+
     nixosConfigurations = {
       sora = mkConfig "sora";
       shiro = mkConfig "shiro";

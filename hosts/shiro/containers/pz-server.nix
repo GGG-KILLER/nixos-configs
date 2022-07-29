@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  nixpkgs-stable,
+  inputs,
   ...
 } @ args:
 with lib; let
@@ -28,7 +28,7 @@ in {
   containers.pz-server = mkContainer {
     name = "pz-server";
 
-    nixpkgs = nixpkgs-stable;
+    nixpkgs = inputs.nixpkgs-stable;
 
     includeAnimu = false;
     includeSeries = false;

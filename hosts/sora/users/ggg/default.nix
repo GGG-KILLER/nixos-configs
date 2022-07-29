@@ -2,9 +2,7 @@
   config,
   system,
   pkgs,
-  deploy-rs,
-  agenix,
-  git-crypt-agessh,
+  inputs,
   ...
 }: let
   dotnet-sdk = with pkgs.dotnetCorePackages;
@@ -59,7 +57,7 @@ in {
 
       # Encryption
       age
-      agenix.defaultPackage.${system}
+      inputs.agenix.defaultPackage.${system}
       step-cli
       xca
 
@@ -73,9 +71,9 @@ in {
       # Misc
       chromium
       croc
-      deploy-rs.packages.${system}.deploy-rs
+      inputs.deploy-rs.packages.${system}.deploy-rs
       file
-      git-crypt-agessh.packages.${system}.default
+      inputs.git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
       libguestfs-with-appliance
       mullvad-vpn

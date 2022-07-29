@@ -1,7 +1,7 @@
 {
   system,
   pkgs,
-  alejandra,
+  inputs,
   ...
 }: let
   inherit (builtins) fromJSON readFile map filter;
@@ -111,7 +111,7 @@ in {
       omnisharp-roslyn
       rust-analyzer
       shellcheck
-      alejandra.defaultPackage.${system}
+      inputs.alejandra.defaultPackage.${system}
     ];
   };
 }

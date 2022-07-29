@@ -4,14 +4,13 @@
   pkgs,
   options,
   inputs,
-  home-manager,
   ...
 }:
 with lib; let
   cfg = config.modules.keymap;
 in {
   imports = [
-    (import "${home-manager}/nixos")
+    (import "${inputs.home-manager}/nixos")
   ];
 
   options.modules.home.mainUsers = mkOption {

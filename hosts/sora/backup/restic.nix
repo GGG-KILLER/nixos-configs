@@ -1,11 +1,9 @@
 {
   config,
   lib,
-  my-lib,
   ...
 }:
 with lib; let
-  inherit (my-lib) fs;
   inherit (config.my.secrets.services) backblaze;
 in {
   services.restic.backups = let
