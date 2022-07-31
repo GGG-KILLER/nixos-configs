@@ -16,8 +16,6 @@ in {
       userSettings =
         settings
         // {
-          "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
-          "omnisharp.enableDecompilationSupport" = true;
           "extensions.autoCheckUpdates" = false;
           "extensions.autoUpdate" = false;
           "update.mode" = "none";
@@ -108,7 +106,6 @@ in {
     };
 
     home.packages = with pkgs; [
-      omnisharp-roslyn
       rust-analyzer
       shellcheck
       inputs.alejandra.defaultPackage.${system}
