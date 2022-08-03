@@ -1,6 +1,6 @@
 {config, ...}: {
   virtualisation.oci-containers.containers.downloader-frontend = {
-    image = "shiro.lan:5000/downloader/frontend:latest";
+    image = "docker.lan/downloader/frontend:latest";
     ports = ["9000:8080"];
     dependsOn = ["downloader-backend"];
     extraOptions = [
@@ -14,7 +14,7 @@
   };
 
   virtualisation.oci-containers.containers.downloader-backend = {
-    image = "shiro.lan:5000/downloader/backend:latest";
+    image = "docker.lan/downloader/backend:latest";
     user = "downloader:data-members";
     volumes = [
       "pgo:/app/PGO"
