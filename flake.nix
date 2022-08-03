@@ -58,7 +58,7 @@
 
         modules = [
           ./common
-          (./hosts + "/${host}/configuration.nix")
+          ./hosts/${host}/configuration.nix
           agenix.nixosModule
         ];
       };
