@@ -27,11 +27,11 @@
 in
   stdenv.mkDerivation rec {
     pname = "git-credential-manager";
-    version = "2.0.696";
+    version = "2.0.785";
 
     src = fetchzip {
-      url = "https://github.com/GitCredentialManager/git-credential-manager/releases/download/v${version}/gcmcore-linux_amd64.${version}.tar.gz";
-      hash = "sha256-RploAqKPT3jpN5WsBc/swfZUYoagv0HE32pUpfSJoXI=";
+      url = "https://github.com/GitCredentialManager/git-credential-manager/releases/download/v${version}/gcm-linux_amd64.${version}.tar.gz";
+      hash = "sha256-Dx/MBsoXBMZ8Xar2kWaKWgtJvAbeuUbxoLpV9EgOIAU=";
       stripRoot = false;
     };
 
@@ -57,7 +57,7 @@ in
 
       makeWrapper $gcmlibs/git-credential-manager-core $out/bin/git-credential-manager-core \
         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libraries}" \
-        --set TERM xterm --set DOTNET_CLI_TELEMETRY_OPTOUT 1
+        --set DOTNET_CLI_TELEMETRY_OPTOUT 1
     '';
 
     meta = with lib; {
