@@ -72,14 +72,13 @@
     qemu.ovmf.enable = true;
   };
 
-  # Firmware Update
-  services.fwupd.enable = true;
-
   # I2C
   hardware.i2c.enable = true;
 
-  # Enable AMD Microcode Updating
+  # Firmware
+  services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
+  hardware.enableAllFirmware = true;
 
   # Android
   programs.adb.enable = true;
@@ -95,12 +94,14 @@
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
 
-  # git-credential-manager has /usr/bin/which hardcoded.
-  system.activationScripts.usr-bin-which = ''
-    mkdir -p /usr/bin
-    rm /usr/bin/which
-    ln -sfn ${pkgs.which}/bin/which /usr/bin/which
-  '';
+  #
+
+  # # git-credential-manager has /usr/bin/which hardcoded.
+  # system.activationScripts.usr-bin-which = ''
+  #   mkdir -p /usr/bin
+  #   rm /usr/bin/which
+  #   ln -sfn ${pkgs.which}/bin/which /usr/bin/which
+  # '';
 
   # Corsair Keyboard
   hardware.ckb-next.enable = true;
