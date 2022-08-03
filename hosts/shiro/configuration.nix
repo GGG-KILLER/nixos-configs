@@ -31,6 +31,12 @@ with lib; {
 
   services.openssh.enable = true;
 
+  # Firmware
+  nixpkgs.config.allowUnfree = true;
+  services.fwupd.enable = true;
+  hardware.cpu.amd.updateMicrocode = true;
+  hardware.enableAllFirmware = true;
+
   # Flakes
   nix = {
     package = pkgs.nixFlakes;
