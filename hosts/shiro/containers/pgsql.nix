@@ -61,10 +61,9 @@ with lib; let
             "pt_BR.UTF-8/UTF-8"
           ];
 
-          services.pgadmin = {
+          services.pgmanage = {
             enable = true;
-            initialEmail = "gggkiller2@gmail.com";
-            initialPasswordFile = pkgs.writeText "p" "ggg2022!";
+            connections.main = "host=/run/postgresql dbname=postgres";
           };
 
           services.postgresql = {
