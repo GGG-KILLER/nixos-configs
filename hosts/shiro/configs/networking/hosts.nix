@@ -8,15 +8,11 @@ with lib; let
   networking =
     mapAttrs (
       netName: netCfg: let
-        name =
-          if netCfg.name != null
-          then netCfg.name
-          else netName;
+        inherit (netCfg) name;
       in
         netCfg
         // {
-          inherit name;
-          names = [name] ++ netCfg.extraNames;
+          names = [netCfg.name] ++ netCfg.extraNames;
         }
     )
     config.my.networking;
@@ -28,7 +24,6 @@ with lib; let
       # "${name}.home-server.ggg"
       # "${name}.home-server"
       "${name}.lan"
-      "${name}"
     ];
   in
     assert (ipAddrs ? "clan" || ipAddrs ? "elan");

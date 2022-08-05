@@ -16,11 +16,11 @@ with lib; let
       };
     };
   };
-  networkingOptions = {
+  networkingOptions = {name, ...}: {
     options = {
       name = mkOption {
-        type = with types; nullOr str;
-        default = null;
+        type = with types; str;
+        default = name;
         description = "the name of this machine";
       };
       extraNames = mkOption {
