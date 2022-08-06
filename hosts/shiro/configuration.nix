@@ -16,6 +16,7 @@ with lib; {
     ./gpu.nix
     ./hardware-configuration.nix
     ./headless.nix
+    ./journald.nix
     ./nat.nix
     ./secrets.nix
     ./store.nix
