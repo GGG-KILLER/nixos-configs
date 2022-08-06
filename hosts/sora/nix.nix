@@ -4,4 +4,11 @@
     cores = 11;
     max-jobs = 11;
   };
+
+  # Automatic garbage collect
+  nix.gc = {
+    automatic = true;
+    dates = "00:00";
+    options = "--delete-older-than 3d";
+  };
 }
