@@ -60,7 +60,7 @@ in {
     description = "the nameservers to use when a device is connected to the VPN";
   };
 
-  config = {
+  config = rec {
     my.networking.shiro = {
       ipAddrs = {
         elan = "192.168.1.2";
@@ -71,6 +71,33 @@ in {
         "monit.shiro"
         "ca"
       ];
+    };
+
+    networking = {
+      useDHCP = false;
+      enableIPv6 = false;
+      hostName = "shiro";
+      hostId = "14537a32";
+
+      defaultGateway = "192.168.1.1";
+      nameservers = ["192.168.1.1"];
+
+      interfaces.enp6s0 = {
+        ipv4.addresses = [];
+      };
+
+      macvlans.mv-enp6s0-host = {
+        interface = "enp6s0";
+        mode = "bridge";
+      };
+      interfaces.mv-enp6s0-host = {
+        ipv4.addresses = [
+          {
+            address = my.networking.shiro.ipAddrs.elan;
+            prefixLength = 24;
+          }
+        ];
+      };
     };
   };
 }

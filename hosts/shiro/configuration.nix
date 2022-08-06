@@ -17,7 +17,6 @@ with lib; {
     ./hardware-configuration.nix
     ./headless.nix
     ./nat.nix
-    ./networking.nix
     ./secrets.nix
     ./store.nix
     ./virtualisation.nix
