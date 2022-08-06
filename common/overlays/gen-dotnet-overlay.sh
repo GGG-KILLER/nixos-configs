@@ -67,11 +67,11 @@ SDK_DARWIN_AARCH64_HASH=$(jq -r '.sdk.files[] | select(.name == "dotnet-sdk-osx-
 FORMATTED_VERSION=${WANTED_VERSION//./_}
 
 cat >"dotnet-$WANTED_VERSION.nix" <<DELIM
-{nixpkgs, ...}: {
+{inputs, ...}: {
   nixpkgs.overlays = [
     (self: super: let
       # Use \`import <nixpkgs/pkgs/development/compilers/dotnet/build-dotnet.nix>\` if you're not using nix flakes.
-      buildDotnet = attrs: super.callPackage (import "\${nixpkgs}/pkgs/development/compilers/dotnet/build-dotnet.nix" attrs) {};
+      buildDotnet = attrs: super.callPackage (import "\${inputs.nixpkgs}/pkgs/development/compilers/dotnet/build-dotnet.nix" attrs) {};
       buildAspNetCore = attrs: buildDotnet (attrs // {type = "aspnetcore";});
       buildNetRuntime = attrs: buildDotnet (attrs // {type = "runtime";});
       buildNetSdk = attrs: buildDotnet (attrs // {type = "sdk";});
