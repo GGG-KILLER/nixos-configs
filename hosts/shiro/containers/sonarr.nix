@@ -10,9 +10,7 @@ in {
   my.networking.sonarr = {
     useVpn = true;
     extraNames = ["jackett"];
-    ipAddrs = {
-      elan = "192.168.1.5";
-    };
+    ipAddr = "192.168.1.5";
     ports = [
       {
         protocol = "http";

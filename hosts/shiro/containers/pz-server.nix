@@ -8,9 +8,7 @@ with lib; let
   inherit (import ./funcs.nix args) mkContainer;
 in {
   my.networking.pz-server = {
-    ipAddrs = {
-      elan = "192.168.1.14";
-    };
+    ipAddr = "192.168.1.14";
     ports = [
       {
         protocol = "udp";

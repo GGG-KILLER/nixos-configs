@@ -18,8 +18,6 @@ in rec {
     ...
   }: let
     netCfg = config.my.networking.${name};
-    ipAddr = netCfg.ipAddrs;
-    clanHash = substring 0 10 (builtins.hashString "sha1" name);
     networking-hosts = config.networking.hosts;
   in {
     # This can be overriden by just defining it.
@@ -27,15 +25,7 @@ in rec {
     privateNetwork = true;
 
     # External LAN
-    macvlans = mkIf (netCfg.ipAddrs ? elan) ["enp6s0"];
-
-    # Container LAN
-    extraVeths = {
-      "clan-${clanHash}" = mkIf (netCfg.ipAddrs ? clan) {
-        hostBridge = "vmbr1";
-        localAddress = "${netCfg.ipAddrs.clan}/24";
-      };
-    };
+    macvlans = ["enp6s0"];
 
     bindMounts = mkMerge [
       (optionalAttrs includeAnimu {
@@ -104,10 +94,7 @@ in rec {
           hostName = name;
           defaultGateway = mkOverride 900 (
             if netCfg.useVpn
-            then
-              if ipAddr ? clan
-              then vpnNetCfg.ipAddrs.clan
-              else vpnNetCfg.ipAddrs.elan
+            then vpnNetCfg.ipAddr
             else "192.168.1.1"
           );
           nameservers =
@@ -115,15 +102,9 @@ in rec {
             then consts.networking.vpnNameservers
             else containerCfg.nameservers;
           interfaces = {
-            mv-enp6s0.ipv4.addresses = mkIf (ipAddr ? elan) [
+            mv-enp6s0.ipv4.addresses = [
               {
-                address = ipAddr.elan;
-                prefixLength = 24;
-              }
-            ];
-            "clan-${clanHash}".ipv4.addresses = mkIf (ipAddr ? clan) [
-              {
-                address = ipAddr.clan;
+                address = netCfg.ipAddr;
                 prefixLength = 24;
               }
             ];

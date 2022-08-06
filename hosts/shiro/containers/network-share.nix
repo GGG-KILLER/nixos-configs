@@ -7,9 +7,7 @@ with lib; let
   inherit (import ./funcs.nix args) mkContainer;
 in {
   my.networking.network-share = {
-    ipAddrs = {
-      elan = "192.168.1.3";
-    };
+    ipAddr = "192.168.1.3";
     ports = [
       {
         protocol = "tcp";

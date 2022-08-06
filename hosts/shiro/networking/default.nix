@@ -33,9 +33,9 @@ with lib; let
         default = false;
         description = "whether to use VPN or not";
       };
-      ipAddrs = mkOption {
-        type = types.attrs;
-        description = "the IP addresses of this machine";
+      ipAddr = mkOption {
+        type = types.str;
+        description = "the IP address of this machine";
       };
       ports = mkOption {
         type = with types; listOf (submodule portOptions);
@@ -62,9 +62,7 @@ in {
 
   config = rec {
     my.networking.shiro = {
-      ipAddrs = {
-        elan = "192.168.1.2";
-      };
+      ipAddr = "192.168.1.2";
       extraNames = [
         "grafana.shiro"
         "prometheus.shiro"
@@ -93,7 +91,7 @@ in {
       interfaces.mv-enp6s0-host = {
         ipv4.addresses = [
           {
-            address = my.networking.shiro.ipAddrs.elan;
+            address = my.networking.shiro.ipAddr;
             prefixLength = 24;
           }
         ];

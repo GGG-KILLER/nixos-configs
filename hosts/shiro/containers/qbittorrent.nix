@@ -10,9 +10,7 @@ in {
   my.networking.qbittorrent = {
     useVpn = true;
     extraNames = ["flood"];
-    ipAddrs = {
-      elan = "192.168.1.10";
-    };
+    ipAddr = "192.168.1.10";
     ports = [
       {
         protocol = "tcp";

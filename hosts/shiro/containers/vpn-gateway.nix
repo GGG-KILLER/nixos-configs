@@ -8,9 +8,7 @@ with lib; let
   consts = config.my.constants;
 in {
   my.networking.vpn-gateway = {
-    ipAddrs = {
-      elan = "192.168.1.7";
-    };
+    ipAddr = "192.168.1.7";
   };
 
   containers.vpn-gateway = mkContainer {

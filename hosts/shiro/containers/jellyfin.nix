@@ -10,9 +10,7 @@ with lib; let
 in {
   my.networking.jellyfin = {
     useVpn = true;
-    ipAddrs = {
-      elan = "192.168.1.6";
-    };
+    ipAddr = "192.168.1.6";
     ports = [
       {
         protocol = "http";

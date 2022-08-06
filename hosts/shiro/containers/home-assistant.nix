@@ -9,9 +9,7 @@ with lib; let
   consts = config.my.constants;
 in rec {
   my.networking.home-assistant = {
-    ipAddrs = {
-      elan = "192.168.1.13";
-    };
+    ipAddr = "192.168.1.13";
     ports = [
       {
         protocol = "http";

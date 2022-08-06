@@ -9,9 +9,7 @@ with lib; let
   consts = config.my.constants;
 in rec {
   my.networking.firefly-iii = {
-    ipAddrs = {
-      elan = "192.168.1.9";
-    };
+    ipAddr = "192.168.1.9";
     extraNames = [
       "money"
       "importer.money"
