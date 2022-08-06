@@ -63,7 +63,7 @@ with lib; let
 
           services.pgmanage = {
             enable = true;
-            connections.main = "host=/run/postgresql dbname=postgres";
+            connections.main = "host=/run/postgresql dbname=postgres sslmode=disable";
           };
 
           services.postgresql = {
@@ -127,7 +127,7 @@ with lib; let
               addSSL = true;
               locations."/" = {
                 extraConfig = ''
-                  proxy_pass http://localhost:${toString config.services.pgadmin.port};
+                  proxy_pass http://localhost:${toString config.services.pgmanage.port};
                   proxy_http_version 1.1;
                   proxy_set_header Upgrade $http_upgrade;
                   proxy_set_header Connection "upgrade";
