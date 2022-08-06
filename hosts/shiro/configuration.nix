@@ -9,11 +9,18 @@
 with lib; {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
-    ./configs
     ./containers
+    ./networking
     ./services
+    ./boot.nix
+    ./gpu.nix
     ./hardware-configuration.nix
+    ./headless.nix
+    ./nat.nix
+    ./networking.nix
     ./secrets.nix
+    ./store.nix
+    ./virtualisation.nix
   ];
 
   # We want xlibs because we want cached stuff.

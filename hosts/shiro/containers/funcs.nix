@@ -73,7 +73,7 @@ in rec {
     in {
       imports = [
         ../../../common
-        ../configs/nixos/gpu.nix
+        ../gpu.nix
       ];
 
       options.container = {
