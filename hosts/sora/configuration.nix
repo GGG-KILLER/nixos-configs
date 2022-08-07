@@ -43,8 +43,13 @@
   # ZFS boot settings.
   boot.supportedFilesystems = ["zfs" "ntfs"];
 
-  networking.hostName = "sora";
-  networking.hostId = "6967af45";
+  networking = {
+    hostName = "sora";
+    hostId = "6967af45";
+
+    defaultGateway = "192.168.1.1";
+    nameservers = ["192.168.1.1"];
+  };
 
   # Packages
   environment.shells = with pkgs; [bash powershell];
@@ -93,15 +98,6 @@
     registry.nixpkgs.flake = inputs.nixpkgs;
     nixPath = ["nixpkgs=${inputs.nixpkgs}"];
   };
-
-  #
-
-  # # git-credential-manager has /usr/bin/which hardcoded.
-  # system.activationScripts.usr-bin-which = ''
-  #   mkdir -p /usr/bin
-  #   rm /usr/bin/which
-  #   ln -sfn ${pkgs.which}/bin/which /usr/bin/which
-  # '';
 
   # Corsair Keyboard
   hardware.ckb-next.enable = true;
