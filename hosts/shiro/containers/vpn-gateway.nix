@@ -46,13 +46,18 @@ in {
         address = [secrets.address];
         dns = [secrets.dns];
         privateKeyFile = "/secrets/mullvad-privkey";
-        # TODO: Enable kill switch
-        # postUp = [
-        #   "${iptables} -I OUTPUT ! -o ${wg-interface} -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j REJECT"
-        # ];
-        # preDown = [
-        #   "${iptables} -D OUTPUT ! -o ${wg-interface} -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j REJECT"
-        # ];
+        # Thanks to https://www.reddit.com/r/WireGuard/comments/gf989b/comment/fqek1t2/ for this killswitch
+        postUp = ''
+          ${iptables} -N WG_KILLSWITCH
+          ${iptables} -A OUTPUT -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j WG_KILLSWITCH
+          ${iptables} -A WG_KILLSWITCH -o ${wg-interface} -j RETURN
+          ${iptables} -A WG_KILLSWITCH -o mv-enp6s0 -m iprange --dst-range 192.168.1.2-192.168.1.100 -j RETURN
+          ${iptables} -A WG_KILLSWITCH -j REJECT
+        '';
+        preDown = ''
+          ${iptables} -D OUTPUT -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j WG_KILLSWITCH
+          ${iptables} -X WG_KILLSWITCH
+        '';
         peers = [
           {
             inherit (secrets) endpoint publicKey;
