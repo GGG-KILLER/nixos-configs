@@ -6,6 +6,7 @@
 with lib; let
   inherit (import ./funcs.nix args) mkContainer;
   consts = config.my.constants;
+  secrets = config.my.secrets.vpn.mullvad;
 in {
   my.networking.vpn-gateway = {
     ipAddr = "192.168.1.7";
@@ -19,6 +20,13 @@ in {
     includeEtc = false;
     includeH = false;
 
+    bindMounts = {
+      "/secrets" = {
+        hostPath = "/run/container-secrets/vpn-gateway";
+        isReadOnly = true;
+      };
+    };
+
     # Let the container create tunnels
     enableTun = true;
 
@@ -26,45 +34,38 @@ in {
       config,
       pkgs,
       ...
-    }: {
+    }: let
+      wg-interface = "wg-mullvad";
+    in {
       # VPN Config
-      modules.vpn.mullvad = {
-        enable = true;
-        alwaysRequireVpn = true;
-        autoConnect = true;
-        emergencyOnFail = true;
-        allowLan = true;
-        tunnelProtocol = "wireguard";
-        location = "br";
-        nameservers = consts.networking.vpnNameservers;
+      networking.wg-quick.interfaces.${wg-interface} = let
+        iptables = "${pkgs.iptables}/bin/iptables";
+        ip6tables = "${pkgs.iptables}/bin/iptables";
+        wg = "${pkgs.wireguard-tools}/bin/wg";
+      in {
+        address = [secrets.address];
+        dns = [secrets.dns];
+        privateKeyFile = "/secrets/mullvad-privkey";
+        # TODO: Enable kill switch
+        # postUp = [
+        #   "${iptables} -I OUTPUT ! -o ${wg-interface} -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j REJECT"
+        # ];
+        # preDown = [
+        #   "${iptables} -D OUTPUT ! -o ${wg-interface} -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j REJECT"
+        # ];
+        peers = [
+          {
+            inherit (secrets) endpoint publicKey;
+            allowedIPs = ["0.0.0.0/0"];
+          }
+        ];
       };
-
-      # systemd.services.mullvad-auto-restarter = {
-      #   description = "Service to fix mullvad if it's broken.";
-      #   after = ["mullvad.service"];
-      #   startAt = "*:0,15,30,45";
-      #   path = with pkgs; [mullvad-vpn coreutils systemd];
-      #   script = ''
-      #     #! ${pkgs.bash}/bin/bash
-      #     set -euo pipefail
-
-      #     if ! mullvad status ; then
-      #       echo "Restarting mullvad...";
-      #       TALPID_NET_CLS_MOUNT_DIR=/tmp/net_cls timeout 10 mullvad-daemon;
-      #       systemctl restart mullvad.service;
-      #     fi
-      #   '';
-      #   serviceConfig.Type = "oneshot";
-      # };
 
       # NAT
       networking.nat = {
         enable = true;
-        internalIPs = [
-          "192.168.1.0/24"
-          "192.168.2.0/24"
-        ];
-        externalInterface = "wg-mullvad";
+        internalIPs = ["192.168.1.0/24"];
+        externalInterface = wg-interface;
       };
     };
   };

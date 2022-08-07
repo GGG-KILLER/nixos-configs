@@ -24,6 +24,9 @@ in {
   "shiro/stepca/intermediate_ca_key".publicKeys = [ggg shiro];
   "shiro/stepca/keys_password".publicKeys = [ggg shiro];
 
+  # Shiro - VPN Gateway
+  "shiro/vpn-gateway/mullvad_private_key".publicKeys = [ggg shiro];
+
   # VPN Proxy
   "vpn-proxy/wireguard/private_key".publicKeys = [ggg vpn-proxy];
   "vpn-proxy/wireguard/wing_psk".publicKeys = [ggg vpn-proxy];
