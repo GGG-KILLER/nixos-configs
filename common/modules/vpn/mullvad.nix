@@ -106,10 +106,7 @@ in {
               else "block"
             }
 
-            ${optionalString (config.my.secrets.vpn.mullvad != null) "${mullvad} account set \"${builtins.replaceStrings [" "] [""] config.my.secrets.vpn.mullvad.account}\""}
-
             ${mullvad} relay set tunnel-protocol ${mullvadConfig.tunnelProtocol}
-            ${optionalString (config.my.secrets.vpn.mullvad != null) "${mullvad} account set \"${builtins.replaceStrings [" "] [""] config.my.secrets.vpn.mullvad.account}\""}
             ${optionalString (mullvadConfig.location != null) "${mullvad} relay set location ${mullvadConfig.location}"}
             ${optionalString mullvadConfig.autoConnect "${mullvad} connect"}
             ${mullvad} always-require-vpn set ${
@@ -123,6 +120,8 @@ in {
               else "off"
             }
             ${optionalString (mullvadConfig.nameservers != []) "${mullvad} dns set custom ${concatStringsSep " " mullvadConfig.nameservers}"}
+
+            ${optionalString (config.my.secrets.vpn.mullvad != null) "${mullvad} account login \"${builtins.replaceStrings [" "] [""] config.my.secrets.vpn.mullvad.account}\""}
           '';
           Restart = "always";
           RestartSec = "5s";
