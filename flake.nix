@@ -36,24 +36,15 @@
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
-    nurPkgs = system:
-      import nur {
-        pkgs = pkgs;
-        nurpkgs = pkgs;
-      };
-    nurNoPkgs = system:
-      import nur {
-        nurpkgs = pkgs;
-      };
+    nur-no-pkgs = import nur {
+      nurpkgs = nixpkgs.legacyPackages.${system};
+    };
     mkConfig = host:
       nixpkgs.lib.nixosSystem {
         inherit system;
 
         specialArgs = {
-          inherit system inputs;
-          nur = nurPkgs system;
-          nur-no-pkgs = nurNoPkgs system;
+          inherit system inputs nur-no-pkgs;
         };
 
         modules = [
