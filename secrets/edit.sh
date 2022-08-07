@@ -1,5 +1,6 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p
+#! nix-shell -i bash -p vscode
 # shellcheck shell=bash
 ROOT_DIR="$(dirname "$(readlink -f "$0")")"
-RULES="$ROOT_DIR/secrets.nix" EDITOR="code --wait" agenix -e "$@"
+pushd "$ROOT_DIR" || exit
+EDITOR="code --wait" agenix -e "$@"
