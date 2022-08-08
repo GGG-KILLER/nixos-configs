@@ -109,7 +109,7 @@ in {
       gh = {
         enable = true;
         settings = {
-          editor = "code --wait";
+          editor = "${pkgs.vscode}/bin/code --wait";
         };
       };
       git = {
@@ -122,6 +122,7 @@ in {
           credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager-core";
           credential.credentialStore = "secretservice";
           init.defaultBranch = "main";
+          core.editor = "${pkgs.vscode}/bin/code --wait";
         };
       };
       jq.enable = true;
