@@ -63,7 +63,7 @@ in rec {
       containerCfg = config.container;
     in {
       imports = [
-        ../../../common
+        ../../../common/default.flakeless.nix
         ../gpu.nix
       ];
 
