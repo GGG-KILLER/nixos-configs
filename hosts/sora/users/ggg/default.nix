@@ -98,7 +98,8 @@ in {
     home.shellAliases = {};
 
     programs = {
-      command-not-found.enable = true;
+      command-not-found.enable = false;
+      nix-index.enable = true;
       home-manager.enable = true;
       bat.enable = true;
       dircolors.enable = true;
@@ -163,6 +164,10 @@ in {
     xdg.configFile."nix/nix.conf".text = ''
       access-tokens = github.com=${config.my.secrets.users.ggg.nixGithubToken}
     '';
+
+    home.file = {
+      ".cache/nix-index/files".source = inputs.nix-index-database.legacyPackages.${system}.database;
+    };
 
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
   };
