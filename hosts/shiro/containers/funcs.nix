@@ -23,6 +23,7 @@ in rec {
     # This can be overriden by just defining it.
     autoStart = true;
     privateNetwork = true;
+    ephemeral = true;
 
     # External LAN
     macvlans = ["enp6s0"];
