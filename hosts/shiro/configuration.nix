@@ -44,14 +44,6 @@ with lib; {
   hardware.cpu.amd.updateMicrocode = true;
   hardware.enableAllFirmware = true;
 
-  # Flakes
-  nix = {
-    package = pkgs.nixFlakes;
-    extraOptions = "experimental-features = nix-command flakes";
-    registry.nixpkgs.flake = inputs.nixpkgs;
-    nixPath = ["nixpkgs=${inputs.nixpkgs}"];
-  };
-
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
