@@ -38,11 +38,6 @@ in {
       android-tools
       genymotion
 
-      # Database
-      pgformatter
-      pgmodeler
-      postgresql_14
-
       # Coding
       docker-compose
       #dotnet-sdk
@@ -54,6 +49,11 @@ in {
       tokei
       wrangler
       yarn
+
+      # Database
+      pgformatter
+      pgmodeler
+      postgresql_14
 
       # Encryption
       age
