@@ -147,6 +147,6 @@ in rec {
   mkContainer = config:
     mkMerge [
       (mkDefaultSettings config)
-      (filterAttrs (name: val: all (unwantedName: name != unwantedName) ["name" "includeAnimu" "includeSeries" "includeH" "includeEtc"]) config)
+      (removeAttrs config ["name" "includeAnimu" "includeSeries" "includeH" "includeEtc"])
     ];
 }
