@@ -156,7 +156,7 @@ in {
     };
 
     services = {
-      flameshot.enable = true;
+      flameshot.enable = false;
       rsibreak.enable = true;
     };
 
