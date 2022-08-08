@@ -64,6 +64,12 @@ in {
       # Hardware
       openrgb
 
+      # Nix
+      inputs.deploy-rs.packages.${system}.deploy-rs
+      nix-du
+      nix-ld
+      nix-top
+
       # VMs
       virt-manager
       virt-viewer
@@ -71,7 +77,6 @@ in {
       # Misc
       chromium
       croc
-      inputs.deploy-rs.packages.${system}.deploy-rs
       file
       inputs.git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
