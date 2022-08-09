@@ -34,6 +34,7 @@ in {
 
   containers.network-share = mkContainer {
     name = "network-share";
+    ephemeral = false;
 
     config = {
       config,
