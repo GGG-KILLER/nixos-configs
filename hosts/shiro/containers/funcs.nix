@@ -21,9 +21,9 @@ in rec {
     networking-hosts = config.networking.hosts;
   in {
     # This can be overriden by just defining it.
-    autoStart = true;
+    autoStart = mkDefault true;
     privateNetwork = true;
-    ephemeral = true;
+    ephemeral = mkDefault true;
 
     # External LAN
     macvlans = ["enp6s0"];
