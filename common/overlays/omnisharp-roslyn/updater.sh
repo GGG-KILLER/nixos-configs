@@ -2,6 +2,9 @@
 #! nix-shell -i bash -p curl jq common-updater-scripts nuget-to-nix gnugrep coreutils
 # shellcheck shell=bash
 
+# WARNING: you need BOTH .NET 7 and 6 to run this script (and they must be on your path
+# using dotnetCorePackages.combinePackages).
+
 set -euo pipefail
 SDK7_VERSION=$(dotnet --version)
 RUNTIME6_VERSION=$(dotnet --list-runtimes | grep -oP '(?<=Microsoft\.NETCore\.App )6\.0\.\d+')
