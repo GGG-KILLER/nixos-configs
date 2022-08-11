@@ -43,7 +43,14 @@ mkdir ./nuget_pkgs
 replaceInPlace global.json '7.0.100-preview.4.22252.9' "$SDK7_VERSION"
 
 for project in src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj; do
-  dotnet restore "$project" --packages ./nuget_pkgs
+  dotnet restore "$project" \
+    --packages ./nuget_pkgs \
+    -property:PackageVersion="${new_version//v}" \
+    -property:AssemblyVersion="${new_version//v}".0 \
+    -property:FileVersion="${new_version//v}".0 \
+    -property:InformationalVersion="${new_version//v}" \
+    -property:RuntimeFrameworkVersion=6.0.0-preview.7.21317.1 \
+    -property:RollForward=LatestMajor
 done
 
 nuget-to-nix ./nuget_pkgs > "$deps_file"

@@ -482,8 +482,7 @@
   (fetchNuGet {
     pname = "Microsoft.TestPlatform.TranslationLayer";
     version = "17.2.0";
-    sha256 = "10a8dh2bl9kgls5n7fqlg3c84qb2wxbabdw0c3in8vv5369bpaq9";
-    url = "https://pkgs.dev.azure.com/dnceng/9ee6d478-d288-47f7-aacc-f6e6d082ae6d/_packaging/d1622942-d16f-48e5-bc83-96f4539e7601/nuget/v3/flat2/microsoft.testplatform.translationlayer/17.2.0/microsoft.testplatform.translationlayer.17.2.0.nupkg";
+    sha256 = "0yzwsmyb1pz761rg03zjimbqhngqj2vgzppp0ypqhdxbp5gmh2k9";
   })
   (fetchNuGet {
     pname = "Microsoft.VisualStudio.SDK.EmbedInteropTypes";
