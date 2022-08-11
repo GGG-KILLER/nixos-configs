@@ -89,5 +89,13 @@
   "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
   "window.titleBarStyle": "custom",
   "workbench.iconTheme": "material-icon-theme",
+  "workbench.colorCustomizations": {
+    "editorInlayHint.foreground": "#f8f8f87e",
+    "editorInlayHint.background": "#ffffff00",
+    "editorInlayHint.typeForeground": "#f8f8f87e",
+    "editorInlayHint.typeBackground": "#ffffff00",
+    "editorInlayHint.parameterForeground": "#f8f8f87e",
+    "editorInlayHint.parameterBackground": "#ffffff00"
+  },
   "terminal.external.linuxExec": "zsh"
 }
