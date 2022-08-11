@@ -8,11 +8,11 @@
 }:
 stdenv.mkDerivation rec {
   pname = "rclone";
-  version = "1.59.0-beta.6165.7361c98b2";
+  version = "1.59.1";
 
   src = fetchzip {
-    url = "https://beta.rclone.org/v${version}/rclone-v${version}-linux-amd64.zip";
-    hash = "sha256-uYtze09kGhveyFsX8KvWbB6T79tRJQmMwInAnnd5gWE=";
+    url = "https://github.com/rclone/rclone/releases/download/v${version}/rclone-v${version}-linux-amd64.zip";
+    hash = "sha256-R2E62M1Q8QOOwegz+UtyrAJkB0I9Rx4+4Sn4kOwxG80=";
   };
 
   buildInputs = [fuse];
