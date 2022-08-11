@@ -3,6 +3,7 @@
   fetchFromGitHub,
   buildDotnetModule,
   dotnetCorePackages,
+  patchelf,
 }: let
   sdkVersion = dotnetCorePackages.sdk_6_0.version;
   runtimeVersion = dotnetCorePackages.runtime_6_0.version;
@@ -10,7 +11,6 @@
     combinePackages [
       sdk_7_0
       sdk_6_0
-      sdk_5_0
       sdk_3_1
     ];
 in
@@ -28,6 +28,11 @@ in
     projectFile = "src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj";
     nugetDeps = ./deps.nix;
 
+    nativeBuildInputs = [
+      patchelf
+    ];
+
+    dotnet-sdk = combined-sdk;
     dotnet-runtime = combined-sdk;
 
     dotnetInstallFlags = ["--framework net6.0"];
@@ -42,6 +47,14 @@ in
     '';
 
     postFixup = ''
+      # Emulate what .NET 7 does to its binaries while a fix doesn't land in buildDotnetModule
+      DOTNET_INTERPRETER=$(patchelf --print-interpreter ${dotnet-runtime}/dotnet)
+      DOTNET_RPATH=$(patchelf --print-rpath ${dotnet-runtime}/dotnet)
+
+      patchelf --set-interpreter $DOTNET_INTERPRETER \
+        --set-rpath $DOTNET_RPATH \
+        $out/lib/omnisharp-roslyn/OmniSharp
+
       # Delete files to mimick hacks in https://github.com/OmniSharp/omnisharp-roslyn/blob/bdc14ca/build.cake#L594
       rm $out/lib/omnisharp-roslyn/NuGet.*.dll
       rm $out/lib/omnisharp-roslyn/System.Configuration.ConfigurationManager.dll
