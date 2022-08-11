@@ -1,3 +1,4 @@
+# Thanks to @myaats for providing this to me
 {
   lib,
   buildGoModule,
