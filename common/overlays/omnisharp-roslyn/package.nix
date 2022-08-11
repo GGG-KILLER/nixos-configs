@@ -6,14 +6,7 @@
   lib,
   patchelf,
 }: let
-  sdkVersion = dotnetCorePackages.sdk_6_0.version;
-  runtimeVersion = dotnetCorePackages.runtime_6_0.version;
-  combined-sdk = with dotnetCorePackages;
-    combinePackages [
-      sdk_7_0
-      sdk_6_0
-      sdk_3_1
-    ];
+  inherit (dotnetCorePackages) sdk_6_0;
 in
   buildDotnetModule rec {
     pname = "omnisharp-roslyn";
@@ -33,12 +26,10 @@ in
       patchelf
     ];
 
-    dotnet-sdk = combined-sdk;
-    dotnet-runtime = combined-sdk;
-
     dotnetInstallFlags = ["--framework net6.0"];
     dotnetBuildFlags = ["--framework net6.0"];
     dotnetFlags = [
+      # These flags are set by the cake build.
       "-property:PackageVersion=${version}"
       "-property:AssemblyVersion=${version}.0"
       "-property:FileVersion=${version}.0"
@@ -47,27 +38,26 @@ in
       "-property:RollForward=LatestMajor"
     ];
 
-    executables = ["OmniSharp"];
-
     postPatch = ''
       # Relax the version requirement
       substituteInPlace global.json \
-        --replace '7.0.100-preview.4.22252.9' '${sdkVersion}'
+        --replace '7.0.100-preview.4.22252.9' '${sdk_6_0.version}'
     '';
 
     dontDotnetFixup = true; # we'll fix it ourselves
     postFixup = ''
       # Emulate what .NET 7 does to its binaries while a fix doesn't land in buildDotnetModule
-      DOTNET_INTERPRETER=$(patchelf --print-interpreter ${dotnet-runtime}/dotnet)
-      DOTNET_RPATH=$(patchelf --print-rpath ${dotnet-runtime}/dotnet)
-
-      patchelf --set-interpreter $DOTNET_INTERPRETER \
-        --set-rpath $DOTNET_RPATH \
+      patchelf --set-interpreter $(patchelf --print-interpreter ${sdk_6_0}/dotnet) \
+        --set-rpath $(patchelf --print-rpath ${sdk_6_0}/dotnet) \
         $out/lib/omnisharp-roslyn/OmniSharp
+
+      # Now create a wrapper without DOTNET_ROOT
       # we explicitly don't set DOTNET_ROOT as it should get the one from PATH
-      # as you can use any .NET SDK higher than 6 to run OmniSharp.
+      # as you can use any .NET SDK higher than 6 to run OmniSharp and you most
+      # likely will NOT want the .NET 6 runtime running it (as it'll use that to
+      # detect the SDKs for its own use, so it's better to let it find it in PATH).
       makeWrapper $out/lib/omnisharp-roslyn/OmniSharp $out/bin/OmniSharp \
-        --prefix LD_LIBRARY_PATH : ${icu}/lib
+        --prefix LD_LIBRARY_PATH : ${sdk_6_0.icu}/lib
 
       # Delete files to mimick hacks in https://github.com/OmniSharp/omnisharp-roslyn/blob/bdc14ca/build.cake#L594
       rm $out/lib/omnisharp-roslyn/NuGet.*.dll
