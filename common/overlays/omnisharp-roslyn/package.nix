@@ -16,13 +16,13 @@
 in
   buildDotnetModule rec {
     pname = "omnisharp-roslyn";
-    version = "1.39.0";
+    version = "1.39.1";
 
     src = fetchFromGitHub {
       owner = "OmniSharp";
       repo = pname;
       rev = "v${version}";
-      sha256 = "XwW4rPZKz9+p8rDoFirF5XwuouiwsKbu4bUrcZP0xhc=";
+      sha256 = "Fd9fS5iSEynZfRwZexDlVndE/zSZdUdugR0VgXXAdmI=";
     };
 
     projectFile = "src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj";
