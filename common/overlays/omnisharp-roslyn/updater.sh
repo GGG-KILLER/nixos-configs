@@ -42,11 +42,6 @@ mkdir ./nuget_pkgs
 
 replaceInPlace global.json '7.0.100-preview.4.22252.9' "$SDK7_VERSION"
 
-for project in src/OmniSharp.Http.Driver/OmniSharp.Http.Driver.csproj src/OmniSharp.LanguageServerProtocol/OmniSharp.LanguageServerProtocol.csproj src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj; do
-  replaceInPlace $project '<RuntimeFrameworkVersion>6.0.0-preview.7.21317.1</RuntimeFrameworkVersion>' "<RuntimeFrameworkVersion>$RUNTIME6_VERSION</RuntimeFrameworkVersion>"
-  replaceInPlace $project '<RuntimeIdentifiers>win7-x64;win7-x86;win10-arm64</RuntimeIdentifiers>' '<RuntimeIdentifiers>linux-x64;linux-arm64;osx-x64;osx-arm64</RuntimeIdentifiers>'
-done
-
 for project in src/OmniSharp.Stdio.Driver/OmniSharp.Stdio.Driver.csproj; do
   dotnet restore "$project" --packages ./nuget_pkgs
 done
