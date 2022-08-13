@@ -32,6 +32,7 @@ with lib; let
 
     containers."pgsql-${env}" = mkContainer {
       name = "pgsql-${env}";
+      ephemeral = false;
 
       includeAnimu = false;
       includeSeries = false;
@@ -42,6 +43,10 @@ with lib; let
         "/mnt/pgsql" = {
           hostPath = "/zfs-main-pool/data/dbs/pgsql-${env}";
           isReadOnly = false;
+        };
+        "/secrets" = {
+          hostPath = "/run/container-secrets/pgsql-${env}";
+          isReadOnly = true;
         };
       };
 
@@ -59,10 +64,15 @@ with lib; let
             "pt_BR.UTF-8/UTF-8"
           ];
 
-          services.pgmanage = {
+          services.pgadmin = {
             enable = true;
-            connections.main = "host=/run/postgresql dbname=postgres sslmode=disable";
+            initialEmail = "gggkiller2@gmail.com";
+            initialPasswordFile = "/secrets/pgadmin-pass";
           };
+          systemd.tmpfiles.rules = [
+            "d '/var/lib/pgadmin' 0755 pgadmin pgadmin"
+            "d '/var/log/pgadmin' 0755 pgadmin pgadmin"
+          ];
 
           services.postgresql = {
             enable = true;
@@ -71,6 +81,7 @@ with lib; let
             enableTCPIP = true;
             authentication = mkForce ''
               # TYPE  DATABASE        USER            ADDRESS                 METHOD
+              local   all             all                                     trust
               host    all             all             127.0.0.1/32            scram-sha-256
               host    all             all             ::1/128                 scram-sha-256
               host    all             all             192.168.1.0/24          scram-sha-256
@@ -124,7 +135,7 @@ with lib; let
               addSSL = true;
               locations."/" = {
                 extraConfig = ''
-                  proxy_pass http://localhost:${toString config.services.pgmanage.port};
+                  proxy_pass http://localhost:${toString config.services.pgadmin.port};
                   proxy_http_version 1.1;
                   proxy_set_header Upgrade $http_upgrade;
                   proxy_set_header Connection "upgrade";

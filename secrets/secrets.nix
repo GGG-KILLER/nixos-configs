@@ -27,6 +27,10 @@ in {
   # Shiro - VPN Gateway
   "shiro/vpn-gateway/mullvad_private_key.age".publicKeys = [ggg shiro];
 
+  # Shiro - PostgreSQL
+  "shiro/pgsql/dev_pass.age".publicKeys = [ggg shiro];
+  "shiro/pgsql/prd_pass.age".publicKeys = [ggg shiro];
+
   # VPN Proxy
   "vpn-proxy/wireguard/private_key.age".publicKeys = [ggg vpn-proxy];
   "vpn-proxy/wireguard/wing_psk.age".publicKeys = [ggg vpn-proxy];

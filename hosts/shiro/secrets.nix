@@ -23,5 +23,20 @@
       # We can't symlink as the container won't be able to follow it.
       symlink = false;
     };
+
+    containers_pgsql-dev_pgadmin-pass = {
+      file = ../../secrets/shiro/pgsql/dev_pass.age;
+      path = "/run/container-secrets/pgsql-dev/pgadmin-pass";
+      owner = "996";
+      # We can't symlink as the container won't be able to follow it.
+      symlink = false;
+    };
+    containers_pgsql-prd_pgadmin-pass = {
+      file = ../../secrets/shiro/pgsql/prd_pass.age;
+      path = "/run/container-secrets/pgsql-prd/pgadmin-pass";
+      owner = "996";
+      # We can't symlink as the container won't be able to follow it.
+      symlink = false;
+    };
   };
 }
