@@ -1,4 +1,3 @@
 # age1wt4pfkks0995xsgkyf2mu7ayd8g73a3zvk4l6smuznuzwv0kw5gqswym4d
-common/secrets/**    binary filter=git-crypt-agessh diff=git-crypt-agessh
-secrets/**           binary
-secrets/secrets.nix -binary
+common/secrets/** binary filter=git-crypt-agessh diff=git-crypt-agessh
+secrets/**/*.age  binary
