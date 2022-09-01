@@ -40,6 +40,9 @@
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
 
+  # ZFS is marked as broken on 5.19
+  nixpkgs.config.allowBroken = true;
+
   # ZFS boot settings.
   boot.supportedFilesystems = ["zfs" "ntfs"];
 
