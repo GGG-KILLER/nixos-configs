@@ -16,6 +16,7 @@ in {
       userSettings =
         settings
         // {
+          "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
           "extensions.autoCheckUpdates" = false;
           "extensions.autoUpdate" = false;
           "update.mode" = "none";
