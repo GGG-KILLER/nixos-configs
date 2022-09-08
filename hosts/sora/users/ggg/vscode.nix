@@ -7,7 +7,6 @@
   inherit (builtins) fromJSON readFile map filter;
   readJSON = path: fromJSON (readFile path);
   settings = readJSON ./configs/settings.json;
-  keybindings = readJSON ./configs/keybindings.json;
   inherit (pkgs.vscode-utils) extensionsFromVscodeMarketplace;
 in {
   home-manager.users.ggg = {
