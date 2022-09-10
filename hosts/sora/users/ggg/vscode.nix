@@ -88,20 +88,21 @@ in {
           {
             publisher = "visualstudioexptteam";
             name = "vscodeintellicode";
-            version = "1.2.22";
-            sha256 = "KlDrAV2MlJx5opVzf6KggaWn8zkeWU/TDEiCW3rLb+s=";
+            version = "1.2.25";
+            sha256 = "sha256-MpOZQsenSGBgPpVTlRGvXFgZqfAGwuDzsys8tm7d/FE=";
           }
           {
             publisher = "ms-vscode";
             name = "powershell";
-            version = "2022.6.3";
-            sha256 = "P8kakmpT3yAkKFroKttiLOV7PneOIoQOEtwImPIDHQY=";
+            version = "2022.8.5";
+            sha256 = "sha256-QwsVUakeSsdxiYdS1Z2+9jnPEyp0MeXNaaN038wJGCU=";
           }
           {
             publisher = "ms-vscode-remote";
             name = "remote-containers";
-            version = "0.242.0";
-            sha256 = "cLHa0E0izNu2QYQBQ0qUlCIXsJmvc7Q6kgR6F3hnMX8=";
+            version = "0.252.0";
+            sha256 = "sha256-pXd2IjbRwYgUAGVIMLE9mQwR8mG/x0MoMfK8zVh3Mvs=";
+          }
           }
         ];
     };
