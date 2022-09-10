@@ -103,6 +103,11 @@ in {
             version = "0.252.0";
             sha256 = "sha256-pXd2IjbRwYgUAGVIMLE9mQwR8mG/x0MoMfK8zVh3Mvs=";
           }
+          {
+            publisher = "L13RARY";
+            name = "l13-diff";
+            version = "1.0.3";
+            sha256 = "sha256-dZAtNyMaVmBMGWCVpizK8JDZASzMo4AkIKkjPYWJn1U=";
           }
         ];
     };
