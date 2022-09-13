@@ -7,14 +7,15 @@ with lib; let
   extensionPkgs = with pkgs.gnomeExtensions; [
     always-show-titles-in-overview
     appindicator
-    mpris-indicator-button
-    transparent-top-bar
-    just-perfection
-    status-area-horizontal-spacing
-    user-themes
-    #static-background-in-overview
-    dash-to-panel
     arcmenu
+    dash-to-panel
+    easyeffects-preset-selector
+    just-perfection
+    mpris-indicator-button
+    #static-background-in-overview
+    status-area-horizontal-spacing
+    transparent-top-bar
+    user-themes
   ];
 in {
   environment.systemPackages =

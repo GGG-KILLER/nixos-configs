@@ -31,6 +31,7 @@ in {
   home-manager.users.ggg = {
     home.packages = with pkgs; [
       # Audio
+      easyeffects
       ffmpeg_5-full
       helvum
 
