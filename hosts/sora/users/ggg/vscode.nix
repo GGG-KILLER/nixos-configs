@@ -15,8 +15,14 @@ in {
       userSettings =
         settings
         // {
-          # "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
           # "omnisharp.dotnetPath" = "/dev/null";
+          # "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
+
+          "powershell.powerShellAdditionalExePaths" = {
+            "PowerShell Core 7 (x64)" = "${pkgs.powershell}${pkgs.powershell.shellPath}";
+          };
+          "powershell.promptToUpdatePowerShell" = false;
+
           "extensions.autoCheckUpdates" = false;
           "extensions.autoUpdate" = false;
           "update.mode" = "none";
