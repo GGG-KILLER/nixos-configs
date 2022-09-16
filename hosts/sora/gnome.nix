@@ -20,7 +20,7 @@ with lib; {
 
   # Remote Desktop
   services.gnome.gnome-remote-desktop.enable = true;
-  programs.xwayland.enable = true;
+  # programs.xwayland.enable = true;
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-remote-desktop
