@@ -18,7 +18,6 @@
   "csharp.semanticHighlighting.enabled": true,
   "debug.inlineValues": "on",
   "diffEditor.ignoreTrimWhitespace": false,
-  "editor.experimental.stickyScroll.enabled": true,
   "editor.fontFamily": "'Cascadia Code'",
   "editor.fontLigatures": true,
   "editor.formatOnType": true,
@@ -29,12 +28,11 @@
   "editor.renderControlCharacters": true,
   "editor.renderWhitespace": "boundary",
   "editor.smoothScrolling": true,
+  "editor.stickyScroll.enabled": true,
   "editor.suggestSelection": "first",
   "editor.wordWrap": "on",
   "editor.wrappingIndent": "same",
   "explorer.autoReveal": false,
-  "extensions.autoCheckUpdates": false,
-  "extensions.autoUpdate": false,
   "extensions.ignoreRecommendations": false,
   "files.associations": {},
   "files.autoSave": "onWindowChange",
@@ -67,6 +65,7 @@
   "omnisharp.organizeImportsOnFormat": true,
   "omnisharp.useModernNet": true,
   "redhat.telemetry.enabled": false,
+  "terminal.external.linuxExec": "zsh",
   "terminal.integrated.defaultProfile.linux": "zsh",
   "terminal.integrated.fontFamily": "'Cascadia Mono PL'",
   "terminal.integrated.rightClickBehavior": "copyPaste",
@@ -90,18 +89,16 @@
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.enabled": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "update.mode": "none",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}",
   "window.titleBarStyle": "custom",
-  "workbench.iconTheme": "material-icon-theme",
   "workbench.colorCustomizations": {
-    "editorInlayHint.foreground": "#f8f8f87e",
     "editorInlayHint.background": "#ffffff00",
-    "editorInlayHint.typeForeground": "#f8f8f87e",
-    "editorInlayHint.typeBackground": "#ffffff00",
+    "editorInlayHint.foreground": "#f8f8f87e",
+    "editorInlayHint.parameterBackground": "#ffffff00",
     "editorInlayHint.parameterForeground": "#f8f8f87e",
-    "editorInlayHint.parameterBackground": "#ffffff00"
+    "editorInlayHint.typeBackground": "#ffffff00",
+    "editorInlayHint.typeForeground": "#f8f8f87e"
   },
-  "terminal.external.linuxExec": "zsh"
+  "workbench.iconTheme": "material-icon-theme"
 }
