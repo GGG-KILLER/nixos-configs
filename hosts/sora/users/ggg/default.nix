@@ -15,6 +15,7 @@
   dotnetRoot = "${dotnet-sdk}";
   dotnetSdk = "${dotnet-sdk}/sdk";
   dotnetBinary = "${dotnetRoot}/bin/dotnet";
+  xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
 in {
   imports = [
     ./theme.nix
@@ -60,7 +61,7 @@ in {
       age
       inputs.agenix.defaultPackage.${system}
       step-cli
-      xca
+      xca-stable
 
       # Hardware
       openrgb
