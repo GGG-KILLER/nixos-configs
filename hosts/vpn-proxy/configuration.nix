@@ -16,6 +16,7 @@ in {
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./secrets.nix
+    ./store.nix
   ];
 
   networking.hostName = "vpn-proxy"; # Define your hostname.
