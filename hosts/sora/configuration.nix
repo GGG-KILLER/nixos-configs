@@ -58,7 +58,7 @@
   environment.shells = with pkgs; [bash powershell];
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  #services.printing.enable = true;
 
   # List services that you want to enable:
 
