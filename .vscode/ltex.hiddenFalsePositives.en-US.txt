@@ -1,0 +1,1 @@
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qnixos-configs\nMy own NixOS Configs\\E$"}
