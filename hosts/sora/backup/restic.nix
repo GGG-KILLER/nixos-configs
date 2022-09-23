@@ -1,35 +1,40 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib; let
   inherit (config.my.secrets.services) backblaze;
 in {
   services.restic.backups = let
+    zfs = "${pkgs.zfs}/bin/zfs";
+    baseDir = "/home/ggg/.zfs/snapshot/restic-backup";
     allBase = {
       initialize = true;
+      backupPrepareCommand = "${zfs} snapshot rpool/userdata/home/ggg@restic-backup";
+      backupCleanupCommand = "${zfs} destroy rpool/userdata/home/ggg@restic-backup";
       paths = [
-        "/home/ggg"
+        baseDir
       ];
       extraBackupArgs = [
-        "--exclude=/home/ggg/Data"
-        "--exclude=/home/ggg/Downloads"
-        "--exclude=/home/ggg/Git"
-        "--exclude=/home/ggg/Unity"
-        "--exclude=/home/ggg/.cache"
-        "--exclude=/home/ggg/.compose-cache"
-        "--exclude=/home/ggg/.dotnet"
-        "--exclude=/home/ggg/.java"
-        "--exclude=/home/ggg/.nix-defexpr"
-        "--exclude=/home/ggg/.nix-profile"
-        "--exclude=/home/ggg/.nuget"
-        "--exclude=/home/ggg/.nv"
-        "--exclude=/home/ggg/.omnisharp"
-        "--exclude=/home/ggg/.pki"
-        "--exclude=/home/ggg/.templateengine"
-        "--exclude=/home/ggg/.vscode"
-        "--exclude=/home/ggg/.var/app/com.valvesoftware.Steam/.local/share/Steam"
+        "--exclude=${baseDir}/Data"
+        "--exclude=${baseDir}/Downloads"
+        "--exclude=${baseDir}/Git"
+        "--exclude=${baseDir}/Unity"
+        "--exclude=${baseDir}/.cache"
+        "--exclude=${baseDir}/.compose-cache"
+        "--exclude=${baseDir}/.dotnet"
+        "--exclude=${baseDir}/.java"
+        "--exclude=${baseDir}/.nix-defexpr"
+        "--exclude=${baseDir}/.nix-profile"
+        "--exclude=${baseDir}/.nuget"
+        "--exclude=${baseDir}/.nv"
+        "--exclude=${baseDir}/.omnisharp"
+        "--exclude=${baseDir}/.pki"
+        "--exclude=${baseDir}/.templateengine"
+        "--exclude=${baseDir}/.vscode"
+        "--exclude=${baseDir}/.var/app/com.valvesoftware.Steam/.local/share/Steam"
       ];
       pruneOpts = [
         "--keep-daily 7"
