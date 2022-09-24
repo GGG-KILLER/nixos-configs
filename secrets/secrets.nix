@@ -11,9 +11,11 @@ let
 in {
   # Sora
   "sora/backup_password.age".publicKeys = [ggg sora];
+  "sora/backup_envfile.age".publicKeys = [ggg sora];
 
   # Shiro
   "shiro/backup_password.age".publicKeys = [ggg shiro];
+  "shiro/backup_envfile.age".publicKeys = [ggg shiro];
 
   # Shiro - Wireguard
   "shiro/wireguard/private_key.age".publicKeys = [ggg shiro];

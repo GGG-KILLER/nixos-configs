@@ -60,10 +60,8 @@ in {
         rcloneConfig = {
           type = "b2";
           hard_delete = true;
-          account = backblaze.backup-sora.keyId;
-          key = backblaze.backup-sora.applicationKey;
-          download_url = "https://20f939184fd4f6b7.ggg.dev";
         };
+        environmentFile = config.age.secrets.backup-envfile.path;
       }
     ];
   };
