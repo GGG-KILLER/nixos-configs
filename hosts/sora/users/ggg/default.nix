@@ -18,6 +18,7 @@
   xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
 in {
   imports = [
+    ./backup-commands.nix
     ./theme.nix
     ./vscode.nix
   ];
