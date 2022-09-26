@@ -24,10 +24,10 @@ with lib; {
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-remote-desktop
-    gnome3.adwaita-icon-theme
+    gnome.adwaita-icon-theme
     flat-remix-gtk
     flat-remix-gnome
     flat-remix-icon-theme
   ];
-  services.udev.packages = with pkgs; [gnome3.gnome-settings-daemon];
+  services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
 }
