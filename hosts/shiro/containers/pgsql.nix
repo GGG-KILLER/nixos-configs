@@ -64,16 +64,15 @@ with lib; let
             "pt_BR.UTF-8/UTF-8"
           ];
 
-          # TODO: Uncomment when this gets merged: https://github.com/NixOS/nixpkgs/pull/188575
-          # services.pgadmin = {
-          #   enable = true;
-          #   initialEmail = "gggkiller2@gmail.com";
-          #   initialPasswordFile = "/secrets/pgadmin-pass";
-          # };
-          # systemd.tmpfiles.rules = [
-          #   "d '/var/lib/pgadmin' 0755 pgadmin pgadmin"
-          #   "d '/var/log/pgadmin' 0755 pgadmin pgadmin"
-          # ];
+          services.pgadmin = {
+            enable = true;
+            initialEmail = "gggkiller2@gmail.com";
+            initialPasswordFile = "/secrets/pgadmin-pass";
+          };
+          systemd.tmpfiles.rules = [
+            "d '/var/lib/pgadmin' 0755 pgadmin pgadmin"
+            "d '/var/log/pgadmin' 0755 pgadmin pgadmin"
+          ];
 
           services.postgresql = {
             enable = true;
