@@ -4,6 +4,7 @@
     #./dotnet-combine.nix
     ./local.nix
     #./ms-dotnettools-csharp.nix
+    ./prometheus-node-exporter.nix
     #./omnisharp-roslyn.nix
     ./rclone.nix
     ./virt-v2v.nix
