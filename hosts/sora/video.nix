@@ -18,7 +18,7 @@
   # environment.sessionVariables.VDPAU_DRIVER = "nvidia";
   hardware.nvidia = {
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # modesetting.enable = true;
+    modesetting.enable = true;
     # powerManagement.enable = true;
   };
 
