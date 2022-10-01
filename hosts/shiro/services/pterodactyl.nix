@@ -78,6 +78,7 @@ in {
       secrets."pterodactyl/panel.env".path
     ];
     extraOptions = [
+      "--cap-drop=ALL"
       "--dns=192.168.1.1"
       "--ipc=none"
       "--network=pterodactyl"
