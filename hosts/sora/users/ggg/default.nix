@@ -64,6 +64,9 @@ in {
       step-cli
       xca-stable
 
+      # Games
+      inputs.packwiz.packages.${system}.packwiz
+
       # Hardware
       openrgb
 

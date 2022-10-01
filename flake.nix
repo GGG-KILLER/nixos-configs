@@ -30,6 +30,10 @@
       url = "github:ZentriaMC/pterodactyl-wings-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    packwiz = {
+      url = "github:packwiz/packwiz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

@@ -259,6 +259,26 @@
         "type": "github"
       }
     },
+    "packwiz": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1661555305,
+        "narHash": "sha256-zx0zvTpnnfRxvjVZwdXNt6obfd8gNiIjBvJnBy3ovts=",
+        "owner": "packwiz",
+        "repo": "packwiz",
+        "rev": "c7c2ca786bd050043dc36f5a35fbe7699a29adbc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "packwiz",
+        "repo": "packwiz",
+        "type": "github"
+      }
+    },
     "pterodactyl-wings-nix": {
       "inputs": {
         "docker-tools": "docker-tools",
@@ -292,6 +312,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
+        "packwiz": "packwiz",
         "pterodactyl-wings-nix": "pterodactyl-wings-nix"
       }
     },
