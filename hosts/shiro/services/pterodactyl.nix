@@ -1,7 +1,8 @@
 {
-  system,
   config,
   inputs,
+  pkgs,
+  system,
   ...
 }: let
   inherit (config.age) secrets;
@@ -99,6 +100,8 @@ in {
     requires = ["docker.service"];
     partOf = ["docker.service"];
     wantedBy = ["multi-user.target"];
+
+    path = with pkgs; [shadow];
 
     unitConfig = {
       StartLimitIntervalSec = 180;
