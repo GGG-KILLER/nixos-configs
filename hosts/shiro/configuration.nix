@@ -20,6 +20,7 @@ with lib; {
     ./nat.nix
     ./secrets.nix
     ./store.nix
+    ./users.nix
     ./virtualisation.nix
   ];
 
