@@ -26,6 +26,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database.url = "github:mic92/nix-index-database";
+    pterodactyl-wings-nix = {
+      url = "github:ZentriaMC/pterodactyl-wings-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {

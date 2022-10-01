@@ -65,6 +65,27 @@
         "type": "github"
       }
     },
+    "docker-tools": {
+      "inputs": {
+        "nixpkgs": [
+          "pterodactyl-wings-nix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1644953486,
+        "narHash": "sha256-sXMeN/VGcpn6cGw+CRQzDX226v3wpwXGgD9WFh44yXI=",
+        "owner": "ZentriaMC",
+        "repo": "docker-tools",
+        "rev": "158e8a76cae65a7f843a4623a73e9d95564859de",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ZentriaMC",
+        "repo": "docker-tools",
+        "type": "github"
+      }
+    },
     "fenix": {
       "inputs": {
         "nixpkgs": [
@@ -100,6 +121,21 @@
       "original": {
         "owner": "edolstra",
         "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-utils": {
+      "locked": {
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },
@@ -223,6 +259,28 @@
         "type": "github"
       }
     },
+    "pterodactyl-wings-nix": {
+      "inputs": {
+        "docker-tools": "docker-tools",
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1644958357,
+        "narHash": "sha256-5VuRBBRX9f8B4EYtnAUyIP92GAR/BZiw6n4pPzjpK1A=",
+        "owner": "ZentriaMC",
+        "repo": "pterodactyl-wings-nix",
+        "rev": "684b099c6138e79d1ed61b047fe5c4cdbb7dd329",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ZentriaMC",
+        "repo": "pterodactyl-wings-nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
@@ -233,7 +291,8 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
-        "nur": "nur"
+        "nur": "nur",
+        "pterodactyl-wings-nix": "pterodactyl-wings-nix"
       }
     },
     "rust-analyzer-src": {
