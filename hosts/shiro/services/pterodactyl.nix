@@ -112,7 +112,7 @@ in {
       User = "root";
       WorkingDirectory = "/zfs-main-pool/data/gaming/pterodactyl";
       LimitNOFILE = 4096;
-      PIDFile = "/var/run/wings/daemon.pid";
+      PIDFile = "/run/wings/daemon.pid";
       ExecStart = "${wings}/bin/wings --config /zfs-main-pool/data/gaming/pterodactyl/wings-config.yml";
 
       Restart = "on-failure";
