@@ -48,7 +48,7 @@ in {
     ];
     environment = {
       # App Settings
-      APP_URL = "http://pterodactyl.lan";
+      APP_URL = "https://pterodactyl.lan";
       APP_TIMEZONE = config.time.timeZone;
       APP_SERVICE_AUTHOR = "noreply@example.com";
       APP_ENV = "production";
