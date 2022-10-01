@@ -119,4 +119,11 @@ in {
       RestartSec = "5s";
     };
   };
+
+  networking.firewall.allowedTCPPortRanges = [
+    {
+      from = 30000;
+      to = 30100;
+    }
+  ];
 }
