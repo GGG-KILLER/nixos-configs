@@ -56,7 +56,7 @@ in {
           type = "b2";
           hard_delete = true;
         };
-        environmentFile = config.age.secrets.backup-password.path;
+        environmentFile = config.age.secrets.backup-envfile.path;
       }
     ];
   };
