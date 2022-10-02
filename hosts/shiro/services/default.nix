@@ -1,5 +1,6 @@
 {...}: {
   imports = [
+    ./gaming
     ./monitoring
     ./backup/restic.nix
     ./docker-registry.nix

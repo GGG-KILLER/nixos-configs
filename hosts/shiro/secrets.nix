@@ -2,6 +2,7 @@
   age.secrets = {
     backup-password.file = ../../secrets/shiro/backup_password.age;
     backup-envfile.file = ../../secrets/shiro/backup_envfile.age;
+    "mnn-server.env".file = ../../secrets/shiro/mnn-server.env.age;
 
     wireguard-key.file = ../../secrets/shiro/wireguard/private_key.age;
     wireguard-laptop-psk.file = ../../secrets/shiro/wireguard/laptop_psk.age;
