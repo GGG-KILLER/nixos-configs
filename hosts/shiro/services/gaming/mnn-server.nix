@@ -25,6 +25,7 @@ in {
       MODE = "survival";
       FORCE_GAMEMODE = "true";
       ALLOW_FLIGHT = "true";
+      ONLINE_MODE = "false";
 
       EULA = "TRUE";
 
