@@ -1,10 +1,13 @@
 {
+  system,
   config,
   options,
   lib,
+  inputs,
   ...
 }:
 with lib; let
+  inherit (config.nixpkgs) localSystem;
   consts = config.my.constants;
   hostNetCfg = config.my.networking.shiro;
   vpnNetCfg = config.my.networking.vpn-gateway;
@@ -16,57 +19,16 @@ in rec {
     includeH ? true,
     includeEtc ? true,
     ...
-  }: let
+  } @ args: let
     netCfg = config.my.networking.${name};
     networking-hosts = config.networking.hosts;
-  in {
-    # This can be overriden by just defining it.
-    autoStart = mkDefault true;
-    privateNetwork = true;
-    ephemeral = mkDefault true;
-
-    # External LAN
-    macvlans = ["enp6s0"];
-
-    bindMounts = mkMerge [
-      (optionalAttrs includeAnimu {
-        "/mnt/animu" = {
-          hostPath = "/zfs-main-pool/data/animu";
-          isReadOnly = false;
-        };
-      })
-      (optionalAttrs includeSeries {
-        "/mnt/series" = {
-          hostPath = "/zfs-main-pool/data/series";
-          isReadOnly = false;
-        };
-      })
-      (optionalAttrs includeH {
-        "/mnt/h" = {
-          hostPath = "/zfs-main-pool/data/h";
-          isReadOnly = false;
-        };
-      })
-      (optionalAttrs includeEtc {
-        "/mnt/etc" = {
-          hostPath = "/zfs-main-pool/data/etc";
-          isReadOnly = false;
-        };
-      })
-    ];
-
-    config = {
+    container-base = {
       config,
       pkgs,
       ...
     }: let
       containerCfg = config.container;
     in {
-      imports = [
-        ../../../common/default.flakeless.nix
-        ../gpu.nix
-      ];
-
       options.container = {
         name = mkOption {
           type = types.str;
@@ -80,6 +42,9 @@ in rec {
       };
 
       config = {
+        nixpkgs = {inherit localSystem;};
+        boot.isContainer = true;
+
         container.name = name;
 
         system.stateVersion = "22.11";
@@ -142,11 +107,64 @@ in rec {
         environment.systemPackages = with pkgs; [man git netcat tcpdump htop nmon];
       };
     };
+  in {
+    # This can be overriden by just defining it.
+    autoStart = mkDefault true;
+    privateNetwork = true;
+    ephemeral = mkDefault true;
+
+    # External LAN
+    macvlans = ["enp6s0"];
+
+    bindMounts = mkMerge [
+      (optionalAttrs includeAnimu {
+        "/mnt/animu" = {
+          hostPath = "/zfs-main-pool/data/animu";
+          isReadOnly = false;
+        };
+      })
+      (optionalAttrs includeSeries {
+        "/mnt/series" = {
+          hostPath = "/zfs-main-pool/data/series";
+          isReadOnly = false;
+        };
+      })
+      (optionalAttrs includeH {
+        "/mnt/h" = {
+          hostPath = "/zfs-main-pool/data/h";
+          isReadOnly = false;
+        };
+      })
+      (optionalAttrs includeEtc {
+        "/mnt/etc" = {
+          hostPath = "/zfs-main-pool/data/etc";
+          isReadOnly = false;
+        };
+      })
+    ];
+
+    path =
+      toString
+      (inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+        specialArgs = {
+          inherit system inputs;
+        };
+        modules = [
+          ../../../common
+          container-base
+          args.config
+        ];
+      })
+      .config
+      .system
+      .build
+      .toplevel;
   };
 
   mkContainer = config:
     mkMerge [
       (mkDefaultSettings config)
-      (removeAttrs config ["name" "includeAnimu" "includeSeries" "includeH" "includeEtc"])
+      (removeAttrs config ["name" "config" "includeAnimu" "includeSeries" "includeH" "includeEtc"])
     ];
 }
