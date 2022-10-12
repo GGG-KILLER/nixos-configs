@@ -47,6 +47,7 @@ in {
 
   containers.qbittorrent = mkContainer {
     name = "qbittorrent";
+    timeoutStartSec = "5min";
 
     bindMounts = {
       "/mnt/qbittorrent" = {
