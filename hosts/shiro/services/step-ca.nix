@@ -1,4 +1,9 @@
-{config, ...}: let
+{
+  config,
+  lib,
+  ...
+}:
+with lib; let
   inherit (config.age) secrets;
   step-ca-port = 1443;
 in {
@@ -20,6 +25,14 @@ in {
     locations."= /root.crt".alias = config.my.secrets.pki.root-crt-path;
     locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;
   };
+
+  systemd.services = flip mapAttrs' config.security.acme.certs (name: _: {
+    name = "acme-${name}";
+    value = {
+      after = ["step-ca.service"];
+      requires = ["step-ca.service"];
+    };
+  });
 
   networking.firewall.allowedTCPPorts = [step-ca-port];
   services.step-ca = {

@@ -29,9 +29,20 @@ with lib; {
         };
       })
       containersNeedingVpn;
+    needsStepCA =
+      mapAttrs'
+      (name: _: {
+        name = "containers@${name}";
+        value = {
+          after = ["step-ca.service"];
+          requires = ["step-ca.service"];
+        };
+      })
+      config.my.networking;
   in
     mkMerge [
       servicesNeedingVpn
+      needsStepCA
       {
         "container@vpn-gateway".wantedBy = map (name: "container@${name}.service") (attrNames containersNeedingVpn);
       }
