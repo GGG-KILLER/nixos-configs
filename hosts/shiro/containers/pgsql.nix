@@ -33,6 +33,7 @@ with lib; let
     containers."pgsql-${env}" = mkContainer {
       name = "pgsql-${env}";
       ephemeral = false;
+      timeoutStartSec = "2min";
 
       includeAnimu = false;
       includeSeries = false;
