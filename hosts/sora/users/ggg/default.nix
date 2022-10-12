@@ -23,11 +23,6 @@ in {
     ./vscode.nix
   ];
 
-  users.users.ggg = {
-    shell = pkgs.zsh;
-    extraGroups = ["docker" "lxd" "adbusers"];
-  };
-
   environment.systemPackages = [dotnet-sdk];
 
   home-manager.users.ggg = {
@@ -42,26 +37,19 @@ in {
       genymotion
 
       # Coding
-      docker-compose
-      #dotnet-sdk
       jetbrains.rider
       mono
-      nodejs_latest
-      powershell
       rnix-lsp
-      tokei
       wrangler
       yarn
 
       # Database
       pgformatter
       pgmodeler
-      postgresql_14
 
       # Encryption
       age
       inputs.agenix.defaultPackage.${system}
-      step-cli
       xca-stable
 
       # Games
@@ -72,8 +60,6 @@ in {
 
       # Nix
       inputs.deploy-rs.packages.${system}.deploy-rs
-      nix-du
-      nix-ld
       nix-top
 
       # VMs
@@ -82,17 +68,10 @@ in {
 
       # Misc
       chromium
-      croc
-      file
       inputs.git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
       libguestfs-with-appliance
       mullvad-vpn
-      neofetch
-      p7zip
-      rclone
-      steam-run
-      #virt-v2v # Broken, can't be arsed to fix.
     ];
 
     home.sessionVariables = {
@@ -104,35 +83,17 @@ in {
     home.shellAliases = {};
 
     programs = {
-      command-not-found.enable = false;
-      nix-index.enable = true;
-      home-manager.enable = true;
-      bat.enable = true;
-      dircolors.enable = true;
-      exa = {
-        enable = true;
-        enableAliases = true;
-      };
       gh = {
         enable = true;
-        settings = {
-          editor = "${pkgs.vscode}/bin/code --wait";
-        };
+        settings.editor = "${pkgs.vscode}/bin/code --wait";
       };
       git = {
-        enable = true;
-        delta.enable = true;
-        lfs.enable = true;
-        userName = "GGG";
-        userEmail = "gggkiller2@gmail.com";
         extraConfig = {
           credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager-core";
           credential.credentialStore = "secretservice";
-          init.defaultBranch = "main";
           core.editor = "${pkgs.vscode}/bin/code --wait";
         };
       };
-      jq.enable = true;
       mangohud = {
         enable = true;
         settingsPerApplication = {
@@ -148,18 +109,6 @@ in {
           cache-default = 4000000;
         };
       };
-      tealdeer.enable = true;
-      zsh = {
-        enable = true;
-        enableAutosuggestions = true;
-        enableSyntaxHighlighting = true;
-        enableVteIntegration = true;
-        oh-my-zsh = {
-          enable = true;
-          plugins = ["git" "sudo"];
-          theme = "candy";
-        };
-      };
     };
 
     services = {
@@ -171,13 +120,6 @@ in {
       access-tokens = github.com=${config.my.secrets.users.ggg.nixGithubToken}
     '';
 
-    home.file = {
-      ".cache/nix-index/files".source = inputs.nix-index-database.legacyPackages.${system}.database;
-    };
-
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
   };
-
-  modules.home.mainUsers = ["ggg"];
-  environment.pathsToLink = ["/share/zsh"];
 }

@@ -12,7 +12,7 @@ with lib; let
     easyeffects-preset-selector
     just-perfection
     mpris-indicator-button
-    #static-background-in-overview
+    #static-background-in-overview # MAKES EVERYTHING SLOW AS FUCK AFTER A WHILE
     status-area-horizontal-spacing
     transparent-top-bar
     user-themes

@@ -1,4 +1,8 @@
-{inputs, ...}: {
+{
+  lib,
+  inputs,
+  ...
+}: {
   nix = {
     # Flakes
     settings.experimental-features = ["nix-command" "flakes"];
@@ -21,4 +25,9 @@
     settings.auto-optimise-store = true;
     optimise.automatic = true;
   };
+
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam-original"
+    ];
 }
