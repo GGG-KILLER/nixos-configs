@@ -20,4 +20,7 @@
     ZED_NOTIFY_VERBOSE = "1";
     ZED_SLACK_WEBHOOK_URL = config.my.secrets.discord.webhook + "/slack";
   };
+
+  # ZFS Flags
+  boot.kernelParams = ["zfs.zfs_arc_max=6442450944" "elevator=none" "nohibernate"];
 }
