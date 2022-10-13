@@ -79,8 +79,6 @@
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
           sshUser = "root";
-          autoRollback = false;
-          magicRollback = false;
         };
       };
       vpn-proxy = {
