@@ -85,7 +85,7 @@ in {
       }
       # Spar PC1
       {
-        publicKey = "TQtHm4nt3tWg71tfCAwZsTrbc+Rk89VJkjos8V6pUUE=";
+        publicKey = "pkViSi7z7J4wk6zh3POR4jbeZkDVFSVPFBG5M8N4Eyg=";
         presharedKeyFile = config.age.secrets.wireguard-spar-pc1-psk.path;
         allowedIPs = ["192.168.8.3/32"];
       }
