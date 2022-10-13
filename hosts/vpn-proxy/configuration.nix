@@ -55,10 +55,14 @@ in {
     postUp = ''
       ${iptables} -A FORWARD -i ${inp-interface} -j ACCEPT
       ${iptables} -t nat -A POSTROUTING -s 192.168.6.0/24 -o ${out-interface} -j MASQUERADE
+      ${iptables} -t nat -A POSTROUTING -s 192.168.7.0/24 -o ${out-interface} -j MASQUERADE
+      ${iptables} -t nat -A POSTROUTING -s 192.168.8.0/24 -o ${out-interface} -j MASQUERADE
     '';
     postDown = ''
       ${iptables} -D FORWARD -i ${inp-interface} -j ACCEPT
       ${iptables} -t nat -D POSTROUTING -s 192.168.6.0/24 -o ${out-interface} -j MASQUERADE
+      ${iptables} -t nat -D POSTROUTING -s 192.168.7.0/24 -o ${out-interface} -j MASQUERADE
+      ${iptables} -t nat -D POSTROUTING -s 192.168.8.0/24 -o ${out-interface} -j MASQUERADE
     '';
     # Wing:     192.168.6.2/32
     # GGG:      192.168.7.2/32
