@@ -80,6 +80,7 @@
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
           sshUser = "root";
         };
+        confirmTimeout = 300;
       };
       vpn-proxy = {
         hostname = "vpn-proxy.ggg.dev";
