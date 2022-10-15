@@ -17,6 +17,6 @@
 in
   final: prev: {
     "@jesec/flood" = prev."@jesec/flood".override {
-      buildInputs = [final.node-pre-gyp];
+      buildInputs = [nodejs.pkgs.node-pre-gyp];
     };
   }
