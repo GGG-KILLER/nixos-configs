@@ -73,7 +73,7 @@ in {
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         ExecStart = ''
-          ${floodCfg.package}/bin/flood \
+          ${floodCfg.package}/lib/node_modules/@jesec/flood/dist/index.js \
             -p${toString floodCfg.web.port}\
             --host 0.0.0.0 \
             --rundir "${floodCfg.rundir}" \
