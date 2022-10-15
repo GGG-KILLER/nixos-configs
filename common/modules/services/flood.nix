@@ -13,21 +13,27 @@ in {
     enable = mkOption {
       type = types.bool;
       default = false;
-      description = "enable flood service";
+      description = "enable flood service.";
     };
     rundir = mkOption {
       type = types.path;
-      description = "the path where flood will save its data do";
+      description = "the path where flood will save its data do.";
     };
     auth = mkOption {
       type = types.enum ["default" "none"];
-      description = "the auth method that flood should use";
+      description = "the auth method that flood should use.";
       default = "none";
     };
     allowedpath = mkOption {
       type = with types; nullOr (listOf path);
-      description = "the paths flood is allowed to access";
+      description = "the paths flood is allowed to access.";
       default = null;
+    };
+    package = mkOption {
+      type = types.package;
+      default = pkgs.flood;
+      defaultText = literalExpression "pkgs.flood";
+      description = "the package that contains the flood binary.";
     };
     web = {
       port = mkOption {
@@ -67,7 +73,7 @@ in {
       wantedBy = ["multi-user.target"];
       serviceConfig = {
         ExecStart = ''
-          ${pkgs.flood}/bin/flood \
+          ${floodCfg.package}/bin/flood \
             -p${toString floodCfg.web.port}\
             --host 0.0.0.0 \
             --rundir "${floodCfg.rundir}" \
