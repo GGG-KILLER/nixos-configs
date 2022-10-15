@@ -97,9 +97,9 @@ in {
   environment.systemPackages = [wings];
 
   systemd.services.pterodactyl-wings = {
-    after = ["docker.service"];
-    requires = ["docker.service"];
-    partOf = ["docker.service"];
+    after = ["docker.service" "docker-pterodactyl-panel.service"];
+    requires = ["docker.service" "docker-pterodactyl-panel.service"];
+    partOf = ["docker.service" "docker-pterodactyl-panel.service"];
     wantedBy = ["multi-user.target"];
 
     path = with pkgs; [shadow];
