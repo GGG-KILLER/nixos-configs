@@ -25,6 +25,7 @@
     ./virtualisation.nix
     ./vpn.nix
     ./webcam.nix
+    ./yubikey.nix
     ./zfs.nix
     nur-no-pkgs.repos.ilya-fedin.modules.flatpak-fonts
     nur-no-pkgs.repos.ilya-fedin.modules.flatpak-icons

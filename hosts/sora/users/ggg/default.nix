@@ -51,6 +51,8 @@ in {
       age
       inputs.agenix.defaultPackage.${system}
       xca-stable
+      yubikey-manager
+      yubikey-manager-qt
 
       # Games
       inputs.packwiz.packages.${system}.packwiz
