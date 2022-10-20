@@ -1,9 +1,16 @@
 {
   pkgs,
+  lib,
   inputs,
   system,
   ...
 }: {
+  nixpkgs.config.allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "steam-run"
+      "steam-original"
+    ];
+
   home-manager.users.ggg = {
     home.packages = with pkgs; [
       # Coding
