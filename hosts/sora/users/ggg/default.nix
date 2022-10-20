@@ -122,6 +122,8 @@ in {
       access-tokens = github.com=${config.my.secrets.users.ggg.nixGithubToken}
     '';
 
+    manual.manpages.enable = false;
+
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
   };
 }
