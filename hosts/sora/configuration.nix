@@ -87,7 +87,7 @@
   # Firmware
   services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
-  hardware.enableAllFirmware = true;
+  # hardware.enableAllFirmware = true;
 
   # Android
   programs.adb.enable = true;
