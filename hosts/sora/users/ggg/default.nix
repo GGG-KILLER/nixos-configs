@@ -29,7 +29,6 @@ in {
     home.packages = with pkgs; [
       # Audio
       easyeffects
-      ffmpeg_5-full
       helvum
 
       # Android
@@ -63,6 +62,10 @@ in {
       # Nix
       inputs.deploy-rs.packages.${system}.deploy-rs
       nix-top
+
+      # Media
+      ffmpeg_5-full
+      handbrake
 
       # VMs
       virt-manager
