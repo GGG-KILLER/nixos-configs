@@ -3,9 +3,7 @@
   lib,
   ...
 } @ args:
-with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
-in {
+with lib; {
   my.networking.network-share = {
     ipAddr = "192.168.1.3";
     ports = [
@@ -32,9 +30,15 @@ in {
     ];
   };
 
-  containers.network-share = mkContainer {
-    name = "network-share";
+  modules.containers.network-share = {
     ephemeral = false;
+
+    builtinMounts = {
+      animu = true;
+      series = true;
+      etc = true;
+      h = true;
+    };
 
     config = {
       config,

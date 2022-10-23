@@ -4,7 +4,6 @@
   ...
 } @ args:
 with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
   consts = config.my.constants;
 in {
   my.networking.qbittorrent = {
@@ -45,16 +44,23 @@ in {
     ];
   };
 
-  containers.qbittorrent = mkContainer {
-    name = "qbittorrent";
+  modules.containers.qbittorrent = {
+    vpn = true;
     timeoutStartSec = "5min";
 
+    builtinMounts = {
+      animu = true;
+      series = true;
+      etc = true;
+      h = true;
+    };
     bindMounts = {
       "/mnt/qbittorrent" = {
         hostPath = "/zfs-main-pool/data/qbittorrent";
         isReadOnly = false;
       };
     };
+
     config = {
       config,
       pkgs,

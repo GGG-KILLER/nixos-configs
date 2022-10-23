@@ -5,11 +5,9 @@
   ...
 } @ args:
 with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
   consts = config.my.constants;
 in {
   my.networking.jellyfin = {
-    useVpn = true;
     ipAddr = "192.168.1.6";
     ports = [
       {
@@ -30,20 +28,15 @@ in {
     ];
   };
 
-  containers.jellyfin = mkContainer {
-    name = "jellyfin";
+  modules.containers.jellyfin = {
+    vpn = true;
 
-    allowedDevices = [
-      {
-        node = "/dev/dri/card0";
-        modifier = "rwm";
-      }
-      {
-        node = "/dev/dri/renderD128";
-        modifier = "rwm";
-      }
-    ];
-
+    builtinMounts = {
+      animu = true;
+      series = true;
+      etc = true;
+      h = true;
+    };
     bindMounts = {
       "/var/lib/jellyfin" = {
         hostPath = "/zfs-main-pool/data/jellyfin";

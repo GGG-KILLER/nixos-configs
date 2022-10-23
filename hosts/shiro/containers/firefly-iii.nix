@@ -5,7 +5,6 @@
   ...
 } @ args:
 with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
   consts = config.my.constants;
 in rec {
   my.networking.firefly-iii = {
@@ -28,14 +27,7 @@ in rec {
     ];
   };
 
-  containers.firefly-iii = mkContainer {
-    name = "firefly-iii";
-
-    includeAnimu = false;
-    includeSeries = false;
-    includeEtc = false;
-    includeH = false;
-
+  modules.containers.firefly-iii = {
     bindMounts = {
       "/var/www/firefly-iii" = {
         hostPath = "/zfs-main-pool/data/firefly-iii";

@@ -5,7 +5,6 @@
   ...
 } @ args:
 with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
   consts = config.my.constants;
 in rec {
   my.networking.home-assistant = {
@@ -34,14 +33,7 @@ in rec {
     ];
   };
 
-  containers.home-assistant = mkContainer {
-    name = "home-assistant";
-
-    includeAnimu = false;
-    includeSeries = false;
-    includeEtc = false;
-    includeH = false;
-
+  modules.containers.home-assistant = {
     bindMounts = {
       "/var/lib/hass" = {
         hostPath = "/zfs-main-pool/data/home-assistant";

@@ -4,7 +4,6 @@
   ...
 } @ args:
 with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
   consts = config.my.constants;
   secrets = config.my.secrets.vpn.mullvad;
 in {
@@ -12,13 +11,8 @@ in {
     ipAddr = "192.168.1.7";
   };
 
-  containers.vpn-gateway = mkContainer {
-    name = "vpn-gateway";
-
-    includeAnimu = false;
-    includeSeries = false;
-    includeEtc = false;
-    includeH = false;
+  modules.containers.vpn-gateway = {
+    enableTun = true;
 
     bindMounts = {
       "/secrets" = {
@@ -26,9 +20,6 @@ in {
         isReadOnly = true;
       };
     };
-
-    # Let the container create tunnels
-    enableTun = true;
 
     config = {
       config,

@@ -30,15 +30,9 @@ with lib; let
       ];
     };
 
-    containers."pgsql-${env}" = mkContainer {
-      name = "pgsql-${env}";
+    modules.containers."pgsql-${env}" = {
       ephemeral = false;
       timeoutStartSec = "2min";
-
-      includeAnimu = false;
-      includeSeries = false;
-      includeEtc = false;
-      includeH = false;
 
       bindMounts = {
         "/mnt/pgsql" = {
