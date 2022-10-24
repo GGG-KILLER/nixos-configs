@@ -32,7 +32,7 @@ in {
       ONLINE_MODE = "false";
       RCON_CMDS_STARTUP = ''
         /chunky spawn
-        /chunky radius 10000
+        /chunky radius 2500
         /chunky start
         /gamerule doInsomnia false
       '';
