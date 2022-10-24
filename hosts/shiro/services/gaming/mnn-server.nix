@@ -30,6 +30,18 @@ in {
       FORCE_GAMEMODE = "true";
       ALLOW_FLIGHT = "true";
       ONLINE_MODE = "false";
+      RCON_CMDS_STARTUP = ''
+        /chunky spawn
+        /chunky radius 10000
+        /chunky start
+        /gamerule doInsomnia false
+      '';
+      RCON_CMDS_FIRST_CONNECT = ''
+        /chunky pause
+      '';
+      RCON_CMDS_LAST_DISCONNECT = ''
+        /chunky continue
+      '';
 
       EULA = "TRUE";
 
