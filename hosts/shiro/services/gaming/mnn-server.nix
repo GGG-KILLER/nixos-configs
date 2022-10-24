@@ -30,6 +30,7 @@ in {
       FORCE_GAMEMODE = "true";
       ALLOW_FLIGHT = "true";
       ONLINE_MODE = "false";
+      SPAWN_PROTECTION = "0";
       RCON_CMDS_STARTUP = ''
         /chunky spawn
         /chunky radius 2500
