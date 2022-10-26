@@ -63,6 +63,26 @@ in {
         internalIPs = ["192.168.1.0/24"];
         externalInterface = wg-interface;
       };
+
+      # Watchdog
+      systemd.services.wireguard-watchdog = {
+        description = "Service to fix wireguard if it's not working.";
+        after = ["wg-quick-${wg-interface}.service"];
+        partOf = ["wg-quick-${wg-interface}.service"];
+        startAt = "*:0,15,30,45";
+        path = with pkgs; [iproute2 curl systemd];
+        script = ''
+          #! ${pkgs.bash}/bin/bash
+          set -euo pipefail
+
+          if ! curl https://f.ggg.dev/azenv ; then
+            echo "Restarting wireguard..."
+            ip link del ${wg-interface}
+            systemctl restart wg-quick-${wg-interface}.service
+          fi
+        '';
+        serviceConfig.Type = "oneshot";
+      };
     };
   };
 }
