@@ -78,6 +78,7 @@ in {
       jellyfin-mpv-shim
       libguestfs-with-appliance
       mullvad-vpn
+      rustdesk
     ];
 
     home.sessionVariables = {

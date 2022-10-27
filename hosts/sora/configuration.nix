@@ -18,7 +18,7 @@
     ./hardware-configuration.nix
     ./nix.nix
     ./overrides.nix
-    ./remote-desktop.nix
+    ./rustdesk.nix
     ./secrets.nix
     ./users/ggg
     ./video.nix
