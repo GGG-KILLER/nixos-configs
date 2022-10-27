@@ -37,6 +37,7 @@
       btop
       dig.dnsutils
       file
+      killall
       neofetch
       p7zip
       rclone

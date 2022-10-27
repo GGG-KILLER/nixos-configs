@@ -73,6 +73,7 @@ in {
 
       # Misc
       chromium
+      fd
       inputs.git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
       libguestfs-with-appliance
@@ -126,5 +127,17 @@ in {
     '';
 
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
+
+    systemd.user.services.jellyfin-mpv-shim = {
+      Unit = {
+        Description = "Jellyfin MPV Shim";
+        After = ["graphical-session-pre.target"];
+        PartOf = ["graphical-session.target"];
+      };
+
+      Service.ExecStart = "${pkgs.jellyfin-mpv-shim}/bin/jellyfin-mpv-shim";
+
+      Install.WantedBy = ["graphical-session.target"];
+    };
   };
 }
