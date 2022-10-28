@@ -33,7 +33,7 @@ in {
       SPAWN_PROTECTION = "0";
       RCON_CMDS_STARTUP = ''
         /chunky spawn
-        /chunky radius 2500
+        /chunky radius 10000
         /chunky start
         /gamerule doInsomnia false
       '';
