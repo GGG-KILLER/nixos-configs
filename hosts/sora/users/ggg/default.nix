@@ -55,6 +55,7 @@ in {
 
       # Games
       inputs.packwiz.packages.${system}.packwiz
+      (prismlauncher.override {jdks = [openjdk8-bootstrap openjdk11-bootstrap openjdk16-bootstrap jdk];})
 
       # Hardware
       openrgb
