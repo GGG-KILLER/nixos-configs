@@ -1,8 +1,14 @@
-{config, ...}: {
-  services.grafana = rec {
+{config, ...}: let
+  domain = "grafana.shiro.lan";
+in {
+  services.grafana = {
     enable = true;
-    domain = "grafana.shiro.lan";
-    rootUrl = "http://${domain}/";
+    settings.server = {
+      inherit domain;
+      http_addr = "127.0.0.1";
+      root_url = "https://${domain}/";
+      enable_gzip = true;
+    };
   };
 
   security.acme.certs."grafana.shiro.lan".email = "grafana@shiro.lan";
@@ -10,7 +16,7 @@
     enableACME = true;
     addSSL = true;
     locations."/" = {
-      proxyPass = with config.services.grafana; "${protocol}://${addr}:${toString port}";
+      proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
     };
   };
 }
