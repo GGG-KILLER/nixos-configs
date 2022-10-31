@@ -74,6 +74,7 @@ in {
 
       # Misc
       chromium
+      discord-canary
       fd
       inputs.git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
