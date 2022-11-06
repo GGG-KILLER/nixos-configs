@@ -10,7 +10,6 @@ with lib; {
   imports = [
     "${modulesPath}/profiles/minimal.nix"
     ./containers
-    ./networking
     ./services
     ./boot.nix
     ./gpu.nix
@@ -18,6 +17,7 @@ with lib; {
     ./headless.nix
     ./journald.nix
     ./nat.nix
+    ./networking.nix
     ./secrets.nix
     ./store.nix
     ./users.nix

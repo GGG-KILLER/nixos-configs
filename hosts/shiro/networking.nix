@@ -1,4 +1,8 @@
-{lib, ...}:
+{
+  lib,
+  config,
+  ...
+}:
 with lib; let
   portOptions = {
     options = {
@@ -45,11 +49,6 @@ with lib; let
     };
   };
 in {
-  imports = [
-    ./hosts.nix
-    ./mitmproxy.nix
-  ];
-
   options.my.networking = mkOption {
     type = with types; attrsOf (submodule networkingOptions);
   };
@@ -96,6 +95,12 @@ in {
           }
         ];
       };
+
+      hosts = let
+        networking = mapAttrs (netName: netCfg: netCfg // {names = [netCfg.name] ++ netCfg.extraNames;}) config.my.networking;
+        hostToNameValPair = host: nameValuePair host.ipAddr (map (name: "${name}.lan") host.names);
+      in
+        listToAttrs (map hostToNameValPair (attrValues networking));
     };
   };
 }
