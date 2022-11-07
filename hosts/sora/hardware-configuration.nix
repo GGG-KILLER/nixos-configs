@@ -16,6 +16,7 @@
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "lm75" "k10temp" "nct6775"];
   boot.extraModulePackages = [];
+  boot.zfs.enableUnstable = true;
 
   fileSystems."/" = {
     device = "none";
