@@ -69,6 +69,7 @@
       sora = mkConfig "sora";
       shiro = mkConfig "shiro";
       vpn-proxy = mkConfig "vpn-proxy";
+      f-ggg-dev = mkConfig "f.ggg.dev";
     };
 
     deploy.nodes = {
@@ -89,6 +90,18 @@
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vpn-proxy;
           sshOpts = ["-p" "17606"];
+          sshUser = "root";
+        };
+      };
+      f-ggg-dev = {
+        hostname = "f.ggg.dev";
+        fastConnection = false;
+        autoRollback = false;
+        magicRollback = false;
+        profiles.system = {
+          user = "root";
+          path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.f-ggg-dev;
+          #sshOpts = ["-p" "17606"];
           sshUser = "root";
         };
       };
