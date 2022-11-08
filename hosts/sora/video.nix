@@ -34,7 +34,7 @@
       DefaultDepth    24
       Option         "Stereo" "0"
       Option         "nvidiaXineramaInfoOrder" "DFP-3"
-      Option         "metamodes" "DP-2: 1920x1080_144 +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On, AllowGSYNCCompatible=On}, HDMI-1: 1920x1080_75 +1920+28 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On, AllowGSYNCCompatible=On}"
+      Option         "metamodes" "DP-2: 1920x1080_144 +0+0, HDMI-1: 1920x1080_75 +1920+28"
       Option         "SLI" "Off"
       Option         "MultiGPU" "Off"
       Option         "BaseMosaic" "off"
