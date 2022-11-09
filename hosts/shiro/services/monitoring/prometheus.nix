@@ -22,6 +22,8 @@ with lib; {
     ];
   };
 
+  systemd.services.prometheus.serviceConfig.SystemCallFilter = mkForce ["@system-service" "~@privileged"];
+
   security.acme.certs."prometheus.shiro.lan".email = "prometheus@shiro.lan";
   services.nginx.virtualHosts."prometheus.shiro.lan" = {
     enableACME = true;
