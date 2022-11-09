@@ -75,28 +75,27 @@ in rec {
           frontend = {};
           mobile_app = {};
           # ESPHome
-          # esphome = {}; # Uncomment when nixos/nixpkgs#198319 gets fixed.
+          esphome = {};
           # Speedtest.net
           speedtestdotnet = {};
         };
       };
 
-      # Uncomment when nixos/nixpkgs#198319 gets fixed.
-      # systemd.services.esphome = {
-      #   description = "ESPHome";
-      #   after = ["network.target"];
-      #   wantedBy = ["multi-user.target"];
-      #   serviceConfig = {
-      #     User = "hass";
-      #     Group = "hass";
-      #     Restart = "on-failure";
-      #     WorkingDirectory = config.services.home-assistant.configDir;
-      #     ExecStart = "${pkgs.esphome}/bin/esphome dashboard ${config.services.home-assistant.configDir}/esphome";
-      #   };
-      # };
+      systemd.services.esphome = {
+        description = "ESPHome";
+        after = ["network.target"];
+        wantedBy = ["multi-user.target"];
+        serviceConfig = {
+          User = "hass";
+          Group = "hass";
+          Restart = "on-failure";
+          WorkingDirectory = config.services.home-assistant.configDir;
+          ExecStart = "${pkgs.esphome}/bin/esphome dashboard ${config.services.home-assistant.configDir}/esphome";
+        };
+      };
 
       security.acme.certs."hass.lan".email = "hass@home-assistant.lan";
-      # security.acme.certs."esphome.lan".email = "esphome@home-assistant.lan"; # Uncomment when nixos/nixpkgs#198319 gets fixed.
+      security.acme.certs."esphome.lan".email = "esphome@home-assistant.lan";
       services.nginx = {
         enable = true;
         virtualHosts."hass.lan" = {
@@ -118,26 +117,25 @@ in rec {
             '';
           };
         };
-        # Uncomment when nixos/nixpkgs#198319 gets fixed.
-        # virtualHosts."esphome.lan" = {
-        #   enableACME = true;
-        #   addSSL = true;
-        #   locations."/" = {
-        #     extraConfig = ''
-        #       proxy_pass http://localhost:6052;
-        #       proxy_http_version 1.1;
-        #       proxy_set_header Upgrade $http_upgrade;
-        #       proxy_set_header Connection "upgrade";
-        #       proxy_set_header Host $host;
-        #       proxy_set_header X-Real-IP $remote_addr;
-        #       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        #       proxy_set_header X-Forwarded-Proto $scheme;
-        #       proxy_set_header X-Forwarded-Protocol $scheme;
-        #       proxy_set_header X-Forwarded-Host $http_host;
-        #       proxy_read_timeout 6h;
-        #     '';
-        #   };
-        # };
+        virtualHosts."esphome.lan" = {
+          enableACME = true;
+          addSSL = true;
+          locations."/" = {
+            extraConfig = ''
+              proxy_pass http://localhost:6052;
+              proxy_http_version 1.1;
+              proxy_set_header Upgrade $http_upgrade;
+              proxy_set_header Connection "upgrade";
+              proxy_set_header Host $host;
+              proxy_set_header X-Real-IP $remote_addr;
+              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+              proxy_set_header X-Forwarded-Proto $scheme;
+              proxy_set_header X-Forwarded-Protocol $scheme;
+              proxy_set_header X-Forwarded-Host $http_host;
+              proxy_read_timeout 6h;
+            '';
+          };
+        };
       };
     };
   };
