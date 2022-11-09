@@ -20,6 +20,7 @@ in {
   ];
 
   networking.hostName = "vpn-proxy"; # Define your hostname.
+  networking.domain = "ggg.dev";
 
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
