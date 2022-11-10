@@ -20,8 +20,8 @@ in {
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [sshPort];
-  networking.firewall.allowedUDPPorts = [sshPort];
+  networking.firewall.allowedTCPPorts = [80 443 sshPort];
+  networking.firewall.allowedUDPPorts = [80 443 sshPort];
 
   zramSwap.enable = true;
 
