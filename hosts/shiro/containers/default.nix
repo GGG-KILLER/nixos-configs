@@ -123,6 +123,7 @@ with lib; {
                 then vpnNetCfg.ipAddr
                 else "192.168.1.1"
               );
+              useHostResolvConf = false;
               nameservers = containerCfg.nameservers;
               interfaces = {
                 mv-enp6s0.ipv4.addresses = [
