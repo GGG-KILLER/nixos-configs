@@ -8,7 +8,7 @@ with lib; let
 in {
   my.networking.sonarr = {
     extraNames = ["jackett"];
-    ipAddr = "192.168.1.5";
+    mainAddr = "192.168.1.5";
     ports = [
       {
         protocol = "http";

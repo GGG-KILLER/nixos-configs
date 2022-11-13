@@ -8,7 +8,7 @@ with lib; let
   consts = config.my.constants;
 in {
   my.networking.jellyfin = {
-    ipAddr = "192.168.1.6";
+    mainAddr = "192.168.1.6";
     ports = [
       {
         protocol = "http";

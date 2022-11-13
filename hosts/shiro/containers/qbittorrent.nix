@@ -7,9 +7,8 @@ with lib; let
   consts = config.my.constants;
 in {
   my.networking.qbittorrent = {
-    useVpn = true;
     extraNames = ["flood"];
-    ipAddr = "192.168.1.10";
+    mainAddr = "192.168.1.10";
     ports = [
       {
         protocol = "tcp";

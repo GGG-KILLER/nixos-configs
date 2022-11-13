@@ -128,7 +128,7 @@ with lib; {
               interfaces = {
                 mv-enp6s0.ipv4.addresses = [
                   {
-                    address = netCfg.ipAddr;
+                    address = netCfg.mainAddr;
                     prefixLength = 24;
                   }
                 ];

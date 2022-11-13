@@ -5,7 +5,7 @@
 } @ args:
 with lib; {
   my.networking.network-share = {
-    ipAddr = "192.168.1.3";
+    mainAddr = "192.168.1.3";
     ports = [
       {
         protocol = "tcp";

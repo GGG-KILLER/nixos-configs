@@ -10,7 +10,7 @@ with lib; let
     ip,
   }: {
     my.networking."pgsql-${env}" = {
-      ipAddr = ip;
+      mainAddr = ip;
       ports = [
         {
           protocol = "http";

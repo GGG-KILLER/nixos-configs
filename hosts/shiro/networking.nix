@@ -32,14 +32,13 @@ with lib; let
         default = [];
         description = "extra hostnames for this machine";
       };
-      useVpn = mkOption {
-        type = types.bool;
-        default = false;
-        description = "whether to use VPN or not";
-      };
-      ipAddr = mkOption {
+      mainAddr = mkOption {
         type = types.str;
-        description = "the IP address of this machine";
+        description = "the main IP address of this machine";
+      };
+      extraAddrs = mkOption {
+        type = with types; attrsOf str;
+        description = "extra IP addresses that may be used to reach this machine";
       };
       ports = mkOption {
         type = with types; listOf (submodule portOptions);
@@ -61,7 +60,7 @@ in {
 
   config = rec {
     my.networking.shiro = {
-      ipAddr = "192.168.1.2";
+      mainAddr = "192.168.1.2";
       extraNames = [
         "grafana.shiro"
         "prometheus.shiro"
@@ -90,7 +89,7 @@ in {
       interfaces.mv-enp6s0-host = {
         ipv4.addresses = [
           {
-            address = my.networking.shiro.ipAddr;
+            address = my.networking.shiro.mainAddr;
             prefixLength = 24;
           }
         ];
@@ -98,7 +97,7 @@ in {
 
       hosts = let
         networking = mapAttrs (netName: netCfg: netCfg // {names = [netCfg.name] ++ netCfg.extraNames;}) config.my.networking;
-        hostToNameValPair = host: nameValuePair host.ipAddr (map (name: "${name}.lan") host.names);
+        hostToNameValPair = host: nameValuePair host.mainAddr (map (name: "${name}.lan") host.names);
       in
         listToAttrs (map hostToNameValPair (attrValues networking));
     };
