@@ -29,20 +29,35 @@ with lib; {
         attrsOf (submodule ({name, ...}: {
           options = {
             name = mkOption {
+              description = "The container name (if not set uses the key in the modules.containers object)";
               type = types.str;
               default = name;
             };
 
-            vpn = mkEnableOption "whether this container should be tunneled through the VPN";
-            enableTun = containerOptions.enableTun;
+            vpn = mkEnableOption "Whether this container should be tunneled through the VPN";
+
+            # Allows the container to create and setup tunnel interfaces by granting the `NET_ADMIN` capability and enabling access to `/dev/net/tun`.
+            inherit (containerOptions) enableTun;
+            # Extra veth-pairs to be created for the container.
+            inherit (containerOptions) extraVeths;
+            # List of forwarded ports from host to container.
+            # Each forwarded port is specified by protocol, hostPort and containerPort.
+            # By default, protocol is tcp and hostPort and containerPort are assumed to be the same if containerPort is not explicitly given.
+            inherit (containerOptions) forwardPorts;
+
+            # Runs container in ephemeral mode with the empty root filesystem at boot.
+            # Useful for completely stateless, reproducible containers.
             ephemeral = mkOption {
               type = containerOptions.ephemeral.type;
               description = containerOptions.ephemeral.description;
               default = true;
             };
-            timeoutStartSec = containerOptions.timeoutStartSec;
+
+            # Time for the container to start. In case of a timeout, the container processes get killed.
+            inherit (containerOptions) timeoutStartSec;
 
             builtinMounts = mkOption {
+              description = "Which of the builtin mounts should be mounted into this container";
               type = types.submodule {
                 options = {
                   animu = mkEnableOption "";
@@ -58,7 +73,9 @@ with lib; {
                 h = false;
               };
             };
-            bindMounts = containerOptions.bindMounts;
+
+            # An extra list of directories that is bound to the container.
+            inherit (containerOptions) bindMounts;
 
             config = mkOption {
               description = ''
