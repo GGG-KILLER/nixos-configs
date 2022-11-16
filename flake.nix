@@ -34,6 +34,12 @@
       url = "github:packwiz/packwiz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mats-config = {
+      url = "github:Myaats/system";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nur.follows = "nur";
+      inputs.home-manager.follows = "home-manager";
+    };
   };
 
   outputs = {

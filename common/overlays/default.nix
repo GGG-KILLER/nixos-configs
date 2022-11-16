@@ -1,4 +1,4 @@
-{...}: {
+{inputs, ...}: {
   imports = [
     ./local
     #./dotnet-7.0.nix
@@ -8,5 +8,6 @@
     #./omnisharp-roslyn.nix
     #./rclone.nix
     ./virt-v2v.nix
+    "${inputs.mats-config}/common/overlays/mpv.nix"
   ];
 }
