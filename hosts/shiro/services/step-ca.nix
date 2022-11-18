@@ -8,19 +8,17 @@ with lib; let
   step-ca-port = 1443;
 in {
   # ACME Settings
-  security.acme = {
+  security.acme = mkForce {
     acceptTerms = true; # kinda pointless since we never use upstream
     defaults = {
       server = "https://ca.lan:${toString step-ca-port}/acme/acme/directory";
       renewInterval = "hourly";
     };
-    certs."ca.lan".email = "ca@shiro.lan";
   };
 
   # This is only for the nginx config of the downloader.
-  services.nginx.virtualHosts."ca.lan" = {
-    enableACME = true;
-    addSSL = true;
+  modules.services.nginx.virtualHosts."ca.lan" = {
+    ssl = true;
     locations."/".proxyPass = "https://127.0.0.1:${toString step-ca-port}";
     locations."= /root.crt".alias = config.my.secrets.pki.root-crt-path;
     locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;

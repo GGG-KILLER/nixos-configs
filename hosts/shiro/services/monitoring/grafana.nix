@@ -11,12 +11,8 @@ in {
     };
   };
 
-  security.acme.certs."grafana.shiro.lan".email = "grafana@shiro.lan";
-  services.nginx.virtualHosts."grafana.shiro.lan" = {
-    enableACME = true;
-    addSSL = true;
-    locations."/" = {
-      proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
-    };
+  modules.services.nginx.virtualHosts.${domain} = {
+    ssl = true;
+    locations."/".proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
   };
 }

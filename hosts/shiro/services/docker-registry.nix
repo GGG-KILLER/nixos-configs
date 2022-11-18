@@ -26,10 +26,8 @@
     ];
   };
 
-  security.acme.certs."docker.lan".email = "docker@shiro.lan";
-  services.nginx.virtualHosts."docker.lan" = {
-    enableACME = true;
-    addSSL = true;
+  modules.services.nginx.virtualHosts."docker.lan" = {
+    ssl = true;
     locations."/".proxyPass = "http://127.0.0.1:9001";
     locations."/v2/" = {
       proxyPass = "http://shiro.lan:5000";

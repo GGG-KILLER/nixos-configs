@@ -7,7 +7,7 @@ with lib; {
   services.prometheus = {
     enable = true;
     retentionTime = "182d";
-    webExternalUrl = "http://prometheus.shiro.lan";
+    webExternalUrl = "https://prometheus.shiro.lan";
     scrapeConfigs = [
       {
         job_name = "prometheus";
@@ -24,12 +24,8 @@ with lib; {
 
   systemd.services.prometheus.serviceConfig.SystemCallFilter = mkForce ["@system-service" "~@privileged"];
 
-  security.acme.certs."prometheus.shiro.lan".email = "prometheus@shiro.lan";
-  services.nginx.virtualHosts."prometheus.shiro.lan" = {
-    enableACME = true;
-    addSSL = true;
-    locations."/" = {
-      proxyPass = "http://localhost:9090";
-    };
+  modules.services.nginx.virtualHosts."prometheus.shiro.lan" = {
+    ssl = true;
+    locations."/".proxyPass = "http://localhost:9090";
   };
 }

@@ -14,12 +14,8 @@ in {
     '';
   };
 
-  security.acme.certs."monit.shiro.lan".email = "monit@shiro.lan";
-  services.nginx.virtualHosts."monit.shiro.lan" = {
-    enableACME = true;
-    addSSL = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString port}";
-    };
+  modules.services.nginx.virtualHosts."monit.shiro.lan" = {
+    ssl = true;
+    locations."/".proxyPass = "http://127.0.0.1:${toString port}";
   };
 }
