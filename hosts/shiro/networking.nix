@@ -125,11 +125,11 @@ in {
         externalInterface = "enp6s0";
       };
 
-      hosts = let
-        networking = mapAttrs (netName: netCfg: netCfg // {names = [netCfg.name] ++ netCfg.extraNames;}) config.my.networking;
-        hostToNameValPair = host: nameValuePair host.mainAddr (map (name: "${name}.local") host.names);
-      in
-        listToAttrs (map hostToNameValPair (attrValues networking));
+      # hosts = let
+      #   networking = mapAttrs (netName: netCfg: netCfg // {names = [netCfg.name] ++ netCfg.extraNames;}) config.my.networking;
+      #   hostToNameValPair = host: nameValuePair host.mainAddr (map (name: "${name}.local") host.names);
+      # in
+      #   listToAttrs (map hostToNameValPair (attrValues networking));
     };
 
     boot.kernel.sysctl = {

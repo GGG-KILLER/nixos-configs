@@ -93,7 +93,7 @@ with lib; {
     containers = let
       inherit (config.nixpkgs) localSystem;
       consts = config.my.constants;
-      networking-hosts = config.networking.hosts;
+      # networking-hosts = config.networking.hosts;
     in
       flip mapAttrs config.modules.containers (name: cfg: let
         netCfg = config.my.networking.${name};
@@ -131,7 +131,7 @@ with lib; {
 
             # Base network configs
             networking = {
-              hosts = networking-hosts;
+              # hosts = networking-hosts;
               useDHCP = mkOverride 900 false;
               enableIPv6 = mkOverride 900 false;
               hostName = name;
