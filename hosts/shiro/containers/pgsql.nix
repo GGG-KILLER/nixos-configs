@@ -4,31 +4,17 @@
   ...
 } @ args:
 with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
   mkPgsql = {
     env,
     ip,
     hostPort,
   }: {
-    my.networking."pgsql-${env}" = {
-      mainAddr = ip;
-      ports = [
-        {
-          protocol = "http";
-          port = 80;
-          description = "Local NGINX";
-        }
-        {
-          protocol = "tcp";
-          port = 5432;
-          description = "PostgreSQL Port";
-        }
-      ];
-    };
-
     modules.containers."pgsql-${env}" = {
       ephemeral = false;
       timeoutStartSec = "3min";
+
+      hostBridge = "br-ctlan";
+      localAddress = "${ip}/24";
 
       bindMounts = {
         "/mnt/pgsql" = {
@@ -48,21 +34,6 @@ with lib; let
           inherit hostPort;
           containerPort = 5432;
         }
-        # Microsoft DS
-        {
-          protocol = "tcp";
-          hostPort = 445;
-        }
-        # NetBIOS Name Service
-        {
-          protocol = "udp";
-          hostPort = 137;
-        }
-        # NetBIOS Datagram Service
-        {
-          protocol = "udp";
-          hostPort = 138;
-        }
       ];
 
       config = {
@@ -74,6 +45,11 @@ with lib; let
         with lib; let
           pgsql = pkgs.postgresql_14;
         in {
+          networking = {
+            defaultGateway = "172.16.0.1";
+            nameservers = ["192.168.1.1"];
+          };
+
           i18n.supportedLocales = [
             "en_US.UTF-8/UTF-8"
             "pt_BR.UTF-8/UTF-8"
@@ -99,7 +75,7 @@ with lib; let
               local   all             all                                     trust
               host    all             all             127.0.0.1/32            scram-sha-256
               host    all             all             192.168.1.0/24          scram-sha-256
-              host    all             all             10.0.0.0/24             scram-sha-256
+              host    all             all             172.16.0.0/24             scram-sha-256
             '';
             settings = {
               # Resource Consumtion Settings (https://www.postgresql.org/docs/14/runtime-config-resource.html)
@@ -142,12 +118,14 @@ with lib; let
             ];
           };
 
+          networking.firewall.allowedTCPPorts = [5432];
+
           modules.services.nginx = {
             enable = true;
             virtualHosts."pg${env}.shiro.lan" = {
               ssl = false;
               extraConfig = ''
-                set_real_ip_from 10.0.0.0/24;
+                set_real_ip_from 172.16.0.0/24;
               '';
               locations."/" = {
                 proxyPass = "http://localhost:${toString config.services.pgadmin.port}";
@@ -165,12 +143,12 @@ in {
   config = mkMerge [
     (mkPgsql {
       env = "dev";
-      ip = "10.0.0.6";
+      ip = "172.16.0.6";
       hostPort = 5432;
     })
     (mkPgsql {
       env = "prd";
-      ip = "10.0.0.7";
+      ip = "172.16.0.7";
       hostPort = 5433;
     })
   ];

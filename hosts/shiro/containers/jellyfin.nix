@@ -4,22 +4,12 @@
   pkgs,
   ...
 } @ args:
-with lib; let
-  consts = config.my.constants;
-in {
-  my.networking.jellyfin = {
-    mainAddr = "10.0.1.5";
-    ports = [
-      {
-        protocol = "http";
-        port = 80;
-        description = "Local NGINX";
-      }
-    ];
-  };
-
+with lib; {
   modules.containers.jellyfin = {
     vpn = true;
+
+    hostBridge = "br-ctvpn";
+    localAddress = "10.11.0.5/10";
 
     builtinMounts = {
       animu = true;
@@ -43,6 +33,12 @@ in {
       pkgs,
       ...
     }: {
+      networking = {
+        defaultGateway = "10.11.0.1";
+        nameservers = ["10.11.0.1"];
+        useHostResolvConf = false;
+      };
+
       # Jellyfin
       services.jellyfin = {
         enable = true;
@@ -59,7 +55,7 @@ in {
           "jellyfin.lan" = {
             ssl = false;
             extraConfig = ''
-              set_real_ip_from 10.0.1.0/24;
+              set_real_ip_from 10.11.0.0/24;
 
               # Security / XSS Mitigation Headers
               add_header X-Frame-Options "SAMEORIGIN";

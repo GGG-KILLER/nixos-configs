@@ -4,34 +4,11 @@
   ...
 } @ args:
 with lib; {
-  my.networking.network-share = {
-    mainAddr = "10.0.0.3";
-    ports = [
-      {
-        protocol = "tcp";
-        port = 139;
-        description = "NetBIOS Session Service";
-      }
-      {
-        protocol = "tcp";
-        port = 445;
-        description = "Microsoft DS";
-      }
-      {
-        protocol = "udp";
-        port = 137;
-        description = "NetBIOS Name Service";
-      }
-      {
-        protocol = "udp";
-        port = 138;
-        description = "NetBIOS Datagram Service";
-      }
-    ];
-  };
-
   modules.containers.network-share = {
     ephemeral = false;
+
+    hostBridge = "br-ctlan";
+    localAddress = "172.16.0.3/24";
 
     builtinMounts = {
       animu = true;
@@ -113,6 +90,9 @@ with lib; {
       };
 
       environment.systemPackages = [pkgs.samba];
+
+      networking.firewall.allowedTCPPorts = [139 445];
+      networking.firewall.allowedUDPPorts = [137 138];
     };
   };
 }

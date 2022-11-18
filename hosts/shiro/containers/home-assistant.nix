@@ -4,25 +4,11 @@
   pkgs,
   ...
 } @ args:
-with lib; let
-  consts = config.my.constants;
-in rec {
-  my.networking.home-assistant = {
-    mainAddr = "10.0.0.5";
-    extraNames = [
-      "hass"
-      "esphome"
-    ];
-    ports = [
-      {
-        protocol = "http";
-        port = 80;
-        description = "Local NGINX";
-      }
-    ];
-  };
-
+with lib; {
   modules.containers.home-assistant = {
+    hostBridge = "br-ctlan";
+    localAddress = "172.16.0.5/24";
+
     bindMounts = {
       "/var/lib/hass" = {
         hostPath = "/zfs-main-pool/data/home-assistant";
@@ -35,6 +21,11 @@ in rec {
       pkgs,
       ...
     }: {
+      networking = {
+        defaultGateway = "172.16.0.1";
+        nameservers = ["192.168.1.1"];
+      };
+
       services.home-assistant = {
         enable = true;
         package =
@@ -88,7 +79,7 @@ in rec {
         virtualHosts."hass.lan" = {
           ssl = false;
           extraConfig = ''
-            set_real_ip_from 10.0.0.0/24;
+            set_real_ip_from 172.16.0.0/24;
           '';
           locations."/" = {
             proxyPass = "http://localhost:8123";
@@ -101,7 +92,7 @@ in rec {
         virtualHosts."esphome.lan" = {
           ssl = false;
           extraConfig = ''
-            set_real_ip_from 10.0.0.0/24;
+            set_real_ip_from 172.16.0.0/24;
           '';
           locations."/" = {
             proxyPass = "http://localhost:6052";

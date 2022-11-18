@@ -3,24 +3,13 @@
   lib,
   ...
 } @ args:
-with lib; let
-  consts = config.my.constants;
-in {
-  my.networking.qbittorrent = {
-    extraNames = ["flood"];
-    mainAddr = "10.0.1.3";
-    ports = [
-      {
-        protocol = "http";
-        port = 80;
-        description = "Local NGINX";
-      }
-    ];
-  };
-
+with lib; {
   modules.containers.qbittorrent = {
     vpn = true;
     timeoutStartSec = "5min";
+
+    hostBridge = "br-ctvpn";
+    localAddress = "10.11.0.3/10";
 
     builtinMounts = {
       animu = true;
@@ -41,6 +30,12 @@ in {
       pkgs,
       ...
     }: {
+      networking = {
+        defaultGateway = "10.11.0.1";
+        nameservers = ["10.11.0.1"];
+        useHostResolvConf = false;
+      };
+
       # qBitTorrent
       modules.services.qbittorrent = {
         enable = true;
@@ -76,7 +71,7 @@ in {
             ssl = false;
             root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
             extraConfig = ''
-              set_real_ip_from 10.0.1.0/24;
+              set_real_ip_from 10.11.0.0/24;
             '';
             locations."/" = {
               tryFiles = "$uri /index.html";
@@ -95,7 +90,7 @@ in {
           "qbittorrent.lan" = {
             ssl = false;
             extraConfig = ''
-              set_real_ip_from 10.0.1.0/24;
+              set_real_ip_from 10.11.0.0/24;
             '';
             locations."/" = {
               proxyPass = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";

@@ -4,25 +4,11 @@
   pkgs,
   ...
 } @ args:
-with lib; let
-  consts = config.my.constants;
-in rec {
-  my.networking.firefly-iii = {
-    mainAddr = "10.0.0.4";
-    extraNames = [
-      "money"
-      "importer.money"
-    ];
-    ports = [
-      {
-        protocol = "http";
-        port = 80;
-        description = "Local NGINX";
-      }
-    ];
-  };
-
+with lib; {
   modules.containers.firefly-iii = {
+    hostBridge = "br-ctlan";
+    localAddress = "172.16.0.4/24";
+
     bindMounts = {
       "/var/www/firefly-iii" = {
         hostPath = "/zfs-main-pool/data/firefly-iii";
@@ -39,6 +25,11 @@ in rec {
       pkgs,
       ...
     }: {
+      networking = {
+        defaultGateway = "172.16.0.1";
+        nameservers = ["192.168.1.1"];
+      };
+
       i18n.supportedLocales = [
         "en_US.UTF-8/UTF-8"
         "pt_BR.UTF-8/UTF-8"
@@ -107,7 +98,7 @@ in rec {
           ssl = false;
           root = "/var/www/firefly-iii/public";
           extraConfig = ''
-            set_real_ip_from 10.0.0.0/24;
+            set_real_ip_from 172.16.0.0/24;
 
             fastcgi_param HTTP_PROXY "";
             index index.html index.htm index.php;
@@ -156,7 +147,7 @@ in rec {
           ssl = false;
           root = "/var/www/firefly-iii-data-importer/public";
           extraConfig = ''
-            set_real_ip_from 10.0.0.0/24;
+            set_real_ip_from 172.16.0.0/24;
 
             fastcgi_param HTTP_PROXY "";
             index index.html index.htm index.php;

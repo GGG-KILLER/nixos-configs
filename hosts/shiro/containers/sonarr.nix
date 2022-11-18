@@ -3,23 +3,12 @@
   lib,
   ...
 } @ args:
-with lib; let
-  consts = config.my.constants;
-in {
-  my.networking.sonarr = {
-    extraNames = ["jackett"];
-    mainAddr = "10.0.1.4";
-    ports = [
-      {
-        protocol = "http";
-        port = 80;
-        description = "NGINX";
-      }
-    ];
-  };
-
+with lib; {
   modules.containers.sonarr = {
     vpn = true;
+
+    hostBridge = "br-ctvpn";
+    localAddress = "10.11.0.4/10";
 
     builtinMounts = {
       animu = true;
@@ -44,6 +33,12 @@ in {
       pkgs,
       ...
     }: {
+      networking = {
+        defaultGateway = "10.11.0.1";
+        nameservers = ["10.11.0.1"];
+        useHostResolvConf = false;
+      };
+
       # Sonarr
       services.sonarr = {
         enable = true;
@@ -69,14 +64,14 @@ in {
           "sonarr.lan" = {
             ssl = false;
             extraConfig = ''
-              set_real_ip_from 10.0.1.0/24;
+              set_real_ip_from 10.11.0.0/24;
             '';
             locations."/".proxyPass = "http://localhost:8989";
           };
           "jackett.lan" = {
             ssl = false;
             extraConfig = ''
-              set_real_ip_from 10.0.1.0/24;
+              set_real_ip_from 10.11.0.0/24;
             '';
             locations."/".proxyPass = "http://localhost:9117";
           };

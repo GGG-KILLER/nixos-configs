@@ -5,7 +5,7 @@
   ...
 }:
 with lib; let
-  net = config.my.networking;
+  ct = config.modules.containers;
   proxy = {
     firefly-iii = ["money.lan" "importer.money.lan"];
     home-assistant = ["hass.lan" "esphome.lan"];
@@ -23,7 +23,7 @@ in {
         set_real_ip_from 192.168.0.0/16;
       '';
       locations."/" = {
-        proxyPass = "http://${net.${entry.name}.mainAddr}";
+        proxyPass = "http://${head (splitString "/" ct.${entry.name}.localAddress)}";
         proxyWebsockets = true;
         extraConfig = ''
           client_max_body_size 1G;

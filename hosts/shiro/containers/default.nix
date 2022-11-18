@@ -41,6 +41,7 @@ with lib; {
             inherit (containerOptions) enableTun;
             # Extra veth-pairs to be created for the container.
             inherit (containerOptions) extraVeths;
+            inherit (containerOptions) hostBridge localAddress;
             # List of forwarded ports from host to container.
             # Each forwarded port is specified by protocol, hostPort and containerPort.
             # By default, protocol is tcp and hostPort and containerPort are assumed to be the same if containerPort is not explicitly given.
@@ -93,33 +94,13 @@ with lib; {
     containers = let
       inherit (config.nixpkgs) localSystem;
       consts = config.my.constants;
-      # networking-hosts = config.networking.hosts;
     in
       flip mapAttrs config.modules.containers (name: cfg: let
-        netCfg = config.my.networking.${name};
         container-base = {
           config,
           pkgs,
           ...
-        }: let
-          containerCfg = config.container;
-        in {
-          options.container = {
-            name = mkOption {
-              type = types.str;
-              description = "The name of the container";
-              default = name;
-            };
-            nameservers = mkOption {
-              type = types.listOf types.str;
-              description = "The list of nameservers used by the container";
-              default =
-                if cfg.vpn
-                then ["10.0.1.1"]
-                else ["192.168.1.1"];
-            };
-          };
-
+        }: {
           config = {
             nixpkgs = {inherit localSystem;};
             boot.isContainer = true;
@@ -129,46 +110,12 @@ with lib; {
             # Enable X11 Libs
             environment.noXlibs = false;
 
-            # Base network configs
-            networking = {
-              # hosts = networking-hosts;
-              useDHCP = mkOverride 900 false;
-              enableIPv6 = mkOverride 900 false;
-              hostName = name;
-              defaultGateway = mkOverride 900 (
-                if cfg.vpn
-                then "10.0.1.1"
-                else "10.0.0.1"
-              );
-              useHostResolvConf = false;
-              nameservers = containerCfg.nameservers;
-              firewall = let
-                getPorts = proto:
-                  flatten (map (portDef: portDef.port) (filter (portDef: portDef.protocol == proto) netCfg.ports));
-              in {
-                allowedTCPPorts = getPorts "tcp" ++ getPorts "http";
-                allowedUDPPorts = getPorts "udp";
-              };
-            };
-
-            # ACME Settings
-            security.acme = {
-              acceptTerms = true; # kinda pointless since we never use upstream
-              defaults = {
-                server = "https://ca.lan/acme/acme/directory";
-                renewInterval = "hourly";
-              };
-            };
-
             # Configure the network setup to
             systemd.services.network-setup.serviceConfig = mkIf cfg.vpn {
               Restart = "on-failure";
               RestartSec = "5s";
               StartLimitIntervalSec = "0";
             };
-
-            # Enable the OpenSSH server.
-            services.sshd.enable = true;
 
             # Have manpages
             environment.systemPackages = with pkgs; [man git netcat tcpdump htop nmon];
@@ -181,12 +128,7 @@ with lib; {
         inherit (cfg) ephemeral timeoutStartSec;
 
         # Networking
-        inherit (cfg) enableTun extraVeths forwardPorts;
-        hostBridge =
-          if cfg.vpn
-          then "br-ctvpn"
-          else "br-ctlan";
-        localAddress = "${netCfg.mainAddr}/24";
+        inherit (cfg) hostBridge localAddress enableTun extraVeths forwardPorts;
 
         bindMounts = mkMerge [
           cfg.bindMounts
