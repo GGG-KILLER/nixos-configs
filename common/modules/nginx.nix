@@ -54,27 +54,10 @@ in {
               real_ip_header proxy_protocol;
               ${server.extraConfig}
             '';
-            listen =
-              [
-                {
-                  addr = "0.0.0.0";
-                  port = 80;
-                }
-              ]
-              ++ (
-                optional (server.serverName != null && server.ssl)
-                # Needed for SNI Proxy
-                {
-                  addr = "0.0.0.0";
-                  port = 444;
-                  ssl = server.ssl;
-                  extraParameters = ["proxy_protocol"];
-                }
-              );
           }
           // (optionalAttrs (server.serverName != null && server.ssl) {
             enableACME = true;
-            forceSSL = true;
+            addSSL = true;
             http2 = true;
           })
           // (optionalAttrs (server.root != null) {
