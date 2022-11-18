@@ -115,7 +115,7 @@ with lib; {
               description = "The list of nameservers used by the container";
               default =
                 if cfg.vpn
-                then consts.networking.vpnNameservers
+                then ["10.0.1.1"]
                 else ["192.168.1.1"];
             };
           };
