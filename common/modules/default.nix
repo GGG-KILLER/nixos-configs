@@ -8,5 +8,6 @@
     ./monitoring
     ./services
     ./vpn/mullvad.nix
+    ./nginx.nix
   ];
 }
