@@ -137,7 +137,7 @@ with lib; {
               hostName = name;
               defaultGateway = mkOverride 900 (
                 if cfg.vpn
-                then vpnNetCfg.ipAddr
+                then vpnNetCfg.mainAddr
                 else "192.168.1.1"
               );
               useHostResolvConf = false;
