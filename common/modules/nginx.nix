@@ -11,6 +11,7 @@ with lib; let
 in {
   options.modules.services.nginx = let
     nginx-opts = options.services.nginx.type.getSubOptions {};
+    vhost-opts = nginx-opts.virtualHosts.type.getSubOptions {};
   in {
     enable = mkOption {
       type = types.bool;
@@ -25,45 +26,12 @@ in {
               type = types.str;
               default = name;
             };
-            serverAliases = mkOption {
-              type = types.listOf types.str;
-              default = [];
-            };
-            default = mkOption {
-              type = types.bool;
-              default = false;
-            };
             ssl = mkOption {
               type = types.bool;
               default = true;
             };
-            root = mkOption {
-              type = types.nullOr types.path;
-              default = null;
-            };
-            extraConfig = mkOption {
-              type = types.lines;
-              default = "";
-            };
-            locations = mkOption {
-              type = types.attrsOf (types.submodule {
-                options = {
-                  priority = mkOption {
-                    type = types.int;
-                    default = 1000;
-                  };
-                  proxyPass = mkOption {
-                    type = types.nullOr types.str;
-                    default = null;
-                  };
-                  extraConfig = mkOption {
-                    type = types.lines;
-                    default = null;
-                  };
-                };
-              });
-              default = {};
-            };
+
+            inherit (vhost-opts) serverAliases default root extraConfig locations;
           };
         });
       default = {};
@@ -82,10 +50,7 @@ in {
         lib.attrsets.mapAttrs
         (key: server:
           {
-            serverName = server.serverName;
-            serverAliases = server.serverAliases;
-            default = server.default;
-            locations = server.locations;
+            inherit (server) serverName serverAliases default locations;
             extraConfig = ''
               set_real_ip_from 127.0.0.0/8;
               real_ip_header proxy_protocol;
