@@ -61,7 +61,8 @@ in {
                   port = 80;
                 }
               ]
-              ++ (optional (server.serverName != null && server.ssl) [
+              ++ (
+                optional (server.serverName != null && server.ssl)
                 # Needed for SNI Proxy
                 {
                   addr = "0.0.0.0";
@@ -69,9 +70,10 @@ in {
                   ssl = server.ssl;
                   extraParameters = ["proxy_protocol"];
                 }
-              ]);
+              );
           }
           // (optionalAttrs (server.serverName != null && server.ssl) {
+            enableACME = true;
             forceSSL = true;
             http2 = true;
           })
