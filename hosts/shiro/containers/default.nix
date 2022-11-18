@@ -22,7 +22,7 @@ with lib; {
   ];
 
   options.modules.containers = let
-    containerOptions = options.containers.type.getSubOptions [];
+    containerOptions = options.containers.type.getSubOptions ["modules" "containers"];
   in
     mkOption {
       type = with types;
