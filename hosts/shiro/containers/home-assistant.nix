@@ -8,27 +8,16 @@ with lib; let
   consts = config.my.constants;
 in rec {
   my.networking.home-assistant = {
-    mainAddr = "192.168.1.13";
+    mainAddr = "10.0.0.5";
+    extraNames = [
+      "hass"
+      "esphome"
+    ];
     ports = [
       {
         protocol = "http";
-        port = 8123;
-        description = "Home Assistant Web UI";
-      }
-      {
-        protocol = "http";
-        port = 6052;
-        description = "ESPHome Web UI";
-      }
-      {
-        protocol = "http";
         port = 80;
-        description = "Local Nginx";
-      }
-      {
-        protocol = "http";
-        port = 443;
-        description = "Local Nginx";
+        description = "Local NGINX";
       }
     ];
   };
@@ -94,44 +83,30 @@ in rec {
         };
       };
 
-      security.acme.certs."hass.lan".email = "hass@home-assistant.lan";
-      security.acme.certs."esphome.lan".email = "esphome@home-assistant.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
         virtualHosts."hass.lan" = {
-          enableACME = true;
-          addSSL = true;
+          ssl = false;
+          extraConfig = ''
+            set_real_ip_from 10.0.0.0/24;
+          '';
           locations."/" = {
+            proxyPass = "http://localhost:8123";
+            proxyWebsockets = true;
             extraConfig = ''
-              proxy_pass http://localhost:8123;
-              proxy_http_version 1.1;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Forwarded-Protocol $scheme;
-              proxy_set_header X-Forwarded-Host $http_host;
               proxy_read_timeout 6h;
             '';
           };
         };
         virtualHosts."esphome.lan" = {
-          enableACME = true;
-          addSSL = true;
+          ssl = false;
+          extraConfig = ''
+            set_real_ip_from 10.0.0.0/24;
+          '';
           locations."/" = {
+            proxyPass = "http://localhost:6052";
+            proxyWebsockets = true;
             extraConfig = ''
-              proxy_pass http://localhost:6052;
-              proxy_http_version 1.1;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Forwarded-Protocol $scheme;
-              proxy_set_header X-Forwarded-Host $http_host;
               proxy_read_timeout 6h;
             '';
           };

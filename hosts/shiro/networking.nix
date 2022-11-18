@@ -61,6 +61,10 @@ in {
   config = rec {
     my.networking.shiro = {
       mainAddr = "192.168.1.2";
+      extraAddrs = {
+        ctlan = "10.0.0.1";
+        ctvpn = "10.0.1.2";
+      };
       extraNames = [
         "grafana.shiro"
         "prometheus.shiro"
@@ -75,31 +79,62 @@ in {
       hostName = "shiro";
       hostId = "14537a32";
 
-      defaultGateway = "192.168.1.1";
+      defaultGateway = {
+        address = "192.168.1.1";
+        interface = "enp6s0";
+      };
       nameservers = ["192.168.1.1"];
 
-      interfaces.enp6s0 = {
-        ipv4.addresses = [];
+      bridges = {
+        # Bridge with LAN access
+        br-ctlan = {
+          interfaces = [];
+        };
+        # Bridge with VPN gateway only
+        br-ctvpn = {
+          interfaces = ["vlan-ctvpn"];
+        };
       };
 
-      macvlans.mv-enp6s0-host = {
-        interface = "enp6s0";
-        mode = "bridge";
-      };
-      interfaces.mv-enp6s0-host = {
-        ipv4.addresses = [
+      interfaces = {
+        enp6s0.ipv4.addresses = [
           {
             address = my.networking.shiro.mainAddr;
             prefixLength = 24;
           }
         ];
+        vlan-ctvpn.virtual = true;
+        br-ctlan.ipv4.addresses = [
+          {
+            address = my.networking.shiro.extraAddrs.ctlan;
+            prefixLength = 24;
+          }
+        ];
+        br-ctvpn.ipv4.addresses = [
+          {
+            address = my.networking.shiro.extraAddrs.ctvpn;
+            prefixLength = 24;
+          }
+        ];
+      };
+
+      # NAT br-ctlan to lan interface
+      nat = {
+        enable = true;
+        internalInterfaces = ["br-ctlan"];
+        externalInterface = "enp6s0";
       };
 
       hosts = let
         networking = mapAttrs (netName: netCfg: netCfg // {names = [netCfg.name] ++ netCfg.extraNames;}) config.my.networking;
-        hostToNameValPair = host: nameValuePair host.mainAddr (map (name: "${name}.lan") host.names);
+        hostToNameValPair = host: nameValuePair host.mainAddr (map (name: "${name}.local") host.names);
       in
         listToAttrs (map hostToNameValPair (attrValues networking));
+    };
+
+    boot.kernel.sysctl = {
+      "net.ipv4.ip_forward" = "1";
+      "net.ipv6.conf.all.forwarding" = "1";
     };
   };
 }

@@ -8,27 +8,12 @@ with lib; let
 in {
   my.networking.sonarr = {
     extraNames = ["jackett"];
-    mainAddr = "192.168.1.5";
+    mainAddr = "10.0.1.4";
     ports = [
-      {
-        protocol = "http";
-        port = 8989;
-        description = "Sonarr Web UI";
-      }
-      {
-        protocol = "http";
-        port = 9117;
-        description = "Jackett Web UI";
-      }
       {
         protocol = "http";
         port = 80;
         description = "NGINX";
-      }
-      {
-        protocol = "http";
-        port = 443;
-        description = "Local Nginx";
       }
     ];
   };
@@ -42,6 +27,7 @@ in {
       etc = true;
       h = true;
     };
+
     bindMounts = {
       "/mnt/sonarr" = {
         hostPath = "/zfs-main-pool/data/sonarr";
@@ -77,24 +63,22 @@ in {
       };
 
       # NGINX
-      security.acme.certs."sonarr.lan".email = "sonarr@sonarr.lan";
-      security.acme.certs."jackett.lan".email = "jackett@soarr.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
         virtualHosts = {
           "sonarr.lan" = {
-            enableACME = true;
-            addSSL = true;
-            locations."/" = {
-              proxyPass = "http://localhost:8989";
-            };
+            ssl = false;
+            extraConfig = ''
+              set_real_ip_from 10.0.1.0/24;
+            '';
+            locations."/".proxyPass = "http://localhost:8989";
           };
           "jackett.lan" = {
-            enableACME = true;
-            addSSL = true;
-            locations."/" = {
-              proxyPass = "http://localhost:9117";
-            };
+            ssl = false;
+            extraConfig = ''
+              set_real_ip_from 10.0.1.0/24;
+            '';
+            locations."/".proxyPass = "http://localhost:9117";
           };
         };
       };

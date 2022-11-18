@@ -10,6 +10,7 @@ with lib; {
   imports = [
     ./downloader.nix
     ./firefly-iii.nix
+    ./gateway.nix
     ./home-assistant.nix
     ./jellyfin.nix
     ./network-share.nix
@@ -92,7 +93,6 @@ with lib; {
     containers = let
       inherit (config.nixpkgs) localSystem;
       consts = config.my.constants;
-      vpnNetCfg = config.my.networking.vpn-gateway;
       networking-hosts = config.networking.hosts;
     in
       flip mapAttrs config.modules.containers (name: cfg: let
@@ -137,19 +137,11 @@ with lib; {
               hostName = name;
               defaultGateway = mkOverride 900 (
                 if cfg.vpn
-                then vpnNetCfg.mainAddr
-                else "192.168.1.1"
+                then "10.0.1.1"
+                else "10.0.0.1"
               );
               useHostResolvConf = false;
               nameservers = containerCfg.nameservers;
-              interfaces = {
-                mv-enp6s0.ipv4.addresses = [
-                  {
-                    address = netCfg.mainAddr;
-                    prefixLength = 24;
-                  }
-                ];
-              };
               firewall = let
                 getPorts = proto:
                   flatten (map (portDef: portDef.port) (filter (portDef: portDef.protocol == proto) netCfg.ports));
@@ -186,10 +178,15 @@ with lib; {
         # This can be overriden by just defining it.
         autoStart = mkDefault true;
         privateNetwork = true;
-        inherit (cfg) enableTun ephemeral timeoutStartSec;
+        inherit (cfg) ephemeral timeoutStartSec;
 
-        # External LAN
-        macvlans = ["enp6s0"];
+        # Networking
+        inherit (cfg) enableTun extraVeths forwardPorts;
+        hostBridge =
+          if cfg.vpn
+          then "br-ctvpn"
+          else "br-ctlan";
+        localAddress = "${netCfg.mainAddr}/24";
 
         bindMounts = mkMerge [
           cfg.bindMounts

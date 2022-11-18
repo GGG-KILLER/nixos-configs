@@ -8,22 +8,12 @@ with lib; let
   consts = config.my.constants;
 in {
   my.networking.jellyfin = {
-    mainAddr = "192.168.1.6";
+    mainAddr = "10.0.1.5";
     ports = [
-      {
-        protocol = "http";
-        port = 8096;
-        description = "Jellyfin Web UI";
-      }
       {
         protocol = "http";
         port = 80;
         description = "Local NGINX";
-      }
-      {
-        protocol = "http";
-        port = 443;
-        description = "Local Nginx";
       }
     ];
   };
@@ -63,16 +53,14 @@ in {
       environment.systemPackages = with pkgs; [jellyfin-ffmpeg];
 
       # NGINX
-      security.acme.certs."jellyfin.lan".email = "jellyfin@jellyfin.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
-        # recommendedProxySettings = true;
         virtualHosts = {
           "jellyfin.lan" = {
-            default = true;
-            enableACME = true;
-            addSSL = true;
+            ssl = false;
             extraConfig = ''
+              set_real_ip_from 10.0.1.0/24;
+
               # Security / XSS Mitigation Headers
               add_header X-Frame-Options "SAMEORIGIN";
               add_header X-XSS-Protection "1; mode=block";
@@ -82,15 +70,10 @@ in {
               return = "302 http://$host/web/";
             };
             locations."/" = {
+              proxyPass = "http://localhost:8096";
+              proxyWebsockets = true;
               extraConfig = ''
                 # Proxy main Jellyfin traffic
-                proxy_pass http://localhost:8096;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_set_header X-Forwarded-Protocol $scheme;
-                proxy_set_header X-Forwarded-Host $http_host;
                 proxy_read_timeout 6h;
 
                 # Disable buffering when the nginx proxy gets very resource heavy upon streaming
@@ -99,31 +82,19 @@ in {
             };
             # location block for /web - This is purely for aesthetics so /web/#!/ works instead of having to go to /web/index.html/#!/
             locations."= /web/" = {
+              proxyPass = "http://localhost:8096/web/index.html";
               extraConfig = ''
                 # Proxy main Jellyfin traffic
-                proxy_pass http://localhost:8096/web/index.html;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_set_header X-Forwarded-Protocol $scheme;
-                proxy_set_header X-Forwarded-Host $http_host;
                 proxy_read_timeout 6h;
+
+                # Disable buffering when the nginx proxy gets very resource heavy upon streaming
+                proxy_buffering off;
               '';
             };
             locations."/socket" = {
+              proxyPass = "http://localhost:8096";
+              proxyWebsockets = true;
               extraConfig = ''
-                # Proxy Jellyfin Websockets traffic
-                proxy_pass http://localhost:8096;
-                proxy_http_version 1.1;
-                proxy_set_header Upgrade $http_upgrade;
-                proxy_set_header Connection "upgrade";
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
-                proxy_set_header X-Forwarded-Protocol $scheme;
-                proxy_set_header X-Forwarded-Host $http_host;
                 proxy_read_timeout 6h;
               '';
             };

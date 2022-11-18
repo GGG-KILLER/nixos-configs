@@ -8,7 +8,7 @@ with lib; let
   consts = config.my.constants;
 in rec {
   my.networking.firefly-iii = {
-    mainAddr = "192.168.1.9";
+    mainAddr = "10.0.0.4";
     extraNames = [
       "money"
       "importer.money"
@@ -17,12 +17,7 @@ in rec {
       {
         protocol = "http";
         port = 80;
-        description = "Local Nginx";
-      }
-      {
-        protocol = "http";
-        port = 443;
-        description = "Local Nginx";
+        description = "Local NGINX";
       }
     ];
   };
@@ -106,17 +101,14 @@ in rec {
         };
       };
 
-      security.acme.certs."money.lan".email = "money@firefly-iii.lan";
-      security.acme.certs."importer.money.lan".email = "importer.money@firefly-iii.lan";
-
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
         virtualHosts."money.lan" = {
-          default = true;
-          enableACME = true;
-          addSSL = true;
+          ssl = false;
           root = "/var/www/firefly-iii/public";
           extraConfig = ''
+            set_real_ip_from 10.0.0.0/24;
+
             fastcgi_param HTTP_PROXY "";
             index index.html index.htm index.php;
           '';
@@ -161,10 +153,11 @@ in rec {
           '';
         };
         virtualHosts."importer.money.lan" = {
-          enableACME = true;
-          addSSL = true;
+          ssl = false;
           root = "/var/www/firefly-iii-data-importer/public";
           extraConfig = ''
+            set_real_ip_from 10.0.0.0/24;
+
             fastcgi_param HTTP_PROXY "";
             index index.html index.htm index.php;
           '';

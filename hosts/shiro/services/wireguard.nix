@@ -20,12 +20,12 @@ with lib; {
     postUp = [
       "${iptables} -A FORWARD -i wglan -j ACCEPT"
       "${iptables} -A FORWARD -o wglan -j ACCEPT"
-      "${iptables} -t nat -A POSTROUTING -o mv-enp6s0-host -j MASQUERADE"
+      "${iptables} -t nat -A POSTROUTING -o enp6s0 -j MASQUERADE"
     ];
     postDown = [
       "${iptables} -D FORWARD -i wglan -j ACCEPT"
       "${iptables} -D FORWARD -o wglan -j ACCEPT"
-      "${iptables} -t nat -D POSTROUTING -o mv-enp6s0-host -j MASQUERADE"
+      "${iptables} -t nat -D POSTROUTING -o enp6s0 -j MASQUERADE"
     ];
     # Laptop Addr: 192.168.5.2/24
     # Phone Addr:  192.168.5.3/24

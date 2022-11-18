@@ -6,9 +6,12 @@
 with lib; let
   consts = config.my.constants;
   secrets = config.my.secrets.vpn.mullvad;
-in {
+in rec {
   my.networking.vpn-gateway = {
-    mainAddr = "192.168.1.7";
+    mainAddr = "10.0.0.2";
+    extraAddrs = {
+      ctlan = "10.0.1.1";
+    };
   };
 
   modules.containers.vpn-gateway = {
@@ -21,6 +24,11 @@ in {
       };
     };
 
+    extraVeths."ctvpn.local" = {
+      hostBridge = "br-ctvpn";
+      localAddress = "${my.networking.vpn-gateway.extraAddrs.ctlan}/24";
+    };
+
     config = {
       config,
       pkgs,
@@ -29,26 +37,10 @@ in {
       wg-interface = "wg-mullvad";
     in {
       # VPN Config
-      networking.wg-quick.interfaces.${wg-interface} = let
-        iptables = "${pkgs.iptables}/bin/iptables";
-        ip6tables = "${pkgs.iptables}/bin/iptables";
-        wg = "${pkgs.wireguard-tools}/bin/wg";
-      in {
+      networking.wg-quick.interfaces.${wg-interface} = {
         address = [secrets.address];
         dns = [secrets.dns];
         privateKeyFile = "/secrets/mullvad-privkey";
-        # Thanks to https://www.reddit.com/r/WireGuard/comments/gf989b/comment/fqek1t2/ for this killswitch
-        postUp = ''
-          ${iptables} -N WG_KILLSWITCH
-          ${iptables} -A OUTPUT -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j WG_KILLSWITCH
-          ${iptables} -A WG_KILLSWITCH -o ${wg-interface} -j RETURN
-          ${iptables} -A WG_KILLSWITCH -o mv-enp6s0 -m iprange --dst-range 192.168.1.2-192.168.1.100 -j RETURN
-          ${iptables} -A WG_KILLSWITCH -j REJECT
-        '';
-        preDown = ''
-          ${iptables} -D OUTPUT -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j WG_KILLSWITCH
-          ${iptables} -X WG_KILLSWITCH
-        '';
         peers = [
           {
             inherit (secrets) endpoint publicKey;
@@ -60,7 +52,7 @@ in {
       # NAT
       networking.nat = {
         enable = true;
-        internalIPs = ["192.168.1.0/24"];
+        internalIPs = ["10.0.0.0/8"];
         externalInterface = wg-interface;
       };
 

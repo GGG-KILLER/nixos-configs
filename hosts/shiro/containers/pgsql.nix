@@ -8,6 +8,7 @@ with lib; let
   mkPgsql = {
     env,
     ip,
+    hostPort,
   }: {
     my.networking."pgsql-${env}" = {
       mainAddr = ip;
@@ -15,12 +16,7 @@ with lib; let
         {
           protocol = "http";
           port = 80;
-          description = "Nginx";
-        }
-        {
-          protocol = "http";
-          port = 443;
-          description = "Local Nginx";
+          description = "Local NGINX";
         }
         {
           protocol = "tcp";
@@ -32,7 +28,7 @@ with lib; let
 
     modules.containers."pgsql-${env}" = {
       ephemeral = false;
-      timeoutStartSec = "2min";
+      timeoutStartSec = "3min";
 
       bindMounts = {
         "/mnt/pgsql" = {
@@ -44,6 +40,30 @@ with lib; let
           isReadOnly = true;
         };
       };
+
+      forwardPorts = [
+        # PostgreSQL Port
+        {
+          protocol = "tcp";
+          inherit hostPort;
+          containerPort = 5432;
+        }
+        # Microsoft DS
+        {
+          protocol = "tcp";
+          hostPort = 445;
+        }
+        # NetBIOS Name Service
+        {
+          protocol = "udp";
+          hostPort = 137;
+        }
+        # NetBIOS Datagram Service
+        {
+          protocol = "udp";
+          hostPort = 138;
+        }
+      ];
 
       config = {
         lib,
@@ -78,8 +98,8 @@ with lib; let
               # TYPE  DATABASE        USER            ADDRESS                 METHOD
               local   all             all                                     trust
               host    all             all             127.0.0.1/32            scram-sha-256
-              host    all             all             ::1/128                 scram-sha-256
               host    all             all             192.168.1.0/24          scram-sha-256
+              host    all             all             10.0.0.0/24             scram-sha-256
             '';
             settings = {
               # Resource Consumtion Settings (https://www.postgresql.org/docs/14/runtime-config-resource.html)
@@ -122,24 +142,17 @@ with lib; let
             ];
           };
 
-          security.acme.certs."pg${env}.shiro.lan".email = "pg${env}@pg${env}.lan";
-          services.nginx = {
+          modules.services.nginx = {
             enable = true;
             virtualHosts."pg${env}.shiro.lan" = {
-              enableACME = true;
-              addSSL = true;
+              ssl = false;
+              extraConfig = ''
+                set_real_ip_from 10.0.0.0/24;
+              '';
               locations."/" = {
+                proxyPass = "http://localhost:${toString config.services.pgadmin.port}";
+                proxyWebsockets = true;
                 extraConfig = ''
-                  proxy_pass http://localhost:${toString config.services.pgadmin.port};
-                  proxy_http_version 1.1;
-                  proxy_set_header Upgrade $http_upgrade;
-                  proxy_set_header Connection "upgrade";
-                  proxy_set_header Host $host;
-                  proxy_set_header X-Real-IP $remote_addr;
-                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                  proxy_set_header X-Forwarded-Proto $scheme;
-                  proxy_set_header X-Forwarded-Protocol $scheme;
-                  proxy_set_header X-Forwarded-Host $http_host;
                   proxy_read_timeout 6h;
                 '';
               };
@@ -152,11 +165,13 @@ in {
   config = mkMerge [
     (mkPgsql {
       env = "dev";
-      ip = "192.168.1.15";
+      ip = "10.0.0.6";
+      hostPort = 5432;
     })
     (mkPgsql {
       env = "prd";
-      ip = "192.168.1.16";
+      ip = "10.0.0.7";
+      hostPort = 5433;
     })
   ];
 }

@@ -8,37 +8,12 @@ with lib; let
 in {
   my.networking.qbittorrent = {
     extraNames = ["flood"];
-    mainAddr = "192.168.1.10";
+    mainAddr = "10.0.1.3";
     ports = [
-      {
-        protocol = "tcp";
-        port = 6881;
-        description = "DHT?";
-      }
-      {
-        protocol = "udp";
-        port = 6881;
-        description = "DHT?";
-      }
       {
         protocol = "http";
         port = 80;
         description = "Local NGINX";
-      }
-      {
-        protocol = "http";
-        port = 443;
-        description = "Local Nginx";
-      }
-      {
-        protocol = "http";
-        port = config.modules.services.qbittorrent.web.port;
-        description = "qBitTorrent Web UI";
-      }
-      {
-        protocol = "http";
-        port = config.modules.services.flood.web.port;
-        description = "Flood UI";
       }
     ];
   };
@@ -53,6 +28,7 @@ in {
       etc = true;
       h = true;
     };
+
     bindMounts = {
       "/mnt/qbittorrent" = {
         hostPath = "/zfs-main-pool/data/qbittorrent";
@@ -93,17 +69,15 @@ in {
       };
 
       # NGINX
-      security.acme.certs."flood.lan".email = "flood@qbittorrent.lan";
-      security.acme.certs."qbittorrent.lan".email = "qbittorrent@qbittorrent.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
-        recommendedProxySettings = true;
         virtualHosts = {
           "flood.lan" = {
-            default = true;
-            enableACME = true;
-            addSSL = true;
+            ssl = false;
             root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
+            extraConfig = ''
+              set_real_ip_from 10.0.1.0/24;
+            '';
             locations."/" = {
               tryFiles = "$uri /index.html";
             };
@@ -119,8 +93,10 @@ in {
             };
           };
           "qbittorrent.lan" = {
-            enableACME = true;
-            addSSL = true;
+            ssl = false;
+            extraConfig = ''
+              set_real_ip_from 10.0.1.0/24;
+            '';
             locations."/" = {
               proxyPass = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";
               proxyWebsockets = true;

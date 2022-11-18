@@ -5,7 +5,7 @@
 } @ args:
 with lib; {
   my.networking.network-share = {
-    mainAddr = "192.168.1.3";
+    mainAddr = "10.0.0.3";
     ports = [
       {
         protocol = "tcp";
@@ -39,6 +39,29 @@ with lib; {
       etc = true;
       h = true;
     };
+
+    forwardPorts = [
+      # NetBIOS Session Service
+      {
+        protocol = "tcp";
+        hostPort = 139;
+      }
+      # Microsoft DS
+      {
+        protocol = "tcp";
+        hostPort = 445;
+      }
+      # NetBIOS Name Service
+      {
+        protocol = "udp";
+        hostPort = 137;
+      }
+      # NetBIOS Datagram Service
+      {
+        protocol = "udp";
+        hostPort = 138;
+      }
+    ];
 
     config = {
       config,
