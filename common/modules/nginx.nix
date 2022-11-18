@@ -10,8 +10,7 @@ with lib; let
   cfg = config.modules.services.nginx;
 in {
   options.modules.services.nginx = let
-    nginx-opts = options.services.nginx.type.getSubOptions {};
-    vhost-opts = nginx-opts.virtualHosts.type.getSubOptions {};
+    vhost-opts = options.services.nginx.virtualHosts.type.getSubOptions ["modules" "services" "nginx" "virtualHosts"];
   in {
     enable = mkOption {
       type = types.bool;
@@ -19,21 +18,20 @@ in {
       description = "enable nginx service";
     };
     virtualHosts = mkOption {
-      type = types.attrsOf (types.submodule
-        {name, ...}: {
-          options = {
-            serverName = mkOption {
-              type = types.str;
-              default = name;
-            };
-            ssl = mkOption {
-              type = types.bool;
-              default = true;
-            };
-
-            inherit (vhost-opts) serverAliases default root extraConfig locations;
+      type = types.attrsOf (types.submodule ({name, ...}: {
+        options = {
+          serverName = mkOption {
+            type = types.str;
+            default = name;
           };
-        });
+          ssl = mkOption {
+            type = types.bool;
+            default = true;
+          };
+
+          inherit (vhost-opts) serverAliases default root extraConfig locations;
+        };
+      }));
       default = {};
       description = "virtual hosts";
     };
