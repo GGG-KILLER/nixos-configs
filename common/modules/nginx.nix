@@ -44,6 +44,7 @@ in {
       recommendedTlsSettings = true;
       recommendedGzipSettings = true;
       recommendedOptimisation = true;
+      recommendedProxySettings = true;
       virtualHosts =
         lib.attrsets.mapAttrs
         (key: server:
