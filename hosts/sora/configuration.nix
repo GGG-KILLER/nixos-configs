@@ -12,6 +12,7 @@
     ./audio.nix
     ./backup/restic.nix
     ./docker.nix
+    ./fancontrol.nix
     ./fonts.nix
     ./gnome.nix
     # Include the results of the hardware scan.
