@@ -73,12 +73,6 @@
   # Flatpak
   services.flatpak.enable = true;
 
-  # libvirtd
-  virtualisation.libvirtd = {
-    enable = true;
-    qemu.ovmf.enable = true;
-  };
-
   # I2C
   hardware.i2c.enable = true;
 
