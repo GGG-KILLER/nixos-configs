@@ -81,6 +81,7 @@ in {
       libguestfs-with-appliance
       mullvad-vpn
       rustdesk
+      zenmonitor
     ];
 
     home.sessionVariables = {
