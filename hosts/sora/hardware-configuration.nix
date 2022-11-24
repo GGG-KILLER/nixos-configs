@@ -14,8 +14,8 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "uas" "usbcore" "sd_mod"];
   boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd" "lm75" "k10temp" "nct6775"];
-  boot.extraModulePackages = [];
+  boot.kernelModules = ["kvm-amd" "lm75" "k10temp" "nct6775" "zenpower"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [zenpower];
   boot.zfs.enableUnstable = true;
 
   fileSystems."/" = {
