@@ -11,7 +11,6 @@
         };
       in {
         discord-email-bridge = callPackage repo {};
-        #zfs_exporter = callPackage ./zfs_exporter {};
         git-credential-manager = callPackage ./git-credential-manager {};
         winfonts = callPackage ./winfonts {};
         npm = callPackage ./npm {inherit (super) nodejs;};
