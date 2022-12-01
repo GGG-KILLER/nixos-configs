@@ -82,6 +82,8 @@
       shiro = {
         hostname = "shiro.lan";
         fastConnection = true;
+        autoRollback = false;
+        magicRollback = false;
         profiles.system = {
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
@@ -102,8 +104,6 @@
       f-ggg-dev = {
         hostname = "f.ggg.dev";
         fastConnection = false;
-        autoRollback = false;
-        magicRollback = false;
         profiles.system = {
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.f-ggg-dev;
