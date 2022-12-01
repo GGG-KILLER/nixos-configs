@@ -1,5 +1,6 @@
 {
   lib,
+  autoPatchelfHook,
   fetchzip,
   fontconfig,
   icu,
@@ -7,11 +8,12 @@
   libsecret,
   libunwind,
   libX11,
-  openssl_1_1,
-  zlib,
-  stdenv,
-  autoPatchelfHook,
   makeWrapper,
+  openssl_1_1,
+  stdenv,
+  libICE,
+  libSM,
+  zlib,
 }: let
   libraries = [
     fontconfig
@@ -27,11 +29,11 @@
 in
   stdenv.mkDerivation rec {
     pname = "git-credential-manager";
-    version = "2.0.785";
+    version = "2.0.877";
 
     src = fetchzip {
       url = "https://github.com/GitCredentialManager/git-credential-manager/releases/download/v${version}/gcm-linux_amd64.${version}.tar.gz";
-      hash = "sha256-Dx/MBsoXBMZ8Xar2kWaKWgtJvAbeuUbxoLpV9EgOIAU=";
+      hash = "sha256-Mr548yaKkLSQm6sASWtYJ/1hk6Dgyek1ai+mcrWNn+c=";
       stripRoot = false;
     };
 
@@ -51,17 +53,22 @@ in
       chmod +x Atlassian.Bitbucket.UI
       chmod +x GitHub.UI
       chmod +x GitLab.UI
-      chmod +x git-credential-manager-core
+      chmod +x git-credential-manager
+      chmod +x git-credential-manager-ui
 
       mkdir -p $out/bin
 
-      makeWrapper $gcmlibs/git-credential-manager-core $out/bin/git-credential-manager-core \
+      makeWrapper $gcmlibs/git-credential-manager $out/bin/git-credential-manager \
         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath libraries}" \
+        --set DOTNET_CLI_TELEMETRY_OPTOUT 1
+
+      makeWrapper $gcmlibs/git-credential-manager-ui $out/bin/git-credential-manager-ui \
+        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath (libraries ++ [libICE libSM])}" \
         --set DOTNET_CLI_TELEMETRY_OPTOUT 1
     '';
 
     meta = with lib; {
-      description = "API Support for your favorite torrent trackers";
+      description = "Secure, cross-platform Git credential storage with authentication to GitHub, Azure Repos, and other popular Git hosting services.";
       homepage = "https://github.com/GitCredentialManager/git-credential-manager/";
       license = licenses.mit;
       maintainers = [
