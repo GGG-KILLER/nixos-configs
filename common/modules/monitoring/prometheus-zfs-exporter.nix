@@ -9,11 +9,7 @@ with lib; let
   cfg = config.modules.services.zfs-exporter;
 in {
   options.modules.services.zfs-exporter = {
-    enable = mkOption {
-      type = types.bool;
-      default = false;
-      description = "Whether to enable the zfs_exporter service.";
-    };
+    enable = mkEnableOption "Whether to enable the prometheus-zfs-exporter service.";
   };
 
   config = mkIf cfg.enable {
@@ -23,7 +19,7 @@ in {
       serviceConfig = {
         Restart = "always";
         ExecStart = ''
-          ${pkgs.local.zfs_exporter}/bin/zfs_exporter
+          ${pkgs.prometheus-zfs-exporter}/bin/zfs_exporter
         '';
         PrivateTmp = true;
         WorkingDirectory = /tmp;

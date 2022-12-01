@@ -1,6 +1,6 @@
 {...}: {
   imports = [
     ./node-exporter-smartmon.nix
-    ./zfs-exporter.nix
+    ./prometheus-zfs-exporter.nix
   ];
 }
