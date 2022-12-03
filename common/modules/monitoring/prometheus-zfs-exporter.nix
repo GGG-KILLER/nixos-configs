@@ -16,6 +16,7 @@ in {
     systemd.services."prometheus-zfs-exporter" = {
       wantedBy = ["multi-user.target"];
       after = ["network.target"];
+      path = [pkgs.zfs];
       serviceConfig = {
         Restart = "always";
         ExecStart = ''
