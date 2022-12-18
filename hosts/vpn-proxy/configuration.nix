@@ -100,15 +100,15 @@ in {
   # Enable DNS Server
   services.dnsmasq = {
     enable = true;
-    servers = [
-      "1.1.1.1"
-      "1.0.0.1"
-      "8.8.8.8"
-      "8.8.4.4"
-    ];
-    extraConfig = ''
-      interface=${inp-interface}
-    '';
+    settings = {
+      server = [
+        "1.1.1.1"
+        "1.0.0.1"
+        "8.8.8.8"
+        "8.8.4.4"
+      ];
+      interface = inp-interface;
+    };
   };
 
   # Enable Mullvad
