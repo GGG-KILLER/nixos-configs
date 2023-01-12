@@ -23,13 +23,18 @@ in {
         "/zfs-main-pool/data/step-ca"
       ];
       extraBackupArgs = [
-        "--exclude=/zfs-main-pool/data/h/G"
-        "--exclude=/zfs-main-pool/data/etc/twitch-leaks-part-one"
-        "--exclude=/zfs-main-pool/data/etc/mega-archive"
         ''--exclude="/zfs-main-pool/data/etc/April 22nd 2020, random leaked shit.rar"''
-        "--exclude=/zfs-main-pool/data/etc/random"
         "--exclude=/zfs-main-pool/data/etc/CP2077"
+        "--exclude=/zfs-main-pool/data/etc/mega-archive"
+        "--exclude=/zfs-main-pool/data/etc/random"
+        "--exclude=/zfs-main-pool/data/etc/twitch-leaks-part-one"
+        "--exclude=/zfs-main-pool/data/h/G"
+        "--exclude=/zfs-main-pool/data/h/Playlists"
+        "--exclude=/zfs-main-pool/data/h/R"
+        "--exclude=/zfs-main-pool/data/h/T"
+        "--exclude=/zfs-main-pool/data/home-assistant/.platformio"
         "--exclude=/zfs-main-pool/data/jellyfin/metadata"
+        "--exclude=/zfs-main-pool/data/jellyfin/transcodes"
       ];
       pruneOpts = [
         "--keep-daily 7"
