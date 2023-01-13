@@ -37,6 +37,7 @@ in {
         "--exclude=${baseDir}/.var/app/com.valvesoftware.Steam/.local/share/Steam"
       ];
       pruneOpts = [
+        "--group-by hosts"
         "--keep-daily 7"
         "--keep-weekly 4"
         "--keep-monthly 12"
