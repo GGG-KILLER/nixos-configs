@@ -24,7 +24,6 @@
     "zenpower"
   ];
   boot.extraModulePackages = with config.boot.kernelPackages; [zenpower];
-  boot.zfs.enableUnstable = true;
   boot.blacklistedKernelModules = ["k10temp"];
 
   fileSystems."/" = {

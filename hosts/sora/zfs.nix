@@ -1,4 +1,10 @@
 {config, ...}: {
+  # Unstable is needed for 6.0
+  boot.zfs.enableUnstable = true;
+
+  # ZFS boot settings.
+  boot.supportedFilesystems = ["zfs" "ntfs"];
+
   # ZFS maintenance settings.
   services.zfs.trim.enable = true;
 
