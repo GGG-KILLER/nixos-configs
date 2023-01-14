@@ -6,8 +6,10 @@
   pkgs,
   inputs,
   nur-no-pkgs,
+  lib,
   ...
-}: {
+}:
+with lib; {
   imports = [
     ./audio.nix
     ./backup/restic.nix
@@ -36,8 +38,15 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # LQX kernel
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  # Latest ZFS compatible kernel (preferrably LQX)
+  boot.kernelPackages = let
+    zfsKernelPackages = pkgs.zfsUnstable.latestCompatibleLinuxPackages;
+    lqxKernelPackages = pkgs.linuxPackages_lqx;
+    removePatch = ver: concatStringsSep "." (take 2 (splitString "." ver));
+  in
+    if zfsKernelPackages.kernel.kernelOlder (removePatch lqxKernelPackages.kernel.version)
+    then zfsKernelPackages
+    else lqxKernelPackages;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
