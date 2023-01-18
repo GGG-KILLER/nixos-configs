@@ -9,11 +9,16 @@ with lib; let
 in {
   services.restic.backups = let
     zfs = "${pkgs.zfs}/bin/zfs";
-    baseDir = "/home/ggg/.zfs/snapshot/restic-backup";
-    allBase = {
+    allBase = type: let
+      baseDir = "/home/ggg/.zfs/snapshot/restic-backup-${type}";
+    in {
       initialize = true;
-      backupPrepareCommand = "${zfs} snapshot rpool/userdata/home/ggg@restic-backup";
-      backupCleanupCommand = "${zfs} destroy rpool/userdata/home/ggg@restic-backup";
+      backupPrepareCommand = ''
+        ${zfs} snapshot rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Snapshot created"
+      '';
+      backupCleanupCommand = ''
+        ${zfs} destroy rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupCleanupCommand] Snapshot deleted"
+      '';
       paths = [
         baseDir
       ];
@@ -49,13 +54,13 @@ in {
     };
   in {
     all-local = mkMerge [
-      allBase
+      (allBase "local")
       {
         repository = "/mnt/DataExt/all";
       }
     ];
     all-b2 = mkMerge [
-      allBase
+      (allBase "b2")
       {
         repository = "rclone:b2:ggg-backups-sora";
         rcloneConfig = {
