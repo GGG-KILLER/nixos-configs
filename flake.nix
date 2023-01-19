@@ -25,7 +25,10 @@
       url = "github:kamadorueda/alejandra/2.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-index-database.url = "github:mic92/nix-index-database";
+    nix-index-database = {
+      url = "github:mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     pterodactyl-wings-nix = {
       url = "github:ZentriaMC/pterodactyl-wings-nix";
       inputs.nixpkgs.follows = "nixpkgs";
