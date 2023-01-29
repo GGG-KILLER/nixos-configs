@@ -65,7 +65,7 @@ in {
 
       # Media
       ffmpeg_5-full
-      handbrake
+      # handbrake # TODO: Uncomment when nixos/nixpkgs#212306 gets merged.
 
       # VMs
       virt-manager
