@@ -9,7 +9,7 @@
   ...
 }: {
   imports = [
-    ./audio.nix
+    ./audio
     ./backup/restic.nix
     ./docker.nix
     ./fancontrol.nix
