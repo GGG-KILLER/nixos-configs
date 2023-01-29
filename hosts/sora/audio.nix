@@ -11,41 +11,26 @@
     pulse.enable = true;
     jack.enable = true;
 
-    # wireplumber.enable = true;
-    # media-session.enable = false;
-    wireplumber.enable = false;
-    media-session.enable = true;
-    media-session.config.alsa-monitor = {
-      rules = [
-        {
-          matches = [{"device.name" = "alsa_card.usb-C-Media_Electronics_Inc._USB_Audio_Device-00";}];
-          actions = {
-            update-props = {
-              #"api.alsa.soft-mixer" = true;
-              "api.alsa.ignore-dB" = true;
-              "api.alsa.volume" = "ignore";
-              "api.alsa.volume-limit" = 0.01;
-            };
-          };
-        }
-      ];
-    };
+    wireplumber.enable = true;
+    media-session.enable = false;
   };
 
-  # environment.etc."wireplumber/main.lua.d/99-fix-chinesium-headset.lua" = {
-  #   text = ''
-  #     alsa_monitor.rules = {
-  #         matches = {
-  #           {
-  #             { "device.name", "matches", "alsa_card.usb-C-Media_Electronics_Inc._USB_Audio_Device-00" },
-  #           },
-  #         },
-  #         apply_properties = {
-  #           ["api.alsa.ignore-dB"] = true,
-  #           ["api.alsa.volume"] = "ignore",
-  #           ["api.alsa.volume-limit"] = 0.01,
-  #         }
-  #     }
-  #   '';
-  # };
+  environment.etc."wireplumber/main.lua.d/99-fix-bad-headset.lua" = {
+    text = ''
+      local rule = {
+          matches = {
+            {
+              { "device.name", "matches", "alsa_card.usb-C-Media_Electronics_Inc._USB_Audio_Device-00" },
+            },
+          },
+          apply_properties = {
+            ["api.alsa.ignore-dB"] = true,
+            ["api.alsa.volume"] = "ignore",
+            ["api.alsa.volume-limit"] = 0.01,
+          }
+      }
+
+      table.insert(alsa_monitor.rules, rule)
+    '';
+  };
 }
