@@ -11,8 +11,9 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-amd"];
-  boot.extraModulePackages = [];
+  boot.kernelModules = ["kvm-amd" "nct6775" "zenpower"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [zenpower];
+  boot.blacklistedKernelModules = ["k10temp"];
 
   fileSystems."/" = {
     device = "zfs-main-pool/system/root";
