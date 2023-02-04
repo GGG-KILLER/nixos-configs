@@ -119,7 +119,7 @@ in {
           (vscodeExt {
             id = "astro-build.astro-vscode";
             version = "0.29.5";
-            sha256 = "sha256-YRZ62fSJFJIbV+dE3YoLIouiBvyW5r2uSwWst4JQda8=";
+            sha256 = "sha256-DaXhnzAjVUhEMzcSa3+hY+aj7H6KgAqaHRlSkNH8oA8=";
           })
         ];
     };
