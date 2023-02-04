@@ -18,6 +18,8 @@
   services.zfs.autoSnapshot = {
     enable = true;
     monthly = 0;
+    weekly = 0;
+    daily = 2;
   };
 
   # Enable ZED's pushbullet compat
