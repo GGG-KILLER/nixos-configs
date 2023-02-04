@@ -98,7 +98,7 @@ in {
       };
       git = {
         extraConfig = {
-          credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager-core";
+          credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager";
           credential.credentialStore = "secretservice";
           core.editor = "${pkgs.vscode}/bin/code --wait";
         };
