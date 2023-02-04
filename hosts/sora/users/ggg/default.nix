@@ -28,7 +28,7 @@ in {
     home.packages = with pkgs; [
       # Audio
       easyeffects
-      helvum
+      # helvum # TODO: Uncomment when NixOS/nixpkgs#214387 hits unstable.
 
       # Android
       android-tools
@@ -43,7 +43,7 @@ in {
 
       # Database
       pgformatter
-      pgmodeler
+      # pgmodeler # TODO: Uncomment this once the hash in nixpkgs gets updated.
 
       # Encryption
       age
