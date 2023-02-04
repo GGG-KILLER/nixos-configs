@@ -66,7 +66,7 @@
         };
 
         modules = [
-          agenix.nixosModule
+          agenix.nixosModules.default
           ./common
           ./hosts/${host}/configuration.nix
         ];

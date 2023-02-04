@@ -47,7 +47,7 @@ in {
 
       # Encryption
       age
-      inputs.agenix.defaultPackage.${system}
+      inputs.agenix.packages.${system}.default
       xca-stable
       yubikey-manager
       yubikey-manager-qt
