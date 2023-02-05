@@ -23,6 +23,15 @@ in {
   home-manager.users.ggg = {
     programs.vscode = {
       enable = true;
+      # TODO: Undo when NixOS/nixpkgs#214617 gets fixed.
+      package = pkgs.vscode.overrideAttrs (finalAttrs: previousAttrs: {
+        installPhase =
+          previousAttrs.installPhase
+          + ''
+            chmod +x $out/lib/vscode/resources/app/node_modules/node-pty/build/Release/spawn-helper
+            chmod +x $out/lib/vscode/resources/app/node_modules.asar.unpacked/node-pty/build/Release/spawn-helper
+          '';
+      });
       userSettings =
         settings
         // {
