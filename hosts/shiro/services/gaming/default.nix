@@ -1,5 +1,5 @@
 {...}: {
   imports = [
-    ./mnn-server.nix
+    # ./mnn-server.nix
   ];
 }
