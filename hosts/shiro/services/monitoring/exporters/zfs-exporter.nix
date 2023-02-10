@@ -1,12 +1,12 @@
 {config, ...}: {
-  modules.services.zfs-exporter.enable = true;
+  services.prometheus.exporters.zfs.enable = true;
 
   services.prometheus.scrapeConfigs = [
     {
       job_name = "zfs";
       static_configs = [
         {
-          targets = ["127.0.0.1:9134"];
+          targets = ["127.0.0.1:${toString config.services.prometheus.exporters.zfs.port}"];
           labels = {inherit (config.my.constants.prometheus) instance;};
         }
       ];
