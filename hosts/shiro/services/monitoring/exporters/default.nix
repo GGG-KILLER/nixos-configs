@@ -1,6 +1,7 @@
 {lib, ...}:
 with lib; {
   imports = [
+    ./lm-sensors.nix
     ./node-exporter-smartmon.nix
     ./node.nix
     ./zfs-exporter.nix
