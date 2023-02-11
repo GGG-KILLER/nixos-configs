@@ -6,6 +6,8 @@
 }: {
   # boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  boot.zfs.enableUnstable = true;
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.kernelParams = ["nohibernate"];
   # boot.initrd.supportedFilesystems = [ "zfs" ]; # boot from zfs
   boot.supportedFilesystems = ["zfs"];
