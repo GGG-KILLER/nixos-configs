@@ -11,8 +11,8 @@
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
   boot.initrd.kernelModules = ["dm-snapshot"];
-  boot.kernelModules = ["kvm-amd" "nct6775" "zenpower"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [zenpower];
+  boot.kernelModules = ["kvm-amd" "nct6775" "zenpower" "it87"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [zenpower it87];
   boot.blacklistedKernelModules = ["k10temp"];
 
   fileSystems."/" = {
