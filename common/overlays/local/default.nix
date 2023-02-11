@@ -14,6 +14,7 @@
         git-credential-manager = callPackage ./git-credential-manager {};
         winfonts = callPackage ./winfonts {};
         npm = callPackage ./npm {inherit (super) nodejs;};
+        prometheus-lm-sensors-exporter = callPackage ./lm-sensors-exporter {};
       };
     })
   ];
