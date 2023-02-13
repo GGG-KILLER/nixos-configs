@@ -117,8 +117,8 @@ in {
           })
           (vscodeExt {
             id = "ms-vscode-remote.remote-containers";
-            version = "0.276.0";
-            sha256 = "sha256-2LnWUd+ZvTHd16OkaZrYmqHCToBa3c9TSGiJSXLq46Q=";
+            version = "0.279.0";
+            sha256 = "sha256-LlPeXeL+n9tGNeju+7FfZq96kn9Uj9V/5eRyg5av+oQ=";
           })
           (vscodeExt {
             id = "L13RARY.l13-diff";
