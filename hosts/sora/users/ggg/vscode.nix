@@ -50,7 +50,7 @@ in {
       extensions = with pkgs.vscode-extensions;
         [
           dbaeumer.vscode-eslint
-          eamodio.gitlens
+          # eamodio.gitlens
           editorconfig.editorconfig
           foxundermoon.shell-format
           hashicorp.terraform
@@ -129,6 +129,11 @@ in {
             id = "astro-build.astro-vscode";
             version = "0.29.5";
             sha256 = "sha256-DaXhnzAjVUhEMzcSa3+hY+aj7H6KgAqaHRlSkNH8oA8=";
+          })
+          (vscodeExt {
+            id = "eamodio.gitlens";
+            version = "2023.2.1204";
+            sha256 = "sha256-FurYfkw+mOjyymR1VCGf0jJ2JCZJ8eGb1J7zD2peBjw=";
           })
         ];
     };
