@@ -12,7 +12,6 @@ with lib; {
     ./containers
     ./services
     ./boot.nix
-    ./gpu.nix
     ./hardware-configuration.nix
     ./headless.nix
     ./journald.nix
@@ -21,6 +20,7 @@ with lib; {
     ./secrets.nix
     ./store.nix
     ./users.nix
+    ./video.nix
     ./virtualisation.nix
   ];
 
