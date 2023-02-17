@@ -23,6 +23,9 @@ with lib; {
     ./virtualisation.nix
   ];
 
+  # NVIDIA drivers are unfree.
+  nixpkgs.config.allowUnfree = true;
+
   environment.systemPackages = with pkgs; [
     docker-compose
   ];
@@ -30,7 +33,6 @@ with lib; {
   services.openssh.enable = true;
 
   # Firmware
-  nixpkgs.config.allowUnfree = true;
   services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
   # hardware.enableAllFirmware = true;
