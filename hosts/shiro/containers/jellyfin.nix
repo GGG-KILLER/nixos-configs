@@ -42,10 +42,10 @@ in {
         hostPath = "/zfs-main-pool/data/jellyfin";
         isReadOnly = false;
       };
-      # "/dev/dri" = {
-      #   hostPath = "/dev/dri";
-      #   isReadOnly = false;
-      # };
+      "/dev/dri" = {
+        hostPath = "/dev/dri";
+        isReadOnly = false;
+      };
     };
 
     config = {
