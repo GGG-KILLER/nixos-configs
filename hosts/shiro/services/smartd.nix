@@ -5,13 +5,16 @@
 }: {
   services.smartd = let
     discord-sh = "${pkgs.discord-sh}/bin/discord.sh";
+    jq = "${pkgs.jq}/bin/jq";
+    cut = "${pkgs.coreutils}/bin/cut";
+    rev = "${pkgs.util-linux}/bin/rev";
+    escape-str = varName: ''$(echo "${varName}" | ${jq} -Rs . | ${cut} -c 2- | ${rev} | ${cut} -c 2- | ${rev})'';
     notifyScript = pkgs.writeScript "smartd-discord-notify.sh" ''
       ${discord-sh} \
         --webhook-url="${config.my.secrets.discord.webhook}" \
-        --title "Problem on $SMARTD_DEVICE: $SMARTD_FAILTYPE" \
+        --title "$SMARTD_FAILTYPE" \
         --author smartd \
-        --text "$SMARTD_FULLMESSAGE" \
-        --field "Disk;$SMARTD_DEVICESTRING" \
+        --description "${escape-str "$SMARTD_FULLMESSAGE"}" \
         --footer "on $SMARTD_DEVICE" \
         --timestamp
     '';
@@ -38,6 +41,6 @@
     #   Long self-test 1 AM every saturday
     # Disables emailing with -m <nomailer>
     # Runs a custom script for notifications with -M exec
-    defaults.monitored = "-a -s '(O/../.././(00|06|12|18)|S/../.././02|L/../../6/01)' -m <nomailer> -M exec ${notifyScript} -M test";
+    defaults.monitored = "-a -s (O/../.././(00|06|12|18)|S/../.././02|L/../../6/01) -m <nomailer> -M exec ${notifyScript} -M test";
   };
 }
