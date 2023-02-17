@@ -18,8 +18,6 @@ in {
     package = nvidiaDriver;
 
     open = true;
-    modesetting.enable = true;
-    nvidiaSettings = false;
-    powerManagement.enable = false;
+    modesetting.enable = false;
   };
 }
