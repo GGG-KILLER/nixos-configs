@@ -14,6 +14,9 @@
   boot.kernelModules = ["kvm-amd" "nct6775" "zenpower" "it87"];
   boot.extraModulePackages = with config.boot.kernelPackages; [zenpower it87];
   boot.blacklistedKernelModules = ["k10temp"];
+  boot.extraModprobeConfig = ''
+    options it87 force_id=0xa40
+  '';
 
   fileSystems."/" = {
     device = "zfs-main-pool/system/root";
