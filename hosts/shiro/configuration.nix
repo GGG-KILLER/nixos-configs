@@ -8,7 +8,6 @@
 }:
 with lib; {
   imports = [
-    "${modulesPath}/profiles/minimal.nix"
     ./containers
     ./services
     ./boot.nix
@@ -23,15 +22,6 @@ with lib; {
     ./video.nix
     ./virtualisation.nix
   ];
-
-  # We want xlibs because we want cached stuff.
-  environment.noXlibs = false;
-
-  # We actually *do* want documentation.
-  documentation = {
-    enable = true;
-    nixos.enable = true;
-  };
 
   environment.systemPackages = with pkgs; [
     docker-compose
