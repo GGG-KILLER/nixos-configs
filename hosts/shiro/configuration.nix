@@ -28,6 +28,7 @@ with lib; {
 
   environment.systemPackages = with pkgs; [
     docker-compose
+    nvtop-nvidia
   ];
 
   services.openssh.enable = true;
