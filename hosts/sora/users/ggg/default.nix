@@ -116,6 +116,7 @@ in {
         config = {
           profile = "gpu-hq";
           cache-default = 4000000;
+          hwdec = "auto";
         };
       };
     };
