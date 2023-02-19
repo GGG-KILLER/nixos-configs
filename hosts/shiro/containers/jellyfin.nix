@@ -42,6 +42,30 @@ in {
         hostPath = "/zfs-main-pool/data/jellyfin";
         isReadOnly = false;
       };
+      "/dev/nvidia-modeset" = {
+        hostPath = "/dev/nvidia-modeset";
+        isReadOnly = false;
+      };
+      "/dev/nvidia-uvm" = {
+        hostPath = "/dev/nvidia-uvm";
+        isReadOnly = false;
+      };
+      "/dev/nvidia-uvm-tools" = {
+        hostPath = "/dev/nvidia-uvm-tools";
+        isReadOnly = false;
+      };
+      "/dev/nvidia0" = {
+        hostPath = "/dev/nvidia0";
+        isReadOnly = false;
+      };
+      "/dev/nvidiactl" = {
+        hostPath = "/dev/nvidiactl";
+        isReadOnly = false;
+      };
+      "/dev/nvram" = {
+        hostPath = "/dev/nvram";
+        isReadOnly = false;
+      };
       "/dev/dri" = {
         hostPath = "/dev/dri";
         isReadOnly = false;
@@ -53,6 +77,17 @@ in {
       pkgs,
       ...
     }: {
+      imports = [../video.nix];
+
+      hardware.opengl.enable = true;
+
+      nixpkgs.config.allowUnfreePredicate = pkg:
+        builtins.elem (lib.getName pkg) [
+          "nvidia-x11"
+          "steam-run"
+          "steam-original"
+        ];
+
       # Jellyfin
       services.jellyfin = {
         enable = true;

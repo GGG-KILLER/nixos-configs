@@ -19,5 +19,6 @@ in {
 
     open = true;
     modesetting.enable = false;
+    nvidiaSettings = false;
   };
 }
