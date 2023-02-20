@@ -90,9 +90,25 @@ in {
 
       # Jellyfin
       services.jellyfin = {
-        enable = true;
+        # enable = true; # TODO: Uncomment once NixOS/nixpkgs#149715 gets merged.
         user = "streamer";
         group = "data-members";
+      };
+
+      systemd.packages = [pkgs.jellyfin];
+      systemd.services.jellyfin = let
+        cfg = config.services.jellyfin;
+      in {
+        after = ["network.target"];
+        wantedBy = ["multi-user.target"];
+
+        serviceConfig = rec {
+          User = cfg.user;
+          Group = cfg.group;
+          StateDirectory = "jellyfin";
+          CacheDirectory = "jellyfin";
+          ExecStart = "${cfg.package}/bin/jellyfin --datadir '/var/lib/${StateDirectory}' --cachedir '/var/cache/${CacheDirectory}'";
+        };
       };
 
       environment.systemPackages = with pkgs; [jellyfin-ffmpeg];
