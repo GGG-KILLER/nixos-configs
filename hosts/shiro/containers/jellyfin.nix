@@ -6,6 +6,16 @@
 } @ args:
 with lib; let
   consts = config.my.constants;
+  gpuDevs = [
+    "/dev/dri"
+    "/dev/shm"
+    "/dev/nvidia-modeset"
+    "/dev/nvidia-uvm"
+    "/dev/nvidia-uvm-tools"
+    "/dev/nvidia0"
+    "/dev/nvidiactl"
+    "/dev/nvram"
+  ];
 in {
   my.networking.jellyfin = {
     mainAddr = "192.168.1.6";
@@ -28,6 +38,13 @@ in {
     ];
   };
 
+  containers.jellyfin.allowedDevices =
+    map (dev: {
+      modifier = "rw";
+      node = dev;
+    })
+    gpuDevs;
+
   modules.containers.jellyfin = {
     vpn = true;
 
@@ -37,40 +54,19 @@ in {
       etc = true;
       h = true;
     };
-    bindMounts = {
-      "/var/lib/jellyfin" = {
-        hostPath = "/zfs-main-pool/data/jellyfin";
-        isReadOnly = false;
-      };
-      "/dev/nvidia-modeset" = {
-        hostPath = "/dev/nvidia-modeset";
-        isReadOnly = false;
-      };
-      "/dev/nvidia-uvm" = {
-        hostPath = "/dev/nvidia-uvm";
-        isReadOnly = false;
-      };
-      "/dev/nvidia-uvm-tools" = {
-        hostPath = "/dev/nvidia-uvm-tools";
-        isReadOnly = false;
-      };
-      "/dev/nvidia0" = {
-        hostPath = "/dev/nvidia0";
-        isReadOnly = false;
-      };
-      "/dev/nvidiactl" = {
-        hostPath = "/dev/nvidiactl";
-        isReadOnly = false;
-      };
-      "/dev/nvram" = {
-        hostPath = "/dev/nvram";
-        isReadOnly = false;
-      };
-      "/dev/dri" = {
-        hostPath = "/dev/dri";
-        isReadOnly = false;
-      };
-    };
+    bindMounts =
+      {
+        "/var/lib/jellyfin" = {
+          hostPath = "/zfs-main-pool/data/jellyfin";
+          isReadOnly = false;
+        };
+      }
+      // (listToAttrs (map (dev:
+        nameValuePair dev {
+          hostPath = dev;
+          isReadOnly = false;
+        })
+      gpuDevs));
 
     config = {
       config,
