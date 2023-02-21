@@ -48,7 +48,6 @@
     hostName = "sora";
     hostId = "6967af45";
 
-    defaultGateway = "192.168.1.1";
     nameservers = ["192.168.1.1"];
   };
 
