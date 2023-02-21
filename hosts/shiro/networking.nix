@@ -90,7 +90,7 @@ in {
         ipv4.addresses = [
           {
             address = my.networking.shiro.mainAddr;
-            prefixLength = 24;
+            prefixLength = 16;
           }
         ];
       };

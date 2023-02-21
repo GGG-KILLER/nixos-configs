@@ -146,7 +146,7 @@ with lib; {
                 mv-enp6s0.ipv4.addresses = [
                   {
                     address = netCfg.mainAddr;
-                    prefixLength = 24;
+                    prefixLength = 16;
                   }
                 ];
               };
