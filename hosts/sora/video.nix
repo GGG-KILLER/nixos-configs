@@ -21,5 +21,6 @@ in {
     modesetting.enable = true;
     nvidiaSettings = true;
     powerManagement.enable = false;
+    forceFullCompositionPipeline = true;
   };
 }
