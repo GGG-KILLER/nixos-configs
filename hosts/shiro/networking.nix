@@ -60,7 +60,7 @@ in {
 
   config = rec {
     my.networking.shiro = {
-      mainAddr = "192.168.1.2";
+      mainAddr = "192.168.2.133"; # ipgen -n 192.168.2.0/24 shiro
       extraNames = [
         "grafana.shiro"
         "prometheus.shiro"

@@ -8,7 +8,7 @@ with lib; let
   consts = config.my.constants;
 in rec {
   my.networking.home-assistant = {
-    mainAddr = "192.168.1.13";
+    mainAddr = "192.168.2.228"; # ipgen -n 192.168.2.0/24 home-assistant
     ports = [
       {
         protocol = "http";

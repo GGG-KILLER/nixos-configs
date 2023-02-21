@@ -8,7 +8,7 @@ with lib; let
   secrets = config.my.secrets.vpn.mullvad;
 in {
   my.networking.vpn-gateway = {
-    mainAddr = "192.168.1.7";
+    mainAddr = "192.168.2.47"; # ipgen -n 192.168.2.0/24 vpn-gateway
   };
 
   modules.containers.vpn-gateway = {

@@ -8,7 +8,7 @@ with lib; let
   consts = config.my.constants;
 in rec {
   my.networking.firefly-iii = {
-    mainAddr = "192.168.1.9";
+    mainAddr = "192.168.2.202"; # ipgen -n 192.168.2.0/24 firefly-iii
     extraNames = [
       "money"
       "importer.money"

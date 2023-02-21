@@ -8,7 +8,7 @@ with lib; let
 in {
   my.networking.qbittorrent = {
     extraNames = ["flood"];
-    mainAddr = "192.168.1.10";
+    mainAddr = "192.168.2.154"; # ipgen -n 192.168.2.0/24 qbittorrent
     ports = [
       {
         protocol = "tcp";

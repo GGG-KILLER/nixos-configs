@@ -152,11 +152,11 @@ in {
   config = mkMerge [
     (mkPgsql {
       env = "dev";
-      ip = "192.168.1.15";
+      ip = "192.168.2.19"; # ipgen -n 192.168.2.0/24 pgsql-dev
     })
     (mkPgsql {
       env = "prd";
-      ip = "192.168.1.16";
+      ip = "192.168.2.241"; # ipgen -n 192.168.2.0/24 pgsql-prd
     })
   ];
 }

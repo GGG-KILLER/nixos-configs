@@ -5,7 +5,7 @@
 } @ args:
 with lib; {
   my.networking.network-share = {
-    mainAddr = "192.168.1.3";
+    mainAddr = "192.168.2.7"; # ipgen -n 192.168.2.0/24 network-share
     ports = [
       {
         protocol = "tcp";
