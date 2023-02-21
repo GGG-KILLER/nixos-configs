@@ -76,6 +76,7 @@ in {
       discord-canary
       fd
       inputs.git-crypt-agessh.packages.${system}.default
+      inputs.ipgen-cli.packages.${system}.ipgen-cli
       jellyfin-mpv-shim
       libguestfs-with-appliance
       mullvad-vpn

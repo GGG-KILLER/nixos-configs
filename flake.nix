@@ -49,12 +49,24 @@
     #   inputs.nur.follows = "nur";
     #   inputs.home-manager.follows = "home-manager";
     # };
+    ipgen-cli = {
+      url = "github:ipgen/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.cargo2nix.follows = "cargo2nix";
+    };
 
     # Inputs needed by others
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
+    };
+    cargo2nix = {
+      url = "github:cargo2nix/cargo2nix/release-0.11.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
     };
   };
 
