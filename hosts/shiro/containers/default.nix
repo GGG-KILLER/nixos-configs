@@ -175,11 +175,8 @@ with lib; {
               StartLimitIntervalSec = "0";
             };
 
-            # Enable the OpenSSH server.
-            services.sshd.enable = true;
-
             # Have manpages
-            environment.systemPackages = with pkgs; [man git netcat tcpdump htop nmon];
+            environment.systemPackages = with pkgs; [man netcat tcpdump htop nmon];
           };
         };
       in {
