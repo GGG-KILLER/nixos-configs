@@ -8,10 +8,13 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
     };
     agenix = {
       url = "github:ryantm/agenix";
@@ -20,10 +23,12 @@
     git-crypt-agessh = {
       url = "github:mtoohey31/git-crypt-agessh";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
     };
     alejandra = {
       url = "github:kamadorueda/alejandra/2.0.0";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flakeCompat.follows = "flake-compat";
     };
     nix-index-database = {
       url = "github:mic92/nix-index-database";
@@ -32,6 +37,7 @@
     pterodactyl-wings-nix = {
       url = "github:ZentriaMC/pterodactyl-wings-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
     packwiz = {
       url = "github:packwiz/packwiz";
@@ -43,6 +49,13 @@
     #   inputs.nur.follows = "nur";
     #   inputs.home-manager.follows = "home-manager";
     # };
+
+    # Inputs needed by others
+    flake-utils.url = "github:numtide/flake-utils";
+    flake-compat = {
+      url = "github:edolstra/flake-compat";
+      flake = false;
+    };
   };
 
   outputs = {
