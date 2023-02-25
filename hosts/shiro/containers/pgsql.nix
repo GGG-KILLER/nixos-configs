@@ -79,7 +79,7 @@ with lib; let
               local   all             all                                     trust
               host    all             all             127.0.0.1/32            scram-sha-256
               host    all             all             ::1/128                 scram-sha-256
-              host    all             all             192.168.1.0/24          scram-sha-256
+              host    all             all             192.168.0.0/16          scram-sha-256
             '';
             settings = {
               # Resource Consumtion Settings (https://www.postgresql.org/docs/14/runtime-config-resource.html)
