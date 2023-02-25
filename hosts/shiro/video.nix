@@ -11,13 +11,13 @@
     else unstableDriver;
 in {
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.enable = true;
 
   environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
   hardware.nvidia = {
     package = nvidiaDriver;
 
-    open = true;
+    # open = true; # NOTE: Does not work with the Quadro P400
     modesetting.enable = false;
     nvidiaSettings = false;
   };
