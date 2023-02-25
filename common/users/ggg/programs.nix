@@ -37,6 +37,7 @@
       btop
       dig.dnsutils
       file
+      iotop-c
       killall
       neofetch
       p7zip
