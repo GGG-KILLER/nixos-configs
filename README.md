@@ -8,6 +8,7 @@ My own NixOS Configs
 - `secrets`: encrypted secrets using [agenix](https://github.com/ryantm/agenix)
 
 ## Hosts
+- `f.ggg.dev`: The backend for services I host publicly
 - `shiro`: My home server where I host my own services along with some others
 - `sora`: My desktop
 - `vpn-proxy`: A proxy I made for some of my friends which are in risk of MITM to use
