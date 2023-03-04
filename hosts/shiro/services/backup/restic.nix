@@ -23,11 +23,7 @@ in {
         "/zfs-main-pool/data/step-ca"
       ];
       extraBackupArgs = [
-        ''--exclude="/zfs-main-pool/data/etc/April 22nd 2020, random leaked shit.rar"''
-        "--exclude=/zfs-main-pool/data/etc/CP2077"
-        "--exclude=/zfs-main-pool/data/etc/mega-archive"
         "--exclude=/zfs-main-pool/data/etc/random"
-        "--exclude=/zfs-main-pool/data/etc/twitch-leaks-part-one"
         "--exclude=/zfs-main-pool/data/h/G"
         "--exclude=/zfs-main-pool/data/h/Playlists"
         "--exclude=/zfs-main-pool/data/h/R"
