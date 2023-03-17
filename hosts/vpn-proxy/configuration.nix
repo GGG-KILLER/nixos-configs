@@ -30,6 +30,11 @@ in {
     enable = true;
     ports = [sshPort];
   };
+  services.endlessh = {
+    enable = true;
+    port = 22;
+    openFirewall = true;
+  };
 
   # Enable NAT
   networking.nat = {

@@ -18,6 +18,11 @@ in {
     enable = true;
     ports = [sshPort];
   };
+  services.endlessh = {
+    enable = true;
+    port = 22;
+    openFirewall = true;
+  };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [80 443 sshPort];
