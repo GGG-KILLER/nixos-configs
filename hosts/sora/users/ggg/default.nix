@@ -62,6 +62,7 @@ in {
       # Nix
       inputs.deploy-rs.packages.${system}.deploy-rs
       nix-top
+      nixpkgs-review
 
       # Media
       ffmpeg_5-full
