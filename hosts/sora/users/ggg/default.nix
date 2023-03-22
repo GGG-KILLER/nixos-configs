@@ -28,7 +28,7 @@ in {
     home.packages = with pkgs; [
       # Audio
       easyeffects
-      # helvum # TODO: Uncomment when NixOS/nixpkgs#214387 hits unstable.
+      helvum
 
       # Android
       android-tools
@@ -66,7 +66,7 @@ in {
 
       # Media
       ffmpeg_5-full
-      # handbrake # TODO: Uncomment when nixos/nixpkgs#212306 gets merged.
+      handbrake
 
       # VMs
       virt-manager
