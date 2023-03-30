@@ -9,7 +9,6 @@
     combinePackages [
       sdk_7_0
       sdk_6_0
-      sdk_3_1
     ];
   dotnetRoot = "${dotnet-sdk}";
   dotnetSdk = "${dotnet-sdk}/sdk";
