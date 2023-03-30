@@ -7,6 +7,7 @@
 }: let
   dotnet-sdk = with pkgs.dotnetCorePackages;
     combinePackages [
+      sdk_8_0
       sdk_7_0
       sdk_6_0
     ];
