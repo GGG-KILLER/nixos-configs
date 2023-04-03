@@ -34,6 +34,7 @@ in {
     enable = true;
     port = 22;
     openFirewall = true;
+    extraOptions = ["-4" "-l 16" "-d 20000" "-v"];
   };
 
   # Enable NAT
