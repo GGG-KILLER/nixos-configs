@@ -15,6 +15,7 @@
         winfonts = callPackage ./winfonts {};
         npm = callPackage ./npm {inherit (super) nodejs;};
         prometheus-lm-sensors-exporter = callPackage ./lm-sensors-exporter {};
+        mockoon = callPackage ./mockoon.nix {};
       };
     })
   ];

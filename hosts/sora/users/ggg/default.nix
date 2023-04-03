@@ -81,6 +81,7 @@ in {
       inputs.ipgen-cli.packages.${system}.ipgen-cli
       jellyfin-mpv-shim
       libguestfs-with-appliance
+      local.mockoon
       mullvad-vpn
       rustdesk
       zenmonitor
@@ -134,6 +135,13 @@ in {
     '';
 
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
+    xdg.desktopEntries = {
+      mockoon = {
+        name = "Mockoon";
+        exec = "${pkgs.local.mockoon}";
+        categories = ["Application" "Network"];
+      };
+    };
 
     systemd.user.services.jellyfin-mpv-shim = {
       Unit = {
