@@ -112,23 +112,23 @@ in {
           })
           (vscodeExt {
             id = "ms-vscode.powershell";
-            version = "2023.1.0";
-            sha256 = "sha256-OiVb88BGvzsPTzKU1rGLGSMQSwKV4zI9FthOmutz34U=";
+            version = "2023.3.3";
+            sha256 = "sha256-dPsYr6qnqGjbB8r2tPLr1HiH3x17ZNEgS0ZhGn1elR8=";
           })
           (vscodeExt {
             id = "ms-vscode-remote.remote-containers";
-            version = "0.279.0";
-            sha256 = "sha256-LlPeXeL+n9tGNeju+7FfZq96kn9Uj9V/5eRyg5av+oQ=";
+            version = "0.289.0";
+            sha256 = "sha256-U7gilVJx8c+nmh6YVGVLoRKjC2n71Vih6aALWkcQw0I=";
           })
           (vscodeExt {
             id = "L13RARY.l13-diff";
-            version = "1.0.3";
-            sha256 = "sha256-dZAtNyMaVmBMGWCVpizK8JDZASzMo4AkIKkjPYWJn1U=";
+            version = "1.1.0";
+            sha256 = "sha256-k/lsQ3ldtJi+Pk25MU1XTtzkK3SFTj0866JlQWgCXhE=";
           })
           (vscodeExt {
             id = "astro-build.astro-vscode";
-            version = "0.29.5";
-            sha256 = "sha256-DaXhnzAjVUhEMzcSa3+hY+aj7H6KgAqaHRlSkNH8oA8=";
+            version = "0.29.7";
+            sha256 = "sha256-hr8opkNnYpnc8ZRd8tkO8GgMN2lK0YwCETDNe4QnUNQ=";
           })
           (vscodeExt {
             id = "eamodio.gitlens";
