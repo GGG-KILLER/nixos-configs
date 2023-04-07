@@ -34,4 +34,5 @@
 
   nix.settings.trusted-users = ["ggg"];
   modules.home.mainUsers = ["ggg"];
+  programs.zsh.enable = true;
 }

@@ -19,7 +19,7 @@
     ./hardware-configuration.nix
     ./nix.nix
     ./overrides.nix
-    ./rustdesk.nix
+    #./rustdesk.nix # TODO: Remove when NixOS/nixpkgs#225170 gets fixed.
     ./secrets.nix
     ./users/ggg
     ./video.nix

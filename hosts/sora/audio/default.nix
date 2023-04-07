@@ -11,7 +11,6 @@
     jack.enable = true;
 
     wireplumber.enable = true;
-    media-session.enable = false;
   };
 
   environment.etc."wireplumber/main.lua.d/51-disable-devices.lua".source = ./51-disable-devices.lua;

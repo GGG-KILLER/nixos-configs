@@ -132,8 +132,8 @@ in {
           })
           (vscodeExt {
             id = "eamodio.gitlens";
-            version = "2023.3.204";
-            sha256 = "sha256-xuOrXQ81HzxRkoJaGd2zJTkL1LVsx1N1RqLv9iK41Vo=";
+            version = "2023.4.705";
+            sha256 = "";
           })
         ];
     };
