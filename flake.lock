@@ -304,6 +304,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-rustdesk": {
+      "locked": {
+        "lastModified": 1680938684,
+        "narHash": "sha256-aoRIRr/L76RpQs8vbubo2+gc+WThN7mSrLAKf9d7Ako=",
+        "owner": "ocfox",
+        "repo": "nixpkgs",
+        "rev": "09462c7f66f51d172955e6cee70a58f697979f41",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ocfox",
+        "ref": "rustdesk",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1680724564,
@@ -392,6 +408,7 @@
         "ipgen-cli": "ipgen-cli",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-rustdesk": "nixpkgs-rustdesk",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "packwiz": "packwiz",

@@ -7,8 +7,15 @@
     inherit system;
     config.allowUnfree = true;
   };
+  nixpkgs-rustdesk = import inputs.nixpkgs-rustdesk {
+    inherit system;
+    config.allowUnfree = true;
+  };
 in {
   nixpkgs.overlays = [
+    (self: super: {
+      rustdesk = nixpkgs-rustdesk.rustdesk;
+    })
     # (self: super: {
     #   combined-dotnet-sdks = with super.dotnetCorePackages;
     #     combinePackages [

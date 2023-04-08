@@ -83,7 +83,7 @@ in {
       libguestfs-with-appliance
       local.mockoon
       mullvad-vpn
-      #rustdesk # TODO: Remove when NixOS/nixpkgs#225170 gets fixed.
+      rustdesk
       zenmonitor
     ];
 
