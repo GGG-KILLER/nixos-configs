@@ -61,7 +61,8 @@ in {
           mhutchie.git-graph
           mikestead.dotenv
           ms-azuretools.vscode-docker
-          ms-dotnettools.csharp
+          #ms-dotnettools.csharp
+          pkgs.local.csharp-vscode-ext
           ms-toolsai.jupyter
           ms-vscode-remote.remote-ssh
           octref.vetur
