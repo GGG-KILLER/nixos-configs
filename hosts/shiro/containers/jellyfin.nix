@@ -104,6 +104,7 @@ in {
           StateDirectory = "jellyfin";
           CacheDirectory = "jellyfin";
           ExecStart = "${cfg.package}/bin/jellyfin --datadir '/var/lib/${StateDirectory}' --cachedir '/var/cache/${CacheDirectory}'";
+          Restart = "always";
         };
       };
 
