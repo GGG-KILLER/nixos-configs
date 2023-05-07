@@ -2,19 +2,27 @@
 {config, ...}: let
   inherit (config.age) secrets;
 in {
-  virtualisation.oci-containers.containers.terraria = {
-    image = "ryshe/terraria:vanilla-latest";
-    ports = ["7777:7777/tcp"];
+  virtualisation.oci-containers.containers.tshock = {
+    image = "docker.lan/terraria:tshock-latest";
+    cmd = [
+      "-secure"
+      "-maxplayers"
+      "6"
+      "-noupnp"
+      "-forcepriority"
+      "1"
+    ];
+    ports = [
+      "7777:7777/tcp"
+      "7878:7878/tcp"
+    ];
     volumes = [
-      # We don't mount into /root/.local/share/Terraria because /root/.local/share/Terraria/Worlds is a declared mount in the image
-      # which means it'll replace the World directory that would be inside that
-      "/zfs-main-pool/data/gaming/terraria:/Terraria"
+      "/zfs-main-pool/data/gaming/tshock/Worlds:/root/.local/share/Terraria/Worlds"
+      "/zfs-main-pool/data/gaming/tshock/Logs:/tshock/logs"
+      "/zfs-main-pool/data/gaming/tshock/Plugins:/plugins"
     ];
     environment = rec {
       TZ = config.time.timeZone;
-      CONFIGPATH = "/Terraria";
-      WORLDPATH = "${CONFIGPATH}/Worlds";
-      LOGPATH = "${CONFIGPATH}/Logs";
       WORLD_FILENAME = "GGG_+_Night.wld";
     };
     extraOptions = [
@@ -24,5 +32,5 @@ in {
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [7777];
+  networking.firewall.allowedTCPPorts = [7777 7878];
 }
