@@ -11,6 +11,7 @@ in {
       "-noupnp"
       "-forcepriority"
       "1"
+      "-constileation"
     ];
     ports = [
       "7777:7777/tcp"
