@@ -30,6 +30,9 @@ in {
       "--dns=192.168.1.1"
       "--ipc=none"
       "--pull=always"
+      "--cpu-shares=512"
+      "--memory=1G"
+      "--stop-signal=SIGINT"
     ];
   };
 
