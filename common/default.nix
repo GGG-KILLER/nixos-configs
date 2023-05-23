@@ -15,4 +15,8 @@
   ];
 
   environment.pathsToLink = ["/share/zsh"];
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1t"
+  ];
 }

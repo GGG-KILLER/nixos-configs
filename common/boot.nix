@@ -1,5 +1,5 @@
 {...}: {
-  boot.cleanTmpDir = true;
+  boot.tmp.cleanOnBoot = true;
 
   boot.kernel.sysctl = {
     "kernel.task_delayacct" = 1;
