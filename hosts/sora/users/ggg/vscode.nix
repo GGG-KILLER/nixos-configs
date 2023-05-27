@@ -90,11 +90,6 @@ in {
             sha256 = "0Al+69quQXPdFBMsSDWXjITJiux+OQSzQ7i/pgnlm/Q=";
           })
           (vscodeExt {
-            id = "tht13.html-preview-vscode";
-            version = "0.2.5";
-            sha256 = "22CeRp/pz0UicMgocfmkd4Tko9Avc96JR9jJ/+KO5Uw=";
-          })
-          (vscodeExt {
             id = "christopherstyles.html-entities";
             version = "1.1.2";
             sha256 = "P+IKHH9DDAgvU4Gfsc7c7QYZBE4QPooIteFSzoSoMzw=";
