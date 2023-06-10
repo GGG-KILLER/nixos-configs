@@ -9,10 +9,9 @@
   coreutils,
 }: let
   inherit (stdenv.hostPlatform) system;
+  inherit (vscode-utils) buildVscodeMarketplaceExtension;
 
-  version = "1.25.4";
-
-  vsixInfo = let
+  extInfo = let
     linuxDebuggerBins = [
       ".debugger/vsdbg-ui"
       ".debugger/vsdbg"
@@ -25,8 +24,8 @@
       ".debugger/arm64/vsdbg-ui"
       ".debugger/arm64/vsdbg"
     ];
-    omniSharpBins = [
-      ".omnisharp/1.39.4-net6.0/OmniSharp"
+    lspBins = [
+      ".roslyn/Microsoft.CodeAnalysis.LanguageServer"
     ];
     razorBins = [
       ".razor/createdump"
@@ -35,39 +34,23 @@
   in
     {
       x86_64-linux = {
-        url = "https://github.com/OmniSharp/omnisharp-vscode/releases/download/v${version}/csharp-${version}-linux-x64.vsix";
-        sha256 = "08k0wxyj8wz8npw1yqrkdpbvwbnrdnsngdkrd2p5ayn3v608ifc2";
-        binaries = linuxDebuggerBins ++ omniSharpBins ++ razorBins;
+        arch = "linux-x64";
+        sha256 = "sha256-FkW7xHeK9Fjjah90RDdptZbu9CNGxTf6xejoCZIHo5c=";
+        binaries = linuxDebuggerBins ++ lspBins ++ razorBins;
       };
-      aarch64-linux = {
-        url = "https://github.com/OmniSharp/omnisharp-vscode/releases/download/v${version}/csharp-${version}-linux-arm64.vsix";
-        sha256 = "09r2d463dk35905f2c3msqzxa7ylcf0ynhbp3n6d12y3x1200pr2";
-        binaries = linuxDebuggerBins ++ omniSharpBins; # Linux aarch64 version has no Razor Language Server
-      };
-      x86_64-darwin = {
-        url = "https://github.com/OmniSharp/omnisharp-vscode/releases/download/v${version}/csharp-${version}-darwin-x64.vsix";
-        sha256 = "0mp550kq33zwmlvrhymwnixl4has62imw3ia5z7a01q7mp0w9wpn";
-        binaries = darwinX86DebuggerBins ++ omniSharpBins ++ razorBins;
-      };
-      aarch64-darwin = {
-        url = "https://github.com/OmniSharp/omnisharp-vscode/releases/download/v${version}/csharp-${version}-darwin-arm64.vsix";
-        sha256 = "08406xz2raal8f10bmnkz1mwdfprsbkjxzc01v0i4sax1hr2a2yl";
-        binaries = darwinAarch64DebuggerBins ++ darwinX86DebuggerBins ++ omniSharpBins ++ razorBins;
-      };
+      aarch64-linux = linuxDebuggerBins ++ lspBins; # Linux aarch64 version has no Razor Language Server
+      x86_64-darwin = darwinX86DebuggerBins ++ lspBins ++ razorBins;
+      aarch64-darwin = darwinAarch64DebuggerBins ++ darwinX86DebuggerBins ++ lspBins ++ razorBins;
     }
     .${system}
     or (throw "Unsupported system: ${system}");
 in
-  vscode-utils.buildVscodeMarketplaceExtension rec {
+  buildVscodeMarketplaceExtension {
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      inherit version;
-    };
-
-    vsix = fetchurl {
-      name = "${mktplcRef.publisher}-${mktplcRef.name}.zip";
-      inherit (vsixInfo) url sha256;
+      version = "2.0.206";
+      inherit (extInfo) sha256 arch;
     };
 
     nativeBuildInputs = [
@@ -76,25 +59,9 @@ in
 
     postPatch =
       ''
-        declare ext_unique_id
-        # See below as to why we cannot take the whole basename.
-        ext_unique_id="$(basename "$out" | head -c 32)"
-
-        # Fix 'Unable to connect to debuggerEventsPipeName .. exceeds the maximum length 107.' when
-        # attempting to launch a specific test in debug mode. The extension attemps to open
-        # a pipe in extension dir which would fail anyway. We change to target file path
-        # to a path in tmp dir with a short name based on the unique part of the nix store path.
-        # This is however a brittle patch as we're working on minified code.
-        # Hence the attempt to only hold on stable names.
-        # However, this really would better be fixed upstream.
-        sed -i \
-          -E -e 's/(this\._pipePath=[a-zA-Z0-9_]+\.join\()([a-zA-Z0-9_]+\.getExtensionPath\(\)[^,]*,)/\1require("os").tmpdir(), "'"$ext_unique_id"'"\+/g' \
-          "$PWD/dist/extension.js"
-
         # Fix reference to uname
-        sed -i \
-          -E -e 's_uname -m_${coreutils}/bin/uname -m_g' \
-          "$PWD/dist/extension.js"
+        substituteInPlace $PWD/dist/extension.js \
+          --replace 'uname -m' '${coreutils}/bin/uname -m'
 
         patchelf_add_icu_as_needed() {
           declare elf="''${1?}"
@@ -122,17 +89,17 @@ in
         (bin: ''
           chmod +x "${bin}"
         '')
-        vsixInfo.binaries))
+        extInfo.binaries))
       + lib.optionalString stdenv.isLinux (lib.concatStringsSep "\n" (map
         (bin: ''
           patchelf_common "${bin}"
         '')
-        vsixInfo.binaries));
+        extInfo.binaries));
 
     meta = {
-      description = "C# for Visual Studio Code (powered by OmniSharp)";
-      homepage = "https://github.com/OmniSharp/omnisharp-vscode";
-      license = lib.licenses.mit;
+      description = "Base language support for C#";
+      homepage = "https://github.com/dotnet/vscode-csharp";
+      license = lib.licenses.unfree;
       maintainers = [lib.maintainers.jraygauthier];
       platforms = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     };

@@ -54,8 +54,6 @@ in {
           mhutchie.git-graph
           mikestead.dotenv
           ms-azuretools.vscode-docker
-          #ms-dotnettools.csharp
-          pkgs.local.csharp-vscode-ext
           ms-toolsai.jupyter
           ms-vscode-remote.remote-ssh
           octref.vetur
@@ -67,6 +65,12 @@ in {
           timonwong.shellcheck
           valentjn.vscode-ltex
           wix.vscode-import-cost
+
+          # C# Development
+          pkgs.local.csdevkit-vscode-ext
+          #ms-dotnettools.csharp
+          pkgs.local.csharp-vscode-ext
+          # pkgs.local.vscodeintellicode-csharp-vscode-ext
         ]
         ++ extensionsFromVscodeMarketplace [
           (vscodeExt {
