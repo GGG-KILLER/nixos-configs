@@ -38,6 +38,7 @@
 
   # LQX kernel
   boot.kernelPackages = pkgs.linuxPackages_lqx;
+  # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   # # ZFS marked as broken on 6.1 LQX but it works.
   # nixpkgs.config.allowBroken = pkgs.linuxPackages_lqx.zfsUnstable.name == "zfs-kernel-2.1.8-staging-2023-01-10-6.1.3";
 
