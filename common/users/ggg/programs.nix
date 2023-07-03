@@ -74,7 +74,20 @@
         enableVteIntegration = true;
         oh-my-zsh = {
           enable = true;
-          plugins = ["git" "sudo"];
+          plugins = [
+            "adb"
+            "copybuffer"
+            "copyfile"
+            "docker"
+            "docker-compose"
+            "dotnet"
+            "encode64"
+            "fd"
+            "git"
+            "git-auto-fetch"
+            "sudo"
+            "timer"
+          ];
           theme = "candy";
         };
       };
