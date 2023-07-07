@@ -13,6 +13,20 @@ in {
 
   modules.services.nginx.virtualHosts.${domain} = {
     ssl = true;
-    locations."/".proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
+    locations."/" = {
+      proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
+      extraConfig = ''
+        proxy_buffering off;
+        proxy_cache off;
+      '';
+    };
+    locations."/api/live/ws" = {
+      proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
+      proxyWebsockets = true;
+      extraConfig = ''
+        proxy_buffering off;
+        proxy_cache off;
+      '';
+    };
   };
 }
