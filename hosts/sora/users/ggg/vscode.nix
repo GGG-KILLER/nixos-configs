@@ -23,7 +23,6 @@ in {
   home-manager.users.ggg = {
     programs.vscode = {
       enable = true;
-      # TODO: Undo when NixOS/nixpkgs#214617 gets fixed.
       package = pkgs.vscode;
       userSettings =
         settings
