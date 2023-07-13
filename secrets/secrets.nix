@@ -17,6 +17,7 @@ in {
   "shiro/backup_password.age".publicKeys = [ggg sora shiro];
   "shiro/backup_envfile.age".publicKeys = [ggg sora shiro];
   "shiro/mnn-server.env.age".publicKeys = [ggg shiro];
+  "shiro/valheim-server.env.age".publicKeys = [ggg shiro];
 
   # Shiro - Wireguard
   "shiro/wireguard/private_key.age".publicKeys = [ggg shiro];
