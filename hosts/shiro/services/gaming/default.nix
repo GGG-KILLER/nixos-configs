@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     # ./mnn-server.nix
-    ./terraria.nix
+    # ./terraria.nix
+    ./valheim.nix
   ];
 }
