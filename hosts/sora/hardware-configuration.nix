@@ -12,7 +12,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "uas" "usbcore" "sd_mod"];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
   boot.initrd.kernelModules = [];
   boot.kernelModules = ["kvm-amd" "lm75" "nct6775" "zenpower"];
   boot.extraModulePackages = with config.boot.kernelPackages; [zenpower];
@@ -78,7 +78,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/7DF6-078B";
+    device = "/dev/disk/by-uuid/BB73-6EFC";
     fsType = "vfat";
     options = ["X-mount.mkdir"];
   };
@@ -97,7 +97,7 @@
 
   swapDevices = [
     {
-      device = "/dev/disk/by-id/ata-SanDisk_Ultra_II_960GB_170517421132-part2";
+      device = "/dev/disk/by-id/nvme-WD_BLACK_SN770_2TB_230835800082-part2";
       randomEncryption = true;
     }
   ];
