@@ -41,6 +41,7 @@
       killall
       neofetch
       p7zip
+      parted
       rclone
       steam-run
       unzip
