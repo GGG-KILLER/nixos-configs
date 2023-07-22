@@ -77,6 +77,7 @@ in {
       chromium
       discord-canary
       fd
+      google-chrome
       imhex
       inputs.git-crypt-agessh.packages.${system}.default
       # inputs.ipgen-cli.packages.${system}.ipgen-cli
