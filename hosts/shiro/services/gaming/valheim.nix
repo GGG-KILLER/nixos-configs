@@ -36,7 +36,7 @@ in {
       "--dns=192.168.1.1"
       "--ipc=none"
       "--pull=always"
-      "--cpu-shares=2048"
+      #"--cpu-shares=2048"
       "--memory=4G"
       "--stop-timeout=120"
     ];
