@@ -16,6 +16,7 @@ in {
       TZ = config.time.timeZone;
       SERVER_NAME = "GGG + Night";
       WORLD_NAME = "World";
+      BEPINEX = "true";
 
       SERVER_PUBLIC = "false";
       ADMINLIST_IDS = "76561198044403949 76561198131281776";
