@@ -45,6 +45,5 @@ with lib; {
     ];
   };
 
-  networking.firewall.allowedTCPPorts = [61235];
   networking.firewall.allowedUDPPorts = [61235];
 }
