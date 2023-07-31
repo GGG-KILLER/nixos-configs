@@ -85,6 +85,7 @@ in {
       libguestfs-with-appliance
       local.mockoon
       mullvad-vpn
+      ruffle
       rustdesk
       zenmonitor
     ];
