@@ -16,6 +16,7 @@ with lib; let
     status-area-horizontal-spacing
     transparent-top-bar
     user-themes
+    vitals
   ];
 in {
   environment.systemPackages =
