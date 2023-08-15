@@ -7,7 +7,7 @@
 in {
   console.font = mkForce "Cascadia Code";
   fonts = {
-    enableDefaultFonts = true;
+    enableDefaultPackages = true;
 
     fontconfig = {
       enable = true;
@@ -36,7 +36,7 @@ in {
     };
 
     fontDir.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       cascadia-code
       noto-fonts
       noto-fonts-extra
