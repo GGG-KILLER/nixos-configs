@@ -14,11 +14,10 @@
   binaries =
     {
       x86_64-linux = [
-        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-reliability-monitor.linux-x64/Microsoft.VisualStudio.Reliability.Monitor"
-        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-server.linux-x64/Microsoft.VisualStudio.Code.Server"
-        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-code-launcher.linux-x64/Microsoft.VisualStudio.Code.Launcher"
         "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-code-servicehost.linux-x64/Microsoft.VisualStudio.Code.ServiceHost"
+        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-reliability-monitor.linux-x64/Microsoft.VisualStudio.Reliability.Monitor"
         "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/servicehub-controller-net60.linux-x64/Microsoft.ServiceHub.Controller"
+        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-server.linux-x64/Microsoft.VisualStudio.Code.Server"
       ];
     }
     .${system}
@@ -28,8 +27,8 @@ in
     mktplcRef = {
       name = "csdevkit";
       publisher = "ms-dotnettools";
-      version = "0.1.83";
-      sha256 = "sha256-aKrmdm4JJ3x/BBr0zGHNaCXNobiKg7+OYGIFZgF5a9o=";
+      version = "0.4.6";
+      sha256 = "sha256-OL0BkUKoL65LPnCJS9XUP+zcWhN8VMY+hLa5s7WoVZ8=";
       arch = "linux-x64";
     };
     sourceRoot = "extension"; # This has more than one folder.

@@ -66,8 +66,8 @@ in {
           wix.vscode-import-cost
 
           # C# Development
-          #pkgs.local.csdevkit-vscode-ext
           #ms-dotnettools.csharp
+          pkgs.local.csdevkit-vscode-ext
           pkgs.local.csharp-vscode-ext
           # pkgs.local.vscodeintellicode-csharp-vscode-ext
         ]

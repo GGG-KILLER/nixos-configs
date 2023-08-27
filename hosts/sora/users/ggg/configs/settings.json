@@ -24,6 +24,7 @@
   "dotnet.inlayHints.suppressInlayHintsForParametersThatMatchArgumentName": true,
   "dotnet.inlayHints.suppressInlayHintsForParametersThatMatchMethodIntent": true,
   "dotnet.navigation.navigateToDecompiledSources": true,
+  "dotnet.preferRuntimeFromSDK": true,
   "dotnet.quickInfo.showRemarksInQuickInfo": true,
   "editor.fontFamily": "'Cascadia Code'",
   "editor.fontLigatures": true,

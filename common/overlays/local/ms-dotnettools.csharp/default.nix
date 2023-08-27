@@ -35,7 +35,7 @@
     {
       x86_64-linux = {
         arch = "linux-x64";
-        sha256 = "sha256-FkW7xHeK9Fjjah90RDdptZbu9CNGxTf6xejoCZIHo5c=";
+        sha256 = "sha256-CQWNxJX9sIeuy6D65v0mQKKcZZZ2/gTbiobQna+ZvVM=";
         binaries = linuxDebuggerBins ++ lspBins ++ razorBins;
       };
       aarch64-linux = linuxDebuggerBins ++ lspBins; # Linux aarch64 version has no Razor Language Server
@@ -49,7 +49,7 @@ in
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      version = "2.0.206";
+      version = "2.0.413";
       inherit (extInfo) sha256 arch;
     };
 
