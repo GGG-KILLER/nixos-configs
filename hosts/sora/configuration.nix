@@ -36,9 +36,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # TODO: Return once ZFS supports 6.4
-  # # LQX kernel
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # LQX kernel
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
