@@ -59,9 +59,6 @@ in
 
     postPatch =
       ''
-        # Fix reference to uname
-        substituteInPlace $PWD/dist/extension.js \
-          --replace 'uname -m' '${coreutils}/bin/uname -m'
 
         patchelf_add_icu_as_needed() {
           declare elf="''${1?}"
@@ -85,6 +82,7 @@ in
         }
 
         substituteInPlace dist/extension.js \
+          --replace 'uname -m' '${coreutils}/bin/uname -m' \
           --replace 'c=s.dirname(o.path)' 'c=s.dirname(s.dirname(o.path))'
 
       ''
