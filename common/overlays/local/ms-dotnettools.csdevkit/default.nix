@@ -39,6 +39,9 @@ in
 
     postPatch =
       ''
+        declare ext_unique_id
+        ext_unique_id="$(basename "$out" | head -c 32)"
+
         ls -lAFh components/vs-green-server/platforms/linux-x64/ &1>2
 
         patchelf_add_icu_as_needed() {
@@ -61,6 +64,12 @@ in
             --set-rpath "${lib.makeLibraryPath [stdenv.cc.cc openssl icu.out]}:\$ORIGIN" \
             "$elf"
         }
+
+        substituteInPlace dist/extension.js \
+          --replace 'e.extensionPath,"cache"' 'require("os").tmpdir(),"$ext_unique_id"' \
+          --replace 'D=v.dirname(k.path)' 'D=v.dirname(v.dirname(k.path))' \
+          --replace 'DOTNET_ROOT=v.dirname(e)' 'DOTNET_ROOT=v.dirname(v.dirname(e))' \
+          --replace 't.setExecuteBit=async function(e){if("win32"!==process.platform){const t=i.join(e[a.SERVICEHUB_CONTROLLER_COMPONENT_NAME],"Microsoft.ServiceHub.Controller"),n=i.join(e[a.SERVICEHUB_HOST_COMPONENT_NAME],(0,a.getServiceHubHostEntrypointName)()),r=[(0,a.getServerPath)(e),t,n,(0,c.getReliabilityMonitorPath)(e)];await Promise.all(r.map((e=>(0,o.chmod)(e,"0755"))))}}' 't.setExecuteBit=async function(e){}'
 
       ''
       + (lib.concatStringsSep "\n" (map

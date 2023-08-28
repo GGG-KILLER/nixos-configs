@@ -84,6 +84,9 @@ in
             "$elf"
         }
 
+        substituteInPlace dist/extension.js \
+          --replace 'c=s.dirname(o.path)' 'c=s.dirname(s.dirname(o.path))'
+
       ''
       + (lib.concatStringsSep "\n" (map
         (bin: ''
