@@ -35,7 +35,7 @@
     {
       x86_64-linux = {
         arch = "linux-x64";
-        sha256 = "sha256-CQWNxJX9sIeuy6D65v0mQKKcZZZ2/gTbiobQna+ZvVM=";
+        sha256 = "sha256-kki3+gMFgwSrQEhxL7jbAO3GzoMw203U4a71Jl6qj68=";
         binaries = linuxDebuggerBins ++ lspBins ++ razorBins;
       };
       aarch64-linux = linuxDebuggerBins ++ lspBins; # Linux aarch64 version has no Razor Language Server
@@ -49,7 +49,7 @@ in
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      version = "2.0.413";
+      version = "2.0.436";
       inherit (extInfo) sha256 arch;
     };
 
@@ -82,8 +82,7 @@ in
         }
 
         substituteInPlace dist/extension.js \
-          --replace 'uname -m' '${coreutils}/bin/uname -m' \
-          --replace 'c=s.dirname(o.path)' 'c=s.dirname(s.dirname(o.path))'
+          --replace 'uname -m' '${coreutils}/bin/uname -m'
 
       ''
       + (lib.concatStringsSep "\n" (map
@@ -100,7 +99,7 @@ in
     meta = {
       description = "Base language support for C#";
       homepage = "https://github.com/dotnet/vscode-csharp";
-      license = lib.licenses.unfree;
+      license = lib.licenses.mit;
       maintainers = [lib.maintainers.jraygauthier];
       platforms = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     };
