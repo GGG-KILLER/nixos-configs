@@ -42,8 +42,6 @@ in
         declare ext_unique_id
         ext_unique_id="$(basename "$out" | head -c 32)"
 
-        ls -lAFh components/vs-green-server/platforms/linux-x64/ &1>2
-
         patchelf_add_icu_as_needed() {
           declare elf="''${1?}"
           declare icu_major_v="${
