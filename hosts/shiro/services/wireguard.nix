@@ -29,6 +29,7 @@ with lib; {
     ];
     # Laptop Addr: 192.168.5.2/24
     # Phone Addr:  192.168.5.3/24
+    # Coffee :     192.168.5.4/32
     peers = [
       # Laptop
       {
@@ -41,6 +42,12 @@ with lib; {
         publicKey = "2EqK/0ue4yZ05N8uq9VuDZRgJ3L6wsZXbnoLG9pNa3U=";
         presharedKeyFile = config.age.secrets.wireguard-phone-psk.path;
         allowedIPs = ["192.168.5.3/32"];
+      }
+      # Coffee
+      {
+        publicKey = "zj6VD5GT50+yXMFgYoiDEzkKWBOnFCF9+k8jbQ4uhi8=";
+        presharedKeyFile = config.age.secrets.wireguard-coffee-psk.path;
+        allowedIPs = ["192.168.5.4/32"];
       }
     ];
   };
