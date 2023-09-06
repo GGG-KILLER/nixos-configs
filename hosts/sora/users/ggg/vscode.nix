@@ -84,8 +84,8 @@ in {
           })
           (vscodeExt {
             id = "venner.vscode-glua-enhanced";
-            version = "2.5.2";
-            sha256 = "sha256-TSdsXfWhGrVMPSLmEePkp93SGMHLUXG4navhJai3imo=";
+            version = "2.5.3";
+            sha256 = "sha256-evKJvE7YxJImGg2+zW1QC5JTEQL5fqbAjffMWKorsdI=";
           })
           (vscodeExt {
             id = "kumar-harsh.graphql-for-vscode";
@@ -119,8 +119,8 @@ in {
           })
           (vscodeExt {
             id = "astro-build.astro-vscode";
-            version = "2.3.1";
-            sha256 = "sha256-0Vca0nA4y86JJhCOyYmespi+pvhI3k2bkYC/18RpOx4=";
+            version = "2.3.3";
+            sha256 = "sha256-OaTS8iwwR0SMzKt8ZtoHKs5M9PhpoUd1vDgNXmZlYrA=";
           })
           (vscodeExt {
             id = "eamodio.gitlens";
