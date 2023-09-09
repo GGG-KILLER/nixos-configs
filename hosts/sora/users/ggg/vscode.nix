@@ -64,6 +64,7 @@ in {
           timonwong.shellcheck
           valentjn.vscode-ltex
           wix.vscode-import-cost
+          arrterian.nix-env-selector
 
           # C# Development
           #ms-dotnettools.csharp
