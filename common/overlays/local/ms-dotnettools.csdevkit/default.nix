@@ -27,8 +27,8 @@ in
     mktplcRef = {
       name = "csdevkit";
       publisher = "ms-dotnettools";
-      version = "0.5.2";
-      sha256 = "sha256-1/4STusYKtDobXYcy+osXCEPuiEKQtCFEDl/JJ42N7g=";
+      version = "0.5.24";
+      sha256 = "sha256-392VnUKx1bnfwpW88hPEvPCBkbHLyxReiG4oEqsbqbI=";
       arch = "linux-x64";
     };
     sourceRoot = "extension"; # This has more than one folder.
