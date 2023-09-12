@@ -94,6 +94,20 @@ in {
       DOTNET_ROOT = dotnetRoot;
       MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
       MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
+      # Not actually used, I just want these packages rooted so the GC doesn't get rid of them.
+      PYTORCH = "${pkgs.python3.withPackages (ps:
+        with ps; [
+          matplotlib
+
+          torchWithCuda
+          torchvisionWithCuda
+          torchtntWithCuda
+          torchevalWithCuda
+          botorchWithCuda
+          torchinfoWithCuda
+          lion-pytorchWithCuda
+          torch-tb-profilerWithCuda
+        ])}";
     };
 
     home.shellAliases = {};
