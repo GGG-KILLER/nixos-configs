@@ -41,8 +41,9 @@ in {
         };
       extensions = with pkgs.vscode-extensions;
         [
-          dbaeumer.vscode-eslint
           # eamodio.gitlens
+          arrterian.nix-env-selector
+          dbaeumer.vscode-eslint
           editorconfig.editorconfig
           foxundermoon.shell-format
           hashicorp.terraform
@@ -53,6 +54,7 @@ in {
           mhutchie.git-graph
           mikestead.dotenv
           ms-azuretools.vscode-docker
+          ms-python.python
           ms-toolsai.jupyter
           ms-vscode-remote.remote-ssh
           octref.vetur
@@ -64,7 +66,6 @@ in {
           timonwong.shellcheck
           valentjn.vscode-ltex
           wix.vscode-import-cost
-          arrterian.nix-env-selector
 
           # C# Development
           #ms-dotnettools.csharp
