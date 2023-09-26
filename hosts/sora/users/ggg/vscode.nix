@@ -85,34 +85,19 @@ in {
             sha256 = "sha256-TIh8W05pe7/8wo/rFH79uOXOf1mlEXDoNdfuKhHtS1E=";
           })
           (vscodeExt {
-            id = "venner.vscode-glua-enhanced";
-            version = "2.5.3";
-            sha256 = "sha256-evKJvE7YxJImGg2+zW1QC5JTEQL5fqbAjffMWKorsdI=";
-          })
-          (vscodeExt {
-            id = "kumar-harsh.graphql-for-vscode";
-            version = "1.15.3";
-            sha256 = "0Al+69quQXPdFBMsSDWXjITJiux+OQSzQ7i/pgnlm/Q=";
-          })
-          (vscodeExt {
             id = "christopherstyles.html-entities";
             version = "1.1.2";
             sha256 = "P+IKHH9DDAgvU4Gfsc7c7QYZBE4QPooIteFSzoSoMzw=";
           })
           (vscodeExt {
-            id = "visualstudioexptteam.vscodeintellicode";
-            version = "1.2.30";
-            sha256 = "sha256-f2Gn+W0QHN8jD5aCG+P93Y+JDr/vs2ldGL7uQwBK4lE=";
-          })
-          (vscodeExt {
             id = "ms-vscode.powershell";
-            version = "2023.6.0";
-            sha256 = "sha256-GRUU85WXLNsUU1NGwY17sKiBeehYfpUEKLX+uRom1aQ=";
+            version = "2023.9.2";
+            sha256 = "sha256-0Qs1SXVPcxI8NKhnCk94Kcl27rMYz9npTrxsnFu4VXk=";
           })
           (vscodeExt {
             id = "ms-vscode-remote.remote-containers";
-            version = "0.304.0";
-            sha256 = "sha256-I7jaHIPpN2UDwqBQqrb9A3fVgxpsJdi94wkovp4I0uw=";
+            version = "0.313.0";
+            sha256 = "sha256-bx6quRdOb86DafUjXIQ7UsERtRoT6T1lr3iH/5tSXzo=";
           })
           (vscodeExt {
             id = "L13RARY.l13-diff";
@@ -120,14 +105,9 @@ in {
             sha256 = "sha256-cfvV8wfbUgCbtMqrmEqBEuudlWOhCoghIJTPKOfDUI8=";
           })
           (vscodeExt {
-            id = "astro-build.astro-vscode";
-            version = "2.3.3";
-            sha256 = "sha256-OaTS8iwwR0SMzKt8ZtoHKs5M9PhpoUd1vDgNXmZlYrA=";
-          })
-          (vscodeExt {
             id = "eamodio.gitlens";
-            version = "2023.6.905";
-            sha256 = "sha256-00FpZleOSUCKgWELbiUYbmzRkTDq6KKkN0mmsI/OUzs=";
+            version = "2023.9.2605";
+            sha256 = "sha256-9bpbfEoDQALJpX4iTcvRllO1yqC7lf4ST1044+O5gZQ=";
           })
         ];
     };
