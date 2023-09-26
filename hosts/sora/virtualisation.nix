@@ -7,7 +7,7 @@
     qemu.ovmf.enable = true;
   };
 
-  # VirtualBox
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = ["ggg"];
+  # # VirtualBox
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = ["ggg"];
 }
