@@ -43,6 +43,9 @@
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
 
+  # Enable CUDA support for everything
+  nixpkgs.config.cudaSupport = true;
+
   networking = {
     hostName = "sora";
     hostId = "6967af45";
