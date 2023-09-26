@@ -35,7 +35,7 @@ in {
       genymotion
 
       # Coding
-      jetbrains.rider
+      # jetbrains.rider
       mono
       rnix-lsp
       wrangler
