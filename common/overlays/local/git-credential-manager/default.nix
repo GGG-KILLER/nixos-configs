@@ -9,7 +9,7 @@
   libunwind,
   libX11,
   makeWrapper,
-  openssl_1_1,
+  openssl,
   stdenv,
   libICE,
   libSM,
@@ -22,7 +22,7 @@
     libsecret
     libunwind
     libX11
-    openssl_1_1
+    openssl
     stdenv.cc.cc
     zlib
   ];
