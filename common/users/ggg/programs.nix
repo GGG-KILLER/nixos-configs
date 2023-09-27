@@ -54,7 +54,7 @@
       home-manager.enable = true;
       bat.enable = true;
       dircolors.enable = true;
-      exa = {
+      eza = {
         enable = true;
         enableAliases = true;
       };

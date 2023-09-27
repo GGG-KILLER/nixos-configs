@@ -37,8 +37,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # LQX kernel
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
-  # boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  # boot.kernelPackages = pkgs.linuxPackages_lqx;
+  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
