@@ -7,30 +7,31 @@ with lib; let
   inherit (config.my.secrets.services) backblaze;
 in {
   services.restic.backups = let
-    allBase = {
+    allBase = let
+      baseDir = "/zfs-main-pool/data";
+    in {
       initialize = true;
       paths = [
         "/var/lib/grafana"
-        "/zfs-main-pool/data/dbs/pgsql-prd" # only prod is worth backing up
-        "/zfs-main-pool/data/etc"
-        "/zfs-main-pool/data/h"
-        "/zfs-main-pool/data/home-assistant"
-        "/zfs-main-pool/data/jackett"
-        "/zfs-main-pool/data/jellyfin"
-        "/zfs-main-pool/data/qbittorrent"
-        "/zfs-main-pool/data/series"
-        "/zfs-main-pool/data/sonarr"
-        "/zfs-main-pool/data/step-ca"
+        "${baseDir}/dbs/pgsql-prd" # only prod is worth backing up
+        "${baseDir}/etc"
+        "${baseDir}/h"
+        "${baseDir}/home-assistant"
+        "${baseDir}/jackett"
+        "${baseDir}/jellyfin"
+        "${baseDir}/qbittorrent"
+        "${baseDir}/series"
+        "${baseDir}/sonarr"
+        "${baseDir}/step-ca"
       ];
       extraBackupArgs = [
-        "--exclude=/zfs-main-pool/data/etc/random"
-        "--exclude=/zfs-main-pool/data/h/G"
-        "--exclude=/zfs-main-pool/data/h/Playlists"
-        "--exclude=/zfs-main-pool/data/h/R"
-        "--exclude=/zfs-main-pool/data/h/T"
-        "--exclude=/zfs-main-pool/data/home-assistant/.platformio"
-        "--exclude=/zfs-main-pool/data/jellyfin/metadata"
-        "--exclude=/zfs-main-pool/data/jellyfin/transcodes"
+        "--exclude=${baseDir}/etc/random"
+        "--exclude=${baseDir}/h/G"
+        "--exclude=${baseDir}/h/Playlists"
+        "--exclude=${baseDir}/h/T"
+        "--exclude=${baseDir}/home-assistant/.platformio"
+        "--exclude=${baseDir}/jellyfin/metadata"
+        "--exclude=${baseDir}/jellyfin/transcodes"
       ];
       pruneOpts = [
         "--group-by hosts"
