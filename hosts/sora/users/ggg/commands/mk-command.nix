@@ -1,10 +1,13 @@
 {
+  # Dependencies
   lib,
   makeWrapper,
   runCommand,
-  dependencies,
+  # Actual args
   filePath,
+  dependencies,
   replacements ? {},
+  buildInputs ? [],
 }:
 with lib; let
   binPath = makeBinPath dependencies;
@@ -20,14 +23,15 @@ with lib; let
 in
   runCommand "${fileName}-script"
   {
+    inherit buildInputs;
     nativeBuildInputs = [makeWrapper];
   } ''
     mkdir -p $out/bin
-
     cp ${filePath} $out/bin/${fileName}
-    patchShebangs $out/bin/${fileName}
-    ${replaceCmd}
     chmod 0755 $out/bin/${fileName}
+
+    patchShebangs --host $out/bin/${fileName}
+    ${replaceCmd}
 
     wrapProgram $out/bin/${fileName} --prefix PATH : ${binPath}
   ''
