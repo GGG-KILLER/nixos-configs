@@ -8,7 +8,7 @@
     mkCommand = pkgs.callPackage ./mk-command.nix;
   in [
     (mkCommand {
-      dependencies = with pkgs; [restic];
+      dependencies = with pkgs; [restic coreutils];
       buildInputs = with pkgs; [bash];
 
       filePath = ./restic-b2;
