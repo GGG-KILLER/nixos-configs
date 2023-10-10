@@ -23,6 +23,7 @@ in {
         baseDir
       ];
       extraBackupArgs = [
+        "--compression max"
         "--exclude=${baseDir}/Data"
         "--exclude=${baseDir}/Downloads"
         "--exclude=${baseDir}/Git"

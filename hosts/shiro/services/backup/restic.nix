@@ -25,6 +25,7 @@ in {
         "${baseDir}/step-ca"
       ];
       extraBackupArgs = [
+        "--compression max"
         "--exclude=${baseDir}/etc/random"
         "--exclude=${baseDir}/h/G"
         "--exclude=${baseDir}/h/Playlists"
