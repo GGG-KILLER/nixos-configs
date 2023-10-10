@@ -89,11 +89,11 @@
     options = ["nofail"];
   };
 
-  fileSystems."/mnt/DataExt" = {
-    device = "/dev/disk/by-id/usb-Seagate_Expansion_NAA4BEJR-0:0-part1";
-    fsType = "ntfs";
-    options = ["nofail"];
-  };
+  # fileSystems."/mnt/DataExt" = {
+  #   device = "/dev/disk/by-id/usb-Seagate_Expansion_NAA4BEJR-0:0-part1";
+  #   fsType = "ntfs";
+  #   options = ["nofail"];
+  # };
 
   swapDevices = [
     {
