@@ -30,4 +30,8 @@ with lib; {
     flat-remix-icon-theme
   ];
   services.udev.packages = with pkgs; [gnome.gnome-settings-daemon];
+
+  # CVE-2023-43641 mitigations
+  services.gnome.gnome-online-miners.enable = mkForce false;
+  services.gnome.tracker-miners.enable = mkForce false;
 }
