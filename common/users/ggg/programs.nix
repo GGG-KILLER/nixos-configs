@@ -57,6 +57,7 @@
       eza = {
         enable = true;
         enableAliases = true;
+        extraOptions = ["-g"];
       };
       git = {
         enable = true;
