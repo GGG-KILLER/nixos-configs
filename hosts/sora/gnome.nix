@@ -12,7 +12,6 @@ with lib; {
     # Enable the GNOME Desktop Environment.
     displayManager = {
       gdm.enable = true;
-      # xpra.enable = true;
     };
 
     desktopManager.gnome.enable = true;

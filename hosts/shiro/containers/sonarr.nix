@@ -10,16 +10,6 @@ in {
     extraNames = ["jackett"];
     mainAddr = "192.168.2.46"; # ipgen -n 192.168.2.0/24 sonarr
     ports = [
-      # {
-      #   protocol = "http";
-      #   port = 8989;
-      #   description = "Sonarr Web UI";
-      # }
-      # {
-      #   protocol = "http";
-      #   port = 9117;
-      #   description = "Jackett Web UI";
-      # }
       {
         protocol = "http";
         port = 80;

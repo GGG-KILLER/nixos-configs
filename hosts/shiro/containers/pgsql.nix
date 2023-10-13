@@ -116,9 +116,7 @@ with lib; let
               pgtap
               pg_topn
               periods
-              # cstore_fdw (Requires PostgreSQL < 12)
               pg_rational
-              # pg_safeupdate
             ];
           };
 

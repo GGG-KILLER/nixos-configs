@@ -25,7 +25,6 @@
       ".debugger/arm64/vsdbg"
     ];
     lspBins = [
-      #".roslyn/Microsoft.CodeAnalysis.LanguageServer"
     ];
     razorBins = [
       ".razor/createdump"

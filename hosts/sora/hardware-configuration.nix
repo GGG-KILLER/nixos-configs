@@ -89,12 +89,6 @@
     options = ["nofail"];
   };
 
-  # fileSystems."/mnt/DataExt" = {
-  #   device = "/dev/disk/by-id/usb-Seagate_Expansion_NAA4BEJR-0:0-part1";
-  #   fsType = "ntfs";
-  #   options = ["nofail"];
-  # };
-
   swapDevices = [
     {
       device = "/dev/disk/by-id/nvme-WD_BLACK_SN770_2TB_230835800082-part2";

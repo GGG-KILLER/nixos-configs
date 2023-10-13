@@ -27,9 +27,6 @@ in {
       userSettings =
         settings
         // {
-          # "omnisharp.dotnetPath" = "/dev/null";
-          # "omnisharp.path" = "${pkgs.omnisharp-roslyn}/bin/OmniSharp";
-
           "powershell.powerShellAdditionalExePaths" = {
             "PowerShell Core 7 (x64)" = "${pkgs.powershell}${pkgs.powershell.shellPath}";
           };
@@ -68,10 +65,8 @@ in {
           wix.vscode-import-cost
 
           # C# Development
-          #ms-dotnettools.csharp
           pkgs.local.csdevkit-vscode-ext
           pkgs.local.csharp-vscode-ext
-          # pkgs.local.vscodeintellicode-csharp-vscode-ext
         ]
         ++ extensionsFromVscodeMarketplace [
           (vscodeExt {

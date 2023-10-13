@@ -1,4 +1,3 @@
-# torchsnapshot
 {
   buildPythonPackage,
   fetchPypi,

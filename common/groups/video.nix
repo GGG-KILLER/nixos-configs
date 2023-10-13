@@ -1,7 +1,3 @@
-{lib, ...}:
-with lib; {
-  # users.groups.video = {
-  #   gid = mkForce 44;
-  # };
-  ids.gids.video = mkForce 44;
+{lib, ...}: {
+  ids.gids.video = lib.mkForce 44;
 }

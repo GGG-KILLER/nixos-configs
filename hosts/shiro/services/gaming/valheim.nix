@@ -1,4 +1,3 @@
-# /zfs-main-pool/data/gaming/valheim
 {config, ...}: let
   inherit (config.age) secrets;
 in {
@@ -37,7 +36,6 @@ in {
       "--dns=192.168.1.1"
       "--ipc=none"
       "--pull=always"
-      #"--cpu-shares=2048"
       "--memory=4G"
       "--stop-timeout=120"
     ];

@@ -1,6 +1,4 @@
 {...}: {
-  # system.autoUpgrade.enable = true;
-
   # Automatic garbage collect
   nix.gc = {
     automatic = true;

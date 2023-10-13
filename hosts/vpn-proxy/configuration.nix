@@ -9,7 +9,6 @@
   sshPort = 17606;
   wgPort = 61253;
   inp-interface = "wgvpn-proxy";
-  # out-interface = "wg-mullvad";
   out-interface = "ens3";
 in {
   imports = [
@@ -21,9 +20,6 @@ in {
 
   networking.hostName = "vpn-proxy"; # Define your hostname.
   networking.domain = "ggg.dev";
-
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
@@ -116,18 +112,6 @@ in {
       interface = inp-interface;
     };
   };
-
-  # Enable Mullvad
-  # modules.vpn.mullvad = {
-  #   enable = true;
-  #   alwaysRequireVpn = true;
-  #   autoConnect = true;
-  #   emergencyOnFail = false;
-  #   allowLan = true;
-  #   tunnelProtocol = "wireguard";
-  #   location = "de";
-  #   setCheckReversePath = false;
-  # };
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [

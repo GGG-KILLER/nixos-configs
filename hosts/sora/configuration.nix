@@ -56,14 +56,12 @@
   # Packages
   environment.shells = with pkgs; [bash powershell];
 
-  # Enable CUPS to print documents.
-  #services.printing.enable = true;
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
+  # TODO: Enable firewall
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
@@ -79,7 +77,6 @@
   # Firmware
   services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
-  # hardware.enableAllFirmware = true;
 
   # Android
   programs.adb.enable = true;

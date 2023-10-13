@@ -10,9 +10,6 @@ in {
   networking.hostName = "f"; # Define your hostname.
   networking.domain = "ggg.dev";
 
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;

@@ -43,12 +43,6 @@
       url = "github:packwiz/packwiz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # mats-config = {
-    #   url = "github:Myaats/system";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    #   inputs.nur.follows = "nur";
-    #   inputs.home-manager.follows = "home-manager";
-    # };
     ipgen-cli = {
       url = "github:ipgen/cli";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -118,7 +112,6 @@
         profiles.system = {
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vpn-proxy;
-          sshOpts = ["-p" "17606"];
           sshUser = "root";
         };
       };
@@ -128,7 +121,6 @@
         profiles.system = {
           user = "root";
           path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.f-ggg-dev;
-          #sshOpts = ["-p" "17606"];
           sshUser = "root";
         };
       };

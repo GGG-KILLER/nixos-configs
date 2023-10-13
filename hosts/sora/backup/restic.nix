@@ -54,12 +54,6 @@ in {
       };
     };
   in {
-    # all-local = mkMerge [
-    #   (allBase "local")
-    #   {
-    #     repository = "/mnt/DataExt/all";
-    #   }
-    # ];
     all-b2 = mkMerge [
       (allBase "b2")
       {

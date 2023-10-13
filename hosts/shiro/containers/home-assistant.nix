@@ -10,16 +10,6 @@ in rec {
   my.networking.home-assistant = {
     mainAddr = "192.168.2.228"; # ipgen -n 192.168.2.0/24 home-assistant
     ports = [
-      # {
-      #   protocol = "http";
-      #   port = 8123;
-      #   description = "Home Assistant Web UI";
-      # }
-      # {
-      #   protocol = "http";
-      #   port = 6052;
-      #   description = "ESPHome Web UI";
-      # }
       {
         protocol = "http";
         port = 80;

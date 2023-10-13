@@ -17,7 +17,7 @@ in {
   hardware.nvidia = {
     package = nvidiaDriver;
 
-    # open = true; # NOTE: Does not work with the Quadro P400
+    # NOTE: Open kernel module does not work with the Quadro P400
     modesetting.enable = false;
     nvidiaSettings = false;
   };

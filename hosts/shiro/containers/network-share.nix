@@ -58,10 +58,6 @@ with lib; {
           map to guest = bad user
           smb encrypt = required
           use sendfile = yes
-          #vfs objects = acl_xattr
-          #map acl inherit = yes
-          # the next line is only required on Samba versions less than 4.9.0
-          #store dos attributes = yes
         '';
         shares = {
           Animu = {

@@ -1,7 +1,3 @@
-{lib, ...}:
-with lib; {
-  # users.groups.render = {
-  #   gid = 108;
-  # };
-  ids.gids.render = mkForce 108;
+{lib, ...}: {
+  ids.gids.render = lib.mkForce 108;
 }

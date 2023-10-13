@@ -17,18 +17,6 @@ in {
         autohint = true;
         enable = true;
       };
-      # defaultFonts.serif = [
-      #   "Times New Roman"
-      #   # "DejaVu Serif"
-      # ];
-      # defaultFonts.emoji = [
-      #   "Segoe UI Emoji"
-      #   # "Noto Color Emoji"
-      # ];
-      # defaultFonts.sansSerif = [
-      #   "Arial"
-      #   # "DejaVu Sans"
-      # ];
       defaultFonts.monospace = [
         "Cascadia Code"
         "Consolas"

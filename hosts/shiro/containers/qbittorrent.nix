@@ -30,16 +30,6 @@ in {
         port = 443;
         description = "Local Nginx";
       }
-      # {
-      #   protocol = "http";
-      #   port = config.modules.services.qbittorrent.web.port;
-      #   description = "qBitTorrent Web UI";
-      # }
-      # {
-      #   protocol = "http";
-      #   port = config.modules.services.flood.web.port;
-      #   description = "Flood UI";
-      # }
     ];
   };
 
