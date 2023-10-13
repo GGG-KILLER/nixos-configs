@@ -69,17 +69,29 @@ in {
       security.acme.certs."jackett.lan".email = "jackett@soarr.lan";
       services.nginx = {
         enable = true;
+
+        proxyTimeout = "12h";
+        recommendedProxySettings = true;
+        recommendedOptimisation = true;
+        recommendedBrotliSettings = true;
+        recommendedGzipSettings = true;
+        recommendedZstdSettings = true;
+
         virtualHosts = {
           "sonarr.lan" = {
             enableACME = true;
             addSSL = true;
+
             locations."/" = {
               proxyPass = "http://localhost:8989";
+              proxyWebsockets = true;
             };
           };
+
           "jackett.lan" = {
             enableACME = true;
             addSSL = true;
+
             locations."/" = {
               proxyPass = "http://localhost:9117";
             };

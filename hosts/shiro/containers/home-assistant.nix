@@ -88,42 +88,30 @@ in rec {
       security.acme.certs."esphome.lan".email = "esphome@home-assistant.lan";
       services.nginx = {
         enable = true;
+
+        proxyTimeout = "12h";
+        recommendedProxySettings = true;
+        recommendedOptimisation = true;
+        recommendedBrotliSettings = true;
+        recommendedGzipSettings = true;
+        recommendedZstdSettings = true;
+
         virtualHosts."hass.lan" = {
           enableACME = true;
           addSSL = true;
+
           locations."/" = {
-            extraConfig = ''
-              proxy_pass http://localhost:8123;
-              proxy_http_version 1.1;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Forwarded-Protocol $scheme;
-              proxy_set_header X-Forwarded-Host $http_host;
-              proxy_read_timeout 6h;
-            '';
+            proxyPass = "http://localhost:8123";
+            proxyWebsockets = true;
           };
         };
         virtualHosts."esphome.lan" = {
           enableACME = true;
           addSSL = true;
+
           locations."/" = {
-            extraConfig = ''
-              proxy_pass http://localhost:6052;
-              proxy_http_version 1.1;
-              proxy_set_header Upgrade $http_upgrade;
-              proxy_set_header Connection "upgrade";
-              proxy_set_header Host $host;
-              proxy_set_header X-Real-IP $remote_addr;
-              proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-              proxy_set_header X-Forwarded-Proto $scheme;
-              proxy_set_header X-Forwarded-Protocol $scheme;
-              proxy_set_header X-Forwarded-Host $http_host;
-              proxy_read_timeout 6h;
-            '';
+            proxyPass = "http://localhost:6052";
+            proxyWebsockets = true;
           };
         };
       };

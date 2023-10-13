@@ -123,22 +123,22 @@ with lib; let
           security.acme.certs."pg${env}.shiro.lan".email = "pg${env}@pg${env}.lan";
           services.nginx = {
             enable = true;
+
+            proxyTimeout = "12h";
+            recommendedProxySettings = true;
+            recommendedOptimisation = true;
+            recommendedBrotliSettings = true;
+            recommendedGzipSettings = true;
+            recommendedZstdSettings = true;
+
             virtualHosts."pg${env}.shiro.lan" = {
               enableACME = true;
               addSSL = true;
               locations."/" = {
                 extraConfig = ''
                   proxy_pass http://localhost:${toString config.services.pgadmin.port};
-                  proxy_http_version 1.1;
                   proxy_set_header Upgrade $http_upgrade;
                   proxy_set_header Connection "upgrade";
-                  proxy_set_header Host $host;
-                  proxy_set_header X-Real-IP $remote_addr;
-                  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                  proxy_set_header X-Forwarded-Proto $scheme;
-                  proxy_set_header X-Forwarded-Protocol $scheme;
-                  proxy_set_header X-Forwarded-Host $http_host;
-                  proxy_read_timeout 6h;
                 '';
               };
             };

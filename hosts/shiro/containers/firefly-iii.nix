@@ -111,6 +111,13 @@ in rec {
 
       services.nginx = {
         enable = true;
+
+        recommendedProxySettings = true;
+        recommendedOptimisation = true;
+        recommendedBrotliSettings = true;
+        recommendedGzipSettings = true;
+        recommendedZstdSettings = true;
+
         virtualHosts."money.lan" = {
           default = true;
           enableACME = true;

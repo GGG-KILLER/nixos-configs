@@ -87,7 +87,14 @@ in {
       security.acme.certs."qbittorrent.lan".email = "qbittorrent@qbittorrent.lan";
       services.nginx = {
         enable = true;
+
+        proxyTimeout = "12h";
         recommendedProxySettings = true;
+        recommendedOptimisation = true;
+        recommendedBrotliSettings = true;
+        recommendedGzipSettings = true;
+        recommendedZstdSettings = true;
+
         virtualHosts = {
           "flood.lan" = {
             default = true;
@@ -104,7 +111,6 @@ in {
                 client_max_body_size 1G;
                 proxy_buffering off;
                 proxy_cache off;
-                proxy_read_timeout 6h;
               '';
             };
           };
