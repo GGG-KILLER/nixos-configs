@@ -42,7 +42,9 @@ in {
       enable = true;
       enableReload = true;
       recommendedTlsSettings = true;
+      recommendedBrotliSettings = true;
       recommendedGzipSettings = true;
+      recommendedZstdSettings = true;
       recommendedOptimisation = true;
       recommendedProxySettings = true;
       virtualHosts =
