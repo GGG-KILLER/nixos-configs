@@ -8,15 +8,10 @@
 }:
 with lib; {
   imports = [
-    ./downloader.nix
-    ./firefly-iii.nix
-    ./home-assistant.nix
-    ./jellyfin.nix
-    ./network-share.nix
-    ./openspeedtest.nix
+    ./downloads
+    ./misc
+    ./streaming
     ./pgsql.nix
-    ./qbittorrent.nix
-    ./sonarr.nix
     ./vpn-gateway.nix
   ];
 

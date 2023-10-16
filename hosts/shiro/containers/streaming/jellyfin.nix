@@ -73,7 +73,7 @@ in {
       pkgs,
       ...
     }: {
-      imports = [../video.nix];
+      imports = [../../video.nix];
 
       hardware.opengl.enable = true;
 
