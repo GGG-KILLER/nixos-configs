@@ -27,7 +27,7 @@ in {
       extraBackupArgs = [
         "--compression max"
         "--exclude=${baseDir}/etc/random"
-        "--exclude=${baseDir}/etc/Archive"
+        "--exclude=${baseDir}/etc/Archives"
         "--exclude=${baseDir}/h/G"
         "--exclude=${baseDir}/h/Playlists"
         "--exclude=${baseDir}/h/T"
