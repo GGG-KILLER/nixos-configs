@@ -15,7 +15,7 @@ in {
 
   environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
   hardware.nvidia = {
-    package = nvidiaDriver;
+    package = stableDriver;
 
     open = true;
     modesetting.enable = true;
