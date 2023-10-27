@@ -9,7 +9,6 @@ with lib; let
   gpuDevs = [
     "/dev/dri"
     "/dev/shm"
-    "/dev/nvidia-modeset"
     "/dev/nvidia-uvm"
     "/dev/nvidia-uvm-tools"
     "/dev/nvidia0"
