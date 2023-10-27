@@ -76,17 +76,19 @@ in {
       # Misc
       chromium
       discord-canary
+      exiftool
       fd
       google-chrome
+      imgbrd-grabber
       imhex
       inputs.git-crypt-agessh.packages.${system}.default
-      # inputs.ipgen-cli.packages.${system}.ipgen-cli
       jellyfin-mpv-shim
       libguestfs-with-appliance
       local.mockoon
       mullvad-vpn
       ruffle
       rustdesk
+      yt-dlp
       zenmonitor
     ];
 
