@@ -32,6 +32,8 @@
     locations."/v2/" = {
       proxyPass = "http://shiro.lan:5000";
       extraConfig = ''
+        proxy_buffering off;
+          proxy_cache off;
         client_max_body_size 0;
       '';
     };
