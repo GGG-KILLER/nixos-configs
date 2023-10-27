@@ -10,6 +10,7 @@ with lib; {
   imports = [
     ./containers
     ./services
+    ./users
     ./boot.nix
     ./hardware-configuration.nix
     ./headless.nix
