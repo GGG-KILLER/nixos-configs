@@ -52,6 +52,10 @@ in {
       allBase
       {
         repository = "/mnt/backup/all";
+        pruneOpts = mkForce [
+          "--group-by hosts"
+          "--keep-daily 7"
+        ];
       }
     ];
     all-b2 = mkMerge [
