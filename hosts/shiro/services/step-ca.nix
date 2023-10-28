@@ -62,7 +62,7 @@ in {
         policy = {
           x509 = {
             allow = {
-              dns = ["*.*.shiro.lan" "*.shiro.lan" "*.lan"];
+              dns = ["*.shiro.lan" "*.lan"];
             };
             allowWildcardNames = true;
           };
