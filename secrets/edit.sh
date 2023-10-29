@@ -3,4 +3,4 @@
 # shellcheck shell=bash
 ROOT_DIR="$(dirname "$(readlink -f "$0")")"
 pushd "$ROOT_DIR" || exit
-EDITOR="code --wait" agenix -e "$@"
+EDITOR="code --wait" exec agenix -e "$@"
