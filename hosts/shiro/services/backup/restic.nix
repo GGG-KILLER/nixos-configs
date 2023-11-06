@@ -29,6 +29,7 @@ in {
         "--exclude=${baseDir}/etc/Archives"
         "--exclude=${baseDir}/etc/random"
         "--exclude=${baseDir}/h/G"
+        "--exclude=${baseDir}/h/OF"
         "--exclude=${baseDir}/h/Playlists"
         "--exclude=${baseDir}/h/R"
         "--exclude=${baseDir}/h/T"
