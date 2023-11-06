@@ -38,7 +38,7 @@ in {
       # jetbrains.rider
       mono
       rnix-lsp
-      wrangler
+      # wrangler
       yarn
 
       # Database
