@@ -18,7 +18,6 @@
         mockoon = callPackage ./mockoon.nix {};
         csharp-vscode-ext = callPackage ./ms-dotnettools.csharp {};
         csdevkit-vscode-ext = callPackage ./ms-dotnettools.csdevkit {};
-        vscodeintellicode-csharp-vscode-ext = callPackage ./ms-dotnettools.vscodeintellicode-csharp {};
       };
     })
   ];

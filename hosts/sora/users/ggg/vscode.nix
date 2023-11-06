@@ -43,7 +43,6 @@ in {
           dbaeumer.vscode-eslint
           editorconfig.editorconfig
           foxundermoon.shell-format
-          hashicorp.terraform
           james-yu.latex-workshop
           jnoortheen.nix-ide
           kamadorueda.alejandra
@@ -54,12 +53,12 @@ in {
           ms-python.python
           ms-toolsai.jupyter
           ms-vscode-remote.remote-ssh
-          octref.vetur
+          # octref.vetur
           oderwat.indent-rainbow
           pkief.material-icon-theme
-          redhat.java
+          # redhat.java
           redhat.vscode-yaml
-          svelte.svelte-vscode
+          # svelte.svelte-vscode
           timonwong.shellcheck
           valentjn.vscode-ltex
           wix.vscode-import-cost
@@ -91,18 +90,18 @@ in {
           })
           (vscodeExt {
             id = "ms-vscode-remote.remote-containers";
-            version = "0.313.0";
-            sha256 = "sha256-bx6quRdOb86DafUjXIQ7UsERtRoT6T1lr3iH/5tSXzo=";
+            version = "0.315.1";
+            sha256 = "sha256-esDIiSI/g/1Si8WiT9jkxM6dmSCxIhS3uzaxcc0QBj4=";
           })
           (vscodeExt {
             id = "L13RARY.l13-diff";
-            version = "1.3.2";
-            sha256 = "sha256-cfvV8wfbUgCbtMqrmEqBEuudlWOhCoghIJTPKOfDUI8=";
+            version = "1.3.4";
+            sha256 = "sha256-6fAtYsGTJBVgZGWXm12Tz1KBo2fFuirfzr/XJNhQ2vo=";
           })
           (vscodeExt {
             id = "eamodio.gitlens";
-            version = "2023.10.1305";
-            sha256 = "sha256-ga2hIXLH2pO3DHZowKXhIr7j6D7+bNDUlplO439mQsw=";
+            version = "2023.11.504";
+            sha256 = "sha256-gZco6ZXj2mkWn0llw88344NR2Ez039jcXQkSsTa5KdM=";
           })
         ];
     };
