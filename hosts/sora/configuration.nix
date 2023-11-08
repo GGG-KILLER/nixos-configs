@@ -11,6 +11,7 @@
   imports = [
     ./audio
     ./backup/restic.nix
+    ./users/ggg
     ./docker.nix
     ./fancontrol.nix
     ./fonts.nix
@@ -18,10 +19,10 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./nix.nix
+    ./openrgb.nix
     ./overrides.nix
     ./rustdesk.nix
     ./secrets.nix
-    ./users/ggg
     ./video.nix
     ./virtualisation.nix
     ./vpn.nix
