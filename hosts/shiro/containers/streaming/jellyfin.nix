@@ -59,6 +59,10 @@ in {
           hostPath = "/zfs-main-pool/data/jellyfin";
           isReadOnly = false;
         };
+        "/var/cache/jellyfin" = {
+          hostPath = "/zfs-main-pool/data/jellyfin/var-cache";
+          isReadOnly = false;
+        };
       }
       // (listToAttrs (map (dev:
         nameValuePair dev {
