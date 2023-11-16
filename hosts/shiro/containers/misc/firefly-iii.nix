@@ -43,7 +43,27 @@ in rec {
       config,
       pkgs,
       ...
-    }: {
+    }: let
+      fireflyPhp = pkgs.php82.buildEnv {
+        extensions = {
+          enabled,
+          all,
+        }:
+          enabled
+          ++ (with all; [
+            bcmath
+            intl
+            curl
+            zip
+            sodium
+            gd
+            xml
+            mbstring
+            pgsql
+            pdo_pgsql
+          ]);
+      };
+    in {
       i18n.supportedLocales = [
         "en_US.UTF-8/UTF-8"
         "pt_BR.UTF-8/UTF-8"
@@ -52,25 +72,7 @@ in rec {
       services.phpfpm.pools.firefly-iii = {
         user = config.services.nginx.user;
         group = config.services.nginx.group;
-        phpPackage = pkgs.php.buildEnv {
-          extensions = {
-            enabled,
-            all,
-          }:
-            enabled
-            ++ (with all; [
-              bcmath
-              intl
-              curl
-              zip
-              sodium
-              gd
-              xml
-              mbstring
-              pgsql
-              pdo_pgsql
-            ]);
-        };
+        phpPackage = fireflyPhp;
         settings = {
           "pm" = "dynamic";
           "listen.owner" = config.services.nginx.user;
@@ -85,7 +87,7 @@ in rec {
       services.phpfpm.pools.firefly-iii-data-importer = {
         user = config.services.nginx.user;
         group = config.services.nginx.group;
-        phpPackage = pkgs.php.buildEnv {
+        phpPackage = pkgs.php82.buildEnv {
           extensions = {
             enabled,
             all,
@@ -103,6 +105,19 @@ in rec {
           "pm.min_spare_servers" = 1;
           "pm.max_spare_servers" = 3;
           "pm.max_requests" = 500;
+        };
+      };
+
+      systemd.services.firefly-iii-cron = {
+        description = "Firefly III recurring transactions";
+        after = ["phpfpm-firefly-iii.service"];
+        requisite = ["phpfpm-firefly-iii.service"];
+        startAt = "daily";
+        script = "${fireflyPhp}/bin/php /var/www/firefly-iii/artisan firefly-iii:cron";
+        serviceConfig = {
+          Type = "oneshot";
+          User = "nginx";
+          Group = "nginx";
         };
       };
 
