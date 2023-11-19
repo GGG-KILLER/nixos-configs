@@ -6,6 +6,6 @@
   ...
 }: {
   home-manager.users.ggg = {
-    home.packages = with pkgs; [tmux yt-dlp];
+    home.packages = with pkgs; [tmux yt-dlp aria];
   };
 }

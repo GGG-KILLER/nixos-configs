@@ -74,6 +74,7 @@ in {
       virt-viewer
 
       # Misc
+      aria
       chromium
       discord-canary
       exiftool
