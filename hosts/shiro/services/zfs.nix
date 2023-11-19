@@ -1,6 +1,6 @@
 {config, ...}: {
   # Expand all devices on boot
-  services.zfs.expandOnBoot = "all";
+  #services.zfs.expandOnBoot = "all"; # TODO: re-enable once zpool-auto-expand-partitions gets fixed
 
   # Enable auto-scrub
   services.zfs.autoScrub.enable = true;
