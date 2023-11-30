@@ -17,7 +17,7 @@ buildGoModule rec {
     sha256 = "sha256-+0k9LBsHqNHmoOAY1UDzbbqni+ikj+c3ijfT41rCfLc=";
   };
 
-  vendorSha256 = "sha256-nAvODyy+PfkGFAaq+3hBhQaPji5GUMU7N8xcgbGQMeI=";
+  vendorHash = "sha256-nAvODyy+PfkGFAaq+3hBhQaPji5GUMU7N8xcgbGQMeI=";
 
   # FIXME: tests fail due to read-only nix store
   doCheck = false;

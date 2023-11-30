@@ -16,7 +16,7 @@ buildGoModule rec {
     sha256 = "sha256-lGhpZ8esDoyzLcqdBpcTOtk6CRHsyJnwk2Vc0SWHeRk=";
   };
 
-  vendorSha256 = null;
+  vendorHash = null;
 
   postConfigure = ''
     substituteInPlace vendor/github.com/ncabatoff/gosensors/gosensors.go \
