@@ -30,7 +30,7 @@ in {
     enable = true;
     port = 22;
     openFirewall = true;
-    extraOptions = ["-4" "-l 16" "-d 20000" "-v"];
+    extraOptions = ["-4" "-l 16" "-d 20000"];
   };
 
   # Enable NAT
@@ -122,6 +122,8 @@ in {
     sshPort
     wgPort
   ];
+
+  zramSwap.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
