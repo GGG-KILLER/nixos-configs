@@ -5,16 +5,11 @@
 }:
 with lib; let
   extensionPkgs = with pkgs.gnomeExtensions; [
-    always-show-titles-in-overview
     appindicator
     arcmenu
     dash-to-panel
-    easyeffects-preset-selector
     just-perfection
-    mpris-indicator-button
-    #static-background-in-overview # MAKES EVERYTHING SLOW AS FUCK AFTER A WHILE
     status-area-horizontal-spacing
-    transparent-top-bar
     user-themes
     vitals
   ];
