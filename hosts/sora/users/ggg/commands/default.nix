@@ -5,7 +5,7 @@
   ...
 }: {
   home-manager.users.ggg.home.packages = let
-    mkCommand = pkgs.callPackage ./mk-command.nix;
+    mkCommand = pkgs.callPackage ../../../../../common/users/mk-command.nix;
   in [
     (mkCommand {
       dependencies = with pkgs; [restic coreutils];
