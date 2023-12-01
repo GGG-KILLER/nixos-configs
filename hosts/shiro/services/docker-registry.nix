@@ -1,4 +1,4 @@
-{...}: {
+{config, ...}: {
   services.dockerRegistry = {
     enable = true;
     enableDelete = true;
@@ -17,6 +17,7 @@
       ENABLE_DELETE_IMAGES = "true";
       DOCKER_REGISTRY_URL = "http://shiro.lan:5000";
       PUBLIC_REGISTRY_URL = "docker.lan";
+      SECRET_KEY_BASE = config.my.secrets.docker-registry-browser.secret-key-base;
     };
     extraOptions = [
       "--cap-drop=ALL"
