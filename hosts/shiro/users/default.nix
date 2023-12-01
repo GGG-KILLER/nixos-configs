@@ -1,5 +1,5 @@
 {...}: {
   imports = [
-    ./ggg.nix
+    ./ggg
   ];
 }

@@ -1,0 +1,16 @@
+#! /usr/bin/env bash
+set -euo pipefail
+shopt -s nullglob
+
+if [[ $EUID -ne 0 ]]; then
+    echo "Please run as root" >&2
+    exit
+fi
+
+for repo in $(curl -Ls GET http://docker.lan/v2/_catalog | jq -r '.repositories[]'); do
+    tags=(/var/lib/docker-registry/docker/registry/v2/repositories/"$repo"/_manifests/tags/*);
+    if [ "${#tags[@]}" -lt 1 ]; then
+        echo "Removing repository $repo due to no tags being in it.";
+        rm -r "/var/lib/docker-registry/docker/registry/v2/repositories/$repo";
+    fi
+done
