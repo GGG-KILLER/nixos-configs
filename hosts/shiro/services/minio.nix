@@ -11,7 +11,7 @@
   };
 
   services.prometheus.exporters.minio = {
-    enable = true;
+    enable = false;
     minioBucketStats = true;
     minioAddress = "http://localhost:8082";
   };
