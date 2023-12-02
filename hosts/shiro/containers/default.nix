@@ -10,6 +10,7 @@ with lib; {
   imports = [
     ./downloads
     ./misc
+    ./monitoring
     ./streaming
     ./pgsql.nix
     ./vpn-gateway.nix
