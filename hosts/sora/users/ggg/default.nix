@@ -138,9 +138,69 @@ in {
       mpv = {
         enable = true;
         config = {
-          profile = "gpu-hq";
-          cache-default = 4000000;
+          # General
+          scale = "ewa_lanczossharp";
+          cscale = "ewa_lanczossharp";
+          dscale = "mitchell";
+          correct-downscaling = "yes";
+          linear-downscaling = "yes";
+          sigmoid-upscaling = "yes";
+
+          vd-lavc-dr = "yes";
+
+          gpu-api = "vulkan";
+          vulkan-async-compute = "yes";
+          vulkan-async-transfer = "yes";
+          vulkan-queue-count = 1;
+
           hwdec = "auto";
+          vo = "gpu-next";
+          ao = "pipewire";
+
+          # Misc
+          deinterlace = "no";
+
+          # Colorspace
+          #icc-contrast = 1000;
+          target-prim = "auto";
+          target-trc = "auto";
+          vf = "format=colorlevels=full:colormatrix=auto";
+          video-output-levels = "full";
+
+          # Dither
+          dither-depth = "auto";
+          temporal-dither = "yes";
+
+          # Debanding
+          deband = "yes";
+          deband-iterations = 4;
+          deband-threshold = 20;
+          deband-range = 16;
+          deband-grain = 0;
+
+          # Subtitles
+          blend-subtitles = "yes";
+
+          # Motion Interpolation
+          video-sync = "display-resample";
+          interpolation = "yes";
+          tscale = "oversample";
+
+          # Anti-Ringing
+          scale-antiring = 0.7;
+          dscale-antiring = 0.7;
+          cscale-antiring = 0.7;
+
+          # Cache
+          cache = "auto";
+          cache-secs = 600;
+          demuxer-max-back-bytes = "100MiB";
+          demuxer-max-bytes = "100MiB";
+          demuxer-readahead-secs = 600;
+
+          # profile = "gpu-hq";
+          # cache-default = 4000000;
+          osc = "no";
         };
       };
       obs-studio = {
