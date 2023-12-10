@@ -194,8 +194,8 @@ in {
           # Cache
           cache = "auto";
           cache-secs = 600;
-          demuxer-max-back-bytes = "100MiB";
-          demuxer-max-bytes = "100MiB";
+          demuxer-max-back-bytes = "250MiB";
+          demuxer-max-bytes = "250MiB";
           demuxer-readahead-secs = 600;
 
           # profile = "gpu-hq";
