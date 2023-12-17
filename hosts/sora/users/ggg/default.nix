@@ -27,7 +27,7 @@ in {
   home-manager.users.ggg = {
     home.packages = with pkgs; [
       # Audio
-      (easyeffects.override {speexdsp = speexdsp.overrideAttrs (old: {configureFlags = [];});})
+      easyeffects
       helvum
 
       # Android

@@ -1,2 +1,3 @@
 .deploy-gc/
 fonts.tar.gz
+simple-flake.nix
