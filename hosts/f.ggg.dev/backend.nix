@@ -6,11 +6,11 @@
 }: let
   backendImage = pkgs.dockerTools.pullImage {
     imageName = "docker.lan/mywebsite/backend";
-    imageDigest = "sha256:13f8f07f177e539057bf24ab3a30d5e931dc3f6895e7e73936074c29a3bcaff8";
-    sha256 = "1lbkhbwg1j9yz7d270wil9zcw90jmzz0gv9zpl34np0jncgqi7an";
+    imageDigest = "sha256:642dd8473db3b123eb42fa525996c052fa037058c0f20f865c68c158014fa8b4";
+    sha256 = "155i4qyma9s2b0dsc4w2wsvscrpj5zyyzrnw4fjizwny4zqjk66v";
     finalImageName = "docker.lan/mywebsite/backend";
     finalImageTag = "latest";
-  }; # /nix/store/hf21fbwi4ihm9g266rvjj8pk017jb4yb-docker-image-docker.lan-mywebsite-backend-latest.tar
+  };
 in {
   virtualisation.podman = {
     enable = true;
