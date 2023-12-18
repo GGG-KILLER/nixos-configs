@@ -16,9 +16,11 @@ with lib; let
 
     # Get rid of channels
     home.activation.eliminateChannelsRoot = config.lib.dag.entryAfter ["writeBoundary"] ''
-      rm -f $HOME/.nix-channels
-      rm -rf $HOME/.nix-defexpr
-      ln -sf ${inputs.nixpkgs} $HOME/.nix-defexpr
+      rm -f ${config.home.homeDirectory}/.nix-channels
+      rm -rf ${config.home.homeDirectory}/.nix-defexpr
+      ln -sf ${inputs.nixpkgs} ${config.home.homeDirectory}/.nix-defexpr
+
+      ${config.nix.package}/bin/nix profile wipe-history --profile ${config.home.homeDirectory}/.local/state/nix/profiles/home-manager
     '';
   };
 in {
