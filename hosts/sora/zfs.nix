@@ -30,5 +30,5 @@
   };
 
   # ZFS Flags
-  boot.kernelParams = ["zfs.zfs_arc_max=6442450944" "elevator=none" "nohibernate"];
+  boot.kernelParams = ["zfs.zfs_arc_max=12884901888" "elevator=none" "nohibernate"];
 }
