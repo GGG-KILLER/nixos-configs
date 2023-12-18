@@ -2,7 +2,7 @@
   sshPort = 17606;
 in {
   imports = [
-    ./docker.nix
+    ./backend.nix
     ./hardware-configuration.nix
     ./store.nix
   ];
