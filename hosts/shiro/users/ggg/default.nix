@@ -10,6 +10,6 @@
   ];
 
   home-manager.users.ggg = {
-    home.packages = with pkgs; [tmux yt-dlp aria];
+    home.packages = with pkgs; [tmux yt-dlp aria step-cli];
   };
 }

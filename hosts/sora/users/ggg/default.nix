@@ -40,9 +40,14 @@ in {
       rnix-lsp
       # wrangler
       yarn
+      docker-compose
+      nodejs_latest
+      powershell
+      tokei
 
       # Database
       pgformatter
+      postgresql_14
       # pgmodeler # TODO: Uncomment this once the hash in nixpkgs gets updated.
 
       # Encryption
@@ -51,6 +56,7 @@ in {
       xca-stable
       yubikey-manager
       yubikey-manager-qt
+      step-cli
 
       # Games
       # inputs.packwiz.packages.${system}.packwiz
@@ -91,6 +97,7 @@ in {
       rustdesk
       yt-dlp
       zenmonitor
+      r2modman
     ];
 
     home.sessionVariables = {
@@ -121,12 +128,29 @@ in {
         settings.editor = "${pkgs.vscode}/bin/code --wait";
       };
       git = {
+        enable = true;
+        delta.enable = true;
+        lfs.enable = true;
+        userName = "GGG";
+        userEmail = "gggkiller2@gmail.com";
         extraConfig = {
+          init.defaultBranch = "main";
           credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager";
           credential.credentialStore = "secretservice";
           core.editor = "${pkgs.vscode}/bin/code --wait";
         };
       };
+      tealdeer.enable = true;
+      zsh.oh-my-zsh.plugins = [
+        "adb"
+        "copybuffer"
+        "copyfile"
+        "docker"
+        "docker-compose"
+        "dotnet"
+        "git"
+        "git-auto-fetch"
+      ];
       mangohud = {
         enable = true;
         settingsPerApplication = {

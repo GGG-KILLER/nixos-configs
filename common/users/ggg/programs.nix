@@ -13,18 +13,6 @@
 
   home-manager.users.ggg = {
     home.packages = with pkgs; [
-      # Coding
-      docker-compose
-      nodejs_latest
-      powershell
-      tokei
-
-      # Database
-      postgresql_14
-
-      # Encryption
-      step-cli
-
       # Nix
       nix-du
       nix-ld
@@ -41,8 +29,6 @@
       killall
       neofetch
       p7zip
-      parted
-      rclone
       steam-run
       unzip
       zip
@@ -57,18 +43,9 @@
       eza = {
         enable = true;
         enableAliases = true;
-        extraOptions = ["-g"];
-      };
-      git = {
-        enable = true;
-        delta.enable = true;
-        lfs.enable = true;
-        userName = "GGG";
-        userEmail = "gggkiller2@gmail.com";
-        extraConfig.init.defaultBranch = "main";
+        extraOptions = ["-a" "-g"];
       };
       jq.enable = true;
-      tealdeer.enable = true;
       zsh = {
         enable = true;
         enableAutosuggestions = true;
@@ -77,16 +54,8 @@
         oh-my-zsh = {
           enable = true;
           plugins = [
-            "adb"
-            "copybuffer"
-            "copyfile"
-            "docker"
-            "docker-compose"
-            "dotnet"
             "encode64"
             "fd"
-            "git"
-            "git-auto-fetch"
             "sudo"
             "timer"
           ];
