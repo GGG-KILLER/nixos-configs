@@ -1,3 +1,8 @@
-.deploy-gc/
-fonts.tar.gz
+# Folders
+/.deploy-gc/
+/isos/
+
+# Files
+*.tar.gz
+*.zip
 simple-flake.nix

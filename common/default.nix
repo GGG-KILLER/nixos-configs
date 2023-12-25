@@ -1,18 +1,25 @@
-{...}: {
-  imports = [
-    ./groups
-    ./modules
-    ./overlays
-    ./secrets
-    ./users
-    ./boot.nix
-    ./console.nix
-    ./home-manager.nix
-    ./i18n.nix
-    ./nix.nix
-    ./pki.nix
-    ./time.nix
-  ];
+{
+  lib,
+  liveCd ? false,
+  ...
+}: {
+  imports =
+    [
+      ./groups
+      ./modules
+      ./overlays
+      ./secrets
+      ./users
+      ./boot.nix
+      ./console.nix
+      ./i18n.nix
+      ./nix.nix
+      ./pki.nix
+      ./time.nix
+    ]
+    ++ (lib.optionals (!liveCd) [
+      ./home-manager.nix
+    ]);
 
   environment.pathsToLink = ["/share/zsh"];
 

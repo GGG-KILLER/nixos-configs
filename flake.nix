@@ -91,6 +91,32 @@
       shiro = mkConfig "shiro";
       vpn-proxy = mkConfig "vpn-proxy";
       f-ggg-dev = mkConfig "f.ggg.dev";
+      live-cd-gnome = nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = {
+          inherit system inputs;
+          liveCd = true;
+        };
+
+        modules = [
+          ./common
+          ./media/live-cd-gnome.nix
+        ];
+      };
+      live-cd-minimal = nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = {
+          inherit system inputs;
+          liveCd = true;
+        };
+
+        modules = [
+          ./common
+          ./media/live-cd-minimal.nix
+        ];
+      };
     };
 
     deploy.nodes = {

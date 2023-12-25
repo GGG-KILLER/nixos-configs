@@ -1,11 +1,11 @@
 {
+  lib,
   config,
   pkgs,
+  liveCd ? false,
   ...
 }: {
-  imports = [
-    ./programs.nix
-  ];
+  imports = lib.optional (!liveCd) ./programs.nix;
 
   users.users.ggg = {
     uid = 1000;
@@ -33,6 +33,6 @@
     config.users.users.ggg.openssh.authorizedKeys.keys;
 
   nix.settings.trusted-users = ["ggg"];
-  modules.home.mainUsers = ["ggg"];
+  modules.home.mainUsers = lib.mkIf (!liveCd) ["ggg"];
   programs.zsh.enable = true;
 }
