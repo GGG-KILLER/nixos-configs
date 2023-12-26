@@ -11,6 +11,7 @@
     };
     volumes = [
       "/zfs-main-pool/data/homarr/configs:/app/data/configs"
+      "/zfs-main-pool/data/homarr/data:/data"
       "/zfs-main-pool/data/homarr/icons:/app/public/icons"
       "${config.my.secrets.pki.root-crt-path}:/etc/ssl/certs/private/ca/ca-root.pem"
     ];
