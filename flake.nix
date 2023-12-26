@@ -75,6 +75,7 @@
 
         specialArgs = {
           inherit system inputs nur-no-pkgs;
+          liveCd = false;
         };
 
         modules = [
