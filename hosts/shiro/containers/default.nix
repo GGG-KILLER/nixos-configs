@@ -4,6 +4,7 @@
   options,
   config,
   lib,
+  liveCd,
   ...
 }:
 with lib; {
@@ -216,7 +217,7 @@ with lib; {
           (inputs.nixpkgs.lib.nixosSystem {
             inherit system;
             specialArgs = {
-              inherit system inputs;
+              inherit system inputs liveCd;
             };
             modules = [
               ../../../common
