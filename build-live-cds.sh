@@ -3,8 +3,11 @@
 # shellcheck shell=bash
 set -euo pipefail
 
-rm isos/*.iso || true;
-mkdir isos || true;
+if [ -d isos/ ]; then
+    rm isos/*.iso || true;
+else
+    mkdir isos;
+fi
 
 function move_iso() {
     ISOS=("$1"/iso/*.iso)
