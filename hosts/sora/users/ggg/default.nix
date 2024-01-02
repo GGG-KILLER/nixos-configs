@@ -72,7 +72,7 @@ in {
       nixpkgs-review
 
       # Media
-      ffmpeg_5-full
+      ffmpeg_6-full
       handbrake
 
       # VMs
