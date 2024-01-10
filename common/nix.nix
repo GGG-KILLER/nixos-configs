@@ -1,9 +1,12 @@
 {
   lib,
   inputs,
+  pkgs,
   ...
 }: {
   nix = {
+    package = pkgs.nixVersions.nix_2_19;
+
     # Flakes
     settings.experimental-features = ["nix-command" "flakes"];
     registry = {
