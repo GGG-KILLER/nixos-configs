@@ -1,0 +1,25 @@
+From bda5cc6c051585475ce6186640c6b6d27801da1b Mon Sep 17 00:00:00 2001
+From: GGG <gggkiller2@gmail.com>
+Date: Thu, 11 Jan 2024 13:30:44 -0300
+Subject: [PATCH] Fix getMaxCPU segfault.
+
+---
+ src/libutil/current-process.cc | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/libutil/current-process.cc b/src/libutil/current-process.cc
+index 352a6a0fb..733dc15a9 100644
+--- a/src/libutil/current-process.cc
++++ b/src/libutil/current-process.cc
+@@ -35,6 +35,8 @@ unsigned int getMaxCPU()
+ 
+         auto cpuMax = readFile(cpuFile);
+         auto cpuMaxParts = tokenizeString<std::vector<std::string>>(cpuMax, " \n");
++        if (cpuMaxParts.size() != 2)
++                return 0;
+         auto quota = cpuMaxParts[0];
+         auto period = cpuMaxParts[1];
+         if (quota != "max")
+-- 
+2.42.0
+
