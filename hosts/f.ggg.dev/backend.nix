@@ -6,8 +6,8 @@
 }: let
   backendImage = pkgs.dockerTools.pullImage {
     imageName = "docker.lan/mywebsite/backend";
-    imageDigest = "sha256:642dd8473db3b123eb42fa525996c052fa037058c0f20f865c68c158014fa8b4";
-    sha256 = "155i4qyma9s2b0dsc4w2wsvscrpj5zyyzrnw4fjizwny4zqjk66v";
+    imageDigest = "sha256:f2a79a6eb54705264268d91167e98d93a13404af5f93647c301d14e17a991e30";
+    sha256 = "08z693z1zb1l8175mm09j1ijd0ynwp6syhcivqkffxm54g3ygnwp";
     finalImageName = "docker.lan/mywebsite/backend";
     finalImageTag = "latest";
   };
