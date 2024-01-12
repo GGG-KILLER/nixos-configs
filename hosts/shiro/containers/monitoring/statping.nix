@@ -8,6 +8,7 @@
     name = "statping-nix-wrapper";
     tag = "latest";
 
+    # nix run nixpkgs#nix-prefetch-docker -- --image-name adamboutcher/statping-ng --image-tag latest --quiet
     fromImage = pkgs.dockerTools.pullImage {
       imageName = "adamboutcher/statping-ng";
       imageDigest = "sha256:e32bd2e50ca023f37b0650e1942d51cb9269a2caab11042bc0cc53fac0474a2b";
