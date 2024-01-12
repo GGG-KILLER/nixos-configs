@@ -37,7 +37,7 @@ in {
       else unstableDriver;
   in {
     # Use latest kernel if possible.
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    # boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # ISO naming.
     isoImage.isoBaseName = "${config.system.nixos.distroId}-${config.isoImage.edition}";
