@@ -25,6 +25,7 @@
       ".debugger/arm64/vsdbg"
     ];
     lspBins = [
+      ".roslyn/Microsoft.CodeAnalysis.LanguageServer"
     ];
     razorBins = [
       ".razor/createdump"
@@ -34,7 +35,7 @@
     {
       x86_64-linux = {
         arch = "linux-x64";
-        sha256 = "sha256-8I7mCslgUCz/bKBA4+roU1/89i2ljrmV8BYwl5WoEUk=";
+        sha256 = "sha256-i5shbpjp0e0qUIG6FLPu1mIN0DD2+zdCq/nZa49v5iI=";
         binaries = linuxDebuggerBins ++ lspBins ++ razorBins;
       };
       aarch64-linux = linuxDebuggerBins ++ lspBins; # Linux aarch64 version has no Razor Language Server
@@ -48,7 +49,7 @@ in
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      version = "2.9.20";
+      version = "2.15.30";
       inherit (extInfo) sha256 arch;
     };
 

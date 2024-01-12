@@ -85,23 +85,23 @@ in {
           })
           (vscodeExt {
             id = "ms-vscode.powershell";
-            version = "2023.9.2";
-            sha256 = "sha256-0Qs1SXVPcxI8NKhnCk94Kcl27rMYz9npTrxsnFu4VXk=";
+            version = "2024.1.0";
+            sha256 = "sha256-7RVBNFHI85KKVed2S5mVL9oiOafRBBplVstRHD1LgFU=";
           })
           (vscodeExt {
             id = "ms-vscode-remote.remote-containers";
-            version = "0.315.1";
-            sha256 = "sha256-esDIiSI/g/1Si8WiT9jkxM6dmSCxIhS3uzaxcc0QBj4=";
+            version = "0.331.0";
+            sha256 = "sha256-/Ac7TLedftURKNkMYujnGN2zUg/jNW4Bft0bTDicx68=";
           })
           (vscodeExt {
             id = "L13RARY.l13-diff";
-            version = "1.3.4";
-            sha256 = "sha256-6fAtYsGTJBVgZGWXm12Tz1KBo2fFuirfzr/XJNhQ2vo=";
+            version = "1.3.5";
+            sha256 = "sha256-V0hiuTjLhQLlPMX227BUQtgIiO1cPlWtV2maQbwHvNY=";
           })
           (vscodeExt {
             id = "eamodio.gitlens";
-            version = "2023.11.504";
-            sha256 = "sha256-gZco6ZXj2mkWn0llw88344NR2Ez039jcXQkSsTa5KdM=";
+            version = "2024.1.1204";
+            sha256 = "sha256-K7AEEU8JiyEYzd+0FtRPrBIp4uLD0Lxgv1D7Wd8Zypw=";
           })
         ];
     };
