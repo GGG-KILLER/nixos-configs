@@ -4,7 +4,7 @@
 set -euo pipefail
 
 if [ -d isos/ ]; then
-    rm isos/*.iso || true;
+    rm -f isos/*.iso || true;
 else
     mkdir isos;
 fi
