@@ -91,6 +91,7 @@ in {
       inputs.git-crypt-agessh.packages.${system}.default
       jellyfin-mpv-shim
       libguestfs-with-appliance
+      local.m3u8-dl
       local.mockoon
       mullvad-vpn
       ruffle
