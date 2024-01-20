@@ -41,6 +41,6 @@
     #   Long self-test 1 AM every saturday
     # Disables emailing with -m <nomailer>
     # Runs a custom script for notifications with -M exec
-    defaults.monitored = "-a -s (O/../.././(00|06|12|18)|S/../.././02|L/../../6/01) -m <nomailer> -M exec ${notifyScript} -M test";
+    defaults.monitored = "-a -s (O/../.././(00|06|12|18)|S/../.././02|L/../../6/01) -m <nomailer> -M exec ${notifyScript}";
   };
 }
