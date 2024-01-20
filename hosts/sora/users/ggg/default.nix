@@ -54,8 +54,8 @@ in {
       age
       inputs.agenix.packages.${system}.default
       xca-stable
-      yubikey-manager
-      yubikey-manager-qt
+      # yubikey-manager # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
+      # yubikey-manager-qt # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
       step-cli
 
       # Games
