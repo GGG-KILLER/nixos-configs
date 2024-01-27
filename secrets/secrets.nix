@@ -5,7 +5,8 @@ let
   sora = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6b2z/jMnPSYXSYYJ6NBY77m0bofpVceoArRzJHQ+Nc";
   shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc";
   vpn-proxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXJsB3idnONLnk1X/Ga2V0HHCJhjqptMbvdZVJji3F/";
-  systems = [sora shiro vpn-proxy];
+  f-ggg-dev = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ527bVSbg3fMxUIyMrXhmyo0A/motmI3SZY6sMLk7C0";
+  systems = [sora shiro vpn-proxy f-ggg-dev];
 
   all = users ++ systems;
 in {
