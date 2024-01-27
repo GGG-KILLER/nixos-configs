@@ -48,7 +48,7 @@ in {
           timonwong.shellcheck
           valentjn.vscode-ltex
         ])
-        ++ (with (pkgs.forVSCodeVersion package.version).vscode-marketplace; [
+        ++ (with pkgs.vscode-marketplace; [
           arrterian.nix-env-selector
           christopherstyles.html-entities
           cschlosser.doxdocgen
