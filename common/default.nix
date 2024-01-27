@@ -15,6 +15,7 @@
       ./i18n.nix
       ./nix.nix
       ./pki.nix
+      ./secrets.nix
       ./time.nix
     ]
     ++ (lib.optionals (!liveCd) [

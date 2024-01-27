@@ -10,9 +10,13 @@ let
 
   all = users ++ systems;
 in {
+  # All
+  "all/users/ggg/hashedPassword.age".publicKeys = all;
+
   # Sora
   "sora/backup_password.age".publicKeys = [ggg sora];
   "sora/backup_envfile.age".publicKeys = [ggg sora];
+  "sora/users/ggg/nix.conf.age".publicKeys = [ggg sora];
 
   # Shiro
   "shiro/backup_password.age".publicKeys = [ggg sora shiro];
