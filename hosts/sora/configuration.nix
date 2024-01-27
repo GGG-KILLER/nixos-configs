@@ -33,6 +33,11 @@
     nur-no-pkgs.repos.ilya-fedin.modules.flatpak-icons
   ];
 
+  # Overlays
+  nixpkgs.overlays = [
+    inputs.nix-vscode-extensions.overlays.default
+  ];
+
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
