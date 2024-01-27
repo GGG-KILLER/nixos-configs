@@ -8,7 +8,7 @@ with lib; let
   inherit (config.my.secrets.services) backblaze;
 in {
   services.restic.backups = let
-    zfs = "${pkgs.zfs}/bin/zfs";
+    zfs = getExe pkgs.zfs;
     allBase = type: let
       baseDir = "/home/ggg/.zfs/snapshot/restic-backup-${type}";
     in {

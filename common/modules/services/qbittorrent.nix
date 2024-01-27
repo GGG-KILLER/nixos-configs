@@ -36,7 +36,7 @@ in {
 
   config = mkIf cfg.enable {
     users.users = mkIf (cfg.user == "qbittorrent") {
-      "${cfg.user}" = {
+      ${cfg.user} = {
         group = cfg.group;
         home = cfg.dataDir;
         isSystemUser = true;
@@ -44,7 +44,7 @@ in {
     };
 
     users.groups = mkIf (cfg.user == "qbittorrent") {
-      "${cfg.group}" = {gid = null;};
+      ${cfg.group} = {gid = null;};
     };
 
     systemd.services.qbittorrent = {
@@ -54,7 +54,7 @@ in {
       path = [pkgs.qbittorrent-nox];
       serviceConfig = {
         ExecStart = ''
-          ${pkgs.qbittorrent-nox}/bin/qbittorrent-nox \
+          ${getExe' pkgs.qbittorrent-nox "qbittorrent-nox"} \
             --profile=${cfg.dataDir} \
             --webui-port=${toString cfg.web.port}
         '';

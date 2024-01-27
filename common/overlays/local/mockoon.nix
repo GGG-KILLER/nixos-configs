@@ -10,4 +10,5 @@ appimageTools.wrapType2 rec {
     sha256 = "sha256-YGcD/8h21fUoBEAcBVI5jo0UMCKdVRdC1zxDIrHjU+8=";
   };
   extraPkgs = pkgs: with pkgs; [];
+  meta.mainProgram = "mockoon";
 }

@@ -6,7 +6,7 @@
 }:
 with lib; {
   networking.wg-quick.interfaces.wglan = let
-    iptables = "${pkgs.iptables}/bin/iptables";
+    iptables = getExe' pkgs.iptables "iptables";
   in {
     address = [
       "192.168.5.1/24"

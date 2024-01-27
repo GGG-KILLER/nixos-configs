@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   systemd.services.rustdesk = {
     description = "RustDesk";
     requires = ["network.target"];
@@ -6,7 +10,7 @@
     wantedBy = ["multi-user.target"];
 
     serviceConfig = {
-      ExecStart = "${pkgs.rustdesk}/bin/rustdesk --service";
+      ExecStart = "${lib.getExe pkgs.rustdesk} --service";
       PIDFile = "/var/run/rustdesk.pid";
       KillMode = "mixed";
       TimeoutStopSec = "30";

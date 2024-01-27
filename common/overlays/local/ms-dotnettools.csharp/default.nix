@@ -82,7 +82,7 @@ in
         }
 
         substituteInPlace dist/extension.js \
-          --replace 'uname -m' '${coreutils}/bin/uname -m'
+          --replace 'uname -m' '${lib.getExe' coreutils "uname"} -m'
 
       ''
       + (lib.concatStringsSep "\n" (map

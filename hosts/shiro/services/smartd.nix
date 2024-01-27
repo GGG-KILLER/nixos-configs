@@ -1,16 +1,18 @@
 {
+  lib,
   config,
   pkgs,
   ...
-}: {
+}: let
+  inherit (lib) getExe getExe';
+in {
   services.smartd = let
-    discord-sh = "${pkgs.discord-sh}/bin/discord.sh";
-    jq = "${pkgs.jq}/bin/jq";
-    cut = "${pkgs.coreutils}/bin/cut";
-    rev = "${pkgs.util-linux}/bin/rev";
+    jq = getExe pkgs.jq;
+    cut = getExe' pkgs.coreutils "cut";
+    rev = getExe' pkgs.util-linux "rev";
     escape-str = varName: ''$(echo "${varName}" | ${jq} -Rs . | ${cut} -c 2- | ${rev} | ${cut} -c 2- | ${rev})'';
     notifyScript = pkgs.writeScript "smartd-discord-notify.sh" ''
-      ${discord-sh} \
+      ${getExe' pkgs.discord-sh "discord.sh"} \
         --webhook-url="${config.my.secrets.discord.webhook}" \
         --title "$SMARTD_FAILTYPE" \
         --author smartd \

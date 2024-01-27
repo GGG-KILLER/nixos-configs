@@ -4,22 +4,22 @@
   inputs,
   lib,
   ...
-}:
-with lib; let
-  inherit (builtins) fromJSON readFile map filter;
+}: let
+  inherit (builtins) fromJSON readFile;
+  inherit (lib) getExe;
   readJSON = path: fromJSON (readFile path);
   settings = readJSON ./vscode/settings.json;
   inherit (pkgs.vscode-utils) extensionsFromVscodeMarketplace;
 in {
   home-manager.users.ggg = {
-    programs.vscode = {
+    programs.vscode = rec {
       enable = true;
       package = pkgs.vscode;
       userSettings =
         settings
         // {
           "powershell.powerShellAdditionalExePaths" = {
-            "PowerShell Core 7 (x64)" = "${pkgs.powershell}${pkgs.powershell.shellPath}";
+            "PowerShell Core 7 (x64)" = getExe pkgs.powershell;
           };
           "powershell.promptToUpdatePowerShell" = false;
 
@@ -28,9 +28,9 @@ in {
           "update.mode" = "none";
 
           "nix.enableLanguageServer" = true;
-          "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
-          "nix.serverPath" = "${pkgs.nil}/bin/nil";
-          "nix.serverSettings"."nil"."formatting"."command" = ["${pkgs.alejandra}/bin/alejandra"];
+          "nix.formatterPath" = getExe pkgs.alejandra;
+          "nix.serverPath" = getExe pkgs.nil;
+          "nix.serverSettings"."nil"."formatting"."command" = [(getExe pkgs.alejandra)];
         };
       extensions =
         (with pkgs.local; [
@@ -48,7 +48,7 @@ in {
           timonwong.shellcheck
           valentjn.vscode-ltex
         ])
-        ++ (with pkgs.vscode-marketplace; [
+        ++ (with (pkgs.forVSCodeVersion package.version).vscode-marketplace; [
           arrterian.nix-env-selector
           christopherstyles.html-entities
           cschlosser.doxdocgen

@@ -1,19 +1,21 @@
 {
+  lib,
   config,
   system,
   pkgs,
   inputs,
   ...
 }: let
+  inherit (lib) getExe getExe';
   dotnet-sdk = with pkgs.dotnetCorePackages;
     combinePackages [
       sdk_8_0
       sdk_7_0
       sdk_6_0
     ];
-  dotnetRoot = "${dotnet-sdk}";
+  dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/sdk";
-  dotnetBinary = "${dotnetRoot}/bin/dotnet";
+  dotnetBinary = getExe dotnet-sdk;
   xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
 in {
   imports = [
@@ -126,7 +128,7 @@ in {
     programs = {
       gh = {
         enable = true;
-        settings.editor = "${pkgs.vscode}/bin/code --wait";
+        settings.editor = "${getExe pkgs.vscode} --wait";
       };
       git = {
         enable = true;
@@ -138,7 +140,7 @@ in {
           init.defaultBranch = "main";
           credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager";
           credential.credentialStore = "secretservice";
-          core.editor = "${pkgs.vscode}/bin/code --wait";
+          core.editor = "${getExe pkgs.vscode} --wait";
         };
       };
       tealdeer.enable = true;
@@ -251,7 +253,7 @@ in {
     xdg.desktopEntries = {
       mockoon = {
         name = "Mockoon";
-        exec = "${pkgs.local.mockoon}";
+        exec = getExe pkgs.local.mockoon;
         categories = ["Application" "Network"];
       };
     };
@@ -263,7 +265,7 @@ in {
         PartOf = ["graphical-session.target"];
       };
 
-      Service.ExecStart = "${pkgs.jellyfin-mpv-shim}/bin/jellyfin-mpv-shim";
+      Service.ExecStart = getExe pkgs.jellyfin-mpv-shim;
 
       Install.WantedBy = ["graphical-session.target"];
     };

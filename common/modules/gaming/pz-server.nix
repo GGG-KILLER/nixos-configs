@@ -44,7 +44,7 @@ in {
 
   config = mkIf cfg.enable {
     users.users = mkIf (cfg.user == "pzuser") {
-      "${cfg.user}" = {
+      ${cfg.user} = {
         group = cfg.group;
         home = cfg.serverDir;
         isSystemUser = true;
@@ -52,7 +52,7 @@ in {
     };
 
     users.groups = mkIf (cfg.group == "pzuser") {
-      "${cfg.group}" = {gid = null;};
+      ${cfg.group} = {gid = null;};
     };
 
     systemd.tmpfiles.rules = [
@@ -92,8 +92,8 @@ in {
         "${cfg.serverDir}/jre64"
       ];
       preStart = ''
-        ${steamcmd}/bin/steamcmd +runscript ${steamcmdScript}
-        ${patchelf}/bin/patchelf \
+        ${getExe steamcmd} +runscript ${steamcmdScript}
+        ${getExe patchelf} \
           --set-interpreter "$(cat ${stdenv.cc}/nix-support/dynamic-linker)" \
           --set-rpath "${libraryPath}" \
           "${cfg.serverDir}/ProjectZomboid64" \

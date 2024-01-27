@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     hash = "sha256-TVDZeplFxbtw9s+GiLelYeh8Awh2M9/uYQpHpYl8+Gw=";
   };
 
-  unpackCmd = "${dpkg}/bin/dpkg-deb -x $curSrc .";
+  unpackCmd = "${lib.getExe dpkg} -x $curSrc .";
 
   nativeBuildInputs = [
     autoPatchelfHook

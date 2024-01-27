@@ -113,7 +113,7 @@ in rec {
         after = ["phpfpm-firefly-iii.service"];
         requisite = ["phpfpm-firefly-iii.service"];
         startAt = "daily";
-        script = "${fireflyPhp}/bin/php /var/www/firefly-iii/artisan firefly-iii:cron";
+        script = "${getExe fireflyPhp} /var/www/firefly-iii/artisan firefly-iii:cron";
         serviceConfig = {
           Type = "oneshot";
           User = "nginx";

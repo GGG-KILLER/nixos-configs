@@ -30,9 +30,8 @@ in {
     in {
       # VPN Config
       networking.wg-quick.interfaces.${wg-interface} = let
-        iptables = "${pkgs.iptables}/bin/iptables";
-        ip6tables = "${pkgs.iptables}/bin/iptables";
-        wg = "${pkgs.wireguard-tools}/bin/wg";
+        iptables = getExe' pkgs.iptables "iptables";
+        wg = getExe pkgs.wireguard-tools;
       in {
         address = [secrets.address];
         dns = [secrets.dns];
@@ -73,7 +72,7 @@ in {
         startAt = "*:0,15,30,45";
         path = with pkgs; [iproute2 curl systemd];
         script = ''
-          #! ${pkgs.bash}/bin/bash
+          #! ${getExe pkgs.bash}
           set -euo pipefail
 
           if ! curl https://f.ggg.dev/azenv ; then

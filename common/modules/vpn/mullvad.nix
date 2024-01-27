@@ -96,10 +96,10 @@ in {
         inherit TALPID_NET_CLS_MOUNT_DIR;
       };
       serviceConfig = let
-        mullvad = "${pkgs.mullvad-vpn}/bin/mullvad";
+        mullvad = getExe pkgs.mullvad-vpn;
       in
         {
-          ExecStart = "${pkgs.mullvad-vpn}/bin/mullvad-daemon -v --disable-stdout-timestamps";
+          ExecStart = "${getExe pkgs.mullvad-vpn} -v --disable-stdout-timestamps";
           ExecStartPost = pkgs.writeShellScript "mullvad_setup" ''
             ${mullvad} lan set ${
               if mullvadConfig.allowLan

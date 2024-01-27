@@ -80,7 +80,7 @@ in rec {
           Group = "hass";
           Restart = "on-failure";
           WorkingDirectory = config.services.home-assistant.configDir;
-          ExecStart = "${pkgs.esphome}/bin/esphome dashboard ${config.services.home-assistant.configDir}/esphome";
+          ExecStart = "${getExe pkgs.esphome} dashboard ${config.services.home-assistant.configDir}/esphome";
         };
       };
 

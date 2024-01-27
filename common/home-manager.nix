@@ -20,7 +20,7 @@ with lib; let
       rm -rf ${config.home.homeDirectory}/.nix-defexpr
       ln -sf ${inputs.nixpkgs} ${config.home.homeDirectory}/.nix-defexpr
 
-      ${config.nix.package}/bin/nix profile wipe-history --profile ${config.home.homeDirectory}/.local/state/nix/profiles/home-manager
+      ${getExe config.nix.package} profile wipe-history --profile ${config.home.homeDirectory}/.local/state/nix/profiles/home-manager
     '';
   };
 in {

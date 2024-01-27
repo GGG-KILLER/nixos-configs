@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  lib,
   config,
   pkgs,
   ...
@@ -42,7 +43,7 @@ in {
 
   # Configure Wireguard Interface
   networking.wg-quick.interfaces.${inp-interface} = let
-    iptables = "${pkgs.iptables}/bin/iptables";
+    iptables = lib.getExe' pkgs.iptables "iptables";
   in {
     address = [
       "192.168.6.1/24"
