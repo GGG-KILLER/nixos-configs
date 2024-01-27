@@ -31,6 +31,7 @@
     ./zfs.nix
     nur-no-pkgs.repos.ilya-fedin.modules.flatpak-fonts
     nur-no-pkgs.repos.ilya-fedin.modules.flatpak-icons
+    nur-no-pkgs.repos.ilya-fedin.modules.io-scheduler
   ];
 
   # Overlays
