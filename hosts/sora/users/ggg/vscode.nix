@@ -8,7 +8,7 @@
 with lib; let
   inherit (builtins) fromJSON readFile map filter;
   readJSON = path: fromJSON (readFile path);
-  settings = readJSON ./configs/settings.json;
+  settings = readJSON ./vscode/settings.json;
   inherit (pkgs.vscode-utils) extensionsFromVscodeMarketplace;
 in {
   home-manager.users.ggg = {
@@ -26,6 +26,11 @@ in {
           "extensions.autoCheckUpdates" = false;
           "extensions.autoUpdate" = false;
           "update.mode" = "none";
+
+          "nix.enableLanguageServer" = true;
+          "nix.formatterPath" = "${pkgs.alejandra}/bin/alejandra";
+          "nix.serverPath" = "${pkgs.nil}/bin/nil";
+          "nix.serverSettings"."nil"."formatting"."command" = ["${pkgs.alejandra}/bin/alejandra"];
         };
       extensions =
         (with pkgs.local; [
