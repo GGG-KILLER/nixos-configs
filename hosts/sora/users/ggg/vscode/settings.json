@@ -83,7 +83,7 @@
   "redhat.telemetry.enabled": false,
   "terminal.external.linuxExec": "zsh",
   "terminal.integrated.defaultProfile.linux": "zsh",
-  "terminal.integrated.fontFamily": "'Cascadia Mono PL'",
+  "terminal.integrated.fontFamily": "'Cascadia Code'",
   "terminal.integrated.rightClickBehavior": "copyPaste",
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.shellIntegration.enabled": false,
