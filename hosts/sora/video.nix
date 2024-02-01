@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }: let
   stableDriver = config.boot.kernelPackages.nvidiaPackages.stable;
@@ -10,12 +11,16 @@
     then stableDriver
     else unstableDriver;
 in {
+  boot.kernelModules = ["nvidia-uvm"]; # Needed for VA-API
   services.xserver.videoDrivers = ["nvidia"];
   hardware.opengl.enable = true;
+  hardware.opengl.extraPackages = with pkgs; [nvidia-vaapi-driver];
 
   environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
+  environment.sessionVariables.VDPAU_DRIVER = "nvidia";
+  environment.sessionVariables.NVD_BACKEND = "direct";
   hardware.nvidia = {
-    package = stableDriver;
+    package = nvidiaDriver;
 
     open = true;
     modesetting.enable = true;
