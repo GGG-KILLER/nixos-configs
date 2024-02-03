@@ -1,5 +1,5 @@
 {...}: {
   imports = [
-    #./valheim.nix
+    ./valheim.nix
   ];
 }
