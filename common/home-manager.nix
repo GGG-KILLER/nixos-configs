@@ -1,6 +1,8 @@
 {
   lib,
   config,
+  pkgs,
+  options,
   inputs,
   ...
 }:
@@ -22,6 +24,10 @@ with lib; let
     '';
   };
 in {
+  imports = [
+    (import "${inputs.home-manager}/nixos")
+  ];
+
   options.modules.home.mainUsers = mkOption {
     type = types.listOf types.str;
     example = ["root"];

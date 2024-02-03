@@ -22,7 +22,7 @@
       "prometheus"
       "wheel"
     ];
-    hashedPasswordFile = config.age.secrets."all/users/ggg/hashedPassword.age".path;
+    hashedPassword = config.my.secrets.users.ggg.hashedPassword;
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGIbyyT77P4fzRh4Bfox1GQANs+P5VTrVADu5+k282fn ggg"

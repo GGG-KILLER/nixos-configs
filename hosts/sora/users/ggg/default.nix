@@ -1,13 +1,12 @@
 {
-  config,
-  inputs,
   lib,
-  pkgs,
+  config,
   system,
+  pkgs,
+  inputs,
   ...
 }: let
-  inherit (lib) getExe;
-  inherit (config) age;
+  inherit (lib) getExe getExe';
   dotnet-sdk = with pkgs.dotnetCorePackages;
     combinePackages [
       sdk_8_0
@@ -28,11 +27,6 @@ in {
   environment.systemPackages = [dotnet-sdk];
 
   home-manager.users.ggg = {
-    config,
-    lib,
-    pkgs,
-    ...
-  }: {
     home.packages = with pkgs; [
       # Audio
       easyeffects
@@ -59,7 +53,7 @@ in {
       # pgmodeler # TODO: Uncomment this once the hash in nixpkgs gets updated.
 
       # Encryption
-      pkgs.age
+      age
       inputs.agenix.packages.${system}.default
       xca-stable
       # yubikey-manager # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
@@ -251,9 +245,8 @@ in {
       rsibreak.enable = true;
     };
 
-    home.activation.setupGggSecrets = lib.hm.dag.entryAfter ["writeBoundary"] ''
-      mkdir -p ${config.xdg.configHome}/nix
-      ln -sf ${age.secrets."ggg-nix.conf".path} ${config.xdg.configHome}/nix/nix.conf
+    xdg.configFile."nix/nix.conf".text = ''
+      access-tokens = github.com=${config.my.secrets.users.ggg.nixGithubToken}
     '';
 
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp

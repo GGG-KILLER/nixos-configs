@@ -69,7 +69,6 @@
     nur,
     deploy-rs,
     agenix,
-    home-manager,
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -87,7 +86,6 @@
 
         modules = [
           agenix.nixosModules.default
-          home-manager.nixosModules.home-manager
           ./common
           ./hosts/${host}/configuration.nix
         ];
@@ -109,7 +107,6 @@
         };
 
         modules = [
-          agenix.nixosModules.default
           ./common
           ./media/live-cd-gnome.nix
         ];
@@ -123,7 +120,6 @@
         };
 
         modules = [
-          agenix.nixosModules.default
           ./common
           ./media/live-cd-minimal.nix
         ];
