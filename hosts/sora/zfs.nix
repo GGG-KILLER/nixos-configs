@@ -1,5 +1,5 @@
 {config, ...}: {
-  # Unstable is needed for 6.4
+  # Unstable is needed for 6.8
   boot.zfs.enableUnstable = true;
 
   # ZFS boot settings.
