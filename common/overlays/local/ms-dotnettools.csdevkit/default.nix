@@ -1,12 +1,10 @@
 {
   lib,
-  fetchurl,
   vscode-utils,
   patchelf,
   icu,
   stdenv,
   openssl,
-  coreutils,
 }: let
   inherit (stdenv.hostPlatform) system;
   inherit (vscode-utils) buildVscodeMarketplaceExtension;
@@ -27,8 +25,8 @@ in
     mktplcRef = {
       name = "csdevkit";
       publisher = "ms-dotnettools";
-      version = "1.2.7";
-      sha256 = "sha256-O901P7dKh1TbNGsVyRRkm38XxnRd7q3p//VrGLEtJhk=";
+      version = "1.4.2";
+      sha256 = "sha256-7C/VPwfZsn4m5xlerbiaIwbzmah4GPrcnuTVPbM6SOg=";
       arch = "linux-x64";
     };
     sourceRoot = "extension"; # This has more than one folder.
