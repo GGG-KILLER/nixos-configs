@@ -22,6 +22,7 @@
         zenKernels = callPackage "${inputs.nixpkgs}/pkgs/os-specific/linux/kernel/zen-kernels.nix";
         kernelPatches = callPackage "${inputs.nixpkgs}/pkgs/os-specific/linux/kernel/patches.nix" {};
       in rec {
+        avalonia-ilspy = callPackage ./avalonia-ilspy {};
         discord-email-bridge = callPackage deb {};
         m3u8-dl = callPackage m3u8-dl-source {};
         git-credential-manager = callPackage ./git-credential-manager {};
