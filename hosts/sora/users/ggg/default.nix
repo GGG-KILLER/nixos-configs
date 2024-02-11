@@ -37,6 +37,7 @@ in {
       genymotion
 
       # Coding
+      local.avalonia-ilspy
       # jetbrains.rider
       mono
       rnix-lsp
