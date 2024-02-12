@@ -53,6 +53,6 @@ buildDotnetModule rec {
   dotnet-sdk = with dotnetCorePackages; combinePackages [sdk_6_0 sdk_7_0 sdk_8_0];
   dotnet-runtime = dotnetCorePackages.runtime_6_0;
 
-  executables = ["ILSpy"];
-  meta.mainProgram = executables;
+  meta.mainProgram = "ILSpy";
+  executables = [meta.mainProgram];
 }
