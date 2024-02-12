@@ -255,7 +255,12 @@ in {
       mockoon = {
         name = "Mockoon";
         exec = getExe pkgs.local.mockoon;
-        categories = ["Application" "Network"];
+        categories = ["Development" "Network" "Debugger" "Viewer"];
+      };
+      ilspy = {
+        name = "ILSpy";
+        exec = getExe pkgs.local.avalonia-ilspy;
+        categories = ["Development" "Debugger" "Viewer"];
       };
     };
 
