@@ -34,7 +34,7 @@
     {
       x86_64-linux = {
         arch = "linux-x64";
-        sha256 = "sha256-i5shbpjp0e0qUIG6FLPu1mIN0DD2+zdCq/nZa49v5iI=";
+        sha256 = "sha256-HSNseXhXwWhOX+PEqa/tkffQ66j/LE+sAxBIeYJ/LV8=";
         binaries = linuxDebuggerBins ++ lspBins ++ razorBins;
       };
       aarch64-linux = linuxDebuggerBins ++ lspBins; # Linux aarch64 version has no Razor Language Server
@@ -48,7 +48,7 @@ in
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      version = "2.15.30"; # TODO: Update once dotnet/vscode-csharp#6866 gets fixed.
+      version = "2.18.15";
       inherit (extInfo) sha256 arch;
     };
 
