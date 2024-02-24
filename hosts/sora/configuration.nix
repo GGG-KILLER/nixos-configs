@@ -101,6 +101,9 @@
   hardware.xone.enable = true;
   hardware.steam-hardware.enable = true;
 
+  # Giving up on 100% pure nix, I want .NET AOT
+  programs.nix-ld.enable = true;
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
