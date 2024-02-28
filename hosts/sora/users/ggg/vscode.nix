@@ -68,6 +68,7 @@ in {
           pkief.material-icon-theme
           redhat.vscode-yaml
           wix.vscode-import-cost
+          jashoo.dotnetinsights
         ]);
     };
 
