@@ -1,4 +1,4 @@
-{...}: {
+{pkgs, ...}: {
   # Enable sound.
   sound.enable = false;
   hardware.pulseaudio.enable = false;
@@ -10,9 +10,14 @@
     pulse.enable = true;
     jack.enable = true;
 
-    wireplumber.enable = true;
+    wireplumber = {
+      enable = true;
+      configPackages = [
+        (pkgs.runCommand "wireplumber-configs" {} ''
+          mkdir -p "$out/share/wireplumber/main.lua.d/"
+          cp -t "$out/share/wireplumber/main.lua.d/" "${./51-disable-devices.lua}" "${./99-fix-bad-headset.lua}"
+        '')
+      ];
+    };
   };
-
-  environment.etc."wireplumber/main.lua.d/51-disable-devices.lua".source = ./51-disable-devices.lua;
-  environment.etc."wireplumber/main.lua.d/99-fix-bad-headset.lua".source = ./99-fix-bad-headset.lua;
 }
