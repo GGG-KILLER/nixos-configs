@@ -97,7 +97,7 @@ in {
         nixpkgs-review
 
         # Media
-        ffmpeg-full
+        ffmpeg
         handbrake
 
         # VMs
