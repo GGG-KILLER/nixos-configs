@@ -5,7 +5,9 @@
   ...
 }: {
   nix = {
-    package = pkgs.nixVersions.nix_2_19;
+    package = pkgs.nixVersions.nix_2_19.overrideAttrs (prev: {
+      patches = prev.patches ++ [overlays/nix/getMaxCPU_2_19.patch];
+    });
 
     # Flakes
     settings.experimental-features = ["nix-command" "flakes"];

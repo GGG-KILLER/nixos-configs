@@ -6,7 +6,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) getExe getExe';
+  inherit (lib) getExe;
   dotnet-sdk = with pkgs.dotnetCorePackages;
     combinePackages [
       sdk_8_0
@@ -17,6 +17,27 @@
   dotnetSdk = "${dotnet-sdk}/sdk";
   dotnetBinary = getExe dotnet-sdk;
   xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
+  avalonia-ilspy = pkgs.callPackage ../../../../common/packages/avalonia-ilspy {};
+  m3u8-dl = pkgs.callPackage ../../../../common/packages/m3u8-dl.nix {};
+  mockoon = pkgs.callPackage ../../../../common/packages/mockoon.nix {};
+  git-credential-manager = pkgs.callPackage ../../../../common/packages/git-credential-manager {};
+  r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
+    version = "3.1.47";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "PedroVH";
+      repo = "r2modmanPlus";
+      rev = version;
+      hash = "sha256-IlIjoxqhdoEQGruTF28+E9eHC7YWzZRjRDScZ04KlBI=";
+    };
+
+    offlineCache = pkgs.fetchYarnDeps {
+      yarnLock = "${src}/yarn.lock";
+      hash = "sha256-1JXd1pDGEFDG+ogXbEpl4WMYXwksJJJBx20ZPykc7OM=";
+    };
+
+    patches = [];
+  });
 in {
   imports = [
     ./commands
@@ -27,82 +48,83 @@ in {
   environment.systemPackages = [dotnet-sdk];
 
   home-manager.users.ggg = {
-    home.packages = with pkgs; [
-      # Audio
-      easyeffects
-      helvum
+    home.packages =
+      (with pkgs; [
+        # Audio
+        easyeffects
+        helvum
 
-      # Android
-      android-tools
-      genymotion
+        # Android
+        android-tools
+        genymotion
 
-      # Coding
-      local.avalonia-ilspy
-      # jetbrains.rider
-      mono
-      rnix-lsp
-      # wrangler
-      yarn
-      docker-compose
-      nodejs_latest
-      powershell
-      tokei
+        # Coding
+        avalonia-ilspy
+        # jetbrains.rider
+        mono
+        rnix-lsp
+        # wrangler
+        yarn
+        docker-compose
+        nodejs_latest
+        powershell
+        tokei
 
-      # Database
-      pgformatter
-      postgresql_14
-      # pgmodeler # TODO: Uncomment this once the hash in nixpkgs gets updated.
+        # Database
+        pgformatter
+        postgresql_14
+        # pgmodeler # TODO: Uncomment this once the hash in nixpkgs gets updated.
 
-      # Encryption
-      age
-      inputs.agenix.packages.${system}.default
-      xca-stable
-      # yubikey-manager # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
-      # yubikey-manager-qt # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
-      step-cli
+        # Encryption
+        age
+        inputs.agenix.packages.${system}.default
+        xca-stable
+        # yubikey-manager # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
+        # yubikey-manager-qt # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
+        step-cli
 
-      # Games
-      # inputs.packwiz.packages.${system}.packwiz
-      (prismlauncher.override {jdks = [openjdk8-bootstrap openjdk11-bootstrap openjdk16-bootstrap openjdk17-bootstrap jdk];})
-      r2mod_cli
+        # Games
+        # inputs.packwiz.packages.${system}.packwiz
+        (prismlauncher.override {jdks = [openjdk8-bootstrap openjdk11-bootstrap openjdk16-bootstrap openjdk17-bootstrap jdk];})
+        r2mod_cli
 
-      # Hardware
-      openrgb
+        # Hardware
+        openrgb
 
-      # Nix
-      inputs.deploy-rs.packages.${system}.deploy-rs
-      nix-top
-      nixpkgs-review
+        # Nix
+        inputs.deploy-rs.packages.${system}.deploy-rs
+        nix-top
+        nixpkgs-review
 
-      # Media
-      ffmpeg-full
-      handbrake
+        # Media
+        ffmpeg-full
+        handbrake
 
-      # VMs
-      virt-manager
-      virt-viewer
+        # VMs
+        virt-manager
+        virt-viewer
 
-      # Misc
-      aria
-      chromium
-      discord-canary
-      exiftool
-      fd
-      google-chrome
-      imgbrd-grabber
-      imhex
-      inputs.git-crypt-agessh.packages.${system}.default
-      jellyfin-mpv-shim
-      libguestfs-with-appliance
-      local.m3u8-dl
-      local.mockoon
-      mullvad-vpn
-      ruffle
-      rustdesk
-      yt-dlp
-      zenmonitor
-      r2modman
-    ];
+        # Misc
+        aria
+        chromium
+        discord-canary
+        exiftool
+        fd
+        google-chrome
+        imgbrd-grabber
+        imhex
+        inputs.git-crypt-agessh.packages.${system}.default
+        jellyfin-mpv-shim
+        libguestfs-with-appliance
+        m3u8-dl
+        mockoon
+        mullvad-vpn
+        ruffle
+        rustdesk
+        yt-dlp
+        zenmonitor
+      ])
+      ++ [r2modman];
 
     home.sessionVariables = {
       DOTNET_ROOT = dotnetRoot;
@@ -139,7 +161,7 @@ in {
         userEmail = "gggkiller2@gmail.com";
         extraConfig = {
           init.defaultBranch = "main";
-          credential.helper = "${pkgs.local.git-credential-manager}/bin/git-credential-manager";
+          credential.helper = "${git-credential-manager}/bin/git-credential-manager";
           credential.credentialStore = "secretservice";
           core.editor = "${getExe pkgs.vscode} --wait";
         };
@@ -254,12 +276,12 @@ in {
     xdg.desktopEntries = {
       mockoon = {
         name = "Mockoon";
-        exec = getExe pkgs.local.mockoon;
+        exec = getExe mockoon;
         categories = ["Development" "Network" "Debugger" "Viewer"];
       };
       ilspy = {
         name = "ILSpy";
-        exec = getExe pkgs.local.avalonia-ilspy;
+        exec = getExe avalonia-ilspy;
         categories = ["Development" "Debugger" "Viewer"];
       };
     };

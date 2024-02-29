@@ -1,10 +1,5 @@
-{
-  config,
-  lib,
-  ...
-} @ args:
-with lib; let
-  consts = config.my.constants;
+{pkgs, ...}: let
+  npm = pkgs.callPackage ../../../../common/packages/npm {};
 in {
   my.networking.qbittorrent = {
     extraNames = ["flood"];
@@ -66,7 +61,7 @@ in {
       # Flood
       modules.services.flood = {
         enable = true;
-        package = pkgs.local.npm."@jesec/flood";
+        package = npm."@jesec/flood";
         rundir = "/mnt/qbittorrent/flood";
         auth = "none";
         allowedpath = [

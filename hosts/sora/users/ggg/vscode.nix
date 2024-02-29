@@ -9,10 +9,11 @@
   inherit (lib) getExe;
   readJSON = path: fromJSON (readFile path);
   settings = readJSON ./vscode/settings.json;
-  inherit (pkgs.vscode-utils) extensionsFromVscodeMarketplace;
+  csdevkit-vscode-ext = pkgs.callPackage ../../../../common/packages/ms-dotnettools.csdevkit {};
+  csharp-vscode-ext = pkgs.callPackage ../../../../common/packages/ms-dotnettools.csharp {};
 in {
   home-manager.users.ggg = {
-    programs.vscode = rec {
+    programs.vscode = {
       enable = true;
       package = pkgs.vscode;
       userSettings =
@@ -33,11 +34,11 @@ in {
           "nix.serverSettings"."nil"."formatting"."command" = [(getExe pkgs.alejandra)];
         };
       extensions =
-        (with pkgs.local; [
+        [
           # C# Development
           csdevkit-vscode-ext
           csharp-vscode-ext
-        ])
+        ]
         ++ (with pkgs.vscode-extensions; [
           foxundermoon.shell-format
           kamadorueda.alejandra
