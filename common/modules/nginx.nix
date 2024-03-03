@@ -2,7 +2,6 @@
 {
   options,
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -40,7 +39,7 @@ in {
   config = mkIf cfg.enable {
     services.nginx = {
       enable = true;
-      enableReload = true;
+      enableReload = false;
       recommendedTlsSettings = true;
       recommendedBrotliSettings = true;
       recommendedGzipSettings = true;

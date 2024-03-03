@@ -1,9 +1,6 @@
 {
-  config,
   pkgs,
   lib,
-  modulesPath,
-  inputs,
   ...
 }:
 with lib; {
@@ -18,6 +15,7 @@ with lib; {
     ./nat.nix
     ./networking.nix
     ./secrets.nix
+    ./shellhub.nix
     ./store.nix
     ./users.nix
     ./video.nix
