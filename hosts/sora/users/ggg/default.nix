@@ -21,6 +21,7 @@
   m3u8-dl = pkgs.callPackage ../../../../common/packages/m3u8-dl.nix {};
   mockoon = pkgs.callPackage ../../../../common/packages/mockoon.nix {};
   git-credential-manager = pkgs.callPackage ../../../../common/packages/git-credential-manager {};
+  kemono-dl = pkgs.callPackage ../../../../common/packages/kemono-dl {};
   r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
     version = "3.1.47";
 
@@ -123,6 +124,7 @@ in {
         rustdesk
         yt-dlp
         zenmonitor
+        kemono-dl
       ])
       ++ [r2modman];
 
