@@ -1,7 +1,7 @@
 {...}: {
   virtualisation.docker = {
     enable = true;
-    storageDriver = "zfs";
+    storageDriver = "overlay2";
     autoPrune.enable = true;
   };
 }
