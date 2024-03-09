@@ -1,6 +1,10 @@
-{config, ...}: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   # Unstable is needed for 6.8
-  boot.zfs.enableUnstable = true;
+  boot.zfs.package = pkgs.zfs_unstable;
 
   # ZFS boot settings.
   boot.supportedFilesystems = ["zfs" "ntfs"];
