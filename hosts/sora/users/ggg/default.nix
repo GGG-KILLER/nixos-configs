@@ -6,7 +6,7 @@
   inputs,
   ...
 }: let
-  inherit (lib) getExe;
+  inherit (lib) getExe head;
   dotnet-sdk = with pkgs.dotnetCorePackages;
     combinePackages [
       sdk_8_0
@@ -130,8 +130,8 @@ in {
 
     home.sessionVariables = {
       DOTNET_ROOT = dotnetRoot;
-      MSBuildSdksPath = "${dotnetSdk}/$(${dotnetBinary} --version)/Sdks";
-      MSBUILD_EXE_PATH = "${dotnetSdk}/$(${dotnetBinary} --version)/MSBuild.dll";
+      MSBuildSdksPath = "${dotnetSdk}/${head dotnetBinary.versions}/Sdks";
+      MSBUILD_EXE_PATH = "${dotnetSdk}/${head dotnetBinary.versions}/MSBuild.dll";
 
       # PYTORCH_PYTHON = "${pkgs.python3.withPackages (ps:
       #   with ps; [
