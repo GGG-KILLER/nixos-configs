@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  ...
-} @ args:
-with lib; let
-  consts = config.my.constants;
-in {
+{...}: {
   my.networking.sonarr = {
     extraNames = ["jackett"];
     mainAddr = "192.168.2.46"; # ipgen -n 192.168.2.0/24 sonarr
@@ -51,6 +44,14 @@ in {
       # Sonarr
       services.sonarr = {
         enable = true;
+        package = pkgs.sonarr.overrideAttrs (final: prev: rec {
+          version = "4.0.2.1183";
+
+          src = pkgs.fetchurl {
+            url = "https://github.com/Sonarr/Sonarr/releases/download/v${version}/Sonarr.main.${version}.linux-x64.tar.gz";
+            hash = "sha256-S9j6zXEJM963tki88awPW0uK0fQd1bBwBcsHBlDSg/E=";
+          };
+        });
         user = "my-sonarr";
         group = "data-members";
         dataDir = "/mnt/sonarr";
