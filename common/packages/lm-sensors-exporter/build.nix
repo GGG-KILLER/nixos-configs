@@ -1,8 +1,10 @@
 {
+  system ? builtins.currentSystem,
   pkgs ?
     import <nixpkgs> {
+      inherit system;
       config = {allowUnfree = true;};
     },
 }: {
-  lm-sensors-exporter = pkgs.callPackage ./default.nix {};
+  out = pkgs.callPackage ./default.nix {};
 }

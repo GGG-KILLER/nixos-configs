@@ -1,8 +1,10 @@
 {
+  system ? builtins.currentSystem,
   pkgs ?
     import <nixpkgs> {
+      inherit system;
       config = {allowUnfree = true;};
     },
 }: {
-  git-credential-manager = pkgs.callPackage ./default.nix {};
+  out = pkgs.callPackage ./default.nix {};
 }

@@ -1,8 +1,10 @@
 {
+  system ? builtins.currentSystem,
   pkgs ?
     import <nixpkgs> {
+      inherit system;
       config = {allowUnfree = true;};
     },
 }: {
-  kemono-dl = pkgs.callPackage ./default.nix {};
+  out = pkgs.callPackage ./default.nix {};
 }
