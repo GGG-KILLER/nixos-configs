@@ -40,7 +40,9 @@
       config,
       pkgs,
       ...
-    }: {
+    }: let
+      jackett = pkgs.callPackage ../../../../common/packages/jackett {};
+    in {
       # Sonarr
       services.sonarr = {
         enable = true;
@@ -60,6 +62,7 @@
       # Jackett
       services.jackett = {
         enable = true;
+        package = jackett;
         user = "my-sonarr";
         group = "data-members";
         dataDir = "/mnt/jackett";
