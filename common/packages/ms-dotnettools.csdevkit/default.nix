@@ -9,14 +9,48 @@
   inherit (stdenv.hostPlatform) system;
   inherit (vscode-utils) buildVscodeMarketplaceExtension;
 
-  binaries =
+  extInfo =
     {
-      x86_64-linux = [
-        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-code-servicehost.linux-x64/Microsoft.VisualStudio.Code.ServiceHost"
-        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-reliability-monitor.linux-x64/Microsoft.VisualStudio.Reliability.Monitor"
-        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/servicehub-controller-net60.linux-x64/Microsoft.ServiceHub.Controller"
-        "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-server.linux-x64/Microsoft.VisualStudio.Code.Server"
-      ];
+      x86_64-linux = {
+        arch = "linux-x64";
+        sha256 = "sha256-7m85Zl9oV40le3nkNPzoKu/AAf8XhQpI8sBMsQXmBg8=";
+        binaries = [
+          "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/servicehub-controller-net60.linux-x64/Microsoft.ServiceHub.Controller"
+          "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-code-servicehost.linux-x64/Microsoft.VisualStudio.Code.ServiceHost"
+          "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-reliability-monitor.linux-x64/Microsoft.VisualStudio.Reliability.Monitor"
+          "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-server.linux-x64/Microsoft.VisualStudio.Code.Server"
+        ];
+      };
+      aarch64-linux = {
+        arch = "linux-arm64";
+        sha256 = "sha256-39D55EdwE4baDYbHc9GD/1XoxGbQkUkS1H2uysJHlxw=";
+        binaries = [
+          "components/vs-green-server/platforms/linux-arm64/node_modules/@microsoft/servicehub-controller-net60.linux-arm64/Microsoft.ServiceHub.Controller"
+          "components/vs-green-server/platforms/linux-arm64/node_modules/@microsoft/visualstudio-code-servicehost.linux-arm64/Microsoft.VisualStudio.Code.ServiceHost"
+          "components/vs-green-server/platforms/linux-arm64/node_modules/@microsoft/visualstudio-reliability-monitor.linux-arm64/Microsoft.VisualStudio.Reliability.Monitor"
+          "components/vs-green-server/platforms/linux-arm64/node_modules/@microsoft/visualstudio-server.linux-arm64/Microsoft.VisualStudio.Code.Server"
+        ];
+      };
+      x86_64-darwin = {
+        arch = "darwin-x64";
+        sha256 = "sha256-gfhJX07R+DIw9FbzaEE0JZwEmDeifiq4vHyMHZZ1udM=";
+        binaries = [
+          "components/vs-green-server/platforms/darwin-x64/node_modules/@microsoft/servicehub-controller-net60.darwin-x64/Microsoft.ServiceHub.Controller"
+          "components/vs-green-server/platforms/darwin-x64/node_modules/@microsoft/visualstudio-code-servicehost.darwin-x64/Microsoft.VisualStudio.Code.ServiceHost"
+          "components/vs-green-server/platforms/darwin-x64/node_modules/@microsoft/visualstudio-reliability-monitor.darwin-x64/Microsoft.VisualStudio.Reliability.Monitor"
+          "components/vs-green-server/platforms/darwin-x64/node_modules/@microsoft/visualstudio-server.darwin-x64/Microsoft.VisualStudio.Code.Server"
+        ];
+      };
+      aarch64-darwin = {
+        arch = "darwin-arm64";
+        sha256 = "sha256-vogstgCWvI9csNF9JfJ41XPR1POy842g2yhWqIDoHLw=";
+        binaries = [
+          "components/vs-green-server/platforms/darwin-arm64/node_modules/@microsoft/servicehub-controller-net60.darwin-arm64/Microsoft.ServiceHub.Controller"
+          "components/vs-green-server/platforms/darwin-arm64/node_modules/@microsoft/visualstudio-code-servicehost.darwin-arm64/Microsoft.VisualStudio.Code.ServiceHost"
+          "components/vs-green-server/platforms/darwin-arm64/node_modules/@microsoft/visualstudio-reliability-monitor.darwin-arm64/Microsoft.VisualStudio.Reliability.Monitor"
+          "components/vs-green-server/platforms/darwin-arm64/node_modules/@microsoft/visualstudio-server.darwin-arm64/Microsoft.VisualStudio.Code.Server"
+        ];
+      };
     }
     .${system}
     or (throw "Unsupported system: ${system}");
@@ -26,8 +60,7 @@ in
       name = "csdevkit";
       publisher = "ms-dotnettools";
       version = "1.4.2";
-      sha256 = "sha256-7C/VPwfZsn4m5xlerbiaIwbzmah4GPrcnuTVPbM6SOg=";
-      arch = "linux-x64";
+      inherit (extInfo) sha256 arch;
     };
     sourceRoot = "extension"; # This has more than one folder.
 
@@ -70,12 +103,12 @@ in
         (bin: ''
           chmod +x "${bin}"
         '')
-        binaries))
+        extInfo.binaries))
       + lib.optionalString stdenv.isLinux (lib.concatStringsSep "\n" (map
         (bin: ''
           patchelf_common "${bin}"
         '')
-        binaries));
+        extInfo.binaries));
 
     meta = {
       description = "Official C# extension from Microsoft";
