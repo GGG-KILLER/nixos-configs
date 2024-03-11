@@ -11,35 +11,49 @@
   inherit (vscode-utils) buildVscodeMarketplaceExtension;
 
   extInfo = let
-    linuxDebuggerBins = [
-      ".debugger/vsdbg-ui"
-      ".debugger/vsdbg"
-    ];
-    darwinX86DebuggerBins = [
-      ".debugger/x86_64/vsdbg-ui"
-      ".debugger/x86_64/vsdbg"
-    ];
-    darwinAarch64DebuggerBins = [
-      ".debugger/arm64/vsdbg-ui"
-      ".debugger/arm64/vsdbg"
-    ];
-    lspBins = [
+    baseBins = [
       ".roslyn/Microsoft.CodeAnalysis.LanguageServer"
-    ];
-    razorBins = [
-      ".razor/createdump"
       ".razor/rzls"
     ];
+    linuxBins =
+      baseBins
+      ++ [
+        ".debugger/vsdbg-ui"
+        ".debugger/vsdbg"
+      ];
+    darwinBins =
+      baseBins
+      ++ [
+        ".debugger/x86_64/vsdbg-ui"
+        ".debugger/x86_64/vsdbg"
+      ];
   in
     {
       x86_64-linux = {
         arch = "linux-x64";
-        sha256 = "sha256-HSNseXhXwWhOX+PEqa/tkffQ66j/LE+sAxBIeYJ/LV8=";
-        binaries = linuxDebuggerBins ++ lspBins ++ razorBins;
+        sha256 = "sha256-B46bBW1IlvpTvSldannn22ySfzw/XQrNG4XPa2kp/Es=";
+        binaries = linuxBins;
       };
-      aarch64-linux = linuxDebuggerBins ++ lspBins; # Linux aarch64 version has no Razor Language Server
-      x86_64-darwin = darwinX86DebuggerBins ++ lspBins ++ razorBins;
-      aarch64-darwin = darwinAarch64DebuggerBins ++ darwinX86DebuggerBins ++ lspBins ++ razorBins;
+      aarch64-linux = {
+        arch = "linux-arm64";
+        sha256 = "sha256-W51IorPTV2782Qb+ozVeuVTh+ov3DKNfbzZEp2eJi58=";
+        binaries = linuxBins;
+      };
+      x86_64-darwin = {
+        arch = "darwin-x64";
+        sha256 = "sha256-X4xymVWgBt+ilCE0GfFJaZRZhauii9T5riWLgqYeXe8=";
+        binaries = darwinBins;
+      };
+      aarch64-darwin = {
+        arch = "darwin-arm64";
+        sha256 = "sha256-sMHJk39wOoTBcLvb4NFLNv56VzOeAaLjV9vG4qUJSR0=";
+        binaries =
+          darwinBins
+          ++ [
+            ".debugger/arm64/vsdbg-ui"
+            ".debugger/arm64/vsdbg"
+          ];
+      };
     }
     .${system}
     or (throw "Unsupported system: ${system}");
@@ -48,7 +62,7 @@ in
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      version = "2.18.15";
+      version = "2.22.2";
       inherit (extInfo) sha256 arch;
     };
 
@@ -58,7 +72,6 @@ in
 
     postPatch =
       ''
-
         patchelf_add_icu_as_needed() {
           declare elf="''${1?}"
           declare icu_major_v="${
@@ -96,10 +109,10 @@ in
         extInfo.binaries));
 
     meta = {
-      description = "Base language support for C#";
+      description = "Official C# support for Visual Studio Code";
       homepage = "https://github.com/dotnet/vscode-csharp";
       license = lib.licenses.mit;
-      maintainers = [lib.maintainers.jraygauthier];
+      maintainers = with lib.maintainers; [ggg];
       platforms = ["x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin"];
     };
   }
