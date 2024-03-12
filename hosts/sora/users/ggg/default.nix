@@ -130,8 +130,8 @@ in {
 
     home.sessionVariables = {
       DOTNET_ROOT = dotnetRoot;
-      MSBuildSdksPath = "${dotnetSdk}/${head dotnetBinary.versions}/Sdks";
-      MSBUILD_EXE_PATH = "${dotnetSdk}/${head dotnetBinary.versions}/MSBuild.dll";
+      MSBuildSdksPath = "${dotnetSdk}/${head dotnet-sdk.versions}/Sdks";
+      MSBUILD_EXE_PATH = "${dotnetSdk}/${head dotnet-sdk.versions}/MSBuild.dll";
 
       # PYTORCH_PYTHON = "${pkgs.python3.withPackages (ps:
       #   with ps; [
