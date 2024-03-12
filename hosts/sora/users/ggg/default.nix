@@ -15,7 +15,6 @@
     ];
   dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/sdk";
-  dotnetBinary = getExe dotnet-sdk;
   xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
   avalonia-ilspy = pkgs.callPackage ../../../../common/packages/avalonia-ilspy {};
   m3u8-dl = pkgs.callPackage ../../../../common/packages/m3u8-dl.nix {};

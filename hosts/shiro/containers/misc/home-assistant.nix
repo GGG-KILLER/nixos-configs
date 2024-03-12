@@ -1,12 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-} @ args:
-with lib; let
-  consts = config.my.constants;
-in rec {
+{lib, ...}: {
   my.networking.home-assistant = {
     mainAddr = "192.168.2.228"; # ipgen -n 192.168.2.0/24 home-assistant
     ports = [
@@ -40,9 +32,6 @@ in rec {
         enable = true;
         package =
           (pkgs.home-assistant.override {
-            extraPackages = python3Packages:
-              with python3Packages; [
-              ];
             extraComponents = [
               "default_config"
               "esphome"
@@ -80,7 +69,7 @@ in rec {
           Group = "hass";
           Restart = "on-failure";
           WorkingDirectory = config.services.home-assistant.configDir;
-          ExecStart = "${getExe pkgs.esphome} dashboard ${config.services.home-assistant.configDir}/esphome";
+          ExecStart = "${lib.getExe pkgs.esphome} dashboard ${config.services.home-assistant.configDir}/esphome";
         };
       };
 

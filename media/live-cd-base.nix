@@ -1,5 +1,4 @@
 {
-  modulesPath,
   lib,
   config,
   pkgs,
@@ -28,14 +27,7 @@ in {
     };
   };
 
-  config = let
-    stableDriver = config.boot.kernelPackages.nvidiaPackages.stable;
-    unstableDriver = config.boot.kernelPackages.nvidiaPackages.beta;
-    nvidiaDriver =
-      if (lib.versionOlder unstableDriver.version stableDriver.version)
-      then stableDriver
-      else unstableDriver;
-  in {
+  config = {
     # Use latest kernel if possible.
     # boot.kernelPackages = pkgs.linuxPackages_latest;
 
@@ -56,7 +48,7 @@ in {
 
     environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
     hardware.nvidia = {
-      package = stableDriver;
+      package = config.boot.kernelPackages.nvidiaPackages.stable;
 
       # NOTE: Open kernel module does not work with the Quadro P400
       modesetting.enable = false;

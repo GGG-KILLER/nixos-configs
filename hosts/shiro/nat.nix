@@ -1,5 +1,6 @@
-{lib, ...}:
-with lib; {
+{lib, ...}: let
+  inherit (lib) mkOverride;
+in {
   # Flags to make NAT work in VPN gateway. (hopefully)
   boot.kernelModules = ["nf_nat_ftp"];
 

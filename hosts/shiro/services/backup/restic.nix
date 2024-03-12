@@ -2,9 +2,8 @@
   config,
   lib,
   ...
-}:
-with lib; let
-  inherit (config.my.secrets.services) backblaze;
+}: let
+  inherit (lib) mkMerge mkForce;
 in {
   services.restic.backups = let
     allBase = let

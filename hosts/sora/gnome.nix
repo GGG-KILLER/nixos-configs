@@ -1,10 +1,10 @@
 {
   lib,
-  config,
   pkgs,
   ...
-}:
-with lib; {
+}: let
+  inherit (lib) mkForce;
+in {
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;

@@ -11,7 +11,7 @@ in {
       "/zfs-main-pool/data/gaming/valheim/config:/config"
       "/zfs-main-pool/data/gaming/valheim/data:/opt/valheim"
     ];
-    environment = rec {
+    environment = {
       TZ = config.time.timeZone;
       SERVER_NAME = "GGG + Night";
       WORLD_NAME = "World";

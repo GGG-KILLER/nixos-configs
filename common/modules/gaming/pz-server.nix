@@ -66,7 +66,7 @@ in {
       ];
 
     systemd.services.pz-server = let
-      inherit (pkgs) stdenv libstdcxx5 glibc zlib patchelf;
+      inherit (pkgs) stdenv libstdcxx5 zlib patchelf;
       inherit (pkgs.lib) makeLibraryPath;
       inherit (pkgs.steamPackages) steamcmd;
       steamcmdScript = pkgs.writeText "update_zomboid.txt" ''

@@ -3,8 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-with lib; {
+}: let
+  inherit (lib) getExe';
+in {
   networking.wg-quick.interfaces.wglan = let
     iptables = getExe' pkgs.iptables "iptables";
   in {

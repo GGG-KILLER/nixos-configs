@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}: {
+{pkgs, ...}: {
   home-manager.users.ggg.home.packages = let
     mkCommand = pkgs.callPackage ../../../../../common/users/mk-command.nix;
   in [

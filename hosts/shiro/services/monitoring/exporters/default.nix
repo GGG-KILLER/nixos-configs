@@ -1,5 +1,6 @@
-{lib, ...}:
-with lib; {
+{lib, ...}: let
+  inherit (lib) mkOption types;
+in {
   imports = [
     ./lm-sensors.nix
     ./node-exporter-smartmon.nix

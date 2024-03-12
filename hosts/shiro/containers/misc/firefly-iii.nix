@@ -1,12 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-} @ args:
-with lib; let
-  consts = config.my.constants;
-in rec {
+{lib, ...}: {
   my.networking.firefly-iii = {
     mainAddr = "192.168.2.202"; # ipgen -n 192.168.2.0/24 firefly-iii
     extraNames = [
@@ -113,7 +105,7 @@ in rec {
         after = ["phpfpm-firefly-iii.service"];
         requisite = ["phpfpm-firefly-iii.service"];
         startAt = "daily";
-        script = "${getExe fireflyPhp} /var/www/firefly-iii/artisan firefly-iii:cron";
+        script = "${lib.getExe fireflyPhp} /var/www/firefly-iii/artisan firefly-iii:cron";
         serviceConfig = {
           Type = "oneshot";
           User = "nginx";

@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  ...
-} @ args:
-with lib; let
-  inherit (import ./funcs.nix args) mkContainer;
+{lib, ...}: let
   mkPgsql = {
     env,
     ip,
@@ -147,7 +141,7 @@ with lib; let
     };
   };
 in {
-  config = mkMerge [
+  config = lib.mkMerge [
     (mkPgsql {
       env = "dev";
       ip = "192.168.2.19"; # ipgen -n 192.168.2.0/24 pgsql-dev

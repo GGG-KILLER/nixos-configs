@@ -1,11 +1,5 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-} @ args:
-with lib; let
-  consts = config.my.constants;
+{lib, ...}: let
+  inherit (lib) getExe' listToAttrs nameValuePair;
   gpuDevs = [
     "/dev/dri"
     "/dev/shm"

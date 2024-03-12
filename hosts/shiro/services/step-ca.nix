@@ -2,8 +2,8 @@
   config,
   lib,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkForce flip mapAttrs';
   inherit (config.age) secrets;
   step-ca-port = 1443;
 in {

@@ -2,10 +2,9 @@
   lib,
   buildGoModule,
   fetchFromGitHub,
-  nixosTests,
   lm_sensors,
 }:
-buildGoModule rec {
+buildGoModule {
   pname = "lm-sensors-exporter";
   version = "edcd531";
 

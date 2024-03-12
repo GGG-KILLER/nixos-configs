@@ -2,8 +2,9 @@
   config,
   lib,
   ...
-}:
-with lib; {
+}: let
+  inherit (lib) mkForce;
+in {
   services.prometheus = {
     enable = true;
     retentionTime = "182d";

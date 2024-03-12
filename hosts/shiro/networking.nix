@@ -2,8 +2,8 @@
   lib,
   config,
   ...
-}:
-with lib; let
+}: let
+  inherit (lib) mkOption types mapAttrs listToAttrs nameValuePair attrValues;
   portOptions = {
     options = {
       protocol = mkOption {

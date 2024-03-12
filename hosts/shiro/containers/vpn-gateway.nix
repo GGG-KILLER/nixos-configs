@@ -2,9 +2,8 @@
   config,
   lib,
   ...
-} @ args:
-with lib; let
-  consts = config.my.constants;
+}: let
+  inherit (lib) getExe getExe';
   secrets = config.my.secrets.vpn.mullvad;
 in {
   my.networking.vpn-gateway = {

@@ -3,9 +3,8 @@
   lib,
   pkgs,
   ...
-}:
-with lib; let
-  inherit (config.my.secrets.services) backblaze;
+}: let
+  inherit (lib) getExe mkMerge;
 in {
   services.restic.backups = let
     zfs = getExe pkgs.zfs;

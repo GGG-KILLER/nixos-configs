@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  ...
-} @ args:
-with lib; {
+{...}: {
   my.networking.network-share = {
     mainAddr = "192.168.2.7"; # ipgen -n 192.168.2.0/24 network-share
     ports = [
