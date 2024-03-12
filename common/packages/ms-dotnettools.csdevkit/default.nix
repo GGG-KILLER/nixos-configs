@@ -59,7 +59,7 @@ in
     mktplcRef = {
       name = "csdevkit";
       publisher = "ms-dotnettools";
-      version = "1.4.2";
+      version = "1.4.28";
       inherit (extInfo) sha256 arch;
     };
     sourceRoot = "extension"; # This has more than one folder.
