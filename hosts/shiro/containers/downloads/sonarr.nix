@@ -1,4 +1,4 @@
-{...}: {
+{self, ...}: {
   my.networking.sonarr = {
     extraNames = ["jackett"];
     mainAddr = "192.168.2.46"; # ipgen -n 192.168.2.0/24 sonarr
@@ -39,10 +39,9 @@
     config = {
       config,
       pkgs,
+      system,
       ...
-    }: let
-      jackett = pkgs.callPackage ../../../../common/packages/jackett {};
-    in {
+    }: {
       # Sonarr
       services.sonarr = {
         enable = true;
@@ -62,7 +61,7 @@
       # Jackett
       services.jackett = {
         enable = true;
-        package = jackett;
+        package = self.packages.${system}.jackett;
         user = "my-sonarr";
         group = "data-members";
         dataDir = "/mnt/jackett";

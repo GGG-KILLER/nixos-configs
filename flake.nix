@@ -80,7 +80,7 @@
         inherit system;
 
         specialArgs = {
-          inherit system inputs nur-no-pkgs;
+          inherit self system inputs nur-no-pkgs;
           liveCd = false;
         };
 
@@ -158,6 +158,58 @@
         };
       };
     };
+
+    packages = let
+      forAllSystems = function:
+        nixpkgs.lib.genAttrs [
+          "x86_64-linux"
+          "aarch64-linux"
+          "x86_64-darwin"
+          "aarch64-darwin"
+        ] (system:
+          function (import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          }));
+    in
+      forAllSystems (pkgs: rec {
+        avalonia-ilspy = pkgs.callPackage ./common/packages/avalonia-ilspy {};
+        git-credential-manager = pkgs.callPackage ./common/packages/git-credential-manager {};
+        jackett = pkgs.callPackage ./common/packages/jackett {};
+        kemono-dl = pkgs.callPackage ./common/packages/kemono-dl {};
+        lm-sensors-exporter = pkgs.callPackage ./common/packages/lm-sensors-exporter {};
+        ms-dotnettools-csdevkit = pkgs.callPackage ./common/packages/ms-dotnettools.csdevkit {};
+        ms-dotnettools-csharp = pkgs.callPackage ./common/packages/ms-dotnettools.csharp {};
+        npm = pkgs.callPackage ./common/packages/npm {};
+        # winfonts = pkgs.callPackage ./common/packages/winfonts {};
+        discord-email-bridge = pkgs.callPackage ./common/packages/discord-email-bridge.nix {};
+        m3u8-dl = pkgs.callPackage ./common/packages/m3u8-dl.nix {};
+        mockoon = pkgs.callPackage ./common/packages/mockoon.nix {};
+
+        ffmpeg_6 = pkgs.ffmpeg_6.overrideAttrs rec {
+          version = "6.1.1";
+          src = pkgs.fetchgit {
+            url = "https://git.ffmpeg.org/ffmpeg.git";
+            rev = "n${version}";
+            hash = "sha256-Q0c95hbCVUHQWPoh5uC8uzMylmB4BnWg+VhXEgSouzo=";
+          };
+          patches = [
+          ];
+        };
+        ffmpeg_6-headless = ffmpeg_6.override {
+          ffmpegVariant = "headless";
+        };
+        ffmpeg_6-full = ffmpeg_6.override {
+          ffmpegVariant = "full";
+        };
+
+        ffmpeg = ffmpeg_6;
+        ffmpeg-headless = ffmpeg_6-headless;
+        ffmpeg-full = ffmpeg_6-full;
+
+        yt-dlp = pkgs.yt-dlp.override {inherit ffmpeg;};
+        jellyfin-ffmpeg = pkgs.jellyfin-ffmpeg.override {inherit ffmpeg_6-full;};
+      });
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
   };

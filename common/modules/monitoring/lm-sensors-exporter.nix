@@ -1,13 +1,13 @@
 # Thanks to @myaats for providing this to me
 {
+  self,
   config,
-  pkgs,
   lib,
+  system,
   ...
 }:
 with lib; let
   cfg = config.modules.services.lm-sensors-exporter;
-  prometheus-lm-sensors-exporter = pkgs.callPackage ../../packages/lm-sensors-exporter {};
 in {
   options.modules.services.lm-sensors-exporter = {
     enable = mkEnableOption "Whether to enable the prometheus-lm-sensors-exporter service.";
@@ -47,7 +47,7 @@ in {
       after = ["network.target"];
       serviceConfig = {
         ExecStart = ''
-          ${prometheus-lm-sensors-exporter}/bin/sensor-exporter \
+          ${self.packages.${system}.lm-sensors-exporter}/bin/sensor-exporter \
             -web.listen-address ${cfg.listenAddress}:${toString cfg.port}
         '';
         Restart = mkDefault "always";

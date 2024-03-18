@@ -1,4 +1,8 @@
-{lib, ...}: let
+{
+  self,
+  lib,
+  ...
+}: let
   inherit (lib) getExe' listToAttrs nameValuePair;
   gpuDevs = [
     "/dev/dri"
@@ -68,6 +72,7 @@ in {
     config = {
       config,
       pkgs,
+      system,
       ...
     }: {
       imports = [../../video.nix];
@@ -105,7 +110,7 @@ in {
         };
       };
 
-      environment.systemPackages = with pkgs; [jellyfin-ffmpeg];
+      environment.systemPackages = [self.packages.${system}.jellyfin-ffmpeg];
 
       # NGINX
       security.acme.certs."jellyfin.lan".email = "jellyfin@jellyfin.lan";

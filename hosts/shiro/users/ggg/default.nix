@@ -1,11 +1,14 @@
-{pkgs, ...}: let
-  kemono-dl = pkgs.callPackage ../../../../common/packages/kemono-dl {};
-in {
+{
+  self,
+  pkgs,
+  system,
+  ...
+}: {
   imports = [
     ./commands
   ];
 
   home-manager.users.ggg = {
-    home.packages = with pkgs; [tmux yt-dlp aria step-cli kemono-dl];
+    home.packages = with pkgs; [tmux self.packages.${system}.yt-dlp aria step-cli self.packages.${system}.kemono-dl];
   };
 }

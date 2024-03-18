@@ -1,4 +1,5 @@
 {
+  self,
   lib,
   config,
   system,
@@ -16,11 +17,11 @@
   dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/sdk";
   xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
-  avalonia-ilspy = pkgs.callPackage ../../../../common/packages/avalonia-ilspy {};
-  m3u8-dl = pkgs.callPackage ../../../../common/packages/m3u8-dl.nix {};
-  mockoon = pkgs.callPackage ../../../../common/packages/mockoon.nix {};
-  git-credential-manager = pkgs.callPackage ../../../../common/packages/git-credential-manager {};
-  kemono-dl = pkgs.callPackage ../../../../common/packages/kemono-dl {};
+  avalonia-ilspy = self.packages.${system}.avalonia-ilspy;
+  m3u8-dl = self.packages.${system}.m3u8-dl;
+  mockoon = self.packages.${system}.mockoon;
+  git-credential-manager = self.packages.${system}.git-credential-manager;
+  kemono-dl = self.packages.${system}.kemono-dl;
   r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
     version = "3.1.47";
 
@@ -97,7 +98,7 @@ in {
         nixpkgs-review
 
         # Media
-        ffmpeg
+        self.packages.${system}.ffmpeg
         handbrake
 
         # VMs
@@ -121,7 +122,7 @@ in {
         mullvad-vpn
         ruffle
         rustdesk
-        yt-dlp
+        self.packages.${system}.yt-dlp
         zenmonitor
         kemono-dl
       ])

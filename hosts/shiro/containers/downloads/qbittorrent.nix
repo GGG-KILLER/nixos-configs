@@ -1,6 +1,4 @@
-{pkgs, ...}: let
-  npm = pkgs.callPackage ../../../../common/packages/npm {};
-in {
+{self, ...}: {
   my.networking.qbittorrent = {
     extraNames = ["flood"];
     mainAddr = "192.168.2.154"; # ipgen -n 192.168.2.0/24 qbittorrent
@@ -48,6 +46,7 @@ in {
     config = {
       config,
       pkgs,
+      system,
       ...
     }: {
       # qBitTorrent
@@ -61,7 +60,7 @@ in {
       # Flood
       modules.services.flood = {
         enable = true;
-        package = npm."@jesec/flood";
+        package = self.packages.${system}.npm."@jesec/flood";
         rundir = "/mnt/qbittorrent/flood";
         auth = "none";
         allowedpath = [
