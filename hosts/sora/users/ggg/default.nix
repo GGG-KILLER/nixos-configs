@@ -61,15 +61,15 @@ in {
 
         # Coding
         avalonia-ilspy
-        # jetbrains.rider
-        mono
-        rnix-lsp
-        # wrangler
-        yarn
         docker-compose
+        #jetbrains.rider
+        mono
+        nil
         nodejs_latest
         powershell
         tokei
+        #wrangler
+        yarn
 
         # Database
         pgformatter
@@ -80,13 +80,13 @@ in {
         age
         inputs.agenix.packages.${system}.default
         xca-stable
-        # yubikey-manager # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
-        # yubikey-manager-qt # TODO: Uncomment once NixOS/nixpkgs#280995 hits unstable.
+        yubikey-manager
+        yubikey-manager-qt
         step-cli
 
         # Games
-        # inputs.packwiz.packages.${system}.packwiz
-        (prismlauncher.override {jdks = [openjdk8-bootstrap openjdk11-bootstrap openjdk16-bootstrap openjdk17-bootstrap jdk];})
+        inputs.packwiz.packages.${system}.packwiz
+        (prismlauncher.override {jdks = [jdk8 jdk11 jdk17 jdk19 jdk21];})
         r2mod_cli
 
         # Hardware
