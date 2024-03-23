@@ -172,7 +172,9 @@
             config.allowUnfree = true;
           }));
     in
-      forAllSystems (pkgs: rec {
+      forAllSystems (pkgs: let
+        npm = pkgs.callPackage ./common/packages/npm {};
+      in rec {
         avalonia-ilspy = pkgs.callPackage ./common/packages/avalonia-ilspy {};
         git-credential-manager = pkgs.callPackage ./common/packages/git-credential-manager {};
         jackett = pkgs.callPackage ./common/packages/jackett {};
@@ -180,7 +182,7 @@
         lm-sensors-exporter = pkgs.callPackage ./common/packages/lm-sensors-exporter {};
         ms-dotnettools-csdevkit = pkgs.callPackage ./common/packages/ms-dotnettools.csdevkit {};
         ms-dotnettools-csharp = pkgs.callPackage ./common/packages/ms-dotnettools.csharp {};
-        npm = pkgs.callPackage ./common/packages/npm {};
+        flood = npm."@jesec/flood";
         # winfonts = pkgs.callPackage ./common/packages/winfonts {};
         discord-email-bridge = pkgs.callPackage ./common/packages/discord-email-bridge.nix {};
         m3u8-dl = pkgs.callPackage ./common/packages/m3u8-dl.nix {};

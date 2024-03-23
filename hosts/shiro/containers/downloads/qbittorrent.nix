@@ -60,7 +60,7 @@
       # Flood
       modules.services.flood = {
         enable = true;
-        package = self.packages.${system}.npm."@jesec/flood";
+        package = self.packages.${system}.flood;
         rundir = "/mnt/qbittorrent/flood";
         auth = "none";
         allowedpath = [
