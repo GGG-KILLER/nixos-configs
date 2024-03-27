@@ -174,7 +174,7 @@
     in
       forAllSystems (pkgs: let
         npm = pkgs.callPackage ./common/packages/npm {};
-      in rec {
+      in {
         avalonia-ilspy = pkgs.callPackage ./common/packages/avalonia-ilspy {};
         git-credential-manager = pkgs.callPackage ./common/packages/git-credential-manager {};
         jackett = pkgs.callPackage ./common/packages/jackett {};
