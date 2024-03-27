@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  lib,
   pkgs,
   inputs,
   nur-no-pkgs,
@@ -43,7 +44,13 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # LQX kernel
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  # TODO: Remove override when NixOS/nixpkgs#298049 arrives on unstable.
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_lqx.override {
+    structuredExtraConfig = with lib.kernel; {
+      UCLAMP_TASK = lib.mkForce (option no);
+      UCLAMP_TASK_GROUP = lib.mkForce (option no);
+    };
+  });
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
