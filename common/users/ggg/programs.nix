@@ -42,13 +42,12 @@
       dircolors.enable = true;
       eza = {
         enable = true;
-        enableAliases = true;
         extraOptions = ["-a" "-g"];
       };
       jq.enable = true;
       zsh = {
         enable = true;
-        enableAutosuggestions = true;
+        autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
         enableVteIntegration = true;
         oh-my-zsh = {
