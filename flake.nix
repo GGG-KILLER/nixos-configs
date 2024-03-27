@@ -187,30 +187,6 @@
         discord-email-bridge = pkgs.callPackage ./common/packages/discord-email-bridge.nix {};
         m3u8-dl = pkgs.callPackage ./common/packages/m3u8-dl.nix {};
         mockoon = pkgs.callPackage ./common/packages/mockoon.nix {};
-
-        ffmpeg_6 = pkgs.ffmpeg_6.overrideAttrs rec {
-          version = "6.1.1";
-          src = pkgs.fetchgit {
-            url = "https://git.ffmpeg.org/ffmpeg.git";
-            rev = "n${version}";
-            hash = "sha256-Q0c95hbCVUHQWPoh5uC8uzMylmB4BnWg+VhXEgSouzo=";
-          };
-          patches = [
-          ];
-        };
-        ffmpeg_6-headless = ffmpeg_6.override {
-          ffmpegVariant = "headless";
-        };
-        ffmpeg_6-full = ffmpeg_6.override {
-          ffmpegVariant = "full";
-        };
-
-        ffmpeg = ffmpeg_6;
-        ffmpeg-headless = ffmpeg_6-headless;
-        ffmpeg-full = ffmpeg_6-full;
-
-        yt-dlp = pkgs.yt-dlp.override {inherit ffmpeg;};
-        jellyfin-ffmpeg = pkgs.jellyfin-ffmpeg.override {inherit ffmpeg_6-full;};
       });
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

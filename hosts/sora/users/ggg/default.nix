@@ -98,7 +98,8 @@ in {
         nixpkgs-review
 
         # Media
-        self.packages.${system}.ffmpeg-full
+        #self.packages.${system}.ffmpeg-full
+        ffmpeg-full
         handbrake
 
         # VMs
@@ -122,7 +123,8 @@ in {
         mullvad-vpn
         ruffle
         rustdesk
-        self.packages.${system}.yt-dlp
+        #self.packages.${system}.yt-dlp
+        yt-dlp
         zenmonitor
         kemono-dl
       ])

@@ -110,7 +110,7 @@ in {
         };
       };
 
-      environment.systemPackages = [self.packages.${system}.jellyfin-ffmpeg];
+      environment.systemPackages = [pkgs.jellyfin-ffmpeg];
 
       # NGINX
       security.acme.certs."jellyfin.lan".email = "jellyfin@jellyfin.lan";
