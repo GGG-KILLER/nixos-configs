@@ -13,7 +13,7 @@
   services.zfs.trim.enable = true;
 
   # Expand all devices on boot
-  #services.zfs.expandOnBoot = "all"; # TODO: re-enable once zpool-auto-expand-partitions gets fixed
+  services.zfs.expandOnBoot = "all";
 
   # Enable auto-scrub
   services.zfs.autoScrub.enable = true;
