@@ -71,6 +71,7 @@ in {
           redhat.vscode-yaml
           wix.vscode-import-cost
           jashoo.dotnetinsights
+          tamasfe.even-better-toml
         ]);
     };
 
