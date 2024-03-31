@@ -58,6 +58,12 @@
             initialEmail = "gggkiller2@gmail.com";
             initialPasswordFile = "/secrets/pgadmin-pass";
           };
+          systemd.services.pgadmin = {
+            after = ["postgresql.service"];
+            wants = ["postgresql.service"];
+            requires = ["postgresql.service"];
+          };
+
           systemd.tmpfiles.rules = [
             "d '/var/lib/pgadmin' 0755 pgadmin pgadmin"
             "d '/var/log/pgadmin' 0755 pgadmin pgadmin"
