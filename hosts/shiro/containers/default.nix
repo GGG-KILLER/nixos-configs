@@ -13,6 +13,7 @@ with lib; {
     ./misc
     ./monitoring
     ./streaming
+    ./authentik.nix
     ./pgsql.nix
     ./vpn-gateway.nix
   ];
@@ -79,6 +80,12 @@ with lib; {
                 container, as a NixOS module.
               '';
               type = types.raw;
+            };
+
+            extraModules = mkOption {
+              description = "Extra modules to add to the system.";
+              type = with types; listOf raw;
+              default = [];
             };
           };
         }));
@@ -219,11 +226,13 @@ with lib; {
             specialArgs = {
               inherit system inputs liveCd;
             };
-            modules = [
-              ../../../common
-              container-base
-              cfg.config
-            ];
+            modules =
+              [../../../common]
+              ++ cfg.extraModules
+              ++ [
+                container-base
+                cfg.config
+              ];
           })
           .config
           .system

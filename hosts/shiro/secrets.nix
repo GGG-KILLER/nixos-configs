@@ -47,5 +47,12 @@
       # We can't symlink as the container won't be able to follow it.
       symlink = false;
     };
+
+    "authentik/authentik.env" = {
+      file = ../../secrets/shiro/authentik/authentik.env.age;
+      path = "/run/container-secrets/sso/authentik.env";
+      # We can't symlink as the container won't be able to follow it.
+      symlink = false;
+    };
   };
 }

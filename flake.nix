@@ -50,6 +50,7 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
+    authentik-nix.url = "github:nix-community/authentik-nix";
 
     # Inputs needed by others
     flake-utils.url = "github:numtide/flake-utils";
@@ -62,13 +63,11 @@
   outputs = {
     self,
     nixpkgs,
-    nur,
     deploy-rs,
-    agenix,
     ...
   } @ inputs: let
     system = "x86_64-linux";
-    nur-no-pkgs = import nur {
+    nur-no-pkgs = import inputs.nur {
       nurpkgs = nixpkgs.legacyPackages.${system};
     };
     mkConfig = host:
@@ -81,7 +80,7 @@
         };
 
         modules = [
-          agenix.nixosModules.default
+          inputs.agenix.nixosModules.default
           ./common
           ./hosts/${host}/configuration.nix
         ];
