@@ -87,7 +87,7 @@
           forceSSL = true;
           locations."/" = {
             proxyWebsockets = true;
-            proxyPass = "https://localhost:9443";
+            proxyPass = "https://authentik";
           };
         };
       };
