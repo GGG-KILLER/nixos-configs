@@ -43,9 +43,6 @@ in {
   "shiro/pterodactyl/db.env.age".publicKeys = [ggg shiro];
   "shiro/pterodactyl/panel.env.age".publicKeys = [ggg shiro];
 
-  # Shiro - Keycloak
-  "shiro/keycloak/db_password.age".publicKeys = [ggg shiro];
-
   # VPN Proxy
   "vpn-proxy/wireguard/private_key.age".publicKeys = [ggg vpn-proxy];
   "vpn-proxy/wireguard/wing_psk.age".publicKeys = [ggg vpn-proxy];
