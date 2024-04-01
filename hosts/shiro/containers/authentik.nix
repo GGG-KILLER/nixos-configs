@@ -68,6 +68,11 @@
           };
         };
       };
+      systemd.services.authentik-migrate.serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = "5s";
+        StartLimitIntervalSec = "0";
+      };
 
       services.nginx.upstreams.authentik = {
         servers."127.0.0.1:9443" = {};
