@@ -5,6 +5,7 @@
   }: {
     my.networking."pgsql-${env}" = {
       mainAddr = ip;
+      extraNames = ["pg${env}.shiro"];
       ports = [
         {
           protocol = "http";

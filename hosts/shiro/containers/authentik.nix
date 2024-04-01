@@ -1,6 +1,7 @@
 {inputs, ...}: {
   my.networking.sso = {
     mainAddr = "192.168.2.247"; # ipgen -n 192.168.2.0/24 sso
+    extraNames = ["sso.shiro"];
     ports = [
       {
         protocol = "http";
