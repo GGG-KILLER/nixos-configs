@@ -13,6 +13,16 @@
         port = 443;
         description = "Local Nginx";
       }
+      {
+        protocol = "http";
+        port = 9000;
+        description = "Authentik";
+      }
+      {
+        protocol = "http";
+        port = 9443;
+        description = "Authentik";
+      }
     ];
   };
 
@@ -49,6 +59,7 @@
           avatars = "initials";
           disable_startup_analytics = true;
           cert_discovery_dir = "/var/lib/acme/";
+          log_level = "trace";
 
           postgresql = {
             host = "pgprd.shiro.lan";
@@ -65,13 +76,19 @@
         '';
       };
 
-      modules.services.nginx.enable = true;
-      modules.services.nginx.virtualHosts."sso.shiro.lan" = {
-        ssl = true;
-        locations."/" = {
-          proxyPass = "https://authentik";
-          recommendedProxySettings = true;
-          proxyWebsockets = true;
+      security.acme.certs."sso.shiro.lan".email = "sso@sso.shiro.lan";
+      services.nginx = {
+        enable = true;
+        recommendedTlsSettings = true;
+        recommendedProxySettings = true;
+
+        virtualHosts."sso.shiro.lan" = {
+          enableACME = true;
+          forceSSL = true;
+          locations."/" = {
+            proxyWebsockets = true;
+            proxyPass = "https://localhost:9443";
+          };
         };
       };
     };
