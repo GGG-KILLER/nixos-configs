@@ -115,6 +115,7 @@ in {
         google-chrome
         imgbrd-grabber
         imhex
+        inputs.ipgen-cli.packages.${system}.default
         inputs.git-crypt-agessh.packages.${system}.default
         jellyfin-mpv-shim
         libguestfs-with-appliance

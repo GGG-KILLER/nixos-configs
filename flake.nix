@@ -43,11 +43,7 @@
       url = "github:packwiz/packwiz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ipgen-cli = {
-      url = "github:ipgen/cli";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    ipgen-cli.url = "github:ipgen/cli";
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
