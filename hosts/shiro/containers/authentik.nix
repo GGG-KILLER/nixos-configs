@@ -87,6 +87,7 @@
           forceSSL = true;
           locations."/" = {
             proxyWebsockets = true;
+            recommendedProxySettings = true;
             proxyPass = "https://authentik";
           };
         };
