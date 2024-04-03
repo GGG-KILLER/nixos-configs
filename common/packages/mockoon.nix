@@ -4,10 +4,11 @@
 }:
 appimageTools.wrapType2 rec {
   name = "mockoon-${version}";
-  version = "3.0.0";
+  version = "8.0.0";
   src = fetchurl {
-    url = "https://github.com/mockoon/mockoon/releases/download/v${version}/mockoon-${version}.AppImage";
-    sha256 = "sha256-YGcD/8h21fUoBEAcBVI5jo0UMCKdVRdC1zxDIrHjU+8=";
+    # https://github.com/mockoon/mockoon/releases/download/v8.0.0/mockoon-8.0.0.x86_64.AppImage
+    url = "https://github.com/mockoon/mockoon/releases/download/v${version}/mockoon-${version}.x86_64.AppImage";
+    sha256 = "sha256-mhUjV8yFXS76kJDj28VeIv4/PlnKos/Ugo9k3RHnRaM=";
   };
-  meta.mainProgram = "mockoon";
+  meta.mainProgram = "mockoon-${version}";
 }

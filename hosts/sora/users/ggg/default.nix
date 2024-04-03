@@ -64,6 +64,7 @@ in {
         docker-compose
         #jetbrains.rider
         mono
+        mockoon
         nil
         nodejs_latest
         powershell
