@@ -15,11 +15,6 @@
       }
       {
         protocol = "http";
-        port = 9000;
-        description = "Authentik";
-      }
-      {
-        protocol = "http";
         port = 9443;
         description = "Authentik";
       }
@@ -81,20 +76,14 @@
         '';
       };
 
-      security.acme.certs."sso.shiro.lan".email = "sso@sso.shiro.lan";
-      services.nginx = {
-        enable = true;
-        recommendedTlsSettings = true;
-        recommendedProxySettings = true;
-
-        virtualHosts."sso.shiro.lan" = {
-          enableACME = true;
-          forceSSL = true;
-          locations."/" = {
-            proxyWebsockets = true;
-            recommendedProxySettings = true;
-            proxyPass = "https://authentik";
-          };
+      modules.services.nginx.enable = true;
+      modules.services.nginx.virtualHosts."sso.shiro.lan" = {
+        default = true;
+        ssl = true;
+        locations."/" = {
+          proxyWebsockets = true;
+          recommendedProxySettings = true;
+          proxyPass = "https://authentik";
         };
       };
     };
