@@ -15,6 +15,11 @@
       }
       {
         protocol = "http";
+        port = 9000;
+        description = "Authentik";
+      }
+      {
+        protocol = "http";
         port = 9443;
         description = "Authentik";
       }
@@ -51,9 +56,8 @@
         createDatabase = false;
         environmentFile = "/secrets/authentik.env";
         settings = {
-          avatars = "initials";
           disable_startup_analytics = true;
-          cert_discovery_dir = "/var/lib/acme/";
+          cert_discovery_dir = "/var/lib/acme/sso.shiro.lan/";
           log_level = "trace";
 
           postgresql = {
