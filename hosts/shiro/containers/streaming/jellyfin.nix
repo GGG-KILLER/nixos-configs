@@ -76,6 +76,9 @@ in {
       ...
     }: {
       imports = [../../video.nix];
+      security.pki.certificateFiles = [
+        config.my.secrets.pki.root-crt-path
+      ];
 
       hardware.opengl.enable = true;
 
