@@ -16,6 +16,9 @@
     ];
   };
 
+  systemd.services."container@sonarr.service".requires = ["container@sso.service"];
+  systemd.services."container@sonarr.service".after = ["container@sso.service"];
+
   modules.containers.sonarr = {
     vpn = true;
 
@@ -68,35 +71,28 @@
       };
 
       # NGINX
-      security.acme.certs."sonarr.lan".email = "sonarr@sonarr.lan";
-      security.acme.certs."jackett.lan".email = "jackett@soarr.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
-
         proxyTimeout = "12h";
-        recommendedProxySettings = true;
-        recommendedOptimisation = true;
-        recommendedBrotliSettings = true;
-        recommendedGzipSettings = true;
-        recommendedZstdSettings = true;
 
         virtualHosts = {
           "sonarr.lan" = {
-            enableACME = true;
-            addSSL = true;
-
+            ssl = true;
             locations."/" = {
               proxyPass = "http://localhost:8989";
+              recommendedProxySettings = true;
               proxyWebsockets = true;
+              sso = true;
             };
           };
 
           "jackett.lan" = {
-            enableACME = true;
-            addSSL = true;
-
+            ssl = true;
             locations."/" = {
               proxyPass = "http://localhost:9117";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+              sso = true;
             };
           };
         };
