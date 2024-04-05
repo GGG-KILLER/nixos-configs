@@ -77,30 +77,23 @@
       };
 
       # NGINX
-      security.acme.certs."flood.lan".email = "flood@qbittorrent.lan";
-      security.acme.certs."qbittorrent.lan".email = "qbittorrent@qbittorrent.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
-
         proxyTimeout = "12h";
-        recommendedProxySettings = true;
-        recommendedOptimisation = true;
-        recommendedBrotliSettings = true;
-        recommendedGzipSettings = true;
-        recommendedZstdSettings = true;
 
         virtualHosts = {
           "flood.lan" = {
             default = true;
-            enableACME = true;
-            addSSL = true;
+            ssl = true;
             root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
             locations."/" = {
+              sso = true;
               tryFiles = "$uri /index.html";
             };
             locations."/api" = {
               proxyPass = "http://localhost:${toString config.modules.services.flood.web.port}";
               proxyWebsockets = true;
+              sso = true;
               extraConfig = ''
                 client_max_body_size 1G;
                 proxy_buffering off;
@@ -109,16 +102,15 @@
             };
           };
           "qbittorrent.lan" = {
-            enableACME = true;
-            addSSL = true;
+            ssl = true;
             locations."/" = {
               proxyPass = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";
               proxyWebsockets = true;
+              sso = true;
               extraConfig = ''
                 client_max_body_size 1G;
                 proxy_buffering off;
                 proxy_cache off;
-                proxy_read_timeout 6h;
               '';
             };
           };
