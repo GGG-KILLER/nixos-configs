@@ -21,7 +21,7 @@
       inputs.home-manager.follows = "home-manager";
     };
     git-crypt-agessh = {
-      url = "github:mtoohey31/git-crypt-agessh";
+      url = "github:GGG-KILLER/git-crypt-agessh";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
