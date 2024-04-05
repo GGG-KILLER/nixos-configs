@@ -38,6 +38,9 @@
   # This is only for the nginx config of the downloader.
   modules.services.nginx.virtualHosts."downloader.lan" = {
     ssl = true;
-    locations."/".proxyPass = "http://127.0.0.1:9000";
+    locations."/" = {
+      sso = true;
+      proxyPass = "http://127.0.0.1:9000";
+    };
   };
 }
