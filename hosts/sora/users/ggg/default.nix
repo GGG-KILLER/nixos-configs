@@ -83,10 +83,10 @@ in {
         xca-stable
         yubikey-manager
         yubikey-manager-qt
-        step-cli
+        #step-cli # TODO: Uncomment if it's still used and NixOS/nixpkgs#301623 has hit unstable.
 
         # Games
-        inputs.packwiz.packages.${system}.packwiz
+        #inputs.packwiz.packages.${system}.packwiz # TODO: Uncomment when packwiz/packwiz#297 gets fixed.
         (prismlauncher.override {jdks = [jdk8 jdk11 jdk17 jdk19 jdk21];})
         r2mod_cli
 
