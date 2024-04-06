@@ -5,6 +5,7 @@
     "mnn-server.env".file = ../../secrets/shiro/mnn-server.env.age;
     "valheim-server.env".file = ../../secrets/shiro/valheim-server.env.age;
     "minio.env".file = ../../secrets/shiro/minio.env.age;
+    "statping.env".file = ../../secrets/shiro/statping.env.age;
 
     wireguard-key.file = ../../secrets/shiro/wireguard/private_key.age;
     wireguard-laptop-psk.file = ../../secrets/shiro/wireguard/laptop_psk.age;

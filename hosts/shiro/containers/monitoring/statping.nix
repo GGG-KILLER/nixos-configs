@@ -55,7 +55,17 @@ in {
     environment = {
       DOMAIN = "status.shiro.lan";
       SAMPLE_DATA = "false";
+
+      DB_CONN = "postgres";
+      DB_HOST = "pgprd.shiro.lan";
+      DB_PORT = "5432";
+      DB_USER = "statping";
+      DB_DATABASE = "statping-ng";
+      POSTGRES_SSLMODE = "disable";
     };
+    environmentFiles = [
+      config.age.secrets."statping.env".path
+    ];
     volumes = [
       "/zfs-main-pool/data/statping:/app"
     ];
