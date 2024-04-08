@@ -182,6 +182,7 @@
         discord-email-bridge = pkgs.callPackage ./common/packages/discord-email-bridge.nix {};
         m3u8-dl = pkgs.callPackage ./common/packages/m3u8-dl.nix {};
         mockoon = pkgs.callPackage ./common/packages/mockoon.nix {};
+        mega-sync = pkgs.callPackage ./common/packages/mega-sync {};
       });
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

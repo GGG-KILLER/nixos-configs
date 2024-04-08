@@ -1,7 +1,7 @@
 {config, ...}: {
   virtualisation.oci-containers.containers.downloader-frontend = {
     image = "docker.lan/downloader/frontend:latest";
-    ports = ["9000:8080"];
+    ports = ["9004:8080"];
     dependsOn = ["downloader-backend"];
     extraOptions = [
       "--cap-drop=ALL"
@@ -39,8 +39,9 @@
   modules.services.nginx.virtualHosts."downloader.lan" = {
     ssl = true;
     locations."/" = {
+      recommendedProxySettings = true;
       sso = true;
-      proxyPass = "http://127.0.0.1:9000";
+      proxyPass = "http://127.0.0.1:9004";
     };
   };
 }
