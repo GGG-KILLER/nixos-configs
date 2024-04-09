@@ -1,7 +1,7 @@
 {config, ...}: {
   virtualisation.oci-containers.containers.downloader-frontend = {
     image = "docker.lan/downloader/frontend:latest";
-    ports = ["9004:8080"];
+    ports = ["${toString config.shiro.ports.downloader}:8080"];
     dependsOn = ["downloader-backend"];
     extraOptions = [
       "--cap-drop=ALL"
@@ -41,7 +41,7 @@
     locations."/" = {
       recommendedProxySettings = true;
       sso = true;
-      proxyPass = "http://127.0.0.1:9004";
+      proxyPass = "http://127.0.0.1:${toString config.shiro.ports.downloader}";
     };
   };
 }

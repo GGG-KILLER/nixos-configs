@@ -7,6 +7,7 @@
 in {
   services.prometheus = {
     enable = true;
+    port = config.shiro.ports.prometheus;
     retentionTime = "182d";
     webExternalUrl = "https://prometheus.shiro.lan";
     scrapeConfigs = [
@@ -14,7 +15,7 @@ in {
         job_name = "prometheus";
         static_configs = [
           {
-            targets = ["127.0.0.1:9090"];
+            targets = ["127.0.0.1:${toString config.shiro.ports.prometheus}"];
             labels = {inherit (config.my.constants.prometheus) instance;};
           }
         ];
@@ -27,6 +28,6 @@ in {
 
   modules.services.nginx.virtualHosts."prometheus.shiro.lan" = {
     ssl = true;
-    locations."/".proxyPass = "http://localhost:9090";
+    locations."/".proxyPass = "http://localhost:${toString config.shiro.ports.prometheus}";
   };
 }

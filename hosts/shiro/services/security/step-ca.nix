@@ -5,13 +5,12 @@
 }: let
   inherit (lib) mkForce flip mapAttrs';
   inherit (config.age) secrets;
-  step-ca-port = 1443;
 in {
   # ACME Settings
   security.acme = mkForce {
     acceptTerms = true; # kinda pointless since we never use upstream
     defaults = {
-      server = "https://ca.lan:${toString step-ca-port}/acme/acme/directory";
+      server = "https://ca.lan:${toString config.shiro.ports.step-ca}/acme/acme/directory";
       renewInterval = "hourly";
     };
   };
@@ -20,7 +19,7 @@ in {
   modules.services.nginx.virtualHosts."ca.lan" = {
     ssl = true;
     locations."/" = {
-      proxyPass = "https://127.0.0.1:${toString step-ca-port}";
+      proxyPass = "https://127.0.0.1:${toString config.shiro.ports.step-ca}";
       recommendedProxySettings = true;
     };
     locations."= /root.crt".alias = config.my.secrets.pki.root-crt-path;
@@ -35,11 +34,11 @@ in {
     };
   });
 
-  networking.firewall.allowedTCPPorts = [step-ca-port];
+  networking.firewall.allowedTCPPorts = [config.shiro.ports.step-ca];
   services.step-ca = {
     enable = true;
     address = "0.0.0.0";
-    port = step-ca-port;
+    port = config.shiro.ports.step-ca;
     intermediatePasswordFile = secrets.step-ca-intermediate-key-password.path;
     # See https://smallstep.com/docs/step-ca/configuration#basic-configuration-options
     settings = {

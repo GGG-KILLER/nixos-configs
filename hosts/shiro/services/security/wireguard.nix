@@ -15,7 +15,7 @@ in {
     dns = [
       "192.168.1.1"
     ];
-    listenPort = 61235;
+    listenPort = config.shiro.ports.wireguard;
     # Public key: 3FNvV2MhtG1ux/vSG+TW3y0Ebenm3qEtQjKZveAMSX0=
     privateKeyFile = config.age.secrets.wireguard-key.path;
     postUp = [
@@ -60,5 +60,5 @@ in {
     ];
   };
 
-  networking.firewall.allowedUDPPorts = [61235];
+  networking.firewall.allowedUDPPorts = [config.shiro.ports.wireguard];
 }

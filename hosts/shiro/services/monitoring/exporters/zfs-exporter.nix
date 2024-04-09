@@ -1,5 +1,8 @@
 {config, ...}: {
-  services.prometheus.exporters.zfs.enable = true;
+  services.prometheus.exporters.zfs = {
+    enable = true;
+    port = config.shiro.ports.prometheus-zfs-exporter;
+  };
 
   services.prometheus.scrapeConfigs = [
     {

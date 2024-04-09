@@ -1,5 +1,8 @@
 {config, ...}: {
-  modules.services.lm-sensors-exporter.enable = true;
+  modules.services.lm-sensors-exporter = {
+    enable = true;
+    port = config.shiro.ports.prometheus-lm-sensors-exporter;
+  };
 
   services.prometheus.scrapeConfigs = [
     {

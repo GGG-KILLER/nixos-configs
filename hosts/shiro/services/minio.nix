@@ -6,14 +6,14 @@
     dataDir = ["/zfs-main-pool/data/minio/data"];
     rootCredentialsFile = config.age.secrets."minio.env".path;
 
-    listenAddress = "127.0.0.1:8082";
-    consoleAddress = "127.0.0.1:8083";
+    listenAddress = "127.0.0.1:${toString config.shiro.ports.minio}";
+    consoleAddress = "127.0.0.1:${toString config.shiro.ports.minio-console}";
   };
 
   services.prometheus.exporters.minio = {
     enable = false;
     minioBucketStats = true;
-    minioAddress = "http://localhost:8082";
+    minioAddress = "http://localhost:${toString config.shiro.ports.minio}";
   };
 
   modules.services.nginx = {
@@ -32,7 +32,7 @@
       '';
 
       locations."/" = {
-        proxyPass = "http://localhost:8082";
+        proxyPass = "http://localhost:${toString config.shiro.ports.minio}";
         extraConfig = ''
           proxy_connect_timeout 300;
 
@@ -41,7 +41,7 @@
       };
 
       locations."/minio/ui/" = {
-        proxyPass = "http://localhost:8083";
+        proxyPass = "http://localhost:${toString config.shiro.ports.minio-console}";
         proxyWebsockets = true;
         extraConfig = ''
           rewrite ^/minio/ui/(.*) /$1 break;

@@ -1,6 +1,7 @@
 {config, ...}: {
   services.prometheus.exporters.smokeping = {
     enable = true;
+    port = config.shiro.ports.prometheus-smokeping-exporter;
     hosts =
       [
         "192.168.1.1"

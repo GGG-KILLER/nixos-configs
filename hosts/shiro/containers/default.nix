@@ -227,7 +227,7 @@ with lib; {
               inherit system inputs liveCd;
             };
             modules =
-              [../../../common]
+              [../../../common ../ports.nix]
               ++ cfg.extraModules
               ++ [
                 container-base

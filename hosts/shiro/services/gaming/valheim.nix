@@ -4,8 +4,8 @@ in {
   virtualisation.oci-containers.containers.valheim = {
     image = "ghcr.io/lloesche/valheim-server";
     ports = [
-      "2456-2458:2456-2458/udp"
-      "9002:9001/tcp"
+      "${toString config.shiro.ports.vallheimUDP_A}-${toString config.shiro.ports.vallheimUDP_C}:2456-2458/udp"
+      "${toString config.shiro.ports.vallheim-control-panel}:9001/tcp"
     ];
     volumes = [
       "/zfs-main-pool/data/gaming/valheim/config:/config"
@@ -41,11 +41,11 @@ in {
     ];
   };
 
-  networking.firewall.allowedUDPPorts = [2456 2457 2458];
-  networking.firewall.allowedTCPPorts = [2456 2457 2458];
+  networking.firewall.allowedUDPPorts = with config.shiro.ports; [vallheimUDP_A vallheimUDP_B vallheimUDP_C];
+  networking.firewall.allowedTCPPorts = with config.shiro.ports; [vallheimUDP_A vallheimUDP_B vallheimUDP_C];
 
   modules.services.nginx.virtualHosts."valheim.lan" = {
     ssl = true;
-    locations."/".proxyPass = "http://127.0.0.1:9002";
+    locations."/".proxyPass = "http://127.0.0.1:${toString config.shiro.ports.vallheim-control-panel}";
   };
 }

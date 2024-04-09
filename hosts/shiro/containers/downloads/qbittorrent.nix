@@ -55,6 +55,8 @@
         user = "my-torrent";
         group = "data-members";
         dataDir = "/mnt/qbittorrent/qbittorrent";
+
+        web.port = config.shiro.ports.qbittorrent-web;
       };
 
       # Flood
@@ -74,6 +76,7 @@
           user = "admin";
           password = config.my.secrets.modules.services.qbittorrent.web.password;
         };
+        web.port = config.shiro.ports.flood;
       };
 
       # NGINX

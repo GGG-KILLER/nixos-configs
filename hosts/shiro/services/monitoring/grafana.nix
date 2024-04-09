@@ -1,27 +1,20 @@
-{config, ...}: let
-  domain = "grafana.shiro.lan";
-in {
+{config, ...}: {
   services.grafana = {
     enable = true;
     settings.server = {
-      inherit domain;
+      domain = "grafana.shiro.lan";
       http_addr = "127.0.0.1";
-      root_url = "https://${domain}/";
+      http_port = config.shiro.ports.grafana;
+      root_url = "https://grafana.shiro.lan/";
       enable_gzip = true;
     };
   };
 
-  modules.services.nginx.virtualHosts.${domain} = {
+  modules.services.nginx.virtualHosts."grafana.shiro.lan" = {
     ssl = true;
     locations."/" = {
       proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
-      extraConfig = ''
-        proxy_buffering off;
-        proxy_cache off;
-      '';
-    };
-    locations."/api/live/ws" = {
-      proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
+      recommendedProxySettings = true;
       proxyWebsockets = true;
       extraConfig = ''
         proxy_buffering off;
