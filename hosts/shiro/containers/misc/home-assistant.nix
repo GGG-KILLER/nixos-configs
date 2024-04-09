@@ -15,12 +15,31 @@
     ];
   };
 
+  containers.home-assistant.allowedDevices = [
+    {
+      modifier = "rw";
+      node = "/dev/ttyACM0";
+    }
+  ];
+
   modules.containers.home-assistant = {
     bindMounts = {
       "/var/lib/hass" = {
         hostPath = "/zfs-main-pool/data/home-assistant";
         isReadOnly = false;
       };
+      "/var/lib/zigbee2mqtt" = {
+        hostPath = "/zfs-main-pool/data/home-assistant/zigbee2mqtt";
+        isReadOnly = false;
+      };
+      "/var/lib/mosquitto" = {
+        hostPath = "/zfs-main-pool/data/home-assistant/mosquitto";
+        isReadOnly = false;
+      };
+      # "/dev/ttyACM0" = {
+      #   hostPath = "/dev/ttyACM0";
+      #   isReadOnly = false;
+      # };
     };
 
     config = {
@@ -28,6 +47,31 @@
       pkgs,
       ...
     }: {
+      services.zigbee2mqtt = {
+        enable = true;
+        settings = {
+          advanced.network_key = "GENERATE";
+          frontend.port = 45111;
+          homeassistant = true;
+          mqtt.base_topic = "zigbee2mqtt";
+          mqtt.server = "mqtt://localhost";
+          permit_join = true;
+          serial.port = "/dev/ttyACM0";
+        };
+      };
+
+      services.mosquitto = {
+        enable = true;
+
+        listeners = [
+          {
+            address = "127.0.0.1";
+            port = 1883;
+            settings.allow_anonymous = true;
+          }
+        ];
+      };
+
       services.home-assistant = {
         enable = true;
         package =
@@ -35,6 +79,7 @@
             extraComponents = [
               "default_config"
               "esphome"
+              "mqtt"
               "speedtestdotnet"
             ];
           })
@@ -53,53 +98,28 @@
           # Enable the frontend
           frontend = {};
           mobile_app = {};
-          # ESPHome
-          esphome = {};
           # Speedtest.net
           speedtestdotnet = {};
         };
       };
 
-      systemd.services.esphome = {
-        description = "ESPHome";
-        after = ["network.target"];
-        wantedBy = ["multi-user.target"];
-        serviceConfig = {
-          User = "hass";
-          Group = "hass";
-          Restart = "on-failure";
-          WorkingDirectory = config.services.home-assistant.configDir;
-          ExecStart = "${lib.getExe pkgs.esphome} dashboard ${config.services.home-assistant.configDir}/esphome";
-        };
-      };
-
-      security.acme.certs."hass.lan".email = "hass@home-assistant.lan";
-      security.acme.certs."esphome.lan".email = "esphome@home-assistant.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
-
         proxyTimeout = "12h";
-        recommendedProxySettings = true;
-        recommendedOptimisation = true;
-        recommendedBrotliSettings = true;
-        recommendedGzipSettings = true;
-        recommendedZstdSettings = true;
 
         virtualHosts."hass.lan" = {
-          enableACME = true;
-          addSSL = true;
+          ssl = true;
 
           locations."/" = {
             proxyPass = "http://localhost:8123";
             proxyWebsockets = true;
           };
         };
-        virtualHosts."esphome.lan" = {
-          enableACME = true;
-          addSSL = true;
+        virtualHosts."z2m.hass.lan" = {
+          ssl = true;
 
           locations."/" = {
-            proxyPass = "http://localhost:6052";
+            proxyPass = "http://localhost:45111";
             proxyWebsockets = true;
           };
         };
