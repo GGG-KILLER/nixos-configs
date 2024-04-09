@@ -37,6 +37,8 @@ in {
     qbittorrent-web = 1036;
     flood = 1037;
 
+    zigbee2mqtt = 1038;
+
     vallheimUDP_A = 2456;
     vallheimUDP_B = 2457;
     vallheimUDP_C = 2458;

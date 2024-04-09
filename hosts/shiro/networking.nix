@@ -62,10 +62,12 @@ in {
     my.networking.shiro = {
       mainAddr = "192.168.2.133"; # ipgen -n 192.168.2.0/24 shiro
       extraNames = [
-        "grafana.shiro"
-        "prometheus.shiro"
-        "monit.shiro"
         "ca"
+        "grafana.shiro"
+        "monit.shiro"
+        "prometheus.shiro"
+        "hass"
+        "z2m.hass"
       ];
     };
 
