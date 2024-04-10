@@ -47,7 +47,6 @@
   # This is only for the nginx config of the downloader.
   modules.services.nginx.virtualHosts = {
     "shiro.lan" = {
-      default = true;
       ssl = true;
 
       locations."/".proxyPass = "http://127.0.0.1:${toString config.shiro.ports.homarr}";
