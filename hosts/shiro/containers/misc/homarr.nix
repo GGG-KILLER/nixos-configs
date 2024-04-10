@@ -5,7 +5,7 @@
 }: {
   virtualisation.oci-containers.containers.homarr = {
     image = "ghcr.io/ajnart/homarr:latest";
-    ports = ["7575:7575"];
+    ports = ["${toString config.shiro.ports.homarr}:7575"];
     environment = {
       NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/private/ca/ca-root.pem";
     };
@@ -25,7 +25,7 @@
 
   virtualisation.oci-containers.containers.dashdot = {
     image = "mauricenino/dashdot";
-    ports = ["7576:3001"];
+    ports = ["${toString config.shiro.ports.dashdot}:3001"];
     environment = {
       DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
     };
@@ -50,13 +50,13 @@
       default = true;
       ssl = true;
 
-      locations."/".proxyPass = "http://127.0.0.1:7575";
+      locations."/".proxyPass = "http://127.0.0.1:${toString config.shiro.ports.homarr}";
     };
 
     "dash.shiro.lan" = {
       ssl = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:7576";
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.dashdot}";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_buffering off;

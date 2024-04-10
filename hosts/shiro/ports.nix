@@ -38,6 +38,14 @@ in {
     flood = 1037;
 
     zigbee2mqtt = 1038;
+    home-assistant = 1039;
+
+    homarr = 1040;
+    dashdot = 1041;
+
+    statping-ng = 1042;
+
+    mqtt = 1883;
 
     vallheimUDP_A = 2456;
     vallheimUDP_B = 2457;

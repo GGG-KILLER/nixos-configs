@@ -13,16 +13,6 @@
         port = 443;
         description = "Local Nginx";
       }
-      {
-        protocol = "http";
-        port = 9000;
-        description = "Authentik";
-      }
-      {
-        protocol = "http";
-        port = 9443;
-        description = "Authentik";
-      }
     ];
   };
 

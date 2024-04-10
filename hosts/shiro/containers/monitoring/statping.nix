@@ -51,7 +51,7 @@ in {
     image = "${statping-ng.imageName}:${statping-ng.imageTag}";
     imageFile = statping-ng;
 
-    ports = ["9003:8080"];
+    ports = ["${toString config.shiro.ports.statping-ng}:8080"];
     environment = {
       DOMAIN = "status.shiro.lan";
       SAMPLE_DATA = "false";
@@ -80,7 +80,7 @@ in {
     "status.shiro.lan" = {
       ssl = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:9003";
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.statping-ng}";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_buffering off;

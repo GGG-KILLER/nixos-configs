@@ -36,7 +36,7 @@
     listeners = [
       {
         address = "127.0.0.1";
-        port = 1883;
+        port = config.shiro.ports.mqtt;
         settings.allow_anonymous = true;
       }
     ];
@@ -63,6 +63,7 @@
       default_config = {};
       # HTTP confs
       http = {
+        server_port = config.shiro.ports.home-assistant;
         trusted_proxies = ["127.0.0.1"];
         use_x_forwarded_for = true;
       };
@@ -77,7 +78,7 @@
       ssl = true;
 
       locations."/" = {
-        proxyPass = "http://localhost:8123";
+        proxyPass = "http://localhost:${toString config.shiro.ports.home-assistant}";
         recommendedProxySettings = true;
         proxyWebsockets = true;
       };
