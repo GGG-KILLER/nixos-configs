@@ -28,6 +28,7 @@
     ];
   };
 
+  modules.services.nginx.clientMaxBodySize = "0";
   modules.services.nginx.virtualHosts."docker.lan" = {
     ssl = true;
     locations."/".proxyPass = "http://127.0.0.1:${toString config.shiro.ports.docker-registry-browser}";
@@ -35,7 +36,7 @@
       proxyPass = "http://shiro.lan:${toString config.shiro.ports.docker-registry}";
       extraConfig = ''
         proxy_buffering off;
-          proxy_cache off;
+        proxy_cache off;
         client_max_body_size 0;
       '';
     };

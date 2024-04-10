@@ -22,7 +22,7 @@ in {
       // {
         default = true;
       };
-    inherit (options.services.nginx) proxyTimeout;
+    inherit (options.services.nginx) clientMaxBodySize proxyTimeout commonHttpConfig;
 
     virtualHosts = mkOption {
       type = types.attrsOf (types.submodule ({name, ...}: {
@@ -74,24 +74,26 @@ in {
       recommendedGzipSettings = true;
       recommendedZstdSettings = true;
       recommendedOptimisation = true;
-      inherit (cfg) proxyTimeout;
+      inherit (cfg) clientMaxBodySize proxyTimeout;
 
-      commonHttpConfig = optionalString cfg.recommendedProxySettings ''
-        proxy_connect_timeout   ${cfg.proxyTimeout};
-        proxy_send_timeout      ${cfg.proxyTimeout};
-        proxy_read_timeout      ${cfg.proxyTimeout};
-        proxy_http_version      1.1;
-        # don't let clients close the keep-alive connection to upstream. See the nginx blog for details:
-        # https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#no-keepalives
-        proxy_set_header        "Connection" "";
+      commonHttpConfig =
+        optionalString cfg.recommendedProxySettings ''
+          proxy_connect_timeout   ${cfg.proxyTimeout};
+          proxy_send_timeout      ${cfg.proxyTimeout};
+          proxy_read_timeout      ${cfg.proxyTimeout};
+          proxy_http_version      1.1;
+          # don't let clients close the keep-alive connection to upstream. See the nginx blog for details:
+          # https://www.nginx.com/blog/avoiding-top-10-nginx-configuration-mistakes/#no-keepalives
+          proxy_set_header        "Connection" "";
 
-        proxy_set_header        Host $host;
-        proxy_set_header        X-Real-IP $remote_addr;
-        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header        X-Forwarded-Proto $scheme;
-        proxy_set_header        X-Forwarded-Host $host;
-        proxy_set_header        X-Forwarded-Server $host;
-      '';
+          proxy_set_header        Host $host;
+          proxy_set_header        X-Real-IP $remote_addr;
+          proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_set_header        X-Forwarded-Proto $scheme;
+          proxy_set_header        X-Forwarded-Host $host;
+          proxy_set_header        X-Forwarded-Server $host;
+        ''
+        + cfg.commonHttpConfig or "";
 
       virtualHosts =
         mapAttrs
