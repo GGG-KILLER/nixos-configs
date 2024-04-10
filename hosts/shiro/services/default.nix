@@ -8,5 +8,6 @@
     ./home-assistant.nix
     ./minio.nix
     ./nginx.nix
+    ./openspeedtest.nix
   ];
 }
