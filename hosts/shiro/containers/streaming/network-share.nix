@@ -43,6 +43,8 @@
       # Samba
       services.samba = {
         enable = true;
+        nsswins = true;
+        enableNmbd = true;
         securityType = "user";
         extraConfig = ''
           server string = Home Server
