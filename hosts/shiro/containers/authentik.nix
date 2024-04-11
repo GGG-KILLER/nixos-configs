@@ -13,6 +13,16 @@
         port = 443;
         description = "Local Nginx";
       }
+      {
+        protocol = "tcp";
+        port = 389;
+        description = "LDAP";
+      }
+      {
+        protocol = "tcp";
+        port = 636;
+        description = "LDAP over TLS/SSL";
+      }
     ];
   };
 
@@ -56,6 +66,22 @@
             user = "authentik";
           };
         };
+      };
+      services.authentik-ldap = {
+        enable = true;
+        environmentFile = "/secrets/ldap-outpost.env";
+      };
+
+      # Resiliency(?)
+      systemd.services.authentik.serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = "5s";
+        StartLimitIntervalSec = "0";
+      };
+      systemd.services.authentik-worker.serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = "5s";
+        StartLimitIntervalSec = "0";
       };
       systemd.services.authentik-migrate.serviceConfig = {
         Restart = "on-failure";
