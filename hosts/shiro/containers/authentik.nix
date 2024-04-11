@@ -65,12 +65,19 @@
             name = "authentik";
             user = "authentik";
           };
+
+          listen = {
+            listen_ldap = "0.0.0.0:389";
+            listen_ldaps = "0.0.0.0:636";
+          };
         };
       };
       services.authentik-ldap = {
         enable = true;
         environmentFile = "/secrets/ldap-outpost.env";
       };
+      # Needed to allow it to run on low ports.
+      systemd.services.authentik-ldap.serviceConfig.AmbientCapabilities = "CAP_NET_BIND_SERVICE";
 
       # Resiliency(?)
       systemd.services.authentik.serviceConfig = {
