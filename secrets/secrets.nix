@@ -47,6 +47,7 @@ in {
   # Shiro - Authentik
   "shiro/authentik/authentik.env.age".publicKeys = [ggg shiro];
   "shiro/authentik/ldap-outpost.env.age".publicKeys = [ggg shiro];
+  "shiro/authentik/radius-outpost.env.age".publicKeys = [ggg shiro];
 
   # VPN Proxy
   "vpn-proxy/wireguard/private_key.age".publicKeys = [ggg vpn-proxy];

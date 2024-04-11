@@ -71,6 +71,10 @@
         enable = true;
         environmentFile = "/secrets/ldap-outpost.env";
       };
+      services.authentik-radius = {
+        enable = true;
+        environmentFile = "/secrets/radius-outpost.env";
+      };
 
       # Resiliency(?)
       systemd.services.authentik.serviceConfig = {
