@@ -55,7 +55,6 @@
       # We can't symlink as the container won't be able to follow it.
       symlink = false;
     };
-
     "authentik/ldap-outpost.env" = {
       file = ../../secrets/shiro/authentik/ldap-outpost.env.age;
       path = "/run/container-secrets/sso/ldap-outpost.env";
