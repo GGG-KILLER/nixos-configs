@@ -38,7 +38,7 @@
       };
       WorkingDir = "/app";
       Healthcheck = {
-        Test = ["CMD-SHELL" "curl -s \"http://localhost:$PORT/health\" | jq -r -e \".online==true\""];
+        Test = ["CMD-SHELL" "curl -s \"http://127.0.0.1:$PORT/health\" | jq -r -e \".online==true\""];
         Interval = 60000000000;
         Timeout = 10000000000;
         Retries = 3;

@@ -52,7 +52,7 @@ in {
               example = literalExpression ''
                 {
                   "/" = {
-                    proxyPass = "http://localhost:3000";
+                    proxyPass = "http://127.0.0.1:3000";
                   };
                 };
               '';

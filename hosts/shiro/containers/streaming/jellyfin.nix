@@ -135,7 +135,7 @@ in {
           };
 
           locations."/" = {
-            proxyPass = "http://localhost:8096";
+            proxyPass = "http://127.0.0.1:8096";
             recommendedProxySettings = true;
             proxyWebsockets = true;
             extraConfig = ''
@@ -146,7 +146,7 @@ in {
 
           # location block for /web - This is purely for aesthetics so /web/#!/ works instead of having to go to /web/index.html/#!/
           locations."= /web/" = {
-            proxyPass = "http://localhost:8096/web/index.html";
+            proxyPass = "http://127.0.0.1:8096/web/index.html";
             recommendedProxySettings = true;
             extraConfig = ''
               # Disable buffering when the nginx proxy gets very resource heavy upon streaming

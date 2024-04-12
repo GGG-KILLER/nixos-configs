@@ -72,7 +72,7 @@
           "/mnt/etc"
         ];
         qbittorrent = {
-          url = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";
+          url = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
           user = "admin";
           password = config.my.secrets.modules.services.qbittorrent.web.password;
         };
@@ -94,7 +94,7 @@
               tryFiles = "$uri /index.html";
             };
             locations."/api" = {
-              proxyPass = "http://localhost:${toString config.modules.services.flood.web.port}";
+              proxyPass = "http://127.0.0.1:${toString config.modules.services.flood.web.port}";
               recommendedProxySettings = true;
               proxyWebsockets = true;
               sso = true;
@@ -108,7 +108,7 @@
           "qbittorrent.lan" = {
             ssl = true;
             locations."/" = {
-              proxyPass = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";
+              proxyPass = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
               recommendedProxySettings = true;
               proxyWebsockets = true;
               sso = true;

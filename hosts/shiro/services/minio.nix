@@ -13,7 +13,7 @@
   services.prometheus.exporters.minio = {
     enable = false;
     minioBucketStats = true;
-    minioAddress = "http://localhost:${toString config.shiro.ports.minio}";
+    minioAddress = "http://127.0.0.1:${toString config.shiro.ports.minio}";
   };
 
   modules.services.nginx = {
@@ -32,30 +32,22 @@
       '';
 
       locations."/" = {
-        proxyPass = "http://localhost:${toString config.shiro.ports.minio}";
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.minio}";
         recommendedProxySettings = true;
+        proxyWebsockets = true;
+
         extraConfig = ''
           proxy_connect_timeout 300;
-
           chunked_transfer_encoding off;
         '';
       };
 
-      locations."/minio/ui/" = {
-        proxyPass = "http://localhost:${toString config.shiro.ports.minio-console}";
+      locations."~ ^/minio/ui/(.*)" = {
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.minio-console}/$1";
         recommendedProxySettings = true;
         proxyWebsockets = true;
         extraConfig = ''
-          rewrite ^/minio/ui/(.*) /$1 break;
-          proxy_set_header X-NginX-Proxy true;
-
-          # This is necessary to pass the correct IP to be hashed
-          real_ip_header X-Real-IP;
-
           proxy_connect_timeout 300;
-
-          proxy_set_header Origin ''';
-
           chunked_transfer_encoding off;
         '';
       };

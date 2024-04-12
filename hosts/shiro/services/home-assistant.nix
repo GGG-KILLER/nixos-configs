@@ -78,7 +78,7 @@
       ssl = true;
 
       locations."/" = {
-        proxyPass = "http://localhost:${toString config.shiro.ports.home-assistant}";
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.home-assistant}";
         recommendedProxySettings = true;
         proxyWebsockets = true;
       };
@@ -87,7 +87,7 @@
       ssl = true;
 
       locations."/" = {
-        proxyPass = "http://localhost:${toString config.shiro.ports.zigbee2mqtt}";
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.zigbee2mqtt}";
         recommendedProxySettings = true;
         proxyWebsockets = true;
       };

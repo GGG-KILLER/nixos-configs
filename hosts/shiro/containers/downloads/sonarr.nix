@@ -79,7 +79,7 @@
           "sonarr.lan" = {
             ssl = true;
             locations."/" = {
-              proxyPass = "http://localhost:${toString config.shiro.ports.sonarr}";
+              proxyPass = "http://127.0.0.1:${toString config.shiro.ports.sonarr}";
               recommendedProxySettings = true;
               proxyWebsockets = true;
               sso = true;
@@ -89,7 +89,7 @@
           "jackett.lan" = {
             ssl = true;
             locations."/" = {
-              proxyPass = "http://localhost:${toString config.shiro.ports.jackett}";
+              proxyPass = "http://127.0.0.1:${toString config.shiro.ports.jackett}";
               recommendedProxySettings = true;
               proxyWebsockets = true;
               sso = true;
