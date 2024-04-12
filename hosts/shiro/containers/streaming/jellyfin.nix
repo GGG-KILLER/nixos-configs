@@ -116,48 +116,42 @@ in {
       environment.systemPackages = [pkgs.jellyfin-ffmpeg];
 
       # NGINX
-      security.acme.certs."jellyfin.lan".email = "jellyfin@jellyfin.lan";
-      services.nginx = {
+      modules.services.nginx = {
         enable = true;
-
         proxyTimeout = "12h";
-        recommendedProxySettings = true;
-        recommendedOptimisation = true;
-        recommendedBrotliSettings = true;
-        recommendedGzipSettings = true;
-        recommendedZstdSettings = true;
 
-        virtualHosts = {
-          "jellyfin.lan" = {
-            default = true;
+        virtualHosts."jellyfin.lan" = {
+          ssl = true;
 
-            enableACME = true;
-            addSSL = true;
+          extraConfig = ''
+            # Security / XSS Mitigation Headers
+            add_header X-Frame-Options "SAMEORIGIN";
+            add_header X-XSS-Protection "1; mode=block";
+            add_header X-Content-Type-Options "nosniff";
+          '';
 
+          locations."= /" = {
+            return = "302 http://$host/web/";
+          };
+
+          locations."/" = {
+            proxyPass = "http://localhost:8096";
+            recommendedProxySettings = true;
+            proxyWebsockets = true;
             extraConfig = ''
-              # Security / XSS Mitigation Headers
-              add_header X-Frame-Options "SAMEORIGIN";
-              add_header X-XSS-Protection "1; mode=block";
-              add_header X-Content-Type-Options "nosniff";
+              # Disable buffering when the nginx proxy gets very resource heavy upon streaming
+              proxy_buffering off;
             '';
+          };
 
-            locations."= /" = {
-              return = "302 http://$host/web/";
-            };
-
-            locations."/" = {
-              proxyPass = "http://localhost:8096";
-              proxyWebsockets = true;
-              extraConfig = ''
-                # Disable buffering when the nginx proxy gets very resource heavy upon streaming
-                proxy_buffering off;
-              '';
-            };
-
-            # location block for /web - This is purely for aesthetics so /web/#!/ works instead of having to go to /web/index.html/#!/
-            locations."= /web/" = {
-              proxyPass = "http://localhost:8096/web/index.html";
-            };
+          # location block for /web - This is purely for aesthetics so /web/#!/ works instead of having to go to /web/index.html/#!/
+          locations."= /web/" = {
+            proxyPass = "http://localhost:8096/web/index.html";
+            recommendedProxySettings = true;
+            extraConfig = ''
+              # Disable buffering when the nginx proxy gets very resource heavy upon streaming
+              proxy_buffering off;
+            '';
           };
         };
       };
