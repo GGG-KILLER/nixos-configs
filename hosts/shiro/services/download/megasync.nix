@@ -64,7 +64,7 @@ in {
       proxyPass = "http://unix:/run/mega-sync/mega-sync.socket";
       recommendedProxySettings = true;
       proxyWebsockets = true;
-      #sso = true;
+      sso = true;
     };
   };
 }
