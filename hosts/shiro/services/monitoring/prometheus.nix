@@ -28,6 +28,9 @@ in {
 
   modules.services.nginx.virtualHosts."prometheus.shiro.lan" = {
     ssl = true;
-    locations."/".proxyPass = "http://localhost:${toString config.shiro.ports.prometheus}";
+    locations."/" = {
+      proxyPass = "http://localhost:${toString config.shiro.ports.prometheus}";
+      recommendedProxySettings = true;
+    };
   };
 }

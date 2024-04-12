@@ -49,18 +49,18 @@
     "shiro.lan" = {
       ssl = true;
 
-      locations."/".proxyPass = "http://127.0.0.1:${toString config.shiro.ports.homarr}";
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.homarr}";
+        recommendedProxySettings = true;
+      };
     };
 
     "dash.shiro.lan" = {
       ssl = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.shiro.ports.dashdot}";
+        recommendedProxySettings = true;
         proxyWebsockets = true;
-        extraConfig = ''
-          proxy_buffering off;
-          proxy_cache off;
-        '';
       };
     };
   };

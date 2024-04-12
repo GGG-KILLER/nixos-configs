@@ -81,6 +81,7 @@ in {
       ssl = true;
       locations."/" = {
         proxyPass = "http://127.0.0.1:${toString config.shiro.ports.statping-ng}";
+        recommendedProxySettings = true;
         proxyWebsockets = true;
         extraConfig = ''
           proxy_buffering off;

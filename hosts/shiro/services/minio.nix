@@ -33,6 +33,7 @@
 
       locations."/" = {
         proxyPass = "http://localhost:${toString config.shiro.ports.minio}";
+        recommendedProxySettings = true;
         extraConfig = ''
           proxy_connect_timeout 300;
 
@@ -42,6 +43,7 @@
 
       locations."/minio/ui/" = {
         proxyPass = "http://localhost:${toString config.shiro.ports.minio-console}";
+        recommendedProxySettings = true;
         proxyWebsockets = true;
         extraConfig = ''
           rewrite ^/minio/ui/(.*) /$1 break;

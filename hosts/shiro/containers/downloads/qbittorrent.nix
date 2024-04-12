@@ -95,10 +95,11 @@
             };
             locations."/api" = {
               proxyPass = "http://localhost:${toString config.modules.services.flood.web.port}";
+              recommendedProxySettings = true;
               proxyWebsockets = true;
               sso = true;
               extraConfig = ''
-                client_max_body_size 1G;
+                client_max_body_size 0;
                 proxy_buffering off;
                 proxy_cache off;
               '';
@@ -108,10 +109,11 @@
             ssl = true;
             locations."/" = {
               proxyPass = "http://localhost:${toString config.modules.services.qbittorrent.web.port}";
+              recommendedProxySettings = true;
               proxyWebsockets = true;
               sso = true;
               extraConfig = ''
-                client_max_body_size 1G;
+                client_max_body_size 0;
                 proxy_buffering off;
                 proxy_cache off;
               '';

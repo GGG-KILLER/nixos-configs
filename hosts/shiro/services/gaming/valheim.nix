@@ -46,6 +46,9 @@ in {
 
   modules.services.nginx.virtualHosts."valheim.lan" = {
     ssl = true;
-    locations."/".proxyPass = "http://127.0.0.1:${toString config.shiro.ports.vallheim-control-panel}";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString config.shiro.ports.vallheim-control-panel}";
+      recommendedProxySettings = true;
+    };
   };
 }

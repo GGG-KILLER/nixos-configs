@@ -31,9 +31,13 @@
   modules.services.nginx.clientMaxBodySize = "0";
   modules.services.nginx.virtualHosts."docker.lan" = {
     ssl = true;
-    locations."/".proxyPass = "http://127.0.0.1:${toString config.shiro.ports.docker-registry-browser}";
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:${toString config.shiro.ports.docker-registry-browser}";
+      recommendedProxySettings = true;
+    };
     locations."/v2/" = {
       proxyPass = "http://shiro.lan:${toString config.shiro.ports.docker-registry}";
+      recommendedProxySettings = true;
       extraConfig = ''
         proxy_buffering off;
         proxy_cache off;
