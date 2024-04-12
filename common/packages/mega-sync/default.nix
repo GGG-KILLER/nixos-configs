@@ -18,7 +18,7 @@ buildDotnetModule rec {
   nugetDeps = ./deps.nix;
 
   dotnet-sdk = dotnetCorePackages.sdk_8_0;
-  dotnet-runtime = dotnetCorePackages.runtime_8_0;
+  dotnet-runtime = dotnetCorePackages.aspnetcore_8_0;
 
   meta.mainProgram = "MegaSync";
   executables = [meta.mainProgram];

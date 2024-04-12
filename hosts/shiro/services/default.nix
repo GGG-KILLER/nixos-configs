@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./backup/restic.nix
+    ./download/megasync.nix
     ./gaming
     ./monitoring
     ./security
