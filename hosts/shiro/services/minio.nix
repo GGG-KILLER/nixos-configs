@@ -43,7 +43,7 @@
       };
 
       locations."~ ^/minio/ui/(.*)" = {
-        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.minio-console}/$1";
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.minio-console}/$1$is_args$args";
         recommendedProxySettings = true;
         proxyWebsockets = true;
         extraConfig = ''
