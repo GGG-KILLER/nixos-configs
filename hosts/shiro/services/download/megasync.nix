@@ -48,6 +48,34 @@ in {
       StateDirectory = "mega-sync";
 
       ExecStart = getExe self.packages.${system}.mega-sync;
+
+      # Hardening
+      # IPAddressAllow = "192.168.1.1";
+      # IPAddressDeny = "localhost multicast 192.168.0.0/24 172.16.0.0/24";
+      LockPersonality = true;
+      # MemoryDenyWriteExecute = true; # Figure out why this doesn't work. They should've solved this already.
+      NoNewPrivileges = true;
+      PrivateDevices = true;
+      PrivateMounts = true;
+      PrivateTmp = true;
+      PrivateUsers = true;
+      ProtectClock = true;
+      ProtectControlGroups = true;
+      ProtectHome = true;
+      ProtectHostname = true;
+      ProtectKernelLogs = true;
+      ProtectKernelModules = true;
+      ProtectKernelTunables = true;
+      ProtectProc = true;
+      ProtectSystem = "full";
+      BindPaths = "/zfs-main-pool/data/h /zfs-main-pool/data/etc";
+      RemoveIPC = true;
+      RestrictAddressFamilies = "AF_UNIX AF_INET";
+      RestrictNamespaces = true;
+      RestrictRealtime = true;
+      RestrictSUIDSGID = true;
+      SystemCallArchitectures = "native";
+      SystemCallFilter = "~@clock ~@cpu-emulation ~@debug ~@module ~@mount ~@obsolete ~@privileged ~@raw-io ~@reboot ~@resources ~@swap";
     };
   };
 
