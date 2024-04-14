@@ -25,6 +25,8 @@
         port = config.shiro.ports.zigbee2mqtt;
         url = "https://z2m.hass.lan";
       };
+
+      external_converters = ["TS0601_TZE200_lawxy9e2.js"];
     };
   };
   systemd.services."zigbee2mqtt.service".requires = ["mosquitto.service" "home-assistant.service"];
@@ -44,25 +46,22 @@
 
   services.home-assistant = {
     enable = true;
-    package =
-      (pkgs.home-assistant.override {
-        extraComponents = [
-          "default_config"
-          "esphome"
-          "mqtt"
-          "speedtestdotnet"
-        ];
-      })
-      .overrideAttrs (oldAttrs: {
-        # Don't run package tests, they take a long time
-        doInstallCheck = false;
-      });
+    extraComponents = ["default_config" "mqtt" "met"];
     configDir = "/zfs-main-pool/data/home-assistant";
     configWritable = true;
     config = {
       default_config = {};
+      homeassistant = {
+        country = "BR";
+        currency = "BRL";
+        unit_system = "metric";
+        time_zone = "America/Sao_Paulo";
+        temperature_unit = "C";
+        external_url = "https://hass.lan";
+      };
       # HTTP confs
       http = {
+        server_host = ["127.0.0.1"];
         server_port = config.shiro.ports.home-assistant;
         trusted_proxies = ["127.0.0.1"];
         use_x_forwarded_for = true;
