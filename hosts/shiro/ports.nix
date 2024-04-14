@@ -53,6 +53,7 @@ in {
 
     sonarr = 8989;
 
+    mqtt-idk = 9001;
     vallheim-control-panel = 9002;
 
     jackett = 9117;
