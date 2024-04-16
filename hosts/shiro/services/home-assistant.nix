@@ -77,14 +77,15 @@ in {
 
       frontend = {
         port = config.shiro.ports.zigbee2mqtt;
+        host = "127.0.0.1";
         url = "https://z2m.hass.lan";
       };
 
       external_converters = ["TS0601_TZE200_lawxy9e2.js"];
     };
   };
-  systemd.services."zigbee2mqtt.service".requires = ["docker-mqtt-hass.service" "docker-hass.service"];
-  systemd.services."zigbee2mqtt.service".after = ["docker-mqtt-hass.service" "docker-hass.service"];
+  systemd.services."zigbee2mqtt.service".requires = ["docker-mqtt-hass.service" "home-assistant.service"];
+  systemd.services."zigbee2mqtt.service".after = ["docker-mqtt-hass.service" "home-assistant.service"];
 
   virtualisation.oci-containers.containers.mqtt-hass = {
     image = "eclipse-mosquitto:2.0";
@@ -102,23 +103,39 @@ in {
       "--ipc=none"
     ];
   };
-  networking.firewall.interfaces."docker0".allowedTCPPorts = [config.shiro.ports.mqtt config.shiro.ports.mqtt-idk];
 
-  virtualisation.oci-containers.containers.hass = {
-    image = "ghcr.io/home-assistant/home-assistant:2024.4.3";
-    ports = ["${toString config.shiro.ports.home-assistant}:8123"];
-    environment = {
-      TZ = "${config.time.timeZone}";
+  services.home-assistant = {
+    enable = true;
+    configDir = "/zfs-main-pool/data/home-assistant";
+    configWritable = true;
+
+    extraComponents = ["default_config" "mqtt" "met"];
+    customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
+      zigbee2mqtt-networkmap
+      mini-graph-card
+    ];
+
+    config = {
+      default_config = {};
+      homeassistant = {
+        country = "BR";
+        currency = "BRL";
+        unit_system = "metric";
+        time_zone = "America/Sao_Paulo";
+        temperature_unit = "C";
+        external_url = "https://hass.lan";
+      };
+      # HTTP confs
+      http = {
+        server_host = ["127.0.0.1"];
+        server_port = config.shiro.ports.home-assistant;
+        trusted_proxies = ["127.0.0.1"];
+        use_x_forwarded_for = true;
+      };
+      # Enable the frontend
+      frontend = {};
+      mobile_app = {};
     };
-    volumes = [
-      "/zfs-main-pool/data/home-assistant:/config"
-    ];
-    extraOptions = [
-      "--network=hass"
-      "--network-alias=hass"
-      "--add-host=host.docker.internal:host-gateway"
-      "--ipc=none"
-    ];
   };
 
   modules.services.nginx = {
@@ -130,6 +147,7 @@ in {
         recommendedProxySettings = true;
         proxyWebsockets = true;
       };
+      locations."^~ /service_worker.js".return = 404;
     };
     virtualHosts."z2m.hass.lan" = {
       ssl = true;
@@ -138,6 +156,7 @@ in {
         proxyPass = "http://127.0.0.1:${toString config.shiro.ports.zigbee2mqtt}";
         recommendedProxySettings = true;
         proxyWebsockets = true;
+        sso = true;
       };
     };
   };
