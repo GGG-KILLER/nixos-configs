@@ -30,7 +30,6 @@
   systemd.services."container@sso.service".after = ["container@pgsql-prd.service"];
 
   modules.containers.sso = {
-    ephemeral = false;
     timeoutStartSec = "2min";
 
     bindMounts = {

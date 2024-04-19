@@ -26,13 +26,18 @@
   };
 
   modules.containers.network-share = {
-    ephemeral = false;
-
     builtinMounts = {
       animu = true;
       series = true;
       etc = true;
       h = true;
+    };
+
+    bindMounts = {
+      "/var/lib/samba" = {
+        hostPath = "/zfs-main-pool/data/network-share/samba";
+        isReadOnly = false;
+      };
     };
 
     config = {

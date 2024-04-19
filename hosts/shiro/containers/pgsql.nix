@@ -26,7 +26,6 @@
     };
 
     modules.containers."pgsql-${env}" = {
-      ephemeral = false;
       timeoutStartSec = "2min";
 
       bindMounts = {
