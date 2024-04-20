@@ -92,7 +92,7 @@ in {
         "${cfg.serverDir}/jre64"
       ];
       preStart = ''
-        ${getExe steamcmd} +runscript ${steamcmdScript}
+        ${getExe' steamcmd "steamcmd"} +runscript ${steamcmdScript}
         ${getExe patchelf} \
           --set-interpreter "$(cat ${stdenv.cc}/nix-support/dynamic-linker)" \
           --set-rpath "${libraryPath}" \
