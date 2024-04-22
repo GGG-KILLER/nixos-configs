@@ -10,6 +10,8 @@ let
 
   all = users ++ systems;
 in {
+  "foldingathome.xml.age".publicKeys = all;
+
   # Sora
   "sora/backup_password.age".publicKeys = [ggg sora];
   "sora/backup_envfile.age".publicKeys = [ggg sora];
