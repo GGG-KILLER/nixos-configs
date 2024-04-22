@@ -13,7 +13,6 @@
     ./backup/restic.nix
     ./users/ggg
     ./docker.nix
-    ./fah.nix
     ./fancontrol.nix
     ./fonts.nix
     ./gnome.nix
