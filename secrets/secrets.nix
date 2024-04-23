@@ -30,6 +30,7 @@ in {
   "shiro/wireguard/phone_psk.age".publicKeys = [ggg shiro];
   "shiro/wireguard/coffee_psk.age".publicKeys = [ggg shiro];
   "shiro/wireguard/coffee2_psk.age".publicKeys = [ggg shiro];
+  "shiro/wireguard/night_psk.age".publicKeys = [ggg shiro];
 
   # Shiro - Step CA
   "shiro/stepca/intermediate_ca_key.age".publicKeys = [ggg shiro];

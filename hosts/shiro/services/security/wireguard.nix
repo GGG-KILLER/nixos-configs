@@ -57,6 +57,12 @@ in {
         presharedKeyFile = config.age.secrets.wireguard-coffee2-psk.path;
         allowedIPs = ["192.168.5.5/32"];
       }
+      # Night
+      {
+        publicKey = "aqGZBpyD7/NZtcbBMq57t91PO5aAvYFnz7Pux0HAhhM=";
+        presharedKeyFile = config.age.secrets.wireguard-night-psk.path;
+        allowedIPs = ["192.168.5.6/32"];
+      }
     ];
   };
 

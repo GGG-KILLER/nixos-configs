@@ -12,6 +12,7 @@
     wireguard-phone-psk.file = ../../secrets/shiro/wireguard/phone_psk.age;
     wireguard-coffee-psk.file = ../../secrets/shiro/wireguard/coffee_psk.age;
     wireguard-coffee2-psk.file = ../../secrets/shiro/wireguard/coffee2_psk.age;
+    wireguard-night-psk.file = ../../secrets/shiro/wireguard/night_psk.age;
 
     "pterodactyl/db.env".file = ../../secrets/shiro/pterodactyl/db.env.age;
     "pterodactyl/panel.env".file = ../../secrets/shiro/pterodactyl/panel.env.age;
