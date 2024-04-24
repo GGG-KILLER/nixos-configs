@@ -57,7 +57,7 @@ in {
 
         # Android
         android-tools
-        genymotion
+        android-studio
 
         # Coding
         avalonia-ilspy
