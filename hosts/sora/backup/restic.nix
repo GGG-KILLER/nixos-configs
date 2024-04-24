@@ -23,10 +23,7 @@ in {
       ];
       extraBackupArgs = [
         "--compression max"
-        "--exclude=${baseDir}/Data"
-        "--exclude=${baseDir}/Downloads"
-        "--exclude=${baseDir}/Git"
-        "--exclude=${baseDir}/Unity"
+        "--exclude=${baseDir}/.android"
         "--exclude=${baseDir}/.cache"
         "--exclude=${baseDir}/.compose-cache"
         "--exclude=${baseDir}/.dotnet"
@@ -38,8 +35,13 @@ in {
         "--exclude=${baseDir}/.omnisharp"
         "--exclude=${baseDir}/.pki"
         "--exclude=${baseDir}/.templateengine"
-        "--exclude=${baseDir}/.vscode"
         "--exclude=${baseDir}/.var/app/com.valvesoftware.Steam/.local/share/Steam"
+        "--exclude=${baseDir}/.vscode"
+        "--exclude=${baseDir}/Android"
+        "--exclude=${baseDir}/Data"
+        "--exclude=${baseDir}/Downloads"
+        "--exclude=${baseDir}/Git"
+        "--exclude=${baseDir}/Unity"
       ];
       pruneOpts = [
         "--group-by hosts"
