@@ -45,6 +45,8 @@ in {
 
     statping-ng = 1042;
 
+    netprobe = 1043;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;
