@@ -1,6 +1,6 @@
 {...}: {
   imports = [
     ./qbittorrent.nix
-    ./sonarr.nix
+    #./sonarr.nix
   ];
 }
