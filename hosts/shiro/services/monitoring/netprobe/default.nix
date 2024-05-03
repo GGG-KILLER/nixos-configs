@@ -1,14 +1,23 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
-  system.activationScripts.create-netprobe-network = let
-    docker = config.virtualisation.oci-containers.backend;
-    dockerBin = "${pkgs.${docker}}/bin/${docker}";
-  in ''
-    ${dockerBin} network inspect netprobe >/dev/null 2>&1 || ${dockerBin} network create netprobe
-  '';
+{config, ...}: {
+  systemd.services."${config.virtualisation.oci-containers.backend}-netprobe-network" = let
+    backend = config.virtualisation.oci-containers.backend;
+  in {
+    wantedBy = ["multi-user.target"];
+    after = ["docker.service" "docker.socket"];
+    before = ["${backend}-netprobe-redis.service" "${backend}-netprobe-probe.service" "${backend}-netprobe-presentation.service"];
+    requiredBy = ["${backend}-netprobe-redis.service" "${backend}-netprobe-probe.service" "${backend}-netprobe-presentation.service"];
+
+    serviceConfig = let
+      backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
+    in {
+      Type = "simple";
+      RemainAfterExit = "yes";
+
+      ExecStartPre = "-${backendBin} network rm netprobe";
+      ExecStart = "${backendBin} network create netprobe";
+      ExecStop = "${backendBin} network rm netprobe";
+    };
+  };
 
   virtualisation.oci-containers.containers.netprobe-redis = {
     image = "redis:latest";
