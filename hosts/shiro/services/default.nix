@@ -6,6 +6,7 @@
     ./monitoring
     ./security
     ./docker-registry.nix
+    ./homarr.nix
     ./home-assistant.nix
     ./minio.nix
     ./nginx.nix
