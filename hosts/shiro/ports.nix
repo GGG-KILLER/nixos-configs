@@ -47,6 +47,9 @@ in {
 
     netprobe = 1043;
 
+    authentik = 1044;
+    authentik-ssl = 1045;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;
