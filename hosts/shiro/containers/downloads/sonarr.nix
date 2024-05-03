@@ -49,11 +49,11 @@
       services.sonarr = {
         enable = true;
         package = pkgs.sonarr.overrideAttrs (final: prev: rec {
-          version = "4.0.2.1183";
+          version = "4.0.4.1491";
 
           src = pkgs.fetchurl {
             url = "https://github.com/Sonarr/Sonarr/releases/download/v${version}/Sonarr.main.${version}.linux-x64.tar.gz";
-            hash = "sha256-S9j6zXEJM963tki88awPW0uK0fQd1bBwBcsHBlDSg/E=";
+            hash = "sha256-rtlOFfeiZLsoZR/bUPAtWicK1Cu/pxtiBhHdHYbGrHo=";
           };
         });
         user = "my-sonarr";
