@@ -15,6 +15,7 @@ with lib; {
     ./streaming
     ./authentik.nix
     ./pgsql.nix
+    ./pz-server.nix
     ./vpn-gateway.nix
   ];
 
