@@ -1,5 +1,0 @@
-{...}: {
-  imports = [
-    ./statping.nix
-  ];
-}

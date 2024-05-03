@@ -11,7 +11,6 @@ with lib; {
   imports = [
     ./downloads
     ./misc
-    ./monitoring
     ./streaming
     ./authentik.nix
     ./pgsql.nix
