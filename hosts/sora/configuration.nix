@@ -44,13 +44,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # LQX kernel
-  # TODO: Remove override when NixOS/nixpkgs#298049 arrives on unstable.
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_lqx.override {
-    structuredExtraConfig = with lib.kernel; {
-      UCLAMP_TASK = lib.mkForce (option no);
-      UCLAMP_TASK_GROUP = lib.mkForce (option no);
-    };
-  });
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
