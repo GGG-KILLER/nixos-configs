@@ -4,11 +4,11 @@
 }:
 buildDotnetModule rec {
   pname = "kemono-dl";
-  version = "0.0.3";
+  version = "0.0.5";
 
   src = builtins.fetchGit {
     url = "git@github.com:GGG-KILLER/kemono-dl.git";
-    rev = "b13e827f0ccaa6a72bfddee55dbc9196061adb80";
+    rev = "a6f9a311c742f707734b8b954bffda8d484f6049";
   };
 
   projectFile = "KemonoDl.Console/KemonoDl.Console.csproj";

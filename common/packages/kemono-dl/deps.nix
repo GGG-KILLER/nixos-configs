@@ -63,6 +63,7 @@
   (fetchNuGet { pname = "Polly.Core"; version = "8.0.0"; sha256 = "10w6z81kidkdhbwkhyas9kc1zmvz0r3mzcsii01wpydw27v0rzxp"; })
   (fetchNuGet { pname = "Polly.Extensions"; version = "8.0.0"; sha256 = "05bf0bsr587sw4ymvcp5830k34hdnz77j1akmxm5j9zilfblzzmr"; })
   (fetchNuGet { pname = "Polly.RateLimiting"; version = "8.0.0"; sha256 = "1i9mgw4jwmhkbimgjvnpdnzdl38ylp3krradyaxbrhp51cc8m7g3"; })
+  (fetchNuGet { pname = "Spectre.Console"; version = "0.49.1"; sha256 = "0fhl96p3xjd5k1wwvhs80cp35rrlgnza6mw9vy0knhmf7ji9b95n"; })
   (fetchNuGet { pname = "System.Diagnostics.DiagnosticSource"; version = "4.7.1"; sha256 = "1mivaifniyrqwlnvzsfaxzrh2sd981bwzs3cbvs5wi7jjzbcqr4p"; })
   (fetchNuGet { pname = "System.Diagnostics.DiagnosticSource"; version = "6.0.0"; sha256 = "0rrihs9lnb1h6x4h0hn6kgfnh58qq7hx8qq99gh6fayx4dcnx3s5"; })
   (fetchNuGet { pname = "System.Diagnostics.DiagnosticSource"; version = "7.0.0"; sha256 = "1jxhvsh5mzdf0sgb4dfmbys1b12ylyr5pcfyj1map354fiq3qsgm"; })
