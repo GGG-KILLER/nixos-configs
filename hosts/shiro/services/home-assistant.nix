@@ -51,13 +51,6 @@ in {
   # For debugging
   environment.systemPackages = with pkgs; [zigpy-cli];
 
-  system.activationScripts.mkVPN = let
-    docker = config.virtualisation.oci-containers.backend;
-    dockerBin = "${pkgs.${docker}}/bin/${docker}";
-  in ''
-    ${dockerBin} network inspect hass >/dev/null 2>&1 || ${dockerBin} network create hass
-  '';
-
   services.udev.extraRules = ''
     SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d4", SYMLINK+="sonoff_zigbee", MODE="0660", GROUP="zigbee2mqtt"
   '';
@@ -98,8 +91,6 @@ in {
     ];
     cmd = ["mosquitto" "-c" "/mosquitto-no-auth.conf"];
     extraOptions = [
-      "--network=hass"
-      "--network-alias=mqtt"
       "--ipc=none"
     ];
   };
