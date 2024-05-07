@@ -42,9 +42,10 @@ in {
 
     locations."/" = {
       extraConfig = ''
-        add_header 'Access-Control-Allow-Origin' "*" always;
+        add_header 'Access-Control-Allow-Credentials' "true";
         add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With' always;
         add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS' always;
+        add_header 'Access-Control-Allow-Origin' "*" always;
         add_header Cache-Control 'no-store, no-cache, max-age=0, no-transform';
         add_header Last-Modified $date_gmt;
         if_modified_since off;
@@ -52,10 +53,6 @@ in {
         etag off;
 
         if ($request_method = OPTIONS) {
-            add_header 'Access-Control-Allow-Credentials' "true";
-            add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Mx-ReqToken,X-Requested-With' always;
-            add_header 'Access-Control-Allow-Origin' "$http_origin" always;
-            add_header 'Access-Control-Allow-Methods' "GET, POST, OPTIONS" always;
             return 200;
         }
       '';
