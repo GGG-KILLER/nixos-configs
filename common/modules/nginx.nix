@@ -150,7 +150,7 @@ in {
                 extraConfig = ''
                   # ensure the host of this vserver matches your external URL you've configured
                   # in authentik
-                  proxy_set_header        Host $host;
+                  proxy_set_header        X-Override-Host $host;
                   proxy_set_header        X-Original-URL $scheme://$http_host$request_uri;
                   add_header              Set-Cookie $auth_cookie;
                   auth_request_set        $auth_cookie $upstream_http_set_cookie;

@@ -107,8 +107,21 @@
     ssl = true;
     locations."/" = {
       proxyWebsockets = true;
-      recommendedProxySettings = true;
       proxyPass = "https://authentik";
+      extraConfig = ''
+        set $my_host $http_host;
+        if ($http_x_override_host) {
+          set $my_host $http_x_override_host;
+        }
+
+        add_header              X-Host $my_host always;
+        proxy_set_header        Host $my_host;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto $scheme;
+        proxy_set_header        X-Forwarded-Host $my_host;
+        proxy_set_header        X-Forwarded-Server $my_host;
+      '';
     };
   };
 }
