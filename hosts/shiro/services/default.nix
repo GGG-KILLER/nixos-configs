@@ -5,6 +5,7 @@
     ./gaming
     ./monitoring
     ./security
+    ./cockpit.nix
     ./docker-registry.nix
     ./homarr.nix
     ./home-assistant.nix
