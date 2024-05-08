@@ -36,7 +36,7 @@ in {
             default = true;
           };
 
-          inherit (vhost-opts) serverAliases default root extraConfig;
+          inherit (vhost-opts) listen serverAliases default root extraConfig;
 
           locations = let
             locationOptions = recursiveUpdate (import "${inputs.nixpkgs}/nixos/modules/services/web-servers/nginx/location-options.nix" {inherit config lib;}) {
@@ -100,7 +100,7 @@ in {
         (key: server:
           mkMerge [
             {
-              inherit (server) serverName serverAliases default;
+              inherit (server) listen serverName serverAliases default;
 
               locations = mapAttrs (host: loc:
                 mkMerge [
