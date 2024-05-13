@@ -26,7 +26,6 @@
     ./video.nix
     ./virtualisation.nix
     ./vpn.nix
-    ./webcam.nix
     ./yubikey.nix
     ./zfs.nix
     nur-no-pkgs.repos.ilya-fedin.modules.flatpak-fonts
@@ -44,7 +43,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # LQX kernel
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
+  #boot.kernelPackages = pkgs.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_lqx.override {
+    structuredExtraConfig = with lib.kernel; {
+      ZSWAP_COMPRESSOR_DEFAULT_ZSTD = lib.mkForce (option no);
+    };
+  });
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
