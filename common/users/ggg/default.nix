@@ -21,6 +21,7 @@
       "nginx"
       "prometheus"
       "wheel"
+      "video"
     ];
     hashedPassword = config.my.secrets.users.ggg.hashedPassword;
     shell = pkgs.zsh;
