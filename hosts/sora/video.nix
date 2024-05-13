@@ -13,12 +13,20 @@
 in {
   boot.kernelModules = ["nvidia-uvm"]; # Needed for VA-API
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl.enable = true;
-  hardware.opengl.extraPackages = with pkgs; [nvidia-vaapi-driver];
 
-  environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
-  environment.sessionVariables.VDPAU_DRIVER = "nvidia";
-  environment.sessionVariables.NVD_BACKEND = "direct";
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [nvidia-vaapi-driver];
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  environment.sessionVariables = {
+    LIBVA_DRIVER_NAME = "nvidia";
+    VDPAU_DRIVER = "nvidia";
+    NVD_BACKEND = "direct";
+  };
+
   hardware.nvidia = {
     package = nvidiaDriver;
 

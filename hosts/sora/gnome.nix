@@ -5,21 +5,18 @@
 }: let
   inherit (lib) mkForce;
 in {
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
+  # Enable the GNOME Desktop Environment.
+  services.xserver.enable = true;
+  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.wayland = true;
 
-    # Enable the GNOME Desktop Environment.
-    displayManager = {
-      gdm.enable = true;
-    };
-
-    desktopManager.gnome.enable = true;
-  };
+  # Wayland tweaks
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  programs.xwayland.enable = true;
 
   # Remote Desktop
   services.gnome.gnome-remote-desktop.enable = true;
-  # programs.xwayland.enable = true;
 
   environment.systemPackages = with pkgs; [
     gnome.gnome-remote-desktop
