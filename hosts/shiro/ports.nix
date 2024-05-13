@@ -50,6 +50,9 @@ in {
     authentik = 1044;
     authentik-ssl = 1045;
 
+    pufferpanel = 1046;
+    pufferpanel-sftp = 1047;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;
@@ -62,6 +65,8 @@ in {
     vallheim-control-panel = 9002;
 
     jackett = 9117;
+
+    # Games: 60000-60999
 
     wireguard = 61235;
   };
