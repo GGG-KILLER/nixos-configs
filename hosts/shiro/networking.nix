@@ -3,7 +3,7 @@
   config,
   ...
 }: let
-  inherit (lib) mkOption types mapAttrs listToAttrs nameValuePair attrValues;
+  inherit (lib) mkOption types mapAttrs listToAttrs nameValuePair attrValues removeSuffix;
   portOptions = {
     options = {
       protocol = mkOption {
@@ -61,14 +61,9 @@ in {
   config = rec {
     my.networking.shiro = {
       mainAddr = "192.168.2.133"; # ipgen -n 192.168.2.0/24 shiro
-      extraNames = [
-        "ca"
-        "grafana.shiro"
-        "monit.shiro"
-        "prometheus.shiro"
-        "hass"
-        "z2m.hass"
-      ];
+      extraNames =
+        []
+        ++ (map (name: removeSuffix ".lan" name) (builtins.attrNames config.services.nginx.virtualHosts));
     };
 
     networking = {
