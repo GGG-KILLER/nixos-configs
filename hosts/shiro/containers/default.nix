@@ -178,7 +178,7 @@ with lib; {
             };
 
             # Have manpages
-            environment.systemPackages = with pkgs; [man netcat tcpdump htop nmon];
+            environment.systemPackages = with pkgs; [man netcat tcpdump htop nmon bat];
           };
         };
       in {
