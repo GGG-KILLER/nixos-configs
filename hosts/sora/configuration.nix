@@ -15,7 +15,6 @@
     ./docker.nix
     ./fancontrol.nix
     ./fonts.nix
-    # ./gnome.nix
     ./kde.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
