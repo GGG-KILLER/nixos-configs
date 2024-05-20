@@ -42,7 +42,6 @@
 in {
   imports = [
     ./commands
-    ./theme.nix
     ./vscode.nix
   ];
 
