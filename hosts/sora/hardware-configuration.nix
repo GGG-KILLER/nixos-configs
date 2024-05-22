@@ -18,8 +18,9 @@
   boot.blacklistedKernelModules = ["k10temp"];
 
   fileSystems."/" = {
-    device = "none";
-    fsType = "tmpfs";
+    device = "rpool/nixos/root";
+    fsType = "zfs";
+    options = ["zfsutil"];
   };
 
   fileSystems."/nix" = {
