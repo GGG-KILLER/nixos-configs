@@ -6,9 +6,6 @@
   # Unstable is needed for 6.8
   boot.zfs.package = pkgs.zfs_unstable;
 
-  # ZFS boot settings.
-  boot.supportedFilesystems = ["zfs" "ntfs"];
-
   # ZFS maintenance settings.
   services.zfs.trim.enable = true;
 
@@ -32,7 +29,4 @@
     ZED_NOTIFY_VERBOSE = "1";
     ZED_SLACK_WEBHOOK_URL = config.my.secrets.discord.webhook + "/slack";
   };
-
-  # ZFS Flags
-  boot.kernelParams = ["zfs.zfs_arc_max=12884901888" "elevator=none" "nohibernate"];
 }

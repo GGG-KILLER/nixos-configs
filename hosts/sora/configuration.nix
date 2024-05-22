@@ -12,6 +12,7 @@
     ./audio
     ./backup/restic.nix
     ./users/ggg
+    ./boot.nix
     ./docker.nix
     ./fancontrol.nix
     ./fonts.nix
@@ -37,18 +38,6 @@
   nixpkgs.overlays = [
     inputs.nix-vscode-extensions.overlays.default
   ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # LQX kernel
-  #boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_lqx.override {
-    structuredExtraConfig = with lib.kernel; {
-      ZSWAP_COMPRESSOR_DEFAULT_ZSTD = lib.mkForce (option no);
-    };
-  });
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
