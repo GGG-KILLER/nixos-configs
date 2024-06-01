@@ -19,10 +19,5 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # LQX kernel
-  #boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_lqx.override {
-    structuredExtraConfig = with lib.kernel; {
-      ZSWAP_COMPRESSOR_DEFAULT_ZSTD = lib.mkForce (option no);
-    };
-  });
+  boot.kernelPackages = pkgs.linuxPackages_lqx;
 }
