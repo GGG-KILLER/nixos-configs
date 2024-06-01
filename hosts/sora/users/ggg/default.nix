@@ -100,7 +100,7 @@ in {
 
         # Media
         #self.packages.${system}.ffmpeg-full
-        ffmpeg-full
+        ffmpeg
         #handbrake # Uncomment when NixOS/nixpkgs#297984 hits unstable.
 
         # VMs

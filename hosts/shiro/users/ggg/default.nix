@@ -15,7 +15,7 @@
       aria
       #step-cli # TODO: Uncomment if it's still used and NixOS/nixpkgs#301623 has hit unstable.
       self.packages.${system}.kemono-dl
-      ffmpeg-full
+      ffmpeg
     ];
   };
 }
