@@ -87,7 +87,7 @@ in {
 
         # Games
         #inputs.packwiz.packages.${system}.packwiz # TODO: Uncomment when packwiz/packwiz#297 gets fixed.
-        (prismlauncher.override {jdks = [jdk8 jdk11 jdk17 jdk19 jdk21];})
+        (prismlauncher.override {jdks = [jdk8 jdk11 jdk17 jdk21];})
         r2mod_cli
 
         # Hardware
