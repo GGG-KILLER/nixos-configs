@@ -42,7 +42,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable CUDA support for everything
-  # nixpkgs.config.cudaSupport = true; # TODO: Consider enabling or removing.
+  nixpkgs.config.cudaSupport = true;
 
   networking = {
     hostName = "sora";
