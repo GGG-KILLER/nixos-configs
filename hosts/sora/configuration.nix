@@ -42,7 +42,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable CUDA support for everything
-  nixpkgs.config.cudaSupport = true;
+  # nixpkgs.config.cudaSupport = true; # TODO: Re-enable after NixOS/nixpkgs#314691 lands on unstable
 
   networking = {
     hostName = "sora";
