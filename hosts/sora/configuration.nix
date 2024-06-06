@@ -15,6 +15,7 @@
     ./boot.nix
     ./docker.nix
     ./fancontrol.nix
+    ./flatpak.nix
     ./fonts.nix
     ./kde.nix
     # Include the results of the hardware scan.
@@ -29,8 +30,6 @@
     ./vpn.nix
     ./yubikey.nix
     ./zfs.nix
-    nur-no-pkgs.repos.ilya-fedin.modules.flatpak-fonts
-    nur-no-pkgs.repos.ilya-fedin.modules.flatpak-icons
     nur-no-pkgs.repos.ilya-fedin.modules.io-scheduler
   ];
 
