@@ -97,6 +97,7 @@ in {
         inputs.deploy-rs.packages.${system}.deploy-rs
         nix-top
         nixpkgs-review
+        nh
 
         # Media
         #self.packages.${system}.ffmpeg-full
