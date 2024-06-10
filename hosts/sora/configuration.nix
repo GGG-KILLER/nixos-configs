@@ -17,6 +17,8 @@
     ./fancontrol.nix
     ./flatpak.nix
     ./fonts.nix
+    # TODO: Undo when this gets fixed in .NET
+    ./hack.nix
     ./kde.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
