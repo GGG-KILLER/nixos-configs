@@ -58,11 +58,12 @@ in {
             --profile=${cfg.dataDir} \
             --webui-port=${toString cfg.web.port}
         '';
-        Restart = "on-success";
+        Restart = "always";
         User = cfg.user;
         Group = cfg.group;
         UMask = "0002";
         LimitNOFILE = 10240;
+        MemoryMax = "8G";
       };
     };
 
