@@ -24,18 +24,18 @@
   git-credential-manager = self.packages.${system}.git-credential-manager;
   kemono-dl = self.packages.${system}.kemono-dl;
   r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
-    version = "3.1.47";
+    version = "3.1.49";
 
     src = pkgs.fetchFromGitHub {
       owner = "PedroVH";
       repo = "r2modmanPlus";
       rev = version;
-      hash = "sha256-IlIjoxqhdoEQGruTF28+E9eHC7YWzZRjRDScZ04KlBI=";
+      hash = "sha256-3bFWmFb906giPCmLEu0G18BWDVGsPolbFx3o6wIn6Wo=";
     };
 
     offlineCache = pkgs.fetchYarnDeps {
       yarnLock = "${src}/yarn.lock";
-      hash = "sha256-1JXd1pDGEFDG+ogXbEpl4WMYXwksJJJBx20ZPykc7OM=";
+      hash = "sha256-ntXZ4gRXRqiPQxdwXDsLxGdBqUV5eboy9ntTlJsz9FA=";
     };
 
     patches = [];
