@@ -76,6 +76,7 @@ in {
         pgformatter
         postgresql_14
         # pgmodeler # TODO: Uncomment this once the hash in nixpkgs gets updated.
+        mongodb-compass
 
         # Encryption
         age
