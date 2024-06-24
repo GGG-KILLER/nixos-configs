@@ -115,6 +115,8 @@ in {
         Group = cfg.group;
         Restart = "always";
         WorkingDirectory = cfg.serverDir;
+
+        TimeoutStartSec = "900";
       };
     };
   };

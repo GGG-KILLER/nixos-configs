@@ -21,6 +21,8 @@
   };
 
   modules.containers.pz-server = {
+    timeoutStartSec = "2min";
+
     bindMounts = {
       "/mnt/pz-server" = {
         hostPath = "/zfs-main-pool/data/gaming/pz-server";
