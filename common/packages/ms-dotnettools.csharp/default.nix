@@ -31,22 +31,26 @@
     {
       x86_64-linux = {
         arch = "linux-x64";
-        sha256 = "sha256-B46bBW1IlvpTvSldannn22ySfzw/XQrNG4XPa2kp/Es=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.34.12/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-x64")
+        sha256 = "sha256-Y+Re3tDX8HQrWo045JxdX8Jt4jomm1/C9T+BU2/hE+g=";
         binaries = linuxBins;
       };
       aarch64-linux = {
         arch = "linux-arm64";
-        sha256 = "sha256-W51IorPTV2782Qb+ozVeuVTh+ov3DKNfbzZEp2eJi58=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.34.12/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-arm64")
+        sha256 = "sha256-nFCFK2GVLljMqmxJnlma6kAXHc9qN/DnnRiWrkjmLmo=";
         binaries = linuxBins;
       };
       x86_64-darwin = {
         arch = "darwin-x64";
-        sha256 = "sha256-X4xymVWgBt+ilCE0GfFJaZRZhauii9T5riWLgqYeXe8=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.34.12/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-x64")
+        sha256 = "sha256-hC1ZJdBKJR3om9xuxEBhaBtQXEin1R0t7BFVdOUu6X8=";
         binaries = darwinBins;
       };
       aarch64-darwin = {
         arch = "darwin-arm64";
-        sha256 = "sha256-sMHJk39wOoTBcLvb4NFLNv56VzOeAaLjV9vG4qUJSR0=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.34.12/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-arm64")
+        sha256 = "sha256-mIZJXgACvJmhrJzOtKcF2DKeBkLSjKehE1xEwtp1X+E=";
         binaries =
           darwinBins
           ++ [
@@ -62,7 +66,7 @@ in
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      version = "2.22.2";
+      version = "2.34.12";
       inherit (extInfo) sha256 arch;
     };
 
