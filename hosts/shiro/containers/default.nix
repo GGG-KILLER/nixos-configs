@@ -12,7 +12,6 @@ with lib; {
     ./downloads
     ./misc
     ./streaming
-    ./mongodb.nix
     ./pgsql.nix
     ./pz-server.nix
     ./vpn-gateway.nix

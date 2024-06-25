@@ -18,6 +18,9 @@
     "pterodactyl/db.env".file = ../../secrets/shiro/pterodactyl/db.env.age;
     "pterodactyl/panel.env".file = ../../secrets/shiro/pterodactyl/panel.env.age;
 
+    "mongodb/dev.env".file = ../../secrets/shiro/mongodb/dev.env.age;
+    "mongodb/prd.env".file = ../../secrets/shiro/mongodb/prd.env.age;
+
     step-ca-intermediate-key = {
       file = ../../secrets/shiro/stepca/intermediate_ca_key.age;
       owner = "step-ca";

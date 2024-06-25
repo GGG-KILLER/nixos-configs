@@ -1,6 +1,7 @@
 {...}: {
   imports = [
     ./backup/restic.nix
+    ./databases
     ./downloads
     ./gaming
     ./monitoring

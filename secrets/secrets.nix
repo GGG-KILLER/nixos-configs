@@ -44,6 +44,10 @@ in {
   "shiro/pgsql/dev_pass.age".publicKeys = [ggg shiro];
   "shiro/pgsql/prd_pass.age".publicKeys = [ggg shiro];
 
+  # Shiro - MongoDB
+  "shiro/mongodb/dev.env.age".publicKeys = [ggg shiro];
+  "shiro/mongodb/prd.env.age".publicKeys = [ggg shiro];
+
   # Shiro - Pterodactyl
   "shiro/pterodactyl/db.env.age".publicKeys = [ggg shiro];
   "shiro/pterodactyl/panel.env.age".publicKeys = [ggg shiro];
