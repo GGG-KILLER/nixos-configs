@@ -2,8 +2,8 @@
   # nix run nixpkgs#nix-prefetch-docker -- --image-name docker.lan/mywebsite/backend --image-tag latest --quiet
   backendImage = pkgs.dockerTools.pullImage {
     imageName = "docker.lan/mywebsite/backend";
-    imageDigest = "sha256:f0e1a44865c49c701781504362d61e0db9b8c8f65a46f10c7423913f01ea37a7";
-    sha256 = "18v46nfgadkmc02nkp3aiwwvldq8di3rvz9jxypfjhxk15b4m4ha";
+    imageDigest = "sha256:15f62841b9b33ec20c80bfba54fd76abbcd8baf6665713612926df41083ee92d";
+    sha256 = "04r47j78r9c9xv9rc11k0gs2k05yxl0825db5wbqipvdilsj6cy3";
     finalImageName = "docker.lan/mywebsite/backend";
     finalImageTag = "latest";
   };
