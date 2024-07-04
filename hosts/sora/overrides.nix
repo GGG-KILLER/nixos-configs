@@ -1,7 +1,9 @@
 {...}: {
   nixpkgs.overlays = [
     (self: super: {
-      mpv = super.wrapMpv super.mpv-unwrapped {
+      mpv = super.mpv-unwrapped.wrapper {
+        mpv = super.mpv-unwrapped;
+
         scripts = with super.mpvScripts; [
           mpris
           thumbnail
