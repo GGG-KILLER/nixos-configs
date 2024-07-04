@@ -115,7 +115,7 @@ in {
         exiftool
         fd
         google-chrome
-        imgbrd-grabber
+        #imgbrd-grabber
         imhex
         inputs.ipgen-cli.packages.${system}.default
         inputs.git-crypt-agessh.packages.${system}.default
