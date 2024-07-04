@@ -64,7 +64,7 @@
     };
 
     home.file = {
-      ".cache/nix-index/files".source = inputs.nix-index-database.legacyPackages.${system}.nix-index-database;
+      ".cache/nix-index/files".source = inputs.nix-index-database.packages.${system}.nix-index-database;
     };
   };
 }
