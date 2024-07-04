@@ -80,7 +80,7 @@ in {
         config.my.secrets.pki.root-crt-path
       ];
 
-      hardware.opengl.enable = true;
+      hardware.graphics.enable = true;
 
       nixpkgs.config.allowUnfreePredicate = pkg:
         builtins.elem (lib.getName pkg) [

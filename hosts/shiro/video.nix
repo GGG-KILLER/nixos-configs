@@ -11,7 +11,7 @@
     else unstableDriver;
 in {
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
   hardware.nvidia = {
