@@ -14,10 +14,10 @@ in {
   boot.kernelModules = ["nvidia-uvm"]; # Needed for VA-API
   services.xserver.videoDrivers = ["nvidia"];
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [nvidia-vaapi-driver];
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   environment.sessionVariables = {
