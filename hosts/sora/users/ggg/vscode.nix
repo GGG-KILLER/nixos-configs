@@ -43,7 +43,7 @@ in {
         ++ (with pkgs.vscode-extensions; [
           foxundermoon.shell-format
           kamadorueda.alejandra
-          matklad.rust-analyzer
+          rust-lang.rust-analyzer
           ms-python.python
           ms-toolsai.jupyter
           ms-vscode-remote.remote-ssh
