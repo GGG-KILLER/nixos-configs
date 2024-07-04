@@ -10,12 +10,6 @@
     consoleAddress = "127.0.0.1:${toString config.shiro.ports.minio-console}";
   };
 
-  services.prometheus.exporters.minio = {
-    enable = false;
-    minioBucketStats = true;
-    minioAddress = "http://127.0.0.1:${toString config.shiro.ports.minio}";
-  };
-
   modules.services.nginx = {
     virtualHosts."s3.shiro.lan" = {
       ssl = true;
