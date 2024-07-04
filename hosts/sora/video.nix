@@ -17,7 +17,6 @@ in {
   hardware.opengl = {
     enable = true;
     extraPackages = with pkgs; [nvidia-vaapi-driver];
-    driSupport = true;
     driSupport32Bit = true;
   };
 
