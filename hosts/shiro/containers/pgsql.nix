@@ -54,7 +54,7 @@
           ];
 
           services.pgadmin = {
-            enable = true;
+            # enable = true;
             initialEmail = "gggkiller2@gmail.com";
             initialPasswordFile = "/secrets/pgadmin-pass";
           };
