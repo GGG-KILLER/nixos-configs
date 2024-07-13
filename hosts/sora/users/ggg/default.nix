@@ -62,14 +62,11 @@ in {
         # Coding
         avalonia-ilspy
         docker-compose
-        #jetbrains.rider
-        mono
         mockoon
         nil
         nodejs_latest
         powershell
         tokei
-        #wrangler
         yarn
 
         # Database
@@ -112,21 +109,15 @@ in {
         aria
         chromium
         discord-canary
-        exiftool
         fd
         google-chrome
-        #imgbrd-grabber
         imhex
         inputs.ipgen-cli.packages.${system}.default
         inputs.git-crypt-agessh.packages.${system}.default
-        jellyfin-mpv-shim
-        libguestfs-with-appliance
         m3u8-dl
         mockoon
         mullvad-vpn
-        ruffle
         rustdesk
-        #self.packages.${system}.yt-dlp
         yt-dlp
         zenmonitor
         kemono-dl
