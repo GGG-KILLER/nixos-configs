@@ -11,12 +11,11 @@ with lib; {
     ./boot.nix
     ./hardware-configuration.nix
     ./headless.nix
-    ./journald.nix
+    # ./journald.nix
     ./nat.nix
     ./networking.nix
     ./ports.nix
     ./secrets.nix
-    ./shellhub.nix
     ./store.nix
     ./users.nix
     ./video.nix

@@ -5,7 +5,6 @@ in {
     ./lm-sensors.nix
     ./node-exporter-smartmon.nix
     ./node.nix
-    ./smokeping.nix
     ./zfs-exporter.nix
   ];
 
