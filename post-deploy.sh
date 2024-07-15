@@ -3,7 +3,12 @@
 # shellcheck shell=bash
 set -uo pipefail
 
-hosts=(shiro.lan f.ggg.dev vpn-proxy.ggg.dev)
+declare -a hosts
+if [ $# -gt 0 ]; then
+    hosts=("$@")
+else
+    hosts=(shiro.lan f.ggg.dev vpn-proxy.ggg.dev)
+fi
 users=(ggg root)
 
 # Thanks to https://serverfault.com/a/995377 for this
