@@ -13,8 +13,8 @@
     {
       x86_64-linux = {
         arch = "linux-x64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.8/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-x64")
-        sha256 = "sha256-SXbNiyt3neGv6jjpoOxt2LvV+LQy7PJ1gojMVpPCHmY=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.14/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-x64")
+        sha256 = "sha256-yPenOk2sKt3DGmb69Ewbz8YT5KU371wizLdqfHCxBfg=";
         binaries = [
           "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/servicehub-controller-net60.linux-x64/Microsoft.ServiceHub.Controller"
           "components/vs-green-server/platforms/linux-x64/node_modules/@microsoft/visualstudio-code-servicehost.linux-x64/Microsoft.VisualStudio.Code.ServiceHost"
@@ -24,8 +24,8 @@
       };
       aarch64-linux = {
         arch = "linux-arm64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.8/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-arm64")
-        sha256 = "sha256-qCzY3hLiPc2y6z72835XTOZb/EQStVC8dk9DFAguWaI=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.14/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-arm64")
+        sha256 = "sha256-zjGyewO5Ss0kBr2GyWa/sBPy1K21MrNsIwzDBjGKlCc=";
         binaries = [
           "components/vs-green-server/platforms/linux-arm64/node_modules/@microsoft/servicehub-controller-net60.linux-arm64/Microsoft.ServiceHub.Controller"
           "components/vs-green-server/platforms/linux-arm64/node_modules/@microsoft/visualstudio-code-servicehost.linux-arm64/Microsoft.VisualStudio.Code.ServiceHost"
@@ -35,8 +35,8 @@
       };
       x86_64-darwin = {
         arch = "darwin-x64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.8/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-x64")
-        sha256 = "sha256-A1e6ZN+lqkwAXqU6cMkNEAg/xeWmSMUaXmn8qxMmkYA=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.14/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-x64")
+        sha256 = "sha256-nhX04v+r8IbUJ5Uoryuxvthn07MAoncDr5dxptlv9GM=";
         binaries = [
           "components/vs-green-server/platforms/darwin-x64/node_modules/@microsoft/servicehub-controller-net60.darwin-x64/Microsoft.ServiceHub.Controller"
           "components/vs-green-server/platforms/darwin-x64/node_modules/@microsoft/visualstudio-code-servicehost.darwin-x64/Microsoft.VisualStudio.Code.ServiceHost"
@@ -46,8 +46,8 @@
       };
       aarch64-darwin = {
         arch = "darwin-arm64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.8/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-arm64")
-        sha256 = "sha256-kRRYsN61GjUllidBK6YF4bSobEQdUHfbVv/Fci2CDOs=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csdevkit/1.8.14/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-arm64")
+        sha256 = "sha256-IvH2wmaiw/TAMzuaFg+5gsKxjnp+Hi3PQnGLXp1KEHM=";
         binaries = [
           "components/vs-green-server/platforms/darwin-arm64/node_modules/@microsoft/servicehub-controller-net60.darwin-arm64/Microsoft.ServiceHub.Controller"
           "components/vs-green-server/platforms/darwin-arm64/node_modules/@microsoft/visualstudio-code-servicehost.darwin-arm64/Microsoft.VisualStudio.Code.ServiceHost"
@@ -63,7 +63,7 @@ in
     mktplcRef = {
       name = "csdevkit";
       publisher = "ms-dotnettools";
-      version = "1.8.8";
+      version = "1.8.14";
       inherit (extInfo) sha256 arch;
     };
     sourceRoot = "extension"; # This has more than one folder.

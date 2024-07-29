@@ -31,26 +31,26 @@
     {
       x86_64-linux = {
         arch = "linux-x64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.35.15/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-x64")
-        sha256 = "sha256-Y+Re3tDX8HQrWo045JxdX8Jt4jomm1/C9T+BU2/hE+g=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.39.29/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-x64")
+        sha256 = "sha256-uCayu7WU+qqiCDxxfO4j1aOypP+O49uNZMnfwq+hO4k=";
         binaries = linuxBins;
       };
       aarch64-linux = {
         arch = "linux-arm64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.35.15/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-arm64")
-        sha256 = "sha256-8FooJmdFHgCAuAeJiVkqX/ugTN5PlLYm6tK9MR5STJY=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.39.29/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=linux-arm64")
+        sha256 = "sha256-b4Q3JWNdZtLlgxMUBpu+5ppJDILxjPHBZeMxsQHiDa0=";
         binaries = linuxBins;
       };
       x86_64-darwin = {
         arch = "darwin-x64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.35.15/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-x64")
-        sha256 = "sha256-BLOiQVXMZlXn3Hgl4EJ24TU6EjH8Gw73qO5DkZcv3BY=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.39.29/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-x64")
+        sha256 = "sha256-uVI2PmHfhmuQMTCbwrGuLamC1DyjeLCZf41pjT891GE=";
         binaries = darwinBins;
       };
       aarch64-darwin = {
         arch = "darwin-arm64";
-        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.35.15/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-arm64")
-        sha256 = "sha256-pNQ7WjqmiPBzzq2QNEd4a3VZqOuoKPtGooy83vgJTPQ=";
+        # nix hash convert --hash-algo sha256 $(nix-prefetch-url --type sha256 "https://ms-dotnettools.gallery.vsassets.io/_apis/public/gallery/publisher/ms-dotnettools/extension/csharp/2.39.29/assetbyname/Microsoft.VisualStudio.Services.VSIXPackage?targetPlatform=darwin-arm64")
+        sha256 = "sha256-zNSvznX7nYTBexlkD49t3Ne66/u3paecZJZwMuPmSf4=";
         binaries =
           darwinBins
           ++ [
@@ -66,7 +66,7 @@ in
     mktplcRef = {
       name = "csharp";
       publisher = "ms-dotnettools";
-      version = "2.35.15";
+      version = "2.39.29";
       inherit (extInfo) sha256 arch;
     };
 
