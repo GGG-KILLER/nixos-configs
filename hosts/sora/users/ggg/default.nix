@@ -63,7 +63,7 @@ in {
         avalonia-ilspy
         docker-compose
         mockoon
-        nil
+        nixd
         nodejs_latest
         powershell
         tokei

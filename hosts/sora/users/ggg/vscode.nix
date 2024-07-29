@@ -30,9 +30,9 @@ in {
           "update.mode" = "none";
 
           "nix.enableLanguageServer" = true;
+          "nix.serverPath" = getExe pkgs.nixd;
           "nix.formatterPath" = getExe pkgs.alejandra;
-          "nix.serverPath" = getExe pkgs.nil;
-          "nix.serverSettings"."nil"."formatting"."command" = [(getExe pkgs.alejandra)];
+          "nix.serverSettings"."nixd"."formatting"."command" = [(getExe pkgs.alejandra)];
         };
       extensions =
         [
