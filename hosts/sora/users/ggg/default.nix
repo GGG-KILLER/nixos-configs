@@ -263,7 +263,6 @@ in {
 
     services = {
       flameshot.enable = false;
-      rsibreak.enable = true;
     };
 
     xdg.configFile."nix/nix.conf".text = ''
