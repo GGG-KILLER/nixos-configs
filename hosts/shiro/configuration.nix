@@ -14,6 +14,7 @@ with lib; {
     # ./journald.nix
     ./nat.nix
     ./networking.nix
+    ./overrides.nix
     ./ports.nix
     ./secrets.nix
     ./store.nix
