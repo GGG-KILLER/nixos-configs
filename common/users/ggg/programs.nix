@@ -14,7 +14,7 @@
   home-manager.users.ggg = {
     home.packages = with pkgs; [
       # Nix
-      nix-du
+      # nix-du # TODO: Consider re-adding when it builds again
       nix-ld
 
       # Web
