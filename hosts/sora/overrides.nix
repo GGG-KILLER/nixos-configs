@@ -13,5 +13,10 @@
         ];
       };
     })
+    (self: super: {
+      lsp-plugins = super.lsp-plugins.override {
+        php = self.php82;
+      };
+    })
   ];
 }
