@@ -7,6 +7,7 @@
     "minio.env".file = ../../secrets/shiro/minio.env.age;
     "statping.env".file = ../../secrets/shiro/statping.env.age;
     "netprobe.env".file = ../../secrets/shiro/netprobe.env.age;
+    pr-tracker-token.file = ../../secrets/shiro/pr-tracker-token.age;
 
     wireguard-key.file = ../../secrets/shiro/wireguard/private_key.age;
     wireguard-laptop-psk.file = ../../secrets/shiro/wireguard/laptop_psk.age;

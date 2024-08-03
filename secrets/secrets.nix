@@ -24,6 +24,7 @@ in {
   "shiro/minio.env.age".publicKeys = [ggg shiro];
   "shiro/statping.env.age".publicKeys = [ggg shiro];
   "shiro/netprobe.env.age".publicKeys = [ggg shiro];
+  "shiro/pr-tracker-token.age".publicKeys = [ggg shiro];
 
   # Shiro - Wireguard
   "shiro/wireguard/private_key.age".publicKeys = [ggg shiro];

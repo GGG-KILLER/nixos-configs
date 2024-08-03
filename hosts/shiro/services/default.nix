@@ -5,6 +5,7 @@
     ./downloads
     ./gaming
     ./monitoring
+    ./nix-pr-tracker
     ./security
     ./cockpit.nix
     ./docker-registry.nix
