@@ -19,6 +19,7 @@
 
   systemd.services.pr-tracker = {
     requires = ["pr-tracker.socket"];
+    path = [pkgs.gitMinimal];
     serviceConfig = {
       DynamicUser = true;
       SupplementaryGroups = "nixpkgs";
