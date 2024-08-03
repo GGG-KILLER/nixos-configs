@@ -9,11 +9,11 @@
 
     # nix run nixpkgs#nix-prefetch-docker -- --image-name adamboutcher/statping-ng --image-tag latest --quiet
     fromImage = pkgs.dockerTools.pullImage {
-      imageName = "ghcr.io/statping-ng/statping-ng";
-      imageDigest = "sha256:50ba35d79ebac36ead6bb1473f59ee5718b16dc80328d8052edb139f57f823e9";
-      sha256 = "0fff2bcajqhxf7lgfm2zdf9rrn6pvy7g5mxf96miaiinp28f29cj";
-      finalImageName = "ghcr.io/statping-ng/statping-ng";
-      finalImageTag = "0.91";
+      imageName = "adamboutcher/statping-ng";
+      imageDigest = "sha256:e32bd2e50ca023f37b0650e1942d51cb9269a2caab11042bc0cc53fac0474a2b";
+      sha256 = "16q341rvqc0a7cq3q1qbbk4h1pll76hny7m7xdhfj43raz1d2ppk";
+      finalImageName = "adamboutcher/statping-ng";
+      finalImageTag = "latest";
     };
 
     copyToRoot = let

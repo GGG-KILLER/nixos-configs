@@ -50,7 +50,7 @@
     };
 
     authentik-server = {
-      image = "ghcr.io/goauthentik/server:2024.6.0";
+      image = "ghcr.io/goauthentik/server:2024.6.2";
       cmd = ["server"];
       environment = authentikEnv;
       environmentFiles = [
@@ -73,7 +73,7 @@
     };
 
     authentik-worker = {
-      image = "ghcr.io/goauthentik/server:2024.6.0";
+      image = "ghcr.io/goauthentik/server:2024.6.2";
       user = "root:root";
       cmd = ["worker"];
       environment = authentikEnv;
