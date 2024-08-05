@@ -34,11 +34,6 @@
       url = "github:mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    pterodactyl-wings-nix = {
-      url = "github:ZentriaMC/pterodactyl-wings-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
     packwiz = {
       url = "github:packwiz/packwiz";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,7 +45,6 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
-    authentik-nix.url = "github:nix-community/authentik-nix";
 
     # Inputs needed by others
     flake-utils.url = "github:numtide/flake-utils";
