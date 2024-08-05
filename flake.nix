@@ -179,8 +179,6 @@
         mockoon = pkgs.callPackage ./common/packages/mockoon.nix {};
         mega-sync = pkgs.callPackage ./common/packages/mega-sync {};
         genymotion-qemu = pkgs.callPackage ./common/packages/genymotion-qemu.nix {};
-        dotnet-sdk_9 = dotnet.sdk_9_0;
-        dotnet-runtime_9 = dotnet.runtime_9_0;
       });
 
     checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;

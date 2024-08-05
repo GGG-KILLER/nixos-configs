@@ -10,7 +10,7 @@
   inherit (lib) getExe head;
   dotnet-sdk = with pkgs.dotnetCorePackages;
     combinePackages [
-      self.packages.${system}.dotnet-sdk_9
+      sdk_9_0
       sdk_8_0
       sdk_7_0
       sdk_6_0
