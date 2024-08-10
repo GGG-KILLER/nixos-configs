@@ -31,8 +31,8 @@ in {
 
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = getExe pkgs.nixd;
-          "nix.formatterPath" = getExe pkgs.alejandra;
-          "nix.serverSettings"."nixd"."formatting"."command" = [(getExe pkgs.alejandra)];
+          "nix.formatterPath" = getExe pkgs.nixfmt-rfc-style;
+          "nix.serverSettings"."nixd"."formatting"."command" = [(getExe pkgs.nixfmt-rfc-style)];
         };
       extensions =
         [
