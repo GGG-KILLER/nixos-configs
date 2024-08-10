@@ -103,8 +103,9 @@ in
 
         # Nix
         inputs.deploy-rs.packages.${system}.deploy-rs
-        nixpkgs-review
         nh
+        nix-output-monitor
+        nixpkgs-review
 
         # Media
         #self.packages.${system}.ffmpeg-full
