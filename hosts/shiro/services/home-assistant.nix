@@ -31,6 +31,7 @@
       external_converters = ["TS0601_TZE200_lawxy9e2.js"];
     };
   };
+  systemd.services."zigbee2mqtt.service".serviceConfig.Restart = "always";
   systemd.services."zigbee2mqtt.service".requires = ["docker-mqtt-hass.service" "home-assistant.service"];
   systemd.services."zigbee2mqtt.service".after = ["docker-mqtt-hass.service" "home-assistant.service"];
 
