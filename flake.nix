@@ -25,11 +25,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.utils.follows = "flake-utils";
     };
-    alejandra = {
-      url = "github:kamadorueda/alejandra/2.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flakeCompat.follows = "flake-compat";
-    };
     nix-index-database = {
       url = "github:mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

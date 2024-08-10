@@ -42,7 +42,6 @@ in
         ]
         ++ (with pkgs.vscode-extensions; [
           foxundermoon.shell-format
-          kamadorueda.alejandra
           rust-lang.rust-analyzer
           ms-python.python
           ms-toolsai.jupyter
@@ -78,7 +77,7 @@ in
     home.packages = with pkgs; [
       rust-analyzer
       shellcheck
-      inputs.alejandra.defaultPackage.${system}
+      nixfmt-rfc-style
     ];
   };
 }

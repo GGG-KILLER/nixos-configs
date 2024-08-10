@@ -41,31 +41,6 @@
         "type": "github"
       }
     },
-    "alejandra": {
-      "inputs": {
-        "fenix": "fenix",
-        "flakeCompat": [
-          "flake-compat"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1657775466,
-        "narHash": "sha256-imWi48JxT7l/1toc7NElP1/CBEbChTQ3n0gjBz6L7so=",
-        "owner": "kamadorueda",
-        "repo": "alejandra",
-        "rev": "142f048ac5cf76bebba8db93a4c8d93b756eb696",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kamadorueda",
-        "ref": "2.0.0",
-        "repo": "alejandra",
-        "type": "github"
-      }
-    },
     "crane": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -139,28 +114,6 @@
       }
     },
     "fenix": {
-      "inputs": {
-        "nixpkgs": [
-          "alejandra",
-          "nixpkgs"
-        ],
-        "rust-analyzer-src": "rust-analyzer-src"
-      },
-      "locked": {
-        "lastModified": 1657607339,
-        "narHash": "sha256-HaqoAwlbVVZH2n4P3jN2FFPMpVuhxDy1poNOR7kzODc=",
-        "owner": "nix-community",
-        "repo": "fenix",
-        "rev": "b814c83d9e6aa5a28d0cf356ecfdafb2505ad37d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "fenix",
-        "type": "github"
-      }
-    },
-    "fenix_2": {
       "inputs": {
         "nixpkgs": [
           "ipgen-cli",
@@ -317,7 +270,7 @@
       "inputs": {
         "advisory-db": "advisory-db",
         "crane": "crane",
-        "fenix": "fenix_2",
+        "fenix": "fenix",
         "flake-utils": "flake-utils_3",
         "nixpkgs": "nixpkgs"
       },
@@ -467,7 +420,6 @@
     "root": {
       "inputs": {
         "agenix": "agenix",
-        "alejandra": "alejandra",
         "deploy-rs": "deploy-rs",
         "flake-compat": "flake-compat",
         "flake-utils": "flake-utils",
@@ -480,23 +432,6 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "packwiz": "packwiz"
-      }
-    },
-    "rust-analyzer-src": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1657557289,
-        "narHash": "sha256-PRW+nUwuqNTRAEa83SfX+7g+g8nQ+2MMbasQ9nt6+UM=",
-        "owner": "rust-lang",
-        "repo": "rust-analyzer",
-        "rev": "caf23f29144b371035b864a1017dbc32573ad56d",
-        "type": "github"
-      },
-      "original": {
-        "owner": "rust-lang",
-        "ref": "nightly",
-        "repo": "rust-analyzer",
-        "type": "github"
       }
     },
     "rust-overlay": {
