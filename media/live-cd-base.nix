@@ -3,9 +3,11 @@
   config,
   pkgs,
   ...
-}: let
+}:
+let
   inherit (lib) mkOption types;
-in {
+in
+{
   imports = [
     ../common/groups
     ../common/users
@@ -19,12 +21,8 @@ in {
   ];
 
   options = {
-    home-manager = mkOption {
-      type = types.any;
-    };
-    modules.home = mkOption {
-      type = types.any;
-    };
+    home-manager = mkOption { type = types.any; };
+    modules.home = mkOption { type = types.any; };
   };
 
   config = {
@@ -43,7 +41,7 @@ in {
     # Don't need firewall while installing, probably
     networking.firewall.enable = false;
 
-    services.xserver.videoDrivers = ["nvidia"];
+    services.xserver.videoDrivers = [ "nvidia" ];
     hardware.graphics.enable = true;
 
     environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";

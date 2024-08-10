@@ -5,35 +5,35 @@
   inputs,
   lib,
   ...
-}: let
+}:
+let
   inherit (builtins) fromJSON readFile;
   inherit (lib) getExe;
   readJSON = path: fromJSON (readFile path);
   settings = readJSON ./vscode/settings.json;
   csdevkit-vscode-ext = self.packages.${system}.ms-dotnettools-csdevkit;
   csharp-vscode-ext = self.packages.${system}.ms-dotnettools-csharp;
-in {
+in
+{
   home-manager.users.ggg = {
     programs.vscode = {
       enable = true;
       package = pkgs.vscode;
-      userSettings =
-        settings
-        // {
-          "powershell.powerShellAdditionalExePaths" = {
-            "PowerShell Core 7 (x64)" = getExe pkgs.powershell;
-          };
-          "powershell.promptToUpdatePowerShell" = false;
-
-          "extensions.autoCheckUpdates" = false;
-          "extensions.autoUpdate" = false;
-          "update.mode" = "none";
-
-          "nix.enableLanguageServer" = true;
-          "nix.serverPath" = getExe pkgs.nixd;
-          "nix.formatterPath" = getExe pkgs.nixfmt-rfc-style;
-          "nix.serverSettings"."nixd"."formatting"."command" = [(getExe pkgs.nixfmt-rfc-style)];
+      userSettings = settings // {
+        "powershell.powerShellAdditionalExePaths" = {
+          "PowerShell Core 7 (x64)" = getExe pkgs.powershell;
         };
+        "powershell.promptToUpdatePowerShell" = false;
+
+        "extensions.autoCheckUpdates" = false;
+        "extensions.autoUpdate" = false;
+        "update.mode" = "none";
+
+        "nix.enableLanguageServer" = true;
+        "nix.serverPath" = getExe pkgs.nixd;
+        "nix.formatterPath" = getExe pkgs.nixfmt-rfc-style;
+        "nix.serverSettings"."nixd"."formatting"."command" = [ (getExe pkgs.nixfmt-rfc-style) ];
+      };
       extensions =
         [
           # C# Development

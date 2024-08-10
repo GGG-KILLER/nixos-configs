@@ -1,11 +1,6 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
-  imports = [
-    ./nixpkgs.nix
-  ];
+  imports = [ ./nixpkgs.nix ];
 
   modules.services.nginx.virtualHosts."nixpkgs.shiro.lan" = {
     ssl = true;
@@ -18,8 +13,8 @@
   };
 
   systemd.services.pr-tracker = {
-    requires = ["pr-tracker.socket"];
-    path = [pkgs.gitMinimal];
+    requires = [ "pr-tracker.socket" ];
+    path = [ pkgs.gitMinimal ];
     serviceConfig = {
       DynamicUser = true;
       SupplementaryGroups = "nixpkgs";
@@ -33,8 +28,8 @@
   };
 
   systemd.sockets.pr-tracker = {
-    wantedBy = ["sockets.target"];
-    before = ["nginx.service"];
+    wantedBy = [ "sockets.target" ];
+    before = [ "nginx.service" ];
     socketConfig.ListenStream = "/run/pr-tracker.sock";
   };
 }

@@ -6,87 +6,98 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usb_storage" "usbhid" "sd_mod"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = ["kvm-amd" "lm75" "nct6775" "zenpower"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [zenpower];
-  boot.blacklistedKernelModules = ["k10temp"];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usb_storage"
+    "usbhid"
+    "sd_mod"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [
+    "kvm-amd"
+    "lm75"
+    "nct6775"
+    "zenpower"
+  ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
+  boot.blacklistedKernelModules = [ "k10temp" ];
 
   fileSystems."/" = {
     device = "rpool/nixos/root";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/nix" = {
     device = "rpool/nixos/nix";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/etc" = {
     device = "rpool/nixos/etc";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/var" = {
     device = "rpool/nixos/var";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/var/lib" = {
     device = "rpool/nixos/var/lib";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/var/log" = {
     device = "rpool/nixos/var/log";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/var/spool" = {
     device = "rpool/nixos/var/spool";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/home" = {
     device = "rpool/userdata/home";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/root" = {
     device = "rpool/userdata/home/root";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/home/ggg" = {
     device = "rpool/userdata/home/ggg";
     fsType = "zfs";
-    options = ["zfsutil"];
+    options = [ "zfsutil" ];
   };
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/BB73-6EFC";
     fsType = "vfat";
-    options = ["X-mount.mkdir"];
+    options = [ "X-mount.mkdir" ];
   };
 
   fileSystems."/mnt/DataInt" = {
     device = "/dev/disk/by-id/ata-ST1000DM010-2EP102_ZN17GS17-part1";
     fsType = "ntfs";
-    options = ["nofail"];
+    options = [ "nofail" ];
   };
 
   swapDevices = [

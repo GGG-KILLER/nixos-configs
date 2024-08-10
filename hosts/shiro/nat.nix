@@ -1,8 +1,10 @@
-{lib, ...}: let
+{ lib, ... }:
+let
   inherit (lib) mkOverride;
-in {
+in
+{
   # Flags to make NAT work in VPN gateway. (hopefully)
-  boot.kernelModules = ["nf_nat_ftp"];
+  boot.kernelModules = [ "nf_nat_ftp" ];
 
   boot.kernel.sysctl = {
     "net.ipv4.conf.all.forwarding" = mkOverride 99 true;

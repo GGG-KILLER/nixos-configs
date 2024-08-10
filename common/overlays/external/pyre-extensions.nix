@@ -18,5 +18,5 @@ buildPythonPackage rec {
     typing-inspect
   ];
 
-  pythonImportsCheck = ["pyre_extensions"];
+  pythonImportsCheck = [ "pyre_extensions" ];
 }

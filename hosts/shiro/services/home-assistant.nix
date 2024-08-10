@@ -1,10 +1,7 @@
+{ config, pkgs, ... }:
 {
-  config,
-  pkgs,
-  ...
-}: {
   # For debugging
-  environment.systemPackages = with pkgs; [zigpy-cli];
+  environment.systemPackages = with pkgs; [ zigpy-cli ];
 
   services.udev.extraRules = ''
     SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d4", SYMLINK+="sonoff_zigbee", MODE="0660", GROUP="zigbee2mqtt"
@@ -28,26 +25,32 @@
         url = "https://z2m.hass.lan";
       };
 
-      external_converters = ["TS0601_TZE200_lawxy9e2.js"];
+      external_converters = [ "TS0601_TZE200_lawxy9e2.js" ];
     };
   };
   systemd.services."zigbee2mqtt.service".serviceConfig.Restart = "always";
-  systemd.services."zigbee2mqtt.service".requires = ["docker-mqtt-hass.service" "home-assistant.service"];
-  systemd.services."zigbee2mqtt.service".after = ["docker-mqtt-hass.service" "home-assistant.service"];
+  systemd.services."zigbee2mqtt.service".requires = [
+    "docker-mqtt-hass.service"
+    "home-assistant.service"
+  ];
+  systemd.services."zigbee2mqtt.service".after = [
+    "docker-mqtt-hass.service"
+    "home-assistant.service"
+  ];
 
   virtualisation.oci-containers.containers.mqtt-hass = {
     image = "eclipse-mosquitto:2.0";
-    volumes = [
-      "/zfs-main-pool/data/mosquitto:/mosquitto"
-    ];
+    volumes = [ "/zfs-main-pool/data/mosquitto:/mosquitto" ];
     ports = [
       "${toString config.shiro.ports.mqtt}:1883"
       "${toString config.shiro.ports.mqtt-idk}:9001"
     ];
-    cmd = ["mosquitto" "-c" "/mosquitto-no-auth.conf"];
-    extraOptions = [
-      "--ipc=none"
+    cmd = [
+      "mosquitto"
+      "-c"
+      "/mosquitto-no-auth.conf"
     ];
+    extraOptions = [ "--ipc=none" ];
   };
 
   services.home-assistant = {
@@ -55,14 +58,18 @@
     configDir = "/zfs-main-pool/data/home-assistant";
     configWritable = true;
 
-    extraComponents = ["default_config" "mqtt" "met"];
+    extraComponents = [
+      "default_config"
+      "mqtt"
+      "met"
+    ];
     customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
       zigbee2mqtt-networkmap
       mini-graph-card
     ];
 
     config = {
-      default_config = {};
+      default_config = { };
       homeassistant = {
         country = "BR";
         currency = "BRL";
@@ -73,14 +80,14 @@
       };
       # HTTP confs
       http = {
-        server_host = ["127.0.0.1"];
+        server_host = [ "127.0.0.1" ];
         server_port = config.shiro.ports.home-assistant;
-        trusted_proxies = ["127.0.0.1"];
+        trusted_proxies = [ "127.0.0.1" ];
         use_x_forwarded_for = true;
       };
       # Enable the frontend
-      frontend = {};
-      mobile_app = {};
+      frontend = { };
+      mobile_app = { };
     };
   };
 

@@ -21,5 +21,5 @@ buildPythonPackage rec {
     typing-extensions
   ];
 
-  pythonImportsCheck = ["torcheval"];
+  pythonImportsCheck = [ "torcheval" ];
 }

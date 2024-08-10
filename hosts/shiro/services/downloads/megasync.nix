@@ -3,11 +3,13 @@
   lib,
   system,
   ...
-}: let
+}:
+let
   inherit (lib) getExe;
-in {
+in
+{
   systemd.services.megasync = {
-    wantedBy = ["network-online.target"];
+    wantedBy = [ "network-online.target" ];
     environment = {
       # Enable tiered compilation
       DOTNET_TieredCompilation = "1";
@@ -82,7 +84,7 @@ in {
   users.users.mega-sync = {
     isSystemUser = true;
     group = "data-members";
-    extraGroups = ["users"];
+    extraGroups = [ "users" ];
   };
 
   modules.services.nginx.virtualHosts."mega.shiro.lan" = {

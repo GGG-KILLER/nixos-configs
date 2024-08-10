@@ -6,9 +6,11 @@
   pkgs,
   inputs,
   ...
-}: let
+}:
+let
   inherit (lib) getExe head;
-  dotnet-sdk = with pkgs.dotnetCorePackages;
+  dotnet-sdk =
+    with pkgs.dotnetCorePackages;
     combinePackages [
       sdk_9_0
       sdk_8_0
@@ -38,15 +40,16 @@
       hash = "sha256-ntXZ4gRXRqiPQxdwXDsLxGdBqUV5eboy9ntTlJsz9FA=";
     };
 
-    patches = [];
+    patches = [ ];
   });
-in {
+in
+{
   imports = [
     ./commands
     ./vscode.nix
   ];
 
-  environment.systemPackages = [dotnet-sdk];
+  environment.systemPackages = [ dotnet-sdk ];
 
   home-manager.users.ggg = {
     home.packages =
@@ -85,7 +88,14 @@ in {
 
         # Games
         #inputs.packwiz.packages.${system}.packwiz # TODO: Uncomment when packwiz/packwiz#297 gets fixed.
-        (prismlauncher.override {jdks = [jdk8 jdk11 jdk17 jdk21];})
+        (prismlauncher.override {
+          jdks = [
+            jdk8
+            jdk11
+            jdk17
+            jdk21
+          ];
+        })
         r2mod_cli
 
         # Hardware
@@ -122,7 +132,7 @@ in {
         zenmonitor
         kemono-dl
       ])
-      ++ [r2modman];
+      ++ [ r2modman ];
 
     home.sessionVariables = {
       DOTNET_ROOT = dotnetRoot;
@@ -144,7 +154,7 @@ in {
       #   ])}";
     };
 
-    home.shellAliases = {};
+    home.shellAliases = { };
 
     programs = {
       gh = {
@@ -274,25 +284,34 @@ in {
       mockoon = {
         name = "Mockoon";
         exec = getExe mockoon;
-        categories = ["Development" "Network" "Debugger" "Viewer"];
+        categories = [
+          "Development"
+          "Network"
+          "Debugger"
+          "Viewer"
+        ];
       };
       ilspy = {
         name = "ILSpy";
         exec = getExe avalonia-ilspy;
-        categories = ["Development" "Debugger" "Viewer"];
+        categories = [
+          "Development"
+          "Debugger"
+          "Viewer"
+        ];
       };
     };
 
     systemd.user.services.jellyfin-mpv-shim = {
       Unit = {
         Description = "Jellyfin MPV Shim";
-        After = ["graphical-session-pre.target"];
-        PartOf = ["graphical-session.target"];
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
       };
 
       Service.ExecStart = getExe pkgs.jellyfin-mpv-shim;
 
-      Install.WantedBy = ["graphical-session.target"];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
   };
 }

@@ -1,7 +1,4 @@
-{
-  buildDotnetModule,
-  dotnetCorePackages,
-}:
+{ buildDotnetModule, dotnetCorePackages }:
 buildDotnetModule rec {
   pname = "kemono-dl";
   version = "0.0.7";
@@ -18,5 +15,5 @@ buildDotnetModule rec {
   dotnet-runtime = dotnetCorePackages.runtime_8_0;
 
   meta.mainProgram = "kemono-dl";
-  executables = [meta.mainProgram];
+  executables = [ meta.mainProgram ];
 }

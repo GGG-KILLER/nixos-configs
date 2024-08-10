@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.grafana = {
     enable = true;
     settings.server = {
@@ -13,7 +14,9 @@
   modules.services.nginx.virtualHosts."grafana.shiro.lan" = {
     ssl = true;
     locations."/" = {
-      proxyPass = with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}";
+      proxyPass =
+        with config.services.grafana.settings.server;
+        "${protocol}://${http_addr}:${toString http_port}";
       recommendedProxySettings = true;
       proxyWebsockets = true;
       extraConfig = ''

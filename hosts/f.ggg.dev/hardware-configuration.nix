@@ -6,15 +6,19 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "vmw_pvscsi" "xen_blkfront"];
-  boot.initrd.kernelModules = ["nvme"];
-  boot.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "ata_piix"
+    "uhci_hcd"
+    "vmw_pvscsi"
+    "xen_blkfront"
+  ];
+  boot.initrd.kernelModules = [ "nvme" ];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 
   boot.loader.grub = {
     efiSupport = true;
@@ -32,7 +36,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config

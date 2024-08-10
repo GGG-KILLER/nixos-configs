@@ -1,11 +1,13 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   src = pkgs.fetchFromGitHub {
     owner = "openspeedtest";
     repo = "Speed-Test";
     rev = "704aec0e5deb54be4588dbebe6b7424216d5e146";
     hash = "sha256-SXwJScm8u6BZiEO3STqVDkecCr7XBSEmq9lR9c0ljeA=";
   };
-in {
+in
+{
   modules.services.nginx.virtualHosts."speed.shiro.lan" = {
     ssl = true;
 

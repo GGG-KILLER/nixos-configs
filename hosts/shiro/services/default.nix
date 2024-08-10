@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./backup/restic.nix
     ./databases

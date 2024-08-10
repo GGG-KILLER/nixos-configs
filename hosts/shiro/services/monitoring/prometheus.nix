@@ -1,10 +1,8 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (lib) mkForce;
-in {
+in
+{
   services.prometheus = {
     enable = true;
     port = config.shiro.ports.prometheus;
@@ -15,8 +13,10 @@ in {
         job_name = "prometheus";
         static_configs = [
           {
-            targets = ["127.0.0.1:${toString config.shiro.ports.prometheus}"];
-            labels = {inherit (config.my.constants.prometheus) instance;};
+            targets = [ "127.0.0.1:${toString config.shiro.ports.prometheus}" ];
+            labels = {
+              inherit (config.my.constants.prometheus) instance;
+            };
           }
         ];
         inherit (config.my.constants.prometheus) scrape_interval;
@@ -25,8 +25,10 @@ in {
         job_name = "netprobe";
         static_configs = [
           {
-            targets = ["127.0.0.1:${toString config.shiro.ports.netprobe}"];
-            labels = {inherit (config.my.constants.prometheus) instance;};
+            targets = [ "127.0.0.1:${toString config.shiro.ports.netprobe}" ];
+            labels = {
+              inherit (config.my.constants.prometheus) instance;
+            };
           }
         ];
         scrape_interval = "30s";
@@ -35,7 +37,10 @@ in {
     ];
   };
 
-  systemd.services.prometheus.serviceConfig.SystemCallFilter = mkForce ["@system-service" "~@privileged"];
+  systemd.services.prometheus.serviceConfig.SystemCallFilter = mkForce [
+    "@system-service"
+    "~@privileged"
+  ];
 
   modules.services.nginx.virtualHosts."prometheus.shiro.lan" = {
     ssl = true;

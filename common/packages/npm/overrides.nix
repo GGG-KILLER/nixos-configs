@@ -1,9 +1,6 @@
-{
-  pkgs,
-  nodejs,
-}: let
-  inherit
-    (pkgs)
+{ pkgs, nodejs }:
+let
+  inherit (pkgs)
     stdenv
     lib
     callPackage
@@ -15,8 +12,6 @@
   since = version: lib.versionAtLeast nodejs.version version;
   before = version: lib.versionOlder nodejs.version version;
 in
-  final: prev: {
-    "@jesec/flood" = prev."@jesec/flood".override {
-      buildInputs = [nodejs.pkgs.node-pre-gyp];
-    };
-  }
+final: prev: {
+  "@jesec/flood" = prev."@jesec/flood".override { buildInputs = [ nodejs.pkgs.node-pre-gyp ]; };
+}

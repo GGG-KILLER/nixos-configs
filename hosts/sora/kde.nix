@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   # Enable KDE.
   services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
@@ -6,7 +7,7 @@
   services.desktopManager.plasma6.enable = true;
 
   # Add Discover
-  environment.systemPackages = with pkgs.kdePackages; [discover];
+  environment.systemPackages = with pkgs.kdePackages; [ discover ];
 
   # Wayland tweaks
   environment.sessionVariables.NIXOS_OZONE_WL = "1";

@@ -6,26 +6,32 @@
   # Actual args
   filePath,
   dependencies,
-  replacements ? {},
-  buildInputs ? [],
+  replacements ? { },
+  buildInputs ? [ ],
 }:
-with lib; let
+with lib;
+let
   binPath = makeBinPath dependencies;
   fileName = builtins.baseNameOf filePath;
   replaceCmd =
-    if replacements == {}
-    then ""
+    if replacements == { } then
+      ""
     else
-      builtins.concatStringsSep "\n" (flip mapAttrsToList replacements (name: val: ''
-        substituteInPlace $out/bin/${fileName} \
-          --subst-var-by "${toString name}" "${toString val}"
-      ''));
+      builtins.concatStringsSep "\n" (
+        flip mapAttrsToList replacements (
+          name: val: ''
+            substituteInPlace $out/bin/${fileName} \
+              --subst-var-by "${toString name}" "${toString val}"
+          ''
+        )
+      );
 in
-  runCommand "${fileName}-script"
+runCommand "${fileName}-script"
   {
     inherit buildInputs;
-    nativeBuildInputs = [makeWrapper];
-  } ''
+    nativeBuildInputs = [ makeWrapper ];
+  }
+  ''
     mkdir -p $out/bin
     cp ${filePath} $out/bin/${fileName}
     chmod 0755 $out/bin/${fileName}

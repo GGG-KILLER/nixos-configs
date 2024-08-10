@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./authentik.nix
     ./step-ca.nix

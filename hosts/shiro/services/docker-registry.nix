@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   services.dockerRegistry = {
     enable = true;
     enableDelete = true;
@@ -7,12 +8,12 @@
     port = config.shiro.ports.docker-registry;
   };
 
-  networking.firewall.allowedTCPPorts = [config.shiro.ports.docker-registry];
-  networking.firewall.allowedUDPPorts = [config.shiro.ports.docker-registry];
+  networking.firewall.allowedTCPPorts = [ config.shiro.ports.docker-registry ];
+  networking.firewall.allowedUDPPorts = [ config.shiro.ports.docker-registry ];
 
   virtualisation.oci-containers.containers.docker-registry-browser = {
     image = "klausmeyer/docker-registry-browser";
-    ports = ["${toString config.shiro.ports.docker-registry-browser}:8080"];
+    ports = [ "${toString config.shiro.ports.docker-registry-browser}:8080" ];
     environment = {
       ENABLE_COLLAPSE_NAMESPACES = "true";
       ENABLE_DELETE_IMAGES = "true";

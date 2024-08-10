@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   boot.tmp.cleanOnBoot = true;
 
   boot.kernel.sysctl = {

@@ -3,10 +3,9 @@
   pkgs,
   system,
   ...
-}: {
-  imports = [
-    ./commands
-  ];
+}:
+{
+  imports = [ ./commands ];
 
   home-manager.users.ggg = {
     home.packages = with pkgs; [

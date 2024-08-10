@@ -5,10 +5,12 @@
   lib,
   ...
 }:
-with lib; let
+with lib;
+let
   floodCfg = config.modules.services.flood;
   qbittorrentCfg = config.modules.services.qbittorrent;
-in {
+in
+{
   options.modules.services.flood = {
     enable = mkOption {
       type = types.bool;
@@ -20,7 +22,10 @@ in {
       description = "the path where flood will save its data do.";
     };
     auth = mkOption {
-      type = types.enum ["default" "none"];
+      type = types.enum [
+        "default"
+        "none"
+      ];
       description = "the auth method that flood should use.";
       default = "none";
     };
@@ -42,15 +47,9 @@ in {
       };
     };
     qbittorrent = {
-      url = mkOption {
-        type = types.str;
-      };
-      user = mkOption {
-        type = types.str;
-      };
-      password = mkOption {
-        type = types.str;
-      };
+      url = mkOption { type = types.str; };
+      user = mkOption { type = types.str; };
+      password = mkOption { type = types.str; };
     };
   };
 
@@ -62,34 +61,40 @@ in {
       }
     ];
 
-    systemd.services.flood = let
-      allowedpaths =
-        if floodCfg.allowedpath == null
-        then ""
-        else concatMapStrings (p: "--allowedpath \"${p}\" ") floodCfg.allowedpath;
-    in {
-      after = ["network.target" "qbittorrent.service"];
-      description = "Flood UI";
-      wantedBy = ["multi-user.target"];
-      serviceConfig = {
-        ExecStart = ''
-          ${floodCfg.package}/lib/node_modules/@jesec/flood/dist/index.js \
-            -p${toString floodCfg.web.port}\
-            --host 0.0.0.0 \
-            --rundir "${floodCfg.rundir}" \
-            --auth "${floodCfg.auth}" \
-            --qburl "${floodCfg.qbittorrent.url}" \
-            --qbuser "${floodCfg.qbittorrent.user}" \
-            --qbpass "${floodCfg.qbittorrent.password}" \
-            ${allowedpaths}
-        '';
-        Restart = "on-success";
-        User = qbittorrentCfg.user;
-        Group = qbittorrentCfg.group;
+    systemd.services.flood =
+      let
+        allowedpaths =
+          if floodCfg.allowedpath == null then
+            ""
+          else
+            concatMapStrings (p: "--allowedpath \"${p}\" ") floodCfg.allowedpath;
+      in
+      {
+        after = [
+          "network.target"
+          "qbittorrent.service"
+        ];
+        description = "Flood UI";
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          ExecStart = ''
+            ${floodCfg.package}/lib/node_modules/@jesec/flood/dist/index.js \
+              -p${toString floodCfg.web.port}\
+              --host 0.0.0.0 \
+              --rundir "${floodCfg.rundir}" \
+              --auth "${floodCfg.auth}" \
+              --qburl "${floodCfg.qbittorrent.url}" \
+              --qbuser "${floodCfg.qbittorrent.user}" \
+              --qbpass "${floodCfg.qbittorrent.password}" \
+              ${allowedpaths}
+          '';
+          Restart = "on-success";
+          User = qbittorrentCfg.user;
+          Group = qbittorrentCfg.group;
+        };
+        environment = {
+          NODE_ENV = "production";
+        };
       };
-      environment = {
-        NODE_ENV = "production";
-      };
-    };
   };
 }

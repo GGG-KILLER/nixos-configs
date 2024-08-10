@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.journald.extraConfig = ''
     Storage=persistent
     Compress=true

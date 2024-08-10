@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   users.users.my-sonarr = {
     uid = 258;
     isSystemUser = true;

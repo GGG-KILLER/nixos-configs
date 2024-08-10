@@ -1,10 +1,8 @@
-{
-  lib,
-  pkgs,
-  ...
-}: let
+{ lib, pkgs, ... }:
+let
   inherit (lib) mkForce;
-in {
+in
+{
   console.font = mkForce "Cascadia Code";
   fonts = {
     enableDefaultPackages = true;

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   my.networking.pz-server = {
     mainAddr = "192.168.2.40"; # ipgen --network 192.168.2.0/24 pz-server
     ports = [
@@ -30,16 +31,18 @@
       };
     };
 
-    config = {lib, ...}: {
-      nixpkgs.config.allowUnfree = true;
+    config =
+      { lib, ... }:
+      {
+        nixpkgs.config.allowUnfree = true;
 
-      modules.services.pz-server = {
-        enable = true;
-        serverName = "mnn2";
-        serverDir = "/mnt/pz-server";
-        adminUserName = "gggadmin";
-        adminPassword = "adminggg";
+        modules.services.pz-server = {
+          enable = true;
+          serverName = "mnn2";
+          serverDir = "/mnt/pz-server";
+          adminUserName = "gggadmin";
+          adminPassword = "adminggg";
+        };
       };
-    };
   };
 }

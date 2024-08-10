@@ -6,15 +6,19 @@
   lib,
   modulesPath,
   ...
-}: {
-  imports = [
-    (modulesPath + "/profiles/qemu-guest.nix")
-  ];
+}:
+{
+  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
 
-  boot.initrd.availableKernelModules = ["ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi"];
-  boot.initrd.kernelModules = [];
-  boot.kernelModules = [];
-  boot.extraModulePackages = [];
+  boot.initrd.availableKernelModules = [
+    "ata_piix"
+    "uhci_hcd"
+    "virtio_pci"
+    "virtio_scsi"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -30,7 +34,7 @@
     fsType = "vfat";
   };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config

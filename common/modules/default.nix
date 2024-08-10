@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./gaming
     ./monitoring

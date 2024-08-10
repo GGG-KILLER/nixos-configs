@@ -41,5 +41,5 @@ buildPythonPackage rec {
     torchsnapshot
   ];
 
-  pythonImportsCheck = ["torchtnt"];
+  pythonImportsCheck = [ "torchtnt" ];
 }

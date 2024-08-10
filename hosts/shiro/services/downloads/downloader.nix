@@ -1,28 +1,42 @@
-{config, ...}: {
-  systemd.services."${config.virtualisation.oci-containers.backend}-downloader-network" = let
-    backend = config.virtualisation.oci-containers.backend;
-  in {
-    wantedBy = ["multi-user.target"];
-    after = ["docker.service" "docker.socket"];
-    before = ["${backend}-downloader-backend.service" "${backend}-downloader-frontend.service"];
-    requiredBy = ["${backend}-downloader-backend.service" "${backend}-downloader-frontend.service"];
+{ config, ... }:
+{
+  systemd.services."${config.virtualisation.oci-containers.backend}-downloader-network" =
+    let
+      backend = config.virtualisation.oci-containers.backend;
+    in
+    {
+      wantedBy = [ "multi-user.target" ];
+      after = [
+        "docker.service"
+        "docker.socket"
+      ];
+      before = [
+        "${backend}-downloader-backend.service"
+        "${backend}-downloader-frontend.service"
+      ];
+      requiredBy = [
+        "${backend}-downloader-backend.service"
+        "${backend}-downloader-frontend.service"
+      ];
 
-    serviceConfig = let
-      backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
-    in {
-      Type = "simple";
-      RemainAfterExit = "yes";
+      serviceConfig =
+        let
+          backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
+        in
+        {
+          Type = "simple";
+          RemainAfterExit = "yes";
 
-      ExecStartPre = "-${backendBin} network rm downloader";
-      ExecStart = "${backendBin} network create downloader";
-      ExecStop = "${backendBin} network rm downloader";
+          ExecStartPre = "-${backendBin} network rm downloader";
+          ExecStart = "${backendBin} network create downloader";
+          ExecStop = "${backendBin} network rm downloader";
+        };
     };
-  };
 
   virtualisation.oci-containers.containers.downloader-frontend = {
     image = "docker.lan/downloader/frontend:latest";
-    ports = ["${toString config.shiro.ports.downloader}:8080"];
-    dependsOn = ["downloader-backend"];
+    ports = [ "${toString config.shiro.ports.downloader}:8080" ];
+    dependsOn = [ "downloader-backend" ];
     extraOptions = [
       "--cap-drop=ALL"
       "--dns=192.168.1.1"

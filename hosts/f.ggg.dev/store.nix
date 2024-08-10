@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   # Automatic garbage collect
   nix.gc = {
     automatic = true;

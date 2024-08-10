@@ -1,8 +1,5 @@
-{
-  config,
-  pkgs,
-  ...
-}: let
+{ config, pkgs, ... }:
+let
   statping-ng = pkgs.dockerTools.buildImage {
     name = "statping-nix-wrapper";
     tag = "0.91";
@@ -16,12 +13,14 @@
       finalImageTag = "latest";
     };
 
-    copyToRoot = let
-      root-crt-dir = pkgs.runCommand "root.crt-as-dir" {} ''
-        mkdir -p $out/usr/local/share/ca-certificates/
-        cp ${config.my.secrets.pki.root-crt-path} $out/usr/local/share/ca-certificates/lan-root-ca.crt
-      '';
-    in [root-crt-dir];
+    copyToRoot =
+      let
+        root-crt-dir = pkgs.runCommand "root.crt-as-dir" { } ''
+          mkdir -p $out/usr/local/share/ca-certificates/
+          cp ${config.my.secrets.pki.root-crt-path} $out/usr/local/share/ca-certificates/lan-root-ca.crt
+        '';
+      in
+      [ root-crt-dir ];
 
     runAsRoot = ''
       #! ${pkgs.runtimeShell}
@@ -30,15 +29,22 @@
 
     config = {
       ExposedPorts = {
-        "8080/tcp" = {};
+        "8080/tcp" = { };
       };
-      Cmd = ["/bin/sh" "-c" "statping --port $PORT"];
+      Cmd = [
+        "/bin/sh"
+        "-c"
+        "statping --port $PORT"
+      ];
       Volumes = {
-        "/app" = {};
+        "/app" = { };
       };
       WorkingDir = "/app";
       Healthcheck = {
-        Test = ["CMD-SHELL" "curl -s \"http://127.0.0.1:$PORT/health\" | jq -r -e \".online==true\""];
+        Test = [
+          "CMD-SHELL"
+          "curl -s \"http://127.0.0.1:$PORT/health\" | jq -r -e \".online==true\""
+        ];
         Interval = 60000000000;
         Timeout = 10000000000;
         Retries = 3;
@@ -46,12 +52,13 @@
       ArgsEscaped = true;
     };
   };
-in {
+in
+{
   virtualisation.oci-containers.containers.statping-ng = {
     image = "${statping-ng.imageName}:${statping-ng.imageTag}";
     imageFile = statping-ng;
 
-    ports = ["${toString config.shiro.ports.statping-ng}:8080"];
+    ports = [ "${toString config.shiro.ports.statping-ng}:8080" ];
     environment = {
       DOMAIN = "status.shiro.lan";
       SAMPLE_DATA = "false";
@@ -63,12 +70,8 @@ in {
       DB_DATABASE = "statping-ng";
       POSTGRES_SSLMODE = "disable";
     };
-    environmentFiles = [
-      config.age.secrets."statping.env".path
-    ];
-    volumes = [
-      "/zfs-main-pool/data/statping:/app"
-    ];
+    environmentFiles = [ config.age.secrets."statping.env".path ];
+    volumes = [ "/zfs-main-pool/data/statping:/app" ];
     extraOptions = [
       "--dns=192.168.1.1"
       "--ipc=none"

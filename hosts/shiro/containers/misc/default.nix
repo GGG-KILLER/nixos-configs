@@ -1,5 +1,4 @@
-{...}: {
-  imports = [
-    ./firefly-iii.nix
-  ];
+{ ... }:
+{
+  imports = [ ./firefly-iii.nix ];
 }

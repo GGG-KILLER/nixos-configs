@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   nixpkgs.overlays = [
     (self: super: {
       mpv = super.mpv-unwrapped.wrapper {
@@ -13,10 +14,6 @@
         ];
       };
     })
-    (self: super: {
-      lsp-plugins = super.lsp-plugins.override {
-        php = self.php82;
-      };
-    })
+    (self: super: { lsp-plugins = super.lsp-plugins.override { php = self.php82; }; })
   ];
 }

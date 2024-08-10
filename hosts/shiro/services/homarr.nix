@@ -1,11 +1,8 @@
+{ lib, config, ... }:
 {
-  lib,
-  config,
-  ...
-}: {
   virtualisation.oci-containers.containers.homarr = {
     image = "ghcr.io/ajnart/homarr:latest";
-    ports = ["${toString config.shiro.ports.homarr}:7575"];
+    ports = [ "${toString config.shiro.ports.homarr}:7575" ];
     environment = {
       NODE_EXTRA_CA_CERTS = "/etc/ssl/certs/private/ca/ca-root.pem";
     };
@@ -25,16 +22,14 @@
 
   virtualisation.oci-containers.containers.dashdot = {
     image = "mauricenino/dashdot";
-    ports = ["${toString config.shiro.ports.dashdot}:3001"];
+    ports = [ "${toString config.shiro.ports.dashdot}:3001" ];
     environment = {
       DASHDOT_ALWAYS_SHOW_PERCENTAGES = "true";
     };
-    volumes =
-      [
-        "/etc/os-release:/mnt/host/etc/os-release:ro"
-        "/proc/1/ns:/mnt/host/proc/1/ns:ro"
-      ]
-      ++ (map (path: "${path}:/mnt/host${path}:ro") (lib.attrNames config.fileSystems));
+    volumes = [
+      "/etc/os-release:/mnt/host/etc/os-release:ro"
+      "/proc/1/ns:/mnt/host/proc/1/ns:ro"
+    ] ++ (map (path: "${path}:/mnt/host${path}:ro") (lib.attrNames config.fileSystems));
     extraOptions = [
       "--cap-drop=ALL"
       "--dns=192.168.1.1"

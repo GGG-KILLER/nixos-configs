@@ -1,5 +1,4 @@
-{...}: {
-  imports = [
-    ./mongodb.nix
-  ];
+{ ... }:
+{
+  imports = [ ./mongodb.nix ];
 }

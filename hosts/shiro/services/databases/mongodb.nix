@@ -1,13 +1,10 @@
-{config, ...}: {
+{ config, ... }:
+{
   virtualisation.oci-containers.containers.mongo-dev = {
     image = "mongodb/mongodb-community-server:latest";
-    ports = ["${toString config.shiro.ports.mongo-dev}:27017"];
-    environmentFiles = [
-      config.age.secrets."mongodb/dev.env".path
-    ];
-    volumes = [
-      "/zfs-main-pool/data/dbs/mongo-dev:/data/db"
-    ];
+    ports = [ "${toString config.shiro.ports.mongo-dev}:27017" ];
+    environmentFiles = [ config.age.secrets."mongodb/dev.env".path ];
+    volumes = [ "/zfs-main-pool/data/dbs/mongo-dev:/data/db" ];
 
     extraOptions = [
       "--dns=192.168.1.1"
@@ -17,13 +14,9 @@
 
   virtualisation.oci-containers.containers.mongo-prd = {
     image = "mongodb/mongodb-community-server:latest";
-    ports = ["${toString config.shiro.ports.mongo-prd}:27017"];
-    environmentFiles = [
-      config.age.secrets."mongodb/prd.env".path
-    ];
-    volumes = [
-      "/zfs-main-pool/data/dbs/mongo-prd:/data/db"
-    ];
+    ports = [ "${toString config.shiro.ports.mongo-prd}:27017" ];
+    environmentFiles = [ config.age.secrets."mongodb/prd.env".path ];
+    volumes = [ "/zfs-main-pool/data/dbs/mongo-prd:/data/db" ];
 
     extraOptions = [
       "--dns=192.168.1.1"

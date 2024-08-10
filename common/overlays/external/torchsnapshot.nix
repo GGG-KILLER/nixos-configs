@@ -35,5 +35,5 @@ buildPythonPackage rec {
     typing-extensions
   ];
 
-  pythonImportsCheck = ["torchsnapshot"];
+  pythonImportsCheck = [ "torchsnapshot" ];
 }

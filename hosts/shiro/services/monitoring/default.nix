@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./exporters
     ./netprobe

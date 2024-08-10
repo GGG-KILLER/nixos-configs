@@ -1,13 +1,17 @@
+{ pkgs, lib, ... }:
 {
-  pkgs,
-  lib,
-  ...
-}: {
   # ZFS boot settings.
-  boot.supportedFilesystems = ["zfs" "ntfs"];
+  boot.supportedFilesystems = [
+    "zfs"
+    "ntfs"
+  ];
 
   # ZFS Flags
-  boot.kernelParams = ["zfs.zfs_arc_max=12884901888" "elevator=none" "nohibernate"];
+  boot.kernelParams = [
+    "zfs.zfs_arc_max=12884901888"
+    "elevator=none"
+    "nohibernate"
+  ];
 
   # Make the root partition ephemeral
   boot.initrd.postDeviceCommands = lib.mkAfter ''

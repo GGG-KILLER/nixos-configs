@@ -1,7 +1,5 @@
-{
-  fetchFromGitHub,
-  callPackage,
-}: let
+{ fetchFromGitHub, callPackage }:
+let
   src = fetchFromGitHub {
     owner = "GGG-KILLER";
     repo = "m3u8-dl";
@@ -9,4 +7,4 @@
     hash = "sha256-G5/i28wlxWG0jskVbvz9AWm6g7Ml/hOXW41RcM0tS8E=";
   };
 in
-  callPackage src {}
+callPackage src { }

@@ -1,5 +1,4 @@
-{...}: {
-  imports = [
-    ./pz-server.nix
-  ];
+{ ... }:
+{
+  imports = [ ./pz-server.nix ];
 }

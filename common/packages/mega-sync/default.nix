@@ -21,5 +21,5 @@ buildDotnetModule rec {
   dotnet-runtime = dotnetCorePackages.aspnetcore_8_0;
 
   meta.mainProgram = "MegaSync";
-  executables = [meta.mainProgram];
+  executables = [ meta.mainProgram ];
 }

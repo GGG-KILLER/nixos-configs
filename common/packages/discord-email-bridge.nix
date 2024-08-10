@@ -1,7 +1,5 @@
-{
-  fetchFromGitHub,
-  callPackage,
-}: let
+{ fetchFromGitHub, callPackage }:
+let
   src = fetchFromGitHub {
     owner = "GGG-KILLER";
     repo = "DiscordEmailBridge";
@@ -9,4 +7,4 @@
     hash = "sha256-/EWpHzxX8EVzudBRBj8wMA+EQq+u9qxD1vn8mWvO5Js=";
   };
 in
-  callPackage src {}
+callPackage src { }

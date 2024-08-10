@@ -7,7 +7,8 @@
   inputs,
   nur-no-pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./audio
     ./backup/restic.nix
@@ -36,9 +37,7 @@
   ];
 
   # Overlays
-  nixpkgs.overlays = [
-    inputs.nix-vscode-extensions.overlays.default
-  ];
+  nixpkgs.overlays = [ inputs.nix-vscode-extensions.overlays.default ];
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
@@ -51,11 +50,14 @@
     hostId = "6967af45";
     enableIPv6 = false; # No ISP support.
 
-    nameservers = ["192.168.1.1"];
+    nameservers = [ "192.168.1.1" ];
   };
 
   # Packages
-  environment.shells = with pkgs; [bash powershell];
+  environment.shells = with pkgs; [
+    bash
+    powershell
+  ];
 
   # List services that you want to enable:
 

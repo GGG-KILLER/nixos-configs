@@ -1,13 +1,17 @@
+{ inputs, pkgs, ... }:
 {
-  inputs,
-  pkgs,
-  ...
-}: {
   nix = {
     package = pkgs.nixVersions.nix_2_21;
 
     # Flakes
-    settings.experimental-features = ["auto-allocate-uids" "ca-derivations" "cgroups" "flakes" "nix-command" "repl-flake"];
+    settings.experimental-features = [
+      "auto-allocate-uids"
+      "ca-derivations"
+      "cgroups"
+      "flakes"
+      "nix-command"
+      "repl-flake"
+    ];
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
       nixpkgs-stable.flake = inputs.nixpkgs-stable;

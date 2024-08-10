@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   nixpkgs.overlays = [
     (self: super: {
       step-ca = super.step-ca.overrideDerivation (oldAttrs: {

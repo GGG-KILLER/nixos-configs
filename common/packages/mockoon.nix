@@ -1,7 +1,4 @@
-{
-  appimageTools,
-  fetchurl,
-}:
+{ appimageTools, fetchurl }:
 appimageTools.wrapType2 rec {
   name = "mockoon-${version}";
   version = "8.0.0";

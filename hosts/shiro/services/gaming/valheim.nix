@@ -1,6 +1,8 @@
-{config, ...}: let
+{ config, ... }:
+let
   inherit (config.age) secrets;
-in {
+in
+{
   virtualisation.oci-containers.containers.valheim = {
     image = "ghcr.io/lloesche/valheim-server";
     ports = [
@@ -29,9 +31,7 @@ in {
       PUID = toString config.users.users.valheim.uid;
       PGID = "1000";
     };
-    environmentFiles = [
-      secrets."valheim-server.env".path
-    ];
+    environmentFiles = [ secrets."valheim-server.env".path ];
     extraOptions = [
       "--dns=192.168.1.1"
       "--ipc=none"
@@ -41,8 +41,16 @@ in {
     ];
   };
 
-  networking.firewall.allowedUDPPorts = with config.shiro.ports; [vallheimUDP_A vallheimUDP_B vallheimUDP_C];
-  networking.firewall.allowedTCPPorts = with config.shiro.ports; [vallheimUDP_A vallheimUDP_B vallheimUDP_C];
+  networking.firewall.allowedUDPPorts = with config.shiro.ports; [
+    vallheimUDP_A
+    vallheimUDP_B
+    vallheimUDP_C
+  ];
+  networking.firewall.allowedTCPPorts = with config.shiro.ports; [
+    vallheimUDP_A
+    vallheimUDP_B
+    vallheimUDP_C
+  ];
 
   modules.services.nginx.virtualHosts."valheim.lan" = {
     ssl = true;

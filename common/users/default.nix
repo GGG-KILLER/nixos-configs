@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   imports = [
     ./ggg
     ./downloader.nix

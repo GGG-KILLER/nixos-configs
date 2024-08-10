@@ -1,6 +1,7 @@
-{lib, ...}: {
+{ lib, ... }:
+{
   options = {
-    system.nixos.codeName = lib.mkOption {readOnly = false;};
+    system.nixos.codeName = lib.mkOption { readOnly = false; };
   };
 
   config = {

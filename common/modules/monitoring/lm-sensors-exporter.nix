@@ -6,9 +6,11 @@
   system,
   ...
 }:
-with lib; let
+with lib;
+let
   cfg = config.modules.services.lm-sensors-exporter;
-in {
+in
+{
   options.modules.services.lm-sensors-exporter = {
     enable = mkEnableOption "Whether to enable the prometheus-lm-sensors-exporter service.";
     port = mkOption {
@@ -43,8 +45,8 @@ in {
 
   config = mkIf cfg.enable {
     systemd.services."prometheus-lm-sensors-exporter" = {
-      wantedBy = ["multi-user.target"];
-      after = ["network.target"];
+      wantedBy = [ "multi-user.target" ];
+      after = [ "network.target" ];
       serviceConfig = {
         ExecStart = ''
           ${self.packages.${system}.lm-sensors-exporter}/bin/sensor-exporter \
@@ -57,8 +59,8 @@ in {
         User = mkDefault cfg.user;
         Group = cfg.group;
         # Hardening
-        CapabilityBoundingSet = mkDefault [""];
-        DeviceAllow = [""];
+        CapabilityBoundingSet = mkDefault [ "" ];
+        DeviceAllow = [ "" ];
         LockPersonality = true;
         MemoryDenyWriteExecute = true;
         NoNewPrivileges = true;
@@ -72,7 +74,10 @@ in {
         ProtectKernelTunables = true;
         ProtectSystem = mkDefault "strict";
         RemoveIPC = true;
-        RestrictAddressFamilies = ["AF_INET" "AF_INET6"];
+        RestrictAddressFamilies = [
+          "AF_INET"
+          "AF_INET6"
+        ];
         RestrictNamespaces = true;
         RestrictRealtime = true;
         RestrictSUIDSGID = true;

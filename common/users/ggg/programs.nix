@@ -4,8 +4,10 @@
   inputs,
   system,
   ...
-}: {
-  nixpkgs.config.allowUnfreePredicate = pkg:
+}:
+{
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (lib.getName pkg) [
       "steam-run"
       "steam-original"
@@ -42,7 +44,10 @@
       dircolors.enable = true;
       eza = {
         enable = true;
-        extraOptions = ["-a" "-g"];
+        extraOptions = [
+          "-a"
+          "-g"
+        ];
       };
       jq.enable = true;
       zsh = {

@@ -1,31 +1,45 @@
-{config, ...}: {
-  systemd.services."${config.virtualisation.oci-containers.backend}-netprobe-network" = let
-    backend = config.virtualisation.oci-containers.backend;
-  in {
-    wantedBy = ["multi-user.target"];
-    after = ["docker.service" "docker.socket"];
-    before = ["${backend}-netprobe-redis.service" "${backend}-netprobe-probe.service" "${backend}-netprobe-presentation.service"];
-    requiredBy = ["${backend}-netprobe-redis.service" "${backend}-netprobe-probe.service" "${backend}-netprobe-presentation.service"];
+{ config, ... }:
+{
+  systemd.services."${config.virtualisation.oci-containers.backend}-netprobe-network" =
+    let
+      backend = config.virtualisation.oci-containers.backend;
+    in
+    {
+      wantedBy = [ "multi-user.target" ];
+      after = [
+        "docker.service"
+        "docker.socket"
+      ];
+      before = [
+        "${backend}-netprobe-redis.service"
+        "${backend}-netprobe-probe.service"
+        "${backend}-netprobe-presentation.service"
+      ];
+      requiredBy = [
+        "${backend}-netprobe-redis.service"
+        "${backend}-netprobe-probe.service"
+        "${backend}-netprobe-presentation.service"
+      ];
 
-    serviceConfig = let
-      backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
-    in {
-      Type = "simple";
-      RemainAfterExit = "yes";
+      serviceConfig =
+        let
+          backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
+        in
+        {
+          Type = "simple";
+          RemainAfterExit = "yes";
 
-      ExecStartPre = "-${backendBin} network rm netprobe";
-      ExecStart = "${backendBin} network create netprobe";
-      ExecStop = "${backendBin} network rm netprobe";
+          ExecStartPre = "-${backendBin} network rm netprobe";
+          ExecStart = "${backendBin} network create netprobe";
+          ExecStop = "${backendBin} network rm netprobe";
+        };
     };
-  };
 
   virtualisation.oci-containers.containers.netprobe-redis = {
     image = "redis:latest";
 
-    environmentFiles = [config.age.secrets."netprobe.env".path];
-    volumes = [
-      "${./redis.conf}:/etc/redis/redis.conf:ro"
-    ];
+    environmentFiles = [ config.age.secrets."netprobe.env".path ];
+    volumes = [ "${./redis.conf}:/etc/redis/redis.conf:ro" ];
     extraOptions = [
       "--network=netprobe"
       "--dns=192.168.1.1"
@@ -39,10 +53,8 @@
     environment = {
       MODULE = "NETPROBE";
     };
-    environmentFiles = [config.age.secrets."netprobe.env".path];
-    volumes = [
-      "/zfs-main-pool/data/netprobe:/netprobe_lite"
-    ];
+    environmentFiles = [ config.age.secrets."netprobe.env".path ];
+    volumes = [ "/zfs-main-pool/data/netprobe:/netprobe_lite" ];
     extraOptions = [
       "--network=netprobe"
       "--dns=192.168.1.1"
@@ -56,13 +68,9 @@
     environment = {
       MODULE = "PRESENTATION";
     };
-    environmentFiles = [config.age.secrets."netprobe.env".path];
-    volumes = [
-      "/zfs-main-pool/data/netprobe:/netprobe_lite"
-    ];
-    ports = [
-      "${toString config.shiro.ports.netprobe}:5000"
-    ];
+    environmentFiles = [ config.age.secrets."netprobe.env".path ];
+    volumes = [ "/zfs-main-pool/data/netprobe:/netprobe_lite" ];
+    ports = [ "${toString config.shiro.ports.netprobe}:5000" ];
     extraOptions = [
       "--network=netprobe"
       "--dns=192.168.1.1"

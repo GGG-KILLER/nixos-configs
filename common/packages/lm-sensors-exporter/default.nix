@@ -25,13 +25,16 @@ buildGoModule {
   CGO_CFLAGS = "-I ${lm_sensors}/include";
   CGO_LDFLAGS = "-L ${lm_sensors}/lib";
 
-  ldflags = ["-s" "-w"];
+  ldflags = [
+    "-s"
+    "-w"
+  ];
 
   meta = with lib; {
     description = "Prometheus exporter for sensor data like temperature and fan speed";
     homepage = "https://github.com/janw/lm-sensors-exporter";
     license = licenses.mit;
-    maintainers = [];
+    maintainers = [ ];
     platforms = platforms.unix;
   };
 }

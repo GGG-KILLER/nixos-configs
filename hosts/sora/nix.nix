@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   nix.settings = {
     http-connections = 100;
     max-substitution-jobs = 64;

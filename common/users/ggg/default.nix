@@ -4,7 +4,8 @@
   pkgs,
   liveCd ? false,
   ...
-}: {
+}:
+{
   imports = lib.optional (!liveCd) ./programs.nix;
 
   users.users.ggg = {
@@ -30,10 +31,9 @@
     ];
   };
 
-  users.users.root.openssh.authorizedKeys.keys =
-    config.users.users.ggg.openssh.authorizedKeys.keys;
+  users.users.root.openssh.authorizedKeys.keys = config.users.users.ggg.openssh.authorizedKeys.keys;
 
-  nix.settings.trusted-users = ["ggg"];
-  modules.home.mainUsers = lib.mkIf (!liveCd) ["ggg"];
+  nix.settings.trusted-users = [ "ggg" ];
+  modules.home.mainUsers = lib.mkIf (!liveCd) [ "ggg" ];
   programs.zsh.enable = true;
 }

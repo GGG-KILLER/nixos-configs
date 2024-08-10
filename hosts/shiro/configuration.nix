@@ -1,9 +1,6 @@
+{ pkgs, lib, ... }:
+with lib;
 {
-  pkgs,
-  lib,
-  ...
-}:
-with lib; {
   imports = [
     ./containers
     ./services

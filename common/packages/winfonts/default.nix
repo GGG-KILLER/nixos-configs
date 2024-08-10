@@ -1,7 +1,4 @@
-{
-  lib,
-  stdenvNoCC,
-}:
+{ lib, stdenvNoCC }:
 stdenvNoCC.mkDerivation {
   pname = "winfonts";
   version = "1";

@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   virtualisation.spiceUSBRedirection.enable = true;
 
   # libvirtd

@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   # nix run nixpkgs#nix-prefetch-docker -- --image-name docker.lan/mywebsite/backend --image-tag latest --quiet
   backendImage = pkgs.dockerTools.pullImage {
     imageName = "docker.lan/mywebsite/backend";
@@ -7,7 +8,8 @@
     finalImageName = "docker.lan/mywebsite/backend";
     finalImageTag = "latest";
   };
-in {
+in
+{
   virtualisation.podman = {
     enable = true;
     autoPrune.enable = true;
@@ -17,7 +19,11 @@ in {
     image = "${backendImage.imageName}:${backendImage.imageTag}";
     imageFile = backendImage;
 
-    ports = ["80:8080/tcp" "443:8083/tcp" "443:8083/udp"];
+    ports = [
+      "80:8080/tcp"
+      "443:8083/tcp"
+      "443:8083/udp"
+    ];
 
     extraOptions = [
       "-v=/home/ggg/MyWebsiteData:/data"

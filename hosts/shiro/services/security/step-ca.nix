@@ -1,11 +1,9 @@
-{
-  config,
-  lib,
-  ...
-}: let
+{ config, lib, ... }:
+let
   inherit (lib) mkForce flip mapAttrs';
   inherit (config.age) secrets;
-in {
+in
+{
   # ACME Settings
   security.acme = mkForce {
     acceptTerms = true; # kinda pointless since we never use upstream
@@ -26,15 +24,17 @@ in {
     locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;
   };
 
-  systemd.services = flip mapAttrs' config.security.acme.certs (name: _: {
-    name = "acme-${name}";
-    value = {
-      after = ["step-ca.service"];
-      requires = ["step-ca.service"];
-    };
-  });
+  systemd.services = flip mapAttrs' config.security.acme.certs (
+    name: _: {
+      name = "acme-${name}";
+      value = {
+        after = [ "step-ca.service" ];
+        requires = [ "step-ca.service" ];
+      };
+    }
+  );
 
-  networking.firewall.allowedTCPPorts = [config.shiro.ports.step-ca];
+  networking.firewall.allowedTCPPorts = [ config.shiro.ports.step-ca ];
   services.step-ca = {
     enable = true;
     address = "0.0.0.0";
@@ -45,7 +45,7 @@ in {
       root = config.my.secrets.pki.root-crt-path;
       crt = config.my.secrets.pki.intermediate-crt-path;
       key = secrets.step-ca-intermediate-key.path;
-      dnsNames = ["ca.lan"];
+      dnsNames = [ "ca.lan" ];
       logger.format = "text";
       db = {
         type = "badgerv2";
@@ -61,7 +61,12 @@ in {
         policy = {
           x509 = {
             allow = {
-              dns = ["*.lan" "*.money.lan" "*.shiro.lan" "*.hass.lan"];
+              dns = [
+                "*.lan"
+                "*.money.lan"
+                "*.shiro.lan"
+                "*.hass.lan"
+              ];
             };
             allowWildcardNames = true;
           };
@@ -71,8 +76,8 @@ in {
             type = "ACME";
             name = "acme";
             forceCN = true;
-            caaIdentities = ["ca.lan"];
-            challenges = ["http-01"];
+            caaIdentities = [ "ca.lan" ];
+            challenges = [ "http-01" ];
           }
         ];
         backdate = "1m0s";

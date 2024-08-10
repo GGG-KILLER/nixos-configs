@@ -1,4 +1,5 @@
-{config, ...}: {
+{ config, ... }:
+{
   virtualisation.oci-containers.containers.pufferpanel = {
     image = "pufferpanel/pufferpanel:latest";
     ports = [
@@ -36,7 +37,7 @@
   };
 
   networking.firewall = {
-    allowedTCPPorts = [config.shiro.ports.pufferpanel-sftp];
+    allowedTCPPorts = [ config.shiro.ports.pufferpanel-sftp ];
     allowedTCPPortRanges = [
       {
         from = 60000;

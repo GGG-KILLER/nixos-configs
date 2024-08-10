@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   users.users.pterodactyl = {
     uid = 993;
     isSystemUser = true;

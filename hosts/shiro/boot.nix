@@ -1,12 +1,9 @@
+{ pkgs, config, ... }:
 {
-  pkgs,
-  config,
-  ...
-}: {
   boot.zfs.package = pkgs.zfs_unstable;
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.kernelParams = ["nohibernate"];
-  boot.supportedFilesystems = ["zfs"];
+  boot.kernelParams = [ "nohibernate" ];
+  boot.supportedFilesystems = [ "zfs" ];
 
   boot.loader.grub = {
     enable = true;

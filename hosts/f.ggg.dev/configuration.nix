@@ -1,6 +1,8 @@
-{...}: let
+{ ... }:
+let
   sshPort = 17606;
-in {
+in
+{
   imports = [
     ./backend.nix
     ./hardware-configuration.nix
@@ -13,18 +15,30 @@ in {
   # Enable the OpenSSH daemon.
   services.openssh = {
     enable = true;
-    ports = [sshPort];
+    ports = [ sshPort ];
   };
   services.endlessh = {
     enable = true;
     port = 22;
     openFirewall = true;
-    extraOptions = ["-4" "-l 16" "-d 20000"];
+    extraOptions = [
+      "-4"
+      "-l 16"
+      "-d 20000"
+    ];
   };
 
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [80 443 sshPort];
-  networking.firewall.allowedUDPPorts = [80 443 sshPort];
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+    sshPort
+  ];
+  networking.firewall.allowedUDPPorts = [
+    80
+    443
+    sshPort
+  ];
 
   zramSwap.enable = true;
 
