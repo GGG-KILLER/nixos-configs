@@ -282,16 +282,6 @@ in
 
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
     xdg.desktopEntries = {
-      mockoon = {
-        name = "Mockoon";
-        exec = getExe mockoon;
-        categories = [
-          "Development"
-          "Network"
-          "Debugger"
-          "Viewer"
-        ];
-      };
       ilspy = {
         name = "ILSpy";
         exec = getExe avalonia-ilspy;
