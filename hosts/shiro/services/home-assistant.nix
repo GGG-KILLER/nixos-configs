@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   # For debugging
   environment.systemPackages = with pkgs; [ zigpy-cli ];
@@ -28,12 +28,12 @@
       external_converters = [ "TS0601_TZE200_lawxy9e2.js" ];
     };
   };
-  systemd.services."zigbee2mqtt.service".serviceConfig.Restart = "always";
-  systemd.services."zigbee2mqtt.service".requires = [
+  systemd.services.zigbee2mqtt.serviceConfig.Restart = lib.mkForce "always";
+  systemd.services.zigbee2mqtt.requires = [
     "docker-mqtt-hass.service"
     "home-assistant.service"
   ];
-  systemd.services."zigbee2mqtt.service".after = [
+  systemd.services.zigbee2mqtt.after = [
     "docker-mqtt-hass.service"
     "home-assistant.service"
   ];
