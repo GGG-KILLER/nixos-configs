@@ -103,9 +103,6 @@
   # Open Tablet thingio
   hardware.opentabletdriver.enable = true;
 
-  # Enable Waydroid
-  virtualisation.waydroid.enable = true;
-
   # Enable KDE Connect
   programs.kdeconnect.enable = true;
 
