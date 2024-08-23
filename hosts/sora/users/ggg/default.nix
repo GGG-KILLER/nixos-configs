@@ -128,7 +128,7 @@ in
         m3u8-dl
         mockoon
         mullvad-vpn
-        rustdesk
+        # rustdesk
         yt-dlp
         zenmonitor
         kemono-dl

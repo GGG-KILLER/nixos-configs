@@ -26,7 +26,7 @@
     ./nix.nix
     ./openrgb.nix
     ./overrides.nix
-    ./rustdesk.nix
+    # ./rustdesk.nix
     ./secrets.nix
     ./video.nix
     ./virtualisation.nix
