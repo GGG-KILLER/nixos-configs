@@ -17,4 +17,7 @@
     };
     qemu.swtpm.enable = true;
   };
+
+  # Huge Pages support
+  boot.kernelParams = ["hugepagesz=1G" "hugepages=32"];
 }
