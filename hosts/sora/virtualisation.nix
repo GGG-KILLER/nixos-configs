@@ -6,7 +6,8 @@ let
     # Ex: 1st Core -> reserved=0
     # Ex: 1st & 2nt Cores -> reserved=0,1
     # Ex: 1st Physical Core (16 Virtual Cores) -> reserved=0,8
-    reserved=0,8,18-31
+    # VM is pinned to: 1-8,17-24
+    reserved=0,9-16,25-31
 
     # Host core range numbered from 0 to core count - 1
     # You must put all the cores of your host CPU
