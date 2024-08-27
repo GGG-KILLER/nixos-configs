@@ -2,7 +2,6 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  lib,
   pkgs,
   inputs,
   nur-no-pkgs,
@@ -11,28 +10,19 @@
 {
   imports = [
     ./audio
-    ./backup/restic.nix
+    ./hardware
+    ./programs
+    ./services
     ./users/ggg
     ./boot.nix
-    ./docker.nix
-    ./fancontrol.nix
-    ./flatpak.nix
     ./fonts.nix
     # TODO: Undo when this gets fixed in .NET
     ./hack.nix
-    ./kde.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./nix.nix
-    ./openrgb.nix
     ./overrides.nix
-    # ./rustdesk.nix
     ./secrets.nix
-    ./video.nix
-    ./virtualisation.nix
-    ./vpn.nix
-    ./yubikey.nix
-    ./zfs.nix
     nur-no-pkgs.repos.ilya-fedin.modules.io-scheduler
   ];
 
