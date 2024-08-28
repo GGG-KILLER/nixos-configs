@@ -177,7 +177,6 @@ in
       };
       tealdeer.enable = true;
       zsh.oh-my-zsh.plugins = [
-        "adb"
         "copybuffer"
         "copyfile"
         "docker"

@@ -59,7 +59,6 @@
           enable = true;
           plugins = [
             "encode64"
-            "fd"
             "sudo"
             "timer"
           ];
