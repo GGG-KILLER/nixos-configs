@@ -49,6 +49,7 @@ in
       package = config.boot.kernelPackages.nvidiaPackages.stable;
 
       # NOTE: Open kernel module does not work with the Quadro P400
+      open = false;
       modesetting.enable = false;
       nvidiaSettings = false;
     };
