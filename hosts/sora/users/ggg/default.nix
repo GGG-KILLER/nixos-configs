@@ -23,7 +23,6 @@ let
   avalonia-ilspy = self.packages.${system}.avalonia-ilspy;
   m3u8-dl = self.packages.${system}.m3u8-dl;
   mockoon = self.packages.${system}.mockoon;
-  git-credential-manager = self.packages.${system}.git-credential-manager;
   kemono-dl = self.packages.${system}.kemono-dl;
   r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
     version = "3.1.49";
@@ -170,7 +169,7 @@ in
         userEmail = "gggkiller2@gmail.com";
         extraConfig = {
           init.defaultBranch = "main";
-          credential.helper = "${git-credential-manager}/bin/git-credential-manager";
+          credential.helper = "${lib.getExe pkgs.git-credential-manager}";
           credential.credentialStore = "secretservice";
           core.editor = "${getExe pkgs.vscode} --wait";
         };

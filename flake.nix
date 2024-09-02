@@ -179,7 +179,6 @@
           in
           {
             avalonia-ilspy = pkgs.callPackage ./common/packages/avalonia-ilspy { };
-            git-credential-manager = pkgs.callPackage ./common/packages/git-credential-manager { };
             jackett = pkgs.callPackage ./common/packages/jackett { };
             kemono-dl = pkgs.callPackage ./common/packages/kemono-dl { };
             lm-sensors-exporter = pkgs.callPackage ./common/packages/lm-sensors-exporter { };
