@@ -1,5 +1,4 @@
-{ pkgs, lib, ... }:
-with lib;
+{ pkgs, ... }:
 {
   imports = [
     ./containers

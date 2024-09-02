@@ -1,4 +1,4 @@
-{ self, lib, ... }:
+{ lib, ... }:
 let
   inherit (lib) getExe' listToAttrs nameValuePair;
   gpuDevs = [
@@ -72,7 +72,6 @@ in
       {
         config,
         pkgs,
-        system,
         ...
       }:
       {

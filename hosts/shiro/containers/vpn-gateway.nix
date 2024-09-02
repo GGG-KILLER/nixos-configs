@@ -19,7 +19,7 @@ in
     };
 
     config =
-      { config, pkgs, ... }:
+      { pkgs, ... }:
       let
         wg-interface = "wg-mullvad";
       in

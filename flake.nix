@@ -175,7 +175,6 @@
           pkgs:
           let
             npm = pkgs.callPackage ./common/packages/npm { };
-            dotnet = pkgs.callPackage ./common/packages/dotnet { inherit nixpkgs; };
           in
           {
             avalonia-ilspy = pkgs.callPackage ./common/packages/avalonia-ilspy { };

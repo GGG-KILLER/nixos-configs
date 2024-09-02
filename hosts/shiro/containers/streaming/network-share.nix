@@ -42,7 +42,7 @@
     };
 
     config =
-      { config, pkgs, ... }:
+      { pkgs, ... }:
       {
         # Samba
         services.samba = {
