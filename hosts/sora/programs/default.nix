@@ -5,7 +5,7 @@
     ./flatpak.nix
     ./kde.nix
     ./openrgb.nix
-    # ./rustdesk.nix
+    ./rustdesk.nix
     ./vpn.nix
     ./yubikey.nix
   ];
