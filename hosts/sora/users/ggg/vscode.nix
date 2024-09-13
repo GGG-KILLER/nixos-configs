@@ -42,7 +42,7 @@ in
         ++ (with pkgs.vscode-extensions; [
           foxundermoon.shell-format
           rust-lang.rust-analyzer
-          ms-python.python
+          # ms-python.python # TODO: Add again once hash mismatch gets fixed.
           ms-toolsai.jupyter
           ms-vscode-remote.remote-ssh
           timonwong.shellcheck
