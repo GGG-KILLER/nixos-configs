@@ -48,19 +48,20 @@
         services.samba = {
           enable = true;
           nsswins = true;
-          enableNmbd = true;
-          securityType = "user";
-          extraConfig = ''
-            server string = Home Server
-            netbios name = HOME-SERVER
-            hosts allow = 192.168. 127.0.0.1
-            hosts deny = 0.0.0.0/0
-            guest account = nobody
-            map to guest = bad user
-            smb encrypt = required
-            use sendfile = yes
-          '';
-          shares = {
+          nmbd.enable = true;
+          settings = {
+            global = {
+              security = "user";
+              "server string" = "Home Server";
+              "netbios name" = "HOME-SERVER";
+              "hosts allow" = "192.168. 127.0.0.1";
+              "hosts deny" = "0.0.0.0/0";
+              "guest account" = "nobody";
+              "map to guest" = "bad user";
+              "smb encrypt" = "required";
+              "use sendfile" = "yes";
+            };
+
             Animu = {
               path = "/mnt/animu";
               browseable = true;
