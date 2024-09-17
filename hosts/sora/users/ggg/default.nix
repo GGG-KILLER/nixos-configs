@@ -110,6 +110,7 @@ in
         #self.packages.${system}.ffmpeg-full
         ffmpeg
         #handbrake # Uncomment when NixOS/nixpkgs#297984 hits unstable.
+        kdePackages.elisa
 
         # VMs
         virt-manager
