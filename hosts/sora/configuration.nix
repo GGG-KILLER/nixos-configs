@@ -41,8 +41,9 @@
     enableIPv6 = false; # No ISP support.
 
     useDHCP = false;
-    bridges."br-lan".interfaces = [ "enp5s0" ];
-    interfaces."br-lan".useDHCP = true;
+    bridges.br-lan.interfaces = [ "enp5s0" ];
+    interfaces.br-lan.useDHCP = true;
+    interfaces.enp2s0f0u8.useDHCP =  true;
 
     nameservers = [ "192.168.1.1" ];
   };
