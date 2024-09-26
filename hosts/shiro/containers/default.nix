@@ -140,9 +140,6 @@ with lib;
 
                 system.stateVersion = "22.11";
 
-                # Enable X11 Libs
-                environment.noXlibs = false;
-
                 # Base network configs
                 networking = {
                   hosts = networking-hosts;
