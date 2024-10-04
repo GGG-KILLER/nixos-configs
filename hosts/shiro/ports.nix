@@ -55,6 +55,8 @@ in
     pufferpanel = 1046;
     pufferpanel-sftp = 1047;
 
+    live-stream-dvr = 1048;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;

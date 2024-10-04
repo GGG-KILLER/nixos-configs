@@ -8,6 +8,7 @@ let
     nameValuePair
     attrValues
     removeSuffix
+    filter
     ;
   portOptions = {
     options = {
@@ -76,7 +77,11 @@ in
       mainAddr = "192.168.2.133"; # ipgen -n 192.168.2.0/24 shiro
       extraNames =
         [ ]
-        ++ (map (name: removeSuffix ".lan" name) (builtins.attrNames config.services.nginx.virtualHosts));
+        ++ (map (name: removeSuffix ".lan" name) (
+          filter (name: removeSuffix ".lan" name != name) (
+            builtins.attrNames config.services.nginx.virtualHosts
+          )
+        ));
     };
 
     networking = {

@@ -66,6 +66,7 @@ in
                 "*.money.lan"
                 "*.shiro.lan"
                 "*.hass.lan"
+                "*.ggg.dev"
               ];
             };
             allowWildcardNames = true;

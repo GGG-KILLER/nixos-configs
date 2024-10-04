@@ -219,7 +219,7 @@ in
     security.acme.certs = lib.mapAttrs' (
       name: server:
       lib.nameValuePair server.serverName {
-        email = "${server.serverName}@${config.networking.hostName}.lan";
+        email = mkDefault "${server.serverName}@${config.networking.hostName}.lan";
       }
     ) (lib.filterAttrs (key: server: server.serverName != null && server.ssl) cfg.virtualHosts);
 

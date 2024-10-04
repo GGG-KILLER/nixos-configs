@@ -8,6 +8,7 @@
     ./monitoring
     ./nix-pr-tracker
     ./security
+    ./cloudflared.nix
     ./cockpit.nix
     ./docker-registry.nix
     ./homarr.nix

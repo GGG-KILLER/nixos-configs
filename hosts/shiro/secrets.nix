@@ -23,6 +23,12 @@
     "mongodb/dev.env".file = ../../secrets/shiro/mongodb/dev.env.age;
     "mongodb/prd.env".file = ../../secrets/shiro/mongodb/prd.env.age;
 
+    "cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json" = {
+      file = ../../secrets/shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age;
+      owner = "cloudflared";
+      group = "cloudflared";
+    };
+
     step-ca-intermediate-key = {
       file = ../../secrets/shiro/stepca/intermediate_ca_key.age;
       owner = "step-ca";

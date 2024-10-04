@@ -123,7 +123,6 @@
   };
 
   modules.services.nginx.virtualHosts."sso.shiro.lan" = {
-    default = true;
     ssl = true;
     locations."/" = {
       proxyWebsockets = true;

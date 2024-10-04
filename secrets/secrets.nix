@@ -150,6 +150,12 @@ in
     shiro
   ];
 
+  # Shiro - Cloudflared
+  "shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age".publicKeys = [
+    ggg
+    shiro
+  ];
+
   # VPN Proxy
   "vpn-proxy/wireguard/private_key.age".publicKeys = [
     ggg
