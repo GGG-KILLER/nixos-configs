@@ -10,8 +10,8 @@ buildDotnetModule rec {
   src = fetchFromGitHub {
     owner = "GGG-KILLER";
     repo = "MegaSync";
-    rev = "dbd12bd7e5ccd8465d27fab59f0f1a2db50c0507";
-    hash = "sha256-ZYZx/olpMA3zy2ohtAGT9vRlTCiAjWxKQRWRm2DRR/k=";
+    rev = "67618749fcfda09d95c0625234580f26f8db2007";
+    hash = "sha256-O4Jm5SJs1Vu+sKklS89KxFikDfmwfpV6uO777P+0Umk=";
   };
 
   projectFile = "MegaSync.csproj";
