@@ -14,7 +14,7 @@ with lib;
     ./misc
     ./streaming
     ./pgsql.nix
-    ./pz-server.nix
+    # ./pz-server.nix
     ./vpn-gateway.nix
   ];
 
