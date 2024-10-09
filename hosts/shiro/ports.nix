@@ -57,6 +57,8 @@ in
 
     live-stream-dvr = 1048;
 
+    cadvisor = 1049;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;
