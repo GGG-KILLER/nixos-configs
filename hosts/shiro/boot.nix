@@ -2,7 +2,10 @@
 {
   boot.zfs.package = pkgs.zfs_unstable;
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
-  boot.kernelParams = [ "nohibernate" ];
+  boot.kernelParams = [
+    "zfs.zfs_arc_max=${toString (8 * 1024 * 1024 * 1024)}"
+    "nohibernate"
+  ];
   boot.supportedFilesystems = [ "zfs" ];
 
   boot.loader.grub = {
