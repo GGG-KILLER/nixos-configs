@@ -59,6 +59,8 @@ in
 
     cadvisor = 1049;
 
+    prometheus-exporter = 1050;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;
