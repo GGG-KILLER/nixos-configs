@@ -1,7 +1,7 @@
 { config, ... }:
 {
   virtualisation.oci-containers.containers.live-stream-dvr = {
-    image = "mrbrax/twitchautomator:master";
+    image = "docker.lan/twitchautomator:latest";
     ports = [
       "${toString config.shiro.ports.live-stream-dvr}:8080"
     ];
