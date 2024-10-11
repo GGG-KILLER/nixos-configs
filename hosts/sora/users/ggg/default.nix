@@ -63,13 +63,13 @@ in
 
         # Coding
         avalonia-ilspy
+        corepack_latest
         docker-compose
         mockoon
         nixd
         nodejs_latest
         powershell
         tokei
-        yarn
 
         # Database
         pgformatter
