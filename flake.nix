@@ -190,6 +190,7 @@
             mockoon = pkgs.callPackage ./common/packages/mockoon.nix { };
             mega-sync = pkgs.callPackage ./common/packages/mega-sync { };
             genymotion-qemu = pkgs.callPackage ./common/packages/genymotion-qemu.nix { };
+            twitch-downloader = pkgs.callPackage ./common/packages/twitch-downloader { };
           }
         );
 
