@@ -2,7 +2,7 @@
 {
   imports = [
     ./downloader.nix
-    ./live-stream-dvr.nix
+    # ./live-stream-dvr.nix
     ./megasync.nix
     ./sonarr.nix
   ];
