@@ -192,6 +192,7 @@
             genymotion-qemu = pkgs.callPackage ./common/packages/genymotion-qemu.nix { };
             twitch-downloader = pkgs.callPackage ./common/packages/twitch-downloader { };
             livestreamdvr = pkgs.callPackage ./common/packages/livestreamdvr { };
+            livestreamdvr-net-backend = pkgs.callPackage ./common/packages/livestreamdvr-net/backend.nix { };
           }
         );
 
