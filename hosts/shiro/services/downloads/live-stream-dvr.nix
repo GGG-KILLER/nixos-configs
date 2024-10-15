@@ -12,30 +12,29 @@
     description = "Live Stream DVR";
     wantedBy = [ "multi-user.target" ];
     environment = {
-      TCD_TWITCHDOWNLOADER_PATH = lib.getExe self.packages.${system}.twitch-downloader;
-      TCD_SERVER_PORT = toString config.shiro.ports.live-stream-dvr;
-      TCD_WEBSOCKET_ENABLED = "1";
-      TCD_ENABLE_FILES_API = "1";
-      TCD_EXPOSE_LOGS_TO_PUBLIC = "1";
-      TCD_MIGRATE_OLD_VOD_JSON = "1";
+      ASPNETCORE_ENVIRONMENT = "Production";
+      ASPNETCORE_HTTP_PORTS = toString config.shiro.ports.live-stream-dvr;
+      ASPNETCORE_HTTPS_PORTS = "";
+
+      DVR_Binaries__StreamLinkPath = lib.getExe pkgs.streamlink;
+      DVR_Binaries__FfmpegPath = lib.getExe pkgs.ffmpeg;
+      DVR_Binaries__MediaInfoPath = lib.getExe pkgs.mediainfo;
+      DVR_Binaries__TwitchDownloaderCliPath = lib.getExe self.packages.${system}.twitch-downloader;
     };
     serviceConfig = {
       User = "downloader";
       Group = "data-members";
       Restart = "always";
-      ExecStart = ''
-        ${lib.getExe self.packages.${system}.livestreamdvr} \
-          --dataroot /zfs-main-pool/data/services/live-stream-dvr \
-          --port ${toString config.shiro.ports.live-stream-dvr}
-      '';
+      ExecStart = lib.getExe self.packages.${system}.livestreamdvr-net-backend;
+      WorkingDirectory = "/zfs-main-pool/data/services/live-stream-dvr";
     };
   };
 
   modules.services.nginx.virtualHosts."ttv.ggg.dev" = {
     ssl = true;
 
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.shiro.ports.live-stream-dvr}";
+    locations."/api/" = {
+      proxyPass = "http://127.0.0.1:${toString config.shiro.ports.live-stream-dvr}/";
       recommendedProxySettings = true;
       proxyWebsockets = true;
     };
