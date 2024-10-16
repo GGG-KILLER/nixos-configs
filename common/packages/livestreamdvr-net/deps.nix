@@ -2,17 +2,17 @@
 # Please dont edit it manually, your changes might get overwritten!
 
 { fetchNuGet }: [
-  (fetchNuGet { pname = "Microsoft.AspNetCore.Authentication.JwtBearer"; version = "8.0.10"; hash = "sha256-FNUdNGdNG/a1PAFh9SADmCF0h8+Be4r/Q3izKML3tas="; })
+  (fetchNuGet { pname = "Microsoft.AspNetCore.Authentication.JwtBearer"; version = "9.0.0-rc.1.24452.1"; hash = "sha256-Ew/8Q58wh/3LQtNeZv+j0ppnmJgolvH3jeyyL5wue94="; })
   (fetchNuGet { pname = "Microsoft.AspNetCore.OpenApi"; version = "9.0.0-rc.1.24452.1"; hash = "sha256-bd5p/KD2ZquDt8C5lTEV1QhnNVjtrD858xu7Xkhwlt8="; })
-  (fetchNuGet { pname = "Microsoft.IdentityModel.Abstractions"; version = "7.1.2"; hash = "sha256-QN2btwsc8XnOp8RxwSY4ntzpqFIrWRZg6ZZEGBZ6TQY="; })
-  (fetchNuGet { pname = "Microsoft.IdentityModel.JsonWebTokens"; version = "7.1.2"; hash = "sha256-kVTS9i3khR7/0JBk52jzv4FUmBsbqntqVyqkDA/APvk="; })
-  (fetchNuGet { pname = "Microsoft.IdentityModel.Logging"; version = "7.1.2"; hash = "sha256-6M7Y1u2cBVsO/dP+qrgkMLisXbZgMgyWoRs5Uq/QJ/o="; })
-  (fetchNuGet { pname = "Microsoft.IdentityModel.Protocols"; version = "7.1.2"; hash = "sha256-6OXP0vQ6bQ3Xvj3I73eqng6NqqMC4htWKuM8cchZhWI="; })
-  (fetchNuGet { pname = "Microsoft.IdentityModel.Protocols.OpenIdConnect"; version = "7.1.2"; hash = "sha256-cAwwCti+/ycdjqNy8PrBNEeuF7u5gYtCX8vBb2qIKRs="; })
-  (fetchNuGet { pname = "Microsoft.IdentityModel.Tokens"; version = "7.1.2"; hash = "sha256-qf8y8KCo1ysrK+jCrnR+ARHwlfMWPXLxe7a41FVg4OA="; })
+  (fetchNuGet { pname = "Microsoft.IdentityModel.Abstractions"; version = "8.0.1"; hash = "sha256-zPWUKTCfGm4MWcYPU037NzezsFE1g8tEijjQkw5iooI="; })
+  (fetchNuGet { pname = "Microsoft.IdentityModel.JsonWebTokens"; version = "8.0.1"; hash = "sha256-Xv9MUnjb66U3xeR9drOcSX5n2DjOCIJZPMNSKjWHo9Y="; })
+  (fetchNuGet { pname = "Microsoft.IdentityModel.Logging"; version = "8.0.1"; hash = "sha256-FfwrH/2eLT521Kqw+RBIoVfzlTNyYMqlWP3z+T6Wy2Y="; })
+  (fetchNuGet { pname = "Microsoft.IdentityModel.Protocols"; version = "8.0.1"; hash = "sha256-v3DIpG6yfIToZBpHOjtQHRo2BhXGDoE70EVs6kBtrRg="; })
+  (fetchNuGet { pname = "Microsoft.IdentityModel.Protocols.OpenIdConnect"; version = "8.0.1"; hash = "sha256-ZHKaZxqESk+OU1SFTFGxvZ71zbdgWqv1L6ET9+fdXX0="; })
+  (fetchNuGet { pname = "Microsoft.IdentityModel.Tokens"; version = "8.0.1"; hash = "sha256-beVbbVQy874HlXkTKarPTT5/r7XR1NGHA/50ywWp7YA="; })
   (fetchNuGet { pname = "Microsoft.OpenApi"; version = "1.6.17"; hash = "sha256-Wx9PwlEJPNMq1kp59nJJnLHQ+yNhqCTudcokmlP+tSk="; })
   (fetchNuGet { pname = "Scalar.AspNetCore"; version = "1.2.9"; hash = "sha256-aH8iLPYz7Olay7gw8mSxLy1TqBwbzkRdPeEmNokEQsg="; })
-  (fetchNuGet { pname = "System.IdentityModel.Tokens.Jwt"; version = "7.1.2"; hash = "sha256-EBVWd0gyU8QM23xclTQAHE/yGbXvHKqZfZ80b1VHuiU="; })
+  (fetchNuGet { pname = "System.IdentityModel.Tokens.Jwt"; version = "8.0.1"; hash = "sha256-hW4f9zWs0afxPbcMqCA/FAGvBZbBFSkugIOurswomHg="; })
   (fetchNuGet { pname = "TwitchLib.EventSub.Core"; version = "2.3.0"; hash = "sha256-beMyCKlD0nwWFoRkCd3vG2JvA0L2DP38zWO4FNKxuuc="; })
   (fetchNuGet { pname = "TwitchLib.EventSub.Webhooks"; version = "2.3.0"; hash = "sha256-rgWLF1pgrCThIRueFeYW5izrR4+vO0ci7CEblDWyqHc="; })
 ]
