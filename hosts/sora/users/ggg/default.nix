@@ -25,13 +25,13 @@ let
   mockoon = self.packages.${system}.mockoon;
   kemono-dl = self.packages.${system}.kemono-dl;
   r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
-    version = "3.1.49";
+    version = "3.1.50";
 
     src = pkgs.fetchFromGitHub {
       owner = "PedroVH";
       repo = "r2modmanPlus";
       rev = version;
-      hash = "sha256-3bFWmFb906giPCmLEu0G18BWDVGsPolbFx3o6wIn6Wo=";
+      hash = "sha256-4IO7HLsvKjNns7GPIUgthQCGat+N+oriWyZoMvIQOGc=";
     };
 
     offlineCache = pkgs.fetchYarnDeps {
