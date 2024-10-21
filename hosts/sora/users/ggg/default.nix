@@ -125,13 +125,14 @@ in
         imhex
         inputs.ipgen-cli.packages.${system}.default
         inputs.git-crypt-agessh.packages.${system}.default
+        kemono-dl
         m3u8-dl
         mockoon
         mullvad-vpn
         # rustdesk
+        wl-clipboard
         yt-dlp
         zenmonitor
-        kemono-dl
       ])
       ++ [ r2modman ];
 
