@@ -19,11 +19,18 @@ let
     ];
   dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/sdk";
-  xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
+
+  agenix = inputs.agenix.packages.${system}.default;
   avalonia-ilspy = self.packages.${system}.avalonia-ilspy;
+  deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
+  dotnet-ef = self.packages.${system}.dotnet-ef;
+  git-crypt-agessh = inputs.git-crypt-agessh.packages.${system}.default;
+  ipgen-cli = inputs.ipgen-cli.packages.${system}.default;
+  kemono-dl = self.packages.${system}.kemono-dl;
   m3u8-dl = self.packages.${system}.m3u8-dl;
   mockoon = self.packages.${system}.mockoon;
-  kemono-dl = self.packages.${system}.kemono-dl;
+  xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
+
   r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
     version = "3.1.50";
 
@@ -65,6 +72,7 @@ in
         avalonia-ilspy
         corepack_latest
         docker-compose
+        dotnet-ef
         mockoon
         nixd
         nodejs_latest
@@ -79,7 +87,7 @@ in
 
         # Encryption
         age
-        inputs.agenix.packages.${system}.default
+        agenix
         xca-stable
         yubikey-manager
         yubikey-manager-qt
@@ -101,7 +109,7 @@ in
         openrgb
 
         # Nix
-        inputs.deploy-rs.packages.${system}.deploy-rs
+        deploy-rs
         nh
         nix-output-monitor
         nixpkgs-review
@@ -121,15 +129,14 @@ in
         chromium
         discord-canary
         fd
+        git-crypt-agessh
         google-chrome
         imhex
-        inputs.ipgen-cli.packages.${system}.default
-        inputs.git-crypt-agessh.packages.${system}.default
+        ipgen-cli
         kemono-dl
         m3u8-dl
         mockoon
         mullvad-vpn
-        # rustdesk
         wl-clipboard
         yt-dlp
         zenmonitor
