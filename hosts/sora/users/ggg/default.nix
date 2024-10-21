@@ -143,6 +143,10 @@ in
       ])
       ++ [ r2modman ];
 
+    home.sessionPath = [
+      "$HOME/.dotnet/tools"
+    ];
+
     home.sessionVariables = {
       DOTNET_ROOT = dotnetRoot;
       MSBuildSdksPath = "${dotnetSdk}/${head dotnet-sdk.versions}/Sdks";
