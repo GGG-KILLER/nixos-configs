@@ -66,6 +66,7 @@ in
       builtins.elem (lib.getName pkg) [
         "steamcmd"
         "steam-original"
+        "steam-unwrapped"
       ];
 
     systemd.services.pz-server =

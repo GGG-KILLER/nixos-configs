@@ -86,6 +86,7 @@ in
             "nvidia-x11"
             "steam-run"
             "steam-original"
+            "steam-unwrapped"
           ];
 
         # Jellyfin

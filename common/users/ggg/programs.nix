@@ -11,6 +11,7 @@
     builtins.elem (lib.getName pkg) [
       "steam-run"
       "steam-original"
+      "steam-unwrapped"
     ];
 
   home-manager.users.ggg = {
