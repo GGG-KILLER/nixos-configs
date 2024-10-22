@@ -1,7 +1,7 @@
 {
   lib,
-  fetchFromGitHub,
   buildDotnetModule,
+  emptyDirectory,
   dotnetCorePackages,
 }:
 
@@ -9,20 +9,36 @@ buildDotnetModule (finalAttrs: {
   pname = "dotnet-ef";
   version = "9.0.0-rc.2.24474.1";
 
-  src = fetchFromGitHub {
-    owner = "dotnet";
-    repo = "efcore";
-    rev = "v${finalAttrs.version}";
-    hash = "sha256-xH8saQZvIOU38I9AoIVIYSvR83ZNz5+MoBhjirdZ+vk=";
-  };
+  src = emptyDirectory;
 
-  projectFile = "src/dotnet-ef/dotnet-ef.csproj";
-  nugetDeps = ./deps.nix;
+  buildInputs = [
+    (dotnetCorePackages.fetchNupkg {
+      inherit (finalAttrs) pname version;
+      hash = "sha256-WS70qX7N5UaOXbVk/IfTBgRXl1v+przTmB3itMxsffE=";
+      installable = true;
+    })
+  ];
 
-  runtimeDeps = [ ];
+  dotnetGlobalTool = true;
+
+  useDotnetFromEnv = true;
+
+  dontBuild = true;
 
   dotnet-sdk = dotnetCorePackages.sdk_9_0;
-  dotnet-runtime = finalAttrs.dotnet-sdk;
+  dotnet-runtime = dotnetCorePackages.sdk_9_0;
+
+  installPhase = ''
+    runHook preInstall
+
+    dotnet tool install --tool-path $out/lib/${finalAttrs.pname} --version ${finalAttrs.version} ${finalAttrs.pname}
+
+    # remove files that contain nix store paths to temp nuget sources we made
+    find $out -name 'project.assets.json' -delete
+    find $out -name '.nupkg.metadata' -delete
+
+    runHook postInstall
+  '';
 
   executables = [ finalAttrs.meta.mainProgram ];
 
