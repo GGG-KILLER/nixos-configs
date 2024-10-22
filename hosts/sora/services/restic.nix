@@ -14,38 +14,94 @@ in
       allBase =
         type:
         let
-          baseDir = "/home/ggg/.zfs/snapshot/restic-backup-${type}";
+          baseHomeDir = "/home/ggg/.zfs/snapshot/restic-backup-${type}";
+          baseVarLibDir = "/var/lib/.zfs/snapshot/restic-backup-${type}";
+          excludeFile = pkgs.writeText "restic-excludes-${type}.txt" ''
+            ${baseHomeDir}/.aspnet
+            ${baseHomeDir}/.cache
+            ${baseHomeDir}/.compose-cache
+            ${baseHomeDir}/.config/chromium
+            ${baseHomeDir}/.config/Code
+            ${baseHomeDir}/.config/discordcanary
+            ${baseHomeDir}/.config/ftb-app
+            ${baseHomeDir}/.config/Google
+            ${baseHomeDir}/.config/google-chrome
+            ${baseHomeDir}/.config/mockoon
+            ${baseHomeDir}/.config/MongoDB Compass
+            ${baseHomeDir}/.config/obs-studio
+            !${baseHomeDir}/.config/obs-studio/basic
+            !${baseHomeDir}/.config/obs-studio/global.ini
+            ${baseHomeDir}/.config/OpenTabletDriver
+            ${baseHomeDir}/.config/r2modman
+            ${baseHomeDir}/.config/r2modmanPlus-local
+            ${baseHomeDir}/.dir_colors
+            ${baseHomeDir}/.docker
+            ${baseHomeDir}/.dotnet
+            ${baseHomeDir}/.ftb
+            ${baseHomeDir}/.gephi
+            ${baseHomeDir}/.ghidra
+            ${baseHomeDir}/.gk
+            ${baseHomeDir}/.irpf
+            ${baseHomeDir}/.java
+            ${baseHomeDir}/.local/share
+            !${baseHomeDir}/.local/share/konsole
+            !${baseHomeDir}/.local/share/Mindustry.bin
+            !${baseHomeDir}/.local/share/Mindustry/saves
+            !${baseHomeDir}/.local/share/plasma-systemmonitor
+            !${baseHomeDir}/.local/share/PrismLauncher/libraries
+            !${baseHomeDir}/.local/share/PrismLauncher/prismlauncher.cfg
+            ${baseHomeDir}/.mongodb
+            ${baseHomeDir}/.mono
+            ${baseHomeDir}/.mozilla
+            ${baseHomeDir}/.nix-*
+            ${baseHomeDir}/.npm
+            ${baseHomeDir}/.nuget
+            ${baseHomeDir}/.nuxtrc
+            ${baseHomeDir}/.nv
+            ${baseHomeDir}/.pcsc10
+            ${baseHomeDir}/.rfb
+            ${baseHomeDir}/.ServiceHub
+            ${baseHomeDir}/.templateengine
+            ${baseHomeDir}/.var/app
+            ${baseHomeDir}/.vscode
+            ${baseHomeDir}/.wine
+            ${baseHomeDir}/.xca
+            ${baseHomeDir}/.yarn
+            ${baseHomeDir}/.zshenv
+            ${baseHomeDir}/.zshrc
+            ${baseHomeDir}/Android
+            ${baseHomeDir}/Downloads
+            ${baseHomeDir}/Git
+            ${baseHomeDir}/MC
+            !${baseHomeDir}/MC/**/backups
+            !${baseHomeDir}/MC/**/config
+            !${baseHomeDir}/MC/**/instance.cfg
+            !${baseHomeDir}/MC/**/instance.json
+            !${baseHomeDir}/MC/**/mmc-pack.json
+            !${baseHomeDir}/MC/**/saves
+            ${baseHomeDir}/Music/Liked Music
+            ${baseHomeDir}/random
+          '';
         in
         {
           initialize = true;
           backupPrepareCommand = ''
-            ${zfs} snapshot rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Snapshot created"
+            ${zfs} snapshot rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Home snapshot created"
+            ${zfs} snapshot rpool/nixos/var/lib@restic-backup-${type} && echo "[backupPrepareCommand] Lib snapshot created"
           '';
           backupCleanupCommand = ''
-            ${zfs} destroy rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupCleanupCommand] Snapshot deleted"
+            ${zfs} destroy rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupCleanupCommand] Home snapshot deleted"
+            ${zfs} destroy rpool/nixos/var/lib@restic-backup-${type} && echo "[backupPrepareCommand] Lib snapshot deleted"
           '';
-          paths = [ baseDir ];
+          paths = [
+            # Backup home dir
+            baseHomeDir
+            # Backup VM images
+            "${baseVarLibDir}/libvirt/images"
+          ];
           extraBackupArgs = [
             "--compression max"
-            "--exclude=${baseDir}/.android"
-            "--exclude=${baseDir}/.cache"
-            "--exclude=${baseDir}/.compose-cache"
-            "--exclude=${baseDir}/.dotnet"
-            "--exclude=${baseDir}/.java"
-            "--exclude=${baseDir}/.nix-defexpr"
-            "--exclude=${baseDir}/.nix-profile"
-            "--exclude=${baseDir}/.nuget"
-            "--exclude=${baseDir}/.nv"
-            "--exclude=${baseDir}/.omnisharp"
-            "--exclude=${baseDir}/.pki"
-            "--exclude=${baseDir}/.templateengine"
-            "--exclude=${baseDir}/.var/app/com.valvesoftware.Steam/.local/share/Steam"
-            "--exclude=${baseDir}/.vscode"
-            "--exclude=${baseDir}/Android"
-            "--exclude=${baseDir}/Data"
-            "--exclude=${baseDir}/Downloads"
-            "--exclude=${baseDir}/Git"
-            "--exclude=${baseDir}/Unity"
+            "--exclude-file=${excludeFile}"
           ];
           pruneOpts = [
             "--group-by hosts"
