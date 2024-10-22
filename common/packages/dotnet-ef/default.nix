@@ -40,7 +40,7 @@ buildDotnetModule (finalAttrs: {
     runHook postInstall
   '';
 
-  executables = [ finalAttrs.meta.mainProgram ];
+  executables = [ finalAttrs.pname ];
 
   meta = {
     description = "Entity Framework Core Tools for the .NET Command-Line Interface.";
@@ -59,7 +59,7 @@ buildDotnetModule (finalAttrs: {
     homepage = "https://github.com/dotnet/efcore";
     license = lib.licenses.mit;
     maintainers = with lib.maintainers; [ ggg ];
-    mainProgram = "dotnet-ef";
+    mainProgram = finalAttrs.pname;
     platforms = lib.platforms.linux;
   };
 })
