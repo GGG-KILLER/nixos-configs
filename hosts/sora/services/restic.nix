@@ -15,7 +15,7 @@ in
         type:
         let
           baseHomeDir = "/home/ggg/.zfs/snapshot/restic-backup-${type}";
-          baseVarLibDir = "/var/lib/.zfs/snapshot/restic-backup-${type}";
+          baseVarLibDir = "/var/lib";
           excludeFile = pkgs.writeText "restic-excludes-${type}.txt" ''
             ${baseHomeDir}/.aspnet
             ${baseHomeDir}/.cache
@@ -83,17 +83,14 @@ in
             ${baseHomeDir}/random
           '';
         in
-        {
+        rec {
           initialize = true;
           backupPrepareCommand = ''
-            ${zfs} destroy rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Home snapshot deleted" || :
+            ${backupCleanupCommand}
             ${zfs} snapshot rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Home snapshot created"
-            ${zfs} destroy rpool/nixos/var/lib@restic-backup-${type} && echo "[backupPrepareCommand] Lib snapshot deleted" || :
-            ${zfs} snapshot rpool/nixos/var/lib@restic-backup-${type} && echo "[backupPrepareCommand] Lib snapshot created"
           '';
           backupCleanupCommand = ''
             ${zfs} destroy rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupCleanupCommand] Home snapshot deleted"
-            ${zfs} destroy rpool/nixos/var/lib@restic-backup-${type} && echo "[backupCleanupCommand] Lib snapshot deleted"
           '';
           paths = [
             # Backup home dir
