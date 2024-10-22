@@ -86,12 +86,14 @@ in
         {
           initialize = true;
           backupPrepareCommand = ''
+            ${zfs} destroy rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Home snapshot deleted" || :
             ${zfs} snapshot rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Home snapshot created"
+            ${zfs} destroy rpool/nixos/var/lib@restic-backup-${type} && echo "[backupPrepareCommand] Lib snapshot deleted" || :
             ${zfs} snapshot rpool/nixos/var/lib@restic-backup-${type} && echo "[backupPrepareCommand] Lib snapshot created"
           '';
           backupCleanupCommand = ''
             ${zfs} destroy rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupCleanupCommand] Home snapshot deleted"
-            ${zfs} destroy rpool/nixos/var/lib@restic-backup-${type} && echo "[backupPrepareCommand] Lib snapshot deleted"
+            ${zfs} destroy rpool/nixos/var/lib@restic-backup-${type} && echo "[backupCleanupCommand] Lib snapshot deleted"
           '';
           paths = [
             # Backup home dir

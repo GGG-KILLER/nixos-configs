@@ -178,22 +178,16 @@
           in
           {
             avalonia-ilspy = pkgs.callPackage ./common/packages/avalonia-ilspy { };
-            jackett = pkgs.callPackage ./common/packages/jackett { };
+            dotnet-ef = pkgs.callPackage ./common/packages/dotnet-ef { };
+            flood = npm."@jesec/flood";
             kemono-dl = pkgs.callPackage ./common/packages/kemono-dl { };
+            livestreamdvr-net-backend = pkgs.callPackage ./common/packages/livestreamdvr-net/backend.nix { };
             lm-sensors-exporter = pkgs.callPackage ./common/packages/lm-sensors-exporter { };
+            m3u8-dl = pkgs.callPackage ./common/packages/m3u8-dl.nix { };
+            mega-sync = pkgs.callPackage ./common/packages/mega-sync { };
+            mockoon = pkgs.callPackage ./common/packages/mockoon.nix { };
             ms-dotnettools-csdevkit = pkgs.callPackage ./common/packages/ms-dotnettools.csdevkit { };
             ms-dotnettools-csharp = pkgs.callPackage ./common/packages/ms-dotnettools.csharp { };
-            flood = npm."@jesec/flood";
-            # winfonts = pkgs.callPackage ./common/packages/winfonts {};
-            discord-email-bridge = pkgs.callPackage ./common/packages/discord-email-bridge.nix { };
-            m3u8-dl = pkgs.callPackage ./common/packages/m3u8-dl.nix { };
-            mockoon = pkgs.callPackage ./common/packages/mockoon.nix { };
-            mega-sync = pkgs.callPackage ./common/packages/mega-sync { };
-            genymotion-qemu = pkgs.callPackage ./common/packages/genymotion-qemu.nix { };
-            twitch-downloader = pkgs.callPackage ./common/packages/twitch-downloader { };
-            livestreamdvr = pkgs.callPackage ./common/packages/livestreamdvr { };
-            livestreamdvr-net-backend = pkgs.callPackage ./common/packages/livestreamdvr-net/backend.nix { };
-            dotnet-ef = pkgs.callPackage ./common/packages/dotnet-ef { };
           }
         );
 

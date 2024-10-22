@@ -18,8 +18,8 @@
 
       DVR_Binaries__StreamLinkPath = lib.getExe pkgs.streamlink;
       DVR_Binaries__FfmpegPath = lib.getExe pkgs.ffmpeg;
-      DVR_Binaries__MediaInfoPath = lib.getExe pkgs.mediainfo;
-      DVR_Binaries__TwitchDownloaderCliPath = lib.getExe self.packages.${system}.twitch-downloader;
+      # DVR_Binaries__MediaInfoPath = lib.getExe pkgs.mediainfo;
+      # DVR_Binaries__TwitchDownloaderCliPath = lib.getExe self.packages.${system}.twitch-downloader;
     };
     serviceConfig = {
       User = "downloader";

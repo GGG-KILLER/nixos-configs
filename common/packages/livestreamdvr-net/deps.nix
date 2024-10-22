@@ -2,8 +2,10 @@
 # Please dont edit it manually, your changes might get overwritten!
 
 { fetchNuGet }: [
-  (fetchNuGet { pname = "Microsoft.AspNetCore.Authentication.JwtBearer"; version = "9.0.0-rc.1.24452.1"; hash = "sha256-Ew/8Q58wh/3LQtNeZv+j0ppnmJgolvH3jeyyL5wue94="; })
-  (fetchNuGet { pname = "Microsoft.AspNetCore.OpenApi"; version = "9.0.0-rc.1.24452.1"; hash = "sha256-bd5p/KD2ZquDt8C5lTEV1QhnNVjtrD858xu7Xkhwlt8="; })
+  (fetchNuGet { pname = "K4os.Compression.LZ4"; version = "1.3.8"; hash = "sha256-OmT3JwO4qpkZDL7XqiFqZCyxySj64s9t+mXcN1T+IyA="; })
+  (fetchNuGet { pname = "LinkDotNet.StringBuilder"; version = "1.21.0"; hash = "sha256-uV9aAW/KkPZprXGvxucnQ+uU03VGiwlPWLn950BF2PE="; })
+  (fetchNuGet { pname = "Microsoft.AspNetCore.Authentication.JwtBearer"; version = "9.0.0-rc.2.24474.3"; hash = "sha256-Qm2QfnhrlQKv/Qf3EtJNkcTSUucWsWv9qxYrNy2FSzQ="; })
+  (fetchNuGet { pname = "Microsoft.AspNetCore.OpenApi"; version = "9.0.0-rc.2.24474.3"; hash = "sha256-1E7rxN2pGwXlPstTVJc/nQ/ZsQXoC5fRxl40uyFZFzc="; })
   (fetchNuGet { pname = "Microsoft.IdentityModel.Abstractions"; version = "8.0.1"; hash = "sha256-zPWUKTCfGm4MWcYPU037NzezsFE1g8tEijjQkw5iooI="; })
   (fetchNuGet { pname = "Microsoft.IdentityModel.JsonWebTokens"; version = "8.0.1"; hash = "sha256-Xv9MUnjb66U3xeR9drOcSX5n2DjOCIJZPMNSKjWHo9Y="; })
   (fetchNuGet { pname = "Microsoft.IdentityModel.Logging"; version = "8.0.1"; hash = "sha256-FfwrH/2eLT521Kqw+RBIoVfzlTNyYMqlWP3z+T6Wy2Y="; })
@@ -14,8 +16,10 @@
   (fetchNuGet { pname = "Microsoft.VisualStudio.Threading"; version = "17.11.20"; hash = "sha256-yuNMLu4qKQpHcYHP2JN45u/dY8wvGHGaFFuHKizupcE="; })
   (fetchNuGet { pname = "Microsoft.VisualStudio.Threading.Analyzers"; version = "17.11.20"; hash = "sha256-mHYVKapahjHlrzeJ6JpQAtugg+Ub3IzesYSJ+UTybAU="; })
   (fetchNuGet { pname = "Microsoft.VisualStudio.Validation"; version = "17.8.8"; hash = "sha256-sB8GLRiJHX3Py7qeBUnUANiDWhyPtISon6HQs+8wKms="; })
-  (fetchNuGet { pname = "Scalar.AspNetCore"; version = "1.2.9"; hash = "sha256-aH8iLPYz7Olay7gw8mSxLy1TqBwbzkRdPeEmNokEQsg="; })
+  (fetchNuGet { pname = "Scalar.AspNetCore"; version = "1.2.18"; hash = "sha256-kTA5H1dl5fwbUTWshe3jZkRq6oJDIPJze6+vcu5cWj8="; })
   (fetchNuGet { pname = "System.IdentityModel.Tokens.Jwt"; version = "8.0.1"; hash = "sha256-hW4f9zWs0afxPbcMqCA/FAGvBZbBFSkugIOurswomHg="; })
   (fetchNuGet { pname = "TwitchLib.EventSub.Core"; version = "2.3.0"; hash = "sha256-beMyCKlD0nwWFoRkCd3vG2JvA0L2DP38zWO4FNKxuuc="; })
   (fetchNuGet { pname = "TwitchLib.EventSub.Webhooks"; version = "2.3.0"; hash = "sha256-rgWLF1pgrCThIRueFeYW5izrR4+vO0ci7CEblDWyqHc="; })
+  (fetchNuGet { pname = "ZoneTree"; version = "1.8.3"; hash = "sha256-XejAVQ+BPGW+NoNPjowM0YpQHqZS1ViGvls7maZSpWw="; })
+  (fetchNuGet { pname = "ZstdNet"; version = "1.4.5"; hash = "sha256-8ilfyR4ajq9hXTgsZQbvfFW0T00BfW5Cv77B4qKCNlw="; })
 ]
