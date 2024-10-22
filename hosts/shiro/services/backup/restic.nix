@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (lib) mkMerge mkForce;
 in
@@ -8,6 +8,47 @@ in
       allBase =
         let
           baseDir = "/zfs-main-pool/data";
+          excludeFile = pkgs.writeText "restic-excludes.txt" ''
+            *.log
+            *.pid
+            /var/lib/grafana/data/log
+            ${baseDir}/etc/Archives
+            ${baseDir}/etc/glua-mc
+            ${baseDir}/etc/ISOs
+            ${baseDir}/etc/Leaks
+            ${baseDir}/etc/phone
+            ${baseDir}/etc/random
+            ${baseDir}/etc/Reading Material/Gentoomen Library
+            ${baseDir}/etc/School/FMU
+            ${baseDir}/etc/Tools
+            ${baseDir}/h
+            !${baseDir}/h/Comics
+            !${baseDir}/h/G
+            !${baseDir}/h/Others
+            !${baseDir}/h/Patreon
+            ${baseDir}/home-assistant/.cache
+            ${baseDir}/home-assistant/.esphome/build
+            ${baseDir}/home-assistant/.platformio
+            ${baseDir}/jackett/*.txt
+            ${baseDir}/jackett/DataProtection
+            ${baseDir}/jackett/Jackett/*.txt
+            ${baseDir}/jackett/Jackett/DataProtection
+            ${baseDir}/jellyfin/data/keyframes
+            ${baseDir}/jellyfin/data/ScheduledTasks
+            ${baseDir}/jellyfin/data/subtitles
+            ${baseDir}/jellyfin/log
+            ${baseDir}/jellyfin/metadata
+            ${baseDir}/jellyfin/plugins/configurations/*/cache
+            ${baseDir}/jellyfin/transcodes
+            ${baseDir}/jellyfin/var-cache
+            ${baseDir}/qbittorrent/qbittorrent/qBittorrent/data/GeoDB
+            ${baseDir}/qbittorrent/qbittorrent/qBittorrent/data/logs
+            ${baseDir}/series
+            ${baseDir}/sonarr/asp
+            ${baseDir}/sonarr/logs
+            ${baseDir}/sonarr/MediaCover
+            ${baseDir}/sonarr/Sentry
+          '';
         in
         {
           initialize = true;
@@ -26,16 +67,7 @@ in
           ];
           extraBackupArgs = [
             "--compression max"
-            "--exclude=${baseDir}/etc/Archives"
-            "--exclude=${baseDir}/etc/random"
-            "--exclude=${baseDir}/h/G"
-            "--exclude=${baseDir}/h/OF"
-            "--exclude=${baseDir}/h/Playlists"
-            "--exclude=${baseDir}/h/R"
-            "--exclude=${baseDir}/h/T"
-            "--exclude=${baseDir}/home-assistant/.platformio"
-            "--exclude=${baseDir}/jellyfin/metadata"
-            "--exclude=${baseDir}/jellyfin/transcodes"
+            "--exclude-file=${excludeFile}"
           ];
           pruneOpts = [
             "--group-by hosts"
