@@ -7,13 +7,13 @@
 
 buildDotnetModule rec {
   pname = "livestreamdvr-net-backend";
-  version = "0-unstable-2024-10-22";
+  version = "2-unstable-2024-10-26";
 
   src = fetchFromGitHub {
     owner = "GGG-KILLER";
     repo = "LiveStreamDVR.NET";
-    rev = "e5a9a4381a118423cbec09bf1886bef058d37929";
-    hash = "sha256-E/4ZLTKf/1e+tmsl2GMSjxdQbeK8l1sJ7bdvZC6NPY8=";
+    rev = "e6887b1b5f45754769c246c65fff9b02d0ab5898";
+    hash = "sha256-L+KGZ+jdycXS4MtGzyUFCrGMIl3W4b1Oo+YnTI7mqxU=";
   };
 
   projectFile = "backend/src/LiveStreamDVR.Api.csproj";
