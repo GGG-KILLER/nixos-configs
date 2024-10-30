@@ -6,7 +6,7 @@ in
   services.prometheus = {
     enable = true;
     port = config.shiro.ports.prometheus;
-    retentionTime = "182d";
+    retentionTime = "1y";
     webExternalUrl = "https://prometheus.shiro.lan";
     scrapeConfigs = [
       {
