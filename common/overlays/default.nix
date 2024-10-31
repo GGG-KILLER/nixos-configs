@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./prometheus-node-exporter.nix
+    #./prometheus-node-exporter.nix
     ./torch.nix
   ];
 }
