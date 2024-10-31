@@ -27,7 +27,6 @@ in
       noto-fonts
       noto-fonts-extra
       noto-fonts-emoji
-      noto-fonts-cjk
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji-blob-bin
