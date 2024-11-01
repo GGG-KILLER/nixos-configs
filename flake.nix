@@ -40,6 +40,10 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
     };
+    stackpkgs = {
+      url = "github:ryze312/stackpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Inputs needed by others
     flake-utils.url = "github:numtide/flake-utils";

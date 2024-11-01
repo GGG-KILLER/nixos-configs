@@ -431,7 +431,8 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
-        "packwiz": "packwiz"
+        "packwiz": "packwiz",
+        "stackpkgs": "stackpkgs"
       }
     },
     "rust-overlay": {
@@ -458,6 +459,26 @@
       "original": {
         "owner": "oxalica",
         "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "stackpkgs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1728317073,
+        "narHash": "sha256-J9rR4pdnSb9zLJ/J3SnC7jOCq7ZowHqU3O6l9AtWK2M=",
+        "owner": "ryze312",
+        "repo": "stackpkgs",
+        "rev": "44b4b651281fa252c66496f80ea42bad2149f11e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ryze312",
+        "repo": "stackpkgs",
         "type": "github"
       }
     },

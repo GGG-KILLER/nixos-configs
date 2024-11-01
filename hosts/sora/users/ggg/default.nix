@@ -20,6 +20,7 @@ let
   dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/sdk";
 
+  audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
   agenix = inputs.agenix.packages.${system}.default;
   avalonia-ilspy = self.packages.${system}.avalonia-ilspy;
   deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
@@ -61,6 +62,7 @@ in
     home.packages =
       (with pkgs; [
         # Audio
+        audiorelay
         easyeffects
         helvum
 
