@@ -16,5 +16,6 @@
     ./minio.nix
     ./nginx.nix
     ./openspeedtest.nix
+    ./zfs.nix
   ];
 }

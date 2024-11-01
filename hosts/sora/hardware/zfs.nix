@@ -3,14 +3,15 @@
   # Unstable is needed for 6.8
   boot.zfs.package = pkgs.zfs_unstable;
 
-  # ZFS maintenance settings.
-  services.zfs.trim.enable = true;
-
   # Expand all devices on boot
   services.zfs.expandOnBoot = "all";
 
   # Enable auto-scrub
   services.zfs.autoScrub.enable = true;
+  services.zfs.autoScrub.interval = "weekly";
+
+  # Enable auto-trim
+  services.zfs.trim.enable = true;
 
   # Enable auto-snapshot
   services.zfs.autoSnapshot = {

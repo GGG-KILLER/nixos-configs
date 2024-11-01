@@ -5,6 +5,10 @@
 
   # Enable auto-scrub
   services.zfs.autoScrub.enable = true;
+  services.zfs.autoScrub.interval = "weekly";
+
+  # Enable auto-trim
+  services.zfs.trim.enable = true;
 
   # Enable auto-snapshot
   services.zfs.autoSnapshot.enable = true;
