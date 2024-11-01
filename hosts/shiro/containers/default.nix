@@ -61,6 +61,9 @@ with lib;
                 # Time for the container to start. In case of a timeout, the container processes get killed.
                 inherit (containerOptions) timeoutStartSec;
 
+                # Enable adding extra flags to the systemd-nspawn command line.
+                inherit (containerOptions) extraFlags;
+
                 builtinMounts = mkOption {
                   description = "Which of the builtin mounts should be mounted into this container";
                   type = types.submodule {
@@ -201,7 +204,7 @@ with lib;
           # This can be overriden by just defining it.
           autoStart = mkDefault true;
           privateNetwork = true;
-          inherit (cfg) enableTun ephemeral timeoutStartSec;
+          inherit (cfg) enableTun ephemeral timeoutStartSec extraFlags;
 
           # External LAN
           macvlans = [ "enp6s0" ];
