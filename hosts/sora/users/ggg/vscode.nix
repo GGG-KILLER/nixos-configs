@@ -10,8 +10,8 @@ let
   inherit (lib) getExe;
   readJSON = path: fromJSON (readFile path);
   settings = readJSON ./vscode/settings.json;
-  csdevkit-vscode-ext = self.packages.${system}.ms-dotnettools-csdevkit;
-  csharp-vscode-ext = self.packages.${system}.ms-dotnettools-csharp;
+  csdevkit-vscode-ext = self.packages.${system}."ms-dotnettools.csdevkit";
+  csharp-vscode-ext = self.packages.${system}."ms-dotnettools.csharp";
 in
 {
   home-manager.users.ggg = {

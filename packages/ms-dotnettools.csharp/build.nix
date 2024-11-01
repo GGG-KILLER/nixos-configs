@@ -8,5 +8,5 @@
   },
 }:
 {
-  out = pkgs.callPackage ./default.nix { };
+  out = pkgs.callPackage ./package.nix { };
 }

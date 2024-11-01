@@ -8,5 +8,5 @@
   },
 }:
 {
-  backend = pkgs.callPackage ./backend.nix { };
+  backend = pkgs.callPackage ./package.nix { };
 }

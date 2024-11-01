@@ -174,20 +174,14 @@
         forAllSystems (
           pkgs:
           let
-            npm = pkgs.callPackage ./common/packages/npm { };
+            packages = pkgs.lib.packagesFromDirectoryRecursive {
+              inherit (pkgs) callPackage;
+              directory = ./packages;
+            };
           in
-          {
-            avalonia-ilspy = pkgs.callPackage ./common/packages/avalonia-ilspy { };
-            dotnet-ef = pkgs.callPackage ./common/packages/dotnet-ef { };
-            flood = npm."@jesec/flood";
-            kemono-dl = pkgs.callPackage ./common/packages/kemono-dl { };
-            livestreamdvr-net-backend = pkgs.callPackage ./common/packages/livestreamdvr-net/backend.nix { };
-            lm-sensors-exporter = pkgs.callPackage ./common/packages/lm-sensors-exporter { };
-            m3u8-dl = pkgs.callPackage ./common/packages/m3u8-dl.nix { };
-            mega-sync = pkgs.callPackage ./common/packages/mega-sync { };
-            mockoon = pkgs.callPackage ./common/packages/mockoon.nix { };
-            ms-dotnettools-csdevkit = pkgs.callPackage ./common/packages/ms-dotnettools.csdevkit { };
-            ms-dotnettools-csharp = pkgs.callPackage ./common/packages/ms-dotnettools.csharp { };
+          (pkgs.lib.filterAttrs (name: value: name != "npm") packages)
+          // {
+            flood = packages.npm."@jesec/flood";
           }
         );
 
