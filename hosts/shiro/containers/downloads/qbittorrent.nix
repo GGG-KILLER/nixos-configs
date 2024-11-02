@@ -44,6 +44,10 @@
       };
     };
 
+    extraFlags = [
+      "--property=MemoryMax=2G"
+    ];
+
     config =
       {
         config,

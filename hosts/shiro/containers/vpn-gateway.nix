@@ -18,6 +18,10 @@ in
       };
     };
 
+    extraFlags = [
+      "--property=MemoryMax=512M"
+    ];
+
     config =
       { pkgs, ... }:
       let

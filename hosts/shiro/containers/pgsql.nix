@@ -39,6 +39,10 @@ let
           };
         };
 
+        extraFlags = [
+          "--property=MemoryMax=${(if env == "prd" then "2G" else "1G")}"
+        ];
+
         config =
           {
             lib,

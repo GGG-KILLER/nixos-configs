@@ -68,6 +68,10 @@ in
         ) gpuDevs
       ));
 
+    extraFlags = [
+      "--property=MemoryMax=1G"
+    ];
+
     config =
       {
         config,

@@ -41,6 +41,10 @@
       };
     };
 
+    extraFlags = [
+      "--property=MemoryMax=256M"
+    ];
+
     config =
       { pkgs, ... }:
       {
