@@ -11,7 +11,7 @@
     ./cloudflared.nix
     ./cockpit.nix
     ./docker-registry.nix
-    ./homarr.nix
+    # ./homarr.nix
     ./home-assistant.nix
     ./minio.nix
     ./nginx.nix
