@@ -63,6 +63,10 @@ in
     ggg
     shiro
   ];
+  "shiro/danbooru.env.age".publicKeys = [
+    ggg
+    shiro
+  ];
 
   # Shiro - Wireguard
   "shiro/wireguard/private_key.age".publicKeys = [

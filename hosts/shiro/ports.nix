@@ -61,6 +61,8 @@ in
 
     prometheus-exporter = 1050;
 
+    danbooru = 1051;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;

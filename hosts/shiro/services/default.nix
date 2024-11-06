@@ -5,6 +5,7 @@
     ./databases
     ./downloads
     ./gaming
+    ./media/danbooru
     ./monitoring
     ./nix-pr-tracker
     ./security
