@@ -1,7 +1,7 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   boot.zfs.package = pkgs.zfs_unstable;
-  boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_11;
   boot.kernelParams = [
     "zfs.zfs_arc_max=${toString (8 * 1024 * 1024 * 1024)}"
     "nohibernate"
