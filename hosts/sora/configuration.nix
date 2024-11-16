@@ -59,7 +59,8 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
+  services.openssh.openFirewall = false; # I don't use SSH, this is only so that secrets have a host key.
 
   # TODO: Enable firewall
   # Open ports in the firewall.
