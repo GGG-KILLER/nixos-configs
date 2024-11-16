@@ -64,8 +64,8 @@
 
   # TODO: Enable firewall
   # Open ports in the firewall.
-  networking.firewall.allowedTCPPorts = [ 6379 ];
-  networking.firewall.allowedUDPPorts = [ ];
+  networking.firewall.allowedTCPPorts = [ 3389 6379 ];
+  networking.firewall.allowedUDPPorts = [ 3389 ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
