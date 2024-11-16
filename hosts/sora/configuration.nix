@@ -35,8 +35,8 @@
   # Enable CUDA support for everything
   # nixpkgs.config.cudaSupport = true; # TODO: Re-enable after NixOS/nixpkgs#314691 lands on unstable
 
-  # Enable broken stuff (ZFS on 6.11)
-  nixpkgs.config.allowBroken = true;
+  # Enable broken stuff (Reason)
+  # nixpkgs.config.allowBroken = true;
 
   networking = {
     hostName = "sora";
