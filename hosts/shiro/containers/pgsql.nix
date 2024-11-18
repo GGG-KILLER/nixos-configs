@@ -61,20 +61,14 @@ let
             ];
 
             services.pgadmin = {
-              # enable = true;
+              enable = true;
               initialEmail = "gggkiller2@gmail.com";
               initialPasswordFile = "/secrets/pgadmin-pass";
             };
-            systemd.services.pgadmin = {
-              after = [ "postgresql.service" ];
-              wants = [ "postgresql.service" ];
-              requires = [ "postgresql.service" ];
+            systemd.services.pgadmin.serviceConfig = {
+              Restart = "always";
+              RestartSec = "5s";
             };
-
-            systemd.tmpfiles.rules = [
-              "d '/var/lib/pgadmin' 0755 pgadmin pgadmin"
-              "d '/var/log/pgadmin' 0755 pgadmin pgadmin"
-            ];
 
             services.postgresql = {
               enable = true;
