@@ -51,17 +51,18 @@ in
           valentjn.vscode-ltex
         ])
         ++ (with pkgs.vscode-marketplace; [
-          arrterian.nix-env-selector
           christopherstyles.html-entities
           cschlosser.doxdocgen
           dbaeumer.vscode-eslint
           eamodio.gitlens
           editorconfig.editorconfig
           james-yu.latex-workshop
+          jashoo.dotnetinsights
           jnoortheen.nix-ide
           l13rary.l13-diff
           mhutchie.git-graph
           mikestead.dotenv
+          mkhl.direnv
           ms-azuretools.vscode-docker
           ms-vscode-remote.remote-containers
           ms-vscode.powershell
@@ -69,9 +70,8 @@ in
           omkov.vscode-ebnf
           pkief.material-icon-theme
           redhat.vscode-yaml
-          wix.vscode-import-cost
-          jashoo.dotnetinsights
           tamasfe.even-better-toml
+          wix.vscode-import-cost
         ]);
     };
 
