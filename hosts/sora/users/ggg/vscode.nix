@@ -40,11 +40,13 @@ in
           csharp-vscode-ext
         ]
         ++ (with pkgs.vscode-extensions; [
+          dart-code.dart-code
+          dart-code.flutter
           foxundermoon.shell-format
-          rust-lang.rust-analyzer
-          # ms-python.python # TODO: Add again once hash mismatch gets fixed.
+          # ms-python.python
           ms-toolsai.jupyter
           ms-vscode-remote.remote-ssh
+          rust-lang.rust-analyzer
           timonwong.shellcheck
           valentjn.vscode-ltex
         ])
