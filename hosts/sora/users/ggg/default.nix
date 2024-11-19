@@ -200,7 +200,9 @@ in
     programs = {
       gh = {
         enable = true;
+        gitCredentialHelper.enable = true;
         settings.editor = "${getExe pkgs.vscode} --wait";
+        extensions = with pkgs; [ gh-poi ];
       };
       git = {
         enable = true;
@@ -210,8 +212,6 @@ in
         userEmail = "gggkiller2@gmail.com";
         extraConfig = {
           init.defaultBranch = "main";
-          credential.helper = "${lib.getExe pkgs.git-credential-manager}";
-          credential.credentialStore = "secretservice";
           core.editor = "${getExe pkgs.vscode} --wait";
         };
       };
