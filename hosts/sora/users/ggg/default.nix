@@ -215,7 +215,13 @@ in
           core.editor = "${getExe pkgs.vscode} --wait";
         };
       };
-      tealdeer.enable = true;
+      tealdeer = {
+        enable = true;
+        settings.updates = {
+          auto_update = true;
+          auto_update_interval_hours = 72;
+        };
+      };
       zsh.oh-my-zsh.plugins = [
         "copybuffer"
         "copyfile"
