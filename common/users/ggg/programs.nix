@@ -56,6 +56,11 @@
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
         enableVteIntegration = true;
+        history = {
+          append = true;
+          expireDuplicatesFirst = true;
+          ignoreAllDups = true;
+        };
         oh-my-zsh = {
           enable = true;
           plugins = [
