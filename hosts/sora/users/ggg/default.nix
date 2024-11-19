@@ -269,6 +269,12 @@ in
         enableBashIntegration = true;
         enableZshIntegration = true;
         nix-direnv.enable = true;
+        config = {
+          global = {
+            bash_path = lib.getExe pkgs.bash;
+            strict_env = true;
+          };
+        };
       };
     };
 
