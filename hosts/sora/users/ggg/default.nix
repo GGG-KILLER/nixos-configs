@@ -88,7 +88,6 @@ in
 
           # Android
           android-tools
-          android-studio
 
           # Coding
           avalonia-ilspy
