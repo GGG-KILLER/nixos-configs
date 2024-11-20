@@ -68,8 +68,17 @@
             "encode64"
             "sudo"
             "timer"
+            "tmux"
           ];
-          theme = "candy";
+          extraConfig = ''
+            ZSH_TMUX_FIXTERM=true
+            ZSH_TMUX_UNICODE=true
+            if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" && "$TERM_PROGRAM" != "vscode" && "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]] && \
+              [[ -n "$SSH_TTY" ]]; then
+              ZSH_TMUX_DEFAULT_SESSION_NAME="''${USER}@$(awk '{print $1}'<<<"$SSH_CLIENT")"
+              ZSH_TMUX_AUTOSTART=true
+            fi
+          '';
         };
       };
     };
