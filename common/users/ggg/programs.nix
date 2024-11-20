@@ -63,6 +63,7 @@
         };
         oh-my-zsh = {
           enable = true;
+          theme = "dpoggi";
           plugins = [
             "encode64"
             "sudo"
