@@ -1,4 +1,7 @@
 { config, ... }:
+let
+  version = "2024.10.3";
+in
 {
   systemd.services."${config.virtualisation.oci-containers.backend}-authentik-network" =
     let
@@ -74,7 +77,7 @@
       };
 
       authentik-server = {
-        image = "ghcr.io/goauthentik/server:2024.8.2";
+        image = "ghcr.io/goauthentik/server:${version}";
         cmd = [ "server" ];
         environment = authentikEnv;
         environmentFiles = [ config.age.secrets."authentik/authentik.env".path ];
@@ -95,7 +98,7 @@
       };
 
       authentik-worker = {
-        image = "ghcr.io/goauthentik/server:2024.8.2";
+        image = "ghcr.io/goauthentik/server:${version}";
         user = "root:root";
         cmd = [ "worker" ];
         environment = authentikEnv;
