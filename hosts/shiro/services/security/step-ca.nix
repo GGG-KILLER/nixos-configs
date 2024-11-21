@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 let
   inherit (lib) mkForce flip mapAttrs';
   inherit (config.age) secrets;
@@ -20,6 +20,10 @@ in
       proxyPass = "https://127.0.0.1:${toString config.shiro.ports.step-ca}";
       recommendedProxySettings = true;
     };
+    locations."= /bundle.crt".alias = pkgs.writeText "bundle.crt" ''
+      ${config.my.secrets.pki.root-crt}
+      ${config.my.secrets.pki.intermediate-crt}
+    '';
     locations."= /root.crt".alias = config.my.secrets.pki.root-crt-path;
     locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;
   };
