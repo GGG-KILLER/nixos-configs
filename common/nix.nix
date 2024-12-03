@@ -1,7 +1,7 @@
 { inputs, pkgs, ... }:
 {
   nix = {
-    package = pkgs.nixVersions.nix_2_21;
+    package = pkgs.nixVersions.latest;
 
     # Flakes
     settings.experimental-features = [
@@ -10,7 +10,6 @@
       "cgroups"
       "flakes"
       "nix-command"
-      "repl-flake"
     ];
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
