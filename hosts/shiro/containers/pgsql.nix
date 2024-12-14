@@ -113,8 +113,8 @@ let
                 DateStyle = "ISO, YMD"; # default: "ISO, MDY"
                 TimeZone = "America/Sao_Paulo"; # default: "GMT"
               };
-              extraPlugins = with pgsql.pkgs; [
-                smlar
+              extensions = with pgsql.pkgs; [
+                # smlar (broken)
                 pgtap
                 pg_topn
                 periods

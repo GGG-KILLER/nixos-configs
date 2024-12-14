@@ -14,8 +14,6 @@ let
     combinePackages [
       sdk_9_0
       sdk_8_0
-      sdk_7_0
-      sdk_6_0
     ];
   dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/sdk";
@@ -90,7 +88,7 @@ in
           android-tools
 
           # Coding
-          avalonia-ilspy
+          # avalonia-ilspy # TODO: re-add when it no longer depends on .NET 6
           corepack_latest
           docker-compose
           dotnet-ef
@@ -287,15 +285,15 @@ in
 
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
     xdg.desktopEntries = {
-      ilspy = {
-        name = "ILSpy";
-        exec = getExe avalonia-ilspy;
-        categories = [
-          "Development"
-          "Debugger"
-          "Viewer"
-        ];
-      };
+      # ilspy = {
+      #   name = "ILSpy";
+      #   exec = getExe avalonia-ilspy;
+      #   categories = [
+      #     "Development"
+      #     "Debugger"
+      #     "Viewer"
+      #   ];
+      # };
     };
 
     systemd.user.services.jellyfin-mpv-shim = {
