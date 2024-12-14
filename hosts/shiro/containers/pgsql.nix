@@ -52,7 +52,7 @@ let
           }:
           with lib;
           let
-            pgsql = pkgs.postgresql_14;
+            pgsql = pkgs.postgresql_17;
           in
           {
             i18n.supportedLocales = [
@@ -74,6 +74,7 @@ let
               enable = true;
               package = pgsql;
               dataDir = "/mnt/pgsql";
+              enableJIT = true;
               enableTCPIP = true;
               authentication = mkForce ''
                 # TYPE  DATABASE        USER            ADDRESS                 METHOD
