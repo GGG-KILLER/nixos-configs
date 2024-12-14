@@ -4,12 +4,10 @@ let
 
   sora = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6b2z/jMnPSYXSYYJ6NBY77m0bofpVceoArRzJHQ+Nc";
   shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc";
-  vpn-proxy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXJsB3idnONLnk1X/Ga2V0HHCJhjqptMbvdZVJji3F/";
   f-ggg-dev = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ527bVSbg3fMxUIyMrXhmyo0A/motmI3SZY6sMLk7C0";
   systems = [
     sora
     shiro
-    vpn-proxy
     f-ggg-dev
   ];
 
@@ -118,27 +116,5 @@ in
   "shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age".publicKeys = [
     ggg
     shiro
-  ];
-
-  # VPN Proxy
-  "vpn-proxy/wireguard/private_key.age".publicKeys = [
-    ggg
-    vpn-proxy
-  ];
-  "vpn-proxy/wireguard/wing_psk.age".publicKeys = [
-    ggg
-    vpn-proxy
-  ];
-  "vpn-proxy/wireguard/ggg_psk.age".publicKeys = [
-    ggg
-    vpn-proxy
-  ];
-  "vpn-proxy/wireguard/spar_ios_psk.age".publicKeys = [
-    ggg
-    vpn-proxy
-  ];
-  "vpn-proxy/wireguard/spar_pc1_psk.age".publicKeys = [
-    ggg
-    vpn-proxy
   ];
 }

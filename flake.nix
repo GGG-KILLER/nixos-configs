@@ -94,7 +94,6 @@
       nixosConfigurations = {
         sora = mkConfig "sora";
         shiro = mkConfig "shiro";
-        vpn-proxy = mkConfig "vpn-proxy";
         f-ggg-dev = mkConfig "f.ggg.dev";
         live-cd-gnome = lib.nixosSystem {
           inherit system;
@@ -136,15 +135,6 @@
             sshUser = "root";
           };
           confirmTimeout = 300;
-        };
-        vpn-proxy = {
-          hostname = "vpn-proxy.ggg.dev";
-          fastConnection = false;
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.vpn-proxy;
-            sshUser = "root";
-          };
         };
         f-ggg-dev = {
           hostname = "f.ggg.dev";

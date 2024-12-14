@@ -7,7 +7,7 @@ declare -a hosts
 if [ $# -gt 0 ]; then
     hosts=("$@")
 else
-    hosts=(shiro.lan f.ggg.dev vpn-proxy.ggg.dev)
+    hosts=(shiro.lan f.ggg.dev)
 fi
 users=(ggg root)
 
