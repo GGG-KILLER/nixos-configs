@@ -89,8 +89,6 @@
         };
     in
     {
-      inherit inputs;
-
       nixosConfigurations = {
         sora = mkConfig "sora";
         shiro = mkConfig "shiro";
