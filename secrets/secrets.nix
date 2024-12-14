@@ -39,19 +39,7 @@ in
     sora
     shiro
   ];
-  "shiro/mnn-server.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/valheim-server.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
   "shiro/minio.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/statping.env.age".publicKeys = [
     ggg
     shiro
   ];
@@ -120,36 +108,8 @@ in
     shiro
   ];
 
-  # Shiro - MongoDB
-  "shiro/mongodb/dev.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/mongodb/prd.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
-  # Shiro - Pterodactyl
-  "shiro/pterodactyl/db.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/pterodactyl/panel.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
   # Shiro - Authentik
   "shiro/authentik/authentik.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/authentik/ldap-outpost.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/authentik/radius-outpost.env.age".publicKeys = [
     ggg
     shiro
   ];

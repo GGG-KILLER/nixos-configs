@@ -1,4 +1,0 @@
-{ ... }:
-{
-  imports = [ ./mongodb.nix ];
-}

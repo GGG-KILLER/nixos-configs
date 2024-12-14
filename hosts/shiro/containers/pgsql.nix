@@ -150,10 +150,10 @@ let
 in
 {
   config = lib.mkMerge [
-    (mkPgsql {
-      env = "dev";
-      ip = "192.168.2.19"; # ipgen -n 192.168.2.0/24 pgsql-dev
-    })
+    # (mkPgsql {
+    #   env = "dev";
+    #   ip = "192.168.2.19"; # ipgen -n 192.168.2.0/24 pgsql-dev
+    # })
     (mkPgsql {
       env = "prd";
       ip = "192.168.2.241"; # ipgen -n 192.168.2.0/24 pgsql-prd

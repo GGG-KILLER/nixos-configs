@@ -69,9 +69,6 @@ in
     vallheimUDP_B = 2457;
     vallheimUDP_C = 2458;
 
-    mongo-dev = 27017;
-    mongo-prd = 27018;
-
     sonarr = 8989;
 
     mqtt-idk = 9001;

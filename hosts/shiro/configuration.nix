@@ -6,15 +6,11 @@
     ./users
     ./boot.nix
     ./hardware-configuration.nix
-    ./headless.nix
-    # ./journald.nix
     ./nat.nix
     ./networking.nix
-    ./overrides.nix
     ./ports.nix
     ./secrets.nix
     ./store.nix
-    ./users.nix
     ./video.nix
     ./virtualisation.nix
   ];
@@ -32,6 +28,15 @@
   # Firmware
   services.fwupd.enable = true;
   hardware.cpu.amd.updateMicrocode = true;
+
+  # Since we can't manually respond to a panic, just reboot.
+  boot.kernelParams = [
+    "panic=1"
+    "boot.panic_on_fail"
+  ];
+
+  # Being headless, we don't need a GRUB splash image.
+  boot.loader.grub.splashImage = null;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

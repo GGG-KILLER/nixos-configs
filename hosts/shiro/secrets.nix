@@ -3,10 +3,7 @@
   age.secrets = {
     backup-password.file = ../../secrets/shiro/backup_password.age;
     backup-envfile.file = ../../secrets/shiro/backup_envfile.age;
-    "mnn-server.env".file = ../../secrets/shiro/mnn-server.env.age;
-    "valheim-server.env".file = ../../secrets/shiro/valheim-server.env.age;
     "minio.env".file = ../../secrets/shiro/minio.env.age;
-    "statping.env".file = ../../secrets/shiro/statping.env.age;
     "netprobe.env".file = ../../secrets/shiro/netprobe.env.age;
     "danbooru.env".file = ../../secrets/shiro/danbooru.env.age;
     pr-tracker-token.file = ../../secrets/shiro/pr-tracker-token.age;
@@ -17,12 +14,6 @@
     wireguard-coffee-psk.file = ../../secrets/shiro/wireguard/coffee_psk.age;
     wireguard-coffee2-psk.file = ../../secrets/shiro/wireguard/coffee2_psk.age;
     wireguard-night-psk.file = ../../secrets/shiro/wireguard/night_psk.age;
-
-    "pterodactyl/db.env".file = ../../secrets/shiro/pterodactyl/db.env.age;
-    "pterodactyl/panel.env".file = ../../secrets/shiro/pterodactyl/panel.env.age;
-
-    "mongodb/dev.env".file = ../../secrets/shiro/mongodb/dev.env.age;
-    "mongodb/prd.env".file = ../../secrets/shiro/mongodb/prd.env.age;
 
     "cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json" = {
       file = ../../secrets/shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age;
@@ -66,12 +57,6 @@
     "authentik/authentik.env" = {
       file = ../../secrets/shiro/authentik/authentik.env.age;
       path = "/run/container-secrets/sso/authentik.env";
-      # We can't symlink as the container won't be able to follow it.
-      symlink = false;
-    };
-    "authentik/ldap-outpost.env" = {
-      file = ../../secrets/shiro/authentik/ldap-outpost.env.age;
-      path = "/run/container-secrets/sso/ldap-outpost.env";
       # We can't symlink as the container won't be able to follow it.
       symlink = false;
     };

@@ -3,10 +3,6 @@
   services.prometheus.exporters.node = {
     enable = true;
     port = config.shiro.ports.prometheus-node-exporter;
-    enabledCollectors = [
-      "systemd"
-      "processes"
-    ];
   };
 
   services.prometheus.scrapeConfigs = [

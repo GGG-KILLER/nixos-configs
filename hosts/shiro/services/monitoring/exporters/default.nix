@@ -8,7 +8,6 @@ in
     ./node-exporter-smartmon.nix
     ./node.nix
     ./openwrt.nix
-    ./systemd.nix
     ./zfs-exporter.nix
   ];
 
