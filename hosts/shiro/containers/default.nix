@@ -204,7 +204,12 @@ with lib;
           # This can be overriden by just defining it.
           autoStart = mkDefault true;
           privateNetwork = true;
-          inherit (cfg) enableTun ephemeral timeoutStartSec extraFlags;
+          inherit (cfg)
+            enableTun
+            ephemeral
+            timeoutStartSec
+            extraFlags
+            ;
 
           # External LAN
           macvlans = [ "enp6s0" ];

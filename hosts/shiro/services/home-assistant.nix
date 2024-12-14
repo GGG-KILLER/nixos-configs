@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   # For debugging
   environment.systemPackages = with pkgs; [ zigpy-cli ];
