@@ -64,11 +64,13 @@
       ...
     }@inputs:
     let
+      inherit (nixpkgs) lib;
+
       system = "x86_64-linux";
       nur-no-pkgs = import inputs.nur { nurpkgs = nixpkgs.legacyPackages.${system}; };
       mkConfig =
         host:
-        nixpkgs.lib.nixosSystem {
+        lib.nixosSystem {
           inherit system;
 
           specialArgs = {
@@ -94,7 +96,7 @@
         shiro = mkConfig "shiro";
         vpn-proxy = mkConfig "vpn-proxy";
         f-ggg-dev = mkConfig "f.ggg.dev";
-        live-cd-gnome = nixpkgs.lib.nixosSystem {
+        live-cd-gnome = lib.nixosSystem {
           inherit system;
 
           specialArgs = {
@@ -107,7 +109,7 @@
             ./media/live-cd-gnome.nix
           ];
         };
-        live-cd-minimal = nixpkgs.lib.nixosSystem {
+        live-cd-minimal = lib.nixosSystem {
           inherit system;
 
           specialArgs = {
@@ -159,7 +161,7 @@
         let
           forAllSystems =
             function:
-            nixpkgs.lib.genAttrs
+            lib.genAttrs
               [
                 "x86_64-linux"
                 "aarch64-linux"
@@ -190,6 +192,11 @@
           }
         );
 
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
+      checks =
+        (builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib)
+        // (lib.mapAttrs' (name: value: {
+          name = "nixos-${name}";
+          inherit value;
+        }) self.nixosConfigurations);
     };
 }
