@@ -95,6 +95,7 @@ in
 
       interfaces.enp6s0 = {
         ipv4.addresses = [ ];
+        wakeOnLan.enable = true;
       };
 
       macvlans.mv-enp6s0-host = {
