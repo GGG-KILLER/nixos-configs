@@ -8,7 +8,7 @@
 
   # ZFS Flags
   boot.kernelParams = [
-    "zfs.zfs_arc_max=12884901888"
+    "zfs.zfs_arc_max=${toString (16 * 1024 * 1024 * 1024)}"
     "elevator=none"
     "nohibernate"
   ];
