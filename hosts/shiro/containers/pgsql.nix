@@ -111,8 +111,12 @@ let
               enable = true;
               initialEmail = "gggkiller2@gmail.com";
               initialPasswordFile = "/secrets/pgadmin-pass";
+              settings = {
+                DATA_DIR = "/mnt/pgsql/pgadmin4/";
+              };
             };
             systemd.services.pgadmin.serviceConfig = {
+              ReadWritePaths = [ "/mnt/pgsql/pgadmin4/" ];
               Restart = "always";
               RestartSec = "5s";
             };
