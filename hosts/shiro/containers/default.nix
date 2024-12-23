@@ -10,8 +10,8 @@
 with lib;
 {
   imports = [
-    ./downloads
-    ./misc
+    # ./downloads # TODO: Re-enable when job again.
+    # ./misc # TODO: Re-enable when job again.
     ./streaming
     ./pgsql.nix
     ./vpn-gateway.nix
