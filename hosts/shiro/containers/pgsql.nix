@@ -60,6 +60,53 @@ let
               "pt_BR.UTF-8/UTF-8"
             ];
 
+            # NOTE: Use when upgrading between major versions.
+            # environment.systemPackages = [
+            #   (
+            #     let
+            #       # XXX specify the postgresql package you'd like to upgrade to.
+            #       # Do not forget to list the extensions you need.
+            #       newPostgres = pkgs.postgresql_17.withJIT.withPackages (pp: [
+            #         # smlar (broken)
+            #         pp.pgtap
+            #         pp.pg_topn
+            #         pp.periods
+            #         pp.pg_rational
+            #       ]);
+            #       cfg = config.services.postgresql;
+            #     in
+            #     pkgs.writeScriptBin "upgrade-pg-cluster" ''
+            #       set -eux
+            #       # XXX it's perhaps advisable to stop all services that depend on postgresql
+            #       systemctl stop postgresql
+
+            #       export NEWDATA="/mnt/pgsql/${newPostgres.psqlSchema}"
+
+            #       export NEWBIN="${newPostgres}/bin"
+
+            #       export OLDDATA="${cfg.dataDir}"
+            #       export OLDBIN="${
+            #         cfg.package.withJIT.withPackages (pp: [
+            #           # smlar (broken)
+            #           pp.pgtap
+            #           pp.pg_topn
+            #           pp.periods
+            #           pp.pg_rational
+            #         ])
+            #       }/bin"
+
+            #       install -d -m 0700 -o postgres -g postgres "$NEWDATA"
+            #       cd "$NEWDATA"
+            #       sudo -u postgres $NEWBIN/initdb -D "$NEWDATA" ${lib.escapeShellArgs cfg.initdbArgs}
+
+            #       sudo -u postgres $NEWBIN/pg_upgrade \
+            #         --old-datadir "$OLDDATA" --new-datadir "$NEWDATA" \
+            #         --old-bindir $OLDBIN --new-bindir $NEWBIN \
+            #         "$@"
+            #     ''
+            #   )
+            # ];
+
             services.pgadmin = {
               enable = true;
               initialEmail = "gggkiller2@gmail.com";
@@ -73,7 +120,7 @@ let
             services.postgresql = {
               enable = true;
               package = pgsql;
-              dataDir = "/mnt/pgsql";
+              dataDir = "/mnt/pgsql/${pgsql.psqlSchema}";
               enableJIT = true;
               enableTCPIP = true;
               authentication = mkForce ''
