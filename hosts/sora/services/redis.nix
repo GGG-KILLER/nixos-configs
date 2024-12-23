@@ -3,7 +3,7 @@
   services.redis.servers.workvm = {
     enable = true;
 
-    bind = "0.0.0.0";
+    bind = "192.168.122.1";
     port = 6379;
 
     settings = {

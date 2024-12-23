@@ -43,10 +43,6 @@
     hostId = "6967af45";
     enableIPv6 = false; # No ISP support.
 
-    useDHCP = false;
-    bridges."br-lan".interfaces = [ "enp5s0" ];
-    interfaces."br-lan".useDHCP = true;
-
     nameservers = [ "192.168.1.1" ];
   };
 
