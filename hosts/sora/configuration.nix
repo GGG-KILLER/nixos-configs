@@ -33,7 +33,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable CUDA support for everything
-  # nixpkgs.config.cudaSupport = true; # TODO: Re-enable after NixOS/nixpkgs#314691 lands on unstable
+  nixpkgs.config.cudaSupport = true;
 
   # Enable broken stuff (Reason)
   # nixpkgs.config.allowBroken = true;
@@ -58,7 +58,6 @@
   services.openssh.enable = true;
   services.openssh.openFirewall = false; # I don't use SSH, this is only so that secrets have a host key.
 
-  # TODO: Enable firewall
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [
     3389
