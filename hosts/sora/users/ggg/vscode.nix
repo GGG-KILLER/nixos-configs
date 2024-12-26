@@ -18,6 +18,9 @@ in
     programs.vscode = {
       enable = true;
       package = pkgs.vscode;
+
+      enableUpdateCheck = false;
+      enableExtensionUpdateCheck = false;
       userSettings = settings // {
         "powershell.powerShellAdditionalExePaths" = {
           "PowerShell Core 7 (x64)" = getExe pkgs.powershell;
@@ -33,8 +36,10 @@ in
         "nix.formatterPath" = getExe pkgs.nixfmt-rfc-style;
         "nix.serverSettings"."nixd"."formatting"."command" = [ (getExe pkgs.nixfmt-rfc-style) ];
       };
-      extensions =
 
+      # Only install extensions through nix.
+      mutableExtensionsDir = false;
+      extensions =
         [
           # C# Development
           csdevkit-vscode-ext
