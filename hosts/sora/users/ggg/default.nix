@@ -28,7 +28,7 @@ let
   kemono-dl = self.packages.${system}.kemono-dl;
   m3u8-dl = self.packages.${system}.m3u8-dl;
   mockoon = self.packages.${system}.mockoon;
-  xca-stable = inputs.nixpkgs-stable.legacyPackages.${system}.xca;
+  xca-stable = pkgs.xca;
 
   r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
     version = "3.1.50";

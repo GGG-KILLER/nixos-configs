@@ -13,7 +13,6 @@
     ];
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
-      nixpkgs-stable.flake = inputs.nixpkgs-stable;
       nur.flake = inputs.nur;
       home-manager.flake = inputs.home-manager;
     };
@@ -21,7 +20,6 @@
     # Path Things
     nixPath = [
       "nixpkgs=${inputs.nixpkgs}"
-      "nixpkgs-stable=${inputs.nixpkgs-stable}"
       "nur=${inputs.nur}"
       "home-manager=${inputs.home-manager}"
     ];
