@@ -4,30 +4,29 @@
 {
   config,
   lib,
+  pkgs,
   modulesPath,
   ...
 }:
+
 {
-  imports = [ (modulesPath + "/profiles/qemu-guest.nix") ];
+  imports = [
+    (modulesPath + "/profiles/qemu-guest.nix")
+  ];
 
   boot.initrd.availableKernelModules = [
     "ata_piix"
     "uhci_hcd"
-    "vmw_pvscsi"
-    "xen_blkfront"
+    "virtio_pci"
+    "virtio_scsi"
+    "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "nvme" ];
-  boot.kernelModules = [ ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  boot.loader.grub = {
-    efiSupport = true;
-    efiInstallAsRemovable = true;
-    device = "nodev";
-  };
-
   fileSystems."/" = {
-    device = "/dev/sda1";
+    device = "/dev/disk/by-uuid/3d99df39-94d4-44b5-9419-0aac0602beda";
     fsType = "ext4";
   };
 
@@ -38,11 +37,14 @@
 
   swapDevices = [ ];
 
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = lib.mkDefault false;
-  networking.interfaces.ens3.useDHCP = lib.mkDefault true;
+  # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
+  # (the default) this is the recommended approach. When using systemd-networkd it's
+  # still possible to use this option, but it's recommended to use it in conjunction
+  # with explicit per-interface declarations with `networking.interfaces.<interface>.useDHCP`.
+  networking.useDHCP = lib.mkDefault true;
+  # networking.interfaces.ens3.useDHCP = lib.mkDefault true;
+  # networking.interfaces.podman0.useDHCP = lib.mkDefault true;
+  # networking.interfaces.veth0.useDHCP = lib.mkDefault true;
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

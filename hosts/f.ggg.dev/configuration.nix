@@ -9,6 +9,12 @@ in
     ./store.nix
   ];
 
+  boot.loader.grub = {
+    efiSupport = true;
+    efiInstallAsRemovable = true;
+    device = "nodev";
+  };
+
   networking.hostName = "f"; # Define your hostname.
   networking.domain = "ggg.dev";
 
