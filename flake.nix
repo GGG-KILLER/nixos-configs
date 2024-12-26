@@ -35,7 +35,13 @@
       url = "github:packwiz/packwiz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ipgen-cli.url = "github:ipgen/cli";
+    ipgen-cli = {
+      url = "github:ipgen/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.crane.follows = "crane";
+      inputs.fenix.follows = "fenix-ipgen-cli";
+    };
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,10 +54,21 @@
     };
 
     # Inputs needed by others
+    crane = {
+      url = "github:ipetkov/crane/8b08e96c9af8c6e3a2b69af5a7fa168750fcf88e";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.flake-compat.follows = "flake-compat";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     flake-compat = {
       url = "github:edolstra/flake-compat";
       flake = false;
+    };
+    fenix-ipgen-cli = {
+      url = "github:nix-community/fenix/cc13ba51f1a3b8eaa4c03fbe46d029effbbcb3c1";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-analyzer-src.follows = "ipgen-cli";
     };
   };
 
