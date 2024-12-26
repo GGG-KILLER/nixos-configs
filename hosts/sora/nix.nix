@@ -7,6 +7,8 @@
     # max-jobs = "auto";
     use-cgroups = true;
     warn-dirty = false;
+
+    system-features = [ "gccarch-znver3" ];
   };
 
   # Automatic garbage collect

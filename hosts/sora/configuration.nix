@@ -26,6 +26,13 @@
     nur-no-pkgs.repos.ilya-fedin.modules.io-scheduler
   ];
 
+  # # Host System # TODO: Enable when I have enough patience to rebuild everything
+  # nixpkgs.hostPlatform = {
+  #   gcc.arch = "znver3";
+  #   gcc.tune = "znver3";
+  #   system = "x86_64-linux";
+  # };
+
   # Overlays
   nixpkgs.overlays = [ inputs.nix-vscode-extensions.overlays.default ];
 
@@ -37,6 +44,9 @@
 
   # Enable broken stuff (Reason)
   # nixpkgs.config.allowBroken = true;
+
+  # # Enable CA derivations by default # TODO: Enable when I have enough patience to rebuild everything
+  # nixpkgs.config.contentAddressedByDefault = true;
 
   networking = {
     hostName = "sora";
