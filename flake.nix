@@ -71,8 +71,6 @@
       mkConfig =
         host:
         lib.nixosSystem {
-          inherit system;
-
           specialArgs = {
             inherit
               self
