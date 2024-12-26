@@ -4,6 +4,7 @@
   options,
   config,
   lib,
+  pkgs,
   liveCd,
   ...
 }:
@@ -106,7 +107,7 @@ with lib;
   config = {
     containers =
       let
-        inherit (config.nixpkgs) localSystem;
+        inherit (pkgs.stdenvNoCC) hostPlatform;
         consts = config.my.constants;
         vpnNetCfg = config.my.networking.vpn-gateway;
         networking-hosts = config.networking.hosts;
@@ -136,7 +137,7 @@ with lib;
 
               config = {
                 nixpkgs = {
-                  inherit localSystem;
+                  inherit hostPlatform;
                 };
                 boot.isContainer = true;
 
