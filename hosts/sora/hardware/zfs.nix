@@ -30,10 +30,11 @@ let
 in
 {
   # Unstable is needed for 6.12
-  boot.zfs.package = upgradeZfs pkgs.zfs_unstable;
-  boot.zfs.modulePackage =
-    upgradeZfs
-      config.boot.kernelPackages.${config.boot.zfs.package.kernelModuleAttribute};
+  boot.zfs.package = pkgs.zfs_unstable;
+  # NOTE: Re-enable if needed in the future.
+  # boot.zfs.modulePackage =
+  #   upgradeZfs
+  #     config.boot.kernelPackages.${config.boot.zfs.package.kernelModuleAttribute};
 
   # Expand all devices on boot
   services.zfs.expandOnBoot = "all";
