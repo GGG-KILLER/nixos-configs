@@ -34,22 +34,34 @@ in
         "nix.serverSettings"."nixd"."formatting"."command" = [ (getExe pkgs.nixfmt-rfc-style) ];
       };
       extensions =
+
         [
           # C# Development
           csdevkit-vscode-ext
           csharp-vscode-ext
         ]
-        ++ (with pkgs.vscode-extensions; [
-          dart-code.dart-code
-          dart-code.flutter
-          foxundermoon.shell-format
-          # ms-python.python
-          ms-toolsai.jupyter
-          ms-vscode-remote.remote-ssh
-          rust-lang.rust-analyzer
-          timonwong.shellcheck
-          valentjn.vscode-ltex
-        ])
+        # Nixpkgs' vscode extensions tend to lag behind quite often, so we just use their build
+        # script but with the auto-updated vscode marketplace sources and versions.
+        ++ (
+          let
+            nixpkgsExtensionWithLatestVersion =
+              getExt:
+              ((getExt pkgs.vscode-extensions).overrideAttrs (old: {
+                inherit (getExt pkgs.vscode-marketplace) version src;
+              }));
+          in
+          [
+            (nixpkgsExtensionWithLatestVersion (exts: exts.dart-code.dart-code))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.dart-code.flutter))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.foxundermoon.shell-format))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.ms-dotnettools.vscode-dotnet-runtime))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.ms-toolsai.jupyter))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.ms-vscode-remote.remote-ssh))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.rust-lang.rust-analyzer))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.timonwong.shellcheck))
+            (nixpkgsExtensionWithLatestVersion (exts: exts.valentjn.vscode-ltex))
+          ]
+        )
         ++ (with pkgs.vscode-marketplace; [
           christopherstyles.html-entities
           cschlosser.doxdocgen
