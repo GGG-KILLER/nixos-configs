@@ -1,18 +1,18 @@
 { buildDotnetModule, dotnetCorePackages }:
 buildDotnetModule rec {
   pname = "kemono-dl";
-  version = "0.0.7";
+  version = "0.0.8";
 
   src = builtins.fetchGit {
     url = "git@github.com:GGG-KILLER/kemono-dl.git";
-    rev = "3836df359e31844042e6f853de1f28a66e7accef";
+    rev = "129390cccd01646d967bd9c55da0b4c1bfe20845";
   };
 
   projectFile = "KemonoDl.Console/KemonoDl.Console.csproj";
-  nugetDeps = ./deps.nix;
+  nugetDeps = ./deps.json;
 
-  dotnet-sdk = dotnetCorePackages.sdk_8_0;
-  dotnet-runtime = dotnetCorePackages.runtime_8_0;
+  dotnet-sdk = dotnetCorePackages.sdk_9_0;
+  dotnet-runtime = dotnetCorePackages.runtime_9_0;
 
   meta.mainProgram = "kemono-dl";
   executables = [ meta.mainProgram ];
