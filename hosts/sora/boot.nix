@@ -23,6 +23,5 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # LQX kernel
-  boot.kernelPackages = pkgs.linuxPackages_lqx;
-  # boot.kernelPackages = pkgs.linuxPackages_zen; # TODO: Go back to LQX when issue gets fixed.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 }
