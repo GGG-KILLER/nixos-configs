@@ -1,6 +1,10 @@
 { pkgs, config, ... }:
 {
+  # Flatpak
+  services.flatpak.enable = true;
+
   system.fsPackages = [ pkgs.bindfs ];
+
   fileSystems =
     let
       mkRoSymBind = path: {
@@ -30,13 +34,4 @@
       "/usr/share/icons" = mkRoSymBind "${aggregatedIcons}/share/icons";
       "/usr/local/share/fonts" = mkRoSymBind "${aggregatedFonts}/share/fonts";
     };
-
-  fonts = {
-    fontDir.enable = true;
-    packages = with pkgs; [
-      noto-fonts
-      noto-fonts-emoji
-      noto-fonts-cjk-sans
-    ];
-  };
 }

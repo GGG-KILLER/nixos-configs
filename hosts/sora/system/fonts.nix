@@ -22,6 +22,8 @@ in
     };
 
     fontDir.enable = true;
+    fontDir.decompressFonts = true;
+
     packages = with pkgs; [
       cascadia-code
       noto-fonts

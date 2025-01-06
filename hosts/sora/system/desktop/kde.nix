@@ -6,6 +6,9 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Enable KDE Connect
+  programs.kdeconnect.enable = true;
+
   # Add Discover
   environment.systemPackages = with pkgs.kdePackages; [ discover ];
 
