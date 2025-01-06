@@ -10,6 +10,9 @@
     ./yubikey.nix
   ];
 
+  # Enable rtkit
+  security.rtkit.enable = true;
+
   # Android
   programs.adb.enable = true;
 
