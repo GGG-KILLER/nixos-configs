@@ -88,6 +88,12 @@
     options = [ "zfsutil" ];
   };
 
+  fileSystems."/home/ggg/Steam" = {
+    device = "rpool/userdata/home/ggg/steam";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/BB73-6EFC";
     fsType = "vfat";
