@@ -20,7 +20,6 @@ let
 
   agenix = inputs.agenix.packages.${system}.default;
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
-  avalonia-ilspy = self.packages.${system}.avalonia-ilspy;
   deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
   dotnet-ef = self.packages.${system}.dotnet-ef;
   git-crypt-agessh = inputs.git-crypt-agessh.packages.${system}.default;
