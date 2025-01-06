@@ -6,6 +6,9 @@
     "zfs.zfs_arc_max=${toString (16 * 1024 * 1024 * 1024)}"
     "elevator=none"
     "nohibernate"
+
+    # Use amd_pstate_epp
+    "amd_pstate=active"
   ];
 
   # Kernel
