@@ -2,8 +2,10 @@
 {
   imports = [
     ./audio
-    ./flatpak.nix
     ./kde.nix
     ./rustdesk.nix
   ];
+
+  # Flatpak
+  services.flatpak.enable = true;
 }
