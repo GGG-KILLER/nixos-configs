@@ -29,22 +29,8 @@ let
   mockoon = self.packages.${system}.mockoon;
   xca-stable = pkgs.xca;
 
-  r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: rec {
-    version = "3.1.50";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "PedroVH";
-      repo = "r2modmanPlus";
-      rev = version;
-      hash = "sha256-4IO7HLsvKjNns7GPIUgthQCGat+N+oriWyZoMvIQOGc=";
-    };
-
-    offlineCache = pkgs.fetchYarnDeps {
-      yarnLock = "${src}/yarn.lock";
-      hash = "sha256-ntXZ4gRXRqiPQxdwXDsLxGdBqUV5eboy9ntTlJsz9FA=";
-    };
-
-    patches = [ ];
+  r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: {
+    patches = [ patches/r2modman-flatpak-launch.patch ];
   });
 in
 {
@@ -64,9 +50,11 @@ in
           # Source #2: https://github.com/matklad/config/blob/8062c8b8a15eabc7e623d2dab9e98cc8b26bdc48/hosts/packages.nix#L6-L18
           vivaldi = (
             (pkgs.vivaldi.overrideAttrs (oldAttrs: {
-              buildPhase = builtins.replaceStrings [ "for f in libGLESv2.so libqt5_shim.so ; do" ] [
-                "for f in libGLESv2.so libqt6_shim.so ; do"
-              ] oldAttrs.buildPhase;
+              buildPhase =
+                builtins.replaceStrings
+                  [ "for f in libGLESv2.so libqt5_shim.so ; do" ]
+                  [ "for f in libGLESv2.so libqt5_shim.so libqt6_shim.so ; do" ]
+                  oldAttrs.buildPhase;
             })).override
               {
                 qt5 = pkgs.qt6;
