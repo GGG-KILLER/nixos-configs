@@ -13,15 +13,6 @@
   # Enable rtkit
   security.rtkit.enable = true;
 
-  # Android
-  programs.adb.enable = true;
-
-  # easyeffects needs this
-  programs.dconf.enable = true;
-
-  # Chrome SUID
-  security.chromiumSuidSandbox.enable = true;
-
   # Giving up on 100% pure nix, I want .NET AOT
   programs.nix-ld.enable = true;
 

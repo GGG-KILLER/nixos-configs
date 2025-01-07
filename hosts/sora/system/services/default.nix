@@ -1,11 +1,26 @@
 { ... }:
 {
   imports = [
-    ./docker.nix
     ./fancontrol.nix
     ./nix.nix
-    ./openrgb.nix
     ./restic.nix
-    ./vpn.nix
   ];
+
+  # Docker
+  virtualisation.docker = {
+    enable = true;
+    autoPrune.enable = true;
+
+    # only start up on demand
+    enableOnBoot = false;
+  };
+
+  # OpenRGB
+  services.hardware.openrgb = {
+    enable = true;
+    motherboard = "amd";
+  };
+
+  # VPN
+  services.mullvad-vpn.enable = true;
 }
