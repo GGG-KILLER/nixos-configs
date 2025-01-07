@@ -139,7 +139,6 @@ in
           # Web
           chromium
           discord-canary
-          google-chrome
           mullvad-vpn
           vivaldi
 
