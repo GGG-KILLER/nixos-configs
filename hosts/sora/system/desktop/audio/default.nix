@@ -13,10 +13,10 @@
     wireplumber = {
       enable = true;
       configPackages = [
-        (pkgs.runCommand "wireplumber-configs" { } ''
-          mkdir -p "$out/share/wireplumber/main.lua.d/"
-          cp -t "$out/share/wireplumber/main.lua.d/" "${./51-disable-devices.lua}" "${./99-fix-bad-headset.lua}"
-        '')
+        (pkgs.linkFarm "sora-wireplumber-configs" {
+          "share/wireplumber/main.lua.d/51-disable-devices.lua" = ./51-disable-devices.lua;
+          "share/wireplumber/main.lua.d/99-fix-bad-headset.lua" = ./99-fix-bad-headset.lua;
+        })
       ];
     };
   };
