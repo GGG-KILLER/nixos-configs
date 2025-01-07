@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
-  # Enable sound.
-  hardware.pulseaudio.enable = false;
   # rtkit is optional but recommended
   security.rtkit.enable = true;
+
+  # Enable pipewire
   services.pipewire = {
     enable = true;
     alsa.enable = true;

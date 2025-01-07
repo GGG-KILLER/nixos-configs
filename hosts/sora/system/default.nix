@@ -10,9 +10,6 @@
     ./yubikey.nix
   ];
 
-  # Enable rtkit
-  security.rtkit.enable = true;
-
   # Giving up on 100% pure nix, I want .NET AOT
   programs.nix-ld.enable = true;
 
