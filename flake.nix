@@ -108,7 +108,6 @@
       nixosConfigurations = {
         sora = mkConfig "sora";
         shiro = mkConfig "shiro";
-        f-ggg-dev = mkConfig "f.ggg.dev";
         live-cd-gnome = lib.nixosSystem {
           inherit system;
 
@@ -149,15 +148,6 @@
             sshUser = "root";
           };
           confirmTimeout = 300;
-        };
-        f-ggg-dev = {
-          hostname = "f.ggg.dev";
-          fastConnection = false;
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.f-ggg-dev;
-            sshUser = "root";
-          };
         };
       };
 
