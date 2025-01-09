@@ -7,13 +7,12 @@
   ];
 
   # Docker
-  virtualisation.docker = {
-    enable = true;
-    autoPrune.enable = true;
-
-    # only start up on demand
-    enableOnBoot = false;
-  };
+  virtualisation.podman.enable = true;
+  virtualisation.podman.enableNvidia = true;
+  virtualisation.podman.dockerCompat = true;
+  virtualisation.podman.autoPrune.enable = true;
+  virtualisation.podman.autoPrune.dates = "daily";
+  virtualisation.podman.autoPrune.flags = [ "--all" ];
 
   # OpenRGB
   services.hardware.openrgb = {
