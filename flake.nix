@@ -28,7 +28,7 @@
       inputs.utils.follows = "flake-utils";
     };
     nix-index-database = {
-      url = "github:mic92/nix-index-database";
+      url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     packwiz = {
