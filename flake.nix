@@ -168,6 +168,15 @@
                   import nixpkgs {
                     inherit system;
                     config.allowUnfree = true;
+                    overlays = [
+                      (
+                        final: prev:
+                        prev.lib.packagesFromDirectoryRecursive {
+                          inherit (final) callPackage;
+                          directory = ./lib;
+                        }
+                      )
+                    ];
                   }
                 )
               );
