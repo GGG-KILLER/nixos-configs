@@ -12,7 +12,7 @@
   ];
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_12; # TODO: Increase when ZFS supports 6.13
 
   # Scheduler
   services.scx.enable = true;
