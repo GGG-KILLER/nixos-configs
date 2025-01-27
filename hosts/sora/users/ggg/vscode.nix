@@ -11,97 +11,12 @@ let
   csharp-vscode-ext = self.packages.${system}."ms-dotnettools.csharp";
 
   settings = {
-    # Set nix file settings
-    "[nix]" = {
-      "editor.insertSpaces" = true;
-      "editor.tabSize" = 2;
-    };
-
-    # Set editor settings
-    "editor.acceptSuggestionOnCommitCharacter" = false;
-    "editor.detectIndentation" = false;
-    "editor.fontFamily" = "'Cascadia Code'";
-    "editor.fontLigatures" = true;
-    "editor.formatOnPaste" = true;
-    "editor.formatOnSave" = true;
-    "editor.formatOnSaveMode" = "modificationsIfAvailable";
-    "editor.formatOnType" = true;
-    "editor.guides.bracketPairs" = "active";
-    "editor.largeFileOptimizations" = false;
-    "editor.linkedEditing" = true;
-    "editor.maxTokenizationLineLength" = 50000;
-    "editor.minimap.enabled" = false;
-    "editor.mouseWheelScrollSensitivity" = 1.5;
-    "editor.renderWhitespace" = "boundary";
-    "editor.smoothScrolling" = true;
-    "editor.snippetSuggestions" = "bottom";
-    "editor.suggest.preview" = true;
-    "editor.suggestSelection" = "recentlyUsedByPrefix";
-    "editor.wordBasedSuggestions" = "off";
-    "editor.wordWrap" = "on";
-    "editor.wrappingIndent" = "same";
-
     # Disable telemetry
     "dotnetAcquisitionExtension.enableTelemetry" = false;
     "gitlens.telemetry.enabled" = false;
     "redhat.telemetry.enabled" = false;
 
-    # Set file explorer settings
-    "explorer.autoReveal" = "focusNoScroll";
-    "explorer.confirmDelete" = false;
-    "explorer.confirmPasteNative" = false;
-    "explorer.copyRelativePathSeparator" = "/";
-
-    # Enable file nesting in explorer
-    "explorer.fileNesting.enabled" = true;
-    "explorer.fileNesting.patterns" = {
-      "*.js" = "\${capture}.js.map, \${capture}.min.js, \${capture}.d.ts";
-      "*.jsx" = "\${capture}.js";
-      "*.ts" = "\${capture}.js";
-      "*.tsx" = "\${capture}.ts";
-      "Cargo.toml" = "Cargo.lock";
-      "package.json" = "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb";
-      "settings.json" = "settings.*.json";
-      "tsconfig.json" = "tsconfig.*.json";
-    };
-
-    "files.autoGuessEncoding" = true;
-    "files.autoSave" = "onWindowChange";
-    "files.exclude" = {
-      "**/.classpath" = true;
-      "**/.factorypath" = true;
-      "**/.project" = true;
-      "**/.settings" = true;
-    };
-    "files.insertFinalNewline" = true;
-    "files.readonlyFromPermissions" = true;
-    "files.simpleDialog.enable" = true;
-    "files.trimTrailingWhitespace" = true;
-
-    # Git settings
-    "git.allowForcePush" = true;
-    "git.autofetch" = true;
-    "git.closeDiffOnOperation" = true;
-    "git.confirmSync" = false;
-    "git.enableSmartCommit" = false;
-    "git.fetchOnPull" = true;
-    "git.pullBeforeCheckout" = true;
-    "git.rebaseWhenSync" = true;
-    "git.terminalGitEditor" = true;
-    "git.useCommitInputAsStashMessage" = true;
-
-    # Use tree view for everything
-    "scm.defaultViewMode" = "tree";
-    "search.defaultViewMode" = "tree";
-
-    # Set terminal settings
-    "terminal.external.linuxExec" = "zsh";
-    "terminal.integrated.defaultProfile.linux" = "zsh";
-    "terminal.integrated.fontFamily" = "'Cascadia Code'";
-    "terminal.integrated.rightClickBehavior" = "copyPaste";
-
     # Set window options
-    "window.title" = "\${dirty}\${activeEditorMedium}\${separator}\${rootName}";
     "window.titleBarStyle" = "custom";
     "workbench.colorCustomizations" = {
       "editorInlayHint.background" = "#ffffff00";
@@ -111,8 +26,6 @@ let
       "editorInlayHint.typeBackground" = "#ffffff00";
       "editorInlayHint.typeForeground" = "#f8f8f87e";
     };
-    "workbench.iconTheme" = "material-icon-theme";
-    "workbench.list.smoothScrolling" = true;
 
     # Set powershell dynamic parts manually
     "powershell.powerShellAdditionalExePaths" = {
@@ -130,9 +43,6 @@ let
     "nix.serverPath" = getExe pkgs.nixd;
     "nix.formatterPath" = getExe pkgs.nixfmt-rfc-style;
     "nix.serverSettings"."nixd"."formatting"."command" = [ (getExe pkgs.nixfmt-rfc-style) ];
-
-    # Misc
-    "notebook.lineNumbers" = "on";
   };
 in
 {
