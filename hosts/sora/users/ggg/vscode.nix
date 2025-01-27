@@ -64,22 +64,22 @@ in
           # script but with the auto-updated vscode marketplace sources and versions.
           ++ (
             let
-              nixpkgsExtensionWithLatestVersion =
+              updateExt =
                 getExt:
                 ((getExt pkgs.vscode-extensions).overrideAttrs (old: {
                   inherit (getExt pkgs.vscode-marketplace) version src;
                 }));
             in
             [
-              (nixpkgsExtensionWithLatestVersion (exts: exts.dart-code.dart-code))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.dart-code.flutter))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.foxundermoon.shell-format))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.ms-dotnettools.vscode-dotnet-runtime))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.ms-toolsai.jupyter))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.ms-vscode-remote.remote-ssh))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.rust-lang.rust-analyzer))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.timonwong.shellcheck))
-              (nixpkgsExtensionWithLatestVersion (exts: exts.valentjn.vscode-ltex))
+              (updateExt (exts: exts.dart-code.dart-code))
+              (updateExt (exts: exts.dart-code.flutter))
+              (updateExt (exts: exts.foxundermoon.shell-format))
+              (updateExt (exts: exts.ms-dotnettools.vscode-dotnet-runtime))
+              (updateExt (exts: exts.ms-toolsai.jupyter))
+              (updateExt (exts: exts.ms-vscode-remote.remote-ssh))
+              (updateExt (exts: exts.rust-lang.rust-analyzer))
+              (updateExt (exts: exts.timonwong.shellcheck))
+              (updateExt (exts: exts.valentjn.vscode-ltex))
             ]
           )
           ++ (with pkgs.vscode-marketplace; [
