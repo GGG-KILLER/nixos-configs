@@ -27,5 +27,11 @@
     # Auto Optimise the Store
     settings.auto-optimise-store = true;
     optimise.automatic = true;
+
+    # Nix Community Cache
+    settings.substituters = [ "https://nix-community.cachix.org" ];
+    settings.trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
   };
 }
