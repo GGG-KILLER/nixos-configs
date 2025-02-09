@@ -183,6 +183,11 @@ in
         extraConfig = {
           init.defaultBranch = "main";
           core.editor = "${getExe pkgs.vscode} --wait";
+
+          # Ensure integrity of things we fetch.
+          transfer.fsckObjects = true;
+          fetch.fsckObjects = true;
+          receive.fsckObjects = true;
         };
       };
       tealdeer = {
