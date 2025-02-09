@@ -57,8 +57,12 @@ in
         extensions =
           [
             # C# Development
-            csdevkit-vscode-ext
-            csharp-vscode-ext
+            (csdevkit-vscode-ext.overrideAttrs (old: {
+              inherit (pkgs.vscode-marketplace.ms-dotnettools.csdevkit) version src;
+            }))
+            (csharp-vscode-ext.overrideAttrs (old: {
+              inherit (pkgs.vscode-marketplace.ms-dotnettools.csharp) version src;
+            }))
           ]
           # Nixpkgs' vscode extensions tend to lag behind quite often, so we just use their build
           # script but with the auto-updated vscode marketplace sources and versions.
