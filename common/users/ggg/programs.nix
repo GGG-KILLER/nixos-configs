@@ -16,6 +16,12 @@
 
   home-manager.users.ggg = {
     home.packages = with pkgs; [
+      # Compression
+      ouch
+      p7zip
+      unzip
+      zip
+
       # Nix
       # nix-du # TODO: Consider re-adding when it builds again
       nix-ld
@@ -31,10 +37,8 @@
       iotop-c
       killall
       neofetch
-      p7zip
       steam-run
-      unzip
-      zip
+      whois
     ];
 
     programs = {

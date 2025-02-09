@@ -27,11 +27,6 @@ let
   kemono-dl = self.packages.${system}.kemono-dl;
   m3u8-dl = self.packages.${system}.m3u8-dl;
   mockoon = self.packages.${system}.mockoon;
-  xca-stable = pkgs.xca;
-
-  r2modman = pkgs.r2modman.overrideDerivation (oldAttrs: {
-    patches = [ patches/r2modman-flatpak-launch.patch ];
-  });
 in
 {
   imports = [
@@ -42,117 +37,109 @@ in
   environment.systemPackages = [ dotnet-sdk ];
 
   home-manager.users.ggg = {
-    home.packages =
-      (
-        with pkgs;
-        let
-          # Source #1: https://github.com/NixOS/nixpkgs/pull/292148#issuecomment-2343586641
-          # Source #2: https://github.com/matklad/config/blob/8062c8b8a15eabc7e623d2dab9e98cc8b26bdc48/hosts/packages.nix#L6-L18
-          vivaldi = (
-            (pkgs.vivaldi.overrideAttrs (oldAttrs: {
-              buildPhase =
-                builtins.replaceStrings
-                  [ "for f in libGLESv2.so libqt5_shim.so ; do" ]
-                  [ "for f in libGLESv2.so libqt5_shim.so libqt6_shim.so ; do" ]
-                  oldAttrs.buildPhase;
-            })).override
-              {
-                qt5 = pkgs.qt6;
-                commandLineArgs = [ "--ozone-platform=wayland" ];
-                # The following two are just my preference, feel free to leave them out
-                proprietaryCodecs = true;
-                enableWidevine = true;
-              }
-          );
-        in
-        [
-          # Audio
-          audiorelay
-          easyeffects
-          helvum
+    home.packages = (
+      with pkgs;
+      let
+        # Source #1: https://github.com/NixOS/nixpkgs/pull/292148#issuecomment-2343586641
+        # Source #2: https://github.com/matklad/config/blob/8062c8b8a15eabc7e623d2dab9e98cc8b26bdc48/hosts/packages.nix#L6-L18
+        vivaldi = (
+          (pkgs.vivaldi.overrideAttrs (oldAttrs: {
+            buildPhase =
+              builtins.replaceStrings
+                [ "for f in libGLESv2.so libqt5_shim.so ; do" ]
+                [ "for f in libGLESv2.so libqt5_shim.so libqt6_shim.so ; do" ]
+                oldAttrs.buildPhase;
+          })).override
+            {
+              qt5 = pkgs.qt6;
+              commandLineArgs = [ "--ozone-platform=wayland" ];
+              # The following two are just my preference, feel free to leave them out
+              proprietaryCodecs = true;
+              enableWidevine = true;
+            }
+        );
+      in
+      [
+        # Audio
+        audiorelay
+        easyeffects
+        helvum
 
-          # Android
-          android-tools
+        # Android
+        android-tools
 
-          # Coding
-          # avalonia-ilspy # TODO: re-add when it no longer depends on .NET 6
-          corepack_latest
-          docker-compose
-          dotnet-ef
-          mockoon
-          nixd
-          nodejs_latest
-          powershell
-          tokei
+        # Coding
+        # avalonia-ilspy # TODO: re-add when it no longer depends on .NET 6
+        corepack_latest
+        docker-compose
+        dotnet-ef
+        mockoon
+        nixd
+        nixf
+        nixfmt-rfc-style
+        nodejs_latest
+        powershell
+        tokei
 
-          # Database
-          pgformatter
-          postgresql_14
-          # pgmodeler # TODO: Uncomment this once the hash in nixpkgs gets updated.
-          mongodb-compass
+        # Downloads
+        aria
+        kemono-dl
+        m3u8-dl
+        yt-dlp
 
-          # Downloads
-          aria
-          kemono-dl
-          m3u8-dl
-          yt-dlp
+        # Encryption
+        age
+        agenix
+        xca
+        yubikey-manager
+        yubikey-manager-qt
 
-          # Encryption
-          age
-          agenix
-          xca-stable
-          yubikey-manager
-          yubikey-manager-qt
-          #step-cli # TODO: Uncomment if it's still used and NixOS/nixpkgs#301623 has hit unstable.
+        # Games
+        (prismlauncher.override {
+          jdks = [
+            jdk8
+            jdk11
+            jdk17
+            jdk21
+          ];
+        })
+        (r2modman.overrideDerivation (oldAttrs: {
+          patches = [ patches/r2modman-flatpak-launch.patch ];
+        }))
 
-          # Games
-          #inputs.packwiz.packages.${system}.packwiz # TODO: Uncomment when packwiz/packwiz#297 gets fixed.
-          (prismlauncher.override {
-            jdks = [
-              jdk8
-              jdk11
-              jdk17
-              jdk21
-            ];
-          })
-          r2mod_cli
+        # Hardware
+        openrgb
 
-          # Hardware
-          openrgb
+        # Nix
+        deploy-rs
+        nh
+        nix-output-monitor
+        nixpkgs-review
 
-          # Nix
-          deploy-rs
-          nh
-          nix-output-monitor
-          nixpkgs-review
+        # Media
+        ffmpeg
+        kdePackages.elisa
 
-          # Media
-          #self.packages.${system}.ffmpeg-full
-          ffmpeg
-          #handbrake # Uncomment when NixOS/nixpkgs#297984 hits unstable.
-          kdePackages.elisa
+        # VMs
+        virt-manager
+        virt-viewer
 
-          # VMs
-          virt-manager
-          virt-viewer
+        # Web
+        chromium
+        discord-canary
+        mullvad-vpn
+        vivaldi
 
-          # Web
-          chromium
-          discord-canary
-          mullvad-vpn
-          vivaldi
-
-          # Misc
-          fd
-          git-crypt-agessh
-          imhex
-          ipgen-cli
-          mockoon
-          wl-clipboard
-          zenmonitor
-        ]
-      )
-      ++ [ r2modman ];
+        # Misc
+        fd
+        git-crypt-agessh
+        imhex
+        ipgen-cli
+        mockoon
+        wl-clipboard
+        zenmonitor
+      ]
+    );
 
     home.sessionPath = [
       "$HOME/.dotnet/tools"
