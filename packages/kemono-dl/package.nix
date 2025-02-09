@@ -1,11 +1,11 @@
 { buildDotnetModule, dotnetCorePackages }:
 buildDotnetModule rec {
   pname = "kemono-dl";
-  version = "0-unstable-2025-01-05";
+  version = "2-unstable-2025-02-09";
 
   src = builtins.fetchGit {
     url = "git@github.com:GGG-KILLER/kemono-dl.git";
-    rev = "8b7e4e21e71c36851004cba3239b005d4e9f2db3";
+    rev = "e409b36a0454ecde766f57c9aef8105325b73417";
   };
 
   projectFile = "KemonoDl.Console/KemonoDl.Console.csproj";
