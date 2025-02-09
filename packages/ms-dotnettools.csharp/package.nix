@@ -17,7 +17,7 @@ let
   extInfo =
     (arch: {
       inherit arch;
-      inherit (lockfile.${arch}) hash binaries;
+      hash = lockfile.${arch};
     })
       (
         {
@@ -53,7 +53,16 @@ buildVscodeMarketplaceExtension {
     substituteInPlace dist/extension.js \
       --replace-fail 'uname -m' '${lib.getExe' coreutils "uname"} -m'
 
-    chmod +x ${lib.escapeShellArgs extInfo.binaries}
+    (
+      shopt -s globstar
+      for f in **/*; do
+        if [[ ! -f "$file" || "$file" == *.so || "$file" == *.dylib ]] ||
+            (! isELF "$file" && ! isMachO "$file"); then
+            continue
+        fi
+        chmod +x "$f"
+      done
+    )
   '';
 
   passthru.updateScript = ./update.sh;

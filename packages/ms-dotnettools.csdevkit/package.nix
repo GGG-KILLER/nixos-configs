@@ -17,7 +17,7 @@ let
   extInfo =
     (arch: {
       inherit arch;
-      inherit (lockfile.${arch}) hash binaries;
+      hash = lockfile.${arch};
     })
       (
         {
@@ -58,7 +58,16 @@ buildVscodeMarketplaceExtension {
       --replace-fail 'e.extensionPath,"cache"' 'require("os").tmpdir(),"'"$ext_unique_id"'"' \
       --replace-fail 't.setExecuteBit=async function(e){if("win32"!==process.platform){const t=o.join(e[a.SERVICEHUB_CONTROLLER_COMPONENT_NAME],"Microsoft.ServiceHub.Controller"),r=o.join(e[a.SERVICEHUB_HOST_COMPONENT_NAME],(0,a.getServiceHubHostEntrypointName)()),n=[(0,a.getServerPath)(e),t,r,(0,c.getReliabilityMonitorPath)(e)];await Promise.all(n.map((e=>(0,i.chmod)(e,"0755"))))}}' 't.setExecuteBit=async function(e){}'
 
-    chmod +x ${lib.escapeShellArgs extInfo.binaries}
+    (
+      shopt -s globstar
+      for f in **/*; do
+        if [[ ! -f "$file" || "$file" == *.so || "$file" == *.dylib ]] ||
+            (! isELF "$file" && ! isMachO "$file"); then
+            continue
+        fi
+        chmod +x "$f"
+      done
+    )
   '';
 
   passthru.updateScript = ./update.sh;
