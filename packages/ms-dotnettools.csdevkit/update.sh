@@ -1,14 +1,12 @@
 #!/usr/bin/env nix-shell
-#!nix-shell -i bash -p curl coreutils jq nix unzip
+#!nix-shell -i bash -p curl jq nix common-updater-scripts
 # shellcheck shell=bash
 set -euo pipefail
-shopt -s globstar
 
 export LC_ALL=C
 
 PUBLISHER=ms-dotnettools
 EXTENSION=csdevkit
-LOCKFILE=packages/$PUBLISHER.$EXTENSION/lockfile.json
 
 response=$(curl -s 'https://marketplace.visualstudio.com/_apis/public/gallery/extensionquery' \
     -H 'accept: application/json;api-version=3.0-preview.1' \
@@ -21,13 +19,6 @@ latest_version=$(jq --raw-output '
 | map(select(has("properties")))
 | map(select(.properties | map(select(.key == "Microsoft.VisualStudio.Code.Engine")) | .[0].value | test("\\^[0-9.]+$")))
 | .[0].version' <<<"$response")
-
-current_version=$(jq '.version' --raw-output <"$LOCKFILE")
-
-if [[ "$latest_version" == "$current_version" ]]; then
-    echo "Package is up to date." >&2
-    exit 1
-fi
 
 getDownloadUrl() {
     nix-instantiate \
@@ -42,41 +33,13 @@ getDownloadUrl() {
         --argstr arch "$1" | jq . --raw-output
 }
 
-TEMP=$(mktemp --directory --tmpdir)
-OUTPUT="$TEMP/lockfile.json"
-trap 'rm -r "$TEMP"' EXIT
-
-HASH=
-fetchMarketplace() {
-    arch="$1"
-
-    echo "  Downloading VSIX..."
-    if ! curl -sLo "$TEMP/$arch".zip "$(getDownloadUrl "$arch")"; then
-        echo "    Failed to download extension for arch $arch" >&2
-        exit 1
-    fi
-
-    HASH=$(nix hash file --type sha256 --sri "$TEMP/$arch".zip)
+update_hash() {
+    local hash
+    hash=$(nix hash convert --hash-algo sha256 "$(nix-prefetch-url --type sha256 "$(getDownloadUrl "$2")")")
+    update-source-version out "$latest_version" "$hash" --system="$1" --ignore-same-version
 }
 
-cat >"$OUTPUT" <<EOF
-{
-  "version": "$latest_version",
-EOF
-firstArch=true
-for arch in linux-x64 linux-arm64 darwin-x64 darwin-arm64; do
-    if [ "$firstArch" = false ]; then
-        echo -e ',' >>"$OUTPUT"
-    fi
-    firstArch=false
-
-    echo "Getting data for $arch..."
-    fetchMarketplace "$arch"
-
-    cat >>"$OUTPUT" <<EOF
-  "$arch": "$HASH"
-EOF
-done
-echo -e '\n}' >>"$OUTPUT"
-
-mv "$OUTPUT" "$LOCKFILE"
+update_hash x86_64-linux linux-x64
+update_hash aarch64-linux linux-arm64
+update_hash x86_64-darwin darwin-x64
+update_hash aarch64-darwin darwin-arm64

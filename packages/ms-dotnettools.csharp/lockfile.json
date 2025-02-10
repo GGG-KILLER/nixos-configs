@@ -1,7 +1,0 @@
-{
-  "version": "2.60.26",
-  "linux-x64": "sha256-gs1P+xhgKIKYhqm6tFonXJA2W1zLxBtkt23IhHVhBZI=",
-  "linux-arm64": "sha256-PHQdK/TImfXgx/OdOPWspvd2iGvaP3H5eDBSpDl8b8E=",
-  "darwin-x64": "sha256-nyoCqLlNAajd3FsYFbk9aZNg9IK4oumfKu0pxOpBSXY=",
-  "darwin-arm64": "sha256-W94USj71eIKP1dBjDBLgs4k8PjeQNj/t7PSMbkIXzyY=",
-}

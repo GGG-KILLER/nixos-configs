@@ -10,30 +10,33 @@
   coreutils,
 }:
 let
-  inherit (stdenv.hostPlatform) system;
-  inherit (vscode-utils) buildVscodeMarketplaceExtension;
-
-  lockfile = lib.importJSON ./lockfile.json;
-  extInfo =
-    (arch: {
-      inherit arch;
-      hash = lockfile.${arch};
-    })
-      (
-        {
-          x86_64-linux = "linux-x64";
-          aarch64-linux = "linux-arm64";
-          x86_64-darwin = "darwin-x64";
-          aarch64-darwin = "darwin-arm64";
-        }
-        .${system} or (throw "Unsupported system: ${system}")
-      );
+  extInfo = (
+    {
+      x86_64-linux = {
+        arch = "linux-x64";
+        hash = "sha256-WVtjYGhwJAwR2pqAM5DJ9a5Ag8/4G5mi7wEIgwF5ON4=";
+      };
+      aarch64-linux = {
+        arch = "linux-arm64";
+        hash = "sha256-AhY1GMdv/ug6Jd3rlffq3CnrxUHMmgXty0u3y4jKgsk=";
+      };
+      x86_64-darwin = {
+        arch = "darwin-x64";
+        hash = "sha256-kTmfJRmN6xEQj1Nmk9quHTdddBRu7YZRN/V46B1jiBg=";
+      };
+      aarch64-darwin = {
+        arch = "darwin-arm64";
+        hash = "sha256-+Mi2x4pTghPd0w+Ku6c+M5S2HybfXRGUFepx++uOUEo=";
+      };
+    }
+    .${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}")
+  );
 in
-buildVscodeMarketplaceExtension {
+vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = {
     name = "csharp";
     publisher = "ms-dotnettools";
-    inherit (lockfile) version;
+    version = "2.64.7";
     inherit (extInfo) hash arch;
   };
 
@@ -52,15 +55,20 @@ buildVscodeMarketplaceExtension {
   postPatch = ''
     substituteInPlace dist/extension.js \
       --replace-fail 'uname -m' '${lib.getExe' coreutils "uname"} -m'
+  '';
 
+  preFixup = ''
     (
       shopt -s globstar
-      for f in **/*; do
+      shopt -s dotglob
+      for file in "$out"/**/*; do
         if [[ ! -f "$file" || "$file" == *.so || "$file" == *.dylib ]] ||
             (! isELF "$file" && ! isMachO "$file"); then
             continue
         fi
-        chmod +x "$f"
+
+        echo Making "$file" executable...
+        chmod +x "$file"
       done
     )
   '';

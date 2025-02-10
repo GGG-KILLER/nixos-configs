@@ -1,7 +1,0 @@
-{
-  "version": "1.15.13",
-  "linux-x64": "sha256-GGUGSsEhTeXIZ0mTXzSkjdlArwdNo6zPi240m+Yo1hY=",
-  "linux-arm64": "sha256-BiVszgLY86NRniRdxRLysRE+cIq4VxWjjx5m408AVbo=",
-  "darwin-x64": "sha256-FGL5z+V4Y2SdV/UVyhZ3vuQ1MGpihFyCJl68R8bnJS4=",
-  "darwin-arm64": "sha256-vchkgY2BoWMAuRvE+DuCrZxMJ44ynpKvrSX9wU5ZN6I="
-}
