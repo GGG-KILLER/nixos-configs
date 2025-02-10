@@ -12,8 +12,8 @@ let
   dotnet-sdk =
     with pkgs.dotnetCorePackages;
     combinePackages [
-      sdk_9_0
-      sdk_8_0
+      sdk_9_0-bin
+      sdk_8_0-bin
     ];
   dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/sdk";
