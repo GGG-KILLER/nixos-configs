@@ -40,12 +40,20 @@ in
     home.packages = (
       with pkgs;
       let
+        replaceStringsEnsuringReplaced =
+          needles: replacements: haystack:
+          let
+            result = lib.replaceStrings needles replacements haystack;
+          in
+          assert result != haystack;
+          result;
+
         # Source #1: https://github.com/NixOS/nixpkgs/pull/292148#issuecomment-2343586641
         # Source #2: https://github.com/matklad/config/blob/8062c8b8a15eabc7e623d2dab9e98cc8b26bdc48/hosts/packages.nix#L6-L18
         vivaldi = (
           (pkgs.vivaldi.overrideAttrs (oldAttrs: {
             buildPhase =
-              builtins.replaceStrings
+              replaceStringsEnsuringReplaced
                 [ "for f in libGLESv2.so libqt5_shim.so ; do" ]
                 [ "for f in libGLESv2.so libqt5_shim.so libqt6_shim.so ; do" ]
                 oldAttrs.buildPhase;
@@ -61,7 +69,7 @@ in
 
         rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
           postInstall =
-            lib.replaceStrings [ "${pkgs.dotnetCorePackages.sdk_8_0-source}" ] [ "${dotnetRoot}" ]
+            replaceStringsEnsuringReplaced [ "${pkgs.dotnetCorePackages.sdk_8_0-source}" ] [ "${dotnetRoot}" ]
               attrs.postInstall;
         });
       in
