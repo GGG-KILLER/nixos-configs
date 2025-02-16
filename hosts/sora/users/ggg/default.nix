@@ -16,7 +16,7 @@ let
       sdk_8_0-bin
     ];
   dotnetRoot = dotnet-sdk;
-  dotnetSdk = "${dotnet-sdk}/sdk";
+  dotnetSdk = "${dotnet-sdk}/share/dotnet/sdk";
 
   agenix = inputs.agenix.packages.${system}.default;
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
@@ -58,6 +58,12 @@ in
               enableWidevine = true;
             }
         );
+
+        rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
+          postInstall =
+            lib.replaceStrings [ "${pkgs.dotnetCorePackages.sdk_8_0-source}" ] [ "${dotnetRoot}" ]
+              attrs.postInstall;
+        });
       in
       [
         # Audio
@@ -73,12 +79,15 @@ in
         corepack_latest
         docker-compose
         dotnet-ef
+        dotnet-outdated
+        dotnet-repl
         mockoon
         nixd
         nixf
         nixfmt-rfc-style
         nodejs_latest
         powershell
+        rider
         tokei
 
         # Downloads
@@ -90,6 +99,7 @@ in
         # Encryption
         age
         agenix
+        git-crypt-agessh
         xca
         yubikey-manager
         yubikey-manager-qt
@@ -132,7 +142,6 @@ in
 
         # Misc
         fd
-        git-crypt-agessh
         imhex
         ipgen-cli
         mockoon
@@ -149,20 +158,6 @@ in
       DOTNET_ROOT = dotnetRoot;
       MSBuildSdksPath = "${dotnetSdk}/${head dotnet-sdk.versions}/Sdks";
       MSBUILD_EXE_PATH = "${dotnetSdk}/${head dotnet-sdk.versions}/MSBuild.dll";
-
-      # PYTORCH_PYTHON = "${pkgs.python3.withPackages (ps:
-      #   with ps; [
-      #     matplotlib
-
-      #     torch
-      #     torchvision
-      #     torchtnt
-      #     torcheval
-      #     botorch
-      #     torchinfo
-      #     lion-pytorch
-      #     torch-tb-profiler
-      #   ])}";
     };
 
     home.shellAliases = { };
