@@ -12,8 +12,8 @@ let
   dotnet-sdk =
     with pkgs.dotnetCorePackages;
     combinePackages [
-      sdk_9_0-bin
-      sdk_8_0-bin
+      dotnet_9.sdk
+      dotnet_8.sdk
     ];
   dotnetRoot = dotnet-sdk;
   dotnetSdk = "${dotnet-sdk}/share/dotnet/sdk";
@@ -232,6 +232,11 @@ in
 
           # Disable OSC for mpv thumbnail script
           osc = "no";
+        };
+        bindings = {
+          f = "cycle fullscreen";
+          r = "playlist-shuffle";
+          R = "playlist-unshuffle";
         };
       };
       obs-studio = {
