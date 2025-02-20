@@ -34,7 +34,10 @@ in
     ./vscode.nix
   ];
 
-  environment.systemPackages = [ dotnet-sdk ];
+  environment.systemPackages = [
+    config.boot.kernelPackages.turbostat
+    dotnet-sdk
+  ];
 
   home-manager.users.ggg = {
     home.packages = (

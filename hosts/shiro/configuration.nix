@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ./containers
@@ -21,6 +21,7 @@
   environment.systemPackages = with pkgs; [
     docker-compose
     nvtopPackages.nvidia
+    config.boot.kernelPackages.turbostat
   ];
 
   services.openssh.enable = true;
