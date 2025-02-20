@@ -81,7 +81,7 @@ in
               (updateExt (exts: exts.ms-dotnettools.vscode-dotnet-runtime))
               (updateExt (exts: exts.ms-toolsai.jupyter))
               (updateExt (exts: exts.ms-vscode-remote.remote-ssh))
-              (updateExt (exts: exts.rust-lang.rust-analyzer))
+              # (updateExt (exts: exts.rust-lang.rust-analyzer)) # TODO: Uncomment when NixOS/nixpkgs#383049 gets merged
               (updateExt (exts: exts.timonwong.shellcheck))
               (updateExt (exts: exts.valentjn.vscode-ltex))
             ]
@@ -112,7 +112,7 @@ in
       };
 
       home.packages = with pkgs; [
-        rust-analyzer
+        # rust-analyzer # TODO: Uncomment when NixOS/nixpkgs#383049 gets merged
         shellcheck
         nixfmt-rfc-style
       ];

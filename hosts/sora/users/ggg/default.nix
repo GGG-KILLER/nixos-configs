@@ -245,7 +245,7 @@ in
       obs-studio = {
         enable = true;
         plugins = with pkgs.obs-studio-plugins; [
-          obs-nvfbc
+          # obs-nvfbc # TODO: Restore whenever it gets fixed.
           input-overlay
           obs-pipewire-audio-capture
         ];
