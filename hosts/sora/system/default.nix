@@ -27,4 +27,7 @@
 
   # Enable Firejail
   programs.firejail.enable = true;
+
+  # Enable sysdig
+  programs.sysdig.enable = true;
 }
