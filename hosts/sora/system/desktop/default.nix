@@ -2,6 +2,7 @@
 {
   imports = [
     ./audio
+    ./opensnitch
     ./kde.nix
     ./rustdesk.nix
   ];

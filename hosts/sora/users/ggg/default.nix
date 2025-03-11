@@ -266,6 +266,7 @@ in
 
     services = {
       flameshot.enable = false;
+      opensnitch-ui.enable = true;
     };
 
     xdg.configFile."nix/nix.conf".text = ''

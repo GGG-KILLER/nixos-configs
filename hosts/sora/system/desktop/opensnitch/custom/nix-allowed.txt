@@ -1,0 +1,6 @@
+0.0.0.0 cache.nixos.org
+0.0.0.0 nix-community.cachix.org
+0.0.0.0 api.github.com
+0.0.0.0 codeload.github.com
+0.0.0.0 codeload.github.com
+0.0.0.0 tarballs.nixos.org

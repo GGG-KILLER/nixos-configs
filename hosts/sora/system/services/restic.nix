@@ -1,3 +1,6 @@
+###
+# ATTENTION: When changing anything in this file, also check hosts/sora/system/desktop/opensnitch/003x-backup-rules.nix
+###
 {
   config,
   lib,
@@ -6,6 +9,13 @@
 }:
 let
   inherit (lib) getExe mkMerge;
+  restic = pkgs.restic.override (
+    prev:
+    assert prev.rclone == pkgs.rclone;
+    {
+      inherit (pkgs) rclone;
+    }
+  );
 in
 {
   services.restic.backups =
@@ -85,6 +95,7 @@ in
         in
         rec {
           initialize = true;
+          package = restic;
           backupPrepareCommand = ''
             ${backupCleanupCommand}
             ${zfs} snapshot rpool/userdata/home/ggg@restic-backup-${type} && echo "[backupPrepareCommand] Home snapshot created"

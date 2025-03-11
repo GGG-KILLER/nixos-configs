@@ -13,7 +13,7 @@ My own NixOS Configs
 - `sora`: My desktop
 
 ## License
-These configs are licensed under MIT.
+These configs are licensed under MIT **with the exception of files under `hosts/sora/system/desktop/opensnitch/reject`**.
 
 So do whatever you want to them, but please give me credit as I have given credit for the ones I obtained from others.
 
