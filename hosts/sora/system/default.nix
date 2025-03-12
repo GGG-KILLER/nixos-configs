@@ -6,6 +6,7 @@
     ./boot.nix
     ./ccache.nix
     ./fonts.nix
+    ./hardening.nix
     ./kernel.nix
     ./yubikey.nix
   ];

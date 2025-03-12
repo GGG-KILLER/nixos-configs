@@ -9,6 +9,9 @@
 
     # Use amd_pstate_epp
     "amd_pstate=active"
+
+    # Enable IOMMU
+    "amd_iommu=on"
   ];
 
   # Kernel
