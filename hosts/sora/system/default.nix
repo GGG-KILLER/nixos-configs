@@ -5,6 +5,7 @@
     ./services
     ./boot.nix
     ./ccache.nix
+    ./firejail.nix
     ./fonts.nix
     ./hardening.nix
     ./kernel.nix
@@ -25,9 +26,6 @@
     xorg.libXrandr # libXrandr.so.2
     fontconfig # libfontconfig.so.1
   ];
-
-  # Enable Firejail
-  programs.firejail.enable = true;
 
   # Enable sysdig
   programs.sysdig.enable = true;
