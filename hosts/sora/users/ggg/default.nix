@@ -27,6 +27,7 @@ let
   kemono-dl = self.packages.${system}.kemono-dl;
   m3u8-dl = self.packages.${system}.m3u8-dl;
   mockoon = self.packages.${system}.mockoon;
+  vivaldi-wayland = self.packages.${system}.vivaldi-wayland;
 in
 {
   imports = [
@@ -50,25 +51,6 @@ in
           in
           assert result != haystack;
           result;
-
-        # Source #1: https://github.com/NixOS/nixpkgs/pull/292148#issuecomment-2343586641
-        # Source #2: https://github.com/matklad/config/blob/8062c8b8a15eabc7e623d2dab9e98cc8b26bdc48/hosts/packages.nix#L6-L18
-        vivaldi = (
-          (pkgs.vivaldi.overrideAttrs (oldAttrs: {
-            buildPhase =
-              replaceStringsEnsuringReplaced
-                [ "for f in libGLESv2.so libqt5_shim.so ; do" ]
-                [ "for f in libGLESv2.so libqt5_shim.so libqt6_shim.so ; do" ]
-                oldAttrs.buildPhase;
-          })).override
-            {
-              qt5 = pkgs.qt6;
-              commandLineArgs = [ "--ozone-platform=wayland" ];
-              # The following two are just my preference, feel free to leave them out
-              proprietaryCodecs = true;
-              enableWidevine = true;
-            }
-        );
 
         rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
           postInstall =
@@ -149,7 +131,7 @@ in
         chromium
         discord-canary
         mullvad-vpn
-        vivaldi
+        vivaldi-wayland
 
         # Misc
         fd
