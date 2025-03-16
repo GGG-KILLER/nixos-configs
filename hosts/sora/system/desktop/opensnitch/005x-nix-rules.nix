@@ -50,12 +50,12 @@ in
       builtins.genList (
         x:
         let
-          id = toString (1 + x);
+          user = "nixbld${toString (1 + x)}";
         in
         {
-          name = "${getSeq (1 + x)}-nix-allow-nixbld${id}-network";
+          name = "${getSeq (1 + x)}-nix-allow-${user}-network";
           value = {
-            name = "${getSeq (1 + x)}-nix-allow-nixbld${id}-network";
+            name = "${getSeq (1 + x)}-nix-allow-${user}-network";
             created = "1970-01-01T00:00:00Z";
             enabled = true;
             action = "allow";
@@ -67,7 +67,7 @@ in
                 {
                   type = "simple";
                   operand = "user.id";
-                  data = "nixbld${id}";
+                  data = config.users.users.${user}.uid;
                 }
                 {
                   type = "simple";
@@ -85,6 +85,6 @@ in
             };
           };
         }
-      ) 32
+      ) config.nix.nrBuildUsers
     );
 }
