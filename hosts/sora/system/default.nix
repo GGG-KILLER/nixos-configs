@@ -9,6 +9,7 @@
     ./fonts.nix
     ./hardening.nix
     ./kernel.nix
+    ./libvirtd.nix
     ./yubikey.nix
   ];
 
