@@ -4,3 +4,5 @@
 0.0.0.0 nix-community.cachix.org
 0.0.0.0 cache.nixos.org
 0.0.0.0 tarballs.nixos.org
+0.0.0.0 download.jetbrains.com
+0.0.0.0 download-cdn.jetbrains.com
