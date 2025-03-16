@@ -31,13 +31,6 @@ in
               operand = "dest.port";
               data = "443";
             }
-            {
-              type = "lists";
-              operand = "lists.domains";
-              data = pkgs.linkFarm "nix-allowed-domains" {
-                "nix-allowed.txt" = ./custom/nix-allowed.txt;
-              };
-            }
           ];
         };
       };
@@ -73,13 +66,6 @@ in
                   type = "simple";
                   operand = "dest.port";
                   data = "443";
-                }
-                {
-                  type = "lists";
-                  operand = "lists.domains";
-                  data = pkgs.linkFarm "nix-allowed-domains" {
-                    "nix-allowed.txt" = ./custom/nix-allowed.txt;
-                  };
                 }
               ];
             };
