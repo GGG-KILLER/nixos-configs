@@ -4,7 +4,7 @@
     ./audio
     ./opensnitch
     ./kde.nix
-    ./rustdesk.nix
+    # ./rustdesk.nix # TODO: Uncomment once NixOS/nixpkgs#390171 hits stable.
   ];
 
   # Android
