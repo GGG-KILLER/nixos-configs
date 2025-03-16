@@ -222,12 +222,7 @@
         bin = "shellcheck";
         profile = "shellcheck.profile";
       };
-      spectacle = mkBin {
-        pkg = pkgs.kdePackages.spectacle;
-        bin = "spectacle";
-        profile = "spectacle.profile";
-        desktop = "org.kde.spectacle.desktop";
-      };
+      # NOTE: Spectacle doesn't work with firejail
       # ssh-agent = mkBin {
       #   pkg = pkgs.openssh;
       #   bin = "ssh-agent";
