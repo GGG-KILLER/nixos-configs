@@ -1,7 +1,19 @@
-{ inputs, pkgs, ... }:
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   nix = {
     package = pkgs.nixVersions.latest;
+
+    # Check config
+    checkConfig = true;
+    checkAllErrors = true;
+
+    # Disable channels
+    channel.enable = false;
 
     # Flakes
     settings.experimental-features = [
@@ -11,18 +23,10 @@
       "flakes"
       "nix-command"
     ];
-    registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-      nur.flake = inputs.nur;
-      home-manager.flake = inputs.home-manager;
-    };
+    registry = lib.mapAttrs' (name: value: lib.nameValuePair name { flake = value; }) inputs;
 
     # Path Things
-    nixPath = [
-      "nixpkgs=${inputs.nixpkgs}"
-      "nur=${inputs.nur}"
-      "home-manager=${inputs.home-manager}"
-    ];
+    nixPath = lib.mapAttrsToList (name: value: "${name}=${value}") inputs;
 
     # Auto Optimise the Store
     settings.auto-optimise-store = true;

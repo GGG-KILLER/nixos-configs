@@ -237,10 +237,6 @@ in
       # opensnitch-ui.enable = true;
     };
 
-    xdg.configFile."nix/nix.conf".text = ''
-      access-tokens = github.com=${config.my.secrets.users.ggg.nixGithubToken}
-    '';
-
     # TODO: add [xdg.desktopEntries](https://nix-community.github.io/home-manager/options.html#opt-xdg.desktopEntries) for seamlessrdp
     xdg.desktopEntries = {
       # ilspy = {

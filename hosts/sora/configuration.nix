@@ -26,10 +26,6 @@
   #   system = "x86_64-linux";
   # };
 
-  nix.extraOptions = ''
-    !include ${config.age.secrets.nix-github-token.path}
-  '';
-
   # Overlays
   nixpkgs.overlays = [ inputs.nix-vscode-extensions.overlays.default ];
 
@@ -41,6 +37,12 @@
 
   # Enable broken stuff (Reason)
   # nixpkgs.config.allowBroken = true;
+
+  nix.daemonCPUSchedPolicy = "idle";
+  nix.daemonIOSchedClass = "idle";
+  nix.extraOptions = ''
+    !include ${config.age.secrets.nix-github-token.path}
+  '';
 
   # # Enable CA derivations by default # TODO: Enable when I have enough patience to rebuild everything
   # nixpkgs.config.contentAddressedByDefault = true;
