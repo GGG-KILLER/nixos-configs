@@ -2,7 +2,7 @@
 # I'm not including it to ensure I only get the parts I want.
 { lib, ... }:
 let
-  inherit (lib) mkForce mkOverride mkDefault;
+  inherit (lib) mkForce;
 in
 {
   # Cannot use hardened kernel otherwise opensnitchd's eBPF mode doesn't work.
@@ -83,7 +83,7 @@ in
   ];
 
   # Hide kptrs even for processes with CAP_SYSLOG
-  boot.kernel.sysctl."kernel.kptr_restrict" = mkOverride 500 2;
+  boot.kernel.sysctl."kernel.kptr_restrict" = 2;
 
   # Keep bpf() JIT enabled but harden it
   boot.kernel.sysctl."net.core.bpf_jit_harden" = 2;
@@ -94,18 +94,18 @@ in
   # Reverse path filtering removed for VPN
 
   # Ignore broadcast ICMP (mitigate SMURF)
-  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_broadcasts" = mkDefault true;
+  boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_broadcasts" = true;
 
   # Ignore incoming ICMP redirects (note: default is needed to ensure that the
   # setting is applied to interfaces added after the sysctls are set)
-  boot.kernel.sysctl."net.ipv4.conf.all.accept_redirects" = mkDefault false;
-  boot.kernel.sysctl."net.ipv4.conf.all.secure_redirects" = mkDefault false;
-  boot.kernel.sysctl."net.ipv4.conf.default.accept_redirects" = mkDefault false;
-  boot.kernel.sysctl."net.ipv4.conf.default.secure_redirects" = mkDefault false;
-  boot.kernel.sysctl."net.ipv6.conf.all.accept_redirects" = mkDefault false;
-  boot.kernel.sysctl."net.ipv6.conf.default.accept_redirects" = mkDefault false;
+  boot.kernel.sysctl."net.ipv4.conf.all.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.all.secure_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.secure_redirects" = false;
+  boot.kernel.sysctl."net.ipv6.conf.all.accept_redirects" = false;
+  boot.kernel.sysctl."net.ipv6.conf.default.accept_redirects" = false;
 
   # Ignore outgoing ICMP redirects (this is ipv4 only)
-  boot.kernel.sysctl."net.ipv4.conf.all.send_redirects" = mkDefault false;
-  boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" = mkDefault false;
+  boot.kernel.sysctl."net.ipv4.conf.all.send_redirects" = false;
+  boot.kernel.sysctl."net.ipv4.conf.default.send_redirects" = false;
 }
