@@ -44,21 +44,6 @@ in
   home-manager.users.ggg = {
     home.packages = (
       with pkgs;
-      let
-        replaceStringsEnsuringReplaced =
-          needles: replacements: haystack:
-          let
-            result = lib.replaceStrings needles replacements haystack;
-          in
-          assert result != haystack;
-          result;
-
-        rider = pkgs.jetbrains.rider.overrideAttrs (attrs: {
-          postInstall =
-            replaceStringsEnsuringReplaced [ "${pkgs.dotnetCorePackages.sdk_8_0-source}" ] [ "${dotnetRoot}" ]
-              attrs.postInstall;
-        });
-      in
       [
         # Audio
         audiorelay
@@ -81,7 +66,7 @@ in
         nixfmt-rfc-style
         nodejs_latest
         powershell
-        rider
+        jetbrains.rider
         tokei
 
         # Downloads
