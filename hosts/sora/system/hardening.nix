@@ -1,13 +1,11 @@
 # Copied from: https://github.com/NixOS/nixpkgs/blob/79aaddff29307748c351a13d66f9d1fba4218624/nixos/modules/profiles/hardened.nix
 # I'm not including it to ensure I only get the parts I want.
-{ config, lib, ... }:
+{ lib, ... }:
 let
-  inherit (lib) mkForce mkDefault mkOverride;
+  inherit (lib) mkForce mkOverride mkDefault;
 in
 {
-  ##
-  ## Cannot use hardened kernel otherwise opensnitchd's eBPF mode doesn't work.
-  ##
+  # Cannot use hardened kernel otherwise opensnitchd's eBPF mode doesn't work.
 
   # Restrict nix to only root and my user
   nix.settings.allowed-users = mkForce [
@@ -15,9 +13,13 @@ in
     "ggg"
   ];
 
-  # Use a safer memory allocator that uses LLVM's AddressSanitizer
-  environment.memoryAllocator.provider = "scudo";
-  environment.variables.SCUDO_OPTIONS = "ZeroContents=1";
+  # NOTE: cannot use alternative allocators because Jetbrains Rider breaks.
+  # environment.memoryAllocator.provider = "scudo";
+  # environment.variables.SCUDO_OPTIONS = lib.concatStringsSep ":" [
+  #   "dealloc_type_mismatch=true"
+  #   "delete_size_mismatch=true"
+  #   "may_return_null=false"
+  # ];
 
   # Disable loading of kernel modules after booting
   security.lockKernelModules = true;
@@ -28,12 +30,12 @@ in
   security.forcePageTableIsolation = true;
 
   # This is required by podman to run containers in rootless mode.
-  security.unprivilegedUsernsClone = mkDefault config.virtualisation.containers.enable;
+  security.unprivilegedUsernsClone = true;
 
   security.virtualisation.flushL1DataCache = "always";
 
   security.apparmor.enable = true;
-  security.apparmor.killUnconfinedConfinables = mkDefault true;
+  security.apparmor.killUnconfinedConfinables = true;
 
   boot.kernelParams = [
     # Don't merge slabs
@@ -83,17 +85,13 @@ in
   # Hide kptrs even for processes with CAP_SYSLOG
   boot.kernel.sysctl."kernel.kptr_restrict" = mkOverride 500 2;
 
-  ##
-  ## Keep bpf() JIT enabled but harden it
-  ##
+  # Keep bpf() JIT enabled but harden it
   boot.kernel.sysctl."net.core.bpf_jit_harden" = 2;
 
   # Disable ftrace debugging
-  boot.kernel.sysctl."kernel.ftrace_enabled" = mkDefault false;
+  boot.kernel.sysctl."kernel.ftrace_enabled" = false;
 
-  ##
-  ## Reverse path filtering removed for VPN
-  ##
+  # Reverse path filtering removed for VPN
 
   # Ignore broadcast ICMP (mitigate SMURF)
   boot.kernel.sysctl."net.ipv4.icmp_echo_ignore_broadcasts" = mkDefault true;
