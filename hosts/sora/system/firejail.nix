@@ -48,11 +48,11 @@
         profile = "ark.profile";
         desktop = "org.kde.ark.desktop";
       };
-      # aria2c = mkBin {
-      #   pkg = pkgs.aria2;
-      #   bin = "aria2c";
-      #   profile = "aria2c.profile";
-      # };
+      aria2c = mkBin {
+        pkg = pkgs.aria2;
+        bin = "aria2c";
+        profile = "aria2c.profile";
+      };
       # b2sum = mkBin {
       #   pkg = pkgs.coreutils-full;
       #   bin = "b2sum";
@@ -83,21 +83,21 @@
         profile = "dolphin.profile";
         desktop = "org.kde.dolphin.desktop";
       };
-      # ffmpeg = mkBin {
-      #   pkg = pkgs.ffmpeg;
-      #   bin = "ffmpeg";
-      #   profile = "ffmpeg.profile";
-      # };
-      # ffplay = mkBin {
-      #   pkg = pkgs.ffmpeg;
-      #   bin = "ffplay";
-      #   profile = "ffplay.profile";
-      # };
-      # ffprobe = mkBin {
-      #   pkg = pkgs.ffmpeg;
-      #   bin = "ffprobe";
-      #   profile = "ffprobe.profile";
-      # };
+      ffmpeg = mkBin {
+        pkg = pkgs.ffmpeg;
+        bin = "ffmpeg";
+        profile = "ffmpeg.profile";
+      };
+      ffplay = mkBin {
+        pkg = pkgs.ffmpeg;
+        bin = "ffplay";
+        profile = "ffplay.profile";
+      };
+      ffprobe = mkBin {
+        pkg = pkgs.ffmpeg;
+        bin = "ffprobe";
+        profile = "ffprobe.profile";
+      };
       # file = mkBin {
       #   pkg = pkgs.file;
       #   bin = "file";
@@ -145,26 +145,26 @@
         desktop = "mpv.desktop";
         profile = "mpv.profile";
       };
-      # nano = mkBin {
-      #   pkg = pkgs.nano;
-      #   bin = "nano";
-      #   profile = "nano.profile";
-      # };
-      # node = mkBin {
-      #   pkg = pkgs.nodejs_latest;
-      #   bin = "node";
-      #   profile = "node.profile";
-      # };
-      # npm = mkBin {
-      #   pkg = pkgs.nodejs_latest;
-      #   bin = "npm";
-      #   profile = "npm.profile";
-      # };
-      # npx = mkBin {
-      #   pkg = pkgs.nodejs_latest;
-      #   bin = "npx";
-      #   profile = "npx.profile";
-      # };
+      nano = mkBin {
+        pkg = pkgs.nano;
+        bin = "nano";
+        profile = "nano.profile";
+      };
+      node = mkBin {
+        pkg = pkgs.nodejs_latest;
+        bin = "node";
+        profile = "node.profile";
+      };
+      npm = mkBin {
+        pkg = pkgs.nodejs_latest;
+        bin = "npm";
+        profile = "npm.profile";
+      };
+      npx = mkBin {
+        pkg = pkgs.nodejs_latest;
+        bin = "npx";
+        profile = "npx.profile";
+      };
       # TODO: add OBS
       okular = mkBin {
         pkg = pkgs.kdePackages.okular;
@@ -177,11 +177,11 @@
       #   bin = "ping";
       #   profile = "ping.profile";
       # };
-      # rnano = mkBin {
-      #   pkg = pkgs.nano;
-      #   bin = "rnano";
-      #   profile = "rnano.profile";
-      # };
+      rnano = mkBin {
+        pkg = pkgs.nano;
+        bin = "rnano";
+        profile = "rnano.profile";
+      };
       # scp = mkBin {
       #   pkg = pkgs.openssh;
       #   bin = "scp";
@@ -254,11 +254,11 @@
       #   bin = "whois";
       #   profile = "whois.profile";
       # };
-      # yarn = mkBin {
-      #   pkg = pkgs.corepack_latest;
-      #   bin = "yarn";
-      #   profile = "yarn.profile";
-      # };
+      yarn = mkBin {
+        pkg = pkgs.corepack_latest;
+        bin = "yarn";
+        profile = "yarn.profile";
+      };
       yt-dlp = mkBin {
         pkg = pkgs.yt-dlp;
         bin = "yt-dlp";
