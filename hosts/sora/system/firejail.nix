@@ -77,12 +77,12 @@
         profile = "DiscordCanary.profile";
         desktop = "discord-canary.desktop";
       };
-      dolphin = mkBin {
-        pkg = pkgs.kdePackages.dolphin;
-        bin = "dolphin";
-        profile = "dolphin.profile";
-        desktop = "org.kde.dolphin.desktop";
-      };
+      # dolphin = mkBin {
+      #   pkg = pkgs.kdePackages.dolphin;
+      #   bin = "dolphin";
+      #   profile = "dolphin.profile";
+      #   desktop = "org.kde.dolphin.desktop";
+      # };
       ffmpeg = mkBin {
         pkg = pkgs.ffmpeg;
         bin = "ffmpeg";
