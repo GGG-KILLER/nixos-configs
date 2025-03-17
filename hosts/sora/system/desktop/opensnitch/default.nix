@@ -10,8 +10,8 @@
     ./010x-private-rules.nix
   ];
 
-  services.opensnitch.enable = true;
+  services.opensnitch.enable = false; # TODO: Enable when I have patience to deal with it.
   services.opensnitch.settings.ProcMonitorMethod = "ebpf";
   services.opensnitch.settings.Firewall = "iptables";
-  services.opensnitch.settings.LogLevel = 1;
+  services.opensnitch.settings.LogLevel = 0;
 }
