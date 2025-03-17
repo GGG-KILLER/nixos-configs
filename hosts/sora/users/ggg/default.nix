@@ -120,6 +120,7 @@ in
         vivaldi-wayland
 
         # Misc
+        duc
         fd
         imhex
         ipgen-cli
