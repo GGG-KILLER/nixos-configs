@@ -2,6 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
+  config,
   inputs,
   nur-no-pkgs,
   ...
@@ -24,6 +25,10 @@
   #   gcc.tune = "znver3";
   #   system = "x86_64-linux";
   # };
+
+  nix.extraOptions = ''
+    !include ${config.age.secrets.nix-github-token.path}
+  '';
 
   # Overlays
   nixpkgs.overlays = [ inputs.nix-vscode-extensions.overlays.default ];

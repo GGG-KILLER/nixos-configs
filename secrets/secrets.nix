@@ -25,6 +25,10 @@ in
     ggg
     sora
   ];
+  "sora/nix-github-token.age".publicKeys = [
+    ggg
+    sora
+  ];
 
   # Shiro
   "shiro/backup_password.age".publicKeys = [
