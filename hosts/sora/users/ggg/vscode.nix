@@ -43,6 +43,9 @@ let
     "nix.serverPath" = getExe pkgs.nixd;
     "nix.formatterPath" = getExe pkgs.nixfmt-rfc-style;
     "nix.serverSettings"."nixd"."formatting"."command" = [ (getExe pkgs.nixfmt-rfc-style) ];
+
+    # LTeX Language Client
+    "ltex.ltex-ls.path" = toString (lib.getBin pkgs.ltex-ls-plus);
   };
 in
 {
@@ -83,7 +86,6 @@ in
               (updateExt (exts: exts.ms-vscode-remote.remote-ssh))
               # (updateExt (exts: exts.rust-lang.rust-analyzer)) # TODO: Uncomment when NixOS/nixpkgs#383049 gets merged
               (updateExt (exts: exts.timonwong.shellcheck))
-              (updateExt (exts: exts.valentjn.vscode-ltex))
             ]
           )
           ++ (with pkgs.vscode-marketplace; [
@@ -96,6 +98,7 @@ in
             jashoo.dotnetinsights
             jnoortheen.nix-ide
             l13rary.l13-diff
+            ltex-plus.vscode-ltex-plus
             mhutchie.git-graph
             mikestead.dotenv
             mkhl.direnv
