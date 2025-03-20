@@ -12,12 +12,12 @@ let
   dotnet-sdk =
     with pkgs.dotnetCorePackages;
     combinePackages [
-      sdk_10_0
+      # sdk_10_0 # TODO: Re-enable when it actually has useful things and doesn't break C# DevKit and Rider
       sdk_9_0
       sdk_8_0
     ];
-  dotnetRoot = dotnet-sdk;
-  dotnetSdk = "${dotnet-sdk}/share/dotnet/sdk";
+  dotnetRoot = "${dotnet-sdk}/share/dotnet";
+  dotnetSdk = "${dotnetRoot}/sdk";
 
   agenix = inputs.agenix.packages.${system}.default;
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
@@ -40,6 +40,10 @@ in
     config.boot.kernelPackages.turbostat
     dotnet-sdk
   ];
+
+  environment.etc = {
+    "dotnet/install_location".text = dotnetRoot;
+  };
 
   home-manager.users.ggg = {
     home.packages = (
