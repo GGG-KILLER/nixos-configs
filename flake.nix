@@ -14,8 +14,6 @@
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
-      inputs.flake-compat.follows = "flake-compat";
     };
     agenix = {
       url = "github:ryantm/agenix";
@@ -25,7 +23,6 @@
     git-crypt-agessh = {
       url = "github:GGG-KILLER/git-crypt-agessh";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
     };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
@@ -38,36 +35,14 @@
     ipgen-cli = {
       url = "github:ipgen/cli";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.crane.follows = "crane";
-      inputs.fenix.follows = "fenix-ipgen-cli";
     };
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
     };
     stackpkgs = {
       url = "github:ryze312/stackpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Inputs needed by others
-    crane = {
-      url = "github:ipetkov/crane/8b08e96c9af8c6e3a2b69af5a7fa168750fcf88e";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.flake-compat.follows = "flake-compat";
-    };
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
-    fenix-ipgen-cli = {
-      url = "github:nix-community/fenix/cc13ba51f1a3b8eaa4c03fbe46d029effbbcb3c1";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-analyzer-src.follows = "ipgen-cli";
     };
   };
 
