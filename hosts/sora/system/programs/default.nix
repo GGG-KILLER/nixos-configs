@@ -92,7 +92,7 @@ in
       git-crypt-agessh
       xca
       yubikey-manager
-      yubikey-manager-qt
+      yubioath-flutter
 
       # Games
       (prismlauncher.override {
