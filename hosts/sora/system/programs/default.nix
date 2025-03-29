@@ -47,7 +47,6 @@ let
   inherit (self.packages.${system})
     kemono-dl
     m3u8-dl
-    mockoon
     vivaldi-wayland
     ;
   inherit (config.boot.kernelPackages) turbostat;
