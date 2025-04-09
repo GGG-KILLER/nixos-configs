@@ -22,5 +22,11 @@
           shiroEnvironmentFile = config.age.secrets.shiro-backup-envfile.path;
         };
       })
+      (mkCommand {
+        dependencies = with pkgs; [ streamlink ];
+        buildInputs = with pkgs; [ bash ];
+
+        filePath = ./dl-twitch-stream;
+      })
     ];
 }

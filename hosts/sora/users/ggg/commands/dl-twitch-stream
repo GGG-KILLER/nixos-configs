@@ -1,0 +1,89 @@
+#! /usr/bin/env bash
+set -euo pipefail
+
+function usage() {
+    echo >&2 "Usage: $(basename "$0") [-t oauth] [--token oauth] <streamer-username> <stream-name> -- [streamlink-args...]"
+    echo >&2 '    -t token, --token token'
+    echo >&2 '        Sets the twitch OAuth token, in case you have Twitch Turbo or a Subscription.'
+    echo >&2 '        Obtain by running the following snippet in the Browser JavaScript Console:'
+    echo >&2 '            document.cookie.split("; ").find(item=>item.startsWith("auth-token="))?.split("=")[1]'
+    echo >&2 '    streamer-username'
+    echo >&2 '        The streamer'\''s username (NOT THEIR DISPLAY NAME). Can be obtained from the end of the URL.'
+    echo >&2 '        Example:'
+    echo >&2 '            A streamer named "Super Cool Streamer" streams over at https://www.twitch.tv/example'
+    echo >&2 '            Their streamer username is: example'
+    echo >&2 '    streamlink-args'
+    echo >&2 '        Extra arguments to pass to streamlink, they are passed without any interpretation due to being past --.'
+    echo >&2 '        The -- IS REQUIRED.'
+    echo >&2 'Examples:'
+    echo >&2 "        Download PremierTwo's stream using a token:  $(basename "$0") -t 4d457c53b8f7eb99b9bf6f9103cdc5 premiertwo"
+    echo >&2 "        Download PraygeRock's stream using a token:  $(basename "$0") --token 6194a8e78657c2ae36f1591035c1c4 PraygeRock"
+    echo >&2 "        Download MichiMochievee's stream (with ads): $(basename "$0") MichiMochievee"
+}
+
+function run() {
+    echo "$ $*"
+    exec "$@"
+}
+
+TWITCH_OAUTH_TOKEN=
+TWITCH_BROADCASTER=
+TWITCH_STREAM_NAME=
+STREAMLINK_EXTRA_ARGS=()
+
+while [ "$#" -gt 0 ]; do
+    case $1 in
+    -t | --token)
+        TWITCH_OAUTH_TOKEN="$2"
+        shift # Don't pass 2 since it'll be done at the loop end.
+        ;;
+    --)
+        shift # Skip --
+        STREAMLINK_EXTRA_ARGS=("$@")
+        ;;
+    *)
+        if [[ -n "$TWITCH_BROADCASTER" && -n "$TWITCH_STREAM_NAME" ]]; then
+            STREAMLINK_EXTRA_ARGS=("$@")
+        elif [[ -z "$TWITCH_BROADCASTER" ]]; then
+            TWITCH_BROADCASTER="$1"
+        else
+            TWITCH_STREAM_NAME="$1"
+        fi
+        ;;
+    esac
+    shift
+done
+
+if [[ -z "$TWITCH_BROADCASTER" ]]; then
+    usage
+    echo >&2 'error: no streamer username provided.'
+    exit 1
+fi
+
+if [[ -z "$TWITCH_STREAM_NAME" ]]; then
+    usage
+    echo >&2 'error: no stream name provided.'
+    exit 1
+fi
+
+if [[ -n "$TWITCH_OAUTH_TOKEN" ]]; then
+    STREAMLINK_EXTRA_ARGS+=(--twitch-api-header "Authorization=OAuth $TWITCH_OAUTH_TOKEN")
+fi
+
+TWITCH_STREAM_NAME="$(sed -e 's/:/ -/g; s/[^[:alnum:][:blank:]#$%()*+,.=_-]//g; s/^[[:space:]]*//; s/[[:space:]]*$//' <<<"$TWITCH_STREAM_NAME")"
+
+run streamlink \
+    --hls-live-edge 99999 \
+    --stream-timeout 200 \
+    --stream-segment-timeout 200 \
+    --stream-segment-threads 5 \
+    --ffmpeg-fout matroska \
+    --ffmpeg-video-transcode av1 \
+    --ffmpeg-audio-transcode opus \
+    --twitch-disable-ads \
+    --retry-streams 10 \
+    --retry-max 5 \
+    -o "$TWITCH_STREAM_NAME".mkv \
+    --url https://www.twitch.tv/"$TWITCH_BROADCASTER" \
+    --default-stream 1080p60,best \
+    "${STREAMLINK_EXTRA_ARGS[@]}"
