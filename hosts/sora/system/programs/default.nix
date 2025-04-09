@@ -3,12 +3,10 @@
   self,
   inputs,
   pkgs,
-  # lib,
   config,
   ...
 }:
 let
-  # inherit (lib) optionalString;
   dotnet-sdk = (
     with pkgs.dotnetCorePackages;
     combinePackages [
@@ -16,27 +14,8 @@ let
       sdk_9_0
       sdk_8_0
     ]
-  )
-  # .overrideAttrs
-  #   (prev: {
-  #     postInstall =
-  #       prev.postInstall or ""
-  #       + ''
-  #         # Un-link things to avoid problems
-  #         find "$out" -type l -exec sh -c 'PREV=$(realpath -- "$1") && echo "  $PREV -> $1" && rm -- "$1" && cp --archive --dereference --recursive -- "$PREV" "$1"' resolver {} \;
-
-  #         # Fix dotnet not finding host/fxr
-  #         rm "$out"/bin/dotnet
-  #         ln -s "$out"/share/dotnet/dotnet "$out"/bin/dotnet
-  #       ''
-  #       + optionalString (prev.src ? man) ''
-  #         # Un-link things to avoid problems
-  #         find "$man" -type l -exec sh -c 'PREV=$(realpath -- "$1") && echo "  $PREV -> $1" && rm -- "$1" && cp --archive --dereference --recursive -- "$PREV" "$1"' resolver {} \;
-  #       '';
-  #   })
-  ;
+  );
   dotnetRoot = "${dotnet-sdk}/share/dotnet";
-  # dotnetSdk = "${dotnetRoot}/sdk";
 
   agenix = inputs.agenix.packages.${system}.default;
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
@@ -145,10 +124,6 @@ in
   environment.variables = {
     EDITOR = "code --wait";
     VISUAL = "code --wait";
-
-    # DOTNET_ROOT = dotnetRoot;
-    # MSBuildSdksPath = "${dotnetSdk}/${head dotnet-sdk.versions}/Sdks";
-    # MSBUILD_EXE_PATH = "${dotnetSdk}/${head dotnet-sdk.versions}/MSBuild.dll";
   };
 
   environment.etc = {
