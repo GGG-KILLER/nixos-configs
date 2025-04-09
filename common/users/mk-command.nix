@@ -20,7 +20,7 @@ let
       builtins.concatStringsSep "\n" (
         flip mapAttrsToList replacements (
           name: val: ''
-            substituteInPlace $out/bin/${fileName} \
+            substituteInPlace $out/lib/${fileName} \
               --subst-var-by "${toString name}" "${toString val}"
           ''
         )
@@ -32,12 +32,12 @@ runCommand "${fileName}-script"
     nativeBuildInputs = [ makeWrapper ];
   }
   ''
-    mkdir -p $out/bin
-    cp ${filePath} $out/bin/${fileName}
-    chmod 0755 $out/bin/${fileName}
+    mkdir -p $out/bin $out/lib
+    cp ${filePath} $out/lib/${fileName}
+    chmod 0755 $out/lib/${fileName}
 
-    patchShebangs --host $out/bin/${fileName}
+    patchShebangs --host $out/lib/${fileName}
     ${replaceCmd}
 
-    wrapProgram $out/bin/${fileName} --prefix PATH : ${binPath}
+    makeWrapper $out/lib/${fileName} $out/bin/${fileName} --inherit-argv0 --prefix PATH : ${binPath}
   ''
