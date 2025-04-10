@@ -4,6 +4,9 @@
   boot.supportedFilesystems = [
     "zfs"
     "ntfs"
+    "ext4"
+    "ext3"
+    "btrfs"
   ];
 
   # Make the root partition ephemeral
