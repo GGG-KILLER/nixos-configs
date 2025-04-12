@@ -17,6 +17,18 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_12; # TODO: Increase when ZFS supports 6.13
 
+  # Add ext4 support
+  system.fsPackages = [ pkgs.e2fsprogs ];
+  boot.supportedFilesystems = {
+    ext3 = true;
+    ext4 = true;
+    btrfs = true;
+  };
+  boot.kernelModules = [
+    "ext2"
+    "ext4"
+  ];
+
   # Scheduler
   services.scx.enable = true;
   services.scx.scheduler = "scx_lavd";

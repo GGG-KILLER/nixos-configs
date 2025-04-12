@@ -1,13 +1,10 @@
 { lib, ... }:
 {
   # ZFS boot settings.
-  boot.supportedFilesystems = [
-    "zfs"
-    "ntfs"
-    "ext4"
-    "ext3"
-    "btrfs"
-  ];
+  boot.supportedFilesystems = {
+    zfs = true;
+    ntfs = true;
+  };
 
   # Make the root partition ephemeral
   boot.initrd.postDeviceCommands = lib.mkAfter ''
