@@ -71,12 +71,12 @@
         desktop = "chromium-browser.desktop";
       };
       # TODO: vscode
-      DiscordCanary = mkBin {
-        pkg = pkgs.discord-canary;
-        bin = "DiscordCanary";
-        profile = "DiscordCanary.profile";
-        desktop = "discord-canary.desktop";
-      };
+      # DiscordCanary = mkBin {
+      #   pkg = pkgs.discord-canary;
+      #   bin = "DiscordCanary";
+      #   profile = "DiscordCanary.profile";
+      #   desktop = "discord-canary.desktop";
+      # };
       # dolphin = mkBin {
       #   pkg = pkgs.kdePackages.dolphin;
       #   bin = "dolphin";
