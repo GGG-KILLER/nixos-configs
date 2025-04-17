@@ -71,12 +71,11 @@
         desktop = "chromium-browser.desktop";
       };
       # TODO: vscode
-      # DiscordCanary = mkBin {
-      #   pkg = pkgs.discord-canary;
-      #   bin = "DiscordCanary";
-      #   profile = "DiscordCanary.profile";
-      #   desktop = "discord-canary.desktop";
-      # };
+      discordcanary = mkBin {
+        pkg = pkgs.discord-canary;
+        profile = "discord-canary.profile";
+        desktop = "discord-canary.desktop";
+      };
       # dolphin = mkBin {
       #   pkg = pkgs.kdePackages.dolphin;
       #   bin = "dolphin";
@@ -264,5 +263,25 @@
         bin = "yt-dlp";
         profile = "yt-dlp.profile";
       };
+    };
+
+    environment.etc = {
+      "firejail/okular.local".text = ''
+        # Allow Okular to access stuff here
+        noblacklist ''${HOME}/Documents
+        noblacklist ''${HOME}/Downloads
+        noblacklist ''${HOME}/Pictures
+      '';
+
+      "firejail/vivaldi-stable.local".text = ''
+        # Allow Vivaldi to access stuff here
+        noblacklist ''${HOME}/Documents
+        noblacklist ''${HOME}/Downloads
+        noblacklist ''${HOME}/Pictures
+
+        whitelist ''${HOME}/Documents
+        whitelist ''${HOME}/Downloads
+        whitelist ''${HOME}/Pictures
+      '';
     };
 }
