@@ -115,6 +115,7 @@ in
       imhex
       ipgen-cli
       mockoon
+      parted
       turbostat
       wl-clipboard
       zenmonitor
