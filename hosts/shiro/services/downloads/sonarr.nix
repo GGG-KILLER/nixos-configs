@@ -1,78 +1,23 @@
 { config, ... }:
 {
-  systemd.services."${config.virtualisation.oci-containers.backend}-sonarr-network" =
-    let
-      backend = config.virtualisation.oci-containers.backend;
-    in
-    {
-      wantedBy = [ "multi-user.target" ];
-      after = [
-        "docker.service"
-        "docker.socket"
-      ];
-      before = [
-        "${backend}-sonarr.service"
-        "${backend}-jackett.service"
-      ];
-      requiredBy = [
-        "${backend}-sonarr.service"
-        "${backend}-jackett.service"
-      ];
-
-      serviceConfig =
-        let
-          backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
-        in
-        {
-          Type = "simple";
-          RemainAfterExit = "yes";
-
-          ExecStartPre = "-${backendBin} network rm sonarr";
-          ExecStart = "${backendBin} network create sonarr";
-          ExecStop = "${backendBin} network rm sonarr";
-        };
+  services.sonarr.enable = true;
+  services.sonarr.user = "my-sonarr";
+  services.sonarr.group = "data-members";
+  services.sonarr.dataDir = "/zfs-main-pool/data/sonarr";
+  services.sonarr.settings = {
+    update.mechanism = "external";
+    server = {
+      port = config.shiro.ports.sonarr;
+      bindaddress = "127.0.0.1";
     };
-
-  virtualisation.oci-containers.containers.sonarr = {
-    image = "lscr.io/linuxserver/sonarr:latest";
-    ports = [ "${toString config.shiro.ports.sonarr}:8989" ];
-    dependsOn = [ "jackett" ];
-    environment = {
-      PUID = toString config.users.users.my-sonarr.uid;
-      GUID = toString config.users.groups.data-members.gid;
-      TZ = config.time.timeZone;
-    };
-    volumes = [
-      "/zfs-main-pool/data/sonarr:/config"
-      "/zfs-main-pool/data/animu:/mnt/animu"
-      "/zfs-main-pool/data/series:/mnt/series"
-      "/zfs-main-pool/data/h:/mnt/h"
-    ];
-    extraOptions = [
-      "--dns=192.168.1.1"
-      "--ipc=none"
-      "--network=sonarr"
-      "--pull=always"
-    ];
+    log.analyticsEnabled = false;
   };
 
-  virtualisation.oci-containers.containers.jackett = {
-    image = "lscr.io/linuxserver/jackett:latest";
-    ports = [ "${toString config.shiro.ports.jackett}:9117" ];
-    environment = {
-      PUID = toString config.users.users.my-sonarr.uid;
-      GUID = toString config.users.groups.data-members.gid;
-      TZ = config.time.timeZone;
-      AUTO_UPDATE = "true";
-    };
-    volumes = [ "/zfs-main-pool/data/jackett:/config" ];
-    extraOptions = [
-      "--dns=192.168.1.1"
-      "--ipc=none"
-      "--network=sonarr"
-      "--pull=always"
-    ];
-  };
+  services.jackett.enable = true;
+  services.jackett.user = "my-sonarr";
+  services.jackett.group = "data-members";
+  services.jackett.dataDir = "/zfs-main-pool/data/jackett";
+  services.jackett.port = config.shiro.ports.jackett;
 
   # NGINX
   modules.services.nginx.virtualHosts = {
