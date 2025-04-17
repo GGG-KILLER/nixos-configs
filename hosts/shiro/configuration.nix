@@ -22,6 +22,8 @@
     docker-compose
     nvtopPackages.nvidia
     config.boot.kernelPackages.turbostat
+    parted
+    btrfs-progs
   ];
 
   services.openssh.enable = true;
