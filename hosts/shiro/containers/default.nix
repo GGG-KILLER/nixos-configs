@@ -11,7 +11,7 @@
 with lib;
 {
   imports = [
-    # ./downloads # TODO: Re-enable when job again.
+    ./downloads
     # ./misc # TODO: Re-enable when job again.
     ./streaming
     ./pgsql.nix
