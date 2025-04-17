@@ -17,10 +17,12 @@
           profile,
           bin ? null,
           desktop ? null,
+          extraArgs ? [ ],
         }:
         {
           executable = if bin != null then lib.getExe' pkg bin else lib.getExe pkg;
           profile = "${pkgs.firejail}/etc/firejail/${profile}";
+          inherit extraArgs;
         }
         // lib.optionalAttrs (desktop != null) {
           desktop = "${pkg}/share/applications/${desktop}";
@@ -237,12 +239,12 @@
       #   bin = "sum";
       #   profile = "sum.profile";
       # };
-      vivaldi = mkBin {
-        pkg = self.packages.${system}.vivaldi-wayland;
-        bin = "vivaldi";
-        desktop = "vivaldi-stable.desktop";
-        profile = "vivaldi.profile";
-      };
+      # vivaldi = mkBin {
+      #   pkg = self.packages.${system}.vivaldi-wayland;
+      #   bin = "vivaldi";
+      #   desktop = "vivaldi-stable.desktop";
+      #   profile = "vivaldi.profile";
+      # };
       # wget = mkBin {
       #   pkg = pkgs.wget;
       #   bin = "wget";
@@ -265,23 +267,31 @@
       };
     };
 
-    environment.etc = {
-      "firejail/okular.local".text = ''
-        # Allow Okular to access stuff here
-        noblacklist ''${HOME}/Documents
-        noblacklist ''${HOME}/Downloads
-        noblacklist ''${HOME}/Pictures
-      '';
+  environment.etc = {
+    "firejail/firejail.config".text = ''
+      # Allow DRM in browsers
+      browser-allow-drm yes
 
-      "firejail/vivaldi-stable.local".text = ''
-        # Allow Vivaldi to access stuff here
-        noblacklist ''${HOME}/Documents
-        noblacklist ''${HOME}/Downloads
-        noblacklist ''${HOME}/Pictures
+      # Allow YubiKey access
+      browser-disable-u2f no
+    '';
 
-        whitelist ''${HOME}/Documents
-        whitelist ''${HOME}/Downloads
-        whitelist ''${HOME}/Pictures
-      '';
-    };
+    "firejail/okular.local".text = ''
+      # Allow Okular to access stuff here
+      noblacklist ''${HOME}/Documents
+      noblacklist ''${HOME}/Downloads
+      noblacklist ''${HOME}/Pictures
+    '';
+
+    # "firejail/vivaldi-stable.local".text = ''
+    #   # Allow Vivaldi to access stuff here
+    #   noblacklist ''${HOME}/Documents
+    #   noblacklist ''${HOME}/Downloads
+    #   noblacklist ''${HOME}/Pictures
+
+    #   whitelist ''${HOME}/Documents
+    #   whitelist ''${HOME}/Downloads
+    #   whitelist ''${HOME}/Pictures
+    # '';
+  };
 }
