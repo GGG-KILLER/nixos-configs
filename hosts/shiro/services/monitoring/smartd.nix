@@ -31,7 +31,7 @@ in
       # Only run the tests and stuff for the disks we list here
       autodetect = false;
       devices = [
-        { device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS"; }
+        { device = "/dev/disk/by-id/ata-SanDisk_Ultra_II_960GB_170517421132"; }
         { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DMFBJG"; }
         { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DOFBJG"; }
         { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_X03BK19PFBJG"; }
