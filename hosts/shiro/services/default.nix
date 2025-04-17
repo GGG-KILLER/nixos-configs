@@ -4,7 +4,7 @@
     ./backup/restic.nix
     ./downloads
     ./media/danbooru
-    # ./monitoring # TODO: Re-enable when job again.
+    ./monitoring
     # ./nix-pr-tracker # TODO: Re-enable when job again.
     ./security
     ./cloudflared.nix
