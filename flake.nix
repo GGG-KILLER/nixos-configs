@@ -86,7 +86,12 @@
           inherit system;
 
           specialArgs = {
-            inherit system inputs;
+            inherit
+              self
+              system
+              inputs
+              nur-no-pkgs
+              ;
             liveCd = true;
           };
 
@@ -99,7 +104,12 @@
           inherit system;
 
           specialArgs = {
-            inherit system inputs;
+            inherit
+              self
+              system
+              inputs
+              nur-no-pkgs
+              ;
             liveCd = true;
           };
 
