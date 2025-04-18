@@ -22,6 +22,7 @@
     docker-compose
     nvtopPackages.nvidia
     config.boot.kernelPackages.turbostat
+    nmon
     parted
     btrfs-progs
   ];
