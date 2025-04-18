@@ -77,5 +77,10 @@ in
 
       btrfs-progs
     ];
+
+    system.activationScripts.linkConfig = ''
+      # Link source to /var/nixos-config
+      ln -sfn ${toString self} /var/nixos-config
+    '';
   };
 }
