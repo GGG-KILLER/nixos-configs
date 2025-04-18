@@ -39,6 +39,9 @@ in
       self.nixosConfigurations.shiro.config.system.build.toplevel
     ];
 
+    # Enable ZFS
+    boot.zfs.package = pkgs.zfs_unstable;
+
     # NVIDIA drivers are unfree.
     nixpkgs.config.allowUnfree = true;
 
@@ -71,6 +74,8 @@ in
       zip
 
       tmux
+
+      btrfs-progs
     ];
   };
 }
