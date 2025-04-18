@@ -18,6 +18,9 @@
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
 
+  # Enable CUDA support for everything
+  nixpkgs.config.cudaSupport = true;
+
   environment.systemPackages = with pkgs; [
     docker-compose
     nvtopPackages.nvidia
