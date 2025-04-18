@@ -1,4 +1,5 @@
 {
+  self,
   lib,
   config,
   pkgs,
@@ -29,8 +30,14 @@ in
     # Use latest kernel if possible.
     # boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    # ISO naming.
-    isoImage.isoBaseName = "${config.system.nixos.distroId}-${config.isoImage.edition}";
+    # ISO Options
+    isoImage.makeEfiBootable = true;
+    isoImage.includeSystemBuildDependencies = true;
+    isoImage.makeUsbBootable = true;
+    isoImage.storeContents = [
+      self.nixosConfigurations.sora.config.system.build.toplevel
+      self.nixosConfigurations.shiro.config.system.build.toplevel
+    ];
 
     # NVIDIA drivers are unfree.
     nixpkgs.config.allowUnfree = true;
