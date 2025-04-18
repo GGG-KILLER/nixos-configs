@@ -53,6 +53,10 @@ in
     # Don't need firewall while installing, probably
     networking.firewall.enable = false;
 
+    # Allow to login with the ggg user SSH key
+    users.users.nixos.openssh.authorizedKeys.keys = config.users.users.ggg.openssh.authorizedKeys.keys;
+
+    # Graphics Settings
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.graphics.enable = true;
 
