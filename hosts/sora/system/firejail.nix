@@ -60,18 +60,18 @@
       #   bin = "b2sum";
       #   profile = "b2sum.profile";
       # };
-      chromium-browser = mkBin {
-        pkg = pkgs.chromium;
-        bin = "chromium-browser";
-        profile = "chromium-browser.profile";
-        desktop = "chromium-browser.desktop";
-      };
-      chromium = mkBin {
-        pkg = pkgs.chromium;
-        bin = "chromium";
-        profile = "chromium.profile";
-        desktop = "chromium-browser.desktop";
-      };
+      # chromium-browser = mkBin {
+      #   pkg = pkgs.chromium;
+      #   bin = "chromium-browser";
+      #   profile = "chromium-browser.profile";
+      #   desktop = "chromium-browser.desktop";
+      # };
+      # chromium = mkBin {
+      #   pkg = pkgs.chromium;
+      #   bin = "chromium";
+      #   profile = "chromium.profile";
+      #   desktop = "chromium-browser.desktop";
+      # };
       # TODO: vscode
       discordcanary = mkBin {
         pkg = pkgs.discord-canary;
