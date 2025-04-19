@@ -52,9 +52,9 @@
     user = "downloader:data-members";
     volumes = [
       "pgo:/app/PGO"
-      "/zfs-main-pool/data/animu:/mnt/animu"
-      "/zfs-main-pool/data/h:/mnt/h"
-      "/zfs-main-pool/data/etc:/mnt/etc"
+      "/storage/animu:/mnt/animu"
+      "/storage/h:/mnt/h"
+      "/storage/etc:/mnt/etc"
     ];
     environment = {
       ConnectionStrings__Main = config.my.secrets.downloader.connection-string;

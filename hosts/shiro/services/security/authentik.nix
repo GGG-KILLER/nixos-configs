@@ -68,7 +68,7 @@ in
           "--loglevel"
           "warning"
         ];
-        volumes = [ "/zfs-main-pool/data/authentik/redis:/data" ];
+        volumes = [ "/var/lib/authentik/redis:/data" ];
         extraOptions = [
           "--dns=192.168.1.1"
           "--network=authentik"
@@ -82,8 +82,8 @@ in
         environment = authentikEnv;
         environmentFiles = [ config.age.secrets."authentik/authentik.env".path ];
         volumes = [
-          "/zfs-main-pool/data/authentik/media:/media"
-          "/zfs-main-pool/data/authentik/templates:/templates"
+          "/var/lib/authentik/media:/media"
+          "/var/lib/authentik/templates:/templates"
         ];
         ports = [
           "${toString config.shiro.ports.authentik}:9000"
@@ -105,9 +105,9 @@ in
         environmentFiles = [ config.age.secrets."authentik/authentik.env".path ];
         volumes = [
           "/var/run/docker.sock:/var/run/docker.sock"
-          "/zfs-main-pool/data/authentik/media:/media"
-          "/zfs-main-pool/data/authentik/certs:/certs"
-          "/zfs-main-pool/data/authentik/templates:/templates"
+          "/var/lib/authentik/media:/media"
+          "/var/lib/authentik/certs:/certs"
+          "/var/lib/authentik/templates:/templates"
         ];
         dependsOn = [ "authentik-redis" ];
         extraOptions = [

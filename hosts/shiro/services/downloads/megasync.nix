@@ -70,7 +70,7 @@ in
       ProtectKernelTunables = true;
       ProtectProc = true;
       ProtectSystem = "full";
-      BindPaths = "/zfs-main-pool/data/h /zfs-main-pool/data/etc";
+      BindPaths = "/storage/h /storage/etc";
       RemoveIPC = true;
       RestrictAddressFamilies = "AF_UNIX AF_INET";
       RestrictNamespaces = true;

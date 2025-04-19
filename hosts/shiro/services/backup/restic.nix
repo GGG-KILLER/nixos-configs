@@ -12,63 +12,62 @@ in
     let
       allBase =
         let
-          baseDir = "/zfs-main-pool/data";
           excludeFile = pkgs.writeText "restic-excludes.txt" ''
             *.log
             *.pid
+            /storage/etc/Archives
+            /storage/etc/glua-mc
+            /storage/etc/ISOs
+            /storage/etc/Leaks
+            /storage/etc/phone
+            /storage/etc/random
+            /storage/etc/Reading Material/Gentoomen Library
+            /storage/etc/School/FMU
+            /storage/etc/Tools
+            /storage/h
+            /storage/series
+            !/storage/h/Comics
+            !/storage/h/G
+            !/storage/h/Others
+            !/storage/h/Patreon
             /var/lib/grafana/data/log
-            ${baseDir}/etc/Archives
-            ${baseDir}/etc/glua-mc
-            ${baseDir}/etc/ISOs
-            ${baseDir}/etc/Leaks
-            ${baseDir}/etc/phone
-            ${baseDir}/etc/random
-            ${baseDir}/etc/Reading Material/Gentoomen Library
-            ${baseDir}/etc/School/FMU
-            ${baseDir}/etc/Tools
-            ${baseDir}/h
-            !${baseDir}/h/Comics
-            !${baseDir}/h/G
-            !${baseDir}/h/Others
-            !${baseDir}/h/Patreon
-            ${baseDir}/home-assistant/.cache
-            ${baseDir}/home-assistant/.esphome/build
-            ${baseDir}/home-assistant/.platformio
-            ${baseDir}/jackett/*.txt
-            ${baseDir}/jackett/DataProtection
-            ${baseDir}/jackett/Jackett/*.txt
-            ${baseDir}/jackett/Jackett/DataProtection
-            ${baseDir}/jellyfin/data/keyframes
-            ${baseDir}/jellyfin/data/ScheduledTasks
-            ${baseDir}/jellyfin/data/subtitles
-            ${baseDir}/jellyfin/log
-            ${baseDir}/jellyfin/metadata
-            ${baseDir}/jellyfin/plugins/configurations/*/cache
-            ${baseDir}/jellyfin/transcodes
-            ${baseDir}/jellyfin/var-cache
-            ${baseDir}/qbittorrent/qbittorrent/qBittorrent/data/GeoDB
-            ${baseDir}/qbittorrent/qbittorrent/qBittorrent/data/logs
-            ${baseDir}/series
-            ${baseDir}/sonarr/asp
-            ${baseDir}/sonarr/logs
-            ${baseDir}/sonarr/MediaCover
-            ${baseDir}/sonarr/Sentry
+            /var/lib/home-assistant/.cache
+            /var/lib/home-assistant/.esphome/build
+            /var/lib/home-assistant/.platformio
+            /var/lib/jackett/*.txt
+            /var/lib/jackett/DataProtection
+            /var/lib/jackett/Jackett/*.txt
+            /var/lib/jackett/Jackett/DataProtection
+            /var/lib/jellyfin/data/keyframes
+            /var/lib/jellyfin/data/ScheduledTasks
+            /var/lib/jellyfin/data/subtitles
+            /var/lib/jellyfin/log
+            /var/lib/jellyfin/metadata
+            /var/lib/jellyfin/plugins/configurations/*/cache
+            /var/lib/jellyfin/transcodes
+            /var/lib/jellyfin/var-cache
+            /var/lib/qbittorrent/qbittorrent/qBittorrent/data/GeoDB
+            /var/lib/qbittorrent/qbittorrent/qBittorrent/data/logs
+            /var/lib/sonarr/asp
+            /var/lib/sonarr/logs
+            /var/lib/sonarr/MediaCover
+            /var/lib/sonarr/Sentry
           '';
         in
         {
           initialize = true;
           paths = [
             "/var/lib/grafana"
-            "${baseDir}/dbs/pgsql-prd" # only prod is worth backing up
-            "${baseDir}/etc"
-            "${baseDir}/h"
-            "${baseDir}/home-assistant"
-            "${baseDir}/jackett"
-            "${baseDir}/jellyfin"
-            "${baseDir}/qbittorrent"
-            "${baseDir}/series"
-            "${baseDir}/sonarr"
-            "${baseDir}/step-ca"
+            "/var/lib/home-assistant"
+            "/var/lib/jackett"
+            "/var/lib/jellyfin"
+            "/var/lib/pgsql-prd" # only prod is worth backing up
+            "/var/lib/qbittorrent"
+            "/var/lib/sonarr"
+            "/var/lib/step-ca"
+            "/storage/etc"
+            "/storage/h"
+            "/storage/series"
           ];
           extraBackupArgs = [
             "--compression max"
@@ -87,16 +86,6 @@ in
         };
     in
     {
-      all-local = mkMerge [
-        allBase
-        {
-          repository = "/mnt/backup/all";
-          pruneOpts = mkForce [
-            "--group-by hosts"
-            "--keep-daily 7"
-          ];
-        }
-      ];
       all-b2 = mkMerge [
         allBase
         {

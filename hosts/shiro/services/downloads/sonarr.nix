@@ -3,7 +3,7 @@
   services.sonarr.enable = true;
   services.sonarr.user = "my-sonarr";
   services.sonarr.group = "data-members";
-  services.sonarr.dataDir = "/zfs-main-pool/data/sonarr";
+  services.sonarr.dataDir = "/var/lib/sonarr";
   services.sonarr.settings = {
     update.mechanism = "external";
     server = {
@@ -16,7 +16,7 @@
   services.jackett.enable = true;
   services.jackett.user = "my-sonarr";
   services.jackett.group = "data-members";
-  services.jackett.dataDir = "/zfs-main-pool/data/jackett";
+  services.jackett.dataDir = "/var/lib/jackett";
   services.jackett.port = config.shiro.ports.jackett;
 
   # NGINX

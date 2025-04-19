@@ -218,25 +218,25 @@ with lib;
             cfg.bindMounts
             (optionalAttrs cfg.builtinMounts.animu {
               "/mnt/animu" = {
-                hostPath = "/zfs-main-pool/data/animu";
+                hostPath = "/storage/animu";
                 isReadOnly = false;
               };
             })
             (optionalAttrs cfg.builtinMounts.series {
               "/mnt/series" = {
-                hostPath = "/zfs-main-pool/data/series";
+                hostPath = "/storage/series";
                 isReadOnly = false;
               };
             })
             (optionalAttrs cfg.builtinMounts.etc {
               "/mnt/etc" = {
-                hostPath = "/zfs-main-pool/data/etc";
+                hostPath = "/storage/etc";
                 isReadOnly = false;
               };
             })
             (optionalAttrs cfg.builtinMounts.h {
               "/mnt/h" = {
-                hostPath = "/zfs-main-pool/data/h";
+                hostPath = "/storage/h";
                 isReadOnly = false;
               };
             })

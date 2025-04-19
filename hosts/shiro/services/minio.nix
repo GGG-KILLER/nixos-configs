@@ -3,8 +3,8 @@
   services.minio = {
     enable = true;
     region = "home-1";
-    configDir = "/zfs-main-pool/data/minio/config";
-    dataDir = [ "/zfs-main-pool/data/minio/data" ];
+    configDir = "/var/lib/minio";
+    dataDir = [ "/storage/minio" ];
     rootCredentialsFile = config.age.secrets."minio.env".path;
 
     listenAddress = "127.0.0.1:${toString config.shiro.ports.minio}";

@@ -2,7 +2,7 @@
 let
   inherit (lib) map mkMerge;
 
-  imagesPath = "/zfs-main-pool/data/services/danbooru/images";
+  imagesPath = "/storage/services/danbooru/images";
 
   defaultContainerFlags = [
     "--dns=192.168.1.1"
@@ -144,7 +144,7 @@ in
     ];
 
     volumes = [
-      "/zfs-main-pool/data/services/danbooru/iqdb:/iqdb/data"
+      "/storage/services/danbooru/iqdb:/iqdb/data"
     ];
 
     extraOptions = defaultContainerFlags ++ [

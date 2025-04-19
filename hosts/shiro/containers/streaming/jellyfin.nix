@@ -50,11 +50,11 @@ in
     bindMounts =
       {
         "/var/lib/jellyfin" = {
-          hostPath = "/zfs-main-pool/data/jellyfin";
+          hostPath = "/var/lib/jellyfin";
           isReadOnly = false;
         };
         "/var/cache/jellyfin" = {
-          hostPath = "/zfs-main-pool/data/jellyfin/var-cache";
+          hostPath = "/var/cache/jellyfin";
           isReadOnly = false;
         };
       }

@@ -7,6 +7,7 @@
     ./monitoring
     # ./nix-pr-tracker # TODO: Re-enable when job again.
     ./security
+    ./btrfs.nix
     ./cloudflared.nix
     ./cockpit.nix
     ./docker-registry.nix

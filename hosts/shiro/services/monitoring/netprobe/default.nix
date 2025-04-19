@@ -54,7 +54,7 @@
       MODULE = "NETPROBE";
     };
     environmentFiles = [ config.age.secrets."netprobe.env".path ];
-    volumes = [ "/zfs-main-pool/data/netprobe:/netprobe_lite" ];
+    volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
     extraOptions = [
       "--network=netprobe"
       "--dns=192.168.1.1"
@@ -69,7 +69,7 @@
       MODULE = "PRESENTATION";
     };
     environmentFiles = [ config.age.secrets."netprobe.env".path ];
-    volumes = [ "/zfs-main-pool/data/netprobe:/netprobe_lite" ];
+    volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
     ports = [ "${toString config.shiro.ports.netprobe}:5000" ];
     extraOptions = [
       "--network=netprobe"

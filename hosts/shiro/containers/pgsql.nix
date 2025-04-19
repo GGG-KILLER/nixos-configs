@@ -30,7 +30,7 @@ let
 
         bindMounts = {
           "/mnt/pgsql" = {
-            hostPath = "/zfs-main-pool/data/dbs/pgsql-${env}";
+            hostPath = "/var/lib/pgsql-${env}";
             isReadOnly = false;
           };
           "/secrets" = {

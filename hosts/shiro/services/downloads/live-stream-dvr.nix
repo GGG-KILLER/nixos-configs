@@ -26,7 +26,7 @@
       Group = "data-members";
       Restart = "always";
       ExecStart = lib.getExe self.packages.${system}.livestreamdvr-net-backend;
-      WorkingDirectory = "/zfs-main-pool/data/services/live-stream-dvr";
+      WorkingDirectory = "/storage/services/live-stream-dvr";
     };
   };
 
@@ -46,5 +46,6 @@
     renewInterval = "daily";
   };
 
-  services.cloudflared.tunnels."3c1b8ea8-a43d-4a97-872c-37752de30b3f".ingress."ttv.ggg.dev" = "https://127.0.0.1";
+  services.cloudflared.tunnels."3c1b8ea8-a43d-4a97-872c-37752de30b3f".ingress."ttv.ggg.dev" =
+    "https://127.0.0.1";
 }

@@ -23,11 +23,11 @@
   modules.containers.firefly-iii = {
     bindMounts = {
       "/var/www/firefly-iii" = {
-        hostPath = "/zfs-main-pool/data/firefly-iii";
+        hostPath = throw "TODO: fix /zfs-main-pool/data/firefly-iii";
         isReadOnly = false;
       };
       "/var/www/firefly-iii-data-importer" = {
-        hostPath = "/zfs-main-pool/data/firefly-iii-data-importer";
+        hostPath = throw "TODO: fix /zfs-main-pool/data/firefly-iii-data-importer";
         isReadOnly = false;
       };
     };

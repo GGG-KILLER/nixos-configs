@@ -13,7 +13,7 @@
       yt-dlp
       aria
       #step-cli # TODO: Uncomment if it's still used and NixOS/nixpkgs#301623 has hit unstable.
-      self.packages.${system}.kemono-dl
+      #self.packages.${system}.kemono-dl # TODO: Uncomment after install.
       ffmpeg
     ];
   };

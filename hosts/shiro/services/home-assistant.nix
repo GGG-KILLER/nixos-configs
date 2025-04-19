@@ -14,7 +14,7 @@
 
   services.zigbee2mqtt = {
     enable = true;
-    dataDir = "/zfs-main-pool/data/zigbee2mqtt";
+    dataDir = "/var/lib/zigbee2mqtt";
     settings = {
       homeassistant = true;
       availability = true;
@@ -45,7 +45,7 @@
 
   virtualisation.oci-containers.containers.mqtt-hass = {
     image = "eclipse-mosquitto:2.0";
-    volumes = [ "/zfs-main-pool/data/mosquitto:/mosquitto" ];
+    volumes = [ "/var/lib/mosquitto:/mosquitto" ];
     ports = [
       "${toString config.shiro.ports.mqtt}:1883"
       "${toString config.shiro.ports.mqtt-idk}:9001"
@@ -60,7 +60,7 @@
 
   services.home-assistant = {
     enable = true;
-    configDir = "/zfs-main-pool/data/home-assistant";
+    configDir = "/var/lib/home-assistant";
     configWritable = true;
 
     extraComponents = [

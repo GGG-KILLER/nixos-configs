@@ -39,7 +39,7 @@
     };
     bindMounts = {
       "/mnt/qbittorrent" = {
-        hostPath = "/zfs-main-pool/data/qbittorrent";
+        hostPath = "/var/lib/qbittorrent";
         isReadOnly = false;
       };
     };

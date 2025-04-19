@@ -31,32 +31,124 @@
   '';
 
   fileSystems."/" = {
-    device = "zfs-main-pool/system/root";
-    fsType = "zfs";
-    options = [ "zfsutil" ];
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=root"
+      "compress=zstd"
+    ];
+  };
+
+  fileSystems."/etc" = {
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=etc"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/nix" = {
-    device = "zfs-main-pool/system/nix";
-    fsType = "zfs";
-    options = [ "zfsutil" ];
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=nix"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/var/lib" = {
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=var/lib"
+      "compress=zstd"
+    ];
+  };
+
+  fileSystems."/var/log" = {
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=var/log"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/var/spool" = {
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=var/spool"
+      "compress=zstd"
+    ];
+  };
+
+  fileSystems."/root" = {
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=home/root"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
+
+  fileSystems."/home/ggg" = {
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+    options = [
+      "subvol=home/ggg"
+      "compress=zstd"
+      "noatime"
+    ];
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-label/boot";
+    device = "/dev/disk/by-uuid/A4DE-1888";
     fsType = "vfat";
+    options = [
+      "fmask=0022"
+      "dmask=0022"
+    ];
   };
 
-  fileSystems."/mnt/backup" = {
-    device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS-part1";
-    fsType = "ext4";
-    options = [ "nofail" ];
+  fileSystems."/storage/services/live-stream-dvr" = {
+    device = "storage/services/live-stream-dvr";
+    fsType = "zfs";
   };
 
-  fileSystems."/mnt/zfs-backup" = {
-    device = "/dev/disk/by-id/ata-TOSHIBA_HDWD120_49GV1LAAS-part2";
-    fsType = "ext4";
-    options = [ "nofail" ];
+  fileSystems."/storage/services/danbooru" = {
+    device = "storage/services/danbooru";
+    fsType = "zfs";
+  };
+
+  fileSystems."/storage/series" = {
+    device = "storage/series";
+    fsType = "zfs";
+  };
+
+  fileSystems."/storage/minio" = {
+    device = "storage/minio";
+    fsType = "zfs";
+  };
+
+  fileSystems."/storage/h" = {
+    device = "storage/h";
+    fsType = "zfs";
+  };
+
+  fileSystems."/storage/etc" = {
+    device = "storage/etc";
+    fsType = "zfs";
+  };
+
+  fileSystems."/storage/animu" = {
+    device = "storage/animu";
+    fsType = "zfs";
   };
 
   swapDevices = [ ];
