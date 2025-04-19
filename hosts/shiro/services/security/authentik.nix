@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  version = "2024.10.4";
+  version = "2025.2.4";
 in
 {
   systemd.services."${config.virtualisation.oci-containers.backend}-authentik-network" =
