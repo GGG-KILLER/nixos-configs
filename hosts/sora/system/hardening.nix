@@ -22,10 +22,10 @@ in
   # ];
 
   # Disable loading of kernel modules after booting
-  security.lockKernelModules = true;
+  # security.lockKernelModules = true;
 
   # Prevent the kernel image from being replaced
-  security.protectKernelImage = true;
+  # security.protectKernelImage = true;
 
   security.forcePageTableIsolation = true;
 
