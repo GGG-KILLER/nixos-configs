@@ -20,6 +20,7 @@
       availability = true;
       permit_join = false;
       serial.port = "/dev/sonoff_zigbee";
+      serial.adapter = "ember";
 
       mqtt.server = "mqtt://127.0.0.1:${toString config.shiro.ports.mqtt}";
       mqtt.version = 5;
