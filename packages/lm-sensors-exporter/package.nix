@@ -17,22 +17,22 @@ buildGoModule {
 
   postConfigure = ''
     substituteInPlace vendor/github.com/ncabatoff/gosensors/gosensors.go \
-      --replace '"/etc/sensors3.conf"' '"${lm_sensors}/etc/sensors3.conf"'
+      --replace '"/etc/sensors3.conf"' '"${lib.getOutput "out" lm_sensors}/etc/sensors3.conf"'
   '';
 
-  CGO_CFLAGS = "-I ${lm_sensors}/include";
-  CGO_LDFLAGS = "-L ${lm_sensors}/lib";
+  CGO_CFLAGS = "-I ${lib.getInclude lm_sensors}/include";
+  CGO_LDFLAGS = "-L ${lib.getLib lm_sensors}/lib";
 
   ldflags = [
     "-s"
     "-w"
   ];
 
-  meta = with lib; {
+  meta = {
     description = "Prometheus exporter for sensor data like temperature and fan speed";
     homepage = "https://github.com/janw/lm-sensors-exporter";
-    license = licenses.mit;
-    maintainers = [ ];
-    platforms = platforms.unix;
+    license = lib.licenses.mit;
+    maintainers = with lib.maintainers; [ maintainers.ggg ];
+    platforms = lib.platforms.unix;
   };
 }
