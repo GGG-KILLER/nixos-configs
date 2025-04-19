@@ -49,15 +49,16 @@ in
       dotnet-ef
       dotnet-outdated
       dotnet-repl
+      dotnet-sdk
+      jetbrains.rider
       mockoon
+      nix-prefetch-scripts
       nixd
       nixf
       nixfmt-rfc-style
       nodejs_latest
       powershell
-      jetbrains.rider
       tokei
-      dotnet-sdk
 
       # Downloads
       aria
