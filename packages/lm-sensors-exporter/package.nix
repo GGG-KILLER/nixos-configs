@@ -1,18 +1,16 @@
 {
   lib,
   buildGoModule,
-  fetchFromGitHub,
+  fetchzip,
   lm_sensors,
 }:
 buildGoModule {
   pname = "lm-sensors-exporter";
   version = "edcd531";
 
-  src = fetchFromGitHub {
-    owner = "janw";
-    repo = "lm-sensors-exporter";
-    rev = "edcd5313d88c6203a5a2f5a39d715cfef379665c";
-    sha256 = "sha256-lGhpZ8esDoyzLcqdBpcTOtk6CRHsyJnwk2Vc0SWHeRk=";
+  src = fetchzip {
+    url = "https://codeberg.org/janw/lm-sensors-exporter/archive/edcd5313d88c6203a5a2f5a39d715cfef379665c.zip";
+    hash = "sha256-lGhpZ8esDoyzLcqdBpcTOtk6CRHsyJnwk2Vc0SWHeRk=";
   };
 
   vendorHash = null;
