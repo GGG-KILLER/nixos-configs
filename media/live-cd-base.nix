@@ -32,7 +32,6 @@ in
 
     # ISO Options
     isoImage.makeEfiBootable = true;
-    isoImage.includeSystemBuildDependencies = true;
     isoImage.makeUsbBootable = true;
     isoImage.storeContents = [
       self.nixosConfigurations.sora.config.system.build.toplevel
