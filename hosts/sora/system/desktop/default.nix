@@ -18,4 +18,10 @@
 
   # Flatpak
   services.flatpak.enable = true;
+
+  programs.goldwarden.enable = true;
+
+  programs.gpu-screen-recorder.enable = true;
+
+  programs.partition-manager.enable = true;
 }
