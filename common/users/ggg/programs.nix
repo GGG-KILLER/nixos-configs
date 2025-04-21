@@ -1,50 +1,9 @@
+{ inputs, system, ... }:
 {
-  pkgs,
-  lib,
-  inputs,
-  system,
-  ...
-}:
-{
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam-run"
-      "steam-original"
-      "steam-unwrapped"
-    ];
-
   home-manager.users.ggg = {
-    home.packages = with pkgs; [
-      # Compression
-      ouch
-      p7zip
-      unzip
-      zip
-
-      # Nix
-      # nix-du # TODO: Consider re-adding when it builds again
-      nix-ld
-
-      # Web
-      croc
-      wget
-
-      # Misc
-      btop
-      dig.dnsutils
-      file
-      iotop-c
-      killall
-      neofetch
-      steam-run
-      whois
-    ];
-
     programs = {
       command-not-found.enable = false;
       nix-index.enable = true;
-      home-manager.enable = true;
       bat.enable = true;
       dircolors.enable = true;
       eza = {

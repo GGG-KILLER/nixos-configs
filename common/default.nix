@@ -15,6 +15,7 @@
     ./i18n.nix
     ./nix.nix
     ./pki.nix
+    ./programs.nix
     ./time.nix
   ] ++ (lib.optionals (!liveCd) [ ./home-manager.nix ]);
 
