@@ -31,4 +31,14 @@
 
   # Enable sysdig
   programs.sysdig.enable = true;
+
+  programs.zsh.ohMyZsh.plugins = [
+    "copybuffer"
+    "copyfile"
+    "docker"
+    "docker-compose"
+    "dotnet"
+    "git"
+    "git-auto-fetch"
+  ];
 }

@@ -48,15 +48,6 @@ in
           auto_update_interval_hours = 72;
         };
       };
-      zsh.oh-my-zsh.plugins = [
-        "copybuffer"
-        "copyfile"
-        "docker"
-        "docker-compose"
-        "dotnet"
-        "git"
-        "git-auto-fetch"
-      ];
       mangohud = {
         enable = true;
         settingsPerApplication = {
