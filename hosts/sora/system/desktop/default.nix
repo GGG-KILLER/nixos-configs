@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   imports = [
     ./audio
@@ -13,10 +13,8 @@
   # easyeffects needs this
   programs.dconf.enable = true;
 
-  # Chrome SUID
   security.chromiumSuidSandbox.enable = true;
 
-  # Flatpak
   services.flatpak.enable = true;
 
   programs.goldwarden.enable = true;
@@ -24,4 +22,11 @@
   programs.gpu-screen-recorder.enable = true;
 
   programs.partition-manager.enable = true;
+
+  programs.obs-studio.enable = true;
+  programs.obs-studio.enableVirtualCamera = true;
+  programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
+    input-overlay
+    obs-pipewire-audio-capture
+  ];
 }

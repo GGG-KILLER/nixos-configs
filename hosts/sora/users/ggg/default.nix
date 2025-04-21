@@ -78,24 +78,14 @@ in
           R = "playlist-unshuffle";
         };
       };
-      obs-studio = {
-        enable = true;
-        plugins = with pkgs.obs-studio-plugins; [
-          # obs-nvfbc # TODO: Restore whenever it gets fixed.
-          input-overlay
-          obs-pipewire-audio-capture
-        ];
-      };
       direnv = {
         enable = true;
         enableBashIntegration = true;
         enableZshIntegration = true;
         nix-direnv.enable = true;
-        config = {
-          global = {
-            bash_path = lib.getExe pkgs.bash;
-            strict_env = true;
-          };
+        config.global = {
+          bash_path = lib.getExe pkgs.bash;
+          strict_env = true;
         };
       };
     };
