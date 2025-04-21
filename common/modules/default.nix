@@ -4,6 +4,7 @@
     ./gaming
     ./monitoring
     ./services
+    ./programs
     ./nginx.nix
   ];
 }
