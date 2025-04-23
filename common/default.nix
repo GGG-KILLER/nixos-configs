@@ -1,8 +1,4 @@
-{
-  lib,
-  liveCd ? false,
-  ...
-}:
+{ ... }:
 {
   imports = [
     ./groups
@@ -12,12 +8,13 @@
     ./users
     ./boot.nix
     ./console.nix
+    ./home-manager.nix
     ./i18n.nix
     ./nix.nix
     ./pki.nix
     ./programs.nix
     ./time.nix
-  ] ++ (lib.optionals (!liveCd) [ ./home-manager.nix ]);
+  ];
 
   environment.pathsToLink = [ "/share/zsh" ];
 
