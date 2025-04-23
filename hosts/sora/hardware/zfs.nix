@@ -1,40 +1,11 @@
 {
-  lib,
   config,
   pkgs,
   ...
 }:
-let
-  upgradeZfs =
-    zfs:
-    zfs.overrideAttrs (
-      prev:
-      assert (prev.version == "2.3.0-rc3");
-      rec {
-        name = lib.replaceStrings [ "2.3.0-rc3" ] [ version ] prev.name;
-        version = "2.3.0-rc4";
-
-        src = pkgs.fetchFromGitHub {
-          owner = "openzfs";
-          repo = "zfs";
-          rev = "zfs-${version}";
-          hash = "sha256-6O+XQvggyVCZBYpx8/7jbq15tLZsvzmDqp+AtEb9qFU=";
-        };
-
-        # configureFlags = prev.configureFlags ++ [ "--enable-linux-experimental" ];
-        meta = prev.meta // {
-          broken = false;
-        };
-      }
-    );
-in
 {
   # Unstable is needed for 6.12
-  boot.zfs.package = pkgs.zfs_unstable;
-  # NOTE: Re-enable if needed in the future.
-  # boot.zfs.modulePackage =
-  #   upgradeZfs
-  #     config.boot.kernelPackages.${config.boot.zfs.package.kernelModuleAttribute};
+  boot.zfs.package = pkgs.zfs_cachyos;
 
   # Expand all devices on boot
   services.zfs.expandOnBoot = "all";
@@ -45,6 +16,7 @@ in
 
   # Enable auto-trim
   services.zfs.trim.enable = true;
+  services.zfs.trim.interval = "daily";
 
   # Enable auto-snapshot
   services.zfs.autoSnapshot = {

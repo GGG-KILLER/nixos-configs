@@ -15,7 +15,7 @@
   ];
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_6_12; # TODO: Increase when ZFS supports 6.13
+  boot.kernelPackages = pkgs.linuxPackages_cachyos;
 
   # Add ext4 support
   system.fsPackages = [ pkgs.e2fsprogs ];
@@ -31,6 +31,7 @@
 
   # Scheduler
   services.scx.enable = true;
+  services.scx.package = pkgs.scx_git.rustscheds;
   services.scx.scheduler = "scx_lavd";
   services.scx.extraArgs = [ "--performance" ];
 }

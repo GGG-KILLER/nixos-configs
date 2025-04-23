@@ -30,6 +30,9 @@
   # Enable CUDA support for everything
   nixpkgs.config.cudaSupport = true;
 
+  # Build chaotic-nyx's packages on top of our nixpkgs instead of theirs.
+  chaotic.nyx.overlay.onTopOf = "user-pkgs";
+
   # Enable broken stuff (Reason)
   # nixpkgs.config.allowBroken = true;
 
