@@ -10,6 +10,9 @@
   boot.initrd.postDeviceCommands = lib.mkAfter ''
     zfs rollback -r rpool/nixos/root@blank
   '';
+  chaotic.zfs-impermanence-on-shutdown.enable = true;
+  chaotic.zfs-impermanence-on-shutdown.volume = "rpool/nixos/root";
+  chaotic.zfs-impermanence-on-shutdown.snapshot = "blank";
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
