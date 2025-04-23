@@ -84,7 +84,7 @@
       nixosConfigurations = {
         sora = mkConfig ./hosts/sora/configuration.nix;
         shiro = mkConfig ./hosts/shiro/configuration.nix;
-        live-cd-gnome = mkConfig ./media/live-cd-gnome.nix;
+        live-cd-plasma6 = mkConfig ./media/live-cd-plasma6.nix;
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
