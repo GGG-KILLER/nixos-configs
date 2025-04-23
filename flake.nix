@@ -58,67 +58,34 @@
       inherit (nixpkgs) lib;
 
       system = "x86_64-linux";
-      nur-no-pkgs = import inputs.nur { nurpkgs = nixpkgs.legacyPackages.${system}; };
       mkConfig =
-        host:
-        lib.nixosSystem {
+        file:
+        lib.nixosSystem rec {
           specialArgs = {
-            inherit
-              self
-              system
-              inputs
-              nur-no-pkgs
-              ;
-            liveCd = false;
+            inherit self system inputs;
+            liveCd = lib.path.hasPrefix ./media file;
           };
 
           modules = [
-            inputs.agenix.nixosModules.default
             ./common
-            ./hosts/${host}/configuration.nix
+            file
+            inputs.agenix.nixosModules.default
+            inputs.chaotic.nixosModules.default
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = specialArgs;
+            }
           ];
         };
     in
     {
       nixosConfigurations = {
-        sora = mkConfig "sora";
-        shiro = mkConfig "shiro";
-        live-cd-gnome = lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-            inherit
-              self
-              system
-              inputs
-              nur-no-pkgs
-              ;
-            liveCd = true;
-          };
-
-          modules = [
-            ./common
-            ./media/live-cd-gnome.nix
-          ];
-        };
-        live-cd-minimal = lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-            inherit
-              self
-              system
-              inputs
-              nur-no-pkgs
-              ;
-            liveCd = true;
-          };
-
-          modules = [
-            ./common
-            ./media/live-cd-minimal.nix
-          ];
-        };
+        sora = mkConfig ./hosts/sora/configuration.nix;
+        shiro = mkConfig ./hosts/shiro/configuration.nix;
+        live-cd-gnome = mkConfig ./media/live-cd-gnome.nix;
+        live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
       deploy.nodes = {
