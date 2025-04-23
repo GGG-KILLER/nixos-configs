@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ inputs, nur-no-pkgs, ... }:
+{ inputs, system, ... }:
 {
   imports = [
     ./hardware
@@ -11,7 +11,7 @@
     ./hardware-configuration.nix
     ./overrides.nix
     ./secrets.nix
-    nur-no-pkgs.repos.ilya-fedin.modules.io-scheduler
+    inputs.nur.legacyPackages."${system}".repos.ilya-fedin.modules.io-scheduler
   ];
 
   # # Host System # TODO: Enable when I have enough patience to rebuild everything
