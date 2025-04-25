@@ -13,7 +13,11 @@ in
     programs.zsh.enable = true;
     programs.zsh.autosuggestions.enable = true;
     programs.zsh.enableCompletion = true;
-    programs.zsh.enableSyntaxHighlighting = true;
+    programs.zsh.syntaxHighlighting.enable = true;
+    programs.zsh.syntaxHighlighting.highlighters = [
+      "main"
+      "brackets"
+    ];
     programs.zsh.enableLsColors = true;
     programs.zsh.vteIntegration = true;
     programs.zsh.setOptions = [

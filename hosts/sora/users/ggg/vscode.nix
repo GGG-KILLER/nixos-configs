@@ -57,7 +57,7 @@ in
 
         # Only install extensions through nix.
         mutableExtensionsDir = false;
-        extensions =
+        profiles.default.extensions =
           [
             # C# Development
             (csdevkit-vscode-ext.overrideAttrs (old: {
