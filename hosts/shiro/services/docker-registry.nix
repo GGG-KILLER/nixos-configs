@@ -20,6 +20,7 @@
       finalImageName = "klausmeyer/docker-registry-browser";
       finalImageTag = "latest";
     };
+    image = "klausmeyer/docker-registry-browser:latest";
     ports = [ "${toString config.shiro.ports.docker-registry-browser}:8080" ];
     environment = {
       ENABLE_COLLAPSE_NAMESPACES = "true";

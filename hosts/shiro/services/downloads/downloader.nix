@@ -42,6 +42,7 @@
       finalImageName = "docker.lan/downloader/frontend";
       finalImageTag = "latest";
     };
+    image = "docker.lan/downloader/frontend:latest";
     ports = [ "${toString config.shiro.ports.downloader}:8080" ];
     dependsOn = [ "downloader-backend" ];
     extraOptions = [
@@ -62,6 +63,7 @@
       finalImageName = "docker.lan/downloader/backend";
       finalImageTag = "latest";
     };
+    image = "docker.lan/downloader/backend:latest";
     user = "downloader:data-members";
     volumes = [
       "pgo:/app/PGO"

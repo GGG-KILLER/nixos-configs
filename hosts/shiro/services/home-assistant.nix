@@ -53,6 +53,7 @@
       finalImageName = "eclipse-mosquitto";
       finalImageTag = "2.0";
     };
+    image = "eclipse-mosquitto:2.0";
     volumes = [ "/var/lib/mosquitto:/mosquitto" ];
     ports = [
       "${toString config.shiro.ports.mqtt}:1883"

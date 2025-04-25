@@ -24,6 +24,7 @@ let
       finalImageName = "ghcr.io/danbooru/danbooru";
       finalImageTag = "master";
     };
+    image = "ghcr.io/danbooru/danbooru:master";
 
     environment = {
       DANBOORU_APP_NAME = "Shirobooru";
@@ -153,6 +154,7 @@ in
       finalImageName = "evazion/iqdb";
       finalImageTag = "latest";
     };
+    image = "evazion/iqdb:latest";
 
     cmd = [
       "http"
@@ -179,6 +181,7 @@ in
       finalImageName = "redis";
       finalImageTag = "latest";
     };
+    image = "redis:latest";
 
     extraOptions = defaultContainerFlags ++ [
       "--network-alias=redis"
@@ -186,7 +189,7 @@ in
   };
 
   virtualisation.oci-containers.containers.danbooru-nginx = {
-    inherit (danbooruContainerBase) imageFile;
+    inherit (danbooruContainerBase) imageFile image;
 
     cmd = [
       "openresty"
@@ -219,6 +222,7 @@ in
       finalImageName = "ghcr.io/danbooru/autotagger";
       finalImageTag = "latest";
     };
+    image = "ghcr.io/danbooru/autotagger:latest";
 
     extraOptions = defaultContainerFlags ++ [
       "--network-alias=autotagger"

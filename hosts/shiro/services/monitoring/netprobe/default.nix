@@ -44,6 +44,7 @@
       finalImageName = "redis";
       finalImageTag = "latest";
     };
+    image = "redis:latest";
 
     environmentFiles = [ config.age.secrets."netprobe.env".path ];
     volumes = [ "${./redis.conf}:/etc/redis/redis.conf:ro" ];
@@ -63,6 +64,7 @@
       finalImageName = "plaintextpackets/netprobe";
       finalImageTag = "latest";
     };
+    image = "plaintextpackets/netprobe:latest";
 
     environment = {
       MODULE = "NETPROBE";
@@ -85,6 +87,7 @@
       finalImageName = "plaintextpackets/netprobe";
       finalImageTag = "latest";
     };
+    image = "plaintextpackets/netprobe:latest";
 
     environment = {
       MODULE = "PRESENTATION";

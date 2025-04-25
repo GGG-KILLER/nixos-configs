@@ -8,6 +8,8 @@ let
     finalImageName = "ghcr.io/goauthentik/server";
     finalImageTag = "2025.2.4";
   };
+
+  image = "${imageFile.imageName}:${imageFile.imageTag}";
 in
 {
   systemd.services."${config.virtualisation.oci-containers.backend}-authentik-network" =
@@ -74,6 +76,7 @@ in
           finalImageName = "docker.io/library/redis";
           finalImageTag = "alpine";
         };
+        image = "docker.io/library/redis:alpine";
         cmd = [
           "--save"
           "60"
@@ -89,7 +92,7 @@ in
       };
 
       authentik-server = {
-        inherit imageFile;
+        inherit imageFile image;
         cmd = [ "server" ];
         environment = authentikEnv;
         environmentFiles = [ config.age.secrets."authentik/authentik.env".path ];
@@ -109,7 +112,7 @@ in
       };
 
       authentik-worker = {
-        inherit imageFile;
+        inherit imageFile image;
         user = "root:root";
         cmd = [ "worker" ];
         environment = authentikEnv;
