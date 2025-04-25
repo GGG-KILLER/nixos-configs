@@ -13,9 +13,13 @@
       listFiles =
         path:
         flatten (
-          mapAttrsToList (
-            name: type: if type == "regular" then append path name else listFiles (append path name)
-          ) (filterAttrs (name: _: hasSuffix ".nix" name && name != "default.nix") (builtins.readDir path))
+          mapAttrsToList
+            (name: type: if type == "regular" then append path name else listFiles (append path name))
+            (
+              filterAttrs (name: type: type == "directory" || (hasSuffix ".nix" name && name != "default.nix")) (
+                builtins.readDir path
+              )
+            )
         );
     in
     listFiles ./.;
