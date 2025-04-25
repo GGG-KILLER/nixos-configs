@@ -18,6 +18,7 @@
   services.flatpak.enable = true;
 
   programs.goldwarden.enable = true;
+  programs.goldwarden.useSshAgent = false;
 
   programs.gpu-screen-recorder.enable = true;
 
