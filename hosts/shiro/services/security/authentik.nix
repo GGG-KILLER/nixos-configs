@@ -1,6 +1,13 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 let
-  version = "2025.2.4";
+  # nix run nixpkgs#nix-prefetch-docker -- --image-name ghcr.io/goauthentik/server --image-tag 2025.2.4 --arch amd64 --os linux --quiet
+  imageFile = pkgs.dockerTools.pullImage {
+    imageName = "ghcr.io/goauthentik/server";
+    imageDigest = "sha256:36233579415aa2e2e52a6b0c45736cb871fe71460bfe0cf95d83f67528fb1182";
+    hash = "sha256-BT6yjwRS4U0tnAko5yt5nl0dFoFgyCr+uUvCspm1PuM=";
+    finalImageName = "ghcr.io/goauthentik/server";
+    finalImageTag = "2025.2.4";
+  };
 in
 {
   systemd.services."${config.virtualisation.oci-containers.backend}-authentik-network" =
@@ -60,7 +67,13 @@ in
     in
     {
       authentik-redis = {
-        image = "docker.io/library/redis:alpine";
+        imageFile = pkgs.dockerTools.pullImage {
+          imageName = "docker.io/library/redis";
+          imageDigest = "sha256:f773b35a95e170d92dd4214a3ec4859b1b7960bf56896ae687646d695f311187";
+          hash = "sha256-MgjZV7aGp1WgxxCAA9m3i25dDN4OA18jYNoxpF/ngIU=";
+          finalImageName = "docker.io/library/redis";
+          finalImageTag = "alpine";
+        };
         cmd = [
           "--save"
           "60"
@@ -72,12 +85,11 @@ in
         extraOptions = [
           "--dns=192.168.1.1"
           "--network=authentik"
-          "--pull=always"
         ];
       };
 
       authentik-server = {
-        image = "ghcr.io/goauthentik/server:${version}";
+        inherit imageFile;
         cmd = [ "server" ];
         environment = authentikEnv;
         environmentFiles = [ config.age.secrets."authentik/authentik.env".path ];
@@ -93,12 +105,11 @@ in
         extraOptions = [
           "--dns=192.168.1.1"
           "--network=authentik"
-          "--pull=always"
         ];
       };
 
       authentik-worker = {
-        image = "ghcr.io/goauthentik/server:${version}";
+        inherit imageFile;
         user = "root:root";
         cmd = [ "worker" ];
         environment = authentikEnv;
@@ -113,7 +124,6 @@ in
         extraOptions = [
           "--dns=192.168.1.1"
           "--network=authentik"
-          "--pull=always"
         ];
       };
     };

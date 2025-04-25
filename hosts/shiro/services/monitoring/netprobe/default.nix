@@ -1,4 +1,4 @@
-{ config, ... }:
+{ pkgs, config, ... }:
 {
   systemd.services."${config.virtualisation.oci-containers.backend}-netprobe-network" =
     let
@@ -36,7 +36,14 @@
     };
 
   virtualisation.oci-containers.containers.netprobe-redis = {
-    image = "redis:latest";
+    # nix run nixpkgs#nix-prefetch-docker -- --image-name redis --image-tag latest --arch amd64 --os linux --quiet
+    imageFile = pkgs.dockerTools.pullImage {
+      imageName = "redis";
+      imageDigest = "sha256:8bc666424ef252009ed34b0432564cabbd4094cd2ce7829306cb1f5ee69170be";
+      hash = "sha256-wJoVcrxqYHJcAyUechkPe5/fKGXol0Y/dwjFM9dPg+s=";
+      finalImageName = "redis";
+      finalImageTag = "latest";
+    };
 
     environmentFiles = [ config.age.secrets."netprobe.env".path ];
     volumes = [ "${./redis.conf}:/etc/redis/redis.conf:ro" ];
@@ -48,7 +55,14 @@
   };
 
   virtualisation.oci-containers.containers.netprobe-probe = {
-    image = "plaintextpackets/netprobe:latest";
+    # nix run nixpkgs#nix-prefetch-docker -- --image-name plaintextpackets/netprobe --image-tag latest --arch amd64 --os linux --quiet
+    imageFile = pkgs.dockerTools.pullImage {
+      imageName = "plaintextpackets/netprobe";
+      imageDigest = "sha256:139ed2dcb004324ef7a8d24bbfdd252bfba0012aa2b70575ca92cc38cd2afd56";
+      hash = "sha256-3aY0INi+kpFvvp6btIE+E5prH2GofN7/mxcj9udYocI=";
+      finalImageName = "plaintextpackets/netprobe";
+      finalImageTag = "latest";
+    };
 
     environment = {
       MODULE = "NETPROBE";
@@ -63,7 +77,14 @@
   };
 
   virtualisation.oci-containers.containers.netprobe-presentation = {
-    image = "plaintextpackets/netprobe:latest";
+    # nix run nixpkgs#nix-prefetch-docker -- --image-name plaintextpackets/netprobe --image-tag latest --arch amd64 --os linux --quiet
+    imageFile = pkgs.dockerTools.pullImage {
+      imageName = "plaintextpackets/netprobe";
+      imageDigest = "sha256:139ed2dcb004324ef7a8d24bbfdd252bfba0012aa2b70575ca92cc38cd2afd56";
+      hash = "sha256-3aY0INi+kpFvvp6btIE+E5prH2GofN7/mxcj9udYocI=";
+      finalImageName = "plaintextpackets/netprobe";
+      finalImageTag = "latest";
+    };
 
     environment = {
       MODULE = "PRESENTATION";

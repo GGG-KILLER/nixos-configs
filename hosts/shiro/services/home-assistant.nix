@@ -45,7 +45,14 @@
   ];
 
   virtualisation.oci-containers.containers.mqtt-hass = {
-    image = "eclipse-mosquitto:2.0";
+    # nix run nixpkgs#nix-prefetch-docker -- --image-name eclipse-mosquitto --image-tag 2.0 --arch amd64 --os linux --quiet
+    imageFile = pkgs.dockerTools.pullImage {
+      imageName = "eclipse-mosquitto";
+      imageDigest = "sha256:94f5a3d7deafa59fa3440d227ddad558f59d293c612138de841eec61bfa4d353";
+      hash = "sha256-bTDUhrhIkxUoeL0SN/8brOLm0L2wlGPJrMalk42KWDU=";
+      finalImageName = "eclipse-mosquitto";
+      finalImageTag = "2.0";
+    };
     volumes = [ "/var/lib/mosquitto:/mosquitto" ];
     ports = [
       "${toString config.shiro.ports.mqtt}:1883"

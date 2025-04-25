@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   systemd.services."${config.virtualisation.oci-containers.backend}-downloader-network" =
     let
@@ -34,7 +34,14 @@
     };
 
   virtualisation.oci-containers.containers.downloader-frontend = {
-    image = "docker.lan/downloader/frontend:latest";
+    # nix run nixpkgs#nix-prefetch-docker -- --image-name docker.lan/downloader/frontend --image-tag latest --arch amd64 --os linux --quiet
+    imageFile = pkgs.dockerTools.pullImage {
+      imageName = "docker.lan/downloader/frontend";
+      imageDigest = "sha256:b7cd81811271f91089cc161b10e9dd26fade9c99d893c8cc9b464424b2adf0d4";
+      hash = "sha256-64ihDXxrLowJrjbEYa1+aX46TDjrJmxZf8LnrKxRp0U=";
+      finalImageName = "docker.lan/downloader/frontend";
+      finalImageTag = "latest";
+    };
     ports = [ "${toString config.shiro.ports.downloader}:8080" ];
     dependsOn = [ "downloader-backend" ];
     extraOptions = [
@@ -43,12 +50,18 @@
       "--ipc=none"
       "--network=downloader"
       "--network-alias=frontend"
-      "--pull=always"
     ];
   };
 
   virtualisation.oci-containers.containers.downloader-backend = {
-    image = "docker.lan/downloader/backend:latest";
+    # nix run nixpkgs#nix-prefetch-docker -- --image-name docker.lan/downloader/backend --image-tag latest --arch amd64 --os linux --quiet
+    imageFile = pkgs.dockerTools.pullImage {
+      imageName = "docker.lan/downloader/backend";
+      imageDigest = "sha256:98d75c28e2bbfd4a6be2114194cc9fd645a470cb0cea1dfe482e8ab99ab9c2f3";
+      hash = "sha256-j8reRST4+8woi2SdOnoUoisQPHtLrxxI7DAqxhtUy6Q=";
+      finalImageName = "docker.lan/downloader/backend";
+      finalImageTag = "latest";
+    };
     user = "downloader:data-members";
     volumes = [
       "pgo:/app/PGO"
@@ -65,7 +78,6 @@
       "--ipc=none"
       "--network=downloader"
       "--network-alias=backend"
-      "--pull=always"
     ];
   };
 
