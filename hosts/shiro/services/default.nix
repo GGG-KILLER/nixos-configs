@@ -3,7 +3,6 @@
   imports = [
     ./backup/restic.nix
     ./downloads
-    ./media/danbooru
     ./monitoring
     # ./nix-pr-tracker # TODO: Re-enable when job again.
     ./security
