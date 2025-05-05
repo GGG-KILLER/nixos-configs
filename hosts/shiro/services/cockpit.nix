@@ -2,8 +2,11 @@
 {
   services.cockpit = {
     enable = true;
+    allowed-origins = [
+      "https://cp.shiro.lan"
+      "wss://cp.shiro.lan"
+    ];
     settings.WebService = {
-      Origins = "https://cp.shiro.lan wss://cp.shiro.lan";
       ProtocolHeader = "X-Forwarded-Proto";
       ForwardedForHeader = "X-Forwarded-For";
     };
