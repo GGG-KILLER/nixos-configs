@@ -30,4 +30,21 @@
     input-overlay
     obs-pipewire-audio-capture
   ];
+
+  programs.gamemode.enable = true;
+
+  programs.steam.enable = true;
+  programs.steam.extraPackages = with pkgs; [
+    mangohud
+    gamescope
+  ];
+  programs.steam.package = pkgs.steam.override {
+    extraEnv = {
+      MANGOHUD = true;
+    };
+  };
+  programs.steam.extest.enable = true;
+  programs.steam.localNetworkGameTransfers.openFirewall = true;
+  programs.steam.protontricks.enable = true;
+  programs.steam.remotePlay.openFirewall = true;
 }
