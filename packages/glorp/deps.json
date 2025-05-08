@@ -100,6 +100,11 @@
     "hash": "sha256-eEw2h6S0m8Wb52hWo/31uCA5NQbPn/7veYpzNhkzyl0="
   },
   {
+    "pname": "Microsoft.Extensions.Hosting.Systemd",
+    "version": "9.0.4",
+    "hash": "sha256-DtyJHVt64SM2ucy8wBuAajjoBBaD4oIldzwIm1R1yw4="
+  },
+  {
     "pname": "Microsoft.Extensions.Logging",
     "version": "9.0.4",
     "hash": "sha256-Vj+NGOamKeuMrLNUWlVKFFkz7IKGIv6h1A5X4CK9D5E="

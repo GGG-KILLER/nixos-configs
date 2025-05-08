@@ -5,7 +5,7 @@ buildDotnetModule rec {
 
   src = builtins.fetchGit {
     url = "git@github.com:GGG-KILLER/Glorp.git";
-    rev = "1f13d033c73f3d6b0c7e4395313cf1c0585a2559";
+    rev = "a4ead6cb0e4d347eec1101ef91b1eb27e7d8e08e";
   };
 
   projectFile = "Glorp/Glorp.csproj";
