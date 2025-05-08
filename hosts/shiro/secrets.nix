@@ -6,6 +6,7 @@
     "minio.env".file = ../../secrets/shiro/minio.env.age;
     "netprobe.env".file = ../../secrets/shiro/netprobe.env.age;
     "danbooru.env".file = ../../secrets/shiro/danbooru.env.age;
+    "glorp.env".file = ../../secrets/shiro/glorp.env.age;
     pr-tracker-token.file = ../../secrets/shiro/pr-tracker-token.age;
 
     wireguard-key.file = ../../secrets/shiro/wireguard/private_key.age;
