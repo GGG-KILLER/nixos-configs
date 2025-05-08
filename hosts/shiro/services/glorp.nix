@@ -15,40 +15,49 @@ in
     environment = {
       # Environment settings
       DOTNET_ENVIRONMENT = "Production";
+
+      HOME = "%C/glorp";
     };
 
     serviceConfig = {
-      DynamicUser = true;
-
       ExecStart = getExe self.packages.${system}.glorp;
       WorkingDirectory = "${self.packages.${system}.glorp}/lib/glorp";
       EnvironmentFile = config.age.secrets."glorp.env".path;
+      CacheDirectory = "glorp";
 
       # Hardening
-      # IPAddressAllow = "192.168.1.1";
-      # IPAddressDeny = "localhost multicast 192.168.0.0/24 172.16.0.0/24";
-      LockPersonality = true;
-      # MemoryDenyWriteExecute = true; # Figure out why this doesn't work. They should've solved this already.
+      SystemCallFilter = [
+        "~@swap @resources @reboot @raw-io @privileged @obsolete @mount @module @debug @cpu-emulation @clock"
+        "sched_setaffinity sched_setscheduler"
+      ];
+      RemoveIPC = true;
+      DynamicUser = true;
+      RestrictRealtime = true;
       NoNewPrivileges = true;
-      PrivateDevices = true;
-      PrivateMounts = true;
+      SystemCallArchitectures = "native";
+      CapabilityBoundingSet = ""; # No capabilities needed.
+      # MemoryDenyWriteExecute = true; # Figure out why this doesn't work. They should've solved this already.
+      RestrictAddressFamilies = "AF_UNIX AF_INET";
+      ProtectSystem = "full";
       PrivateTmp = true;
+      ProtectHome = true;
+      PrivateDevices = true;
+      ProtectProc = "invisible";
+      ProcSubset = "pid";
+      # PrivateNetwork = true; # Needs access to the network.
       PrivateUsers = true;
       ProtectClock = true;
-      ProtectControlGroups = true;
-      ProtectHome = true;
-      ProtectHostname = true;
       ProtectKernelLogs = true;
+      ProtectControlGroups = true;
       ProtectKernelModules = true;
-      ProtectKernelTunables = true;
-      ProtectSystem = "full";
-      RemoveIPC = true;
-      RestrictAddressFamilies = "AF_UNIX AF_INET";
+      PrivateMounts = true;
       RestrictNamespaces = true;
-      RestrictRealtime = true;
+      ProtectHostname = true;
+      LockPersonality = true;
+      ProtectKernelTunables = true;
       RestrictSUIDSGID = true;
-      SystemCallArchitectures = "native";
-      SystemCallFilter = "~@clock";
+      # IPAddressAllow = "192.168.1.1";
+      IPAddressDeny = "localhost multicast 192.168.0.0/24 172.16.0.0/24";
     };
   };
 }
