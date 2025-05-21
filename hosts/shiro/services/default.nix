@@ -11,7 +11,7 @@
     ./docker-registry.nix
     ./glorp.nix
     ./home-assistant.nix
-    # ./minio.nix # TODO: Re-enable when job again.
+    ./minio.nix
     ./nginx.nix
     ./openspeedtest.nix
     ./zfs.nix
