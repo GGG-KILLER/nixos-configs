@@ -39,8 +39,8 @@
     # nix run nixpkgs#nix-prefetch-docker -- --image-name redis --image-tag latest --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "redis";
-      imageDigest = "sha256:8bc666424ef252009ed34b0432564cabbd4094cd2ce7829306cb1f5ee69170be";
-      hash = "sha256-wJoVcrxqYHJcAyUechkPe5/fKGXol0Y/dwjFM9dPg+s=";
+      imageDigest = "sha256:1b7c17f650602d97a10724d796f45f0b5250d47ee5ba02f28de89f8a1531f3ce";
+      hash = "sha256-VP1qZ5yoS58IHrLg0n3S7GcSDkt13ns7dwGDzu0w9hE=";
       finalImageName = "redis";
       finalImageTag = "latest";
     };
