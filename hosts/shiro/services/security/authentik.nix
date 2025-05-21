@@ -1,12 +1,12 @@
 { pkgs, config, ... }:
 let
-  # nix run nixpkgs#nix-prefetch-docker -- --image-name ghcr.io/goauthentik/server --image-tag 2025.2.4 --arch amd64 --os linux --quiet
+  # nix run nixpkgs#nix-prefetch-docker -- --image-name ghcr.io/goauthentik/server --image-tag 2025.4.1 --arch amd64 --os linux --quiet
   imageFile = pkgs.dockerTools.pullImage {
     imageName = "ghcr.io/goauthentik/server";
-    imageDigest = "sha256:36233579415aa2e2e52a6b0c45736cb871fe71460bfe0cf95d83f67528fb1182";
-    hash = "sha256-BT6yjwRS4U0tnAko5yt5nl0dFoFgyCr+uUvCspm1PuM=";
+    imageDigest = "sha256:19158b9331f2a514c063b0ab0ac884e751cc9fddb42cfc8c0688b0082cf029cc";
+    hash = "sha256-t9KliMmu0eqwroBG/SuHnc07txQ9peh1i8E50UjhU4A=";
     finalImageName = "ghcr.io/goauthentik/server";
-    finalImageTag = "2025.2.4";
+    finalImageTag = "2025.4.1";
   };
 
   image = "${imageFile.imageName}:${imageFile.imageTag}";
@@ -71,8 +71,8 @@ in
       authentik-redis = {
         imageFile = pkgs.dockerTools.pullImage {
           imageName = "docker.io/library/redis";
-          imageDigest = "sha256:f773b35a95e170d92dd4214a3ec4859b1b7960bf56896ae687646d695f311187";
-          hash = "sha256-MgjZV7aGp1WgxxCAA9m3i25dDN4OA18jYNoxpF/ngIU=";
+          imageDigest = "sha256:62b5498c91778f738f0efbf0a6fd5b434011235a3e7b5f2ed4a2c0c63bb1c786";
+          hash = "sha256-fB5EfmkroIEcUHygKVZJGT2zvXMwN8Q1UlKF340qt0A=";
           finalImageName = "docker.io/library/redis";
           finalImageTag = "alpine";
         };
