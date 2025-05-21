@@ -15,8 +15,8 @@
     # nix run nixpkgs#nix-prefetch-docker -- --image-name klausmeyer/docker-registry-browser --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "klausmeyer/docker-registry-browser";
-      imageDigest = "sha256:e409aa916bbcd03800f518918f821fa3ebd4c19baf74bbdc1d17d1fccf313fcc";
-      hash = "sha256-pM7jgz3+6wkAK3+jVn/AcjpSCpr0Vt0fzn8C0UnWjjM=";
+      imageDigest = "sha256:d6fe74a0edf6cb4f421a38170ec6cb5117d13a3aa81ef2f1fbbba771c47fd364";
+      hash = "sha256-E0e5ZB/Ol2NRDzkEloceyxoC4ZOoQ22CY/yMUWuXnOI=";
       finalImageName = "klausmeyer/docker-registry-browser";
       finalImageTag = "latest";
     };
