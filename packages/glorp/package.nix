@@ -1,11 +1,11 @@
 { buildDotnetModule, dotnetCorePackages }:
 buildDotnetModule rec {
   pname = "glorp";
-  version = "0-unstable-2025-05-08";
+  version = "0-unstable-2025-05-21";
 
   src = builtins.fetchGit {
     url = "git@github.com:GGG-KILLER/Glorp.git";
-    rev = "a4ead6cb0e4d347eec1101ef91b1eb27e7d8e08e";
+    rev = "3a2afab756d8032dd53fc11e5c66fc65ae5dcfa9";
   };
 
   projectFile = "Glorp/Glorp.csproj";
