@@ -43,6 +43,7 @@ in
     N8N_HOST = "n8n.shiro.lan";
     N8N_PORT = toString config.shiro.ports.n8n;
     N8N_HIRING_BANNER_ENABLED = "false";
+    N8N_RUNNERS_ENABLED = "true";
 
     N8N_PUBLIC_API_DISABLED = "false";
     N8N_PUBLIC_API_SWAGGERUI_DISABLED = "true";
