@@ -19,6 +19,9 @@
     "cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json".file =
       ../../secrets/shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age;
 
+    n8n-encryption-key.file = ../../secrets/shiro/n8n/encryption_key.age;
+    n8n-pgsql-password.file = ../../secrets/shiro/n8n/pgsql/password.age;
+
     step-ca-intermediate-key = {
       file = ../../secrets/shiro/stepca/intermediate_ca_key.age;
       owner = "step-ca";

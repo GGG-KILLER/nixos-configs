@@ -63,6 +63,8 @@ in
 
     danbooru = 1051;
 
+    n8n = 1052;
+
     mqtt = 1883;
 
     vallheimUDP_A = 2456;

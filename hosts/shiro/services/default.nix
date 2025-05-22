@@ -12,6 +12,7 @@
     ./glorp.nix
     ./home-assistant.nix
     ./minio.nix
+    ./n8n.nix
     ./nginx.nix
     ./openspeedtest.nix
     ./zfs.nix

@@ -125,4 +125,14 @@ in
     ggg
     shiro
   ];
+
+  # Shiro -  n8n
+  "shiro/n8n/encryption_key.age".publicKeys = [
+    ggg
+    shiro
+  ];
+  "shiro/n8n/pgsql/password.age".publicKeys = [
+    ggg
+    shiro
+  ];
 }
