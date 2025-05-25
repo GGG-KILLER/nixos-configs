@@ -45,6 +45,7 @@ in
       # Coding
       # avalonia-ilspy # TODO: re-add when it no longer depends on .NET 6
       corepack_latest
+      delta
       docker-compose
       dotnet-ef
       dotnet-outdated
@@ -100,6 +101,19 @@ in
       ffmpeg
       kdePackages.elisa
 
+      # Terminal tools
+      du-dust
+      dua
+      dysk
+      fd
+      mprocs
+      parted
+      ripgrep
+      turbostat
+      wl-clipboard
+      xh
+      uutils-coreutils-noprefix
+
       # VMs
       virt-manager
       virt-viewer
@@ -111,17 +125,17 @@ in
       vivaldi-wayland
 
       # Misc
-      duc
-      fd
       imhex
       ipgen-cli
       mockoon
-      parted
-      turbostat
-      wl-clipboard
       zenmonitor
     ]
   );
+
+  environment.shellAliases = {
+    df = "dysk";
+    du = "dust";
+  };
 
   environment.variables = {
     EDITOR = "code --wait";
