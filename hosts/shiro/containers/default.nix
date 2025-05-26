@@ -287,11 +287,6 @@ with lib;
       mkMerge [
         servicesNeedingVpn
         needsStepCA
-        {
-          "container@vpn-gateway".wantedBy = map (name: "container@${name}.service") (
-            attrNames containersNeedingVpn
-          );
-        }
       ];
   };
 }
