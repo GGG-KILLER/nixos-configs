@@ -9,7 +9,7 @@ let
     finalImageTag = "2025.4.1";
   };
 
-  image = "${imageFile.imageName}:${imageFile.imageTag}";
+  image = imageFile.destNameTag;
 in
 {
   systemd.services."${config.virtualisation.oci-containers.backend}-authentik-network" =
@@ -68,7 +68,7 @@ in
       };
     in
     {
-      authentik-redis = {
+      authentik-redis = rec {
         imageFile = pkgs.dockerTools.pullImage {
           imageName = "docker.io/library/redis";
           imageDigest = "sha256:62b5498c91778f738f0efbf0a6fd5b434011235a3e7b5f2ed4a2c0c63bb1c786";
@@ -76,7 +76,7 @@ in
           finalImageName = "docker.io/library/redis";
           finalImageTag = "alpine";
         };
-        image = "docker.io/library/redis:alpine";
+        image = imageFile.destNameTag;
         cmd = [
           "--save"
           "60"

@@ -44,7 +44,7 @@
     "home-assistant.service"
   ];
 
-  virtualisation.oci-containers.containers.mqtt-hass = {
+  virtualisation.oci-containers.containers.mqtt-hass = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name eclipse-mosquitto --image-tag 2.0 --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "eclipse-mosquitto";
@@ -53,7 +53,7 @@
       finalImageName = "eclipse-mosquitto";
       finalImageTag = "2.0";
     };
-    image = "eclipse-mosquitto:2.0";
+    image = imageFile.destNameTag;
     volumes = [ "/var/lib/mosquitto:/mosquitto" ];
     ports = [
       "${toString config.shiro.ports.mqtt}:1883"

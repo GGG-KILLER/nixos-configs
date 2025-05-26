@@ -33,7 +33,7 @@
         };
     };
 
-  virtualisation.oci-containers.containers.downloader-frontend = {
+  virtualisation.oci-containers.containers.downloader-frontend = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name docker.lan/downloader/frontend --image-tag latest --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "docker.lan/downloader/frontend";
@@ -42,7 +42,7 @@
       finalImageName = "docker.lan/downloader/frontend";
       finalImageTag = "latest";
     };
-    image = "docker.lan/downloader/frontend:latest";
+    image = imageFile.destNameTag;
     ports = [ "${toString config.shiro.ports.downloader}:8080" ];
     dependsOn = [ "downloader-backend" ];
     extraOptions = [
@@ -54,7 +54,7 @@
     ];
   };
 
-  virtualisation.oci-containers.containers.downloader-backend = {
+  virtualisation.oci-containers.containers.downloader-backend = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name docker.lan/downloader/backend --image-tag latest --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "docker.lan/downloader/backend";
@@ -63,7 +63,7 @@
       finalImageName = "docker.lan/downloader/backend";
       finalImageTag = "latest";
     };
-    image = "docker.lan/downloader/backend:latest";
+    image = imageFile.destNameTag;
     user = "downloader:data-members";
     volumes = [
       "pgo:/app/PGO"

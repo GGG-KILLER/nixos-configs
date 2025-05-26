@@ -15,7 +15,7 @@ let
     "--network=danbooru"
   ];
 
-  danbooruContainerBase = {
+  danbooruContainerBase = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name ghcr.io/danbooru/danbooru --image-tag master --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "ghcr.io/danbooru/danbooru";
@@ -24,7 +24,7 @@ let
       finalImageName = "ghcr.io/danbooru/danbooru";
       finalImageTag = "master";
     };
-    image = "ghcr.io/danbooru/danbooru:master";
+    image = imageFile.destNameTag;
 
     environment = {
       DANBOORU_APP_NAME = "Shirobooru";
@@ -145,7 +145,7 @@ in
 
   # https://github.com/danbooru/iqdb
   # https://hub.docker.com/repository/docker/evazion/iqdb
-  virtualisation.oci-containers.containers.danbooru-iqdb = {
+  virtualisation.oci-containers.containers.danbooru-iqdb = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name evazion/iqdb --image-tag latest --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "evazion/iqdb";
@@ -154,7 +154,7 @@ in
       finalImageName = "evazion/iqdb";
       finalImageTag = "latest";
     };
-    image = "evazion/iqdb:latest";
+    image = imageFile.destNameTag;
 
     cmd = [
       "http"
@@ -172,7 +172,7 @@ in
     ];
   };
 
-  virtualisation.oci-containers.containers.danbooru-redis = {
+  virtualisation.oci-containers.containers.danbooru-redis = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name redis --image-tag latest --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "redis";
@@ -181,7 +181,7 @@ in
       finalImageName = "redis";
       finalImageTag = "latest";
     };
-    image = "redis:latest";
+    image = imageFile.destNameTag;
 
     extraOptions = defaultContainerFlags ++ [
       "--network-alias=redis"
@@ -214,7 +214,7 @@ in
     ];
   };
 
-  virtualisation.oci-containers.containers.danbooru-autotagger = {
+  virtualisation.oci-containers.containers.danbooru-autotagger = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name ghcr.io/danbooru/autotagger --image-tag latest --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "ghcr.io/danbooru/autotagger";
@@ -223,7 +223,7 @@ in
       finalImageName = "ghcr.io/danbooru/autotagger";
       finalImageTag = "latest";
     };
-    image = "ghcr.io/danbooru/autotagger:latest";
+    image = imageFile.destNameTag;
 
     extraOptions = defaultContainerFlags ++ [
       "--network-alias=autotagger"

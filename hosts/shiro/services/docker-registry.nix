@@ -11,7 +11,7 @@
   networking.firewall.allowedTCPPorts = [ config.shiro.ports.docker-registry ];
   networking.firewall.allowedUDPPorts = [ config.shiro.ports.docker-registry ];
 
-  virtualisation.oci-containers.containers.docker-registry-browser = {
+  virtualisation.oci-containers.containers.docker-registry-browser = rec {
     # nix run nixpkgs#nix-prefetch-docker -- --image-name klausmeyer/docker-registry-browser --arch amd64 --os linux --quiet
     imageFile = pkgs.dockerTools.pullImage {
       imageName = "klausmeyer/docker-registry-browser";
@@ -20,7 +20,7 @@
       finalImageName = "klausmeyer/docker-registry-browser";
       finalImageTag = "latest";
     };
-    image = "klausmeyer/docker-registry-browser:latest";
+    image = imageFile.destNameTag;
     ports = [ "${toString config.shiro.ports.docker-registry-browser}:8080" ];
     environment = {
       ENABLE_COLLAPSE_NAMESPACES = "true";
