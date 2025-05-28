@@ -18,7 +18,6 @@ let
   dotnetRoot = "${dotnet-sdk}/share/dotnet";
 
   agenix = inputs.agenix.packages.${system}.default;
-  audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
   deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
   git-crypt-agessh = inputs.git-crypt-agessh.packages.${system}.default;
   ipgen-cli = inputs.ipgen-cli.packages.${system}.default;
@@ -26,7 +25,6 @@ let
   inherit (self.packages.${system})
     kemono-dl
     m3u8-dl
-    vivaldi-wayland
     ;
   inherit (config.boot.kernelPackages) turbostat;
 in
@@ -34,14 +32,6 @@ in
   environment.systemPackages = (
     with pkgs;
     [
-      # Audio
-      audiorelay
-      easyeffects
-      helvum
-
-      # Android
-      android-tools
-
       # Coding
       # avalonia-ilspy # TODO: re-add when it no longer depends on .NET 6
       corepack_latest
@@ -51,8 +41,6 @@ in
       dotnet-outdated
       dotnet-repl
       dotnet-sdk
-      jetbrains.rider
-      mockoon
       nix-prefetch-scripts
       nixd
       nixf
@@ -71,25 +59,6 @@ in
       age
       agenix
       git-crypt-agessh
-      xca
-      yubikey-manager
-      yubioath-flutter
-
-      # Games
-      (prismlauncher.override {
-        jdks = [
-          jdk8
-          jdk11
-          jdk17
-          jdk21
-        ];
-      })
-      (r2modman.overrideDerivation (oldAttrs: {
-        patches = [ patches/r2modman-flatpak-launch.patch ];
-      }))
-
-      # Hardware
-      openrgb
 
       # Nix
       deploy-rs
@@ -99,7 +68,6 @@ in
 
       # Media
       ffmpeg
-      kdePackages.elisa
 
       # Terminal tools
       du-dust
@@ -114,21 +82,8 @@ in
       xh
       uutils-coreutils-noprefix
 
-      # VMs
-      virt-manager
-      virt-viewer
-
-      # Web
-      chromium
-      discord-canary
-      mullvad-vpn
-      vivaldi-wayland
-
       # Misc
-      imhex
       ipgen-cli
-      mockoon
-      zenmonitor
     ]
   );
 

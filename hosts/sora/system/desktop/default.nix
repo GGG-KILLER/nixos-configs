@@ -1,10 +1,77 @@
-{ pkgs, ... }:
+{
+  system,
+  self,
+  pkgs,
+  inputs,
+  ...
+}:
+let
+  audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
+
+  inherit (self.packages.${system})
+    vivaldi-wayland
+    ;
+in
 {
   imports = [
     ./audio
     ./opensnitch
     ./kde.nix
     # ./rustdesk.nix # TODO: Uncomment once NixOS/nixpkgs#390171 hits stable.
+  ];
+
+  environment.systemPackages = with pkgs; [
+    # Audio
+    audiorelay
+    easyeffects
+    helvum
+
+    # Android
+    android-tools
+
+    # Coding
+    jetbrains.rider
+    mockoon
+
+    # Encryption
+    xca
+    yubikey-manager
+    yubioath-flutter
+
+    # Games
+    (prismlauncher.override {
+      jdks = [
+        jdk8
+        jdk11
+        jdk17
+        jdk21
+      ];
+    })
+    (r2modman.overrideDerivation (oldAttrs: {
+      patches = [ patches/r2modman-flatpak-launch.patch ];
+    }))
+
+    # Hardware
+    openrgb
+
+    # Media
+    kdePackages.elisa
+
+    # VMs
+    virt-manager
+    virt-viewer
+
+    # Web
+    chromium
+    discord-canary
+    mullvad-vpn
+    vivaldi-wayland
+
+    # Misc
+    imhex
+    mockoon
+    zenmonitor
+
   ];
 
   # Android

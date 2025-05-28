@@ -2,7 +2,6 @@
 {
   imports = [
     ./desktop
-    ./programs
     ./services
     ./boot.nix
     ./ccache.nix
@@ -11,6 +10,7 @@
     ./hardening.nix
     ./kernel.nix
     ./libvirtd.nix
+    ./programs.nix
     ./yubikey.nix
   ];
 
