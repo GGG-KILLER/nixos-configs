@@ -94,6 +94,12 @@
     options = [ "zfsutil" ];
   };
 
+  fileSystems."/home/ggg/Games" = {
+    device = "rpool/userdata/home/ggg/Games";
+    fsType = "zfs";
+    options = [ "zfsutil" ];
+  };
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/BB73-6EFC";
     fsType = "vfat";
