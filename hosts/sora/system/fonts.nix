@@ -12,8 +12,8 @@ in
       allowBitmaps = true;
       useEmbeddedBitmaps = true;
       hinting = {
-        autohint = true;
         enable = true;
+        style = "medium";
       };
       defaultFonts.monospace = [
         "Cascadia Code"
