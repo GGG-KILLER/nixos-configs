@@ -50,6 +50,7 @@ in
     (r2modman.overrideDerivation (oldAttrs: {
       patches = [ patches/r2modman-flatpak-launch.patch ];
     }))
+    lutris
 
     # Hardware
     openrgb
