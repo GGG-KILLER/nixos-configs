@@ -15,71 +15,79 @@ in
     type = with types; attrsOf port;
   };
 
-  config.shiro.ports = {
-    nginx-http = 80;
-    nginx-https = 443;
+  config.shiro.ports =
+    {
+      nginx-http = 80;
+      nginx-https = 443;
 
-    docker-registry = 1024;
-    docker-registry-browser = 1025;
+      # Fixed ports: 60000-
 
-    minio = 1026;
-    minio-console = 1027;
+      # RESERVED: Games (60000-60999)
 
-    step-ca = 1028;
+      # NOTE: Needs to be a fixed port since we can't statically configure this through nix
+      mqtt = 61001;
 
-    grafana = 1029;
-    prometheus = 1030;
-    prometheus-lm-sensors-exporter = 1031;
-    prometheus-node-exporter = 1032;
-    prometheus-smokeping-exporter = 1033;
-    prometheus-zfs-exporter = 1034;
+      wireguard = 61235;
+    }
+    // (
+      let
+        services = [
+          # Step CA
+          "step-ca"
 
-    downloader = 1035;
+          # Docker registry
+          "docker-registry"
+          "docker-registry-browser"
 
-    qbittorrent-web = 1036;
-    flood = 1037;
+          # SSO
+          "authentik"
+          "authentik-ssl"
 
-    zigbee2mqtt = 1038;
-    home-assistant = 1039;
+          # MinIO
+          "minio"
+          "minio-console"
 
-    homarr = 1040;
-    dashdot = 1041;
+          # Monitoring
+          "grafana"
+          "netprobe"
+          "prometheus"
+          "prometheus-lm-sensors-exporter"
+          "prometheus-node-exporter"
+          "prometheus-smartmontools-exporter"
+          "prometheus-smokeping-exporter"
+          "prometheus-zfs-exporter"
 
-    statping-ng = 1042;
+          # Smart Home
+          "home-assistant"
+          "zigbee2mqtt"
 
-    netprobe = 1043;
+          # Downloaders
+          "downloader"
+          "flood"
+          "jackett"
+          "live-stream-dvr"
+          "qbittorrent-web"
+          "sonarr"
 
-    authentik = 1044;
-    authentik-ssl = 1045;
+          # Entertainment
+          "danbooru"
 
-    pufferpanel = 1046;
-    pufferpanel-sftp = 1047;
+          # Misc
+          "n8n"
+        ];
 
-    live-stream-dvr = 1048;
-
-    cadvisor = 1049;
-
-    prometheus-exporter = 1050;
-
-    danbooru = 1051;
-
-    n8n = 1052;
-
-    mqtt = 1883;
-
-    vallheimUDP_A = 2456;
-    vallheimUDP_B = 2457;
-    vallheimUDP_C = 2458;
-
-    sonarr = 8989;
-
-    mqtt-idk = 9001;
-    vallheim-control-panel = 9002;
-
-    jackett = 9117;
-
-    # Games: 60000-60999
-
-    wireguard = 61235;
-  };
+        inherit (lib)
+          listToAttrs
+          genList
+          elemAt
+          length
+          ;
+      in
+      listToAttrs (
+        genList (index: {
+          name = elemAt services index;
+          value = 1024 + index;
+        }) (length services)
+      )
+    );
 }

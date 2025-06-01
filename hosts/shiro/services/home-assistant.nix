@@ -57,7 +57,6 @@
     volumes = [ "/var/lib/mosquitto:/mosquitto" ];
     ports = [
       "${toString config.shiro.ports.mqtt}:1883"
-      "${toString config.shiro.ports.mqtt-idk}:9001"
     ];
     cmd = [
       "mosquitto"
