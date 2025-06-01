@@ -31,68 +31,49 @@ in
       default = false;
       description = "Whether to enable the smartmon node_exporter helper.";
     };
-    listen-addr = mkOption {
+    addr = mkOption {
       type = types.str;
-      default = "/run/smartmontools-exporter.sock";
-      description = "The address or UNIX socket path to listen on.";
+      default = "127.0.0.1";
+      description = "The IP address to listen on.";
+    };
+    port = mkOption {
+      type = types.port;
+      default = 9090;
+      description = "The port to listen on.";
     };
   };
 
   config = mkIf cfg.enable {
-    assertions = [
-      {
-        assertion = config.services.prometheus.enable && config.services.prometheus.exporters.node.enable;
-        message = "Prometheus and node_exporter must be enabled for smartmon node_exporter to be enabled.";
-      }
-    ];
-
     environment.systemPackages = [ smartmontools-exporter ];
 
-    systemd.sockets.smartmontools-exporter = {
-      enable = true;
-      description = "The smartmontools exporter that returns smartctl information about all disks.";
+    systemd.services.smartmontools-exporter =
+      let
+        response-script = pkgs.writeShellScript "generate-smartmon-exporter-response" ''
+          cat <<HEADERS
+          HTTP/1.1 200 OK
+          Date: $(date)
+          Server: netcat
+          Content-Type: text/plain; version=0.0.4; charset=utf-8; escaping=underscores
 
-      socketConfig = {
-        ListenStream = cfg.listen-addr;
-        Accept = true;
-        RemoveOnStop = true;
+          HEADERS
+
+          smartmontools-exporter
+        '';
+      in
+      {
+        enable = true;
+
+        path = [
+          pkgs.coreutils # cat tr
+          smartmontools-exporter
+        ];
+
+        serviceConfig = {
+          ExecStart = "${lib.getExe' pkgs.nmap "ncat"} --listen ${lib.escapeShellArg cfg.addr} ${lib.escapeShellArg cfg.port} --crlf --keep-open --nodns --exec ${lib.escapeShellArg response-script}";
+
+          PrivateTmp = true;
+          WorkingDirectory = "/tmp";
+        };
       };
-    };
-
-    systemd.services."smartmontools-exporter@" = {
-      enable = true;
-      serviceConfig = {
-        Type = "oneshot";
-
-        StandardInput = "socket";
-        StandardOutput = "socket";
-
-        PrivateTmp = true;
-        WorkingDirectory = "/tmp";
-      };
-
-      path = [
-        pkgs.coreutils # cat tr
-        pkgs.moreutils # sponge
-        smartmontools-exporter
-      ];
-      script = ''
-        {
-        cat <<HTTP | tr '\n' '\r\n'
-        HTTP/1.1 200 OK
-        Server: bash
-        Date: $(date --rfc-email)
-        Content-Type: text/plain; version=0.0.4; charset=utf-8; escaping=underscores
-        Cache-Control: no-store
-        X-Content-Type-Options: nosniff
-        X-Frame-Options: deny
-        X-Xss-Protection: 1; mode=block
-
-        HTTP
-
-        smartmontools-exporter
-        } | tr '\n' '\r\n' | sponge
-      '';
-    };
   };
 }
