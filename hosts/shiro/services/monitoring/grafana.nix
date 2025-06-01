@@ -9,6 +9,30 @@
       root_url = "https://grafana.shiro.lan/";
       enable_gzip = true;
     };
+
+    provision.datasources.settings = {
+      apiVersion = 1;
+
+      datasources = [
+        {
+          name = "Prometheus";
+          type = "prometheus";
+          access = "proxy";
+          url = "http://localhost:${toString config.shiro.ports.prometheus}";
+          jsonData = {
+            cacheLevel = "Low";
+            defaultEditor = "code";
+            disableRecordingRules = true;
+            httpMethod = "POST";
+            incrementalQuerying = true;
+            manageAlerts = false;
+            prometheusType = "Prometheus";
+            prometheusVersion = config.services.prometheus.package.version;
+            timeInterval = config.my.constants.prometheus.scrape_interval;
+          };
+        }
+      ];
+    };
   };
 
   modules.services.nginx.virtualHosts."grafana.shiro.lan" = {
