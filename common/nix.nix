@@ -4,6 +4,9 @@
   pkgs,
   ...
 }:
+let
+  reducedInputs = lib.filterAttrs (name: _: name != "self") inputs;
+in
 {
   nix = {
     package = pkgs.nixVersions.latest;
@@ -23,10 +26,10 @@
       "flakes"
       "nix-command"
     ];
-    registry = lib.mapAttrs' (name: value: lib.nameValuePair name { flake = value; }) inputs;
+    registry = lib.mapAttrs' (name: value: lib.nameValuePair name { flake = value; }) reducedInputs;
 
     # Path Things
-    nixPath = lib.mapAttrsToList (name: value: "${name}=${value}") inputs;
+    nixPath = lib.mapAttrsToList (name: value: "${name}=${value}") reducedInputs;
 
     # Auto Optimise the Store
     settings.auto-optimise-store = true;
