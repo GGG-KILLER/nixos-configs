@@ -15,7 +15,7 @@ in
       rev = getExe' pkgs.util-linux "rev";
       escape-str =
         varName: ''$(echo "${varName}" | ${jq} -Rs . | ${cut} -c 2- | ${rev} | ${cut} -c 2- | ${rev})'';
-      notifyScript = pkgs.writeScript "smartd-discord-notify.sh" ''
+      notifyScript = pkgs.writeShellScript "smartd-discord-notify.sh" ''
         ${getExe' pkgs.discord-sh "discord.sh"} \
           --webhook-url="${config.my.secrets.discord.webhook}" \
           --title "$SMARTD_FAILTYPE" \

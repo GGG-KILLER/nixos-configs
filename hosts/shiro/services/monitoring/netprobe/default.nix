@@ -66,7 +66,7 @@ in
     ];
   };
 
-  virtualisation.oci-containers.containers.netprobe-probe = rec {
+  virtualisation.oci-containers.containers.netprobe-probe = {
     inherit imageFile image;
     environment = {
       MODULE = "NETPROBE";

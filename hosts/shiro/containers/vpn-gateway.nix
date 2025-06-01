@@ -8,6 +8,11 @@ in
     mainAddr = "192.168.2.47"; # ipgen -n 192.168.2.0/24 vpn-gateway
   };
 
+  # Only enable the VPN container if we have any containers that need it auto-starting.
+  containers.vpn-gateway.autoStart = lib.any (name: config.containers.${name}.autoStart) (
+    lib.attrNames (lib.filterAttrs (_: container: container.vpn) config.modules.containers)
+  );
+
   modules.containers.vpn-gateway = {
     enableTun = true;
 
