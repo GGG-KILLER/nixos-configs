@@ -5,9 +5,9 @@ in
 {
   imports = [
     ./lm-sensors.nix
-    ./node-exporter-smartmon.nix
     ./node.nix
     ./openwrt.nix
+    ./smartmon-exporter.nix
     ./zfs-exporter.nix
   ];
 
