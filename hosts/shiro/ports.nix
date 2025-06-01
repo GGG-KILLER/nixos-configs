@@ -3,16 +3,11 @@
 # Here basically are registered all ports used across this server
 # including containers and ports only used internally.
 { lib, ... }:
-let
-  inherit (lib) mkOption mdDoc types;
-in
 {
-  options.shiro.ports = mkOption {
+  options.shiro.ports = lib.mkOption {
     internal = true;
-    description = mdDoc ''
-      Ports of services used in the shiro server.
-    '';
-    type = with types; attrsOf port;
+    description = "Ports of services used in this server.";
+    type = with lib.types; attrsOf port;
   };
 
   config.shiro.ports =
