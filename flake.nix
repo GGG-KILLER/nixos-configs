@@ -45,6 +45,10 @@
       url = "github:ryze312/stackpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -52,6 +56,7 @@
       self,
       nixpkgs,
       deploy-rs,
+      disko,
       ...
     }@inputs:
     let
@@ -67,6 +72,7 @@
           };
 
           modules = [
+            disko.nixosModules.disko
             ./common
             file
             inputs.agenix.nixosModules.default
