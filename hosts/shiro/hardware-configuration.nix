@@ -4,6 +4,9 @@
   modulesPath,
   ...
 }:
+let
+  enable-hdds = !config.cost-saving.enable || !config.cost-saving.disable-hdds;
+in
 {
   imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
@@ -117,36 +120,43 @@
   };
 
   fileSystems."/storage/services/live-stream-dvr" = {
+    enable = enable-hdds;
     device = "storage/services/live-stream-dvr";
     fsType = "zfs";
   };
 
   fileSystems."/storage/services/danbooru" = {
+    enable = enable-hdds;
     device = "storage/services/danbooru";
     fsType = "zfs";
   };
 
   fileSystems."/storage/series" = {
+    enable = enable-hdds;
     device = "storage/series";
     fsType = "zfs";
   };
 
   fileSystems."/storage/minio" = {
+    enable = enable-hdds;
     device = "storage/minio";
     fsType = "zfs";
   };
 
   fileSystems."/storage/h" = {
+    enable = enable-hdds;
     device = "storage/h";
     fsType = "zfs";
   };
 
   fileSystems."/storage/etc" = {
+    enable = enable-hdds;
     device = "storage/etc";
     fsType = "zfs";
   };
 
   fileSystems."/storage/animu" = {
+    enable = enable-hdds;
     device = "storage/animu";
     fsType = "zfs";
   };

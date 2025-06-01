@@ -30,13 +30,16 @@ in
 
       # Only run the tests and stuff for the disks we list here
       autodetect = false;
-      devices = [
-        { device = "/dev/disk/by-id/ata-SanDisk_Ultra_II_960GB_170517421132"; }
-        { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DMFBJG"; }
-        { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DOFBJG"; }
-        { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_X03BK19PFBJG"; }
-        { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_X037K5Q6FBJG"; }
-      ];
+      devices =
+        [
+          { device = "/dev/disk/by-id/ata-SanDisk_Ultra_II_960GB_170517421132"; }
+        ]
+        ++ lib.optionals (!config.cost-saving.enable || !config.cost-saving.disable-hdds) [
+          { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DMFBJG"; }
+          { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DOFBJG"; }
+          { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_X03BK19PFBJG"; }
+          { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_X037K5Q6FBJG"; }
+        ];
 
       notifications.mail.enable = false;
       notifications.wall.enable = false;

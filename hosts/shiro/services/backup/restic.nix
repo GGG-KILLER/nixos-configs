@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (lib) mkMerge mkForce;
+  inherit (lib) mkMerge optionals optionalString;
 in
 {
   services.restic.backups =
@@ -15,21 +15,23 @@ in
           excludeFile = pkgs.writeText "restic-excludes.txt" ''
             *.log
             *.pid
-            /storage/etc/Archives
-            /storage/etc/glua-mc
-            /storage/etc/ISOs
-            /storage/etc/Leaks
-            /storage/etc/phone
-            /storage/etc/random
-            /storage/etc/Reading Material/Gentoomen Library
-            /storage/etc/School/FMU
-            /storage/etc/Tools
-            /storage/h
-            /storage/series
-            !/storage/h/Comics
-            !/storage/h/G
-            !/storage/h/Others
-            !/storage/h/Patreon
+            ${optionalString (!config.cost-saving.enable || !config.cost-saving.disable-hdds) ''
+              /storage/etc/Archives
+              /storage/etc/glua-mc
+              /storage/etc/ISOs
+              /storage/etc/Leaks
+              /storage/etc/phone
+              /storage/etc/random
+              /storage/etc/Reading Material/Gentoomen Library
+              /storage/etc/School/FMU
+              /storage/etc/Tools
+              /storage/h
+              /storage/series
+              !/storage/h/Comics
+              !/storage/h/G
+              !/storage/h/Others
+              !/storage/h/Patreon
+            ''}
             /var/lib/grafana/data/log
             /var/lib/home-assistant/.cache
             /var/lib/home-assistant/.esphome/build
@@ -56,19 +58,22 @@ in
         in
         {
           initialize = true;
-          paths = [
-            "/var/lib/grafana"
-            "/var/lib/home-assistant"
-            "/var/lib/jackett"
-            "/var/lib/jellyfin"
-            "/var/lib/pgsql-prd" # only prod is worth backing up
-            "/var/lib/qbittorrent"
-            "/var/lib/sonarr"
-            "/var/lib/step-ca"
-            "/storage/etc"
-            "/storage/h"
-            "/storage/series"
-          ];
+          paths =
+            [
+              "/var/lib/grafana"
+              "/var/lib/home-assistant"
+              "/var/lib/jackett"
+              "/var/lib/jellyfin"
+              "/var/lib/pgsql-prd" # only prod is worth backing up
+              "/var/lib/qbittorrent"
+              "/var/lib/sonarr"
+              "/var/lib/step-ca"
+            ]
+            ++ optionals (!config.cost-saving.enable) [
+              "/storage/etc"
+              "/storage/h"
+              "/storage/series"
+            ];
           extraBackupArgs = [
             "--compression max"
             "--exclude-file=${excludeFile}"

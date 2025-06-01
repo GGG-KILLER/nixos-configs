@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   inherit (lib) mkOption types;
 in
@@ -24,6 +24,6 @@ in
 
   config.my.constants.prometheus = {
     instance = "shiro";
-    scrape_interval = "5s";
+    scrape_interval = if config.cost-saving.enable then config.cost-saving.scrape-interval else "5s";
   };
 }

@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, config, ... }:
 let
   inherit (lib) getExe' listToAttrs nameValuePair;
   gpuDevs = [
@@ -32,6 +32,8 @@ in
       }
     ];
   };
+
+  containers.jellyfin.autoStart = !config.cost-saving.enable || !config.cost-saving.disable-streaming;
 
   containers.jellyfin.allowedDevices = map (dev: {
     modifier = "rw";

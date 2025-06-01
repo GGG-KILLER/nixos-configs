@@ -1,10 +1,10 @@
 { ... }:
 {
   imports = [
-    # ./danbooru
-    # ./downloader.nix # TODO: Re-enable when job again.
+    ./danbooru
+    ./downloader.nix
     ./live-stream-dvr.nix
-    # ./megasync.nix # TODO: Re-enable when Patreon subs restart
+    ./megasync.nix
     ./sonarr.nix
   ];
 }

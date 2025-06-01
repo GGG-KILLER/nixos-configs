@@ -11,6 +11,7 @@
     ./docker-registry.nix
     ./glorp.nix
     ./home-assistant.nix
+    ./michi-site.nix
     ./minio.nix
     ./n8n.nix
     ./nginx.nix

@@ -5,6 +5,7 @@
     ./services
     ./users
     ./boot.nix
+    ./cost-saving.nix
     ./hardware-configuration.nix
     ./nat.nix
     ./networking.nix

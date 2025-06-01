@@ -1,4 +1,4 @@
-{ self, ... }:
+{ self, config, ... }:
 {
   my.networking.qbittorrent = {
     extraNames = [ "flood" ];
@@ -26,6 +26,8 @@
       }
     ];
   };
+
+  containers.qbittorrent.autoStart = !config.cost-saving.enable || !config.cost-saving.disable-downloaders;
 
   modules.containers.qbittorrent = {
     vpn = true;
