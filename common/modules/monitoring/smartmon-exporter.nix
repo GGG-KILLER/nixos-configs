@@ -14,8 +14,10 @@ let
 
     inheritPath = false;
     runtimeInputs = with pkgs; [
+      coreutils
       gawk
-      moreutils
+      gnugrep
+      gnused
       smartmontools
     ];
 
@@ -57,7 +59,7 @@ in
       };
     };
 
-    systemd.services.smartmontools-exporter = {
+    systemd.services."smartmontools-exporter@" = {
       enable = true;
       serviceConfig = {
         Type = "oneshot";
@@ -70,13 +72,11 @@ in
       };
 
       path = [
-        pkgs.coreutils
+        pkgs.coreutils # cat tr
+        pkgs.moreutils # sponge
         smartmontools-exporter
       ];
       script = ''
-        #!${pkgs.runtimeShell}
-        set -euo pipefail
-
         {
         cat <<HTTP | tr '\n' '\r\n'
         HTTP/1.1 200 OK
@@ -91,7 +91,7 @@ in
         HTTP
 
         smartmontools-exporter
-        } | tr '\n' '\r\n'
+        } | tr '\n' '\r\n' | sponge
       '';
     };
   };
