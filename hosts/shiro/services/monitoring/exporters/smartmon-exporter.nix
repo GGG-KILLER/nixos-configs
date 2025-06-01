@@ -15,6 +15,7 @@
         }
       ];
       inherit (config.my.constants.prometheus) scrape_interval;
+      scrape_timeout = "50s";
     }
   ];
 }

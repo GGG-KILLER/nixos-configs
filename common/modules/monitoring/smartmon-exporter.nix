@@ -69,7 +69,7 @@ in
         ];
 
         serviceConfig = {
-          ExecStart = "${lib.getExe' pkgs.nmap "ncat"} --listen ${lib.escapeShellArg cfg.addr} ${lib.escapeShellArg cfg.port} --crlf --keep-open --nodns --exec ${lib.escapeShellArg response-script}";
+          ExecStart = "${lib.getExe' pkgs.nmap "ncat"} --listen ${lib.escapeShellArg cfg.addr} ${lib.escapeShellArg cfg.port} --keep-open --nodns --exec ${lib.escapeShellArg response-script}";
 
           PrivateTmp = true;
           WorkingDirectory = "/tmp";
