@@ -29,10 +29,10 @@ in
       default = false;
       description = "Whether to enable the smartmon node_exporter helper.";
     };
-    socket-path = mkOption {
-      type = types.path;
+    listen-addr = mkOption {
+      type = types.str;
       default = "/run/smartmontools-exporter.sock";
-      description = "The path to the unix socket to listen on.";
+      description = "The address or UNIX socket path to listen on.";
     };
   };
 
@@ -51,7 +51,7 @@ in
       description = "The smartmontools exporter that returns smartctl information about all disks.";
 
       socketConfig = {
-        ListenStream = cfg.socket-path;
+        ListenStream = cfg.listen-addr;
         Accept = true;
         RemoveOnStop = true;
       };
