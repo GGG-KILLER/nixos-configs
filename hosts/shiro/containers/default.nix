@@ -122,6 +122,23 @@ with lib;
               containerCfg = config.container;
             in
             {
+              imports = [
+                # dummy tools
+                # Use reduced set of common/ to reduce rebuild count.
+                ../../../common/groups
+                ../../../common/modules
+                ../../../common/overlays
+                ../../../common/secrets
+                ../../../common/users
+                ../../../common/console.nix
+                ../../../common/i18n.nix
+                ../../../common/pki.nix
+                ../../../common/programs.nix
+                ../../../common/time.nix
+
+                ../ports.nix
+              ];
+
               options.container = {
                 name = mkOption {
                   type = types.str;
@@ -136,6 +153,7 @@ with lib;
               };
 
               config = {
+
                 nixpkgs = {
                   inherit hostPlatform;
                 };
@@ -249,16 +267,10 @@ with lib;
                 specialArgs = {
                   inherit system inputs liveCd;
                 };
-                modules =
-                  [
-                    ../../../common
-                    ../ports.nix
-                  ]
-                  ++ cfg.extraModules
-                  ++ [
-                    container-base
-                    cfg.config
-                  ];
+                modules = cfg.extraModules ++ [
+                  container-base
+                  cfg.config
+                ];
               }).config.system.build.toplevel;
         }
       );
