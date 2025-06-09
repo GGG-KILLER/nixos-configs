@@ -89,6 +89,7 @@ in
             ]
           )
           ++ (with pkgs.vscode-marketplace; [
+            avaloniateam.vscode-avalonia
             christopherstyles.html-entities
             cschlosser.doxdocgen
             dbaeumer.vscode-eslint
