@@ -22,7 +22,7 @@
   # };
 
   # Overlays
-  nixpkgs.overlays = [ inputs.nix-vscode-extensions.overlays.default ];
+  nixpkgs.overlays = [ ];
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;

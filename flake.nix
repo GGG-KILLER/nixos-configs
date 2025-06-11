@@ -37,16 +37,16 @@
       url = "github:ipgen/cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     stackpkgs = {
       url = "github:ryze312/stackpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
       url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix4vscode = {
+      url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -90,6 +90,7 @@
       nixosConfigurations = {
         sora = mkConfig ./hosts/sora/configuration.nix;
         shiro = mkConfig ./hosts/shiro/configuration.nix;
+        glorp = mkConfig ./hosts/glorp/configuration.nix;
         live-cd-plasma6 = mkConfig ./media/live-cd-plasma6.nix;
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
@@ -107,6 +108,19 @@
           };
           confirmTimeout = 300;
         };
+
+        # glorp = {
+        #   hostname = "158.180.39.111";
+        #   fastConnection = false;
+        #   autoRollback = true;
+        #   magicRollback = true;
+        #   profiles.system = {
+        #     user = "root";
+        #     path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.glorp;
+        #     sshUser = "root";
+        #   };
+        #   confirmTimeout = 300;
+        # };
       };
 
       packages =

@@ -1,14 +1,11 @@
 {
   self,
-  system,
   pkgs,
   lib,
   ...
 }:
 let
-  inherit (lib) mkMerge getExe;
-  csdevkit-vscode-ext = self.packages.${system}."ms-dotnettools.csdevkit";
-  csharp-vscode-ext = self.packages.${system}."ms-dotnettools.csharp";
+  inherit (lib) getExe;
 
   settings = {
     # Disable telemetry
@@ -49,74 +46,97 @@ let
   };
 in
 {
-  home-manager.users.ggg = mkMerge [
+  # Load nix4vscode
+  nixpkgs.overlays = [ self.inputs.nix4vscode.overlays.forVscode ];
+
+  home-manager.users.ggg = lib.mkMerge [
     {
-      programs.vscode = {
+      programs.vscode = rec {
         enable = true;
         package = pkgs.vscode;
 
         # Only install extensions through nix.
         mutableExtensionsDir = false;
         profiles.default.extensions =
-          [
-            # C# Development
-            (csdevkit-vscode-ext.overrideAttrs (old: {
-              inherit (pkgs.vscode-marketplace.ms-dotnettools.csdevkit) version src;
-            }))
-            (csharp-vscode-ext.overrideAttrs (old: {
-              inherit (pkgs.vscode-marketplace.ms-dotnettools.csharp) version src;
-            }))
-          ]
-          # Nixpkgs' vscode extensions tend to lag behind quite often, so we just use their build
-          # script but with the auto-updated vscode marketplace sources and versions.
-          ++ (
-            let
-              updateExt =
-                getExt:
-                ((getExt pkgs.vscode-extensions).overrideAttrs (old: {
-                  inherit (getExt pkgs.vscode-marketplace) version src;
-                }));
-            in
-            [
-              (updateExt (exts: exts.dart-code.dart-code))
-              (updateExt (exts: exts.dart-code.flutter))
-              (updateExt (exts: exts.foxundermoon.shell-format))
-              (updateExt (exts: exts.ms-dotnettools.vscode-dotnet-runtime))
-              (updateExt (exts: exts.ms-toolsai.jupyter))
-              (updateExt (exts: exts.ms-vscode-remote.remote-ssh))
-              # (updateExt (exts: exts.rust-lang.rust-analyzer)) # TODO: Uncomment when NixOS/nixpkgs#383049 gets merged
-              (updateExt (exts: exts.timonwong.shellcheck))
+          let
+            mkOverride =
+              nix4vscode-ext:
+              let
+                nixpkgs-ext =
+                  lib.attrByPath (lib.splitString "." nix4vscode-ext.vscodeExtUniqueId) null
+                    pkgs.vscode-extensions;
+              in
+              if nixpkgs-ext == null then
+                nix4vscode-ext
+              else
+                nix4vscode-ext.overrideAttrs (
+                  _:
+                  lib.filterAttrs (
+                    n: _:
+                    lib.elem n [
+                      "buildInputs"
+                      "dontAutoPatchelf"
+                      "nativeBuildInputs"
+                      "patches"
+                      "postConfigure"
+                      "postFixup"
+                      "postInstall"
+                      "postPatch"
+                      "preConfigure"
+                      "preFixup"
+                      "preInstall"
+                      "prePatch"
+                      "propagatedBuildInputs"
+                      "sourceRoot"
+                      "strictDeps"
+                    ]
+                  ) nixpkgs-ext
+                );
+
+            applyPkgsOverrides = exts: lib.map mkOverride exts;
+          in
+          applyPkgsOverrides (
+            pkgs.nix4vscode.forVscodeVersionPrerelease package.version [
+              "avaloniateam.vscode-avalonia"
+              "christopherstyles.html-entities"
+              "cschlosser.doxdocgen"
+              "dart-code.dart-code"
+              "dart-code.flutter"
+              "dbaeumer.vscode-eslint"
+              "eamodio.gitlens"
+              "editorconfig.editorconfig"
+              "foxundermoon.shell-format"
+              "foxundermoon.shell-format"
+              "james-yu.latex-workshop"
+              "jashoo.dotnetinsights"
+              "jnoortheen.nix-ide"
+              "l13rary.l13-diff"
+              "ltex-plus.vscode-ltex-plus"
+              "mhutchie.git-graph"
+              "mikestead.dotenv"
+              "mkhl.direnv"
+              "ms-azuretools.vscode-docker"
+              "ms-dotnettools.csdevkit"
+              "ms-dotnettools.csharp"
+              "ms-dotnettools.vscode-dotnet-runtime"
+              "ms-toolsai.jupyter"
+              "ms-vscode-remote.remote-containers"
+              "ms-vscode-remote.remote-ssh"
+              "ms-vscode.powershell"
+              "oderwat.indent-rainbow"
+              "omkov.vscode-ebnf"
+              "pkief.material-icon-theme"
+              "redhat.vscode-yaml"
+              "rust-lang.rust-analyzer"
+              "tamasfe.even-better-toml"
+              "timonwong.shellcheck"
+              "wix.vscode-import-cost"
             ]
-          )
-          ++ (with pkgs.vscode-marketplace; [
-            avaloniateam.vscode-avalonia
-            christopherstyles.html-entities
-            cschlosser.doxdocgen
-            dbaeumer.vscode-eslint
-            eamodio.gitlens
-            editorconfig.editorconfig
-            james-yu.latex-workshop
-            jashoo.dotnetinsights
-            jnoortheen.nix-ide
-            l13rary.l13-diff
-            ltex-plus.vscode-ltex-plus
-            mhutchie.git-graph
-            mikestead.dotenv
-            mkhl.direnv
-            ms-azuretools.vscode-docker
-            ms-vscode-remote.remote-containers
-            ms-vscode.powershell
-            oderwat.indent-rainbow
-            omkov.vscode-ebnf
-            pkief.material-icon-theme
-            redhat.vscode-yaml
-            tamasfe.even-better-toml
-            wix.vscode-import-cost
-          ]);
+          );
       };
 
       home.packages = with pkgs; [
-        # rust-analyzer # TODO: Uncomment when NixOS/nixpkgs#383049 gets merged
+        rust-analyzer
         shellcheck
         nixfmt-rfc-style
       ];
