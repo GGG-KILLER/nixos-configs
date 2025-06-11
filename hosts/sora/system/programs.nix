@@ -54,6 +54,7 @@ in
       # avalonia-ilspy # TODO: re-add when it no longer depends on .NET 6
       corepack_latest
       delta
+      deno
       docker-compose
       dotnet-ef
       dotnet-outdated
