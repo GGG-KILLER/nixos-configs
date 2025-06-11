@@ -103,6 +103,7 @@ in
               "dart-code.dart-code"
               "dart-code.flutter"
               "dbaeumer.vscode-eslint"
+              "denoland.vscode-deno"
               "eamodio.gitlens"
               "editorconfig.editorconfig"
               "foxundermoon.shell-format"
