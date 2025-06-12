@@ -121,6 +121,7 @@ in
               "ms-dotnettools.csdevkit"
               "ms-dotnettools.csharp"
               "ms-dotnettools.vscode-dotnet-runtime"
+              "ms-python.python"
               "ms-toolsai.jupyter"
               "ms-vscode-remote.remote-containers"
               "ms-vscode-remote.remote-ssh"
