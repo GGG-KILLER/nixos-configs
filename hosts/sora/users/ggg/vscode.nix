@@ -106,6 +106,7 @@ in
               "denoland.vscode-deno"
               "eamodio.gitlens"
               "editorconfig.editorconfig"
+              "ex3ndr.llama-coder"
               "foxundermoon.shell-format"
               "foxundermoon.shell-format"
               "james-yu.latex-workshop"
