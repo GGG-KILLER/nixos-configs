@@ -6,14 +6,10 @@
     # General
     "deepseek-r1"
     "gemma3"
-    "qwen3"
-    "devstral"
-    "llama4"
-    "phi4"
 
-    # Coding
-    "devstral"
-    "wizardlm2"
-    "codestral"
+    # Coding (continue.dev)
+    "llama3.1:8b"
+    "qwen2.5-coder:1.5b-base"
+    "nomic-embed-text:latest"
   ];
 }
