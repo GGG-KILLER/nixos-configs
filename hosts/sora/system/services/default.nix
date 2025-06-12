@@ -3,6 +3,7 @@
   imports = [
     ./fancontrol.nix
     ./nix.nix
+    ./ollama.nix
     ./restic.nix
   ];
 
