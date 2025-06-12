@@ -99,6 +99,7 @@ in
             pkgs.nix4vscode.forVscodeVersionPrerelease package.version [
               "avaloniateam.vscode-avalonia"
               "christopherstyles.html-entities"
+              "Continue.continue"
               "cschlosser.doxdocgen"
               "dart-code.dart-code"
               "dart-code.flutter"
@@ -106,7 +107,6 @@ in
               "denoland.vscode-deno"
               "eamodio.gitlens"
               "editorconfig.editorconfig"
-              "ex3ndr.llama-coder"
               "foxundermoon.shell-format"
               "foxundermoon.shell-format"
               "james-yu.latex-workshop"
