@@ -108,7 +108,7 @@
 
   fileSystems."/mnt/DataInt" = {
     device = "/dev/disk/by-id/ata-ST1000DM010-2EP102_ZN17GS17-part1";
-    fsType = "ntfs";
+    fsType = "ext4";
     options = [ "nofail" ];
   };
 
