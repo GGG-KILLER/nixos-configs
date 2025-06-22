@@ -1,7 +1,7 @@
 #! /usr/bin/env nix-shell
 #! nix-shell -i bash -p nix nix-output-monitor
 # shellcheck shell=bash
-set -euo pipefail
+set -xeuo pipefail
 
 if [ -d isos/ ]; then
     rm -f isos/*.iso || true
@@ -21,11 +21,11 @@ function move_iso() {
 pushd isos
 (
     echo Creating GNOME ISO...
-    nom build ..#nixosConfigurations.live-cd-plasma6.config.system.build.isoImage -o gnome --quiet
+    nom build ..#nixosConfigurations.live-cd-plasma6.config.system.build.isoImage "$@" -o gnome --quiet
     move_iso gnome
 
     echo Creating Minimal ISO...
-    nom build ..#nixosConfigurations.live-cd-minimal.config.system.build.isoImage -o minimal --quiet
+    nom build ..#nixosConfigurations.live-cd-minimal.config.system.build.isoImage "$@" -o minimal --quiet
     move_iso minimal
 )
 popd
