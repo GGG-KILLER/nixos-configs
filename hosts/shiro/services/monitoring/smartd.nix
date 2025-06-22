@@ -37,7 +37,7 @@ in
         ++ lib.optionals (!config.cost-saving.enable || !config.cost-saving.disable-hdds) [
           { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DMFBJG"; }
           { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41HAK6DOFBJG"; }
-          { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_X03BK19PFBJG"; }
+          { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_41FDK5CZFBJG"; }
           { device = "/dev/disk/by-id/ata-TOSHIBA_HDWQ140_X037K5Q6FBJG"; }
         ];
 
