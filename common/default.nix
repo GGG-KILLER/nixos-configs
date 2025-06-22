@@ -13,6 +13,7 @@
     ./nix.nix
     ./pki.nix
     ./programs.nix
+    ./sudo.nix
     ./time.nix
   ];
 
