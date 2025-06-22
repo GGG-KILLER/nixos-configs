@@ -14,5 +14,13 @@
 
         filePath = ./docker-registry-cleanup;
       })
+      (mkCommand {
+        dependencies = with pkgs; [
+          coreutils
+        ];
+        buildInputs = with pkgs; [ bash ];
+
+        filePath = ./find-ata;
+      })
     ];
 }
