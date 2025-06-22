@@ -22,5 +22,5 @@
     default = "1m";
   };
 
-  config.cost-saving.enable = true;
+  config.cost-saving.enable = false;
 }
