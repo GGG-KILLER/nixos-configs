@@ -13,7 +13,7 @@
     ./home-assistant.nix
     ./michi-site.nix
     ./minio.nix
-    ./n8n.nix
+    # ./n8n.nix
     ./nginx.nix
     ./openspeedtest.nix
     ./zfs.nix
