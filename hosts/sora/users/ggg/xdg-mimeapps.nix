@@ -9,6 +9,9 @@
     }:
     let
       associateApp = app: mimes: lib.genAttrs mimes (_: app);
+      dolphinAssociations = associateApp "org.kde.dolphin.desktop" [
+        "inode/directory"
+      ];
       browserAssociations = associateApp "vivaldi-stable.desktop" [
         "application/atom+xml"
         "application/rdf+xml"
@@ -260,29 +263,41 @@
         "application/zstd"
       ];
       miscAssociations = { };
-      associations =
-        browserAssociations
+      defaultAssociations =
+        dolphinAssociations
+        // browserAssociations
         // vscodeAssociations
         // readerAssociations
         // imageAssociations
         // videoAssociations
         // archiveAssociations
         // miscAssociations;
+
+      addedAssociations = defaultAssociations // {
+        "inode/directory" = [
+          "org.kde.dolphin.desktop"
+          "code.desktop"
+          "mpv.desktop"
+        ];
+      };
+
+      mkIniValue =
+        v:
+        let
+          default = lib.generators.mkValueStringDefault { };
+        in
+        if lib.isList v then lib.concatStringsSep ";" (lib.map default v) else default v;
+
       iniFile = pkgs.writeText "default-mimeapps.list" (
         lib.generators.toINI
           {
             mkKeyValue = lib.generators.mkKeyValueDefault {
-              mkValueString =
-                v:
-                let
-                  default = lib.generators.mkValueStringDefault { };
-                in
-                if lib.isList v then lib.concatStringsSep ";" (lib.map default v) else default v;
+              mkValueString = mkIniValue;
             } "=";
           }
           {
-            "Added Associations" = associations;
-            "Default Applications" = associations;
+            "Added Associations" = addedAssociations;
+            "Default Applications" = defaultAssociations;
           }
       );
       initool = lib.getExe pkgs.initool;
@@ -301,15 +316,32 @@
                       mime: app:
                       let
                         args = lib.escapeShellArgs [
-                          mime
-                          app
+                          (mkIniValue mime)
+                          (mkIniValue app)
                         ];
                       in
                       [
                         "${initool} set - 'Added Associations' ${args}"
+                      ]
+                    ) addedAssociations
+                  )
+                )
+              } \
+              | ${
+                lib.concatStringsSep " \\\n      | " (
+                  lib.flatten (
+                    lib.mapAttrsToList (
+                      mime: app:
+                      let
+                        args = lib.escapeShellArgs [
+                          (mkIniValue mime)
+                          (mkIniValue app)
+                        ];
+                      in
+                      [
                         "${initool} set - 'Default Applications' ${args}"
                       ]
-                    ) associations
+                    ) defaultAssociations
                   )
                 )
               })
