@@ -90,7 +90,7 @@
       nixosConfigurations = {
         sora = mkConfig ./hosts/sora/configuration.nix;
         shiro = mkConfig ./hosts/shiro/configuration.nix;
-        glorp = mkConfig ./hosts/glorp/configuration.nix;
+        # glorp = mkConfig ./hosts/glorp/configuration.nix;
         live-cd-plasma6 = mkConfig ./media/live-cd-plasma6.nix;
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
