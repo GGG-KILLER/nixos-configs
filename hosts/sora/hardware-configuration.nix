@@ -23,10 +23,7 @@
     "kvm-amd"
     "lm75"
     "nct6775"
-    "zenpower"
   ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ zenpower ];
-  boot.blacklistedKernelModules = [ "k10temp" ];
 
   fileSystems."/" = {
     device = "rpool/nixos/root";

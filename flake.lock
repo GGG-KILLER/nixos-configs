@@ -451,6 +451,21 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1751432711,
+        "narHash": "sha256-136MeWtckSHTN9Z2WRNRdZ8oRP3vyx3L8UxeBYE+J9w=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "497ae1357f1ac97f1aea31a4cb74ad0d534ef41f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1751271578,
@@ -536,6 +551,7 @@
         "ipgen-cli": "ipgen-cli",
         "nix-index-database": "nix-index-database",
         "nix4vscode": "nix4vscode",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
         "packwiz": "packwiz",
