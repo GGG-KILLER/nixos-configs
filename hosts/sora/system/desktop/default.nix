@@ -17,7 +17,7 @@ in
     ./audio
     ./opensnitch
     ./kde.nix
-    # ./rustdesk.nix # TODO: Uncomment once NixOS/nixpkgs#390171 hits stable.
+    ./rustdesk.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -72,7 +72,7 @@ in
     imhex
     mockoon
     zenmonitor
-
+    rustdesk-flutter
   ];
 
   # Android

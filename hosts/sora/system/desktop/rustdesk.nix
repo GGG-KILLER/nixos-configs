@@ -7,7 +7,7 @@
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
-      ExecStart = "${lib.getExe pkgs.rustdesk} --service";
+      ExecStart = "${lib.getExe pkgs.rustdesk-flutter} --service";
       PIDFile = "/var/run/rustdesk.pid";
       KillMode = "mixed";
       TimeoutStopSec = "30";
