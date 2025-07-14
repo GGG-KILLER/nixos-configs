@@ -60,18 +60,16 @@ in
         profiles.default.extensions =
           let
             mkOverride =
-              nix4vscode-ext:
+              name:
               let
-                nixpkgs-ext =
-                  lib.attrByPath (lib.splitString "." nix4vscode-ext.vscodeExtUniqueId) null
-                    pkgs.vscode-extensions;
+                nixpkgs-ext = lib.attrByPath (lib.splitString "." name) null pkgs.vscode-extensions;
               in
               if nixpkgs-ext == null then
-                nix4vscode-ext
+                null
               else
-                nix4vscode-ext.overrideAttrs (
-                  _:
-                  lib.filterAttrs (
+                {
+                  inherit name;
+                  value = lib.filterAttrs (
                     n: _:
                     lib.elem n [
                       "buildInputs"
@@ -90,13 +88,12 @@ in
                       "sourceRoot"
                       "strictDeps"
                     ]
-                  ) nixpkgs-ext
-                );
+                  ) nixpkgs-ext;
+                };
+            getDecorators =
+              exts-names: lib.listToAttrs (lib.filter (x: x != null) (lib.map mkOverride exts-names));
 
-            applyPkgsOverrides = exts: lib.map mkOverride exts;
-          in
-          applyPkgsOverrides (
-            pkgs.nix4vscode.forVscodeVersionPrerelease package.version [
+            names = [
               "avaloniateam.vscode-avalonia"
               "christopherstyles.html-entities"
               "Continue.continue"
@@ -134,8 +131,9 @@ in
               "tamasfe.even-better-toml"
               "timonwong.shellcheck"
               "wix.vscode-import-cost"
-            ]
-          );
+            ];
+          in
+          pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names;
       };
 
       home.packages = with pkgs; [
