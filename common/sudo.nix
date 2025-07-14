@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 {
   security.sudo.enable = false;
 
@@ -16,6 +16,13 @@
       commands = [
         {
           command = "/nix/store/*/bin/switch-to-configuration";
+          options = [
+            "SETENV"
+            "NOPASSWD"
+          ];
+        }
+        {
+          command = "${lib.getExe config.nix.package} build --no-link --profile /nix/var/nix/profiles/system /nix/store/[a-z0-9]+-nixos-system-(sora|shiro)-[\d.]+";
           options = [
             "SETENV"
             "NOPASSWD"
