@@ -1,0 +1,661 @@
+diff --git a/packages/cli/src/license.ts b/packages/cli/src/license.ts
+index c5583f091c..e26659d77e 100644
+--- a/packages/cli/src/license.ts
++++ b/packages/cli/src/license.ts
+@@ -16,12 +16,48 @@ import config from '@/config';
+ import { SettingsRepository } from '@/databases/repositories/settings.repository';
+ import { LicenseMetricsService } from '@/metrics/license-metrics.service';
+ 
+-import { N8N_VERSION, SETTINGS_LICENSE_CERT_KEY, Time } from './constants';
+-
+-const LICENSE_RENEWAL_DISABLED_WARNING =
+-	'Automatic license renewal is disabled. The license will not renew automatically, and access to licensed features may be lost!';
+-
+-export type FeatureReturnType = Partial<
++const FEATURES: FeatureReturnType = {
++	[LICENSE_FEATURES.ADVANCED_EXECUTION_FILTERS]: true,
++	[LICENSE_FEATURES.ADVANCED_PERMISSIONS]: true,
++	[LICENSE_FEATURES.AI_ASSISTANT]: false,
++	[LICENSE_FEATURES.AI_CREDITS]: false,
++	[LICENSE_FEATURES.API_DISABLED]: false,
++	[LICENSE_FEATURES.API_KEY_SCOPES]: true,
++	[LICENSE_FEATURES.ASK_AI]: false,
++	[LICENSE_FEATURES.BINARY_DATA_S3]: true,
++	[LICENSE_FEATURES.COMMUNITY_NODES_CUSTOM_REGISTRY]: false,
++	[LICENSE_FEATURES.DEBUG_IN_EDITOR]: true,
++	[LICENSE_FEATURES.EXTERNAL_SECRETS]: true,
++	[LICENSE_FEATURES.FOLDERS]: true,
++	[LICENSE_FEATURES.INSIGHTS_VIEW_DASHBOARD]: true,
++	[LICENSE_FEATURES.INSIGHTS_VIEW_HOURLY_DATA]: true,
++	[LICENSE_FEATURES.INSIGHTS_VIEW_SUMMARY]: true,
++	[LICENSE_FEATURES.LDAP]: true,
++	[LICENSE_FEATURES.LOG_STREAMING]: true,
++	[LICENSE_FEATURES.MULTIPLE_MAIN_INSTANCES]: true,
++	[LICENSE_FEATURES.PROJECT_ROLE_ADMIN]: true,
++	[LICENSE_FEATURES.PROJECT_ROLE_EDITOR]: true,
++	[LICENSE_FEATURES.PROJECT_ROLE_VIEWER]: true,
++	[LICENSE_FEATURES.SAML]: true,
++	[LICENSE_FEATURES.SHARING]: true,
++	[LICENSE_FEATURES.SHOW_NON_PROD_BANNER]: false,
++	[LICENSE_FEATURES.SOURCE_CONTROL]: true,
++	[LICENSE_FEATURES.VARIABLES]: true,
++	[LICENSE_FEATURES.WORKER_VIEW]: true,
++	[LICENSE_FEATURES.WORKFLOW_HISTORY]: true,
++	[LICENSE_QUOTAS.AI_CREDITS]: 0,
++	[LICENSE_QUOTAS.INSIGHTS_MAX_HISTORY_DAYS]: 30,
++	[LICENSE_QUOTAS.INSIGHTS_RETENTION_MAX_AGE_DAYS]: 30,
++	[LICENSE_QUOTAS.INSIGHTS_RETENTION_PRUNE_INTERVAL_DAYS]: 180,
++	[LICENSE_QUOTAS.TEAM_PROJECT_LIMIT]: UNLIMITED_LICENSE_QUOTA,
++	[LICENSE_QUOTAS.TRIGGER_LIMIT]: UNLIMITED_LICENSE_QUOTA,
++	[LICENSE_QUOTAS.USERS_LIMIT]: UNLIMITED_LICENSE_QUOTA,
++	[LICENSE_QUOTAS.VARIABLES_LIMIT]: UNLIMITED_LICENSE_QUOTA,
++	[LICENSE_QUOTAS.WORKFLOW_HISTORY_PRUNE_LIMIT]: UNLIMITED_LICENSE_QUOTA,
++	['planName']: 'Pirate',
++};
++
++export type FeatureReturnType = Required<
+ 	{
+ 		planName: string;
+ 	} & { [K in NumericLicenseFeature]: number } & { [K in BooleanLicenseFeature]: boolean }
+@@ -31,8 +67,6 @@ export type FeatureReturnType = Partial<
+ export class License {
+ 	private manager: LicenseManager | undefined;
+ 
+-	private isShuttingDown = false;
+-
+ 	constructor(
+ 		private readonly logger: Logger,
+ 		private readonly instanceSettings: InstanceSettings,
+@@ -47,89 +81,12 @@ export class License {
+ 		forceRecreate = false,
+ 		isCli = false,
+ 	}: { forceRecreate?: boolean; isCli?: boolean } = {}) {
+-		if (this.manager && !forceRecreate) {
+-			this.logger.warn('License manager already initialized or shutting down');
+-			return;
+-		}
+-		if (this.isShuttingDown) {
+-			this.logger.warn('License manager already shutting down');
+-			return;
+-		}
+-
+-		const { instanceType } = this.instanceSettings;
+-		const isMainInstance = instanceType === 'main';
+-		const server = this.globalConfig.license.serverUrl;
+-		const offlineMode = !isMainInstance;
+-		const autoRenewOffset = 72 * Time.hours.toSeconds;
+-		const saveCertStr = isMainInstance
+-			? async (value: TLicenseBlock) => await this.saveCertStr(value)
+-			: async () => {};
+-		const onFeatureChange = isMainInstance
+-			? async (features: TFeatures) => await this.onFeatureChange(features)
+-			: async () => {};
+-		const collectUsageMetrics = isMainInstance
+-			? async () => await this.licenseMetricsService.collectUsageMetrics()
+-			: async () => [];
+-		const collectPassthroughData = isMainInstance
+-			? async () => await this.licenseMetricsService.collectPassthroughData()
+-			: async () => ({});
+-
+-		const { isLeader } = this.instanceSettings;
+-		const { autoRenewalEnabled } = this.globalConfig.license;
+-		const eligibleToRenew = isCli || isLeader;
+-
+-		const shouldRenew = eligibleToRenew && autoRenewalEnabled;
+-
+-		if (eligibleToRenew && !autoRenewalEnabled) {
+-			this.logger.warn(LICENSE_RENEWAL_DISABLED_WARNING);
+-		}
++		this.checkIsLicensedForMultiMain(FEATURES);
+ 
+-		try {
+-			this.manager = new LicenseManager({
+-				server,
+-				tenantId: this.globalConfig.license.tenantId,
+-				productIdentifier: `n8n-${N8N_VERSION}`,
+-				autoRenewEnabled: shouldRenew,
+-				renewOnInit: shouldRenew,
+-				autoRenewOffset,
+-				detachFloatingOnShutdown: this.globalConfig.license.detachFloatingOnShutdown,
+-				offlineMode,
+-				logger: this.logger,
+-				loadCertStr: async () => await this.loadCertStr(),
+-				saveCertStr,
+-				deviceFingerprint: () => this.instanceSettings.instanceId,
+-				collectUsageMetrics,
+-				collectPassthroughData,
+-				onFeatureChange,
+-			});
+-
+-			await this.manager.initialize();
+-
+-			const features = this.manager.getFeatures();
+-			this.checkIsLicensedForMultiMain(features);
+-
+-			this.logger.debug('License initialized');
+-		} catch (error: unknown) {
+-			if (error instanceof Error) {
+-				this.logger.error('Could not initialize license manager sdk', { error });
+-			}
+-		}
++		this.logger.debug('License initialized');
+ 	}
+ 
+-	async loadCertStr(): Promise<TLicenseBlock> {
+-		// if we have an ephemeral license, we don't want to load it from the database
+-		const ephemeralLicense = this.globalConfig.license.cert;
+-		if (ephemeralLicense) {
+-			return ephemeralLicense;
+-		}
+-		const databaseSettings = await this.settingsRepository.findOne({
+-			where: {
+-				key: SETTINGS_LICENSE_CERT_KEY,
+-			},
+-		});
+-
+-		return databaseSettings?.value ?? '';
+-	}
++	async loadCertStr(): Promise<TLicenseBlock> { return ''; }
+ 
+ 	async onFeatureChange(_features: TFeatures): Promise<void> {
+ 		const { isMultiMain, isLeader } = this.instanceSettings;
+@@ -156,18 +113,7 @@ export class License {
+ 		}
+ 	}
+ 
+-	async saveCertStr(value: TLicenseBlock): Promise<void> {
+-		// if we have an ephemeral license, we don't want to save it to the database
+-		if (this.globalConfig.license.cert) return;
+-		await this.settingsRepository.upsert(
+-			{
+-				key: SETTINGS_LICENSE_CERT_KEY,
+-				value,
+-				loadOnStartup: false,
+-			},
+-			['key'],
+-		);
+-	}
++	async saveCertStr(value: TLicenseBlock): Promise<void> { }
+ 
+ 	async activate(activationKey: string): Promise<void> {
+ 		if (!this.manager) {
+@@ -206,9 +152,6 @@ export class License {
+ 
+ 	@OnShutdown()
+ 	async shutdown() {
+-		// Shut down License manager to unclaim any floating entitlements
+-		// Note: While this saves a new license cert to DB, the previous entitlements are still kept in memory so that the shutdown process can complete
+-		this.isShuttingDown = true;
+ 
+ 		if (!this.manager) {
+ 			return;
+@@ -219,7 +162,7 @@ export class License {
+ 	}
+ 
+ 	isFeatureEnabled(feature: BooleanLicenseFeature) {
+-		return this.manager?.hasFeatureEnabled(feature) ?? false;
++		return FEATURES[feature] as boolean;
+ 	}
+ 
+ 	isSharingEnabled() {
+@@ -330,12 +273,33 @@ export class License {
+ 		return this.getFeatureValue(LICENSE_FEATURES.INSIGHTS_VIEW_HOURLY_DATA);
+ 	}
+ 
+-	getCurrentEntitlements() {
+-		return this.manager?.getCurrentEntitlements() ?? [];
++	getCurrentEntitlements(): Array<TEntitlement> {
++		function nowOffsetBy(days: number) {
++			const now = new Date();
++			now.setDate(now.getDate() + days);
++			return now;
++		}
++
++		return [
++			{
++				id: '1b765dc4-d39d-4ffe-9885-c56dd67c4b26',
++				productId: '670650f2-72d8-4397-898c-c249906e2cc2',
++				productMetadata: {
++					terms: {
++						isMainPlan: true,
++					},
++				},
++				features: FEATURES,
++				featureOverrides: {},
++				validFrom: nowOffsetBy(-7),
++				validTo: nowOffsetBy(7),
++				isFloatable: false,
++			}
++		];
+ 	}
+ 
+ 	getFeatureValue<T extends keyof FeatureReturnType>(feature: T): FeatureReturnType[T] {
+-		return this.manager?.getFeatureValue(feature) as FeatureReturnType[T];
++		return FEATURES[feature];
+ 	}
+ 
+ 	getManagementJwt(): string {
+@@ -366,7 +330,7 @@ export class License {
+ 	}
+ 
+ 	getConsumerId() {
+-		return this.manager?.getConsumerId() ?? 'unknown';
++		return 'ec6d64ed-e503-4dc4-b522-8c1172cac1bc';
+ 	}
+ 
+ 	// Helper functions for computed data
+diff --git a/packages/cli/src/license/license.service.ts b/packages/cli/src/license/license.service.ts
+index bd2eca414c..1117eaaed6 100644
+--- a/packages/cli/src/license/license.service.ts
++++ b/packages/cli/src/license/license.service.ts
+@@ -29,7 +29,7 @@ export class LicenseService {
+ 		private readonly workflowRepository: WorkflowRepository,
+ 		private readonly urlService: UrlService,
+ 		private readonly eventService: EventService,
+-	) {}
++	) { }
+ 
+ 	async getLicenseData() {
+ 		const triggerCount = await this.workflowRepository.getActiveTriggerCount();
+@@ -50,15 +50,7 @@ export class LicenseService {
+ 		};
+ 	}
+ 
+-	async requestEnterpriseTrial(user: User) {
+-		await axios.post('https://enterprise.n8n.io/enterprise-trial', {
+-			licenseType: 'enterprise',
+-			firstName: user.firstName,
+-			lastName: user.lastName,
+-			email: user.email,
+-			instanceUrl: this.urlService.getWebhookBaseUrl(),
+-		});
+-	}
++	async requestEnterpriseTrial(user: User) { }
+ 
+ 	async registerCommunityEdition({
+ 		userId,
+@@ -73,30 +65,7 @@ export class LicenseService {
+ 		instanceUrl: string;
+ 		licenseType: string;
+ 	}): Promise<{ title: string; text: string }> {
+-		try {
+-			const {
+-				data: { licenseKey, ...rest },
+-			} = await axios.post<{ title: string; text: string; licenseKey: string }>(
+-				'https://enterprise.n8n.io/community-registered',
+-				{
+-					email,
+-					instanceId,
+-					instanceUrl,
+-					licenseType,
+-				},
+-			);
+-			this.eventService.emit('license-community-plus-registered', { userId, email, licenseKey });
+-			return rest;
+-		} catch (e: unknown) {
+-			if (e instanceof AxiosError) {
+-				const error = e as AxiosError<{ message: string }>;
+-				const errorMsg = error.response?.data?.message ?? e.message;
+-				throw new BadRequestError('Failed to register community edition: ' + errorMsg);
+-			} else {
+-				this.logger.error('Failed to register community edition', { error: ensureError(e) });
+-				throw new BadRequestError('Failed to register community edition');
+-			}
+-		}
++		throw new BadRequestError('Community registering disabled to avoid pirate instance detection.');
+ 	}
+ 
+ 	getManagementJwt(): string {
+diff --git a/packages/cli/src/posthog/index.ts b/packages/cli/src/posthog/index.ts
+index 6dcc6dd650..4a7dd35b9d 100644
+--- a/packages/cli/src/posthog/index.ts
++++ b/packages/cli/src/posthog/index.ts
+@@ -2,61 +2,23 @@ import { GlobalConfig } from '@n8n/config';
+ import { Service } from '@n8n/di';
+ import { InstanceSettings } from 'n8n-core';
+ import type { FeatureFlags, ITelemetryTrackProperties } from 'n8n-workflow';
+-import type { PostHog } from 'posthog-node';
+ 
+ import type { PublicUser } from '@/interfaces';
+ 
+ @Service()
+ export class PostHogClient {
+-	private postHog?: PostHog;
+-
+ 	constructor(
+ 		private readonly instanceSettings: InstanceSettings,
+ 		private readonly globalConfig: GlobalConfig,
+ 	) {}
+ 
+-	async init() {
+-		const { enabled, posthogConfig } = this.globalConfig.diagnostics;
+-		if (!enabled) {
+-			return;
+-		}
+-
+-		const { PostHog } = await import('posthog-node');
+-		this.postHog = new PostHog(posthogConfig.apiKey, {
+-			host: posthogConfig.apiHost,
+-		});
+-
+-		const logLevel = this.globalConfig.logging.level;
+-		if (logLevel === 'debug') {
+-			this.postHog.debug(true);
+-		}
+-	}
++	async init() { }
+ 
+-	async stop(): Promise<void> {
+-		if (this.postHog) {
+-			return this.postHog.shutdown();
+-		}
+-	}
++	async stop(): Promise<void> { }
+ 
+-	track(payload: { userId: string; event: string; properties: ITelemetryTrackProperties }): void {
+-		this.postHog?.capture({
+-			distinctId: payload.userId,
+-			sendFeatureFlags: true,
+-			...payload,
+-		});
+-	}
++	track(payload: { userId: string; event: string; properties: ITelemetryTrackProperties }): void { }
+ 
+ 	async getFeatureFlags(user: Pick<PublicUser, 'id' | 'createdAt'>): Promise<FeatureFlags> {
+-		if (!this.postHog) return {};
+-
+-		const fullId = [this.instanceSettings.instanceId, user.id].join('#');
+-
+-		// cannot use local evaluation because that requires PostHog personal api key with org-wide
+-		// https://github.com/PostHog/posthog/issues/4849
+-		return await this.postHog.getAllFlags(fullId, {
+-			personProperties: {
+-				created_at_timestamp: user.createdAt.getTime().toString(),
+-			},
+-		});
++		return {};
+ 	}
+ }
+diff --git a/packages/cli/src/security-audit/risk-reporters/instance-risk-reporter.ts b/packages/cli/src/security-audit/risk-reporters/instance-risk-reporter.ts
+index 43064daca4..8a31f1b1dd 100644
+--- a/packages/cli/src/security-audit/risk-reporters/instance-risk-reporter.ts
++++ b/packages/cli/src/security-audit/risk-reporters/instance-risk-reporter.ts
+@@ -146,14 +146,7 @@ export class InstanceRiskReporter implements RiskReporter {
+ 	}
+ 
+ 	private async getNextVersions(currentVersionName: string) {
+-		const BASE_URL = this.globalConfig.versionNotifications.endpoint;
+-		const { instanceId } = this.instanceSettings;
+-
+-		const response = await axios.get<n8n.Version[]>(BASE_URL + currentVersionName, {
+-			headers: { 'n8n-instance-id': instanceId },
+-		});
+-
+-		return response.data;
++		return [] as n8n.Version[];
+ 	}
+ 
+ 	private removeIconData(versions: n8n.Version[]) {
+diff --git a/packages/cli/src/services/community-packages.service.ts b/packages/cli/src/services/community-packages.service.ts
+index b6910a961f..46bd16bcd4 100644
+--- a/packages/cli/src/services/community-packages.service.ts
++++ b/packages/cli/src/services/community-packages.service.ts
+@@ -221,20 +221,6 @@ export class CommunityPackagesService {
+ 	}
+ 
+ 	async checkNpmPackageStatus(packageName: string) {
+-		const N8N_BACKEND_SERVICE_URL = 'https://api.n8n.io/api/package';
+-
+-		try {
+-			const response = await axios.post<CommunityPackages.PackageStatusCheck>(
+-				N8N_BACKEND_SERVICE_URL,
+-				{ name: packageName },
+-				{ method: 'POST' },
+-			);
+-
+-			if (response.data.status !== NPM_PACKAGE_STATUS_GOOD) return response.data;
+-		} catch {
+-			// service unreachable, do nothing
+-		}
+-
+ 		return { status: NPM_PACKAGE_STATUS_GOOD };
+ 	}
+ 
+diff --git a/packages/cli/src/telemetry/index.ts b/packages/cli/src/telemetry/index.ts
+index b74e30a3bc..01f804ff9b 100644
+--- a/packages/cli/src/telemetry/index.ts
++++ b/packages/cli/src/telemetry/index.ts
+@@ -1,24 +1,15 @@
+ import { GlobalConfig } from '@n8n/config';
+ import { OnShutdown } from '@n8n/decorators';
+-import { Container, Service } from '@n8n/di';
+-import type RudderStack from '@rudderstack/rudder-sdk-node';
+-import axios from 'axios';
++import { Service } from '@n8n/di';
+ import { InstanceSettings, Logger } from 'n8n-core';
+ import type { ITelemetryTrackProperties } from 'n8n-workflow';
+ 
+-import { LOWEST_SHUTDOWN_PRIORITY, N8N_VERSION } from '@/constants';
+-import { ProjectRelationRepository } from '@/databases/repositories/project-relation.repository';
+-import { ProjectRepository } from '@/databases/repositories/project.repository';
+-import { UserRepository } from '@/databases/repositories/user.repository';
++import { LOWEST_SHUTDOWN_PRIORITY } from '@/constants';
+ import { WorkflowRepository } from '@/databases/repositories/workflow.repository';
+ import type { IExecutionTrackProperties } from '@/interfaces';
+ import { License } from '@/license';
+ import { PostHogClient } from '@/posthog';
+ 
+-import { SourceControlPreferencesService } from '../environments.ee/source-control/source-control-preferences.service.ee';
+-
+-type ExecutionTrackDataKey = 'manual_error' | 'manual_success' | 'prod_error' | 'prod_success';
+-
+ interface IExecutionTrackData {
+ 	count: number;
+ 	first: Date;
+@@ -36,12 +27,6 @@ interface IExecutionsBuffer {
+ 
+ @Service()
+ export class Telemetry {
+-	private rudderStack?: RudderStack;
+-
+-	private pulseIntervalReference: NodeJS.Timeout;
+-
+-	private executionCountsBuffer: IExecutionsBuffer = {};
+-
+ 	constructor(
+ 		private readonly logger: Logger,
+ 		private readonly postHog: PostHogClient,
+@@ -49,186 +34,25 @@ export class Telemetry {
+ 		private readonly instanceSettings: InstanceSettings,
+ 		private readonly workflowRepository: WorkflowRepository,
+ 		private readonly globalConfig: GlobalConfig,
+-	) {}
+-
+-	async init() {
+-		const { enabled, backendConfig } = this.globalConfig.diagnostics;
+-		if (enabled) {
+-			const [key, dataPlaneUrl] = backendConfig.split(';');
+-
+-			if (!key || !dataPlaneUrl) {
+-				this.logger.warn('Diagnostics backend config is invalid');
+-				return;
+-			}
+-
+-			const logLevel = this.globalConfig.logging.level;
+-
+-			const { default: RudderStack } = await import('@rudderstack/rudder-sdk-node');
+-			const axiosInstance = axios.create();
+-			axiosInstance.interceptors.request.use((cfg) => {
+-				cfg.headers.setContentType('application/json', false);
+-				return cfg;
+-			});
+-			this.rudderStack = new RudderStack(key, {
+-				axiosInstance,
+-				logLevel,
+-				dataPlaneUrl,
+-				gzip: false,
+-			});
+-
+-			this.startPulse();
+-		}
+-	}
+-
+-	private startPulse() {
+-		this.pulseIntervalReference = setInterval(
+-			async () => {
+-				void this.pulse();
+-			},
+-			6 * 60 * 60 * 1000,
+-		); // every 6 hours
+-	}
+-
+-	private async pulse() {
+-		if (!this.rudderStack) {
+-			return;
+-		}
+-
+-		const workflowIdsToReport = Object.keys(this.executionCountsBuffer).filter((workflowId) => {
+-			const data = this.executionCountsBuffer[workflowId];
+-			const sum =
+-				(data.manual_error?.count ?? 0) +
+-				(data.manual_success?.count ?? 0) +
+-				(data.prod_error?.count ?? 0) +
+-				(data.prod_success?.count ?? 0);
+-			return sum > 0;
+-		});
+-
+-		for (const workflowId of workflowIdsToReport) {
+-			this.track('Workflow execution count', {
+-				event_version: '2',
+-				workflow_id: workflowId,
+-				...this.executionCountsBuffer[workflowId],
+-			});
+-		}
+-
+-		this.executionCountsBuffer = {};
+-
+-		const sourceControlPreferences = Container.get(
+-			SourceControlPreferencesService,
+-		).getPreferences();
++	) { }
+ 
+-		// License info
+-		const pulsePacket = {
+-			plan_name_current: this.license.getPlanName(),
+-			quota: this.license.getTriggerLimit(),
+-			usage: await this.workflowRepository.getActiveTriggerCount(),
+-			role_count: await Container.get(UserRepository).countUsersByRole(),
+-			source_control_set_up: Container.get(SourceControlPreferencesService).isSourceControlSetup(),
+-			branchName: sourceControlPreferences.branchName,
+-			read_only_instance: sourceControlPreferences.branchReadOnly,
+-			team_projects: (await Container.get(ProjectRepository).getProjectCounts()).team,
+-			project_role_count: await Container.get(ProjectRelationRepository).countUsersByRole(),
+-		};
++	async init() { }
+ 
+-		this.track('pulse', pulsePacket);
+-	}
+-
+-	trackWorkflowExecution(properties: IExecutionTrackProperties) {
+-		if (this.rudderStack) {
+-			const execTime = new Date();
+-			const workflowId = properties.workflow_id;
+-
+-			this.executionCountsBuffer[workflowId] = this.executionCountsBuffer[workflowId] ?? {
+-				user_id: properties.user_id,
+-			};
+-
+-			const key: ExecutionTrackDataKey = `${properties.is_manual ? 'manual' : 'prod'}_${
+-				properties.success ? 'success' : 'error'
+-			}`;
+-
+-			const executionTrackDataKey = this.executionCountsBuffer[workflowId][key];
+-
+-			if (!executionTrackDataKey) {
+-				this.executionCountsBuffer[workflowId][key] = {
+-					count: 1,
+-					first: execTime,
+-				};
+-			} else {
+-				executionTrackDataKey.count++;
+-			}
+-
+-			if (
+-				!properties.success &&
+-				properties.is_manual &&
+-				properties.error_node_type?.startsWith('n8n-nodes-base')
+-			) {
+-				this.track('Workflow execution errored', properties);
+-			}
+-		}
+-	}
++	trackWorkflowExecution(properties: IExecutionTrackProperties) { }
+ 
+ 	@OnShutdown(LOWEST_SHUTDOWN_PRIORITY)
+-	async stopTracking(): Promise<void> {
+-		clearInterval(this.pulseIntervalReference);
+-
+-		await Promise.all([this.postHog.stop(), this.rudderStack?.flush()]);
+-	}
+-
+-	identify(traits?: { [key: string]: string | number | boolean | object | undefined | null }) {
+-		if (!this.rudderStack) {
+-			return;
+-		}
++	async stopTracking(): Promise<void> { }
+ 
+-		const { instanceId } = this.instanceSettings;
+-
+-		this.rudderStack.identify({
+-			userId: instanceId,
+-			traits: { ...traits, instanceId },
+-			context: {
+-				// provide a fake IP address to instruct RudderStack to not use the user's IP address
+-				ip: '0.0.0.0',
+-			},
+-		});
+-	}
++	identify(traits?: { [key: string]: string | number | boolean | object | undefined | null }) { }
+ 
+ 	track(
+ 		eventName: string,
+ 		properties: ITelemetryTrackProperties = {},
+ 		{ withPostHog } = { withPostHog: false }, // whether to additionally track with PostHog
+-	) {
+-		if (!this.rudderStack) {
+-			return;
+-		}
+-
+-		const { instanceId } = this.instanceSettings;
+-		const { user_id } = properties;
+-		const updatedProperties = {
+-			...properties,
+-			instance_id: instanceId,
+-			version_cli: N8N_VERSION,
+-		};
+-
+-		const payload = {
+-			userId: `${instanceId}${user_id ? `#${user_id}` : ''}`,
+-			event: eventName,
+-			properties: updatedProperties,
+-			context: {},
+-		};
+-
+-		if (withPostHog) {
+-			this.postHog?.track(payload);
+-		}
+-
+-		return this.rudderStack.track({
+-			...payload,
+-			// provide a fake IP address to instruct RudderStack to not use the user's IP address
+-			context: { ...payload.context, ip: '0.0.0.0' },
+-		});
+-	}
++	) { }
+ 
+ 	// test helpers
+ 	getCountsBuffer(): IExecutionsBuffer {
+-		return this.executionCountsBuffer;
++		return {};
+ 	}
+ }

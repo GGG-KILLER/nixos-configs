@@ -6,6 +6,7 @@ in
   imports = [
     ./lm-sensors.nix
     ./node.nix
+    ./openwrt.nix
     ./smartmon-exporter.nix
     ./zfs-exporter.nix
   ];
@@ -22,7 +23,7 @@ in
   };
 
   config.my.constants.prometheus = {
-    instance = "shiro";
-    scrape_interval = if config.cost-saving.enable then config.cost-saving.scrape-interval else "5s";
+    instance = "jibril";
+    scrape_interval = "5s";
   };
 }

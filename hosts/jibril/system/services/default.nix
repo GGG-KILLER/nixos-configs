@@ -2,13 +2,17 @@
 {
   imports = [
     ./backup/restic.nix
-    ./downloads
     ./monitoring
+    ./security
     ./btrfs.nix
     ./cloudflared.nix
     ./cockpit.nix
-    ./minio.nix
+    ./docker-registry.nix
+    ./glorp.nix
+    ./home-assistant.nix
+    ./michi-site.nix
+    #./n8n.nix
     ./nginx.nix
-    ./zfs.nix
+    ./openspeedtest.nix
   ];
 }

@@ -64,8 +64,8 @@ in
   options.my.networking = mkOption { type = with types; attrsOf (submodule networkingOptions); };
 
   config = rec {
-    my.networking.shiro = {
-      mainAddr = "192.168.2.133"; # ipgen -n 192.168.2.0/24 shiro
+    my.networking.jibril = {
+      mainAddr = "192.168.2.2";
       extraNames =
         [ ]
         ++ (map (name: removeSuffix ".lan" name) (
@@ -78,28 +78,20 @@ in
     networking = {
       useDHCP = false;
       enableIPv6 = false;
-      hostName = "shiro";
-      hostId = "14537a32";
+      hostName = "jibril";
+      hostId = "023937b5";
 
       defaultGateway = "192.168.1.1";
       nameservers = [ "192.168.1.1" ];
 
-      interfaces.enp6s0 = {
-        ipv4.addresses = [ ];
-        wakeOnLan.enable = true;
-      };
-
-      macvlans.mv-enp6s0-host = {
-        interface = "enp6s0";
-        mode = "bridge";
-      };
-      interfaces.mv-enp6s0-host = {
+      interfaces.enp0s31f6 = {
         ipv4.addresses = [
           {
-            address = my.networking.shiro.mainAddr;
+            address = my.networking.jibril.mainAddr;
             prefixLength = 16;
           }
         ];
+        wakeOnLan.enable = true;
       };
 
       hosts =

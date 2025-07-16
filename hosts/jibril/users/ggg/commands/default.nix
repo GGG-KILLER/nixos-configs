@@ -7,6 +7,15 @@
     [
       (mkCommand {
         dependencies = with pkgs; [
+          curl
+          jq
+        ];
+        buildInputs = with pkgs; [ bash ];
+
+        filePath = ./docker-registry-cleanup;
+      })
+      (mkCommand {
+        dependencies = with pkgs; [
           coreutils
         ];
         buildInputs = with pkgs; [ bash ];

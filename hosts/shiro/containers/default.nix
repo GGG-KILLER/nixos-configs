@@ -12,9 +12,7 @@ with lib;
 {
   imports = [
     ./downloads
-    # ./misc # TODO: Re-enable when job again.
     ./streaming
-    ./pgsql.nix
     ./vpn-gateway.nix
   ];
 
@@ -148,7 +146,16 @@ with lib;
                 nameservers = mkOption {
                   type = types.listOf types.str;
                   description = "The list of nameservers used by the container";
-                  default = if cfg.vpn then consts.networking.vpnNameservers else [ "192.168.1.1" ];
+                  default =
+                    if cfg.vpn then
+                      [
+                        "1.1.1.1"
+                        "1.0.0.1"
+                        "8.8.8.8"
+                        "8.8.4.4"
+                      ]
+                    else
+                      [ "192.168.1.1" ];
                 };
               };
 

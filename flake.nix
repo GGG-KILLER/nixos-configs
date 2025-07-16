@@ -91,6 +91,7 @@
       nixosConfigurations = {
         sora = mkConfig ./hosts/sora/configuration.nix;
         shiro = mkConfig ./hosts/shiro/configuration.nix;
+        jibril = mkConfig ./hosts/jibril/configuration.nix;
         # glorp = mkConfig ./hosts/glorp/configuration.nix;
         live-cd-plasma6 = mkConfig ./media/live-cd-plasma6.nix;
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
@@ -105,6 +106,19 @@
           profiles.system = {
             user = "root";
             path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
+            sshUser = "root";
+          };
+          confirmTimeout = 300;
+        };
+
+        jibril = {
+          hostname = "jibril.lan";
+          fastConnection = true;
+          autoRollback = false;
+          magicRollback = false;
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jibril;
             sshUser = "root";
           };
           confirmTimeout = 300;

@@ -4,44 +4,58 @@
 # including containers and ports only used internally.
 { lib, ... }:
 {
-  options.shiro.ports = lib.mkOption {
+  options.jibril.ports = lib.mkOption {
     internal = true;
     description = "Ports of services used in this server.";
     type = with lib.types; attrsOf port;
   };
 
-  config.shiro.ports =
+  config.jibril.ports =
     {
       nginx-http = 80;
       nginx-https = 443;
 
+      postgres = 5432;
+
       # Fixed ports: 60000-
 
       # RESERVED: Games (60000-60999)
+
+      # NOTE: Needs to be a fixed port since we can't statically configure this through nix
+      mqtt = 61001;
+
+      wireguard = 61235;
     }
     // (
       let
         services = [
-          # MinIO
-          "minio"
-          "minio-console"
+          # Step CA
+          "step-ca"
+
+          # Docker registry
+          "docker-registry"
+          "docker-registry-browser"
+
+          # SSO
+          "authentik"
+          "authentik-ssl"
 
           # Monitoring
+          "grafana"
+          "netprobe"
+          "prometheus"
           "prometheus-lm-sensors-exporter"
           "prometheus-node-exporter"
           "prometheus-smartmontools-exporter"
+          "prometheus-smokeping-exporter"
           "prometheus-zfs-exporter"
 
-          # Downloaders
-          "downloader"
-          "flood"
-          "jackett"
-          "live-stream-dvr"
-          "qbittorrent-web"
-          "sonarr"
+          # Smart Home
+          "home-assistant"
+          "zigbee2mqtt"
 
-          # Entertainment
-          "danbooru"
+          # Misc
+          "n8n"
         ];
 
         inherit (lib)

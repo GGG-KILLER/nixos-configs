@@ -2,13 +2,13 @@ let
   ggg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGIbyyT77P4fzRh4Bfox1GQANs+P5VTrVADu5+k282fn";
   users = [ ggg ];
 
-  sora = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6b2z/jMnPSYXSYYJ6NBY77m0bofpVceoArRzJHQ+Nc";
-  shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc";
-  f-ggg-dev = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJ527bVSbg3fMxUIyMrXhmyo0A/motmI3SZY6sMLk7C0";
+  sora = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6b2z/jMnPSYXSYYJ6NBY77m0bofpVceoArRzJHQ+Nc root@sora";
+  shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc root@shiro";
+  jibril = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGxyqgY1bvf+PYelPm9Sz4f44g1Orp+/Bvz4v8N8MIV0 root@jibril";
   systems = [
     sora
     shiro
-    f-ggg-dev
+    jibril
   ];
 
   all = users ++ systems;
@@ -30,6 +30,74 @@ in
     sora
   ];
 
+  # Jibril
+  "jibril/netprobe.env.age".publicKeys = [
+    ggg
+    shiro
+  ];
+  "jibril/glorp.env.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
+  # Jibril - Wireguard
+  "jibril/wireguard/private_key.age".publicKeys = [
+    ggg
+    jibril
+  ];
+  "jibril/wireguard/laptop_psk.age".publicKeys = [
+    ggg
+    jibril
+  ];
+  "jibril/wireguard/phone_psk.age".publicKeys = [
+    ggg
+    jibril
+  ];
+  "jibril/wireguard/coffee_psk.age".publicKeys = [
+    ggg
+    jibril
+  ];
+  "jibril/wireguard/coffee2_psk.age".publicKeys = [
+    ggg
+    jibril
+  ];
+  "jibril/wireguard/night_psk.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
+  # Jibril - Step CA
+  "jibril/stepca/intermediate_ca_key.age".publicKeys = [
+    ggg
+    jibril
+  ];
+  "jibril/stepca/keys_password.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
+  # Jibril - PostgreSQL
+  "jibril/pgsql/prd_pass.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
+  # Jibril - Authentik
+  "jibril/authentik/authentik.env.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
+  # Jibril -  n8n
+  "jibril/n8n/encryption_key.age".publicKeys = [
+    ggg
+    jibril
+  ];
+  "jibril/n8n/pgsql/password.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
   # Shiro
   "shiro/backup_password.age".publicKeys = [
     ggg
@@ -45,55 +113,7 @@ in
     ggg
     shiro
   ];
-  "shiro/netprobe.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/pr-tracker-token.age".publicKeys = [
-    ggg
-    shiro
-  ];
   "shiro/danbooru.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/glorp.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
-  # Shiro - Wireguard
-  "shiro/wireguard/private_key.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/wireguard/laptop_psk.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/wireguard/phone_psk.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/wireguard/coffee_psk.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/wireguard/coffee2_psk.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/wireguard/night_psk.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
-  # Shiro - Step CA
-  "shiro/stepca/intermediate_ca_key.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/stepca/keys_password.age".publicKeys = [
     ggg
     shiro
   ];
@@ -104,34 +124,8 @@ in
     shiro
   ];
 
-  # Shiro - PostgreSQL
-  "shiro/pgsql/dev_pass.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/pgsql/prd_pass.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
-  # Shiro - Authentik
-  "shiro/authentik/authentik.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
   # Shiro - Cloudflared
   "shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
-  # Shiro -  n8n
-  "shiro/n8n/encryption_key.age".publicKeys = [
-    ggg
-    shiro
-  ];
-  "shiro/n8n/pgsql/password.age".publicKeys = [
     ggg
     shiro
   ];
