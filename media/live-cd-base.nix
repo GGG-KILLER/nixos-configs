@@ -10,7 +10,6 @@
   isoImage.makeUsbBootable = true;
   isoImage.storeContents = [
     self.nixosConfigurations.sora.config.system.build.toplevel
-    self.nixosConfigurations.shiro.config.system.build.toplevel
   ];
 
   # Enable ZFS

@@ -20,9 +20,9 @@ function move_iso() {
 
 pushd isos
 (
-    echo Creating GNOME ISO...
-    nom build ..#nixosConfigurations.live-cd-plasma6.config.system.build.isoImage "$@" -o gnome --quiet
-    move_iso gnome
+    echo Creating Plasma 6 ISO...
+    nom build ..#nixosConfigurations.live-cd-plasma6.config.system.build.isoImage "$@" -o kde --quiet
+    move_iso kde
 
     echo Creating Minimal ISO...
     nom build ..#nixosConfigurations.live-cd-minimal.config.system.build.isoImage "$@" -o minimal --quiet
