@@ -71,9 +71,8 @@ in
     authentication = mkForce ''
       # TYPE  DATABASE        USER            ADDRESS                 METHOD
       local   all             all                                     trust
-      host    all             all             127.0.0.1/32            scram-sha-256
-      host    all             all             ::1/128                 scram-sha-256
-      host    all             all             192.168.0.0/16          scram-sha-256
+      host    all             all             0.0.0.0/0               scram-sha-256
+      host    all             all             ::0/0                   scram-sha-256
     '';
     settings = {
       port = config.jibril.ports.postgres;
