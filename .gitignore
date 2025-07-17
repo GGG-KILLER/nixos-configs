@@ -1,6 +1,8 @@
 # Folders
-/.deploy-gc/
+/.*/
 /isos/
+!/.vscode/
+result*/
 
 # Files
 *.tar.gz
