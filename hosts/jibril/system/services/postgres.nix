@@ -60,14 +60,6 @@ in
     enable = true;
     initialEmail = "gggkiller2@gmail.com";
     initialPasswordFile = config.age.secrets.pgadmin-pass.path;
-    settings = {
-      DATA_DIR = "/var/lib/pgadmin4/";
-    };
-  };
-  systemd.services.pgadmin.serviceConfig = {
-    ReadWritePaths = [ "/var/lib/pgadmin4/" ];
-    Restart = "always";
-    RestartSec = "5s";
   };
 
   services.postgresql = {
