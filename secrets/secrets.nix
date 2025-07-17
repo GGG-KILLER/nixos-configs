@@ -1,21 +1,10 @@
 let
   ggg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGIbyyT77P4fzRh4Bfox1GQANs+P5VTrVADu5+k282fn";
-  users = [ ggg ];
-
   sora = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6b2z/jMnPSYXSYYJ6NBY77m0bofpVceoArRzJHQ+Nc root@sora";
   shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc root@shiro";
   jibril = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGxyqgY1bvf+PYelPm9Sz4f44g1Orp+/Bvz4v8N8MIV0 root@jibril";
-  systems = [
-    sora
-    shiro
-    jibril
-  ];
-
-  all = users ++ systems;
 in
 {
-  "foldingathome.xml.age".publicKeys = all;
-
   # Sora
   "sora/backup_password.age".publicKeys = [
     ggg
@@ -30,10 +19,29 @@ in
     sora
   ];
 
+  # Shared between home servers
+  "home/backup_password.age".publicKeys = [
+    ggg
+    sora
+    shiro
+    jibril
+  ];
+  "home/backup_envfile.age".publicKeys = [
+    ggg
+    sora
+    shiro
+    jibril
+  ];
+  "home/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age".publicKeys = [
+    ggg
+    shiro
+    jibril
+  ];
+
   # Jibril
   "jibril/netprobe.env.age".publicKeys = [
     ggg
-    shiro
+    jibril
   ];
   "jibril/glorp.env.age".publicKeys = [
     ggg
@@ -99,16 +107,6 @@ in
   ];
 
   # Shiro
-  "shiro/backup_password.age".publicKeys = [
-    ggg
-    sora
-    shiro
-  ];
-  "shiro/backup_envfile.age".publicKeys = [
-    ggg
-    sora
-    shiro
-  ];
   "shiro/minio.env.age".publicKeys = [
     ggg
     shiro
@@ -120,12 +118,6 @@ in
 
   # Shiro - VPN Gateway
   "shiro/vpn-gateway/mullvad_private_key.age".publicKeys = [
-    ggg
-    shiro
-  ];
-
-  # Shiro - Cloudflared
-  "shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age".publicKeys = [
     ggg
     shiro
   ];

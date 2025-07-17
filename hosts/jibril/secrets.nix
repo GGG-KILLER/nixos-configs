@@ -3,12 +3,12 @@
   age.secrets = {
     "authentik/authentik.env".file = ../../secrets/jibril/authentik/authentik.env.age;
     "cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json".file =
-      ../../secrets/shiro/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age;
+      ../../secrets/home/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age;
     "glorp.env".file = ../../secrets/jibril/glorp.env.age;
     "netprobe.env".file = ../../secrets/jibril/netprobe.env.age;
 
-    backup-envfile.file = ../../secrets/shiro/backup_envfile.age;
-    backup-password.file = ../../secrets/shiro/backup_password.age;
+    backup-envfile.file = ../../secrets/home/backup_envfile.age;
+    backup-password.file = ../../secrets/home/backup_password.age;
 
     n8n-encryption-key.file = ../../secrets/jibril/n8n/encryption_key.age;
     n8n-pgsql-password.file = ../../secrets/jibril/n8n/pgsql/password.age;
