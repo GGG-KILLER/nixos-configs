@@ -72,7 +72,6 @@ in
 
   services.postgresql = {
     enable = true;
-    port = config.jibril.ports.postgres;
     package = pgsql;
     dataDir = "/var/lib/pgsql-prd/${pgsql.psqlSchema}";
     enableJIT = true;
@@ -85,6 +84,8 @@ in
       host    all             all             192.168.0.0/16          scram-sha-256
     '';
     settings = {
+      port = config.jibril.ports.postgres;
+
       # Resource Consumtion Settings (https://www.postgresql.org/docs/14/runtime-config-resource.html)
       shared_buffers = "512MB"; # default: 128M
       work_mem = "16MB"; # default: 4MB
