@@ -124,8 +124,7 @@ in
   };
 
   modules.services.nginx.virtualHosts."postgres.lan" = {
-    enableACME = true;
-    addSSL = true;
+    ssl = true;
     locations."/" = {
       extraConfig = ''
         proxy_pass http://127.0.0.1:${toString config.services.pgadmin.port};

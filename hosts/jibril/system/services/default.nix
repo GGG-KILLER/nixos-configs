@@ -14,5 +14,6 @@
     #./n8n.nix
     ./nginx.nix
     ./openspeedtest.nix
+    ./postgres.nix
   ];
 }
