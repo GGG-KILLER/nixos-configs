@@ -36,10 +36,6 @@
           "docker-registry"
           "docker-registry-browser"
 
-          # SSO
-          "authentik"
-          "authentik-ssl"
-
           # Monitoring
           "grafana"
           "netprobe"

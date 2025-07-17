@@ -122,7 +122,7 @@
         proxyPass = "http://127.0.0.1:${toString config.jibril.ports.zigbee2mqtt}";
         recommendedProxySettings = true;
         proxyWebsockets = true;
-        sso = true;
+        # sso = true;
       };
     };
   };
