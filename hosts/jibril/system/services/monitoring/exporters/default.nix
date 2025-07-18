@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, ... }:
 let
   inherit (lib) mkOption types;
 in
@@ -6,9 +6,7 @@ in
   imports = [
     ./lm-sensors.nix
     ./node.nix
-    ./openwrt.nix
     ./smartmon-exporter.nix
-    ./zfs-exporter.nix
   ];
 
   options.my.constants.prometheus = {
