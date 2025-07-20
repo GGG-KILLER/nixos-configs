@@ -41,4 +41,9 @@
     "git"
     "git-auto-fetch"
   ];
+
+  # Enable kanidm
+  services.kanidm.package = pkgs.kanidm_1_6;
+  services.kanidm.enableClient = true;
+  services.kanidm.clientSettings.uri = "https://sso.lan";
 }
