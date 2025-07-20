@@ -29,8 +29,9 @@
     // (
       let
         services = [
-          # Step CA
+          # Security
           "step-ca"
+          "kanidm"
 
           # Docker registry
           "docker-registry"
