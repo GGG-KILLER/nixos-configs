@@ -77,7 +77,6 @@ in
 
     networking = {
       useDHCP = false;
-      enableIPv6 = false;
       hostName = "jibril";
       hostId = "023937b5";
 
