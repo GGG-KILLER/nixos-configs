@@ -42,9 +42,6 @@
   networking = {
     hostName = "sora";
     hostId = "6967af45";
-    enableIPv6 = false; # No ISP support.
-
-    nameservers = [ "192.168.1.1" ];
   };
 
   # Enable the OpenSSH daemon.
