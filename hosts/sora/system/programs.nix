@@ -114,8 +114,6 @@ in
   environment.variables = {
     EDITOR = "code --wait";
     VISUAL = "code --wait";
-
-    DEFAULT_BROWSER = "/run/current-system/sw/bin/vivaldi"; # Use /run/current-system (avoids the need of refreshing env by restarting)
   };
 
   environment.etc = {

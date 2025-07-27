@@ -1,16 +1,10 @@
 {
-  system,
-  self,
   pkgs,
   inputs,
   ...
 }:
 let
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
-
-  inherit (self.packages.${system})
-    vivaldi-wayland
-    ;
 in
 {
   imports = [
@@ -66,7 +60,6 @@ in
     chromium
     discord-canary
     mullvad-vpn
-    vivaldi-wayland
 
     # Misc
     imhex
