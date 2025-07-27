@@ -96,7 +96,6 @@ in
       recommendedTlsSettings = true;
       recommendedBrotliSettings = true;
       recommendedGzipSettings = true;
-      recommendedZstdSettings = true;
       recommendedOptimisation = true;
       inherit (cfg) clientMaxBodySize proxyTimeout;
 
