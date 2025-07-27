@@ -28,7 +28,6 @@ in
 
       # No compression.
       gzip off;
-      zstd off;
       brotli off;
 
       fastcgi_read_timeout 999;
@@ -76,7 +75,6 @@ in
 
         # Enable Cache
         gzip off;
-        zstd off;
         brotli off;
       '';
     };
