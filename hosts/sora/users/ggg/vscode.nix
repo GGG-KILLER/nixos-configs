@@ -96,7 +96,7 @@ in
             names = [
               "avaloniateam.vscode-avalonia"
               "christopherstyles.html-entities"
-              "Continue.continue"
+              # "Continue.continue"
               "cschlosser.doxdocgen"
               "dart-code.dart-code"
               "dart-code.flutter"
