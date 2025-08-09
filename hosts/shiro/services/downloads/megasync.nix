@@ -89,15 +89,16 @@ in
       extraGroups = [ "users" ];
     };
 
-    modules.services.nginx.virtualHosts."mega.shiro.lan" = {
-      ssl = true;
+    # TODO: Re-enable when SSO is fixed.
+    # modules.services.nginx.virtualHosts."mega.shiro.lan" = {
+    #   ssl = true;
 
-      locations."/" = {
-        proxyPass = "http://unix:/run/mega-sync/mega-sync.socket";
-        recommendedProxySettings = true;
-        proxyWebsockets = true;
-        sso = true;
-      };
-    };
+    #   locations."/" = {
+    #     proxyPass = "http://unix:/run/mega-sync/mega-sync.socket";
+    #     recommendedProxySettings = true;
+    #     proxyWebsockets = true;
+    #     sso = true;
+    #   };
+    # };
   };
 }

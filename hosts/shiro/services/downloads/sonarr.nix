@@ -21,26 +21,27 @@
     services.jackett.port = config.shiro.ports.jackett;
 
     # NGINX
-    modules.services.nginx.virtualHosts = {
-      "sonarr.shiro.lan" = {
-        ssl = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.shiro.ports.sonarr}";
-          recommendedProxySettings = true;
-          proxyWebsockets = true;
-          sso = true;
-        };
-      };
+    # TODO: Re-enable when SSO is fixed.
+    # modules.services.nginx.virtualHosts = {
+    #   "sonarr.shiro.lan" = {
+    #     ssl = true;
+    #     locations."/" = {
+    #       proxyPass = "http://127.0.0.1:${toString config.shiro.ports.sonarr}";
+    #       recommendedProxySettings = true;
+    #       proxyWebsockets = true;
+    #       sso = true;
+    #     };
+    #   };
 
-      "jackett.shiro.lan" = {
-        ssl = true;
-        locations."/" = {
-          proxyPass = "http://127.0.0.1:${toString config.shiro.ports.jackett}";
-          recommendedProxySettings = true;
-          proxyWebsockets = true;
-          sso = true;
-        };
-      };
-    };
+    #   "jackett.shiro.lan" = {
+    #     ssl = true;
+    #     locations."/" = {
+    #       proxyPass = "http://127.0.0.1:${toString config.shiro.ports.jackett}";
+    #       recommendedProxySettings = true;
+    #       proxyWebsockets = true;
+    #       sso = true;
+    #     };
+    #   };
+    # };
   };
 }
