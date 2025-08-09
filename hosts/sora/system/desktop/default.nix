@@ -48,6 +48,7 @@ in
 
     # Hardware
     openrgb
+    nvtopPackages.nvidia
 
     # Media
     kdePackages.elisa
