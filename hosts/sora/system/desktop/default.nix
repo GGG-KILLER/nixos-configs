@@ -97,8 +97,9 @@ in
 
   programs.steam.enable = true;
   programs.steam.extraPackages = with pkgs; [
-    mangohud
-    gamescope
+    (mangohud.override {
+      nvidiaSupport = true;
+    })
   ];
   programs.steam.package = pkgs.steam.override {
     extraEnv = {
