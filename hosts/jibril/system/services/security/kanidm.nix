@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 {
   services.kanidm.enableServer = true;
-  services.kanidm.package = pkgs.kanidm_1_6;
+  services.kanidm.package = pkgs.kanidm_1_7;
   services.kanidm.serverSettings = {
     version = "2";
 
