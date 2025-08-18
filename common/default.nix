@@ -7,13 +7,10 @@
     ./secrets
     ./users
     ./boot.nix
-    ./console.nix
     ./home-manager.nix
-    ./i18n.nix
     ./nix.nix
     ./programs.nix
     ./sudo.nix
-    ./time.nix
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];

@@ -97,7 +97,9 @@
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
-      nixosModules.common-pki = import ./modules/common/pki.nix;
+      nixosModules.pki = import ./modules/common/pki.nix;
+      nixosModules.i18n = import ./modules/common/i18n.nix;
+
       nixosModules.server-profile = import ./modules/server/profile.nix;
 
       deploy.nodes = {
