@@ -5,6 +5,7 @@
     i18n
     nix-settings
     pki
+    sudo-rs
     zsh
   ];
 }

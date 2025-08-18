@@ -97,10 +97,11 @@
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
-      nixosModules.pki = import ./modules/common/pki.nix;
+      nixosModules.common-programs = import ./modules/common/common-programs.nix;
       nixosModules.i18n = import ./modules/common/i18n.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
-      nixosModules.common-programs = import ./modules/common/common-programs.nix;
+      nixosModules.pki = import ./modules/common/pki.nix;
+      nixosModules.sudo-rs = import ./modules/common/sudo-rs.nix;
       nixosModules.zsh = import ./modules/common/zsh.nix;
 
       nixosModules.server-profile = import ./modules/server/profile.nix;
