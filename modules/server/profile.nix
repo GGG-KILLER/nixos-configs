@@ -5,6 +5,7 @@
     ggg-password
     ggg-programs
     groups
+    hm-cleanup
     i18n
     nix-settings
     pki
@@ -13,4 +14,10 @@
     users
     zsh
   ];
+
+  boot.tmp.cleanOnBoot = true;
+
+  boot.kernel.sysctl = {
+    "kernel.task_delayacct" = 1;
+  };
 }

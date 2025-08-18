@@ -74,5 +74,7 @@ in
         ZSH_TMUX_AUTOQUIT=true
       fi
     '';
+
+    environment.pathsToLink = [ "/share/zsh" ];
   };
 }

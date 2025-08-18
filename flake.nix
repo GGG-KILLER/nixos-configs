@@ -101,6 +101,7 @@
       nixosModules.ggg-password = import ./modules/common/ggg-password.nix;
       nixosModules.ggg-programs = import ./modules/common/ggg-programs.nix;
       nixosModules.groups = import ./modules/common/groups.nix;
+      nixosModules.hm-cleanup = import ./modules/common/hm-cleanup.nix;
       nixosModules.i18n = import ./modules/common/i18n.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
       nixosModules.pki = import ./modules/common/pki.nix;

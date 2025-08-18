@@ -5,6 +5,7 @@
     ggg-password
     ggg-programs
     groups
+    hm-cleanup
     i18n
     nix-settings
     pki
@@ -12,6 +13,12 @@
     users
     zsh
   ];
+
+  boot.tmp.cleanOnBoot = true;
+
+  boot.kernel.sysctl = {
+    "kernel.task_delayacct" = 1;
+  };
 
   security.sudo-rs.extraRules = [
     # Allow to switch configurations through execution of
