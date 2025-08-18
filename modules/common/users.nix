@@ -49,7 +49,6 @@
     group = "data-members";
   };
 
-  age.secrets.ggg-hashed-password.file = ../../secrets/ggg_hashed_password.age;
   users.users.ggg = {
     uid = 1000;
     isNormalUser = true;
@@ -66,7 +65,6 @@
       "wheel"
       "video"
     ];
-    hashedPasswordFile = config.age.secrets.ggg-hashed-password.path;
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGIbyyT77P4fzRh4Bfox1GQANs+P5VTrVADu5+k282fn ggg"
