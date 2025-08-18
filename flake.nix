@@ -99,6 +99,7 @@
 
       nixosModules.pki = import ./modules/common/pki.nix;
       nixosModules.i18n = import ./modules/common/i18n.nix;
+      nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
 
       nixosModules.server-profile = import ./modules/server/profile.nix;
 

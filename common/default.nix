@@ -8,7 +8,6 @@
     ./users
     ./boot.nix
     ./home-manager.nix
-    ./nix.nix
     ./programs.nix
     ./sudo.nix
   ];
