@@ -105,6 +105,7 @@
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
       nixosModules.pki = import ./modules/common/pki.nix;
       nixosModules.server-profile = import ./modules/server/profile.nix;
+      nixosModules.server-services = import ./modules/server/services;
       nixosModules.sudo-rs = import ./modules/common/sudo-rs.nix;
       nixosModules.users = import ./modules/common/users.nix;
       nixosModules.zsh = import ./modules/common/zsh.nix;

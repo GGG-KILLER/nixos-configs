@@ -1,7 +1,6 @@
 { ... }:
 {
   imports = [
-    ./modules
     ./secrets
     ./boot.nix
     ./home-manager.nix

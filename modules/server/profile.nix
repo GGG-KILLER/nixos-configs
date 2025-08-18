@@ -8,6 +8,7 @@
     i18n
     nix-settings
     pki
+    server-services
     sudo-rs
     users
     zsh

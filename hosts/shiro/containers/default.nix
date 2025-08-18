@@ -124,9 +124,10 @@ with lib;
                 common-programs
                 groups
                 i18n
+                pki
+                server-services
                 users
                 zsh
-                ../../../common/modules
                 ../../../common/secrets
 
                 ../ports.nix
