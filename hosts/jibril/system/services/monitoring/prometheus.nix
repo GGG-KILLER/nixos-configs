@@ -3,6 +3,8 @@ let
   inherit (lib) mkForce;
 in
 {
+  jibril.dynamic-ports = [ "prometheus" ];
+
   services.prometheus = {
     enable = true;
     port = config.jibril.ports.prometheus;

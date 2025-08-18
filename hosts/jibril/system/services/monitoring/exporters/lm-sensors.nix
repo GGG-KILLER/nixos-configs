@@ -1,5 +1,7 @@
 { config, ... }:
 {
+  jibril.dynamic-ports = [ "prometheus-lm-sensors-exporter" ];
+
   modules.services.lm-sensors-exporter = {
     enable = true;
     port = config.jibril.ports.prometheus-lm-sensors-exporter;

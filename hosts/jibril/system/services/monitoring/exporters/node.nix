@@ -1,5 +1,7 @@
 { config, ... }:
 {
+  jibril.dynamic-ports = [ "prometheus-node-exporter" ];
+
   services.prometheus.exporters.node = {
     enable = true;
     port = config.jibril.ports.prometheus-node-exporter;

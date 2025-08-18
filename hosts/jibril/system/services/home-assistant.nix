@@ -5,6 +5,11 @@
   ...
 }:
 {
+  jibril.dynamic-ports = [
+    "zigbee2mqtt"
+    "home-assistant"
+  ];
+
   # For debugging
   environment.systemPackages = with pkgs; [ zigpy-cli ];
 

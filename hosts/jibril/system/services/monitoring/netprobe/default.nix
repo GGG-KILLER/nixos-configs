@@ -11,6 +11,8 @@ let
   image = imageFile.destNameTag;
 in
 {
+  jibril.dynamic-ports = [ "netprobe" ];
+
   systemd.services."${config.virtualisation.oci-containers.backend}-netprobe-network" =
     let
       backend = config.virtualisation.oci-containers.backend;

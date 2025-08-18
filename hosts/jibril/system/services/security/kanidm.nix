@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  jibril.dynamic-ports = [ "kanidm" ];
+
   services.kanidm.enableServer = true;
   services.kanidm.package = pkgs.kanidm_1_7;
   services.kanidm.serverSettings = {

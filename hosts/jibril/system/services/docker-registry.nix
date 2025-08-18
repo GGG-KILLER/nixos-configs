@@ -1,5 +1,10 @@
 { pkgs, config, ... }:
 {
+  jibril.dynamic-ports = [
+    "docker-registry"
+    "docker-registry-browser"
+  ];
+
   services.dockerRegistry = {
     enable = true;
     enableDelete = true;

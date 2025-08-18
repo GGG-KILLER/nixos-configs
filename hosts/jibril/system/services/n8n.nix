@@ -24,6 +24,7 @@ let
   '';
 in
 {
+  jibril.dynamic-ports = [ "n8n" ];
   services.n8n.enable = true;
   services.n8n.webhookUrl = "https://n8n.ggg.dev/";
   services.n8n.settings.port = config.jibril.ports.n8n;

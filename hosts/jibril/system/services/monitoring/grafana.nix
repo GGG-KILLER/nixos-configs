@@ -1,5 +1,7 @@
 { config, ... }:
 {
+  jibril.dynamic-ports = [ "grafana" ];
+
   services.grafana = {
     enable = true;
     settings.server = {

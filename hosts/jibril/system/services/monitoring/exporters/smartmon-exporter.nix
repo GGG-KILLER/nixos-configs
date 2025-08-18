@@ -1,8 +1,9 @@
 { config, ... }:
 {
+  jibril.dynamic-ports = [ "prometheus-smartctl-exporter" ];
   services.prometheus.exporters.smartctl.enable = true;
   services.prometheus.exporters.smartctl.listenAddress = "127.0.0.1";
-  services.prometheus.exporters.smartctl.port = config.jibril.ports.prometheus-smartmontools-exporter;
+  services.prometheus.exporters.smartctl.port = config.jibril.ports.prometheus-smartctl-exporter;
 
   services.prometheus.scrapeConfigs = [
     {

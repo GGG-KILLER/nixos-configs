@@ -9,6 +9,8 @@ let
   inherit (config.age) secrets;
 in
 {
+  jibril.dynamic-ports = [ "step-ca" ];
+
   # ACME Settings
   security.acme = mkForce {
     acceptTerms = true; # kinda pointless since we never use upstream
