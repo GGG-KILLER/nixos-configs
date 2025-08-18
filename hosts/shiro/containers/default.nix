@@ -1,4 +1,5 @@
 {
+  self,
   system,
   inputs,
   options,
@@ -106,7 +107,6 @@ with lib;
     containers =
       let
         inherit (pkgs.stdenvNoCC) hostPlatform;
-        consts = config.my.constants;
         vpnNetCfg = config.my.networking.vpn-gateway;
         networking-hosts = config.networking.hosts;
       in
@@ -120,19 +120,14 @@ with lib;
               containerCfg = config.container;
             in
             {
-              imports = [
-                # dummy tools
-                # Use reduced set of common/ to reduce rebuild count.
-                ../../../common/groups
+              imports = with self.nixosModules; [
+                common-programs
+                groups
+                i18n
+                users
+                zsh
                 ../../../common/modules
-                ../../../common/overlays
                 ../../../common/secrets
-                ../../../common/users
-                ../../../common/console.nix
-                ../../../common/i18n.nix
-                ../../../common/pki.nix
-                ../../../common/programs.nix
-                ../../../common/time.nix
 
                 ../ports.nix
               ];
@@ -160,7 +155,6 @@ with lib;
               };
 
               config = {
-
                 nixpkgs = {
                   inherit hostPlatform;
                 };

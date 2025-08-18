@@ -14,7 +14,6 @@ in
   };
 
   config = mkIf cfg.enable {
-
     environment.systemPackages = [ pkgs.tmux ];
 
     programs.zsh.enable = true;

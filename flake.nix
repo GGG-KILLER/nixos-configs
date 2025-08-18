@@ -92,22 +92,21 @@
         sora = mkConfig ./hosts/sora/configuration.nix;
         shiro = mkConfig ./hosts/shiro/configuration.nix;
         jibril = mkConfig ./hosts/jibril/configuration.nix;
-        # glorp = mkConfig ./hosts/glorp/configuration.nix;
         live-cd-plasma6 = mkConfig ./media/live-cd-plasma6.nix;
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
       nixosModules.common-programs = import ./modules/common/common-programs.nix;
+      nixosModules.desktop-profile = import ./modules/desktop/profile.nix;
       nixosModules.ggg-programs = import ./modules/common/ggg-programs.nix;
       nixosModules.groups = import ./modules/common/groups.nix;
       nixosModules.i18n = import ./modules/common/i18n.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
       nixosModules.pki = import ./modules/common/pki.nix;
+      nixosModules.server-profile = import ./modules/server/profile.nix;
       nixosModules.sudo-rs = import ./modules/common/sudo-rs.nix;
       nixosModules.users = import ./modules/common/users.nix;
       nixosModules.zsh = import ./modules/common/zsh.nix;
-
-      nixosModules.server-profile = import ./modules/server/profile.nix;
 
       deploy.nodes = {
         shiro = {

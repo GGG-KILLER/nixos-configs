@@ -5,6 +5,13 @@
   ...
 }:
 {
+  assertions = [
+    {
+      assertion = config.programs.zsh.enable;
+      message = "programs.zsh.enable must be true for the users module. (did you include the zsh module?)";
+    }
+  ];
+
   users.mutableUsers = lib.mkDefault false;
 
   users.users.danbooru = {

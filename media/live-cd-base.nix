@@ -5,6 +5,16 @@
   ...
 }:
 {
+  imports = with self.nixosModules;[
+    common-programs
+    groups
+    i18n
+    nix-settings
+    pki
+    users
+    zsh
+  ];
+
   # ISO Options
   isoImage.makeEfiBootable = true;
   isoImage.makeUsbBootable = true;

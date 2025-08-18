@@ -1,4 +1,4 @@
-{ self }:
+{ self, ... }:
 {
   imports = with self.nixosModules; [
     common-programs

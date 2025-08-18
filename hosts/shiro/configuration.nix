@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ self, config, pkgs, ... }:
 {
   imports = [
+    self.nixosModules.server-profile
     ./containers
     ./services
     ./users
