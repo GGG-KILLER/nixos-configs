@@ -14,7 +14,6 @@
     ./secrets.nix
   ];
 
-  boot.kernelModules = [ "intel_rapl_common" ];
   boot.supportedFilesystems = [ "btrfs" ];
   nixpkgs.hostPlatform = "x86_64-linux";
 

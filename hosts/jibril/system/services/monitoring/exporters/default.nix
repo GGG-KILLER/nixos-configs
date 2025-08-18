@@ -7,7 +7,6 @@ in
     ./lm-sensors.nix
     ./node.nix
     ./smartmon-exporter.nix
-    ./scaphandre.nix
   ];
 
   options.my.constants.prometheus = {
