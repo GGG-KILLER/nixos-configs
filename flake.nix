@@ -98,10 +98,13 @@
       };
 
       nixosModules.common-programs = import ./modules/common/common-programs.nix;
+      nixosModules.ggg-programs = import ./modules/common/ggg-programs.nix;
+      nixosModules.groups = import ./modules/common/groups.nix;
       nixosModules.i18n = import ./modules/common/i18n.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
       nixosModules.pki = import ./modules/common/pki.nix;
       nixosModules.sudo-rs = import ./modules/common/sudo-rs.nix;
+      nixosModules.users = import ./modules/common/users.nix;
       nixosModules.zsh = import ./modules/common/zsh.nix;
 
       nixosModules.server-profile = import ./modules/server/profile.nix;

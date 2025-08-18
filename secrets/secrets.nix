@@ -5,6 +5,14 @@ let
   jibril = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGxyqgY1bvf+PYelPm9Sz4f44g1Orp+/Bvz4v8N8MIV0 root@jibril";
 in
 {
+  # Shared
+  "ggg_hashed_password.age".publicKeys = [
+    ggg
+    sora
+    shiro
+    jibril
+  ];
+
   # Sora
   "sora/backup_password.age".publicKeys = [
     ggg

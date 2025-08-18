@@ -1,9 +1,9 @@
 {
-  # Dependencies
   lib,
   makeWrapper,
   runCommand,
-  # Actual args
+}:
+{
   filePath,
   dependencies,
   replacements ? { },

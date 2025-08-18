@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ self, pkgs, system, ... }:
 {
   home-manager.users.ggg.home.packages =
     let
-      mkCommand = pkgs.callPackage ../../../../../common/users/mk-command.nix;
+      inherit (self.packages.${system}) mkCommand;
     in
     [
       (mkCommand {

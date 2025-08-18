@@ -1,14 +1,11 @@
 { ... }:
 {
   imports = [
-    ./groups
     ./modules
     ./overlays
     ./secrets
-    ./users
     ./boot.nix
     ./home-manager.nix
-    ./sudo.nix
   ];
 
   environment.pathsToLink = [ "/share/zsh" ];

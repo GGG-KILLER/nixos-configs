@@ -8,6 +8,13 @@
 {
   # only set configs if home-manager option exists
   config = lib.optionalAttrs (options ? home-manager) {
+    assertions = [
+      {
+        assertion = inputs ? nix-index-database;
+        message = "nix-index-database must be in the flake inputs to be able to use the ggg-programs module.";
+      }
+    ];
+
     home-manager.users.ggg = {
       programs = {
         dircolors.enable = true;
