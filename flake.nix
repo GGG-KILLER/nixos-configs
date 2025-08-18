@@ -97,6 +97,9 @@
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
+      nixosModules.common-pki = import ./modules/common/pki.nix;
+      nixosModules.server-profile = import ./modules/server/profile.nix;
+
       deploy.nodes = {
         shiro = {
           hostname = "shiro.lan";
@@ -123,19 +126,6 @@
           };
           confirmTimeout = 300;
         };
-
-        # glorp = {
-        #   hostname = "158.180.39.111";
-        #   fastConnection = false;
-        #   autoRollback = true;
-        #   magicRollback = true;
-        #   profiles.system = {
-        #     user = "root";
-        #     path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.glorp;
-        #     sshUser = "root";
-        #   };
-        #   confirmTimeout = 300;
-        # };
       };
 
       packages =

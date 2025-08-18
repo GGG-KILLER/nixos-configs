@@ -11,7 +11,6 @@
     ./home-manager.nix
     ./i18n.nix
     ./nix.nix
-    ./pki.nix
     ./programs.nix
     ./sudo.nix
     ./time.nix
