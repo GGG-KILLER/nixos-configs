@@ -2,7 +2,6 @@
 {
   imports = [
     ./modules
-    ./overlays
     ./secrets
     ./boot.nix
     ./home-manager.nix
