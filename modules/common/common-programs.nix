@@ -1,13 +1,5 @@
 { lib, pkgs, ... }:
 {
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "steam-run"
-      "steam-original"
-      "steam-unwrapped"
-    ];
-
   environment.systemPackages = with pkgs; [
     # Compression
     ouch
@@ -21,7 +13,6 @@
 
     # Web
     croc
-    dig.dnsutils
     q
     wget
     whois
@@ -31,8 +22,7 @@
     file
     jq
     killall
-    neofetch
-    steam-run
+    fastfetch
   ];
 
   security.wrappers.iotop-c = {
@@ -56,7 +46,6 @@
     set smarthome
     set softwrap
     set tabsize 4
-    set tabtospaces
     set trimblanks
   '';
   programs.nano.syntaxHighlight = true;
@@ -66,5 +55,5 @@
   programs.nix-index.enableZshIntegration = true;
   programs.command-not-found.enable = false;
 
-  # ZSH enabled in modules/programs/zsh.nix
+  # ZSH enabled in zsh.nix
 }

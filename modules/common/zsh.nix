@@ -1,4 +1,9 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   inherit (lib) mkEnableOption mkIf;
   cfg = config.my.programs.zsh;
@@ -9,6 +14,8 @@ in
   };
 
   config = mkIf cfg.enable {
+
+    environment.systemPackages = [ pkgs.tmux ];
 
     programs.zsh.enable = true;
     programs.zsh.autosuggestions.enable = true;

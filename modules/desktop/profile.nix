@@ -1,8 +1,10 @@
 { self, ... }:
 {
   imports = with self.nixosModules; [
-    pki
+    common-programs
     i18n
     nix-settings
+    pki
+    zsh
   ];
 }
