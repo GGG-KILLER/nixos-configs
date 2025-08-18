@@ -43,9 +43,8 @@
           "prometheus"
           "prometheus-lm-sensors-exporter"
           "prometheus-node-exporter"
+          "prometheus-scaphandre-exporter"
           "prometheus-smartmontools-exporter"
-          "prometheus-smokeping-exporter"
-          "prometheus-zfs-exporter"
 
           # Smart Home
           "home-assistant"
