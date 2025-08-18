@@ -62,6 +62,8 @@ in
       in
       {
         enable = true;
+        wantedBy = [ "multi-user.target" ];
+        after = [ "network.target" ];
 
         path = [
           pkgs.coreutils # cat tr
