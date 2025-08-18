@@ -34,7 +34,8 @@
 
   # Firmware
   services.fwupd.enable = true;
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware.cpu.intel.updateMicrocode = true;
+  hardware.cpu.intel.sgx.provision.enable = true;
 
   # Since we can't manually respond to a panic, just reboot.
   boot.kernelParams = [
