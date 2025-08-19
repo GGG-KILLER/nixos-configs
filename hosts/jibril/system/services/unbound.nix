@@ -57,7 +57,7 @@
         for-downstream = true;
         zonefile = toString (
           let
-            reversed-addr = lib.concatStringsSep "." (
+            revraddr = lib.concatStringsSep "." (
               lib.reverseList (lib.splitString "." config.my.networking.jibril.mainAddr)
             );
           in
@@ -65,16 +65,18 @@
             $ORIGIN lan.
 
             ; Forward zone
-            jibril IN A ${config.my.networking.jibril.mainAddr}
+            openwrt IN A 192.168.1.1
+            jibril  IN A ${config.my.networking.jibril.mainAddr}
             ${lib.concatStringsSep "\n" (
               lib.map (name: "${name} IN CNAME jibril") config.my.networking.jibril.extraNames
             )}
 
             ; Reverse zone
-            ${reversed-addr}.in-addr.arpa. IN PTR jibril.lan.
+            1.1.168.192.in-addr.arpa. IN PTR openwrt.lan.
+            ${revraddr}.in-addr.arpa. IN PTR jibril.lan.
             ${lib.concatStringsSep "\n" (
               lib.map (
-                name: "${reversed-addr}.in-addr.arpa. IN PTR ${name}.lan."
+                name: "${revraddr}.in-addr.arpa. IN PTR ${name}.lan."
               ) config.my.networking.jibril.extraNames
             )}
           ''
