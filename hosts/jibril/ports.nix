@@ -18,8 +18,10 @@
 
   config.jibril.ports = {
     # NOTE: Cannot be a dynamic port since it has an external dependency.
-    nginx-http = 80;
-    nginx-https = 443;
+    dns = 53;
+    http = 80;
+    https = 443;
+    dns-over-tls = 853;
 
     # NOTE: Cannot be a dynamic port since it has an external dependency.
     postgres = 5432;

@@ -63,7 +63,7 @@ in
     volumes = [ "${./redis.conf}:/etc/redis/redis.conf:ro" ];
     extraOptions = [
       "--network=netprobe"
-      "--dns=192.168.1.1"
+      "--dns=192.168.2.2"
       "--ipc=none"
     ];
   };
@@ -77,7 +77,7 @@ in
     volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
     extraOptions = [
       "--network=netprobe"
-      "--dns=192.168.1.1"
+      "--dns=192.168.2.2"
       "--ipc=none"
     ];
   };
@@ -92,7 +92,7 @@ in
     ports = [ "${toString config.jibril.ports.netprobe}:5000" ];
     extraOptions = [
       "--network=netprobe"
-      "--dns=192.168.1.1"
+      "--dns=192.168.2.2"
       "--ipc=none"
     ];
   };

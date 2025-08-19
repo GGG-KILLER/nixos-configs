@@ -36,7 +36,7 @@
     };
     extraOptions = [
       "--cap-drop=ALL"
-      "--dns=192.168.1.1"
+      "--dns=192.168.2.2"
       "--ipc=none"
     ];
   };

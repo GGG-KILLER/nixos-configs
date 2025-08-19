@@ -14,7 +14,7 @@ in
     in
     {
       address = [ "192.168.5.1/24" ];
-      dns = [ "192.168.1.1" ];
+      dns = [ "192.168.2.2" ];
       listenPort = config.jibril.ports.wireguard;
       # Public key: 3FNvV2MhtG1ux/vSG+TW3y0Ebenm3qEtQjKZveAMSX0=
       privateKeyFile = config.age.secrets.wireguard-key.path;

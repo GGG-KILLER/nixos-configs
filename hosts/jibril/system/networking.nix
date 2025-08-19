@@ -81,7 +81,7 @@ in
       hostId = "023937b5";
 
       defaultGateway = "192.168.1.1";
-      nameservers = [ "192.168.1.1" ];
+      nameservers = [ "192.168.2.2" ];
 
       interfaces.enp0s31f6 = {
         ipv4.addresses = [
