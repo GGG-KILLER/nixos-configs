@@ -13,6 +13,7 @@
       paths = [
         "/var/lib/grafana"
         "/var/lib/home-assistant"
+        "/var/lib/kanidm"
         "/var/lib/pgsql-prd" # only prod is worth backing up
         "/var/lib/step-ca"
       ];
