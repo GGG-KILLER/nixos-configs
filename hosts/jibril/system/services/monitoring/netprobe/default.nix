@@ -43,7 +43,7 @@ in
           RemainAfterExit = "yes";
 
           ExecStartPre = "-${backendBin} network rm netprobe";
-          ExecStart = "${backendBin} network create netprobe";
+          ExecStart = "${backendBin} network create --ipv6 netprobe";
           ExecStop = "${backendBin} network rm netprobe";
         };
     };
@@ -63,7 +63,6 @@ in
     volumes = [ "${./redis.conf}:/etc/redis/redis.conf:ro" ];
     extraOptions = [
       "--network=netprobe"
-      "--dns=192.168.2.2"
       "--ipc=none"
     ];
   };
@@ -77,7 +76,6 @@ in
     volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
     extraOptions = [
       "--network=netprobe"
-      "--dns=192.168.2.2"
       "--ipc=none"
     ];
   };
@@ -92,7 +90,6 @@ in
     ports = [ "${toString config.jibril.ports.netprobe}:5000" ];
     extraOptions = [
       "--network=netprobe"
-      "--dns=192.168.2.2"
       "--ipc=none"
     ];
   };
