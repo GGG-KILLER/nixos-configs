@@ -126,5 +126,5 @@ in
     };
   };
 
-  networking.firewall.allowedUDPPorts = [ config.jibril.ports.postgres ];
+  networking.firewall.allowedTCPPorts = [ config.jibril.ports.postgres ];
 }
