@@ -19,10 +19,15 @@
 
     # Misc
     btop
+    du-dust
+    dua
+    dysk
+    fastfetch
+    fd
     file
     jq
     killall
-    fastfetch
+    ripgrep
   ];
 
   security.wrappers.iotop-c = {
@@ -54,6 +59,11 @@
   programs.nix-index.enableBashIntegration = true;
   programs.nix-index.enableZshIntegration = true;
   programs.command-not-found.enable = false;
+
+  environment.shellAliases = {
+    df = "dysk";
+    du = "dust";
+  };
 
   # ZSH enabled in zsh.nix
 }

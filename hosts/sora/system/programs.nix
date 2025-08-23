@@ -89,13 +89,8 @@ in
       ffmpeg
 
       # Terminal tools
-      du-dust
-      dua
-      dysk
-      fd
       mprocs
       parted
-      ripgrep
       turbostat
       wl-clipboard
       xh
