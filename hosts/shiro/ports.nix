@@ -18,6 +18,12 @@
       # Fixed ports: 60000-
 
       # RESERVED: Games (60000-60999)
+
+      # External services depend on thse
+      prometheus-lm-sensors-exporter = 61001;
+      prometheus-node-exporter = 61002;
+      prometheus-smartmontools-exporter = 61003;
+      prometheus-zfs-exporter = 61004;
     }
     // (
       let
@@ -25,12 +31,6 @@
           # MinIO
           "minio"
           "minio-console"
-
-          # Monitoring
-          "prometheus-lm-sensors-exporter"
-          "prometheus-node-exporter"
-          "prometheus-smartmontools-exporter"
-          "prometheus-zfs-exporter"
 
           # Downloaders
           "downloader"

@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./exporters
+    ./exporters.nix
     ./smartd.nix
   ];
 }
