@@ -109,7 +109,16 @@ in
           ) config.my.networking;
           hostToNameValPair = host: nameValuePair host.mainAddr (map (name: "${name}.lan") host.names);
         in
-        listToAttrs (map hostToNameValPair (attrValues networking));
+        (listToAttrs (map hostToNameValPair (attrValues networking)))
+        // {
+          "192.168.2.2" = [
+            "jibril.lan"
+            "ca.lan docker.lan"
+            "postgres.lan"
+            "prometheus.jibril.lan"
+            "sso.lan"
+          ];
+        };
     };
   };
 }
