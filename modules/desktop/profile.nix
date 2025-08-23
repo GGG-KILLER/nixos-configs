@@ -38,7 +38,7 @@
           ];
         }
         {
-          command = "${lib.getExe config.nix.package} build --no-link --profile /nix/var/nix/profiles/system /nix/store/[a-z0-9]+-nixos-system-(sora|shiro)-[\w.]+";
+          command = "${lib.getExe config.nix.package} build --no-link --profile /nix/var/nix/profiles/system /nix/store/*-nixos-system-*";
           options = [
             "SETENV"
             "NOPASSWD"
