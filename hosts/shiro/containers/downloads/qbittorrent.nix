@@ -89,48 +89,47 @@
         };
 
         # NGINX
-        # TODO: Re-enable when SSO is fixed.
-        # modules.services.nginx = {
-        #   enable = true;
-        #   proxyTimeout = "12h";
+        modules.services.nginx = {
+          enable = true;
+          proxyTimeout = "12h";
 
-        #   virtualHosts = {
-        #     "flood.lan" = {
-        #       default = true;
-        #       ssl = true;
-        #       root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
-        #       locations."/" = {
-        #         sso = true;
-        #         tryFiles = "$uri /index.html";
-        #       };
-        #       locations."/api" = {
-        #         proxyPass = "http://127.0.0.1:${toString config.modules.services.flood.web.port}";
-        #         recommendedProxySettings = true;
-        #         proxyWebsockets = true;
-        #         sso = true;
-        #         extraConfig = ''
-        #           client_max_body_size 0;
-        #           proxy_buffering off;
-        #           proxy_cache off;
-        #         '';
-        #       };
-        #     };
-        #     "qbittorrent.lan" = {
-        #       ssl = true;
-        #       locations."/" = {
-        #         proxyPass = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
-        #         recommendedProxySettings = true;
-        #         proxyWebsockets = true;
-        #         sso = true;
-        #         extraConfig = ''
-        #           client_max_body_size 0;
-        #           proxy_buffering off;
-        #           proxy_cache off;
-        #         '';
-        #       };
-        #     };
-        #   };
-        # };
+          virtualHosts = {
+            "flood.lan" = {
+              default = true;
+              ssl = true;
+              root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
+              locations."/" = {
+                # sso = true;
+                tryFiles = "$uri /index.html";
+              };
+              locations."/api" = {
+                proxyPass = "http://127.0.0.1:${toString config.modules.services.flood.web.port}";
+                recommendedProxySettings = true;
+                proxyWebsockets = true;
+                # sso = true;
+                extraConfig = ''
+                  client_max_body_size 0;
+                  proxy_buffering off;
+                  proxy_cache off;
+                '';
+              };
+            };
+            "qbittorrent.lan" = {
+              ssl = true;
+              locations."/" = {
+                proxyPass = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
+                recommendedProxySettings = true;
+                proxyWebsockets = true;
+                # sso = true;
+                extraConfig = ''
+                  client_max_body_size 0;
+                  proxy_buffering off;
+                  proxy_cache off;
+                '';
+              };
+            };
+          };
+        };
       };
   };
 }

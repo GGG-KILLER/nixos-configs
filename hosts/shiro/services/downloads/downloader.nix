@@ -90,14 +90,13 @@
     };
 
     # This is only for the nginx config of the downloader.
-    # TODO: Re-enable when SSO is fixed.
-    # modules.services.nginx.virtualHosts."downloader.lan" = {
-    #   ssl = true;
-    #   locations."/" = {
-    #     recommendedProxySettings = true;
-    #     sso = true;
-    #     proxyPass = "http://127.0.0.1:${toString config.shiro.ports.downloader}";
-    #   };
-    # };
+    modules.services.nginx.virtualHosts."downloader.lan" = {
+      ssl = true;
+      locations."/" = {
+        recommendedProxySettings = true;
+        # sso = true;
+        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.downloader}";
+      };
+    };
   };
 }
