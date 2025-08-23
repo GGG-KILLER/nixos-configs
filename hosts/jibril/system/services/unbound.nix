@@ -57,27 +57,46 @@
         for-downstream = true;
         zonefile = toString (
           let
-            revraddr = lib.concatStringsSep "." (
-              lib.reverseList (lib.splitString "." config.my.networking.jibril.mainAddr)
+            inherit (config.my.networking.jibril) mainAddr;
+            padRight =
+              width: filler: str:
+              let
+                strw = lib.stringLength str;
+                reqWidth = width - (lib.stringLength filler);
+              in
+              if strw >= width then str else (padRight reqWidth filler str) + filler;
+
+            hosts = {
+              "openwrt.lan" = "192.168.1.1";
+              "qbittorrent.lan" = "192.168.2.154";
+              "flood.lan" = "192.168.2.154";
+              "jellyfin.lan" = "192.168.2.219";
+              "vpn-gateway.lan" = "192.168.2.47";
+              "jibril.lan" = mainAddr;
+            }
+            // (lib.listToAttrs (
+              lib.map (name: lib.nameValuePair name "192.168.2.133") [
+                "shiro.lan"
+                "booru.shiro.lan"
+                "cp.shiro.lan"
+                "downloader.lan"
+                "jackett.shiro.lan"
+                "mega.shiro.lan"
+                "s3.shiro.lan"
+                "sonarr.shiro.lan"
+              ]
+            ))
+            // (lib.listToAttrs (
+              lib.map (name: lib.nameValuePair "${name}.lan" mainAddr) config.my.networking.jibril.extraNames
+            ));
+
+            maxLen = lib.head (
+              lib.sort (a: b: a > b) (lib.map (str: lib.stringLength str) (lib.attrNames hosts))
             );
           in
           pkgs.writeText "lan.zone" ''
-            $ORIGIN lan.
-
-            ; Forward zone
-            openwrt IN A 192.168.1.1
-            jibril  IN A ${config.my.networking.jibril.mainAddr}
             ${lib.concatStringsSep "\n" (
-              lib.map (name: "${name} IN CNAME jibril") config.my.networking.jibril.extraNames
-            )}
-
-            ; Reverse zone
-            1.1.168.192.in-addr.arpa. IN PTR openwrt.lan.
-            ${revraddr}.in-addr.arpa. IN PTR jibril.lan.
-            ${lib.concatStringsSep "\n" (
-              lib.map (
-                name: "${revraddr}.in-addr.arpa. IN PTR ${name}.lan."
-              ) config.my.networking.jibril.extraNames
+              lib.mapAttrsToList (name: addr: "${padRight (maxLen + 1) " " "${name}."} IN A ${addr}") hosts
             )}
           ''
         );
