@@ -32,7 +32,10 @@
       private-domain = [ ''"lan"'' ];
       prefetch = true;
       prefetch-key = true;
-      module-config = ''"validator iterator"'';
+      module-config = ''"respip validator iterator"'';
+      response-ip = [
+        "::/0 redirect"
+      ];
       unblock-lan-zones = true;
       # local-zone = [ ''"lan." redirect'' ];
       fast-server-permil = 700;
