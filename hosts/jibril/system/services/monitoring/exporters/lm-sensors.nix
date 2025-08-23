@@ -17,6 +17,12 @@
             inherit (config.my.constants.prometheus) instance;
           };
         }
+        {
+          targets = [ "shiro.lan:61001" ];
+          labels = {
+            instance = "shiro";
+          };
+        }
       ];
       inherit (config.my.constants.prometheus) scrape_interval;
     }
