@@ -1,5 +1,6 @@
 {
   self,
+  system,
   pkgs,
   lib,
   ...
@@ -116,7 +117,7 @@ in
               "mkhl.direnv"
               "ms-azuretools.vscode-docker"
               "ms-dotnettools.csdevkit"
-              "ms-dotnettools.csharp"
+              # "ms-dotnettools.csharp"
               "ms-dotnettools.vscode-dotnet-runtime"
               "ms-python.python"
               "ms-toolsai.jupyter"
@@ -133,7 +134,8 @@ in
               "wix.vscode-import-cost"
             ];
           in
-          pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names;
+          (pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names)
+          ++ [ self.packages.${system}."ms-dotnettools.csharp" ];
       };
 
       home.packages = with pkgs; [
