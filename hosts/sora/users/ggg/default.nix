@@ -104,16 +104,16 @@ in
       # opensnitch-ui.enable = true;
     };
 
-    # systemd.user.services.jellyfin-mpv-shim = {
-    #   Unit = {
-    #     Description = "Jellyfin MPV Shim";
-    #     After = [ "graphical-session-pre.target" ];
-    #     PartOf = [ "graphical-session.target" ];
-    #   };
+    systemd.user.services.jellyfin-mpv-shim = {
+      Unit = {
+        Description = "Jellyfin MPV Shim";
+        After = [ "graphical-session-pre.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
 
-    #   Service.ExecStart = getExe pkgs.jellyfin-mpv-shim;
+      Service.ExecStart = getExe pkgs.jellyfin-mpv-shim;
 
-    #   Install.WantedBy = [ "graphical-session.target" ];
-    # };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
   };
 }
