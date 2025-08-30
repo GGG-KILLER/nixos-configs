@@ -54,6 +54,10 @@
       url = "github:nix-community/nixpkgs-wayland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    pog = {
+      url = "github:jpetrucciani/pog";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -77,6 +81,12 @@
           };
 
           modules = [
+            (
+              { ... }:
+              {
+                nixpkgs.overlays = [ inputs.pog.overlays.${system}.default ];
+              }
+            )
             disko.nixosModules.disko
             ./common
             file
@@ -162,6 +172,7 @@
                     inherit system;
                     config.allowUnfree = true;
                     overlays = [
+                      inputs.pog.overlays.${system}.default
                       (
                         final: prev:
                         prev.lib.packagesFromDirectoryRecursive {
