@@ -8,6 +8,7 @@
     hm-cleanup
     i18n
     nix-settings
+    nixpkgs-wayland
     pki
     sudo-rs
     users

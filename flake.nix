@@ -50,6 +50,10 @@
       url = "github:nix-community/nix4vscode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-wayland = {
+      url = "github:nix-community/nixpkgs-wayland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -104,6 +108,7 @@
       nixosModules.hm-cleanup = import ./modules/common/hm-cleanup.nix;
       nixosModules.i18n = import ./modules/common/i18n.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
+      nixosModules.nixpkgs-wayland = import ./modules/desktop/nixpkgs-wayland.nix;
       nixosModules.pki = import ./modules/common/pki.nix;
       nixosModules.server-profile = import ./modules/server/profile.nix;
       nixosModules.server-services = import ./modules/server/services;
