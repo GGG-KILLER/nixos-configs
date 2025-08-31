@@ -3,13 +3,35 @@ let
   sora = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6b2z/jMnPSYXSYYJ6NBY77m0bofpVceoArRzJHQ+Nc root@sora";
   shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc root@shiro";
   jibril = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGxyqgY1bvf+PYelPm9Sz4f44g1Orp+/Bvz4v8N8MIV0 root@jibril";
-in
-{
-  # Shared
-  "ggg_hashed_password.age".publicKeys = [
+
+  servers = [
+    ggg
+    shiro
+    jibril
+  ];
+  all = [
     ggg
     sora
     shiro
+    jibril
+  ];
+in
+{
+  # Shared
+  "ggg_hashed_password.age".publicKeys = all;
+
+  # Backups
+  "backup/restic-b2.env.age".publicKeys = all;
+  "backup/restic-shiro-pass.age".publicKeys = [
+    ggg
+    shiro
+  ];
+  "backup/restic-sora-pass.age".publicKeys = [
+    ggg
+    sora
+  ];
+  "backup/restic-jibril-pass.age".publicKeys = [
+    ggg
     jibril
   ];
 

@@ -4,16 +4,36 @@
   pkgs,
   ...
 }:
-let
-  inherit (lib) optionals optionalString;
-in
 {
-  services.restic.backups.all-b2 =
-    let
-      excludeFile = pkgs.writeText "restic-excludes.txt" ''
+  services.restic.backups.filesystem = {
+    initialize = false;
+    repository = "rclone:b2:ggg-restic";
+    rcloneConfig = {
+      type = "b2";
+      hard_delete = true;
+    };
+    environmentFile = config.age.secrets."backup.env".path;
+    passwordFile = config.age.secrets."backup.key".path;
+
+    progressFps = 5;
+    paths = [
+      "/var/lib/jackett"
+      "/var/lib/jellyfin"
+      "/var/lib/qbittorrent"
+      "/var/lib/sonarr"
+    ]
+    ++ lib.optionals (!config.cost-saving.enable) [
+      "/storage/etc"
+      "/storage/h"
+      "/storage/series"
+    ];
+    extraBackupArgs = [
+      "--compression max"
+      "--tag files"
+      "--exclude-file=${pkgs.writeText "restic-excludes.txt" ''
         *.log
         *.pid
-        ${optionalString (!config.cost-saving.enable || !config.cost-saving.disable-hdds) ''
+        ${lib.optionalString (!config.cost-saving.enable || !config.cost-saving.disable-hdds) ''
           /storage/etc/Archives
           /storage/etc/glua-mc
           /storage/etc/ISOs
@@ -48,41 +68,12 @@ in
         /var/lib/sonarr/logs
         /var/lib/sonarr/MediaCover
         /var/lib/sonarr/Sentry
-      '';
-    in
-    {
-      initialize = true;
-      repository = "rclone:b2:ggg-backups-shiro";
-      rcloneConfig = {
-        type = "b2";
-        hard_delete = true;
-      };
-      environmentFile = config.age.secrets.backup-envfile.path;
-      paths =
-        [
-          "/var/lib/jackett"
-          "/var/lib/jellyfin"
-          "/var/lib/qbittorrent"
-          "/var/lib/sonarr"
-        ]
-        ++ optionals (!config.cost-saving.enable) [
-          "/storage/etc"
-          "/storage/h"
-          "/storage/series"
-        ];
-      extraBackupArgs = [
-        "--compression max"
-        "--exclude-file=${excludeFile}"
-      ];
-      pruneOpts = [
-        "--group-by hosts"
-        "--keep-daily 7"
-        "--keep-weekly 4"
-        "--keep-monthly 3"
-      ];
-      passwordFile = config.age.secrets.backup-password.path;
-      timerConfig = {
-        OnCalendar = "daily";
-      };
+      ''}"
+    ];
+
+    timerConfig = {
+      Persistent = true;
+      OnCalendar = "20:00";
     };
+  };
 }

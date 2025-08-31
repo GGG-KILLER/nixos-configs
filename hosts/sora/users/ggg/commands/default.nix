@@ -1,7 +1,7 @@
 {
   lib,
   pkgs,
-  config,
+  # config,
   ...
 }:
 {
@@ -17,71 +17,71 @@
           exec ${_.bat} "$(${_.which} "$1")"
         '';
       })
-      (pog {
-        name = "restic-b2";
-        description = "Runs restic with the B2 configurations for a given host's backup settings";
+      # (pog {
+      #   name = "restic-b2";
+      #   description = "Runs restic with the B2 configurations for a given host's backup settings";
 
-        arguments = [ { name = "...RESTIC-ARGS"; } ];
-        flags = [
-          {
-            name = "host";
-            short = "";
-            argument = "HOST";
-            description = "The host whose configs will be loaded.";
-            required = true;
-            completion = "echo 'shiro sora jibril'";
-          }
-        ];
-        showDefaultFlags = true;
+      #   arguments = [ { name = "...RESTIC-ARGS"; } ];
+      #   flags = [
+      #     {
+      #       name = "host";
+      #       short = "";
+      #       argument = "HOST";
+      #       description = "The host whose configs will be loaded.";
+      #       required = true;
+      #       completion = "echo 'shiro sora jibril'";
+      #     }
+      #   ];
+      #   showDefaultFlags = true;
 
-        strict = true;
-        script =
-          helpers: with helpers; ''
-            if [[ $EUID -ne 0 ]]; then
-                die "error: please run as root"
-            fi
+      #   strict = true;
+      #   script =
+      #     helpers: with helpers; ''
+      #       if [[ $EUID -ne 0 ]]; then
+      #           die "error: please run as root"
+      #       fi
 
-            RESTIC_REPOSITORY=
-            RESTIC_ENV_FILE=
-            RESTIC_ARGS=("$@")
-            RESTIC_ENV_VARS=()
+      #       RESTIC_REPOSITORY=
+      #       RESTIC_ENV_FILE=
+      #       RESTIC_ARGS=("$@")
+      #       RESTIC_ENV_VARS=()
 
-            case "$host" in
-            sora)
-              RESTIC_REPOSITORY="rclone:b2:ggg-backups-sora";
-              RESTIC_ENV_VARS+=("RESTIC_PASSWORD_FILE=${config.age.secrets.backup-password.path}");
-              RESTIC_ENV_FILE="${config.age.secrets.backup-envfile.path}"
-              ;;
-            shiro|jibril)
-              RESTIC_REPOSITORY="rclone:b2:ggg-backups-shiro";
-              RESTIC_ENV_VARS+=("RESTIC_PASSWORD_FILE=${config.age.secrets.shiro-backup-password.path}");
-              RESTIC_ENV_FILE="${config.age.secrets.shiro-backup-envfile.path}"
-              ;;
-            *)
-              die "error: unknown host '$host'. Available hosts are: sora, shiro, jibril."
-              ;;
-            esac;
+      #       case "$host" in
+      #       sora)
+      #         RESTIC_REPOSITORY="rclone:b2:ggg-backups-sora";
+      #         RESTIC_ENV_VARS+=("RESTIC_PASSWORD_FILE=${config.age.secrets."backup.key".path}");
+      #         RESTIC_ENV_FILE="${config.age.secrets."backup.env".path}"
+      #         ;;
+      #       shiro|jibril)
+      #         RESTIC_REPOSITORY="rclone:b2:ggg-backups-shiro";
+      #         RESTIC_ENV_VARS+=("RESTIC_PASSWORD_FILE=${config.age.secrets.shiro-"backup.key".path}");
+      #         RESTIC_ENV_FILE="${config.age.secrets.shiro-"backup.env".path}"
+      #         ;;
+      #       *)
+      #         die "error: unknown host '$host'. Available hosts are: sora, shiro, jibril."
+      #         ;;
+      #       esac;
 
-            if ${file.notExists "RESTIC_ENV_FILE"}; then
-                die "error: the environment file '$RESTIC_ENV_FILE' does not exist."
-            fi
+      #       if ${file.notExists "RESTIC_ENV_FILE"}; then
+      #           die "error: the environment file '$RESTIC_ENV_FILE' does not exist."
+      #       fi
 
-            RESTIC_ENV_VARS+=("RESTIC_REPOSITORY=$RESTIC_REPOSITORY");
-            RESTIC_ENV_VARS+=("RCLONE_CONFIG_B2_TYPE=b2");
-            RESTIC_ENV_VARS+=("RCLONE_CONFIG_B2_HARD_DELETE=true");
-            readarray -t ENV_FILE_VARS < "$RESTIC_ENV_FILE";
-            RESTIC_ENV_VARS+=("''${ENV_FILE_VARS[@]}");
+      #       RESTIC_ENV_VARS+=("RESTIC_REPOSITORY=$RESTIC_REPOSITORY");
+      #       RESTIC_ENV_VARS+=("RCLONE_CONFIG_B2_TYPE=b2");
+      #       RESTIC_ENV_VARS+=("RCLONE_CONFIG_B2_HARD_DELETE=true");
+      #       readarray -t ENV_FILE_VARS < "$RESTIC_ENV_FILE";
+      #       RESTIC_ENV_VARS+=("''${ENV_FILE_VARS[@]}");
 
-            if ${flag "VERBOSE"}; then
-                echo "Env Vars:" >&2
-                printf '  %s\n' "''${RESTIC_ENV_VARS[@]}" >&2
-                echo "Args:" >&2
-                printf '  %s\n' "''${RESTIC_ARGS[@]}" >&2
-            fi
+      #       if ${flag "VERBOSE"}; then
+      #           echo "Env Vars:" >&2
+      #           printf '  %s\n' "''${RESTIC_ENV_VARS[@]}" >&2
+      #           echo "Args:" >&2
+      #           printf '  %s\n' "''${RESTIC_ARGS[@]}" >&2
+      #       fi
 
-            env "''${RESTIC_ENV_VARS[@]}" ${lib.getExe pkgs.restic} "''${RESTIC_ARGS[@]}"
-          '';
-      })
+      #       env "''${RESTIC_ENV_VARS[@]}" ${lib.getExe pkgs.restic} "''${RESTIC_ARGS[@]}"
+      #     '';
+      # })
       (pog {
         name = "dl-twitch-stream";
         description = "Download a Twitch stream using streamlink";

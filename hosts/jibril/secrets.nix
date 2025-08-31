@@ -7,8 +7,8 @@
     "glorp.env".file = ../../secrets/jibril/glorp.env.age;
     "netprobe.env".file = ../../secrets/jibril/netprobe.env.age;
 
-    backup-envfile.file = ../../secrets/home/backup_envfile.age;
-    backup-password.file = ../../secrets/home/backup_password.age;
+    "backup.env".file = ../../secrets/backup/restic-b2.env.age;
+    "backup.key".file = ../../secrets/backup/restic-jibril-pass.age;
 
     n8n-encryption-key.file = ../../secrets/jibril/n8n/encryption_key.age;
     n8n-pgsql-password.file = ../../secrets/jibril/n8n/pgsql/password.age;
