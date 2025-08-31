@@ -2,6 +2,7 @@
 {
   services.restic.backups = {
     all-b2 = {
+      initialize = true;
       repository = "rclone:b2:ggg-backups-shiro"; # TODO: Create bucket specifically for jibril
       rcloneConfig = {
         type = "b2";
@@ -9,13 +10,13 @@
       };
       environmentFile = config.age.secrets.backup-envfile.path;
 
-      initialize = true;
       paths = [
-        "/var/lib/grafana"
-        "/var/lib/home-assistant"
-        "/var/lib/kanidm"
+        "/var/lib/grafana/data"
+        "/var/lib/home-assistant/backups"
+        "/var/lib/kanidm/backups"
         "/var/lib/pgsql-prd" # only prod is worth backing up
         "/var/lib/step-ca"
+        "/var/lib/prometheus2"
       ];
       extraBackupArgs = [
         "--compression max"
@@ -23,16 +24,13 @@
           *.log
           *.pid
           /var/lib/grafana/data/log
-          /var/lib/home-assistant/.cache
-          /var/lib/home-assistant/.esphome/build
-          /var/lib/home-assistant/.platformio
         ''}"
       ];
       pruneOpts = [
         "--group-by hosts"
         "--keep-daily 7"
         "--keep-weekly 4"
-        "--keep-monthly 12"
+        "--keep-monthly 3"
       ];
       passwordFile = config.age.secrets.backup-password.path;
       timerConfig = {

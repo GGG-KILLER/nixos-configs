@@ -78,7 +78,7 @@ in
         "--group-by hosts"
         "--keep-daily 7"
         "--keep-weekly 4"
-        "--keep-monthly 12"
+        "--keep-monthly 3"
       ];
       passwordFile = config.age.secrets.backup-password.path;
       timerConfig = {
