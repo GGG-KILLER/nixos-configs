@@ -21,7 +21,7 @@
     enable = true;
     dataDir = "/var/lib/zigbee2mqtt";
     settings = {
-      homeassistant = true;
+      homeassistant.enable = true;
       availability = true;
       permit_join = false;
       serial.port = "/dev/sonoff_zigbee";
