@@ -20,6 +20,10 @@
     inputs.nur.legacyPackages."${system}".repos.ilya-fedin.modules.io-scheduler
   ];
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19" # jellyfin-mpv-shim # TODO: remove when NixOS/nixpkgs#438884 gets merged
+  ];
+
   # # Host System # TODO: Enable when I have enough patience to rebuild everything
   # nixpkgs.hostPlatform = {
   #   gcc.arch = "znver3";
