@@ -11,7 +11,7 @@
   ];
 
   # For debugging
-  environment.systemPackages = with pkgs; [ zigpy-cli ];
+  # environment.systemPackages = with pkgs; [ zigpy-cli ];
 
   services.udev.extraRules = ''
     SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d4", SYMLINK+="sonoff_zigbee", MODE="0660", GROUP="zigbee2mqtt"
