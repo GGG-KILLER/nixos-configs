@@ -14,12 +14,13 @@
   services.prometheus.exporters.node.firewallFilter =
     "-p tcp -m tcp -s 192.168.2.2 --dport ${toString config.services.prometheus.exporters.node.port}";
 
-  services.prometheus.exporters.smartctl.enable = true;
-  services.prometheus.exporters.smartctl.listenAddress = config.my.networking.shiro.mainAddr;
-  services.prometheus.exporters.smartctl.port = config.shiro.ports.prometheus-smartmontools-exporter;
-  services.prometheus.exporters.smartctl.openFirewall = true;
-  services.prometheus.exporters.smartctl.firewallFilter =
-    "-p tcp -m tcp -s 192.168.2.2 --dport ${toString config.services.prometheus.exporters.smartctl.port}";
+  # NOTE: disabled for power saving.
+  # services.prometheus.exporters.smartctl.enable = true;
+  # services.prometheus.exporters.smartctl.listenAddress = config.my.networking.shiro.mainAddr;
+  # services.prometheus.exporters.smartctl.port = config.shiro.ports.prometheus-smartmontools-exporter;
+  # services.prometheus.exporters.smartctl.openFirewall = true;
+  # services.prometheus.exporters.smartctl.firewallFilter =
+  #   "-p tcp -m tcp -s 192.168.2.2 --dport ${toString config.services.prometheus.exporters.smartctl.port}";
 
   services.prometheus.exporters.zfs.enable = true;
   services.prometheus.exporters.zfs.listenAddress = config.my.networking.shiro.mainAddr;

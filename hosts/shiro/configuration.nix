@@ -2,7 +2,6 @@
 {
   imports = [
     self.nixosModules.server-profile
-    self.nixosModules.gallery-dl
     ./containers
     ./services
     ./users

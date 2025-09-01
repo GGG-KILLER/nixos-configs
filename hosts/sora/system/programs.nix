@@ -47,10 +47,6 @@ let
   inherit (config.boot.kernelPackages) turbostat;
 in
 {
-  imports = [
-    self.nixosModules.gallery-dl
-  ];
-
   environment.systemPackages = (
     with pkgs;
     [
