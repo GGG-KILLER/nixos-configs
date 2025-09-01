@@ -29,9 +29,6 @@
     fontconfig # libfontconfig.so.1
   ];
 
-  # Enable sysdig
-  programs.sysdig.enable = true;
-
   programs.zsh.ohMyZsh.plugins = [
     "copybuffer"
     "copyfile"
