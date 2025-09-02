@@ -116,8 +116,8 @@ in
               "mikestead.dotenv"
               "mkhl.direnv"
               "ms-azuretools.vscode-docker"
-              "ms-dotnettools.csdevkit"
-              # "ms-dotnettools.csharp"
+              # "ms-dotnettools.csdevkit" # TODO: Uncomment once nix-community/nix4vscode#327 gets fixed.
+              # "ms-dotnettools.csharp" # TODO: Uncomment once NixOS/nixpkgs#435965 gets merged.
               "ms-dotnettools.vscode-dotnet-runtime"
               "ms-python.python"
               "ms-toolsai.jupyter"
@@ -135,7 +135,10 @@ in
             ];
           in
           (pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names)
-          ++ [ self.packages.${system}."ms-dotnettools.csharp" ];
+          ++ [
+            self.packages.${system}."ms-dotnettools.csharp"
+            self.packages.${system}."ms-dotnettools.csdevkit"
+          ];
       };
 
       home.packages = with pkgs; [
