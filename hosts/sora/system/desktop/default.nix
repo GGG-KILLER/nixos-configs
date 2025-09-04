@@ -17,7 +17,6 @@ in
   environment.systemPackages = with pkgs; [
     # Audio
     audiorelay
-    easyeffects
     helvum
 
     # Android

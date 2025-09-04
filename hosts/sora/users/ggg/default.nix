@@ -100,6 +100,7 @@ in
     };
 
     services = {
+      easyeffects.enable = true;
       flameshot.enable = false;
       # opensnitch-ui.enable = true;
     };
