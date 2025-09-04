@@ -13,7 +13,9 @@ in
       aria
       ffmpeg
       find-ata
+      gallery-dl
       kemono-dl
+      mprocs
       #step-cli # TODO: Uncomment if it's still used and NixOS/nixpkgs#301623 has hit unstable.
       tmux
       yt-dlp
