@@ -30,6 +30,7 @@ in
     xca
     yubikey-manager
     yubioath-flutter
+    bitwarden-desktop
 
     # Games
     (prismlauncher.override {
@@ -75,9 +76,6 @@ in
   security.chromiumSuidSandbox.enable = true;
 
   services.flatpak.enable = true;
-
-  programs.goldwarden.enable = true;
-  programs.goldwarden.useSshAgent = false;
 
   programs.gpu-screen-recorder.enable = true;
 
