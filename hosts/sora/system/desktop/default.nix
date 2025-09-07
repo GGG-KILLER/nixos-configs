@@ -40,9 +40,7 @@ in
         jdk21
       ];
     })
-    (r2modman.overrideDerivation (oldAttrs: {
-      patches = [ patches/r2modman-flatpak-launch.patch ];
-    }))
+    r2modman
     lutris
 
     # Hardware
