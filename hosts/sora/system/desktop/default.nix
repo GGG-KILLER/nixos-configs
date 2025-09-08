@@ -65,6 +65,7 @@ in
     mockoon
     zenmonitor
     rustdesk-flutter
+    waydroid-helper
   ];
 
   # Android
@@ -105,4 +106,10 @@ in
   programs.steam.localNetworkGameTransfers.openFirewall = true;
   programs.steam.protontricks.enable = true;
   programs.steam.remotePlay.openFirewall = true;
+
+  virtualisation.waydroid.enable = true;
+  systemd = {
+    packages = [ pkgs.waydroid-helper ];
+    services.waydroid-mount.wantedBy = [ "multi-user.target" ];
+  };
 }
