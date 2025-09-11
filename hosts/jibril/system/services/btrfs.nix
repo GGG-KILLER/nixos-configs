@@ -13,9 +13,8 @@
       "2"
       "--loadavg-target"
       "8.0"
-      # TODO: Enable when v0.11 releases
-      # "--throttle-factor"
-      # "1"
+      "--throttle-factor"
+      "1"
     ];
     verbosity = "warning";
   };
