@@ -42,6 +42,11 @@ in
     ];
   };
 
+  fileSystems."/partition-root" = {
+    device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
+    fsType = "btrfs";
+  };
+
   fileSystems."/etc" = {
     device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
     fsType = "btrfs";
