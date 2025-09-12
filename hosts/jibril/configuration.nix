@@ -19,7 +19,7 @@
   nixpkgs.hostPlatform = "x86_64-linux";
 
   # Use the systemd-boot EFI boot loader.
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_15;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_16;
   boot.loader.systemd-boot.enable = true;
   boot.loader.systemd-boot.editor = false;
   boot.loader.systemd-boot.memtest86.enable = true;
