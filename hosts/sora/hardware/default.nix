@@ -1,25 +1,25 @@
 {
   inputs,
   lib,
+  pkgs,
   config,
   ...
 }:
 {
-  imports =
-    [
-      # ./video.nix
-      ./zfs.nix
+  imports = [
+    # ./video.nix
+    ./zfs.nix
 
-      "${inputs.nixos-hardware}/common/gpu/nvidia/ampere"
-    ]
-    ++ (with inputs.nixos-hardware.nixosModules; [
-      common-cpu-amd
-      common-cpu-amd-pstate
-      common-cpu-amd-zenpower
-      common-gpu-nvidia-nonprime
-      common-pc
-      common-pc-ssd
-    ]);
+    "${inputs.nixos-hardware}/common/gpu/nvidia/ampere"
+  ]
+  ++ (with inputs.nixos-hardware.nixosModules; [
+    common-cpu-amd
+    common-cpu-amd-pstate
+    common-cpu-amd-zenpower
+    common-gpu-nvidia-nonprime
+    common-pc
+    common-pc-ssd
+  ]);
 
   # Enable hardware
   hardware.graphics.enable = true;
@@ -45,6 +45,9 @@
 
   # Corsair Keyboard
   hardware.ckb-next.enable = true;
+  hardware.ckb-next.package = pkgs.ckb-next.overrideAttrs (old: {
+    cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DUSE_DBUS_MENU=0" ];
+  });
 
   # Steam Controller
   hardware.xone.enable = true;
