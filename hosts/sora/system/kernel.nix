@@ -12,7 +12,7 @@
   ];
 
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_cachyos;
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-gcc;
 
   # Add ext4 support
   system.fsPackages = [ pkgs.e2fsprogs ];
