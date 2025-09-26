@@ -89,12 +89,18 @@
         arguments = [
           { name = "streamer-username"; }
           { name = "stream-name"; }
+          { name = "--"; }
+          { name = "[...STREAMLINK-ARGS]"; }
         ];
         flags = [
           {
             name = "token";
             argument = "TOKEN";
-            description = "The Twitch OAuth token to use to download the stream with.";
+            description = ''
+              Sets the twitch OAuth token, in case you have Twitch Turbo or a Subscription.
+                                    Obtain by running the following snippet in the Browser JavaScript Console:
+                                        document.cookie.split("; ").find(item=>item.startsWith("auth-token="))?.split("=")[1]
+            '';
             required = true;
             envVar = "TWITCH_OAUTH_TOKEN";
           }
