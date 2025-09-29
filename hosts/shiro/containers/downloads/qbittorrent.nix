@@ -27,7 +27,8 @@
     ];
   };
 
-  containers.qbittorrent.autoStart = !config.cost-saving.enable || !config.cost-saving.disable-downloaders;
+  containers.qbittorrent.autoStart =
+    !config.cost-saving.enable || !config.cost-saving.disable-downloaders;
 
   modules.containers.qbittorrent = {
     vpn = true;

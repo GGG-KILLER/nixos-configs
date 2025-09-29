@@ -1,4 +1,10 @@
-{ self, system, lib, config, ... }:
+{
+  self,
+  system,
+  lib,
+  config,
+  ...
+}:
 let
   inherit (lib) getExe' listToAttrs nameValuePair;
   gpuDevs = [
@@ -49,26 +55,25 @@ in
       etc = true;
       h = true;
     };
-    bindMounts =
-      {
-        "/var/lib/jellyfin" = {
-          hostPath = "/var/lib/jellyfin";
+    bindMounts = {
+      "/var/lib/jellyfin" = {
+        hostPath = "/var/lib/jellyfin";
+        isReadOnly = false;
+      };
+      "/var/cache/jellyfin" = {
+        hostPath = "/var/cache/jellyfin";
+        isReadOnly = false;
+      };
+    }
+    // (listToAttrs (
+      map (
+        dev:
+        nameValuePair dev {
+          hostPath = dev;
           isReadOnly = false;
-        };
-        "/var/cache/jellyfin" = {
-          hostPath = "/var/cache/jellyfin";
-          isReadOnly = false;
-        };
-      }
-      // (listToAttrs (
-        map (
-          dev:
-          nameValuePair dev {
-            hostPath = dev;
-            isReadOnly = false;
-          }
-        ) gpuDevs
-      ));
+        }
+      ) gpuDevs
+    ));
 
     extraFlags = [
       "--property=MemoryMax=1G"

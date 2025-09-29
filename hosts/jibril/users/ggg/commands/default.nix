@@ -1,4 +1,9 @@
-{ self, system, pkgs, ... }:
+{
+  self,
+  system,
+  pkgs,
+  ...
+}:
 {
   home-manager.users.ggg.home.packages = [
     (pkgs.pog.pog {

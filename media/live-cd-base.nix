@@ -5,7 +5,7 @@
   ...
 }:
 {
-  imports = with self.nixosModules;[
+  imports = with self.nixosModules; [
     common-programs
     groups
     i18n
