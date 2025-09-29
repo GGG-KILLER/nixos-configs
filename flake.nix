@@ -189,7 +189,7 @@
           pkgs:
           let
             packages = pkgs.lib.packagesFromDirectoryRecursive {
-              inherit (pkgs) callPackage;
+              inherit (pkgs) callPackage newScope;
               directory = ./packages;
             };
           in
