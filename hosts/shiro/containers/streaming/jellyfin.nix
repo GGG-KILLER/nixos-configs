@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ self, system, lib, config, ... }:
 let
   inherit (lib) getExe' listToAttrs nameValuePair;
   gpuDevs = [
@@ -100,6 +100,7 @@ in
           # enable = true; # TODO: Uncomment once NixOS/nixpkgs#149715 gets merged.
           user = "streamer";
           group = "data-members";
+          package = self.packages.${system}.jellyfin-unstable;
         };
 
         systemd.packages = [ pkgs.jellyfin ];
