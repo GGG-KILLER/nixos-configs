@@ -17,10 +17,10 @@ in
   "@jesec/flood" = nodeEnv.buildNodePackage {
     name = "_at_jesec_slash_flood";
     packageName = "@jesec/flood";
-    version = "0.0.0-master.1510940";
+    version = "0.0.0-master.1cf023b";
     src = fetchurl {
-      url = "https://registry.npmjs.org/@jesec/flood/-/flood-0.0.0-master.1510940.tgz";
-      sha512 = "8+rymIzJylKOqP2OulkecqStRd08rBrmjr9dayK06Z90UB5y23vkorG8vFYVhRw4Y7anzyvmjqmVzAQL7dB27Q==";
+      url = "https://registry.npmjs.org/@jesec/flood/-/flood-0.0.0-master.1cf023b.tgz";
+      sha512 = "V0VbonlXTkBaH681ueRDEvt694iZJZlBuPIC9vVXcMasKcW5zZgvcTff6sGRkxMfn9SdSxnfnTdPBlC6hzZEzA==";
     };
     buildInputs = globalBuildInputs;
     meta = {
