@@ -10,16 +10,36 @@
   services.unbound.resolveLocalQueries = true;
   services.unbound.settings = {
     server = {
-      # verbosity = 2;
+      verbosity = 2;
+
+      # Listen on all interfaces but only allow local addresses to use this
       interface = [ "0.0.0.0" ];
       access-control = [
         "127.0.0.0/8 allow"
         "192.168.0.0/16 allow"
       ];
-      log-time-iso = true;
-      hide-identity = true;
-      hide-version = true;
-      hide-trustanchor = true;
+
+      # Allow Unbound to return responses for private IP Addrs
+      private-domain = [
+        ''"intranet"''
+        ''"internal"''
+        ''"private"''
+        ''"corp"''
+        ''"home"''
+        ''"lan"''
+      ];
+      domain-insecure = [
+        ''"intranet"''
+        ''"internal"''
+        ''"private"''
+        ''"corp"''
+        ''"home"''
+        ''"lan"''
+      ];
+      unblock-lan-zones = true;
+      insecure-lan-zones = true;
+
+      # Exclude local subnets from answers
       private-address = [
         "10.0.0.0/8"
         "172.16.0.0/12"
@@ -29,29 +49,29 @@
         "fe80::/10"
         "::ffff:0:0/96"
       ];
-      private-domain = [ ''"lan"'' ];
-      prefetch = true;
-      prefetch-key = true;
+
+      # We use respip to remove IPv6 entries from the responses
       module-config = ''"respip validator iterator"'';
       response-ip = [
         "::/0 redirect"
       ];
-      unblock-lan-zones = true;
-      # local-zone = [ ''"lan." redirect'' ];
-      fast-server-permil = 700;
-      fast-server-num = 10;
-      dns-error-reporting = true;
-      use-caps-for-id = true;
-      num-threads = 4;
 
-      msg-cache-slabs = 8;
-      rrset-cache-slabs = 8;
-      infra-cache-slabs = 8;
-      key-cache-slabs = 8;
-      msg-cache-size = "256m";
-      rrset-cache-size = "512m";
+      # Allow more recursive queries to upstream DNS servers
+      max-global-quota = 300;
 
-      unwanted-reply-threshold = 10000;
+      # Wait for a little longer on queries
+      discard-timeout = 3800; # in milliseconds
+
+      # Based on recommended settings in https://docs.pi-hole.net/guides/dns/unbound/#configure-unbound
+      harden-glue = true;
+      harden-dnssec-stripped = true;
+      use-caps-for-id = false;
+      prefetch = true; # refresh popular cached entries before they expire
+      edns-buffer-size = 1232;
+
+      # Custom settings
+      hide-identity = true;
+      hide-version = true;
     };
 
     auth-zone = [
