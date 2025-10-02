@@ -1,6 +1,8 @@
 {
-  pkgs,
+  self,
   inputs,
+  system,
+  pkgs,
   ...
 }:
 let
@@ -114,6 +116,6 @@ in
   };
 
   programs.winbox.enable = true;
-  programs.winbox.package = pkgs.winbox4;
+  programs.winbox.package = self.packages.${system}.winbox4;
   programs.winbox.openFirewall = true;
 }
