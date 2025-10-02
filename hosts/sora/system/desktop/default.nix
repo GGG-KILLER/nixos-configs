@@ -112,4 +112,8 @@ in
     packages = [ pkgs.waydroid-helper ];
     services.waydroid-mount.wantedBy = [ "multi-user.target" ];
   };
+
+  programs.winbox.enable = true;
+  programs.winbox.package = pkgs.winbox4;
+  programs.winbox.openFirewall = true;
 }
