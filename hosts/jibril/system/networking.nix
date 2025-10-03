@@ -91,6 +91,10 @@ in
           }
         ];
         wakeOnLan.enable = true;
+        wakeOnLan.policy = [
+          "magic"
+          "broadcast"
+        ];
       };
 
       hosts =
