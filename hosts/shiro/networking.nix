@@ -82,7 +82,7 @@ in
       hostId = "14537a32";
 
       defaultGateway = "192.168.1.1";
-      nameservers = [ "192.168.2.2" ];
+      nameservers = [ "192.168.1.1" ];
 
       interfaces.enp6s0 = {
         ipv4.addresses = [ ];

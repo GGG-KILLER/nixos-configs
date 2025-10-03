@@ -15,6 +15,5 @@
     ./nginx.nix
     ./openspeedtest.nix
     ./postgres.nix
-    ./unbound.nix
   ];
 }

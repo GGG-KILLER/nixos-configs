@@ -53,7 +53,7 @@
       dependsOn = [ "downloader-backend" ];
       extraOptions = [
         "--cap-drop=ALL"
-        "--dns=192.168.2.2"
+        "--dns=192.168.1.1"
         "--ipc=none"
         "--network=downloader"
         "--network-alias=frontend"
@@ -82,7 +82,7 @@
       };
       extraOptions = [
         "--cap-drop=ALL"
-        "--dns=192.168.2.2"
+        "--dns=192.168.1.1"
         "--ipc=none"
         "--network=downloader"
         "--network-alias=backend"
