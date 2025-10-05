@@ -1,6 +1,7 @@
 {
   lib,
   fetchFromGitHub,
+  fetchpatch2,
   makeWrapper,
   electron,
   python3,
@@ -87,6 +88,11 @@ stdenv.mkDerivation (finalAttrs: {
   patches = [
     # MPRIS's DesktopEntry property needs to match the desktop entry basename
     ./fix-mpris-desktop-entry.patch
+    # Fix downloader
+    (fetchpatch2 {
+      url = "https://patch-diff.githubusercontent.com/raw/ytmd-devs/ytmd/pull/3973.patch";
+      hash = "sha256-rlhGIltbNB3Ref9CxMVAP94O/3hp0pJX1eMIpbLNdjI=";
+    })
   ];
 
   desktopItems = [
