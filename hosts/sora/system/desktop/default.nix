@@ -7,6 +7,7 @@
 }:
 let
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
+  inherit (self.packages.${system}) ytmd;
 in
 {
   imports = [
@@ -52,6 +53,7 @@ in
 
     # Media
     kdePackages.elisa
+    ytmd
 
     # VMs
     virt-manager
