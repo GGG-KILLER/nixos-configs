@@ -93,6 +93,11 @@ stdenv.mkDerivation (finalAttrs: {
       url = "https://patch-diff.githubusercontent.com/raw/ytmd-devs/ytmd/pull/3973.patch";
       hash = "sha256-rlhGIltbNB3Ref9CxMVAP94O/3hp0pJX1eMIpbLNdjI=";
     })
+    # Adopt ytmd-devs/ytmd#3917 early
+    (fetchpatch2 {
+      url = "https://patch-diff.githubusercontent.com/raw/ytmd-devs/ytmd/pull/3917.diff"; # uses the diff since there's repeated commmits in the PR somehow.
+      hash = "sha256-XfcE6FqLeKO6Kz1HyNrog5aYosSqiY2i2rlxg9lqPQQ=";
+    })
   ];
 
   desktopItems = [
