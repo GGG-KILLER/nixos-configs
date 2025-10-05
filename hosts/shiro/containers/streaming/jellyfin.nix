@@ -19,7 +19,7 @@ let
 in
 {
   my.networking.jellyfin = {
-    mainAddr = "192.168.2.219"; # ipgen -n 192.168.2.0/24 jellyfin
+    mainAddr = config.home.addrs.shiro-jellyfin;
     ports = [
       {
         protocol = "http";

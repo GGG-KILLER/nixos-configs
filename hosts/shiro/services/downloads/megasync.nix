@@ -54,8 +54,6 @@ in
         ExecStart = getExe self.packages.${system}.mega-sync;
 
         # Hardening
-        # IPAddressAllow = "192.168.1.1";
-        # IPAddressDeny = "localhost multicast 192.168.0.0/24 172.16.0.0/24";
         LockPersonality = true;
         # MemoryDenyWriteExecute = true; # Figure out why this doesn't work. They should've solved this already.
         NoNewPrivileges = true;

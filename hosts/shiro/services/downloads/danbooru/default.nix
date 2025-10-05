@@ -10,7 +10,7 @@ let
   imagesPath = "/storage/services/danbooru/images";
 
   defaultContainerFlags = [
-    "--dns=192.168.1.1"
+    "--dns=${config.home.addrs.router}"
     "--ipc=none"
     "--network=danbooru"
   ];

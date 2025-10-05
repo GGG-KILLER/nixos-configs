@@ -58,7 +58,7 @@ in
       ProtectKernelTunables = true;
       RestrictSUIDSGID = true;
       # IPAddressAllow = "192.168.1.1";
-      IPAddressDeny = "localhost multicast 192.168.0.0/24 172.16.0.0/24";
+      IPAddressDeny = "localhost multicast 10.0.0.0/8 172.16.0.0/24";
     };
   };
 }

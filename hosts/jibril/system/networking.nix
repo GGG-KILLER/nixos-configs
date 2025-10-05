@@ -65,7 +65,7 @@ in
 
   config = rec {
     my.networking.jibril = {
-      mainAddr = "192.168.2.2";
+      mainAddr = config.home.addrs.jibril;
       extraNames =
         [ ]
         ++ (map (name: removeSuffix ".lan" name) (
@@ -80,8 +80,8 @@ in
       hostName = "jibril";
       hostId = "023937b5";
 
-      defaultGateway = "192.168.1.1";
-      nameservers = [ "192.168.1.1" ];
+      defaultGateway = config.home.addrs.router;
+      nameservers = [ config.home.addrs.router ];
 
       interfaces.enp0s31f6 = {
         ipv4.addresses = [

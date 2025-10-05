@@ -65,7 +65,7 @@ in
 
   config = rec {
     my.networking.shiro = {
-      mainAddr = "192.168.2.133"; # ipgen -n 192.168.2.0/24 shiro
+      mainAddr = config.home.addrs.shiro-main;
       extraNames =
         [ ]
         ++ (map (name: removeSuffix ".lan" name) (
@@ -81,8 +81,8 @@ in
       hostName = "shiro";
       hostId = "14537a32";
 
-      defaultGateway = "192.168.1.1";
-      nameservers = [ "192.168.1.1" ];
+      defaultGateway = config.home.addrs.router;
+      nameservers = [ config.home.addrs.router ];
 
       interfaces.enp6s0 = {
         ipv4.addresses = [ ];
@@ -115,7 +115,7 @@ in
         in
         (listToAttrs (map hostToNameValPair (attrValues networking)))
         // {
-          "192.168.2.2" = [
+          ${config.home.addrs.jibril} = [
             "jibril.lan"
             "ca.lan docker.lan"
             "postgres.lan"

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 let
   base = 0;
   getSeq = num: lib.fixedWidthNumber 4 (base + num);
@@ -37,7 +37,7 @@ in
         {
           type = "simple";
           operand = "dest.ip";
-          data = "192.168.1.1";
+          data = config.home.addrs.router;
         }
       ];
     };

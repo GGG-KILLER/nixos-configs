@@ -11,6 +11,7 @@
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
     self.nixosModules.server-profile
+    self.nixosModules.home-network-addrs
     ./hardware
     ./system
     ./users/ggg

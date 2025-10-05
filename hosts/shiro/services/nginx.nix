@@ -1,5 +1,5 @@
-{ ... }:
+{ config, ... }:
 {
   modules.services.nginx.enable = true;
-  services.nginx.resolver.addresses = [ "192.168.1.1" ];
+  services.nginx.resolver.addresses = [ config.home.addrs.router ];
 }

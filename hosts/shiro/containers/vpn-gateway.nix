@@ -5,7 +5,7 @@ let
 in
 {
   my.networking.vpn-gateway = {
-    mainAddr = "192.168.2.47"; # ipgen -n 192.168.2.0/24 vpn-gateway
+    mainAddr = config.home.addrs.shiro-vpn-gateway;
   };
 
   # Only enable the VPN container if we have any containers that need it auto-starting.
@@ -48,8 +48,7 @@ in
               ${iptables} -N WG_KILLSWITCH
               ${iptables} -A OUTPUT -m mark ! --mark $(${wg} show ${wg-interface} fwmark) -m addrtype ! --dst-type LOCAL -j WG_KILLSWITCH
               ${iptables} -A WG_KILLSWITCH -o ${wg-interface} -j RETURN
-              ${iptables} -A WG_KILLSWITCH -o mv-enp6s0 -m iprange --dst-range 192.168.2.1-192.168.2.254 -j RETURN
-              ${iptables} -A WG_KILLSWITCH -o mv-enp6s0 -m iprange --dst-range 192.168.3.1-192.168.3.254 -j RETURN
+              ${iptables} -A WG_KILLSWITCH -o mv-enp6s0 -m iprange --dst-range 10.0.0.0-10.255.255.255 -j RETURN
               ${iptables} -A WG_KILLSWITCH -j REJECT
             '';
             preDown = ''
@@ -67,7 +66,7 @@ in
         # NAT
         networking.nat = {
           enable = true;
-          internalIPs = [ "192.168.0.0/16" ];
+          internalIPs = [ "10.0.0.0/8" ];
           externalInterface = wg-interface;
         };
 

@@ -7,6 +7,7 @@
 {
   imports = [
     self.nixosModules.server-profile
+    self.nixosModules.home-network-addrs
     ./containers
     ./services
     ./users

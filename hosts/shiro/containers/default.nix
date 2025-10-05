@@ -123,6 +123,7 @@ with lib;
               imports = with self.nixosModules; [
                 common-programs
                 groups
+                home-network-addrs
                 i18n
                 pki
                 server-services
@@ -151,7 +152,7 @@ with lib;
                         "8.8.4.4"
                       ]
                     else
-                      [ "192.168.1.1" ];
+                      [ config.home.addrs.router ];
                 };
               };
 
@@ -169,7 +170,7 @@ with lib;
                   useDHCP = mkOverride 900 false;
                   enableIPv6 = mkOverride 900 false;
                   hostName = name;
-                  defaultGateway = mkOverride 900 (if cfg.vpn then vpnNetCfg.mainAddr else "192.168.1.1");
+                  defaultGateway = mkOverride 900 (if cfg.vpn then vpnNetCfg.mainAddr else config.home.addrs.router);
                   useHostResolvConf = false;
                   nameservers = containerCfg.nameservers;
                   interfaces = {

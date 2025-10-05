@@ -2,7 +2,7 @@
 {
   my.networking.qbittorrent = {
     extraNames = [ "flood" ];
-    mainAddr = "192.168.2.154"; # ipgen -n 192.168.2.0/24 qbittorrent
+    mainAddr = config.home.addrs.shiro-qbittorrent;
     ports = [
       {
         protocol = "tcp";
