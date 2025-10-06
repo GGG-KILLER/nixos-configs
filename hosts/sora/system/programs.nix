@@ -38,7 +38,6 @@ let
   agenix = inputs.agenix.packages.${system}.default;
   deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
   git-crypt-agessh = inputs.git-crypt-agessh.packages.${system}.default;
-  ipgen-cli = inputs.ipgen-cli.packages.${system}.default;
 
   inherit (self.packages.${system})
     kemono-dl
@@ -95,9 +94,6 @@ in
       wl-clipboard
       xh
       uutils-coreutils-noprefix
-
-      # Misc
-      ipgen-cli
     ]
   );
 
