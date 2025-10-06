@@ -30,14 +30,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    packwiz = {
-      url = "github:packwiz/packwiz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    ipgen-cli = {
-      url = "github:ipgen/cli";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     stackpkgs = {
       url = "github:ryze312/stackpkgs";
       inputs.nixpkgs.follows = "nixpkgs";
