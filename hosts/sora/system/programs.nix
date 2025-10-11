@@ -65,6 +65,7 @@ in
       nixfmt-rfc-style
       nodejs_latest
       powershell
+      python3
       tokei
 
       # Downloads
