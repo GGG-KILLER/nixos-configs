@@ -13,13 +13,13 @@
 
 buildDotnetModule rec {
   pname = "jellyfin";
-  version = "10.11.0-rc8"; # ensure that jellyfin-web-unstable has matching version
+  version = "10.11.0"; # ensure that jellyfin-web-unstable has matching version
 
   src = fetchFromGitHub {
     owner = "jellyfin";
     repo = "jellyfin";
     rev = "v${version}";
-    hash = "sha256-Z+p+dfLJRR+4CwiAaLrXFzDS7AAFEtEL5KYIM9Qv7kk=";
+    hash = "sha256-8kvN2ZugmjjgSMepDdP9tc48362b6w+RpIsp/IXaivM=";
   };
 
   propagatedBuildInputs = [ sqlite ];
