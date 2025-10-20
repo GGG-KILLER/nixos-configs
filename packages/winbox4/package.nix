@@ -33,6 +33,11 @@ let
   };
 in
 (if stdenvNoCC.hostPlatform.isDarwin then x86_64-dmg else x86_64-zip).overrideAttrs (oldAttrs: {
+
+  passthru = oldAttrs.passthru or {} // {
+    updateScript = ./update.sh;
+  };
+
   meta = oldAttrs.meta // {
     platforms = x86_64-zip.meta.platforms ++ x86_64-dmg.meta.platforms;
     mainProgram = "WinBox";

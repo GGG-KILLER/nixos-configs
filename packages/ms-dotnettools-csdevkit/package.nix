@@ -129,6 +129,8 @@ vscode-utils.buildVscodeMarketplaceExtension {
     )
   '';
 
+  passthru.updateScript = ./update.sh;
+
   meta = {
     changelog = "https://marketplace.visualstudio.com/items/ms-dotnettools.csdevkit/changelog";
     description = "Official Visual Studio Code extension for C# from Microsoft";
