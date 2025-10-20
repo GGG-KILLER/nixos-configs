@@ -17,7 +17,7 @@ if [[ "$currentVersion" == "$latestVersion" ]]; then
 fi
 
 linuxHash="$(get-hash https://download.mikrotik.com/routeros/winbox/$latestVersion/WinBox_Linux.zip)"
-darwinHash="$(get-hash https://download.mikrotik.com/routeros/winbox/$latestVersion/WinBox_Linux.zip)"
+darwinHash="$(get-hash https://download.mikrotik.com/routeros/winbox/$latestVersion/WinBox.dmg)"
 
 update-source-version winbox4 "$latestVersion" "$linuxHash" --system=x86_64-linux --ignore-same-version
 update-source-version winbox4 "$latestVersion" "$darwinHash" --system=aarch64-darwin --ignore-same-version
