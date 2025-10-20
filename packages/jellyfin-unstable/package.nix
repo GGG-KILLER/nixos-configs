@@ -47,8 +47,6 @@ buildDotnetModule rec {
     smoke-test = nixosTests.jellyfin;
   };
 
-  passthru.updateScript = ./update.sh;
-
   meta = with lib; {
     description = "Free Software Media System";
     homepage = "https://jellyfin.org/";

@@ -136,8 +136,8 @@ in
           in
           (pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names)
           ++ [
-            self.packages.${system}."ms-dotnettools.csharp"
-            self.packages.${system}."ms-dotnettools.csdevkit"
+            self.packages.${system}.ms-dotnettools-csharp
+            self.packages.${system}.ms-dotnettools-csdevkit
           ];
       };
 

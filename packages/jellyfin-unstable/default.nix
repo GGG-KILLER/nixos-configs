@@ -8,5 +8,7 @@
   },
 }:
 {
-  jellyfin-unstable = pkgs.callPackage ./package.nix { };
+  jellyfin-unstable = pkgs.callPackage ./package.nix {
+    jellyfin-web-unstable = pkgs.callPackage ../jellyfin-web-unstable/package.nix;
+  };
 }

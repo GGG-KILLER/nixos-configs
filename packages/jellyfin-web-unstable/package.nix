@@ -9,20 +9,17 @@
   xcbuild,
   pango,
   giflib,
-  jellyfin-unstable,
 }:
 buildNpmPackage rec {
   pname = "jellyfin-web";
   version = "10.11.0-rc8";
 
-  src =
-    assert version == jellyfin-unstable.version;
-    fetchFromGitHub {
-      owner = "jellyfin";
-      repo = "jellyfin-web";
-      rev = "v${version}";
-      hash = "sha256-jX9Qut8YsJRyKI2L7Aww4+6G8z741WzN37CUx3KWQfY=";
-    };
+  src = fetchFromGitHub {
+    owner = "jellyfin";
+    repo = "jellyfin-web";
+    rev = "v${version}";
+    hash = "sha256-jX9Qut8YsJRyKI2L7Aww4+6G8z741WzN37CUx3KWQfY=";
+  };
 
   nodejs = nodejs_20; # does not build with 22
 

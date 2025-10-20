@@ -151,8 +151,6 @@ vscode-utils.buildVscodeMarketplaceExtension {
     )
   '';
 
-  passthru.updateScript = ./update.sh;
-
   meta = {
     description = "Official C# support for Visual Studio Code";
     homepage = "https://github.com/dotnet/vscode-csharp";
