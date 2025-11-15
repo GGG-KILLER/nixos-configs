@@ -56,11 +56,12 @@ in
   #   )
   # ];
 
-  services.pgadmin = {
-    enable = true;
-    initialEmail = "gggkiller2@gmail.com";
-    initialPasswordFile = config.age.secrets.pgadmin-pass.path;
-  };
+  # TODO: Uncomment once NixOS/nixpkgs#461494 hits unstable
+  # services.pgadmin = {
+  #   enable = true;
+  #   initialEmail = "gggkiller2@gmail.com";
+  #   initialPasswordFile = config.age.secrets.pgadmin-pass.path;
+  # };
 
   services.postgresql = {
     enable = true;
