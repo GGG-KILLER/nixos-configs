@@ -27,16 +27,15 @@ in
     packages = with pkgs; [
       cascadia-code
       noto-fonts
-      noto-fonts-extra
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       noto-fonts-cjk-sans
       noto-fonts-cjk-serif
       noto-fonts-emoji-blob-bin
       unifont
       corefonts
-      vistafonts
-      vistafonts-cht
-      vistafonts-chs
+      vista-fonts
+      vista-fonts-cht
+      vista-fonts-chs
       source-sans-pro
       source-code-pro
       # local.winfonts

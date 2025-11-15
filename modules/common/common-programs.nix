@@ -19,7 +19,7 @@
 
     # Misc
     btop
-    du-dust
+    dust
     dua
     dysk
     fastfetch

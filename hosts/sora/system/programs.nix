@@ -69,7 +69,7 @@ in
       tokei
 
       # Downloads
-      aria
+      aria2
       kemono-dl
       m3u8-dl
       yt-dlp

@@ -13,9 +13,6 @@
 }:
 
 let
-  # Workaround to cope with utillinux in Nixpkgs 20.09 and util-linux in Nixpkgs master
-  utillinux = if pkgs ? utillinux then pkgs.utillinux else pkgs.util-linux;
-
   python = if nodejs ? python then nodejs.python else python2;
 
   # Create a tar wrapper that filters all the 'Ignoring unknown extended header keyword' noise
@@ -550,7 +547,7 @@ let
           python
           nodejs
         ]
-        ++ lib.optional (stdenv.isLinux) utillinux
+        ++ lib.optional (stdenv.isLinux) pkgs.util-linux
         ++ lib.optional (stdenv.isDarwin) libtool
         ++ buildInputs;
 
@@ -672,7 +669,7 @@ let
           python
           nodejs
         ]
-        ++ lib.optional (stdenv.isLinux) utillinux
+        ++ lib.optional (stdenv.isLinux) pkgs.util-linux
         ++ lib.optional (stdenv.isDarwin) libtool
         ++ buildInputs;
 
@@ -771,7 +768,7 @@ let
           python
           nodejs
         ]
-        ++ lib.optional (stdenv.isLinux) utillinux
+        ++ lib.optional (stdenv.isLinux) pkgs.util-linux
         ++ buildInputs;
         buildCommand = ''
           mkdir -p $out/bin

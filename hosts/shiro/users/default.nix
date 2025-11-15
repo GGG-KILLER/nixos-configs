@@ -10,7 +10,7 @@ in
 {
   home-manager.users.ggg = {
     home.packages = with pkgs; [
-      aria
+      aria2
       ffmpeg
       find-ata
       gallery-dl
