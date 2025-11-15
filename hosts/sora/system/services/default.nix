@@ -1,7 +1,7 @@
 { ... }:
 {
   imports = [
-    ./fancontrol.nix
+    # ./fancontrol.nix # TODO: Find a way to stop it from breaking all the time
     ./nix.nix
     ./ollama.nix
     ./restic.nix
