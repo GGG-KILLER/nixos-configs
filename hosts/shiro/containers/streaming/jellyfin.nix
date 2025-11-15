@@ -105,7 +105,7 @@ in
           # enable = true; # TODO: Uncomment once NixOS/nixpkgs#149715 gets merged.
           user = "streamer";
           group = "data-members";
-          package = self.packages.${system}.jellyfin-unstable;
+          package = pkgs.jellyfin;
         };
 
         systemd.packages = [ pkgs.jellyfin ];
