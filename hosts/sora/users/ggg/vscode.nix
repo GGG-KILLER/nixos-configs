@@ -57,7 +57,7 @@ in
         package = pkgs.vscode;
 
         # Only install extensions through nix.
-        mutableExtensionsDir = false;
+        mutableExtensionsDir = true; # Needed for Copilot to work properly
         profiles.default.extensions =
           let
             mkOverride =
@@ -107,6 +107,7 @@ in
               "editorconfig.editorconfig"
               "foxundermoon.shell-format"
               "foxundermoon.shell-format"
+              "github.copilot"
               "james-yu.latex-workshop"
               "jashoo.dotnetinsights"
               "jnoortheen.nix-ide"
