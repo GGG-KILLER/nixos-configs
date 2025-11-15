@@ -25,13 +25,17 @@ in
         settings.editor = "${getExe pkgs.vscode} --wait";
         extensions = with pkgs; [ gh-poi ];
       };
+      delta = {
+        enable = true;
+        enableGitIntegration = true;
+      };
       git = {
         enable = true;
-        delta.enable = true;
         lfs.enable = true;
-        userName = "GGG";
-        userEmail = "gggkiller2@gmail.com";
-        extraConfig = {
+        settings = {
+          user.name = "GGG";
+          user.email = "gggkiller2@gmail.com";
+
           init.defaultBranch = "main";
           core.editor = "${getExe pkgs.vscode} --wait";
 
