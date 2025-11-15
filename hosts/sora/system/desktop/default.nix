@@ -14,7 +14,7 @@ in
     ./audio
     ./opensnitch
     ./kde.nix
-    ./rustdesk.nix
+    # ./rustdesk.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -65,10 +65,10 @@ in
     mullvad-vpn
 
     # Misc
-    imhex
+    # imhex # TODO: Uncomment once NixOS/nixpkgs#461461 hits unstable
     mockoon
     zenmonitor
-    rustdesk-flutter
+    # rustdesk-flutter
     waydroid-helper
   ];
 
