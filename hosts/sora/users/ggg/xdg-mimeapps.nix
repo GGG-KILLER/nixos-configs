@@ -14,6 +14,7 @@
       ];
       browserAssociations = associateApp "com.vivaldi.Vivaldi.desktop" [
         "application/atom+xml"
+        "application/pdf"
         "application/rdf+xml"
         "application/rss+xml"
         "application/xhtml_xml"
@@ -43,7 +44,7 @@
         "text/x-matlab"
       ];
       readerAssociations = associateApp "org.kde.okular.desktop" [
-        "application/pdf"
+        # PDF moved to browser since it handles it better somehow
         "application/vnd.comicbook+zip"
         "application/vnd.kde.okular-archive"
       ];
@@ -275,7 +276,7 @@
 
       addedAssociations = defaultAssociations // {
         "inode/directory" = [
-          "org.kde.dolphin.desktop"
+          "org.kde.dolphin.desktop" # duplicated here because we override it with the merge operator
           "code.desktop"
           "mpv.desktop"
         ];
