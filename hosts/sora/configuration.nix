@@ -21,18 +21,7 @@
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "qtwebengine-5.15.19" # jellyfin-mpv-shim # TODO: remove when NixOS/nixpkgs#438884 gets merged
   ];
-
-  # # Host System # TODO: Enable when I have enough patience to rebuild everything
-  # nixpkgs.hostPlatform = {
-  #   gcc.arch = "znver3";
-  #   gcc.tune = "znver3";
-  #   system = "x86_64-linux";
-  # };
-
-  # Overlays
-  nixpkgs.overlays = [ ];
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
@@ -45,9 +34,6 @@
 
   # Enable broken stuff (Reason)
   # nixpkgs.config.allowBroken = true;
-
-  # # Enable CA derivations by default # TODO: Enable when I have enough patience to rebuild everything
-  # nixpkgs.config.contentAddressedByDefault = true;
 
   networking = {
     hostName = "sora";

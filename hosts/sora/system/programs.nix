@@ -40,7 +40,6 @@ let
   git-crypt-agessh = inputs.git-crypt-agessh.packages.${system}.default;
 
   inherit (self.packages.${system})
-    kemono-dl
     m3u8-dl
     ;
   inherit (config.boot.kernelPackages) turbostat;
@@ -50,15 +49,13 @@ in
     with pkgs;
     [
       # Coding
-      # avalonia-ilspy # TODO: re-add when it no longer depends on .NET 6
       corepack_latest
       delta
-      deno
-      docker-compose
-      dotnet-ef
       dotnet-outdated
       dotnet-repl
       dotnet-sdk
+      nix-prefetch-docker
+      nix-prefetch-github
       nix-prefetch-scripts
       nixd
       nixf
@@ -70,7 +67,6 @@ in
 
       # Downloads
       aria2
-      kemono-dl
       m3u8-dl
       yt-dlp
 
@@ -90,7 +86,6 @@ in
 
       # Terminal tools
       mprocs
-      parted
       turbostat
       wl-clipboard
       xh

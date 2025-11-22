@@ -1,16 +1,13 @@
 {
   inputs,
   lib,
-  pkgs,
   config,
   ...
 }:
 {
   imports = [
-    # ./video.nix
-    ./zfs.nix
-
     "${inputs.nixos-hardware}/common/gpu/nvidia/ampere"
+    ./zfs.nix
   ]
   ++ (with inputs.nixos-hardware.nixosModules; [
     common-cpu-amd
@@ -41,18 +38,8 @@
 
   # Firmware
   services.fwupd.enable = true;
-  hardware.cpu.amd.updateMicrocode = true;
+  hardware.enableRedistributableFirmware = true;
 
-  # Corsair Keyboard
-  hardware.ckb-next.enable = true;
-  hardware.ckb-next.package = pkgs.ckb-next.overrideAttrs (old: {
-    cmakeFlags = (old.cmakeFlags or [ ]) ++ [ "-DUSE_DBUS_MENU=0" ];
-  });
-
-  # Steam Controller
+  # Xbox Controller
   hardware.xone.enable = true;
-  hardware.steam-hardware.enable = true;
-
-  # Open Tablet thingio
-  hardware.opentabletdriver.enable = true;
 }

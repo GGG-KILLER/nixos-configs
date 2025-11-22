@@ -1,11 +1,4 @@
-{
-  lib,
-  pkgs,
-  ...
-}:
-let
-  inherit (lib) getExe;
-in
+{ lib, pkgs, ... }:
 {
   imports = [
     ./commands
@@ -22,7 +15,7 @@ in
       gh = {
         enable = true;
         gitCredentialHelper.enable = true;
-        settings.editor = "${getExe pkgs.vscode} --wait";
+        settings.editor = "code --wait";
         extensions = with pkgs; [ gh-poi ];
       };
       delta = {
@@ -37,7 +30,7 @@ in
           user.email = "gggkiller2@gmail.com";
 
           init.defaultBranch = "main";
-          core.editor = "${getExe pkgs.vscode} --wait";
+          core.editor = "code --wait";
 
           # Ensure integrity of things we fetch.
           transfer.fsckObjects = true;
@@ -106,7 +99,6 @@ in
     services = {
       easyeffects.enable = true;
       flameshot.enable = false;
-      # opensnitch-ui.enable = true;
       jellyfin-mpv-shim.enable = true;
     };
   };

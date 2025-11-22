@@ -12,9 +12,7 @@ in
 {
   imports = [
     ./audio
-    ./opensnitch
     ./kde.nix
-    # ./rustdesk.nix
   ];
 
   environment.systemPackages = with pkgs; [
@@ -31,9 +29,7 @@ in
 
     # Encryption
     xca
-    yubikey-manager
     yubioath-flutter
-    bitwarden-desktop
 
     # Games
     (prismlauncher.override {
@@ -65,9 +61,6 @@ in
     mullvad-vpn
 
     # Misc
-    # imhex # TODO: Uncomment once NixOS/nixpkgs#461461 hits unstable
-    mockoon
-    zenmonitor
     # rustdesk-flutter
     waydroid-helper
   ];
@@ -78,23 +71,25 @@ in
   # easyeffects needs this
   programs.dconf.enable = true;
 
+  # Needed for chrome-based browsers' sandboxing
   security.chromiumSuidSandbox.enable = true;
 
+  # Needed for flatpak
   services.flatpak.enable = true;
-
-  programs.gpu-screen-recorder.enable = true;
 
   programs.partition-manager.enable = true;
 
-  programs.obs-studio.enable = true;
-  programs.obs-studio.enableVirtualCamera = true;
-  programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
-    input-overlay
-    obs-pipewire-audio-capture
-  ];
+  # OBS
+  # programs.obs-studio.enable = true;
+  # programs.obs-studio.enableVirtualCamera = true;
+  # programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
+  #   input-overlay
+  #   obs-pipewire-audio-capture
+  # ];
 
   programs.gamemode.enable = true;
 
+  # Steam
   programs.steam.enable = true;
   programs.steam.extraPackages = with pkgs; [
     (mangohud.override {
@@ -111,12 +106,14 @@ in
   programs.steam.protontricks.enable = true;
   programs.steam.remotePlay.openFirewall = true;
 
+  # Waydroid
   virtualisation.waydroid.enable = true;
   systemd = {
     packages = [ pkgs.waydroid-helper ];
     services.waydroid-mount.wantedBy = [ "multi-user.target" ];
   };
 
+  # Winbox for router management
   programs.winbox.enable = true;
   programs.winbox.package = self.packages.${system}.winbox4;
   programs.winbox.openFirewall = true;

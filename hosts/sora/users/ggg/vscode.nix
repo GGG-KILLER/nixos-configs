@@ -95,44 +95,27 @@ in
               exts-names: lib.listToAttrs (lib.filter (x: x != null) (lib.map mkOverride exts-names));
 
             names = [
-              "avaloniateam.vscode-avalonia"
-              "christopherstyles.html-entities"
-              # "Continue.continue"
-              "cschlosser.doxdocgen"
-              "dart-code.dart-code"
-              "dart-code.flutter"
               "dbaeumer.vscode-eslint"
-              "denoland.vscode-deno"
               "eamodio.gitlens"
               "editorconfig.editorconfig"
               "foxundermoon.shell-format"
-              "foxundermoon.shell-format"
               "github.copilot"
               "james-yu.latex-workshop"
-              "jashoo.dotnetinsights"
               "jnoortheen.nix-ide"
-              "l13rary.l13-diff"
               "ltex-plus.vscode-ltex-plus"
               "mhutchie.git-graph"
               "mikestead.dotenv"
               "mkhl.direnv"
               "ms-azuretools.vscode-docker"
-              # "ms-dotnettools.csdevkit" # TODO: Uncomment once nix-community/nix4vscode#327 gets fixed.
-              # "ms-dotnettools.csharp" # TODO: Uncomment once NixOS/nixpkgs#435965 gets merged.
               "ms-dotnettools.vscode-dotnet-runtime"
               "ms-python.python"
-              "ms-toolsai.jupyter"
               "ms-vscode-remote.remote-containers"
-              "ms-vscode-remote.remote-ssh"
               "ms-vscode.powershell"
               "oderwat.indent-rainbow"
-              "omkov.vscode-ebnf"
               "pkief.material-icon-theme"
               "redhat.vscode-yaml"
-              "rust-lang.rust-analyzer"
               "tamasfe.even-better-toml"
               "timonwong.shellcheck"
-              "wix.vscode-import-cost"
             ];
           in
           (pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names)
@@ -143,9 +126,7 @@ in
       };
 
       home.packages = with pkgs; [
-        rust-analyzer
         shellcheck
-        nixfmt-rfc-style
       ];
     }
     # Update the settings.json (author: @Myaats)

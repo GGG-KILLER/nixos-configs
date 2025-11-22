@@ -4,7 +4,6 @@
     ./desktop
     ./services
     ./boot.nix
-    ./ccache.nix
     ./firejail.nix
     ./fonts.nix
     ./hardening.nix
