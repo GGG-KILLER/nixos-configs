@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/c53fb425296bf4f318632ffb0f6ed6f0da68036b";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
