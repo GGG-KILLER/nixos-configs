@@ -19,4 +19,7 @@
   boot.loader.systemd-boot.editor = false;
   boot.loader.systemd-boot.memtest86.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Block nftables from loading
+  boot.blacklistedKernelModules = [ "nf_tables" ];
 }
