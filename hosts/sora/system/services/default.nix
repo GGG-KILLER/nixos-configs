@@ -21,6 +21,6 @@
     motherboard = "amd";
   };
 
-  # VPN
-  services.mullvad-vpn.enable = true;
+  # # VPN
+  # services.mullvad-vpn.enable = true;
 }

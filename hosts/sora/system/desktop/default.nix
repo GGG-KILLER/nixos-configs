@@ -58,7 +58,7 @@ in
     # Web
     chromium
     discord-canary
-    mullvad-vpn
+    # mullvad-vpn
 
     # Misc
     # rustdesk-flutter
