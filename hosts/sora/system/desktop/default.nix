@@ -2,6 +2,7 @@
   self,
   inputs,
   system,
+  lib,
   pkgs,
   ...
 }:
@@ -117,4 +118,7 @@ in
   programs.winbox.enable = true;
   programs.winbox.package = self.packages.${system}.winbox4;
   programs.winbox.openFirewall = true;
+
+  # HACK: Temporary workaround for NixOS/nixpkgs#462935
+  systemd.user.services.orca.wantedBy = lib.mkForce [ ];
 }
