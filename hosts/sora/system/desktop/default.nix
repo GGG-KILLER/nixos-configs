@@ -49,6 +49,7 @@ in
 
     # Media
     kdePackages.elisa
+    pinta
     ytmd
 
     # VMs
@@ -61,8 +62,11 @@ in
     # mullvad-vpn
 
     # Misc
-    # rustdesk-flutter
     waydroid-helper
+    localsend
+    metadata-cleaner
+    bleachbit
+    textpieces
   ];
 
   # Android
