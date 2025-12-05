@@ -8,7 +8,7 @@ get-hash() {
     nix hash convert --hash-algo sha256 "$(nix-prefetch-url --type sha256 "$1")"
 }
 
-latestVersion="$(curl -s https://mikrotik.com/download | grep -oE 'https://download.mikrotik.com/routeros/winbox/4[^/]+/WinBox_Linux.zip' | grep -oE '4[^/]+')"
+latestVersion="$(curl -s https://mikrotik.com/download/winbox | grep -oE 'https://download.mikrotik.com/routeros/winbox/4[^/]+/WinBox_Linux.zip' | head -n1 | grep -oE '4[^/]+')"
 currentVersion=$(nix-instantiate --eval -E "with import ./. {}; winbox4.version or (lib.getVersion winbox4)" | tr -d '"')
 
 if [[ "$currentVersion" == "$latestVersion" ]]; then
