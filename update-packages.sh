@@ -4,8 +4,6 @@
 set -euo pipefail
 
 # Update packages nix-update supports
-nix-update --flake --version unstable --format --commit jellyfin-unstable
-nix-update --flake --version unstable --format --commit jellyfin-web-unstable
 nix-update --flake --version unstable --format --commit ytmd
 
 
