@@ -49,7 +49,7 @@ in
     with pkgs;
     [
       # Coding
-      corepack_latest
+      corepack_24
       delta
       dotnet-outdated
       dotnet-repl
