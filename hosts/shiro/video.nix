@@ -1,18 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  stableDriver = config.boot.kernelPackages.nvidiaPackages.stable;
-  unstableDriver = config.boot.kernelPackages.nvidiaPackages.beta;
-  nvidiaDriver =
-    if (lib.versionOlder unstableDriver.version stableDriver.version) then
-      stableDriver
-    else
-      unstableDriver;
-in
+{ config, pkgs, ... }:
 {
   boot.kernelModules = [ "nvidia-uvm" ]; # Needed for VA-API
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -30,7 +16,10 @@ in
   };
 
   hardware.nvidia = {
-    package = nvidiaDriver;
+    # TODO: When 590 comes out, remove this fallback. 580 is the last version to support the Quadro P400.
+    package =
+      config.boot.kernelPackages.nvidiaPackages.legacy_580
+        or config.boot.kernelPackages.nvidiaPackages.stable;
 
     # NOTE: Open kernel module does not work with the Quadro P400
     open = false;
