@@ -13,25 +13,11 @@ in
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"
-    "usbhid"
-    "usb_storage"
     "sd_mod"
   ];
-  boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.kernelModules = [
-    "kvm-amd"
-    "nct6775"
-    "zenpower"
-    "it87"
-  ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [
-    zenpower
-    it87
-  ];
-  boot.blacklistedKernelModules = [ "k10temp" ];
-  boot.extraModprobeConfig = ''
-    options it87 force_id=0xa40
-  '';
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ "kvm-amd" ];
+  boot.extraModulePackages = [ ];
 
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/65c29b59-a760-426f-af56-85a6b4c5da13";
@@ -170,6 +156,4 @@ in
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-
-  powerManagement.cpuFreqGovernor = "powersave";
 }

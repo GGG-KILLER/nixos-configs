@@ -2,6 +2,7 @@
 {
   imports = [
     ./video.nix
+    ./power-saving.nix
   ]
   ++ (with inputs.nixos-hardware.nixosModules; [
     common-cpu-amd
