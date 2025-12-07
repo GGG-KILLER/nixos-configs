@@ -8,6 +8,10 @@ let
   inherit (self.packages.${system}) kemono-dl find-ata;
 in
 {
+  imports = [
+    ./ggg.nix
+  ];
+
   home-manager.users.ggg = {
     home.packages = with pkgs; [
       aria2
