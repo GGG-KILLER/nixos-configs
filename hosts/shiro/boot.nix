@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   boot.zfs.package = pkgs.zfs_unstable;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_12;

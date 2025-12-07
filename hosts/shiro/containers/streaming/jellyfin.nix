@@ -1,10 +1,4 @@
-{
-  self,
-  system,
-  lib,
-  config,
-  ...
-}:
+{ lib, config, ... }:
 let
   inherit (lib) getExe' listToAttrs nameValuePair;
   gpuDevs = [
@@ -86,7 +80,7 @@ in
         ...
       }:
       {
-        imports = [ ../../video.nix ];
+        imports = [ ../../hardware/video.nix ];
         security.pki.certificateFiles = [ config.my.secrets.pki.root-crt-path ];
 
         hardware.graphics.enable = true;

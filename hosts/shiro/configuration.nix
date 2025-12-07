@@ -9,6 +9,7 @@
     self.nixosModules.server-profile
     self.nixosModules.home-network-addrs
     ./containers
+    ./hardware
     ./services
     ./users
     ./boot.nix
@@ -19,7 +20,6 @@
     ./ports.nix
     ./secrets.nix
     ./store.nix
-    ./video.nix
     ./virtualisation.nix
   ];
 
