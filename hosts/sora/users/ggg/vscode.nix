@@ -99,7 +99,7 @@ in
               "eamodio.gitlens"
               "editorconfig.editorconfig"
               "foxundermoon.shell-format"
-              "github.copilot"
+              "github.copilot-chat"
               "james-yu.latex-workshop"
               "jnoortheen.nix-ide"
               "ltex-plus.vscode-ltex-plus"
