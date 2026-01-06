@@ -2,9 +2,7 @@
 {
   nixpkgs.overlays = [
     (self: super: {
-      mpv = super.mpv-unwrapped.wrapper {
-        mpv = super.mpv-unwrapped;
-
+      mpv = super.mpv.override {
         scripts = with super.mpvScripts; [
           mpris
           thumbnail
