@@ -7,7 +7,7 @@
 }:
 let
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
-  inherit (self.packages.${system}) ytmd;
+  inherit (self.packages.${system}) ytmd vivaldi-wayland;
 in
 {
   imports = [
@@ -60,6 +60,7 @@ in
     chromium
     discord-canary
     # mullvad-vpn
+    vivaldi-wayland
 
     # Misc
     waydroid-helper
