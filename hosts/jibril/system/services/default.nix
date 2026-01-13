@@ -10,7 +10,6 @@
     ./docker-registry.nix
     ./glorp.nix
     ./home-assistant.nix
-    ./michi-site.nix
     #./n8n.nix
     ./nginx.nix
     ./openspeedtest.nix
