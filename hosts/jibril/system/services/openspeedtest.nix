@@ -3,8 +3,8 @@ let
   src = pkgs.fetchFromGitHub {
     owner = "openspeedtest";
     repo = "Speed-Test";
-    rev = "704aec0e5deb54be4588dbebe6b7424216d5e146";
-    hash = "sha256-SXwJScm8u6BZiEO3STqVDkecCr7XBSEmq9lR9c0ljeA=";
+    rev = "3ec39a31ec64858642629991caf0dd14ce7c34ca";
+    hash = "sha256-MBVVImy0f+MQnlAYUf77mScpdqkCKi1hdOJEM7Z7KJ0=";
   };
 in
 {
