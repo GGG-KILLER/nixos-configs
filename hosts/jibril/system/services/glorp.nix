@@ -10,7 +10,6 @@ let
 in
 {
   systemd.services.glorp = {
-    enable = false;
     wantedBy = [ "network-online.target" ];
 
     environment = {
