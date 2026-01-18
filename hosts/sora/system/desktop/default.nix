@@ -70,9 +70,6 @@ in
     textpieces
   ];
 
-  # Android
-  programs.adb.enable = true;
-
   # easyeffects needs this
   programs.dconf.enable = true;
 
