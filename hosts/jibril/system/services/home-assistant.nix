@@ -81,10 +81,6 @@
       "mqtt"
       "met"
     ];
-    customLovelaceModules = with pkgs.home-assistant-custom-lovelace-modules; [
-      zigbee2mqtt-networkmap
-      mini-graph-card
-    ];
 
     config = {
       default_config = { };
@@ -98,7 +94,6 @@
       };
       # HTTP confs
       http = {
-        server_host = [ "127.0.0.1" ];
         server_port = config.jibril.ports.home-assistant;
         trusted_proxies = [ "127.0.0.1" ];
         use_x_forwarded_for = true;
