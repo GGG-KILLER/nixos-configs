@@ -12,7 +12,7 @@
       dolphinAssociations = associateApp "org.kde.dolphin.desktop" [
         "inode/directory"
       ];
-      browserAssociations = associateApp "com.vivaldi.Vivaldi.desktop" [
+      browserAssociations = associateApp "vivaldi-stable.desktop" [
         "application/atom+xml"
         "application/pdf"
         "application/rdf+xml"
