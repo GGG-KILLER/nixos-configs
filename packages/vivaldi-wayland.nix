@@ -8,5 +8,5 @@ vivaldi.override {
   inherit vivaldi-ffmpeg-codecs;
   enableWidevine = true;
   inherit widevine-cdm;
-  commandLineArgs = ''--ozone-platform=wayland --enable-features=UseOzonePlatform --use-cmd-decoder=validating --use-gl=desktop'';
+  commandLineArgs = ''--ozone-platform=wayland --enable-features=UseOzonePlatform'';
 }
