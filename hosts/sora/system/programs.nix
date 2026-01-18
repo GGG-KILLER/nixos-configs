@@ -59,7 +59,7 @@ in
       nix-prefetch-scripts
       nixd
       nixf
-      nixfmt-rfc-style
+      nixfmt
       nodejs_latest
       powershell
       python3

@@ -39,8 +39,7 @@ let
     # Set nix dynamic stuff manually
     "nix.enableLanguageServer" = true;
     "nix.serverPath" = getExe pkgs.nixd;
-    "nix.formatterPath" = getExe pkgs.nixfmt-rfc-style;
-    "nix.serverSettings"."nixd"."formatting"."command" = [ (getExe pkgs.nixfmt-rfc-style) ];
+    "nix.serverSettings"."nixd"."formatting"."command" = [ (getExe pkgs.nixfmt) ];
 
     # LTeX Language Client
     "ltex.ltex-ls.path" = toString (lib.getBin pkgs.ltex-ls-plus);
