@@ -1,6 +1,7 @@
 {
+  self,
+  system,
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -16,14 +17,7 @@ let
   ];
 
   danbooruContainerBase = rec {
-    # nix run nixpkgs#nix-prefetch-docker -- --image-name ghcr.io/danbooru/danbooru --image-tag master --arch amd64 --os linux --quiet
-    imageFile = pkgs.dockerTools.pullImage {
-      imageName = "ghcr.io/danbooru/danbooru";
-      imageDigest = "sha256:9ad9dca3cfb79dbbb50142b3563be18f2d390f5029f85defc8807421d427e02b";
-      hash = "sha256-MBYF0X0xwhNHpLoRxjRtpj3zxCie3gktblgignrHqk0=";
-      finalImageName = "ghcr.io/danbooru/danbooru";
-      finalImageTag = "master";
-    };
+    imageFile = self.packages.${system}.docker-images."ghcr.io/danbooru/danbooru:master";
     image = imageFile.destNameTag;
 
     environment = {
@@ -147,14 +141,7 @@ in
     # https://github.com/danbooru/iqdb
     # https://hub.docker.com/repository/docker/evazion/iqdb
     virtualisation.oci-containers.containers.danbooru-iqdb = rec {
-      # nix run nixpkgs#nix-prefetch-docker -- --image-name evazion/iqdb --image-tag latest --arch amd64 --os linux --quiet
-      imageFile = pkgs.dockerTools.pullImage {
-        imageName = "evazion/iqdb";
-        imageDigest = "sha256:3441fbe7b7e15da95624611c49821e457615bb5428cd9e08cb391a547c979622";
-        hash = "sha256-eaLNlNBR3GEXI950QtcGzEj8hca+G/6XeUFwNLRIix8=";
-        finalImageName = "evazion/iqdb";
-        finalImageTag = "latest";
-      };
+      imageFile = self.packages.${system}.docker-images."evazion/iqdb:latest";
       image = imageFile.destNameTag;
 
       cmd = [
@@ -174,14 +161,7 @@ in
     };
 
     virtualisation.oci-containers.containers.danbooru-redis = rec {
-      # nix run nixpkgs#nix-prefetch-docker -- --image-name redis --image-tag latest --arch amd64 --os linux --quiet
-      imageFile = pkgs.dockerTools.pullImage {
-        imageName = "redis";
-        imageDigest = "sha256:1b7c17f650602d97a10724d796f45f0b5250d47ee5ba02f28de89f8a1531f3ce";
-        hash = "sha256-VP1qZ5yoS58IHrLg0n3S7GcSDkt13ns7dwGDzu0w9hE=";
-        finalImageName = "redis";
-        finalImageTag = "latest";
-      };
+      imageFile = self.packages.${system}.docker-images."redis:latest";
       image = imageFile.destNameTag;
 
       extraOptions = defaultContainerFlags ++ [
@@ -216,14 +196,7 @@ in
     };
 
     virtualisation.oci-containers.containers.danbooru-autotagger = rec {
-      # nix run nixpkgs#nix-prefetch-docker -- --image-name ghcr.io/danbooru/autotagger --image-tag latest --arch amd64 --os linux --quiet
-      imageFile = pkgs.dockerTools.pullImage {
-        imageName = "ghcr.io/danbooru/autotagger";
-        imageDigest = "sha256:9f0fa42bf0036b209c52b4ee5d9b79bdd5f0988a7d8143c71318506921a0fe8a";
-        hash = "sha256-zROn3e+Sj8xUJ7k4g0FBXLodi1eclyNM3XL9tHyL6AU=";
-        finalImageName = "ghcr.io/danbooru/autotagger";
-        finalImageTag = "latest";
-      };
+      imageFile = self.packages.${system}.docker-images."ghcr.io/danbooru/autotagger:latest";
       image = imageFile.destNameTag;
 
       extraOptions = defaultContainerFlags ++ [

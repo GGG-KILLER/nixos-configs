@@ -1,13 +1,11 @@
-{ pkgs, config, ... }:
+{
+  self,
+  system,
+  config,
+  ...
+}:
 let
-  # nix run nixpkgs#nix-prefetch-docker -- --image-name plaintextpackets/netprobe --image-tag latest --arch amd64 --os linux --quiet
-  imageFile = pkgs.dockerTools.pullImage {
-    imageName = "plaintextpackets/netprobe";
-    imageDigest = "sha256:139ed2dcb004324ef7a8d24bbfdd252bfba0012aa2b70575ca92cc38cd2afd56";
-    hash = "sha256-3aY0INi+kpFvvp6btIE+E5prH2GofN7/mxcj9udYocI=";
-    finalImageName = "plaintextpackets/netprobe";
-    finalImageTag = "latest";
-  };
+  imageFile = self.packages.${system}.docker-images."plaintextpackets/netprobe:latest";
   image = imageFile.destNameTag;
 in
 {
@@ -49,14 +47,7 @@ in
     };
 
   virtualisation.oci-containers.containers.netprobe-redis = rec {
-    # nix run nixpkgs#nix-prefetch-docker -- --image-name redis --image-tag latest --arch amd64 --os linux --quiet
-    imageFile = pkgs.dockerTools.pullImage {
-      imageName = "redis";
-      imageDigest = "sha256:eab64db310e251b0e8baa2418891094954aed5021ca790edc2842f74b1d8c9e1";
-      hash = "sha256-i5G77fbR9C5CjYgSCDfH5X+96Fi9FNNg1ryh+2MSqiY=";
-      finalImageName = "redis";
-      finalImageTag = "latest";
-    };
+    imageFile = self.packages.${system}.docker-images."redis:latest";
     image = imageFile.destNameTag;
 
     environmentFiles = [ config.age.secrets."netprobe.env".path ];

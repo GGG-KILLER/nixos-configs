@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  self,
+  system,
+  config,
+  ...
+}:
 {
   jibril.dynamic-ports = [
     "docker-registry"
@@ -17,14 +22,7 @@
   networking.firewall.allowedUDPPorts = [ config.jibril.ports.docker-registry ];
 
   virtualisation.oci-containers.containers.docker-registry-browser = rec {
-    # nix run nixpkgs#nix-prefetch-docker -- --image-name klausmeyer/docker-registry-browser --arch amd64 --os linux --quiet
-    imageFile = pkgs.dockerTools.pullImage {
-      imageName = "klausmeyer/docker-registry-browser";
-      imageDigest = "sha256:04c57880532f0fa55e3bb99d02fbb01afecd7ce9641dc8e15c077277fa15670b";
-      hash = "sha256-B1WKcLLyMy8raq7oW01uqzHmQ8d7q7moLHLrQV9fSBA=";
-      finalImageName = "klausmeyer/docker-registry-browser";
-      finalImageTag = "latest";
-    };
+    imageFile = self.packages.${system}.docker-images."klausmeyer/docker-registry-browser:latest";
     image = imageFile.destNameTag;
     ports = [ "${toString config.jibril.ports.docker-registry-browser}:8080" ];
     environment = {

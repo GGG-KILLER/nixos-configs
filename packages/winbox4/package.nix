@@ -34,7 +34,7 @@ let
 in
 (if stdenvNoCC.hostPlatform.isDarwin then x86_64-dmg else x86_64-zip).overrideAttrs (oldAttrs: {
 
-  passthru = oldAttrs.passthru or {} // {
+  passthru = oldAttrs.passthru or { } // {
     updateScript = ./update.sh;
   };
 

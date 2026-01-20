@@ -41,6 +41,9 @@
 
         # Entertainment
         "danbooru"
+
+        # File Browser
+        "mikochi"
       ];
 
       inherit (lib)
