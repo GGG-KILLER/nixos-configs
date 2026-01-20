@@ -24,6 +24,11 @@
     isSystemUser = true;
     group = "data-members";
   };
+  users.users.file-browser = {
+    uid = 262;
+    isSystemUser = true;
+    group = "data-members";
+  };
   users.users.my-sonarr = {
     uid = 258;
     isSystemUser = true;

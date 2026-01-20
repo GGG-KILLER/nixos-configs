@@ -5,6 +5,7 @@
     "backup.key".file = ../../secrets/backup/restic-shiro-pass.age;
     "minio.env".file = ../../secrets/shiro/minio.env.age;
     "danbooru.env".file = ../../secrets/shiro/danbooru.env.age;
+    "mikochi.env".file = ../../secrets/shiro/mikochi.env.age;
 
     containers_vpn-gateway_mullvad-privkey = {
       file = ../../secrets/shiro/vpn-gateway/mullvad_private_key.age;

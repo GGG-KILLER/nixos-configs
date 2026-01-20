@@ -145,6 +145,10 @@ in
     ggg
     shiro
   ];
+  "shiro/mikochi.env.age".publicKeys = [
+    ggg
+    shiro
+  ];
 
   # Shiro - VPN Gateway
   "shiro/vpn-gateway/mullvad_private_key.age".publicKeys = [
