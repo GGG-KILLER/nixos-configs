@@ -106,4 +106,7 @@ in
   environment.etc = {
     "dotnet/install_location".text = dotnetRoot;
   };
+
+  # Enable mtr
+  programs.mtr.enable = true;
 }
