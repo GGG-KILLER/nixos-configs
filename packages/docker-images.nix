@@ -65,8 +65,8 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:6d8de4b1af8290486520f3b000d7a28838a1baa598e4a6bb047e95d27fb02cc8";
-    hash = "sha256-Ayh4WZc+sMRtVrx5goiwrgyZBKoct6YNDj6mjS6apgE=";
+    imageDigest = "sha256:aefdde3d146d0ba9099e31c97f3cfe3d71f2687e1ab3228e91365ef88ab3d276";
+    hash = "sha256-umoL2VAoGY/IcgR/IxlTif0/GvjoCjUXeUtoBun91mg=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };
