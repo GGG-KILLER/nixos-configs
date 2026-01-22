@@ -1,9 +1,15 @@
 let
   ggg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGIbyyT77P4fzRh4Bfox1GQANs+P5VTrVADu5+k282fn";
   sora = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB6b2z/jMnPSYXSYYJ6NBY77m0bofpVceoArRzJHQ+Nc root@sora";
+  steph = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMF6zsTIgqKJKCMevMg9lnhasEcndKKBtYfQtz3GjkZK root@steph";
   shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc root@shiro";
   jibril = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGxyqgY1bvf+PYelPm9Sz4f44g1Orp+/Bvz4v8N8MIV0 root@jibril";
 
+  pcs = [
+    ggg
+    sora
+    steph
+  ];
   servers = [
     ggg
     shiro
@@ -12,6 +18,7 @@ let
   all = [
     ggg
     sora
+    steph
     shiro
     jibril
   ];
@@ -35,16 +42,18 @@ in
     jibril
   ];
 
+  # Steph
+  "steph/nix-github-token.age".publicKeys = [
+    ggg
+    steph
+  ];
+
   # Sora
   "sora/backup_password.age".publicKeys = [
     ggg
     sora
   ];
   "sora/backup_envfile.age".publicKeys = [
-    ggg
-    sora
-  ];
-  "sora/nix-github-token.age".publicKeys = [
     ggg
     sora
   ];

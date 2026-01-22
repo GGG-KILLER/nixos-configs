@@ -96,6 +96,7 @@
     {
       nixosConfigurations = {
         sora = mkConfig ./hosts/sora/configuration.nix;
+        steph = mkConfig ./hosts/steph/configuration.nix;
         shiro = mkConfig ./hosts/shiro/configuration.nix;
         jibril = mkConfig ./hosts/jibril/configuration.nix;
         live-cd-plasma6 = mkConfig ./media/live-cd-plasma6.nix;
