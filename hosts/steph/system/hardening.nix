@@ -22,7 +22,7 @@ in
   # ];
 
   # Disable loading of kernel modules after booting
-  security.lockKernelModules = true;
+  # security.lockKernelModules = true;
 
   # Prevent the kernel image from being replaced
   security.protectKernelImage = true;
@@ -47,8 +47,9 @@ in
     # Enable page allocator randomization
     "page_alloc.shuffle=1"
 
-    # Disable debugfs
-    "debugfs=off"
+    ##
+    ## Keep debugfs enabled for scx
+    ##
   ];
 
   boot.blacklistedKernelModules = [
@@ -84,8 +85,8 @@ in
   # Hide kptrs even for processes with CAP_SYSLOG
   boot.kernel.sysctl."kernel.kptr_restrict" = 2;
 
-  # Disable bpf() JIT (to eliminate spray attacks)
-  boot.kernel.sysctl."net.core.bpf_jit_enable" = false;
+  # Keep bpf() JIT enabled for scx but harden it
+  boot.kernel.sysctl."net.core.bpf_jit_harden" = 2;
 
   # Disable ftrace debugging
   boot.kernel.sysctl."kernel.ftrace_enabled" = false;

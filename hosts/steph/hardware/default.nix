@@ -1,17 +1,14 @@
+{ inputs, ... }:
 {
-  inputs,
-  lib,
-  config,
-  ...
-}:
-{
-  imports = [] ++ (with inputs.nixos-hardware.nixosModules; [
-    common-cpu-intel
-    common-gpu-intel-kaby-lake
-    common-pc
-    common-pc-laptop
-    common-pc-laptop-ssd
-  ]);
+  imports =
+    [ ]
+    ++ (with inputs.nixos-hardware.nixosModules; [
+      common-cpu-intel
+      common-gpu-intel-kaby-lake
+      common-pc
+      common-pc-laptop
+      common-pc-laptop-ssd
+    ]);
 
   # Enable hardware
   hardware.graphics.enable = true;
