@@ -42,7 +42,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.openFirewall = false; # I don't use SSH, this is only so that secrets have a host key.
+  services.openssh.openFirewall = true;
 
   networking.firewall.allowedTCPPorts = [
     3389
