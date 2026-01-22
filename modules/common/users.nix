@@ -69,6 +69,7 @@
       "prometheus"
       "wheel"
       "video"
+      "networkmanager"
     ];
     shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
