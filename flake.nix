@@ -146,6 +146,19 @@
           };
           confirmTimeout = 300;
         };
+
+        sora = {
+          hostname = "sora.lan";
+          fastConnection = true;
+          autoRollback = false;
+          magicRollback = false;
+          profiles.system = {
+            user = "root";
+            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.sora;
+            sshUser = "root";
+          };
+          confirmTimeout = 300;
+        };
       };
 
       packages =
