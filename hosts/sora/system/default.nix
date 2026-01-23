@@ -1,16 +1,9 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./desktop
-    ./services
-    ./boot.nix
-    ./firejail.nix
     ./fonts.nix
-    ./hardening.nix
-    ./kernel.nix
-    ./libvirtd.nix
-    ./programs.nix
-    ./yubikey.nix
+    ./nix.nix
   ];
 
   # Giving up on 100% pure nix, I want .NET AOT
@@ -28,18 +21,55 @@
     fontconfig # libfontconfig.so.1
   ];
 
-  programs.zsh.ohMyZsh.plugins = [
-    "copybuffer"
-    "copyfile"
-    "docker"
-    "docker-compose"
-    "dotnet"
-    "git"
-    "git-auto-fetch"
+  # Programs
+  environment.systemPackages = with pkgs; [
+    # Nix
+    nix-output-monitor
+
+    # Media
+    ffmpeg
+
+    # Terminal tools
+    uutils-coreutils-noprefix
   ];
 
-  # Enable kanidm
-  services.kanidm.package = pkgs.kanidm_1_8;
-  services.kanidm.enableClient = true;
-  services.kanidm.clientSettings.uri = "https://sso.lan";
+  # Enable mtr
+  programs.mtr.enable = true;
+
+  # Kernel params
+  boot.kernelParams = [
+    # ZFS-related params
+    "zfs.zfs_arc_max=${toString (16 * 1024 * 1024 * 1024)}"
+    "elevator=none"
+    "nohibernate"
+  ];
+
+  # Kernel
+  boot.kernelPackages = pkgs.linuxPackages_cachyos-gcc;
+
+  # Scheduler
+  services.scx.enable = true;
+  services.scx.package = pkgs.scx.rustscheds;
+  services.scx.scheduler = "scx_lavd";
+  services.scx.extraArgs = [ "--performance" ];
+
+  # ZFS boot settings.
+  boot.supportedFilesystems = {
+    zfs = true;
+    ntfs = true;
+  };
+
+  # Make the root partition ephemeral
+  boot.initrd.postDeviceCommands = lib.mkAfter ''
+    zfs rollback -r rpool/nixos/root@blank
+  '';
+  chaotic.zfs-impermanence-on-shutdown.enable = true;
+  chaotic.zfs-impermanence-on-shutdown.volume = "rpool/nixos/root";
+  chaotic.zfs-impermanence-on-shutdown.snapshot = "blank";
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.editor = false;
+  boot.loader.systemd-boot.memtest86.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 }

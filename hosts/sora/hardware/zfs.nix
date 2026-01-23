@@ -18,14 +18,6 @@
   services.zfs.trim.enable = true;
   services.zfs.trim.interval = "daily";
 
-  # Enable auto-snapshot
-  services.zfs.autoSnapshot = {
-    enable = true;
-    monthly = 0;
-    weekly = 0;
-    daily = 2;
-  };
-
   # Enable ZED's pushbullet compat
   services.zfs.zed.settings = {
     ZED_DEBUG_LOG = "/tmp/zed.debug.log";

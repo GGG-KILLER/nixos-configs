@@ -1,122 +1,34 @@
-{
-  self,
-  inputs,
-  system,
-  pkgs,
-  ...
-}:
-let
-  audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
-  inherit (self.packages.${system}) ytmd vivaldi-wayland;
-in
+{ inputs, ... }:
 {
   imports = [
+    inputs.jovian.nixosModules.default
     ./audio
-    ./kde.nix
+    ./programs.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    # Audio
-    audiorelay
-    helvum
-
-    # Android
-    android-tools
-
-    # Coding
-    jetbrains.rider
-    mockoon
-
-    # Encryption
-    xca
-    yubioath-flutter
-
-    # Games
-    (prismlauncher.override {
-      jdks = [
-        jdk8
-        jdk11
-        jdk17
-        jdk21
-      ];
-    })
-    r2modman
-    lutris
-
-    # Hardware
-    openrgb
-    nvtopPackages.nvidia
-
-    # Media
-    kdePackages.elisa
-    pinta
-    ytmd
-
-    # VMs
-    virt-manager
-    virt-viewer
-
-    # Web
-    chromium
-    discord-canary
-    # mullvad-vpn
-    vivaldi-wayland
-
-    # Misc
-    waydroid-helper
-    localsend
-    metadata-cleaner
-    bleachbit
-    textpieces
-  ];
-
-  # easyeffects needs this
-  programs.dconf.enable = true;
-
-  # Needed for chrome-based browsers' sandboxing
-  security.chromiumSuidSandbox.enable = true;
-
-  # Needed for flatpak
-  services.flatpak.enable = true;
-
-  programs.partition-manager.enable = true;
-
-  # OBS
-  # programs.obs-studio.enable = true;
-  # programs.obs-studio.enableVirtualCamera = true;
-  # programs.obs-studio.plugins = with pkgs.obs-studio-plugins; [
-  #   input-overlay
-  #   obs-pipewire-audio-capture
-  # ];
-
-  programs.gamemode.enable = true;
-
-  # Steam
-  programs.steam.enable = true;
-  programs.steam.extraPackages = with pkgs; [
-    (mangohud.override {
-      nvidiaSupport = true;
-    })
-  ];
-  programs.steam.package = pkgs.steam.override {
-    extraEnv = {
-      MANGOHUD = true;
-    };
-  };
-  programs.steam.extest.enable = true;
-  programs.steam.localNetworkGameTransfers.openFirewall = true;
-  programs.steam.protontricks.enable = true;
-  programs.steam.remotePlay.openFirewall = true;
-
-  # Waydroid
-  virtualisation.waydroid.enable = true;
-  systemd = {
-    packages = [ pkgs.waydroid-helper ];
-    services.waydroid-mount.wantedBy = [ "multi-user.target" ];
+  # Enable Steam
+  jovian.steam.enable = true;
+  programs.steam = {
+    extest.enable = true;
+    protontricks.enable = true;
+    localNetworkGameTransfers.openFirewall = true;
+    remotePlay.openFirewall = true;
   };
 
-  # Winbox for router management
-  programs.winbox.enable = true;
-  programs.winbox.package = self.packages.${system}.winbox4;
-  programs.winbox.openFirewall = true;
+  # Enable gamescope as our compositor by enabling auto-start
+  jovian.steam.autoStart = true;
+
+  # Enableauto-login for our user
+  jovian.steam.user = "ggg";
+
+  # Enable only select Jovian NixOS settings
+  # We don't need the zram swap, serial access, udev rules nor bluetooth
+  jovian.steamos.useSteamOSConfig = false;
+  jovian.steamos.enableDefaultCmdlineConfig = true;
+  jovian.steamos.enableEarlyOOM = true;
+  jovian.steamos.enableSysctlConfig = true;
+
+  # Enable KDE for actual desktop
+  jovian.steam.desktopSession = "plasma";
+  services.desktopManager.plasma6.enable = true;
 }
