@@ -68,6 +68,13 @@ in
   # Enable Partition Manager to be able to format USB drives
   programs.partition-manager.enable = true;
 
+  # Waydroid
+  virtualisation.waydroid.enable = true;
+  systemd = {
+    packages = [ pkgs.waydroid-helper ];
+    services.waydroid-mount.wantedBy = [ "multi-user.target" ];
+  };
+
   # Winbox for router management
   programs.winbox.enable = true;
   programs.winbox.package = self.packages.${system}.winbox4;
