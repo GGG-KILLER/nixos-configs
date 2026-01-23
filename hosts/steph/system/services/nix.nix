@@ -8,6 +8,15 @@
     !include ${config.age.secrets.nix-github-token.path}
   '';
 
+  nix.buildMachines = [
+    {
+      protocol = "ssh-ng";
+      sshUser = "ggg";
+      hostName = "sora";
+      system = "x86_64-linux";
+    }
+  ];
+
   nix.settings = {
     http-connections = 0;
     keep-derivations = true; # keep derivations, so we don't need to redownload/recreate.
