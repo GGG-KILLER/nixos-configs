@@ -1,12 +1,16 @@
-{ lib, pkgs, ... }:
+{ lib, system, self, pkgs, ... }:
 {
   imports = [
-    ./commands
     ./vscode.nix
     ./xdg-mimeapps.nix
   ];
 
   home-manager.users.ggg = {
+    home.packages = with self.packages.${system}; [
+      dl-twitch-stream
+      batwhich
+    ];
+
     home.sessionPath = [
       "$HOME/.dotnet/tools"
     ];
