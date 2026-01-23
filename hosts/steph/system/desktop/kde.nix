@@ -5,12 +5,6 @@
   services.displayManager.sddm.wayland.enable = true;
   services.desktopManager.plasma6.enable = true;
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "br";
-    variant = "nodeadkeys";
-  };
-
   # Enable KDE Connect
   programs.kdeconnect.enable = true;
 
