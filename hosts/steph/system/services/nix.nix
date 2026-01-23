@@ -8,6 +8,8 @@
     !include ${config.age.secrets.nix-github-token.path}
   '';
 
+  # Use sora for builds, since it has more computing power
+  nix.distributedBuilds = true;
   nix.buildMachines = [
     {
       protocol = "ssh-ng";
