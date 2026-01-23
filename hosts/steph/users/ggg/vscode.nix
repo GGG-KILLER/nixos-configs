@@ -11,7 +11,6 @@ let
   settings = {
     # Disable telemetry
     "dotnetAcquisitionExtension.enableTelemetry" = false;
-    "gitlens.telemetry.enabled" = false;
     "redhat.telemetry.enabled" = false;
 
     # Set window options
@@ -95,7 +94,6 @@ in
 
             names = [
               "dbaeumer.vscode-eslint"
-              "eamodio.gitlens"
               "editorconfig.editorconfig"
               "foxundermoon.shell-format"
               "github.copilot-chat"
