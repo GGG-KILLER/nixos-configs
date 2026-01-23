@@ -3,6 +3,8 @@
   # Enable KDE.
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
+  services.displayManager.sddm.autoNumlock = true;
+
   services.desktopManager.plasma6.enable = true;
 
   # Enable KDE Connect
