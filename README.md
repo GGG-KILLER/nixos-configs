@@ -2,15 +2,16 @@
 My own NixOS Configs
 
 ## Structure
-- `common`: common configs shared across all hosts (laptops, desktops and servers)
 - `common/secrets`: not-so-secret secrets (just things I don't want to be public to all of GitHub) using [git-crypt-agessh](https://github.com/mtoohey31/git-crypt-agessh)
 - `hosts`: individual configuration for each host (laptop, desktop or server)
+- `modules`: shared snippets of configuration used across my machines
 - `secrets`: encrypted secrets using [agenix](https://github.com/ryantm/agenix)
 
 ## Hosts
-- `f.ggg.dev`: The backend for services I host publicly
-- `shiro`: My home server where I host my own services along with some others
-- `sora`: My desktop
+- `shiro`: My NAS
+- `jibril`: My home server where I host a bunch of services
+- `sora`: My desktop (now a glorified Steam Deck connected to a TV)
+- `steph`: My laptop
 
 ## License
 These configs are licensed under MIT **except for files under `hosts/sora/system/desktop/opensnitch/reject`**.
