@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 {
-  jibril.dynamic-ports = [ "kanidm" ];
+  jibril.dynamic-ports = [
+    "kanidm"
+    "sso-acme-http"
+  ];
 
   services.kanidm.enableServer = true;
   services.kanidm.package = pkgs.kanidm_1_8;
@@ -20,17 +23,21 @@
 
   systemd.tmpfiles.rules = [ "d /var/lib/kanidm 1777 root root 10d" ];
 
-  security.acme.certs."sso.lan".postRun = ''
-    set -xeuo pipefail
+  security.acme.certs."sso.lan" = {
+    email = "sso@${config.networking.fqdn}";
+    listenHTTP = ":${toString config.jibril.ports.sso-acme-http}";
+    postRun = ''
+      set -xeuo pipefail
 
-    cp fullchain.pem /var/lib/kanidm/fullchain.pem;
-    cp key.pem /var/lib/kanidm/key.pem;
+      cp fullchain.pem /var/lib/kanidm/fullchain.pem;
+      cp key.pem /var/lib/kanidm/key.pem;
 
-    chmod 440 /var/lib/kanidm/fullchain.pem /var/lib/kanidm/key.pem;
-    chown root:kanidm /var/lib/kanidm/fullchain.pem /var/lib/kanidm/key.pem;
+      chmod 440 /var/lib/kanidm/fullchain.pem /var/lib/kanidm/key.pem;
+      chown root:kanidm /var/lib/kanidm/fullchain.pem /var/lib/kanidm/key.pem;
 
-    systemctl restart kanidm.service
-  '';
+      systemctl restart kanidm.service
+    '';
+  };
 
   services.caddy.virtualHosts."sso.lan" = {
     useACMEHost = "sso.lan";
