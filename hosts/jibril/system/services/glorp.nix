@@ -21,6 +21,7 @@ in
 
     serviceConfig = {
       ExecStart = getExe self.packages.${system}.glorp;
+      Restart = "always";
       WorkingDirectory = "${self.packages.${system}.glorp}/lib/glorp";
       EnvironmentFile = config.age.secrets."glorp.env".path;
       CacheDirectory = "glorp";
