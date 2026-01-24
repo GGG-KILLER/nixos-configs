@@ -28,6 +28,13 @@
     finalImageName = "klausmeyer/docker-registry-browser";
     finalImageTag = "latest";
   };
+  "openspeedtest/latest:latest" = dockerTools.pullImage {
+    imageName = "openspeedtest/latest";
+    imageDigest = "sha256:1745e913f596fe98882b286a67751efdae74774e9caa742a4934bb056e8748d2";
+    hash = "sha256-Dost9UNh9uax6SNEguC/Jydtsr1scJ5Ilgh/SBkOCns=";
+    finalImageName = "openspeedtest/latest";
+    finalImageTag = "latest";
+  };
   "plaintextpackets/netprobe:latest" = dockerTools.pullImage {
     imageName = "plaintextpackets/netprobe";
     imageDigest = "sha256:139ed2dcb004324ef7a8d24bbfdd252bfba0012aa2b70575ca92cc38cd2afd56";

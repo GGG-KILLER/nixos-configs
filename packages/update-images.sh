@@ -23,6 +23,7 @@ function write-image() {
     write-image "redis"
     write-image "evazion/iqdb"
     write-image "klausmeyer/docker-registry-browser"
+    write-image "openspeedtest/latest"
     write-image "plaintextpackets/netprobe"
     write-image "zer0tonin/mikochi"
     write-image "docker.lan/downloader/backend"
