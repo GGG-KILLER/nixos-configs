@@ -72,14 +72,9 @@ in
     N8N_DIAGNOSTICS_CONFIG_BACKEND = "";
   };
 
-  modules.services.nginx.virtualHosts."n8n.jibril.lan" = {
-    ssl = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.jibril.ports.n8n}";
-      recommendedProxySettings = true;
-      proxyWebsockets = true;
-    };
-  };
+  services.caddy.virtualHosts."n8n.jibril.lan".extraConfig = ''
+    reverse_proxy http://127.0.0.1:${toString config.jibril.ports.n8n}
+  '';
 
   services.cloudflared.tunnels."3c1b8ea8-a43d-4a97-872c-37752de30b3f".ingress."n8n.ggg.dev" = {
     originRequest.httpHostHeader = "n8n.jibril.lan";
