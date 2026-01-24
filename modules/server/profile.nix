@@ -15,6 +15,10 @@
     zsh
   ];
 
+  # Add the .lan to the end of the hostname in fqdn and dns searches
+  networking.domain = "lan";
+  networking.search = [ "lan" ];
+
   boot.tmp.cleanOnBoot = true;
 
   boot.kernel.sysctl = {
