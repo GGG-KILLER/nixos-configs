@@ -18,9 +18,9 @@
   # ISO Options
   isoImage.makeEfiBootable = true;
   isoImage.makeUsbBootable = true;
-  isoImage.storeContents = [
-    self.nixosConfigurations.sora.config.system.build.toplevel
-  ];
+  # isoImage.storeContents = [
+  #   self.nixosConfigurations.sora.config.system.build.toplevel
+  # ];
 
   # Enable ZFS
   boot.zfs.package = pkgs.zfs_unstable;
