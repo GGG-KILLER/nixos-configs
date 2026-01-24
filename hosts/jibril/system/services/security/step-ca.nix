@@ -1,18 +1,9 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-let
-  inherit (lib) mkForce flip mapAttrs';
-  inherit (config.age) secrets;
-in
+{ lib, config, ... }:
 {
   jibril.dynamic-ports = [ "step-ca" ];
 
   # ACME Settings
-  security.acme = mkForce {
+  security.acme = lib.mkForce {
     acceptTerms = true; # kinda pointless since we never use upstream
     defaults = {
       server = "https://ca.lan:${toString config.jibril.ports.step-ca}/acme/acme/directory";
@@ -21,41 +12,49 @@ in
   };
 
   # This is only for the nginx config of the downloader.
-  modules.services.nginx.virtualHosts."ca.lan" = {
-    ssl = true;
-    locations."/" = {
-      proxyPass = "https://127.0.0.1:${toString config.jibril.ports.step-ca}";
-      recommendedProxySettings = true;
-    };
-    locations."= /bundle.crt".alias = pkgs.writeText "bundle.crt" ''
+  services.caddy.virtualHosts."ca.lan".extraConfig = ''
+    # Allow people to download the root cert
+    @root {
+      path root.crt
+      path root.pem
+    }
+    respond @root <<PEM
+      ${config.my.secrets.pki.root-crt}
+      PEM
+
+    # Allow people to download the intermediate cert
+    @intermediate {
+      path intermediate.crt
+      path intermediate.pem
+    }
+    respond @root <<PEM
+      ${config.my.secrets.pki.intermediate-crt}
+      PEM
+
+    # Allow people to download the full bundle of root + intermediate cert
+    @bundle {
+      path bundle.crt
+      path bundle.pem
+    }
+    respond @bundle <<PEM
       ${config.my.secrets.pki.root-crt}
       ${config.my.secrets.pki.intermediate-crt}
-    '';
-    locations."= /root.crt".alias = config.my.secrets.pki.root-crt-path;
-    locations."= /intermediate.crt".alias = config.my.secrets.pki.intermediate-crt-path;
-  };
+      PEM
 
-  systemd.services = flip mapAttrs' config.security.acme.certs (
-    name: _: {
-      name = "acme-${name}";
-      value = {
-        after = [ "step-ca.service" ];
-        requires = [ "step-ca.service" ];
-      };
-    }
-  );
+    # Proxy rest to Step CA
+    reverse_proxy https://127.0.0.1:${toString config.jibril.ports.step-ca}
+  '';
 
-  networking.firewall.allowedTCPPorts = [ config.jibril.ports.step-ca ];
   services.step-ca = {
     enable = true;
-    address = "0.0.0.0";
+    address = "127.0.0.1";
     port = config.jibril.ports.step-ca;
-    intermediatePasswordFile = secrets.step-ca-intermediate-key-password.path;
+    intermediatePasswordFile = config.age.secrets.step-ca-intermediate-key-password.path;
     # See https://smallstep.com/docs/step-ca/configuration#basic-configuration-options
     settings = {
       root = config.my.secrets.pki.root-crt-path;
       crt = config.my.secrets.pki.intermediate-crt-path;
-      key = secrets.step-ca-intermediate-key.path;
+      key = config.age.secrets.step-ca-intermediate-key.path;
       dnsNames = [ "ca.lan" ];
       logger.format = "text";
       db = {
@@ -74,7 +73,6 @@ in
             allow = {
               dns = [
                 "*.lan"
-                "*.money.lan"
                 "*.shiro.lan"
                 "*.jibril.lan"
                 "*.hass.lan"
