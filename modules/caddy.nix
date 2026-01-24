@@ -26,9 +26,8 @@ in
     services.caddy.package = pkgs.caddy.withPlugins {
       plugins = [
         "github.com/greenpau/caddy-security@v1.1.31"
-        "github.com/php/frankenphp/caddy@v1.11.1"
-        "github.com/dunglas/caddy-cbrotli@v1.0.1" # encode br zstd gzip
       ];
+      hash = "sha256-aM5UdzmqOwGcdQUzDAEEP30CC1W2UPD10QhF0i7GwQE=";
     };
 
     # https://caddyserver.com/docs/caddyfile/options
@@ -40,8 +39,8 @@ in
       }
 
       # FrankenPHP (https://frankenphp.dev)
-      frankenphp
-      order php_server before file_server
+      #frankenphp
+      #order php_server before file_server
 
       # TLS Options
       skip_install_trust
