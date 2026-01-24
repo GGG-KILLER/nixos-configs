@@ -10,6 +10,7 @@
 {
   imports = [
     self.nixosModules.desktop-profile
+    self.nixosModules.remote-build
     ./hardware
     ./system
     ./users/ggg
