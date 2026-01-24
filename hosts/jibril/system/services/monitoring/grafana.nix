@@ -37,18 +37,9 @@
     };
   };
 
-  modules.services.nginx.virtualHosts."grafana.jibril.lan" = {
-    ssl = true;
-    locations."/" = {
-      proxyPass =
-        with config.services.grafana.settings.server;
-        "${protocol}://${http_addr}:${toString http_port}";
-      recommendedProxySettings = true;
-      proxyWebsockets = true;
-      extraConfig = ''
-        proxy_buffering off;
-        proxy_cache off;
-      '';
-    };
-  };
+  services.caddy.virtualHosts."grafana.jibril.lan".extraConfig = ''
+    reverse_proxy ${
+      with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}"
+    }
+  '';
 }
