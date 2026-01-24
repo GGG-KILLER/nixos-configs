@@ -12,15 +12,5 @@
     };
   };
 
-  modules.services.nginx.virtualHosts."cp.jibril.lan" = {
-    ssl = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:9090";
-      recommendedProxySettings = true;
-      proxyWebsockets = true;
-      extraConfig = ''
-        gzip off;
-      '';
-    };
-  };
+  services.caddy.virtualHosts."cp.shiro.lan".extraConfig = "reverse_proxy http://127.0.0.1:9090";
 }
