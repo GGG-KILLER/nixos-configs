@@ -41,6 +41,12 @@
 
   services.caddy.virtualHosts."sso.lan" = {
     useACMEHost = "sso.lan";
-    extraConfig = "reverse_proxy https://127.0.0.1:${toString config.jibril.ports.kanidm}";
+    extraConfig = ''
+      reverse_proxy https://127.0.0.1:${toString config.jibril.ports.kanidm} {
+        transport http {
+          tls_server_name sso.lan
+        }
+      }
+    '';
   };
 }
