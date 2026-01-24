@@ -11,7 +11,6 @@
     ./glorp.nix
     ./home-assistant.nix
     #./n8n.nix
-    ./nginx.nix
     ./openspeedtest.nix
     ./postgres.nix
   ];
