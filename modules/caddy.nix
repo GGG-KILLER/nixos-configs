@@ -44,7 +44,6 @@ in
 
       # TLS Options
       skip_install_trust
-      key_type ed25519
       cert_lifetime 1h
 
       # Server Options
