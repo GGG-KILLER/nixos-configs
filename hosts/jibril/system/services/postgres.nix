@@ -116,16 +116,9 @@ in
     ];
   };
 
-  modules.services.nginx.virtualHosts."postgres.lan" = {
-    ssl = true;
-    locations."/" = {
-      extraConfig = ''
-        proxy_pass http://127.0.0.1:${toString config.services.pgadmin.port};
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection "upgrade";
-      '';
-    };
-  };
+  services.caddy.virtualHosts."postgres.lan".extraConfig = ''
+    reverse_proxy http://127.0.0.1:${toString config.services.pgadmin.port}
+  '';
 
   networking.firewall.allowedTCPPorts = [ config.jibril.ports.postgres ];
 }
