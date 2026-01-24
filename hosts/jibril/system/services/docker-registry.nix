@@ -38,21 +38,8 @@
     ];
   };
 
-  modules.services.nginx.clientMaxBodySize = "0";
-  modules.services.nginx.virtualHosts."docker.lan" = {
-    ssl = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.jibril.ports.docker-registry-browser}";
-      recommendedProxySettings = true;
-    };
-    locations."/v2/" = {
-      proxyPass = "http://127.0.0.1:${toString config.jibril.ports.docker-registry}";
-      recommendedProxySettings = true;
-      extraConfig = ''
-        proxy_buffering off;
-        proxy_cache off;
-        client_max_body_size 0;
-      '';
-    };
-  };
+  services.caddy.virtualHosts."docker.lan".extraConfig = ''
+    reverse_proxy /v2/* http://127.0.0.1:${toString config.jibril.ports.docker-registry}
+    reverse_proxy http://127.0.0.1:${toString config.jibril.ports.docker-registry-browser}
+  '';
 }
