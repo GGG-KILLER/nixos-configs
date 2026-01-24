@@ -31,11 +31,7 @@ in
     "~@privileged"
   ];
 
-  modules.services.nginx.virtualHosts."prometheus.jibril.lan" = {
-    ssl = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:${toString config.jibril.ports.prometheus}";
-      recommendedProxySettings = true;
-    };
-  };
+  services.caddy.virtualHosts."prometheus.jibril.lan".extraConfig = ''
+    reverse_proxy http://127.0.0.1:${toString config.jibril.ports.prometheus}
+  '';
 }
