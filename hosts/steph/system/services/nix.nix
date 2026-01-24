@@ -10,6 +10,7 @@
 
   # Use sora for builds, since it has more computing power
   nix.distributedBuilds = true;
+  nix.settings.builders = "@/etc/nix/machines";
   nix.buildMachines = [
     {
       protocol = "ssh-ng";
