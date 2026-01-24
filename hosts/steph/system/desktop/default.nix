@@ -48,6 +48,7 @@ in
     metadata-cleaner
     bleachbit
     textpieces
+    waydroid-helper
   ];
 
   # Enable networking (WiFi)
@@ -70,6 +71,7 @@ in
 
   # Waydroid
   virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.package = pkgs.waydroid-nftables;
   systemd = {
     packages = [ pkgs.waydroid-helper ];
     services.waydroid-mount.wantedBy = [ "multi-user.target" ];
