@@ -90,6 +90,9 @@ in
       wl-clipboard
       xh
       uutils-coreutils-noprefix
+
+      # Misc
+      intel-gpu-tools
     ]
   );
 
@@ -109,4 +112,12 @@ in
 
   # Enable mtr
   programs.mtr.enable = true;
+
+  # btop wrapper for GPU stats
+  security.wrappers.btop = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_perfmon=+ep";
+    source = lib.getExe pkgs.btop;
+  };
 }
