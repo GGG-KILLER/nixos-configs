@@ -11,6 +11,23 @@
     };
   };
 
+  systemd.services =
+    (lib.flip lib.mapAttrs' config.security.acme.certs (
+      name: _: {
+        name = "acme-${name}";
+        value = {
+          wants = [ "step-ca.service" ];
+          after = [ "step-ca.service" ];
+        };
+      }
+    ))
+    // {
+      caddy = {
+        wants = [ "step-ca.service" ];
+        after = [ "step-ca.service" ];
+      };
+    };
+
   # This is only for the nginx config of the downloader.
   services.caddy.virtualHosts."ca.lan".extraConfig = ''
     # Allow people to download the root cert
@@ -19,8 +36,8 @@
       path root.pem
     }
     respond @root <<PEM
-      ${config.my.secrets.pki.root-crt}
-      PEM
+    ${config.my.secrets.pki.root-crt}
+    PEM
 
     # Allow people to download the intermediate cert
     @intermediate {
@@ -28,8 +45,8 @@
       path intermediate.pem
     }
     respond @root <<PEM
-      ${config.my.secrets.pki.intermediate-crt}
-      PEM
+    ${config.my.secrets.pki.intermediate-crt}
+    PEM
 
     # Allow people to download the full bundle of root + intermediate cert
     @bundle {
@@ -37,9 +54,9 @@
       path bundle.pem
     }
     respond @bundle <<PEM
-      ${config.my.secrets.pki.root-crt}
-      ${config.my.secrets.pki.intermediate-crt}
-      PEM
+    ${config.my.secrets.pki.root-crt}
+    ${config.my.secrets.pki.intermediate-crt}
+    PEM
 
     # Proxy rest to Step CA
     reverse_proxy https://127.0.0.1:${toString config.jibril.ports.step-ca}
