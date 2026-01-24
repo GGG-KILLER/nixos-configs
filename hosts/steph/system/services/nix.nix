@@ -10,29 +10,35 @@
 
   # Use sora for builds, since it has more computing power
   nix.distributedBuilds = true;
-  nix.settings.builders = "@/etc/nix/machines";
+  nix.settings.builders-use-substitutes = true;
   nix.buildMachines = [
     {
       protocol = "ssh-ng";
-      sshUser = "ggg";
-      hostName = "sora";
-      system = "x86_64-linux";
+      hostName = "sora.lan";
+      sshUser = "remotebld";
+      sshKey = "/root/.ssh/remotebld";
+      systems = [
+        "x86_64-linux"
+        "i686-linux"
+      ];
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+        "gccarch-znver3"
+      ];
+      maxJobs = 32;
     }
   ];
 
   nix.settings = {
-    http-connections = 0;
-    keep-derivations = true; # keep derivations, so we don't need to redownload/recreate.
-    keep-going = true;
-    keep-outputs = true; # keep build inputs, so we don't need to redownload.
+    max-jobs = 0;
     log-lines = 40;
-    max-jobs = "auto";
-    max-substitution-jobs = 2 * 4 * 2; # 2 downloads per thread
     min-free = 50 * 1024 * 1024 * 1024; # have at least 50 GiB free
     preallocate-contents = true;
     require-drop-supplementary-groups = true;
     use-cgroups = true;
-    warn-dirty = false;
   };
 
   # Automatic garbage collect
