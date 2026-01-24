@@ -32,13 +32,8 @@
     systemctl restart kanidm.service
   '';
 
-  # This is only for the nginx config of the downloader.
-  modules.services.nginx.virtualHosts."sso.lan" = {
-    ssl = true;
-    locations."/" = {
-      proxyPass = "https://127.0.0.1:${toString config.jibril.ports.kanidm}";
-      recommendedProxySettings = true;
-      proxyWebsockets = true;
-    };
+  services.caddy.virtualHosts."sso.lan" = {
+    useACMEHost = "sso.lan";
+    extraConfig = "reverse_proxy https://127.0.0.1:${toString config.jibril.ports.kanidm}";
   };
 }
