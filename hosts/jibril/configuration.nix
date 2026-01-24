@@ -12,6 +12,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     self.nixosModules.server-profile
     self.nixosModules.home-network-addrs
+    self.nixosModules.caddy
     ./hardware
     ./system
     ./users/ggg

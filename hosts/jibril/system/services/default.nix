@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   imports = [
     ./backup/restic.nix
@@ -15,4 +15,7 @@
     ./openspeedtest.nix
     ./postgres.nix
   ];
+
+  ggg.caddy.enable = true;
+  ggg.caddy.acme-url = "https://ca.lan:${toString config.jibril.ports.step-ca}/acme/acme/directory";
 }
