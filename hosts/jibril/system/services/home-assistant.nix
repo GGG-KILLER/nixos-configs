@@ -98,26 +98,12 @@
     };
   };
 
-  modules.services.nginx = {
-    virtualHosts."hass.lan" = {
-      ssl = true;
-
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString config.jibril.ports.home-assistant}";
-        recommendedProxySettings = true;
-        proxyWebsockets = true;
-      };
-      locations."^~ /service_worker.js".return = 404;
-    };
-    virtualHosts."z2m.hass.lan" = {
-      ssl = true;
-
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString config.jibril.ports.zigbee2mqtt}";
-        recommendedProxySettings = true;
-        proxyWebsockets = true;
-        # sso = true;
-      };
-    };
+  services.caddy.virtualHosts = {
+    "hass.lan".extraConfig = ''
+      reverse_proxy http://127.0.0.1:${toString config.jibril.ports.home-assistant}
+    '';
+    "z2m.hass.lan".extraConfig = ''
+      reverse_proxy http://127.0.0.1:${toString config.jibril.ports.zigbee2mqtt}
+    '';
   };
 }
