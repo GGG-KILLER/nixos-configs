@@ -24,7 +24,7 @@
   systemd.tmpfiles.rules = [ "d /var/lib/kanidm 1777 root root 10d" ];
 
   security.acme.certs."sso.lan" = {
-    email = "sso@${config.networking.fqdn}";
+    email = "kanidm@${config.networking.fqdn}";
     listenHTTP = ":${toString config.jibril.ports.sso-acme-http}";
     postRun = ''
       set -xeuo pipefail
@@ -39,14 +39,11 @@
     '';
   };
 
-  services.caddy.virtualHosts."sso.lan" = {
-    useACMEHost = "sso.lan";
-    extraConfig = ''
-      reverse_proxy https://127.0.0.1:${toString config.jibril.ports.kanidm} {
-        transport http {
-          tls_server_name sso.lan
-        }
+  services.caddy.virtualHosts."sso.lan".extraConfig = ''
+    reverse_proxy https://127.0.0.1:${toString config.jibril.ports.kanidm} {
+      transport http {
+        tls_server_name sso.lan
       }
-    '';
-  };
+    }
+  '';
 }

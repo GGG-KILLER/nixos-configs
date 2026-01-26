@@ -20,17 +20,6 @@
     wireguard-night-psk.file = ../../secrets/jibril/wireguard/night_psk.age;
     wireguard-phone-psk.file = ../../secrets/jibril/wireguard/phone_psk.age;
 
-    step-ca-intermediate-key = {
-      file = ../../secrets/jibril/stepca/intermediate_ca_key.age;
-      owner = "step-ca";
-      group = "step-ca";
-    };
-    step-ca-intermediate-key-password = {
-      file = ../../secrets/jibril/stepca/keys_password.age;
-      owner = "step-ca";
-      group = "step-ca";
-    };
-
     pgadmin-pass = {
       file = ../../secrets/jibril/pgsql/prd_pass.age;
       owner = "996";

@@ -113,12 +113,12 @@ in
     jibril
   ];
 
-  # Jibril - Step CA
-  "jibril/stepca/intermediate_ca_key.age".publicKeys = [
+  # Jibril - CA
+  "jibril/ca/root.key.age".publicKeys = [
     ggg
     jibril
   ];
-  "jibril/stepca/keys_password.age".publicKeys = [
+  "jibril/ca/intermediate.key.age".publicKeys = [
     ggg
     jibril
   ];

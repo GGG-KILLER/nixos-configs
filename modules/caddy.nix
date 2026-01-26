@@ -13,15 +13,19 @@ in
 {
   options.ggg.caddy = {
     enable = mkEnableOption "the pre-configured opinionated Caddy service";
+    email = mkOption {
+      type = with lib.types; nullOr str;
+      default = "caddy@${config.networking.fqdn}";
+    };
     acme-url = mkOption {
       type = with lib.types; nullOr str;
-      default = "https://ca.lan/acme/acme/directory";
+      default = "https://ca.lan/acme/home/directory";
     };
   };
 
   config = mkIf cfg.enable {
     services.caddy.enable = true;
-    services.caddy.email = "caddy@${config.networking.hostName}.lan";
+    services.caddy.email = cfg.email;
     services.caddy.acmeCA = cfg.acme-url;
     services.caddy.package = pkgs.caddy.withPlugins {
       plugins = [
@@ -37,10 +41,6 @@ in
       metrics {
         per_host
       }
-
-      # FrankenPHP (https://frankenphp.dev)
-      #frankenphp
-      #order php_server before file_server
 
       # TLS Options
       skip_install_trust
