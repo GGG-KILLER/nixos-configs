@@ -7,6 +7,13 @@
 with lib;
 let
   pgsql = pkgs.postgresql_17;
+  getExts = pp: [
+    # pp.smlar (broken)
+    pp.pgtap
+    pp.pg_topn
+    pp.periods
+    pp.pg_rational
+  ];
 in
 {
   # NOTE: Use when upgrading between major versions.
@@ -15,13 +22,7 @@ in
   #     let
   #       # XXX specify the postgresql package you'd like to upgrade to.
   #       # Do not forget to list the extensions you need.
-  #       newPostgres = pkgs.postgresql_17.withJIT.withPackages (pp: [
-  #         # smlar (broken)
-  #         pp.pgtap
-  #         pp.pg_topn
-  #         pp.periods
-  #         pp.pg_rational
-  #       ]);
+  #       newPostgres = pkgs.postgresql_18.withJIT.withPackages getExts;
   #       cfg = config.services.postgresql;
   #     in
   #     pkgs.writeScriptBin "upgrade-pg-cluster" ''
@@ -34,15 +35,7 @@ in
   #       export NEWBIN="${newPostgres}/bin"
 
   #       export OLDDATA="${cfg.dataDir}"
-  #       export OLDBIN="${
-  #         cfg.package.withJIT.withPackages (pp: [
-  #           # smlar (broken)
-  #           pp.pgtap
-  #           pp.pg_topn
-  #           pp.periods
-  #           pp.pg_rational
-  #         ])
-  #       }/bin"
+  #       export OLDBIN="${cfg.package.withJIT.withPackages getExts}/bin"
 
   #       install -d -m 0700 -o postgres -g postgres "$NEWDATA"
   #       cd "$NEWDATA"
@@ -56,17 +49,10 @@ in
   #   )
   # ];
 
-  # TODO: Uncomment once NixOS/nixpkgs#461494 hits unstable
-  # services.pgadmin = {
-  #   enable = true;
-  #   initialEmail = "gggkiller2@gmail.com";
-  #   initialPasswordFile = config.age.secrets.pgadmin-pass.path;
-  # };
-
-  services.postgresql = {
+  services.postgresql = rec {
     enable = true;
     package = pgsql;
-    dataDir = "/var/lib/pgsql-prd/${pgsql.psqlSchema}";
+    dataDir = "/var/lib/pgsql-prd/${package.psqlSchema}";
     enableJIT = true;
     enableTCPIP = true;
     authentication = mkForce ''
@@ -107,13 +93,7 @@ in
       DateStyle = "ISO, YMD"; # default: "ISO, MDY"
       TimeZone = "America/Sao_Paulo"; # default: "GMT"
     };
-    extensions = with pgsql.pkgs; [
-      # smlar (broken)
-      pgtap
-      pg_topn
-      periods
-      pg_rational
-    ];
+    extensions = getExts package.pkgs;
   };
 
   services.caddy.virtualHosts."postgres.lan".extraConfig = ''
