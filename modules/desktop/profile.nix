@@ -14,7 +14,7 @@
     i18n
     nix-settings
     nixpkgs-wayland
-    pki
+    home-pki
     sudo-rs
     users
     zsh

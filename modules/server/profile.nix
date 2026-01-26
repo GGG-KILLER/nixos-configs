@@ -8,7 +8,7 @@
     hm-cleanup
     i18n
     nix-settings
-    pki
+    home-pki
     server-services
     sudo-rs
     users

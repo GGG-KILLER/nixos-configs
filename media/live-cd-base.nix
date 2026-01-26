@@ -10,7 +10,7 @@
     groups
     i18n
     nix-settings
-    pki
+    home-pki
     users
     zsh
   ];

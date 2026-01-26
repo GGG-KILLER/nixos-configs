@@ -125,7 +125,7 @@ with lib;
                 groups
                 home-network-addrs
                 i18n
-                pki
+                home-pki
                 server-services
                 users
                 zsh

@@ -115,10 +115,10 @@
       nixosModules.groups = import ./modules/common/groups.nix;
       nixosModules.hm-cleanup = import ./modules/common/hm-cleanup.nix;
       nixosModules.home-network-addrs = import ./modules/home/network-addrs.nix;
+      nixosModules.home-pki = import ./modules/home-pki;
       nixosModules.i18n = import ./modules/common/i18n.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
       nixosModules.nixpkgs-wayland = import ./modules/desktop/nixpkgs-wayland.nix;
-      nixosModules.pki = import ./modules/common/pki.nix;
       nixosModules.remote-build = import ./modules/remote-build;
       nixosModules.server-profile = import ./modules/server/profile.nix;
       nixosModules.server-services = import ./modules/server/services;
