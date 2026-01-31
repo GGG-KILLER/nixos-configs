@@ -22,9 +22,16 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Hardware info
+  nixpkgs.hostPlatform = "x86_64-linux";
+
+  # Facter
+  hardware.facter.reportPath = ./facter.json;
+  hardware.facter.detected.dhcp.enable = false; # delegate to NetworkManager
+
   # Build chaotic-nyx's packages on top of our nixpkgs instead of theirs.
   chaotic.nyx.overlay.onTopOf = "user-pkgs";
-  
+
   networking = {
     hostName = "steph";
     hostId = "6967af45";
@@ -33,7 +40,7 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.openFirewall = false; # Only need the ssh machine key for secrets.
-  
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

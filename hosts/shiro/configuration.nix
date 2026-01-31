@@ -24,6 +24,10 @@
     ./virtualisation.nix
   ];
 
+  # Facter
+  hardware.facter.reportPath = ./facter.json;
+  hardware.facter.detected.dhcp.enable = false; # static IP
+
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
 

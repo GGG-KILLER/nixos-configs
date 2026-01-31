@@ -26,6 +26,10 @@
   boot.supportedFilesystems = [ "btrfs" ];
   nixpkgs.hostPlatform = "x86_64-linux";
 
+  # Facter
+  hardware.facter.reportPath = ./facter.json;
+  hardware.facter.detected.dhcp.enable = false; # static IP
+
   # Use the systemd-boot EFI boot loader.
   boot.kernelPackages = pkgs.linuxPackages_6_18;
   boot.loader.systemd-boot.enable = true;

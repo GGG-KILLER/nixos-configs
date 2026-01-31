@@ -20,8 +20,8 @@
     inputs.nur.legacyPackages."${system}".repos.ilya-fedin.modules.io-scheduler
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-  ];
+  # Facter
+  hardware.facter.reportPath = ./facter.json;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
