@@ -8,6 +8,7 @@
   imports = [
     self.nixosModules.server-profile
     self.nixosModules.home-network-addrs
+    self.nixosModules.remote-build
     ./containers
     ./hardware
     ./services
