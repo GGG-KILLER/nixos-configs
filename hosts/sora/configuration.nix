@@ -22,6 +22,7 @@
 
   # Facter
   hardware.facter.reportPath = ./facter.json;
+  hardware.facter.detected.dhcp.enable = false; # delegate to NetworkManager
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;

@@ -31,4 +31,7 @@
   # Enable KDE for actual desktop
   jovian.steam.desktopSession = "plasma";
   services.desktopManager.plasma6.enable = true;
+
+  # Enable NetworkManager (Jovian wants it)
+  networking.networkmanager.enable = true;
 }
