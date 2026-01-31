@@ -20,6 +20,7 @@
     };
 
   boot.initrd.luks.devices."luks-2ce17ee3-d23e-44ab-8f7f-4d6a206d9b64".device = "/dev/disk/by-uuid/2ce17ee3-d23e-44ab-8f7f-4d6a206d9b64";
+  boot.initrd.luks.devices."luks-2ce17ee3-d23e-44ab-8f7f-4d6a206d9b64".allowDiscards = true;
   boot.initrd.luks.devices."luks-2ce17ee3-d23e-44ab-8f7f-4d6a206d9b64".bypassWorkqueues = true;
 
   fileSystems."/home" =
