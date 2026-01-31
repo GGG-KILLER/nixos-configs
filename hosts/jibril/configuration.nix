@@ -13,6 +13,7 @@
     self.nixosModules.server-profile
     self.nixosModules.home-network-addrs
     self.nixosModules.caddy
+    self.nixosModules.remote-build
     ./hardware
     ./system
     ./users/ggg
