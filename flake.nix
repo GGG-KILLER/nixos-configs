@@ -107,6 +107,7 @@
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
+      nixosModules.angrr = import ./modules/angrr.nix;
       nixosModules.caddy = import ./modules/caddy.nix;
       nixosModules.common-programs = import ./modules/common/common-programs.nix;
       nixosModules.desktop-profile = import ./modules/desktop/profile.nix;
