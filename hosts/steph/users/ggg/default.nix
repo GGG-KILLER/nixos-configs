@@ -29,6 +29,11 @@
       git = {
         enable = true;
         lfs.enable = true;
+        signing = {
+          format = "ssh";
+          key = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTKlolYglj2sjP3v8+3j/u+SJA1MTWUsUO5Y2HKUGST github@ggg.dev";
+          signByDefault = true;
+        };
         settings = {
           user.name = "GGG";
           user.email = "github@ggg.dev";
@@ -101,6 +106,11 @@
     };
 
     services = {
+      ssh-agent = {
+        enable = true;
+        enableBashIntegration = true;
+        enableZshIntegration = true;
+      };
       easyeffects.enable = true;
       flameshot.enable = false;
       jellyfin-mpv-shim.enable = true;
