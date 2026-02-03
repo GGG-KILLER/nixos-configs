@@ -26,7 +26,11 @@ ROOT_DIR="$(dirname "$(readlink -f "$0")")"
 COMMAND="$1"
 HOST="${2:-$(hostname)}" # fallback to current host
 HOST="${HOST%.lan}" # remove .lan suffix if needed
-shift 2
+if [[ $# -gt 1 ]]; then
+    shift 2
+else
+    shift 1
+fi
 
 # Base args for nh
 NH_ARGS=(
