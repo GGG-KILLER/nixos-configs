@@ -31,7 +31,7 @@
         lfs.enable = true;
         settings = {
           user.name = "GGG";
-          user.email = "gggkiller2@gmail.com";
+          user.email = "github@ggg.dev";
 
           init.defaultBranch = "main";
           core.editor = "code --wait";
