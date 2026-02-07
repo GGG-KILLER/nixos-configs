@@ -10,6 +10,7 @@
 {
   imports = [
     self.nixosModules.desktop-profile
+    self.nixosModules.angrr
     self.nixosModules.remote-build
     ./hardware
     ./system
@@ -23,6 +24,9 @@
   # Facter
   hardware.facter.reportPath = ./facter.json;
   hardware.facter.detected.dhcp.enable = false; # delegate to NetworkManager
+
+  # GC
+  ggg.angrr.enable = true;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;

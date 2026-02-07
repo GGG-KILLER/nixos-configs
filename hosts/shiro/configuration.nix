@@ -7,6 +7,7 @@
 {
   imports = [
     self.nixosModules.server-profile
+    self.nixosModules.angrr
     self.nixosModules.home-network-addrs
     self.nixosModules.remote-build
     ./containers
@@ -27,6 +28,9 @@
   # Facter
   hardware.facter.reportPath = ./facter.json;
   hardware.facter.detected.dhcp.enable = false; # static IP
+
+  # GC
+  ggg.angrr.enable = true;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;

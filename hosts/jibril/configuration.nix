@@ -12,6 +12,7 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     self.nixosModules.server-profile
     self.nixosModules.home-network-addrs
+    self.nixosModules.angrr
     self.nixosModules.caddy
     self.nixosModules.remote-build
     ./hardware
@@ -29,6 +30,9 @@
   # Facter
   hardware.facter.reportPath = ./facter.json;
   hardware.facter.detected.dhcp.enable = false; # static IP
+
+  # GC
+  ggg.angrr.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.kernelPackages = pkgs.linuxPackages_6_18;
