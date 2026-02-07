@@ -93,6 +93,7 @@ in
 
       # Misc
       intel-gpu-tools
+      iperf3
     ]
   );
 
