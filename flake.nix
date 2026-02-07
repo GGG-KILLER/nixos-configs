@@ -118,6 +118,7 @@
       nixosModules.home-network-addrs = import ./modules/home/network-addrs.nix;
       nixosModules.home-pki = import ./modules/home-pki;
       nixosModules.i18n = import ./modules/common/i18n.nix;
+      nixosModules.iperf3 = import ./modules/iperf3.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
       nixosModules.nixpkgs-wayland = import ./modules/desktop/nixpkgs-wayland.nix;
       nixosModules.remote-build = import ./modules/remote-build;
