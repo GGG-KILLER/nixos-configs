@@ -15,6 +15,7 @@
     self.nixosModules.angrr
     self.nixosModules.caddy
     self.nixosModules.remote-build
+    self.nixosModules.iperf3
     ./hardware
     ./system
     ./users/ggg

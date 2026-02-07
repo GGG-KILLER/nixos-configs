@@ -12,6 +12,7 @@
     self.nixosModules.desktop-profile
     self.nixosModules.angrr
     self.nixosModules.remote-build
+    self.nixosModules.iperf3
     ./hardware
     ./system
     ./users/ggg
