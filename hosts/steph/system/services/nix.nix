@@ -47,9 +47,9 @@
         hostName = "shiro.lan";
         maxJobs = 6;
       })
-      (mkMachine {
-        hostName = "jibril.lan";
-      })
+      # (mkMachine {
+      #   hostName = "jibril.lan";
+      # })
     ];
 
   nix.settings = {
