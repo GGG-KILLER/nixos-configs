@@ -2,7 +2,9 @@
 {
   environment.systemPackages = with pkgs; [
     # Compression
-    ouch
+    (ouch.override {
+      enableUnfree = true;
+    })
     p7zip
     unzip
     zip
