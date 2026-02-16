@@ -26,6 +26,7 @@
   # Auto Login
   services.displayManager.autoLogin.enable = true;
   services.displayManager.autoLogin.user = "ggg";
+  services.displayManager.sddm.autoLogin.relogin = true;
 
   # Enable NetworkManager
   networking.networkmanager.enable = true;
