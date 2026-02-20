@@ -1,7 +1,4 @@
-{ config, lib, ... }:
-let
-  inherit (lib) mkForce;
-in
+{ config, ... }:
 {
   jibril.dynamic-ports = [ "prometheus" ];
 
@@ -25,11 +22,6 @@ in
       }
     ];
   };
-
-  systemd.services.prometheus.serviceConfig.SystemCallFilter = mkForce [
-    "@system-service"
-    "~@privileged"
-  ];
 
   services.caddy.virtualHosts."prometheus.jibril.lan".extraConfig = ''
     reverse_proxy http://127.0.0.1:${toString config.jibril.ports.prometheus}
