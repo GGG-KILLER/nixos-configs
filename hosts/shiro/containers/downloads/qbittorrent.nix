@@ -53,12 +53,19 @@
 
     config =
       {
+        lib,
         config,
         pkgs,
         system,
         ...
       }:
       {
+        nixpkgs.config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) [
+            "ouch"
+          ];
+
         # qBitTorrent
         modules.services.qbittorrent = {
           enable = true;

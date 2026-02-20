@@ -91,6 +91,7 @@ in
             "steam-run"
             "steam-original"
             "steam-unwrapped"
+            "ouch"
           ];
 
         # Jellyfin

@@ -33,6 +33,12 @@ in
         wg-interface = "wg-mullvad";
       in
       {
+        nixpkgs.config.allowUnfreePredicate =
+          pkg:
+          builtins.elem (lib.getName pkg) [
+            "ouch"
+          ];
+
         # VPN Config
         networking.wg-quick.interfaces.${wg-interface} =
           let
