@@ -13,30 +13,24 @@
     bindaddress = "127.0.0.1:${toString config.jibril.ports.kanidm}";
     domain = "sso.lan";
     origin = "https://sso.lan";
-    tls_chain = "/var/lib/kanidm/fullchain.pem";
-    tls_key = "/var/lib/kanidm/key.pem";
+    tls_chain = "${config.security.acme.certs."sso.lan".directory}/fullchain.pem";
+    tls_key = "${config.security.acme.certs."sso.lan".directory}/key.pem";
 
     online_backup.versions = 7;
 
     http_client_address_info.x-forward-for = [ "127.0.0.1" ];
   };
 
+  systemd.services.kanidm.after = [ "acme-sso.lan.service" ];
+  systemd.services.kanidm.wants = [ "acme-sso.lan.service" ];
+
   systemd.tmpfiles.rules = [ "d /var/lib/kanidm 1777 root root 10d" ];
 
   security.acme.certs."sso.lan" = {
     email = "kanidm@${config.networking.fqdn}";
+    group = "kanidm";
     listenHTTP = ":${toString config.jibril.ports.sso-acme-http}";
-    postRun = ''
-      set -xeuo pipefail
-
-      cp fullchain.pem /var/lib/kanidm/fullchain.pem;
-      cp key.pem /var/lib/kanidm/key.pem;
-
-      chmod 440 /var/lib/kanidm/fullchain.pem /var/lib/kanidm/key.pem;
-      chown root:kanidm /var/lib/kanidm/fullchain.pem /var/lib/kanidm/key.pem;
-
-      systemctl restart kanidm.service
-    '';
+    reloadServices = [ "kanidm.service" ];
   };
 
   services.caddy.virtualHosts."sso.lan".extraConfig = ''
