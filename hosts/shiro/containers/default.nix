@@ -197,7 +197,7 @@ with lib;
                 security.acme = {
                   acceptTerms = true; # kinda pointless since we never use upstream
                   defaults = {
-                    server = "https://ca.lan/acme/acme/directory";
+                    server = "https://ca.lan/acme/home/directory";
                     renewInterval = "hourly";
                   };
                 };
