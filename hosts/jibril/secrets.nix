@@ -13,6 +13,8 @@
     n8n-encryption-key.file = ../../secrets/jibril/n8n/encryption_key.age;
     n8n-pgsql-password.file = ../../secrets/jibril/n8n/pgsql/password.age;
 
+    grafana_secret_key.file = ../../secrets/jibril/grafana/secret_key.age;
+
     wireguard-key.file = ../../secrets/jibril/wireguard/private_key.age;
     wireguard-coffee-psk.file = ../../secrets/jibril/wireguard/coffee_psk.age;
     wireguard-coffee2-psk.file = ../../secrets/jibril/wireguard/coffee2_psk.age;

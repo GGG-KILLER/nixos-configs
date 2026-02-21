@@ -4,12 +4,19 @@
 
   services.grafana = {
     enable = true;
-    settings.server = {
-      domain = "grafana.jibril.lan";
-      http_addr = "127.0.0.1";
-      http_port = config.jibril.ports.grafana;
-      root_url = "https://grafana.jibril.lan/";
-      enable_gzip = true;
+    settings = {
+      server = {
+        protocol = "socket";
+        root_url = "https://grafana.jibril.lan/";
+        enforce_domain = true;
+        enable_gzip = true;
+      };
+      security = {
+        secret_key = "$__file{${config.age.secrets.grafana_secret_key.path}}";
+        cookie_secure = true;
+        cookie_samesite = "strict";
+        content_security_policy = true;
+      };
     };
 
     provision.datasources.settings = {
@@ -38,8 +45,6 @@
   };
 
   services.caddy.virtualHosts."grafana.jibril.lan".extraConfig = ''
-    reverse_proxy ${
-      with config.services.grafana.settings.server; "${protocol}://${http_addr}:${toString http_port}"
-    }
+    reverse_proxy unix/${config.services.grafana.settings.server.socket}
   '';
 }

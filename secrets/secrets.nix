@@ -87,6 +87,12 @@ in
     jibril
   ];
 
+  # Jibril - Grafana
+  "jibril/grafana/secret_key.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
   # Jibril - Wireguard
   "jibril/wireguard/private_key.age".publicKeys = [
     ggg
