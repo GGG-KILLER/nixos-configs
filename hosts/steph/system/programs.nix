@@ -48,6 +48,12 @@ in
   environment.systemPackages = (
     with pkgs;
     [
+      # Ark archives support
+      unar
+      unrar
+      _7zz
+      p7zip-rar
+
       # Coding
       corepack_24
       delta
