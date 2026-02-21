@@ -15,6 +15,7 @@
   stdenvNoCC,
   unzip,
   writeShellApplication,
+  dbus,
   libxcb,
   libxcb-image,
   libxcb-keysyms,
@@ -46,6 +47,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   buildInputs = [
     fontconfig
     freetype
+    dbus.lib
     libGL
     libxkbcommon
     libxcb
