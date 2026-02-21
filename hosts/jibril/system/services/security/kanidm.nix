@@ -5,9 +5,9 @@
     "sso-acme-http"
   ];
 
-  services.kanidm.enableServer = true;
   services.kanidm.package = pkgs.kanidm_1_8;
-  services.kanidm.serverSettings = {
+  services.kanidm.server.enable = true;
+  services.kanidm.server.settings = {
     version = "2";
 
     bindaddress = "127.0.0.1:${toString config.jibril.ports.kanidm}";
