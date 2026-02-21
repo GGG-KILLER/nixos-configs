@@ -39,6 +39,6 @@
 
   # Enable kanidm
   services.kanidm.package = pkgs.kanidm_1_8;
-  services.kanidm.enableClient = true;
-  services.kanidm.clientSettings.uri = "https://sso.lan";
+  services.kanidm.client.enable = true;
+  services.kanidm.client.settings.uri = "https://sso.lan";
 }
