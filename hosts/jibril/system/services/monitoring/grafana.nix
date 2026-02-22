@@ -9,7 +9,6 @@
         protocol = "socket";
         socket_gid = config.users.groups.caddy.gid;
         root_url = "https://grafana.jibril.lan/";
-        enforce_domain = true;
         enable_gzip = true;
       };
       security = {
