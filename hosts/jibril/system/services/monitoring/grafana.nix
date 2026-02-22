@@ -7,6 +7,7 @@
     settings = {
       server = {
         protocol = "socket";
+        socket_gid = config.users.groups.caddy.gid;
         root_url = "https://grafana.jibril.lan/";
         enforce_domain = true;
         enable_gzip = true;
@@ -43,6 +44,7 @@
       ];
     };
   };
+  users.users.grafana.extraGroups = [ "caddy" ];
 
   services.caddy.virtualHosts."grafana.jibril.lan".extraConfig = ''
     reverse_proxy unix/${config.services.grafana.settings.server.socket}
