@@ -2,15 +2,15 @@
 {
   "eclipse-mosquitto:2.0" = dockerTools.pullImage {
     imageName = "eclipse-mosquitto";
-    imageDigest = "sha256:077fe4ff4c49df1e860c98335c77dda08360629e0e2a718147027e4db3eace9d";
-    hash = "sha256-pTmZTOU++Fc67uwLu0bxlN0x2LUkUK2fFWcM4DE5qao=";
+    imageDigest = "sha256:6852da90a65dfff7aa3a1c8b249e92bb83c17ea8bbcce56bedff8707332a1a29";
+    hash = "sha256-LODqtehTDyaDQSFTg8Y1SpbZP/Fd/N8AtJRRW9u4t4g=";
     finalImageName = "eclipse-mosquitto";
     finalImageTag = "2.0";
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:73dad4271642c5966db88db7a7585fae7cf10b685d1e48006f31e0294c29fdd7";
-    hash = "sha256-i5G77fbR9C5CjYgSCDfH5X+96Fi9FNNg1ryh+2MSqiY=";
+    imageDigest = "sha256:1c054d54ecd1597bba52f4304bca5afbc5565ebe614c5b3d7dc5b7f8a0cd768d";
+    hash = "sha256-gIuRfBIqUFc+jbzi0Ua3ct8ZP3STGM49rmTwy2dq3/s=";
     finalImageName = "redis";
     finalImageTag = "latest";
   };
@@ -19,6 +19,13 @@
     imageDigest = "sha256:3441fbe7b7e15da95624611c49821e457615bb5428cd9e08cb391a547c979622";
     hash = "sha256-eaLNlNBR3GEXI950QtcGzEj8hca+G/6XeUFwNLRIix8=";
     finalImageName = "evazion/iqdb";
+    finalImageTag = "latest";
+  };
+  "jlesage/jdownloader-2:latest" = dockerTools.pullImage {
+    imageName = "jlesage/jdownloader-2";
+    imageDigest = "sha256:48fc9f71588ea25cc7efdc31097fbd66c0a63ed318edbb036cb99366c3f9347f";
+    hash = "sha256-lCyRtkV/01MoLbRmmofsj1OilQHzJlxTFxO7x6alo1A=";
+    finalImageName = "jlesage/jdownloader-2";
     finalImageTag = "latest";
   };
   "klausmeyer/docker-registry-browser:latest" = dockerTools.pullImage {
@@ -44,8 +51,8 @@
   };
   "zer0tonin/mikochi:latest" = dockerTools.pullImage {
     imageName = "zer0tonin/mikochi";
-    imageDigest = "sha256:9681b31dd2e827400c5ef91560fa89f52726dcee62a36c8cb1695180b3334b11";
-    hash = "sha256-kuBCiUYe7olnhjPbxqUFpWq7hoZ/2VpACtzRTzUYCts=";
+    imageDigest = "sha256:0f2972346b7a6713563d875a7c30a97a2f45f72117573f65dfe8fd81fd44b016";
+    hash = "sha256-I8HyIadY2AjUFE+G4QojSyU++kE/XEKtD+RKUAHWxZw=";
     finalImageName = "zer0tonin/mikochi";
     finalImageTag = "latest";
   };
@@ -72,8 +79,8 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:aefdde3d146d0ba9099e31c97f3cfe3d71f2687e1ab3228e91365ef88ab3d276";
-    hash = "sha256-umoL2VAoGY/IcgR/IxlTif0/GvjoCjUXeUtoBun91mg=";
+    imageDigest = "sha256:c19cf465d515082c68c722b5ecdc47fef15edc908524103f004c2a6d2c40cfce";
+    hash = "sha256-MbYlcZoVStxZD8ie10TaCEtcJBMiWLAZkQx99ffWBdg=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };

@@ -22,6 +22,7 @@ function write-image() {
     write-image "eclipse-mosquitto" "2.0"
     write-image "redis"
     write-image "evazion/iqdb"
+    write-image "jlesage/jdownloader-2"
     write-image "klausmeyer/docker-registry-browser"
     write-image "openspeedtest/latest"
     write-image "plaintextpackets/netprobe"
