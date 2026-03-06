@@ -76,25 +76,25 @@
           web.port = config.shiro.ports.qbittorrent-web;
         };
 
-        # Flood
-        modules.services.flood = {
-          enable = true;
-          package = self.packages.${system}.flood;
-          rundir = "/mnt/qbittorrent/flood";
-          auth = "none";
-          allowedpath = [
-            "/mnt/animu"
-            "/mnt/series"
-            "/mnt/h"
-            "/mnt/etc"
-          ];
-          qbittorrent = {
-            url = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
-            user = "admin";
-            password = config.my.secrets.modules.services.qbittorrent.web.password;
-          };
-          web.port = config.shiro.ports.flood;
-        };
+        # # Flood
+        # modules.services.flood = {
+        #   enable = true;
+        #   package = self.packages.${system}.flood;
+        #   rundir = "/mnt/qbittorrent/flood";
+        #   auth = "none";
+        #   allowedpath = [
+        #     "/mnt/animu"
+        #     "/mnt/series"
+        #     "/mnt/h"
+        #     "/mnt/etc"
+        #   ];
+        #   qbittorrent = {
+        #     url = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
+        #     user = "admin";
+        #     password = config.my.secrets.modules.services.qbittorrent.web.password;
+        #   };
+        #   web.port = config.shiro.ports.flood;
+        # };
 
         # NGINX
         modules.services.nginx = {
