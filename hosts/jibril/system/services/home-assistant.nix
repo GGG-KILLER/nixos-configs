@@ -72,20 +72,53 @@
 
     extraComponents = [
       "default_config"
-      "mqtt"
+      "alert"
+      "androidtv_remote"
+      "application_credentials"
+      "automation"
+      "backblaze_b2"
+      "calendar"
+      "command_line"
+      "counter"
+      "device_automation"
+      "dhcp"
+      "diagnostics"
+      "discord"
+      "esphome"
+      "filter"
+      "flux"
+      "group"
+      "history_stats"
+      "history"
+      "holiday"
+      "input_boolean"
+      "input_button"
+      "input_datetime"
+      "input_number"
+      "input_select"
+      "input_text"
+      "local_calendar"
+      "local_todo"
       "met"
+      "mqtt"
+      "ping"
+      "rest_command"
+      "rest"
+      "schedule"
+      "script"
+      "shell_command"
+      "template"
+      "threshold"
+      "timer"
+      "uptime"
+      "utility_meter"
+      "workday"
+      "zha"
+      "zone"
     ];
 
     config = {
       default_config = { };
-      homeassistant = {
-        country = "BR";
-        currency = "BRL";
-        unit_system = "metric";
-        time_zone = "America/Sao_Paulo";
-        temperature_unit = "C";
-        external_url = "https://hass.lan";
-      };
       # HTTP confs
       http = {
         server_port = config.jibril.ports.home-assistant;
