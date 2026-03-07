@@ -18,7 +18,6 @@
     ./users/ggg
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./overrides.nix
     inputs.nur.legacyPackages."${system}".repos.ilya-fedin.modules.io-scheduler
   ];
 
