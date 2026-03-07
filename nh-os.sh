@@ -41,7 +41,7 @@ NH_ARGS=(
 # Add required flags for remote deploy
 if [[ "$HOST" != "$(hostname)" ]]; then
     NH_ARGS+=(
-        "--target-host=root@$HOST.lan"
+        "--target-host=$HOST.lan"
     )
 fi
 
