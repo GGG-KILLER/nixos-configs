@@ -50,22 +50,8 @@
             "encode64"
             "sudo"
             "timer"
-            "tmux"
           ];
           oh-my-zsh.theme = "dpoggi";
-          oh-my-zsh.extraConfig = ''
-            ZSH_TMUX_AUTOSTART_ONCE=true
-            ZSH_TMUX_AUTOCONNECT=true
-            ZSH_TMUX_DETACHED=true
-            ZSH_TMUX_FIXTERM=true
-            ZSH_TMUX_UNICODE=true
-            if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" && -z "$INSIDE_EMACS" && "$TERM_PROGRAM" != "vscode" && "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]] && \
-              [[ -n "$SSH_TTY" ]]; then
-              ZSH_TMUX_DEFAULT_SESSION_NAME="''${USER}@$(awk '{print $1}'<<<"$SSH_CLIENT" | sed 's/\./_/g')"
-              ZSH_TMUX_AUTOSTART=true
-              ZSH_TMUX_AUTOQUIT=true
-            fi
-          '';
           syntaxHighlighting.enable = true;
           syntaxHighlighting.highlighters = [
             "main"
