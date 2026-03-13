@@ -37,28 +37,12 @@
   # Allow to login with the ggg user SSH key
   users.users.nixos.openssh.authorizedKeys.keys = config.users.users.ggg.openssh.authorizedKeys.keys;
 
-  # Graphics Settings
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.graphics.enable = true;
-
-  environment.sessionVariables.LIBVA_DRIVER_NAME = "nvidia";
-  hardware.nvidia = {
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
-    # NOTE: Open kernel module does not work with the Quadro P400
-    open = false;
-    modesetting.enable = false;
-    nvidiaSettings = false;
-  };
-
   environment.systemPackages = with pkgs; [
     croc
     wget
     btop
     file
     iotop-c
-    unzip
-    zip
 
     tmux
 
@@ -67,8 +51,9 @@
 
   system.activationScripts.linkConfig = ''
     # Link source to /var/nixos-config
-    ln -sfn ${toString self} /var/nixos-config
+    ln -sfn ${toString ../.} /var/nixos-config
   '';
 
   nixpkgs.hostPlatform = "x86_64-linux";
+  isoImage.squashfsCompression = "zstd";
 }
