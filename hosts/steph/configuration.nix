@@ -5,6 +5,7 @@
   self,
   inputs,
   system,
+  pkgs,
   ...
 }:
 {
@@ -44,7 +45,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  services.openssh.openFirewall = false; # Only need the ssh machine key for secrets.
+  services.openssh.openFirewall = true;
+  programs.ssh.package = pkgs.openssh_hpn;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
