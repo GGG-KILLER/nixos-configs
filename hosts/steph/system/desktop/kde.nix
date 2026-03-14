@@ -25,5 +25,6 @@
     pkgs.kdePackages.plasma-browser-integration
     # Remove Kate since it keeps showing up when I type Kon for Konsole and I don't even use it
     pkgs.kdePackages.kate
+    pkgs.kdePackages.ktexteditor
   ];
 }
