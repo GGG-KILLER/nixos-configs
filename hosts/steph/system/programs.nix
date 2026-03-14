@@ -4,7 +4,6 @@
   inputs,
   lib,
   pkgs,
-  config,
   ...
 }:
 let
@@ -36,13 +35,11 @@ let
   dotnetRoot = "${dotnet-sdk}/share/dotnet";
 
   agenix = inputs.agenix.packages.${system}.default;
-  deploy-rs = inputs.deploy-rs.packages.${system}.deploy-rs;
   git-crypt-agessh = inputs.git-crypt-agessh.packages.${system}.default;
 
   inherit (self.packages.${system})
     m3u8-dl
     ;
-  inherit (config.boot.kernelPackages) turbostat;
 in
 {
   environment.systemPackages = (
@@ -82,7 +79,6 @@ in
       git-crypt-agessh
 
       # Nix
-      deploy-rs
       nh
       nix-output-monitor
       nixpkgs-review
@@ -92,13 +88,12 @@ in
 
       # Terminal tools
       mprocs
-      turbostat
       wl-clipboard
       xh
       uutils-coreutils-noprefix
+      nvtopPackages.amd
 
       # Misc
-      intel-gpu-tools
       iperf3
     ]
   );
