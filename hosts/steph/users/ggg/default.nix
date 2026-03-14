@@ -83,9 +83,6 @@
           gpu-api = "vulkan";
           gpu-context = "waylandvk";
           ao = "pipewire";
-
-          # Disable OSC for mpv thumbnail script
-          osc = "no";
         };
         bindings = {
           f = "cycle fullscreen";
