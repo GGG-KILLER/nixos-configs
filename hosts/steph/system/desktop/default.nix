@@ -40,7 +40,7 @@ in
 
     # Web
     discord-canary
-    #mullvad-vpn
+    mullvad-vpn
     vivaldi-wayland
 
     # Misc

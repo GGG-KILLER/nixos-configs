@@ -3,14 +3,22 @@
   imports =
     [ ]
     ++ (with inputs.nixos-hardware.nixosModules; [
-      common-cpu-intel
-      common-gpu-intel-kaby-lake
-      common-pc
+      asus-battery
+      common-cpu-amd
+      common-cpu-amd-pstate
+      common-cpu-amd-zenpower
+      common-gpu-amd
       common-pc-laptop
       common-pc-laptop-ssd
     ]);
 
-  # Enable hardware
+  # Limit battery
+  hardware.asus.battery = {
+    chargeUpto = 80;
+    enableChargeUptoScript = true;
+  };
+
+  # Enable graphics
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
 
@@ -21,7 +29,4 @@
   # Xbox Controller
   hardware.xone.enable = true;
   hardware.xpad-noone.enable = false;
-
-  # Powertop Autotune
-  powerManagement.powertop.enable = true;
 }

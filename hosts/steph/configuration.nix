@@ -14,6 +14,7 @@
     ./hardware
     ./system
     ./users/ggg
+    ./disk-config.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./secrets.nix
