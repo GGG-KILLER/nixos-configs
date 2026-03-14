@@ -8,7 +8,7 @@
     !include ${config.age.secrets.nix-github-token.path}
   '';
 
-  # Use sora for builds, since it has more computing power
+  # Use sora for builds, if available, since it has more computing power
   nix.distributedBuilds = true;
   nix.settings.builders-use-substitutes = true;
   nix.buildMachines =
@@ -43,20 +43,19 @@
         hostName = "sora.lan";
         maxJobs = 32;
       })
-      (mkMachine {
-        hostName = "shiro.lan";
-        maxJobs = 6;
-      })
-      # (mkMachine {
-      #   hostName = "jibril.lan";
-      # })
     ];
 
   nix.settings = {
-    max-jobs = 1; # Don't build much (if at all) locally
     log-lines = 40;
+    max-jobs = "auto";
+    http-connections = 0;
+    max-substitution-jobs = 128;
     min-free = 50 * 1024 * 1024 * 1024; # have at least 50 GiB free
     preallocate-contents = true;
+    system-features = [ "gccarch-znver3" ];
+    download-buffer-size = 500 * 1024 * 1024;
+
+    # Security
     require-drop-supplementary-groups = true;
     use-cgroups = true;
   };
