@@ -48,6 +48,7 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
+  programs.ssh.package = pkgs.openssh_hpn;
 
   # Firmware
   services.fwupd.enable = true;
