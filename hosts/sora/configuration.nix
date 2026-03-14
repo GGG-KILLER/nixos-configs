@@ -5,6 +5,7 @@
   self,
   inputs,
   system,
+  pkgs,
   ...
 }:
 {
@@ -48,6 +49,7 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
+  programs.ssh.package = pkgs.openssh_hpn;
 
   networking.firewall.allowedTCPPorts = [
     3389
