@@ -127,6 +127,7 @@
       nixosModules.server-services = import ./modules/server/services;
       nixosModules.sudo-rs = import ./modules/common/sudo-rs.nix;
       nixosModules.users = import ./modules/common/users.nix;
+      nixosModules.xbox-controller = import ./modules/xbox-controller.nix;
       nixosModules.zsh = import ./modules/common/zsh.nix;
 
       deploy.nodes = {

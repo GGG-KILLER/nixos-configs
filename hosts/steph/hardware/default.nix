@@ -1,16 +1,17 @@
-{ inputs, ... }:
+{ self, inputs, ... }:
 {
-  imports =
-    [ ]
-    ++ (with inputs.nixos-hardware.nixosModules; [
-      asus-battery
-      common-cpu-amd
-      common-cpu-amd-pstate
-      common-cpu-amd-zenpower
-      common-gpu-amd
-      common-pc-laptop
-      common-pc-laptop-ssd
-    ]);
+  imports = [
+    self.nixosModules.xbox-controller
+  ]
+  ++ (with inputs.nixos-hardware.nixosModules; [
+    asus-battery
+    common-cpu-amd
+    common-cpu-amd-pstate
+    common-cpu-amd-zenpower
+    common-gpu-amd
+    common-pc-laptop
+    common-pc-laptop-ssd
+  ]);
 
   # Limit battery
   hardware.asus.battery = {
@@ -25,7 +26,4 @@
   # Firmware
   services.fwupd.enable = true;
   hardware.enableRedistributableFirmware = true;
-
-  # Xbox Controller
-  hardware.xpadneo.enable = true;
 }

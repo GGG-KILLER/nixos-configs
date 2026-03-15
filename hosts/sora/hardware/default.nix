@@ -1,4 +1,5 @@
 {
+  self,
   inputs,
   lib,
   config,
@@ -7,6 +8,7 @@
 {
   imports = [
     "${inputs.nixos-hardware}/common/gpu/nvidia/ampere"
+    self.nixosModules.xbox-controller
     ./zfs.nix
   ]
   ++ (with inputs.nixos-hardware.nixosModules; [
@@ -39,7 +41,4 @@
   # Firmware
   services.fwupd.enable = true;
   hardware.enableRedistributableFirmware = true;
-
-  # Xbox Controller
-  hardware.xpadneo.enable = true;
 }
