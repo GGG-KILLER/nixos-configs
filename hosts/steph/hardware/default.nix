@@ -27,6 +27,5 @@
   hardware.enableRedistributableFirmware = true;
 
   # Xbox Controller
-  hardware.xone.enable = true;
-  hardware.xpad-noone.enable = false;
+  hardware.xpadneo.enable = true;
 }
