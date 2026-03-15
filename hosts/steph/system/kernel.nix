@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   # Kernel
-  boot.kernelPackages = pkgs.linuxPackages_cachyos-gcc;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
 
   # Scheduler
   services.scx.enable = true;

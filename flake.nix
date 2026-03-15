@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
     nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -88,7 +87,6 @@
             ./common
             file
             inputs.agenix.nixosModules.default
-            inputs.chaotic.nixosModules.default
             inputs.home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

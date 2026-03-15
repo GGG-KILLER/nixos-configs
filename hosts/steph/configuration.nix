@@ -35,9 +35,6 @@
   # GC
   ggg.angrr.enable = true;
 
-  # Build chaotic-nyx's packages on top of our nixpkgs instead of theirs.
-  chaotic.nyx.overlay.onTopOf = "user-pkgs";
-
   networking = {
     hostName = "steph";
     hostId = "6967af45";

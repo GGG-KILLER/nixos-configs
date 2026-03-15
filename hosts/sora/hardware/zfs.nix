@@ -4,8 +4,7 @@
   ...
 }:
 {
-  # Unstable is needed for 6.12
-  boot.zfs.package = pkgs.zfs_cachyos;
+  boot.zfs.package = pkgs.zfs_unstable;
 
   # Expand all devices on boot
   services.zfs.expandOnBoot = "all";
