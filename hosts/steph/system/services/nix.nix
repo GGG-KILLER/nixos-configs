@@ -46,14 +46,21 @@
     ];
 
   nix.settings = {
+    # Substitution
+    http-connections = 0;
+    download-buffer-size = 500 * 1024 * 1024;
+    max-substitution-jobs = 128;
+
+    # Building
     log-lines = 40;
     max-jobs = "auto";
-    http-connections = 0;
-    max-substitution-jobs = 128;
+    keep-derivations = true; # keep derivations, so we don't need to redownload/recreate.
+    keep-outputs = true; # keep build inputs, so we don't need to redownload.
+    system-features = [ "gccarch-znver3" ];
+
+    # Store
     min-free = 50 * 1024 * 1024 * 1024; # have at least 50 GiB free
     preallocate-contents = true;
-    system-features = [ "gccarch-znver3" ];
-    download-buffer-size = 500 * 1024 * 1024;
 
     # Security
     require-drop-supplementary-groups = true;
