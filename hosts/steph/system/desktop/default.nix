@@ -18,7 +18,7 @@ in
   environment.systemPackages = with pkgs; [
     # Audio
     audiorelay
-    helvum
+    crosspipe
 
     # Android
     android-tools
