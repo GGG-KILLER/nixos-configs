@@ -63,7 +63,7 @@ in
       nixd
       nixf
       nixfmt
-      nodejs_latest
+      nodejs_24
       powershell
       python3
       tokei
