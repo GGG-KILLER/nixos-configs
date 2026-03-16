@@ -1,5 +1,19 @@
 { ... }:
 {
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.settings = {
+    General = {
+      # Low Latency BLE
+      MinConnectionInterval = 7;
+      MaxConnectionInterval = 9;
+      ConnectionLatency = 0;
+      # Connect loop
+      ControllerMode = "dual";
+      JustWorksRepairing = "confirm";
+    };
+  };
+
   hardware.xpadneo.enable = true;
   hardware.xpadneo.settings = {
     # disable_deadzones:
