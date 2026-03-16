@@ -105,4 +105,17 @@
       }
     }
   '';
+
+  # Wait for Caddy to order/renew ACME certs
+  systemd.services = (
+    lib.flip lib.mapAttrs' config.security.acme.certs (
+      name: _: {
+        name = "acme-order-renew-${name}";
+        value = {
+          wants = [ "caddy.service" ];
+          after = [ "caddy.service" ];
+        };
+      }
+    )
+  );
 }
