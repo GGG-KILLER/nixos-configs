@@ -45,6 +45,7 @@
       email = "gggkiller2@gmail.com";
       server = "https://acme-v02.api.letsencrypt.org/directory";
       renewInterval = "daily";
+      renewJitter = "24h";
     };
 
     services.cloudflared.tunnels."3c1b8ea8-a43d-4a97-872c-37752de30b3f".ingress."ttv.ggg.dev" =

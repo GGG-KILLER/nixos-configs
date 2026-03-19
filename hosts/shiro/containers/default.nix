@@ -199,6 +199,7 @@ with lib;
                   defaults = {
                     server = "https://ca.lan/acme/home/directory";
                     renewInterval = "hourly";
+                    renewJitter = "30m";
                   };
                 };
 
