@@ -23,11 +23,13 @@
         ];
         strict = true;
         script = ''
+          shopt -s nullglob globstar
+
           if [[ $# -lt 2 ]]; then
             die "usage: $0 OUTPUT_PATH SOURCE_ARCHIVE"
           fi
 
-          OUTPUT_PATH="$1"
+          OUTPUT_PATH="$(realpath "$1")"
           SOURCE_ARCHIVE="$2"
 
           # Remove archive extension(s) to form base name
@@ -72,10 +74,28 @@
             -delete
 
           # Remove all files that are NOT in the allowed image/video extension list
-          find "$OUTPUT_DIR" -type f ! -iregex '.*\.\(jpg\|jpeg\|png\|gif\|webp\|bmp\|tif\|tiff\|avif\|heic\|heif\|mp4\|mkv\|mov\|webm\|avi\|m4v\|mpg\|mpeg\)$' -delete
+          find "$OUTPUT_DIR" -type f \
+            ! -iregex '.*\.\(jpg\|jpeg\|png\|gif\|bmp\|svg\|webp\|avif\|heic\|heif\|ico\|flv\|ogv\|avi\|mp4\|mpg\|mpeg\|3gp\|mkv\|webm\|vob\|wmv\|m4v\|mov\)$' \
+            -delete
 
           # Remove empty directories
           find "$OUTPUT_DIR" -type d -empty -delete
+
+          # Move files to the right places
+          PICTURES="$(realpath "$OUTPUT_PATH/../Pictures/")"
+          VIDEO="$(realpath "$OUTPUT_PATH/../Video/")"
+          for file in "$OUTPUT_DIR"/**/*; do
+              file_rel="$(realpath --relative-to="$OUTPUT_PATH" -- "$file")"
+              case "$file" in
+                  *.jpg|*.jpeg|*.png|*.gif|*.bmp|*.svg|*.webp|*.avif|*.heic|*.heif|*.ico|*.psd)
+                      mv -v -- "$file" "$PICTURES/''${file_rel//\//_}"
+                      ;;
+                  *.flv|*.ogv|*.avi|*.mp4|*.mpg|*.mpeg|*.3gp|*.mkv|*.webm|*.vob|*.wmv|*.m4v|*.mov)
+                      mv -v -- "$file" "$VIDEO/''${file_rel//\//_}"
+                      ;;
+              esac
+          done
+          rm -r "$OUTPUT_DIR"
         '';
       })
     ];
