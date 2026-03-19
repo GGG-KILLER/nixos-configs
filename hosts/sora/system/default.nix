@@ -40,7 +40,6 @@
   boot.kernelParams = [
     # ZFS-related params
     "zfs.zfs_arc_max=${toString (16 * 1024 * 1024 * 1024)}"
-    "elevator=none"
     "nohibernate"
   ];
 
