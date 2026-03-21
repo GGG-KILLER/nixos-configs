@@ -1,4 +1,10 @@
-{ lib, system, self, pkgs, ... }:
+{
+  lib,
+  system,
+  self,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./vscode.nix
@@ -31,7 +37,7 @@
         lfs.enable = true;
         signing = {
           format = "ssh";
-          key = "key::ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFTKlolYglj2sjP3v8+3j/u+SJA1MTWUsUO5Y2HKUGST github@ggg.dev";
+          key = "/home/ggg/.ssh/id_ed25519.pub";
           signByDefault = true;
         };
         settings = {
@@ -54,15 +60,27 @@
           auto_update_interval_hours = 72;
         };
       };
-      zsh.oh-my-zsh.plugins = [
-        "copybuffer"
-        "copyfile"
-        "docker"
-        "docker-compose"
-        "dotnet"
-        "git"
-        "git-auto-fetch"
-      ];
+      bash.profileExtra = lib.mkOrder 900 ''
+        if [ -z "$SSH_AUTH_SOCK" ]; then
+          export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+        fi
+      '';
+      zsh = {
+        envExtra = lib.mkOrder 900 ''
+          if [ -z "$SSH_AUTH_SOCK" ]; then
+            export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent"
+          fi
+        '';
+        oh-my-zsh.plugins = [
+          "copybuffer"
+          "copyfile"
+          "docker"
+          "docker-compose"
+          "dotnet"
+          "git"
+          "git-auto-fetch"
+        ];
+      };
       mangohud = {
         enable = true;
         settingsPerApplication = {
