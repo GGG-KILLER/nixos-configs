@@ -12,10 +12,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -60,7 +56,6 @@
     {
       self,
       nixpkgs,
-      deploy-rs,
       disko,
       ...
     }@inputs:
@@ -128,47 +123,6 @@
       nixosModules.xbox-controller = import ./modules/xbox-controller.nix;
       nixosModules.zsh = import ./modules/common/zsh.nix;
 
-      deploy.nodes = {
-        shiro = {
-          hostname = "shiro.lan";
-          fastConnection = true;
-          autoRollback = false;
-          magicRollback = false;
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.shiro;
-            sshUser = "root";
-          };
-          confirmTimeout = 300;
-        };
-
-        jibril = {
-          hostname = "jibril.lan";
-          fastConnection = true;
-          autoRollback = false;
-          magicRollback = false;
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.jibril;
-            sshUser = "root";
-          };
-          confirmTimeout = 300;
-        };
-
-        sora = {
-          hostname = "sora.lan";
-          fastConnection = true;
-          autoRollback = false;
-          magicRollback = false;
-          profiles.system = {
-            user = "root";
-            path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.sora;
-            sshUser = "root";
-          };
-          confirmTimeout = 300;
-        };
-      };
-
       packages =
         let
           forAllSystems =
@@ -213,7 +167,5 @@
             flood = packages.npm."@jesec/flood";
           }
         );
-
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
     };
 }
