@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (self.packages.${system}) kemono-dl find-ata;
+  inherit (self.packages.${system}) find-ata;
 in
 {
   imports = [
@@ -18,7 +18,6 @@ in
       ffmpeg
       find-ata
       gallery-dl
-      kemono-dl
       mprocs
       #step-cli # TODO: Uncomment if it's still used and NixOS/nixpkgs#301623 has hit unstable.
       tmux
