@@ -16,19 +16,19 @@ let
     {
       x86_64-linux = {
         arch = "linux-x64";
-        hash = "sha256-djlWJEBtcoCswuvNOf+8vv2QZzTHenivFS6drW6+8SE=";
+        hash = "sha256-ils23RuuuEn25DJl79mMkCXXXdoI+Pyr53VKer1Lvs8=";
       };
       aarch64-linux = {
         arch = "linux-arm64";
-        hash = "sha256-WbUKkBCJg9CE1Sd4FG4iWA8hmmXjZbqHiz2fYOAb91M=";
+        hash = "sha256-RULUblmg5P0EU7PnTLJO6zl27AXhzbqCHWoFDSlI65E=";
       };
       x86_64-darwin = {
         arch = "darwin-x64";
-        hash = "sha256-Bnk42bdMPzABs+xYIJaym5jb2e0H7WOo8tb1Y++63TA=";
+        hash = "sha256-30RHJ6hwjY1OrYYJNsycjcf2TcxhmL6YQCeIMiYRGrc=";
       };
       aarch64-darwin = {
         arch = "darwin-arm64";
-        hash = "sha256-ghzrfXO8yRobmPT9mDY7Lqm34ytJZI8Gv/gvJBut9GA=";
+        hash = "sha256-3bV8J09LzTj6i+YvBoP+Tqy7OIqGvBxDI7pDO0eOLGk=";
       };
     }
     .${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}")
@@ -38,7 +38,7 @@ vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = {
     name = "csdevkit";
     publisher = "ms-dotnettools";
-    version = "1.92.5";
+    version = "3.10.4";
     inherit (extInfo) hash arch;
   };
   sourceRoot = "extension"; # This has more than one folder.
@@ -63,7 +63,7 @@ vscode-utils.buildVscodeMarketplaceExtension {
 
     substituteInPlace dist/extension.js \
       --replace-fail 'e.extensionPath,"cache"' 'require("os").tmpdir(),"'"$ext_unique_id"'"' \
-      --replace-fail 't.setExecuteBit=async function(e){if("win32"!==process.platform){const t=i.join(e[a.SERVICEHUB_CONTROLLER_COMPONENT_NAME],"Microsoft.VisualStudio.Code.ServiceController"),r=i.join(e[a.SERVICEHUB_HOST_COMPONENT_NAME],(0,a.getServiceHubHostEntrypointName)()),n=[(0,a.getServerPath)(e),t,r,(0,c.getReliabilityMonitorPath)(e)];await Promise.all(n.map((e=>(0,o.chmod)(e,"0755"))))}}' 't.setExecuteBit=async function(e){}'
+      --replace-fail 't.setExecuteBit=async function(e){if("win32"!==process.platform){const t=o.join(e[a.SERVICEHUB_CONTROLLER_COMPONENT_NAME],"Microsoft.VisualStudio.Code.ServiceController"),r=o.join(e[a.SERVICEHUB_HOST_COMPONENT_NAME],(0,a.getServiceHubHostEntrypointName)()),n=[(0,a.getServerPath)(e),t,r,(0,c.getReliabilityMonitorPath)(e)];await Promise.all(n.map((e=>(0,i.chmod)(e,"0755"))))}}' 't.setExecuteBit=async function(e){}'
   '';
 
   preFixup = ''
