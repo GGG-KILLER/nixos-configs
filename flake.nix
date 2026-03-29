@@ -166,6 +166,14 @@
           // {
             flood = packages.npm."@jesec/flood";
           }
+          // {
+            ggg-all-systems = pkgs.linkFarm "all-systems" {
+              jibril = self.nixosConfigurations.jibril.config.system.build.toplevel;
+              shiro = self.nixosConfigurations.shiro.config.system.build.toplevel;
+              sora = self.nixosConfigurations.sora.config.system.build.toplevel;
+              steph = self.nixosConfigurations.steph.config.system.build.toplevel;
+            };
+          }
         );
     };
 }
