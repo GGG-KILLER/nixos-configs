@@ -9,8 +9,8 @@
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:1c054d54ecd1597bba52f4304bca5afbc5565ebe614c5b3d7dc5b7f8a0cd768d";
-    hash = "sha256-gIuRfBIqUFc+jbzi0Ua3ct8ZP3STGM49rmTwy2dq3/s=";
+    imageDigest = "sha256:009cc37796fbdbe1b631b4cc0582bed167e5e403ed8bcd06f77eb6cb5aeb6f93";
+    hash = "sha256-xOmdelBmaRjdOGVwl/zx/6X/9HfqsZzzfkJpleyADyE=";
     finalImageName = "redis";
     finalImageTag = "latest";
   };
@@ -23,8 +23,8 @@
   };
   "jlesage/jdownloader-2:latest" = dockerTools.pullImage {
     imageName = "jlesage/jdownloader-2";
-    imageDigest = "sha256:48fc9f71588ea25cc7efdc31097fbd66c0a63ed318edbb036cb99366c3f9347f";
-    hash = "sha256-lCyRtkV/01MoLbRmmofsj1OilQHzJlxTFxO7x6alo1A=";
+    imageDigest = "sha256:3d6cb102bd9bacff12ab1ca5136a38cb8f93d6595a7ccf5bce60aac4df138ebd";
+    hash = "sha256-fRnyCcgRYHTYjU05usrNkqesuUrtDF6rmckMrkndAqs=";
     finalImageName = "jlesage/jdownloader-2";
     finalImageTag = "latest";
   };
@@ -79,8 +79,8 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:c19cf465d515082c68c722b5ecdc47fef15edc908524103f004c2a6d2c40cfce";
-    hash = "sha256-MbYlcZoVStxZD8ie10TaCEtcJBMiWLAZkQx99ffWBdg=";
+    imageDigest = "sha256:f8883d02ced98925c76f6e332e8dd5a53914a616b0dcb320e2b9ee4fa49eb4a1";
+    hash = "sha256-HqFh7gkCYcF8WikSBCgmZcEx5XGIZeafDu4V3JEO5o8=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };
