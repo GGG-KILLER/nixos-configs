@@ -94,6 +94,7 @@ in
       nvtopPackages.amd
 
       # Misc
+      glow
       iperf3
     ]
   );
