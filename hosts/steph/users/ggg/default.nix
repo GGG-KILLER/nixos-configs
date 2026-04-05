@@ -121,11 +121,7 @@
     };
 
     services = {
-      ssh-agent = {
-        enable = true;
-        enableBashIntegration = true;
-        enableZshIntegration = true;
-      };
+      ssh-agent.enable = true;
       easyeffects.enable = true;
       flameshot.enable = false;
       jellyfin-mpv-shim.enable = true;
