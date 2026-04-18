@@ -58,10 +58,11 @@
     ntfs = true;
   };
 
+  # TODO: Convert to boot.initrd.systemd.services (see bootup(7))
   # Make the root partition ephemeral
-  boot.initrd.postDeviceCommands = lib.mkAfter ''
-    zfs rollback -r rpool/nixos/root@blank
-  '';
+  # boot.initrd.postDeviceCommands = lib.mkAfter ''
+  #   zfs rollback -r rpool/nixos/root@blank
+  # '';
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
