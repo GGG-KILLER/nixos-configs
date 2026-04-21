@@ -9,6 +9,7 @@
     ./cockpit.nix
     ./docker-registry.nix
     ./glorp.nix
+    ./hedgedoc.nix
     ./home-assistant.nix
     #./n8n.nix
     ./openspeedtest.nix
