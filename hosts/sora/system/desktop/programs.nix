@@ -9,6 +9,15 @@ let
   inherit (self.packages.${system}) vivaldi-wayland;
 in
 {
+  # TODO: Remove when NixOS/nixpkgs#514113 has been closed
+  nixpkgs.overlays = [
+    (_: prev: {
+      openldap = prev.openldap.overrideAttrs {
+        doCheck = !prev.stdenv.hostPlatform.isi686;
+      };
+    })
+  ];
+
   environment.systemPackages = with pkgs; [
     # Games
     r2modman
