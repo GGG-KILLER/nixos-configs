@@ -2,15 +2,15 @@
 {
   "eclipse-mosquitto:2.0" = dockerTools.pullImage {
     imageName = "eclipse-mosquitto";
-    imageDigest = "sha256:6852da90a65dfff7aa3a1c8b249e92bb83c17ea8bbcce56bedff8707332a1a29";
-    hash = "sha256-LODqtehTDyaDQSFTg8Y1SpbZP/Fd/N8AtJRRW9u4t4g=";
+    imageDigest = "sha256:914f529386804c8278a4e581526b9be5e1604df44b30daabc70aa97dcefe5268";
+    hash = "sha256-Pd3HH2Ppki9hhx647CWXcw6JbEbsYhg2t0XkS4VPKlw=";
     finalImageName = "eclipse-mosquitto";
     finalImageTag = "2.0";
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:009cc37796fbdbe1b631b4cc0582bed167e5e403ed8bcd06f77eb6cb5aeb6f93";
-    hash = "sha256-xOmdelBmaRjdOGVwl/zx/6X/9HfqsZzzfkJpleyADyE=";
+    imageDigest = "sha256:832d7785830f3f4b559300e6191fc914b15642c1935252338825cf4332200148";
+    hash = "sha256-BlayEU/uaKgnLZQSJJ7ywb43ZkSpFQ3db+C16NWDGp0=";
     finalImageName = "redis";
     finalImageTag = "latest";
   };
@@ -30,8 +30,8 @@
   };
   "klausmeyer/docker-registry-browser:latest" = dockerTools.pullImage {
     imageName = "klausmeyer/docker-registry-browser";
-    imageDigest = "sha256:04c57880532f0fa55e3bb99d02fbb01afecd7ce9641dc8e15c077277fa15670b";
-    hash = "sha256-B1WKcLLyMy8raq7oW01uqzHmQ8d7q7moLHLrQV9fSBA=";
+    imageDigest = "sha256:78593b6cd4ddf12d335e7341a0aaca4a0ea9b781895ce0a536bdb801c700a4a5";
+    hash = "sha256-7LJ6rOObrKFpmahedt/aMwbn/eGiLWjs7+fb+p5U0h0=";
     finalImageName = "klausmeyer/docker-registry-browser";
     finalImageTag = "latest";
   };
@@ -79,8 +79,8 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:f8883d02ced98925c76f6e332e8dd5a53914a616b0dcb320e2b9ee4fa49eb4a1";
-    hash = "sha256-HqFh7gkCYcF8WikSBCgmZcEx5XGIZeafDu4V3JEO5o8=";
+    imageDigest = "sha256:af60a5dd3504c97d6734322fae46784146f2becb01ec14f6a66c7ebe79c681ed";
+    hash = "sha256-Mv/7AHS0XfpcpkHrkXbh6F0lhWCCGw879dE20Lh4EZk=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };
