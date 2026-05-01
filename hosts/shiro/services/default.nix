@@ -8,7 +8,6 @@
     ./cockpit.nix
     ./file-browser.nix
     ./hd-idle.nix
-    ./minio.nix
     ./nginx.nix
     ./zfs.nix
   ];
