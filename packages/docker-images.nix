@@ -9,8 +9,8 @@
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:832d7785830f3f4b559300e6191fc914b15642c1935252338825cf4332200148";
-    hash = "sha256-BlayEU/uaKgnLZQSJJ7ywb43ZkSpFQ3db+C16NWDGp0=";
+    imageDigest = "sha256:9ec28b9626938ae5dd565f3371fafd78d432cc049da5865726cd411dfb196c8d";
+    hash = "sha256-W1kyCJzK30iHmCWdGrUWDcbKe7vpwwx9fmMLjXoWJ2Q=";
     finalImageName = "redis";
     finalImageTag = "latest";
   };
