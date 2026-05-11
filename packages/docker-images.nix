@@ -84,4 +84,18 @@
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };
+  "ghcr.io/suwayomi/suwayomi-server:latest" = dockerTools.pullImage {
+    imageName = "ghcr.io/suwayomi/suwayomi-server";
+    imageDigest = "sha256:6bb8fa8cf1cf86589e5851f2f1c2ede5c8248d53982ec1795a715dcde85b1da2";
+    hash = "sha256-+QoJNBdrS/2k/T5ljPMZXQKUawVIb/iicrFYkhHppak=";
+    finalImageName = "ghcr.io/suwayomi/suwayomi-server";
+    finalImageTag = "latest";
+  };
+  "ghcr.io/thephaseless/byparr:latest" = dockerTools.pullImage {
+    imageName = "ghcr.io/thephaseless/byparr";
+    imageDigest = "sha256:01a46a2865d9a6db5eb8ead04ec0dd33b8fbe233e8565ae70b50d4cc0af4cfb0";
+    hash = "sha256-SujZfBhngyDfYTAMecMTMQ+vF4ldL4mQ8YrYY9sQbBY=";
+    finalImageName = "ghcr.io/thephaseless/byparr";
+    finalImageTag = "latest";
+  };
 }

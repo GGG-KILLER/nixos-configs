@@ -2,6 +2,7 @@
 {
   imports = [
     ./backup/restic.nix
+    ./media
     ./monitoring
     ./security
     ./btrfs.nix
