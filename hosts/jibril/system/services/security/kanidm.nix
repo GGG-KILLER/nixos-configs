@@ -5,7 +5,7 @@
     "sso-acme-http"
   ];
 
-  services.kanidm.package = pkgs.kanidm_1_9;
+  services.kanidm.package = pkgs.kanidm_1_10;
   services.kanidm.server.enable = true;
   services.kanidm.server.settings = {
     version = "2";
