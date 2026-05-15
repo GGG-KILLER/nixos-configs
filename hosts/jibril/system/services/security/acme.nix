@@ -103,6 +103,7 @@
         domains *.sora.lan
         domains *.steph.lan
         domains *.hass.lan
+        domains *.router.lan
       }
     }
   '';
