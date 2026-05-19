@@ -93,11 +93,10 @@ in
               exts-names: lib.listToAttrs (lib.filter (x: x != null) (lib.map mkOverride exts-names));
 
             names = [
+              "anthropic.claude-code"
               "dbaeumer.vscode-eslint"
               "editorconfig.editorconfig"
               "foxundermoon.shell-format"
-              "GitHub.copilot"
-              "GitHub.copilot-chat"
               "james-yu.latex-workshop"
               "jnoortheen.nix-ide"
               "ltex-plus.vscode-ltex-plus"
