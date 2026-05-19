@@ -5,6 +5,7 @@
 }:
 {
   boot.zfs.package = pkgs.zfs_unstable;
+  boot.zfs.forceImportRoot = true;
 
   # Expand all devices on boot
   services.zfs.expandOnBoot = "all";
