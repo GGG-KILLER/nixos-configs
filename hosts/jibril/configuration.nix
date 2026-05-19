@@ -10,6 +10,7 @@
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
+    self.nixosModules.oci-containers-networks
     self.nixosModules.server-profile
     self.nixosModules.home-network-addrs
     self.nixosModules.angrr

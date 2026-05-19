@@ -11,40 +11,9 @@ in
 {
   jibril.dynamic-ports = [ "netprobe" ];
 
-  systemd.services."${config.virtualisation.oci-containers.backend}-netprobe-network" =
-    let
-      backend = config.virtualisation.oci-containers.backend;
-    in
-    {
-      wantedBy = [ "multi-user.target" ];
-      after = [
-        "docker.service"
-        "docker.socket"
-      ];
-      before = [
-        "${backend}-netprobe-redis.service"
-        "${backend}-netprobe-probe.service"
-        "${backend}-netprobe-presentation.service"
-      ];
-      requiredBy = [
-        "${backend}-netprobe-redis.service"
-        "${backend}-netprobe-probe.service"
-        "${backend}-netprobe-presentation.service"
-      ];
-
-      serviceConfig =
-        let
-          backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
-        in
-        {
-          Type = "simple";
-          RemainAfterExit = "yes";
-
-          ExecStartPre = "-${backendBin} network rm netprobe";
-          ExecStart = "${backendBin} network create --ipv6 netprobe";
-          ExecStop = "${backendBin} network rm netprobe";
-        };
-    };
+  virtualisation.oci-containers.networks.netprobe = {
+    ipv6 = true;
+  };
 
   virtualisation.oci-containers.containers.netprobe-redis = rec {
     imageFile = self.packages.${system}.docker-images."redis:latest";
@@ -52,10 +21,8 @@ in
 
     environmentFiles = [ config.age.secrets."netprobe.env".path ];
     volumes = [ "${./redis.conf}:/etc/redis/redis.conf:ro" ];
-    extraOptions = [
-      "--network=netprobe"
-      "--ipc=none"
-    ];
+    networks = [ "netprobe" ];
+    extraOptions = [ "--ipc=none" ];
   };
 
   virtualisation.oci-containers.containers.netprobe-probe = {
@@ -65,10 +32,8 @@ in
     };
     environmentFiles = [ config.age.secrets."netprobe.env".path ];
     volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
-    extraOptions = [
-      "--network=netprobe"
-      "--ipc=none"
-    ];
+    networks = [ "netprobe" ];
+    extraOptions = [ "--ipc=none" ];
   };
 
   virtualisation.oci-containers.containers.netprobe-presentation = {
@@ -79,10 +44,8 @@ in
     environmentFiles = [ config.age.secrets."netprobe.env".path ];
     volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
     ports = [ "${toString config.jibril.ports.netprobe}:5000" ];
-    extraOptions = [
-      "--network=netprobe"
-      "--ipc=none"
-    ];
+    networks = [ "netprobe" ];
+    extraOptions = [ "--ipc=none" ];
   };
 
   services.prometheus.scrapeConfigs = [
