@@ -13,7 +13,6 @@
     ./hedgedoc.nix
     ./home-assistant.nix
     #./n8n.nix
-    ./openspeedtest.nix
     ./postgres.nix
   ];
 
