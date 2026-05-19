@@ -9,7 +9,7 @@
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:9ec28b9626938ae5dd565f3371fafd78d432cc049da5865726cd411dfb196c8d";
+    imageDigest = "sha256:0c341492924cad6f5483f9133e43bd6c51ecdecbcadfac5b51657393b6a7936c";
     hash = "sha256-W1kyCJzK30iHmCWdGrUWDcbKe7vpwwx9fmMLjXoWJ2Q=";
     finalImageName = "redis";
     finalImageTag = "latest";
@@ -79,10 +79,24 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:af60a5dd3504c97d6734322fae46784146f2becb01ec14f6a66c7ebe79c681ed";
-    hash = "sha256-Mv/7AHS0XfpcpkHrkXbh6F0lhWCCGw879dE20Lh4EZk=";
+    imageDigest = "sha256:8e5ed623422b61a846499fab7291afffc18f52884e080b30df37b4d6c5e26b97";
+    hash = "sha256-nEwtBViYquAE1p9iM7HHsP77lMRYIBaVhCM4mcNHaz8=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
+  };
+  "ghcr.io/home-assistant/home-assistant:stable" = dockerTools.pullImage {
+    imageName = "ghcr.io/home-assistant/home-assistant";
+    imageDigest = "sha256:ff875078181a0383bf3fca9f061be12d6180896dbd531de04e094e25505b0bb9";
+    hash = "sha256-kf5KkHVxnb8ygztd05jpOsMIfoe4xydX9WQbrsVEPTw=";
+    finalImageName = "ghcr.io/home-assistant/home-assistant";
+    finalImageTag = "stable";
+  };
+  "ghcr.io/koenkk/zigbee2mqtt:latest" = dockerTools.pullImage {
+    imageName = "ghcr.io/koenkk/zigbee2mqtt";
+    imageDigest = "sha256:67c26dcf8346aced02fe1380a6afd1b57268bcef10faae3f6057c13d5d3dfa80";
+    hash = "sha256-4Z+6Th9TE4Yp9Vw2nvJqdAXek5uOHfaHw7DN45DQyvk=";
+    finalImageName = "ghcr.io/koenkk/zigbee2mqtt";
+    finalImageTag = "latest";
   };
   "ghcr.io/suwayomi/suwayomi-server:latest" = dockerTools.pullImage {
     imageName = "ghcr.io/suwayomi/suwayomi-server";

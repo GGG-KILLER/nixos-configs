@@ -31,6 +31,8 @@ function write-image() {
     write-image "docker.lan/downloader/frontend"
     write-image "ghcr.io/danbooru/autotagger"
     write-image "ghcr.io/danbooru/danbooru" "master"
+    write-image "ghcr.io/home-assistant/home-assistant" "stable"
+    write-image "ghcr.io/koenkk/zigbee2mqtt"
     write-image "ghcr.io/suwayomi/suwayomi-server"
     write-image "ghcr.io/thephaseless/byparr"
 
