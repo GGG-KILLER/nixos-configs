@@ -101,6 +101,7 @@
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };
 
+      nixosModules.oci-containers-networks = import ./modules/oci-containers/networks.nix;
       nixosModules.angrr = import ./modules/angrr.nix;
       nixosModules.caddy = import ./modules/caddy.nix;
       nixosModules.common-programs = import ./modules/common/common-programs.nix;
