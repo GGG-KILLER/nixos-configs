@@ -68,6 +68,7 @@ in
       xh
       uutils-coreutils-noprefix
       nvtopPackages.amd
+      (motus.override { withClipboard = false; })
 
       # Misc
       glow
