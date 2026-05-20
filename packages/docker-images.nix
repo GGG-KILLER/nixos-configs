@@ -1,11 +1,11 @@
 { dockerTools }:
 {
-  "eclipse-mosquitto:2.0" = dockerTools.pullImage {
+  "eclipse-mosquitto:2.1-alpine" = dockerTools.pullImage {
     imageName = "eclipse-mosquitto";
-    imageDigest = "sha256:914f529386804c8278a4e581526b9be5e1604df44b30daabc70aa97dcefe5268";
-    hash = "sha256-Pd3HH2Ppki9hhx647CWXcw6JbEbsYhg2t0XkS4VPKlw=";
+    imageDigest = "sha256:a908c65cc8e67ec9d292ef27c2c0360dbaaee7eb1b935cdd194e67697f15dea1";
+    hash = "sha256-ILI5MOApV9eNT7l4Vd6PqvTD/aBmd/QgVb/sgdTKXjM=";
     finalImageName = "eclipse-mosquitto";
-    finalImageTag = "2.0";
+    finalImageTag = "2.1-alpine";
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";

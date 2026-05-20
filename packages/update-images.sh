@@ -19,7 +19,7 @@ function write-image() {
 {
     echo '{ dockerTools }:{'
 
-    write-image "eclipse-mosquitto" "2.0"
+    write-image "eclipse-mosquitto" "2.1-alpine"
     write-image "redis"
     write-image "evazion/iqdb"
     write-image "jlesage/jdownloader-2"
