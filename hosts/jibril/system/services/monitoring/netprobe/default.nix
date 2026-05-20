@@ -11,9 +11,7 @@ in
 {
   jibril.dynamic-ports = [ "netprobe" ];
 
-  virtualisation.oci-containers.networks.netprobe = {
-    ipv6 = true;
-  };
+  virtualisation.oci-containers.networks.netprobe = { };
 
   virtualisation.oci-containers.containers.netprobe-redis = rec {
     imageFile = self.packages.${system}.docker-images."redis:latest";
