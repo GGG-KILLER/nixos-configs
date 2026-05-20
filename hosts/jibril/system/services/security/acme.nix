@@ -16,11 +16,6 @@
   };
 
   # Secrets
-  age.secrets."root.key" = {
-    file = ../../../../../secrets/jibril/ca/root.key.age;
-    owner = config.services.caddy.user;
-    group = config.services.caddy.group;
-  };
   age.secrets."intermediate.key" = {
     file = ../../../../../secrets/jibril/ca/intermediate.key.age;
     owner = config.services.caddy.user;
@@ -36,7 +31,6 @@
         root {
           format pem_file
           cert ${config.ggg.home-pki.root-certificate}
-          key ${config.age.secrets."root.key".path}
         }
 
         intermediate {
@@ -88,6 +82,11 @@
           openssl x509 -in "$intermediateCert" -out "$out"/intermediate.der
         ''
     }
+
+    # Force file downloads
+    @certs path *.pem *.cer *.crt *.pfx *.der
+    header @certs Content-Disposition "attachment"
+
     file_server {
       pass_thru
     }

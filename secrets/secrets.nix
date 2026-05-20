@@ -120,10 +120,6 @@ in
   ];
 
   # Jibril - CA
-  "jibril/ca/root.key.age".publicKeys = [
-    ggg
-    jibril
-  ];
   "jibril/ca/intermediate.key.age".publicKeys = [
     ggg
     jibril
