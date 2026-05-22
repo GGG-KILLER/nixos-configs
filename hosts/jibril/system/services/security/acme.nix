@@ -94,6 +94,8 @@
     # Handle ACME for rest
     acme_server {
       ca home
+      lifetime 36h
+      resolvers 10.0.0.1
 
       allow {
         domains *.lan
