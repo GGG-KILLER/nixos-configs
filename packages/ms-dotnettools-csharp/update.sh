@@ -41,5 +41,4 @@ update_hash() {
 
 update_hash x86_64-linux linux-x64
 update_hash aarch64-linux linux-arm64
-update_hash x86_64-darwin darwin-x64
 update_hash aarch64-darwin darwin-arm64

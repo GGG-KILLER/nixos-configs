@@ -22,10 +22,6 @@ let
         arch = "linux-arm64";
         hash = "sha256-7YtZkjNf16k1Uzq19PLBn7UzR3jndLuhwH00bBdN/Mc=";
       };
-      x86_64-darwin = {
-        arch = "darwin-x64";
-        hash = "sha256-0rsLLFZKTEmkIkzuOi4IRdsSf5vMeuPw2DaY8qk5tOM=";
-      };
       aarch64-darwin = {
         arch = "darwin-arm64";
         hash = "sha256-rWnhfDSeqpzFKBxLt6q3V6Lxw3jjUi11APDzEzPVNnE=";
@@ -140,7 +136,6 @@ vscode-utils.buildVscodeMarketplaceExtension {
     platforms = [
       "x86_64-linux"
       "aarch64-linux"
-      "x86_64-darwin"
       "aarch64-darwin"
     ];
   };
