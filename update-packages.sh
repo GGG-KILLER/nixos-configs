@@ -3,10 +3,6 @@
 # shellcheck shell=bash
 set -euo pipefail
 
-# Update packages nix-update supports
-nix-update --flake --version unstable --format --commit ytmd
-
-
 get-version() {
     nix-instantiate --eval -E "with import ./. {}; $1.version or (lib.getVersion $1)" | tr -d '"'
 }
