@@ -9,8 +9,8 @@
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:0c341492924cad6f5483f9133e43bd6c51ecdecbcadfac5b51657393b6a7936c";
-    hash = "sha256-W1kyCJzK30iHmCWdGrUWDcbKe7vpwwx9fmMLjXoWJ2Q=";
+    imageDigest = "sha256:aa049e689e141a4358ad1d4562dc49c88a89fbab711fd8fcc33f684c80b26301";
+    hash = "sha256-9DqpGkaMKu8Rr64vHbtnxplp3KHxwVVUbW91JszY4P4=";
     finalImageName = "redis";
     finalImageTag = "latest";
   };
@@ -72,15 +72,15 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:8e5ed623422b61a846499fab7291afffc18f52884e080b30df37b4d6c5e26b97";
-    hash = "sha256-nEwtBViYquAE1p9iM7HHsP77lMRYIBaVhCM4mcNHaz8=";
+    imageDigest = "sha256:221efce04096e1b84170f26cfb59f97709c351bd040e9e6e3ebd1e5044a3af13";
+    hash = "sha256-U4eC8brU7ojXwCSHCCA/eUe9ASu5p0dZnn2tiPlXv5M=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };
   "ghcr.io/home-assistant/home-assistant:stable" = dockerTools.pullImage {
     imageName = "ghcr.io/home-assistant/home-assistant";
-    imageDigest = "sha256:ff875078181a0383bf3fca9f061be12d6180896dbd531de04e094e25505b0bb9";
-    hash = "sha256-kf5KkHVxnb8ygztd05jpOsMIfoe4xydX9WQbrsVEPTw=";
+    imageDigest = "sha256:ceb1202133a5a036e8b03e20a10eb113186cc2f871968323c6fc6c3fc4205716";
+    hash = "sha256-9fKeywVIQtYE9kfUq9WHa6+PA6kQXRN2Ed5+m3RF/lk=";
     finalImageName = "ghcr.io/home-assistant/home-assistant";
     finalImageTag = "stable";
   };
