@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p nix-update coreutils
+#! nix-shell -i bash -p nix-update coreutils jq
 # shellcheck shell=bash
 set -euo pipefail
 
@@ -47,3 +47,28 @@ for script_path in packages/*/update.sh; do
     git add "$package_dir"
     git commit -m "$package: $old_ver -> $new_ver"
 done
+
+get-images-digests() {
+    nix-instantiate --eval --strict --json -E 'with import ./. {}; builtins.removeAttrs (builtins.mapAttrs (_: img: img.drvAttrs.imageDigest) docker-images) ["override" "overrideDerivation"]'
+}
+
+old_digests="$(get-images-digests)"
+
+packages/update-images.sh
+
+new_digests="$(get-images-digests)"
+
+changes="$(jq -rn \
+    --argjson old "$old_digests" \
+    --argjson new "$new_digests" \
+    '($new | keys_unsorted[]) as $k |
+     select($old[$k] != $new[$k]) |
+     "- \($k): \($old[$k]) -> \($new[$k])"'
+)"
+
+if [ -n "$changes" ]; then
+    git add packages/docker-images.nix
+    git commit -m "$(printf 'docker-images.nix: update images\n%s' "$changes")"
+else
+    echo "docker-images.nix: no changes."
+fi
