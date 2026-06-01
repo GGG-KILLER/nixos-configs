@@ -1,7 +1,6 @@
-{ self, config, ... }:
+{ config, ... }:
 {
   my.networking.qbittorrent = {
-    extraNames = [ "flood" ];
     mainAddr = config.home.addrs.shiro-qbittorrent;
     ports = [
       {
@@ -55,8 +54,6 @@
       {
         lib,
         config,
-        pkgs,
-        system,
         ...
       }:
       {
@@ -76,65 +73,23 @@
           web.port = config.shiro.ports.qbittorrent-web;
         };
 
-        # # Flood
-        # modules.services.flood = {
-        #   enable = true;
-        #   package = self.packages.${system}.flood;
-        #   rundir = "/mnt/qbittorrent/flood";
-        #   auth = "none";
-        #   allowedpath = [
-        #     "/mnt/animu"
-        #     "/mnt/series"
-        #     "/mnt/h"
-        #     "/mnt/etc"
-        #   ];
-        #   qbittorrent = {
-        #     url = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
-        #     user = "admin";
-        #     password = config.my.secrets.modules.services.qbittorrent.web.password;
-        #   };
-        #   web.port = config.shiro.ports.flood;
-        # };
-
         # NGINX
         modules.services.nginx = {
           enable = true;
           proxyTimeout = "12h";
 
-          virtualHosts = {
-            "flood.lan" = {
-              default = true;
-              ssl = true;
-              root = "${pkgs.flood}/lib/node_modules/flood/dist/assets";
-              locations."/" = {
-                # sso = true;
-                tryFiles = "$uri /index.html";
-              };
-              locations."/api" = {
-                proxyPass = "http://127.0.0.1:${toString config.modules.services.flood.web.port}";
-                recommendedProxySettings = true;
-                proxyWebsockets = true;
-                # sso = true;
-                extraConfig = ''
-                  client_max_body_size 0;
-                  proxy_buffering off;
-                  proxy_cache off;
-                '';
-              };
-            };
-            "qbittorrent.lan" = {
-              ssl = true;
-              locations."/" = {
-                proxyPass = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
-                recommendedProxySettings = true;
-                proxyWebsockets = true;
-                # sso = true;
-                extraConfig = ''
-                  client_max_body_size 0;
-                  proxy_buffering off;
-                  proxy_cache off;
-                '';
-              };
+          virtualHosts."qbittorrent.lan" = {
+            ssl = true;
+            locations."/" = {
+              proxyPass = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
+              recommendedProxySettings = true;
+              proxyWebsockets = true;
+              # sso = true;
+              extraConfig = ''
+                client_max_body_size 0;
+                proxy_buffering off;
+                proxy_cache off;
+              '';
             };
           };
         };

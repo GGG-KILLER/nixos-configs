@@ -28,11 +28,8 @@
     let
       services = [
         # Downloaders
-        "downloader"
-        "flood"
         "jackett"
         "jdownloader"
-        "live-stream-dvr"
         "qbittorrent-web"
         "sonarr"
 

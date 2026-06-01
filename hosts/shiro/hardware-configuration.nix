@@ -110,12 +110,6 @@ in
     ];
   };
 
-  fileSystems."/storage/services/live-stream-dvr" = {
-    enable = enable-hdds;
-    device = "storage/services/live-stream-dvr";
-    fsType = "zfs";
-  };
-
   fileSystems."/storage/services/danbooru" = {
     enable = enable-hdds;
     device = "storage/services/danbooru";

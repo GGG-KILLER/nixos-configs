@@ -164,9 +164,6 @@
           in
           (pkgs.lib.filterAttrs (name: value: name != "npm") packages)
           // {
-            flood = packages.npm."@jesec/flood";
-          }
-          // {
             ggg-all-systems = pkgs.linkFarm "all-systems" {
               jibril = self.nixosConfigurations.jibril.config.system.build.toplevel;
               shiro = self.nixosConfigurations.shiro.config.system.build.toplevel;
