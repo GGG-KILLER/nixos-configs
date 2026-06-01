@@ -148,10 +148,6 @@ in
   ];
 
   # Shiro
-  "shiro/minio.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
   "shiro/danbooru.env.age".publicKeys = [
     ggg
     shiro

@@ -27,10 +27,6 @@
   // (
     let
       services = [
-        # MinIO
-        "minio"
-        "minio-console"
-
         # Downloaders
         "downloader"
         "flood"

@@ -128,12 +128,6 @@ in
     fsType = "zfs";
   };
 
-  fileSystems."/storage/minio" = {
-    enable = enable-hdds;
-    device = "storage/minio";
-    fsType = "zfs";
-  };
-
   fileSystems."/storage/h" = {
     enable = enable-hdds;
     device = "storage/h";
