@@ -188,8 +188,8 @@ with lib;
                         flatten (map (portDef: portDef.port) (filter (portDef: portDef.protocol == proto) netCfg.ports));
                     in
                     {
-                      allowedTCPPorts = getPorts "tcp" ++ getPorts "http";
-                      allowedUDPPorts = getPorts "udp";
+                      allowedTCPPorts = getPorts "tcp" ++ getPorts "http" ++ getPorts "https";
+                      allowedUDPPorts = getPorts "udp" ++ getPorts "https";
                     };
                 };
 

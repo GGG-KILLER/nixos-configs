@@ -15,6 +15,7 @@ let
       protocol = mkOption {
         type = types.enum [
           "http"
+          "https"
           "tcp"
           "udp"
         ];
