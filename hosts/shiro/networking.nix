@@ -134,7 +134,8 @@ in
         // {
           ${config.home.addrs.jibril} = [
             "jibril.lan"
-            "ca.lan docker.lan"
+            "ca.lan"
+            "docker.lan"
             "postgres.lan"
             "prometheus.jibril.lan"
             "sso.lan"
