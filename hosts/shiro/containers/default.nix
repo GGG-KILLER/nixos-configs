@@ -129,6 +129,7 @@ with lib;
                 server-services
                 users
                 zsh
+                caddy
                 ../../../common/secrets
 
                 ../ports.nix
@@ -170,6 +171,9 @@ with lib;
                   useDHCP = mkOverride 900 false;
                   enableIPv6 = mkOverride 900 false;
                   hostName = name;
+                  # Add the .lan to the end of the hostname in fqdn and dns searches
+                  domain = "lan";
+                  search = [ "lan" ];
                   defaultGateway = mkOverride 900 (if cfg.vpn then vpnNetCfg.mainAddr else config.home.addrs.router);
                   useHostResolvConf = false;
                   nameservers = containerCfg.nameservers;

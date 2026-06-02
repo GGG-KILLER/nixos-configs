@@ -10,6 +10,22 @@ let
     removeSuffix
     filter
     ;
+
+  stripScheme =
+    name:
+    let
+      m = builtins.match "https?://(.*)" name;
+    in
+    if m != null then builtins.head m else name;
+
+  stripPort =
+    name:
+    let
+      m = builtins.match "([^:]*):([0-9]+)" name;
+    in
+    if m != null then builtins.head m else name;
+
+  extractCaddyHost = name: stripPort (stripScheme name);
   portOptions = {
     options = {
       protocol = mkOption {
@@ -71,7 +87,7 @@ in
         [ ]
         ++ (map (name: removeSuffix ".lan" name) (
           filter (name: removeSuffix ".lan" name != name) (
-            builtins.attrNames config.services.nginx.virtualHosts
+            map extractCaddyHost (builtins.attrNames config.services.caddy.virtualHosts)
           )
         ));
     };

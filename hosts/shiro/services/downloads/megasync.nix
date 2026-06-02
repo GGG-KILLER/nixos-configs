@@ -87,15 +87,6 @@ in
       extraGroups = [ "users" ];
     };
 
-    modules.services.nginx.virtualHosts."mega.shiro.lan" = {
-      ssl = true;
-
-      locations."/" = {
-        proxyPass = "http://unix:/run/mega-sync/mega-sync.socket";
-        recommendedProxySettings = true;
-        proxyWebsockets = true;
-        # sso = true;
-      };
-    };
+    services.caddy.virtualHosts."mega.shiro.lan".extraConfig = "reverse_proxy unix//run/mega-sync/mega-sync.socket";
   };
 }

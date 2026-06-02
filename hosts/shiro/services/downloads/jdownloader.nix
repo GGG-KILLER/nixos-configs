@@ -41,30 +41,14 @@
     ];
   };
 
-  security.acme.certs."jd.${config.networking.fqdn}" = {
-    email = "jd@${config.networking.fqdn}";
-    postRun = ''
-      cp fullchain.pem /var/lib/jdownloader2/certs/web-fullchain.pem
-      cp key.pem /var/lib/jdownloader2/certs/web-privkey.pem
-
-      chown downloader:data-members /var/lib/jdownloader2/certs/web-{fullchain,privkey}.pem
-      chmod a=r,u+w /var/lib/jdownloader2/certs/web-fullchain.pem
-      chmod a=,u=r /var/lib/jdownloader2/certs/web-privkey.pem
-    '';
-  };
-
-  modules.services.nginx.virtualHosts."jd.${config.networking.fqdn}" = {
-    ssl = true;
-
-    locations."/" = {
-      proxyPass = "https://127.0.0.1:${toString config.shiro.ports.jdownloader}/";
-      recommendedProxySettings = true;
-      proxyWebsockets = true;
-      extraConfig = ''
-        proxy_buffering off;
-        proxy_read_timeout 86400s;
-        proxy_send_timeout 86400s;
-      '';
-    };
-  };
+  services.caddy.virtualHosts."jd.${config.networking.fqdn}".extraConfig = ''
+    reverse_proxy https://127.0.0.1:${toString config.shiro.ports.jdownloader} {
+      transport http {
+        tls_insecure_skip_verify
+        read_timeout 24h
+        write_timeout 24h
+      }
+      flush_interval -1
+    }
+  '';
 }

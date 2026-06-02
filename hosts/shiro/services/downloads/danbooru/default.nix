@@ -204,17 +204,10 @@ in
       ];
     };
 
-    # This is only for the nginx config of the danbooru.
-    modules.services.nginx.virtualHosts."booru.shiro.lan" = {
-      ssl = true;
-      locations."/" = {
-        recommendedProxySettings = true;
-        proxyPass = "http://127.0.0.1:${toString config.shiro.ports.danbooru}";
-        extraConfig = ''
-          # Not set by default by recommendedProxySettings
-          proxy_set_header X-Forwarded-Port $server_port;
-        '';
-      };
-    };
+    services.caddy.virtualHosts."booru.shiro.lan".extraConfig = ''
+      reverse_proxy http://127.0.0.1:${toString config.shiro.ports.danbooru} {
+        header_up X-Forwarded-Port {http.request.local.port}
+      }
+    '';
   };
 }

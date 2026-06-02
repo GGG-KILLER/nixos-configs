@@ -23,12 +23,12 @@ in
       {
         protocol = "http";
         port = 80;
-        description = "Local NGINX";
+        description = "Caddy";
       }
       {
-        protocol = "http";
+        protocol = "https";
         port = 443;
-        description = "Local Nginx";
+        description = "Caddy";
       }
     ];
   };
@@ -123,45 +123,11 @@ in
 
         environment.systemPackages = [ pkgs.jellyfin-ffmpeg ];
 
-        # NGINX
-        modules.services.nginx = {
-          enable = true;
-          proxyTimeout = "12h";
-
-          virtualHosts."jellyfin.lan" = {
-            ssl = true;
-
-            extraConfig = ''
-              # Security / XSS Mitigation Headers
-              add_header X-Frame-Options "SAMEORIGIN";
-              add_header X-XSS-Protection "1; mode=block";
-              add_header X-Content-Type-Options "nosniff";
-            '';
-
-            locations."= /" = {
-              return = "302 http://$host/web/";
-            };
-
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:8096";
-              recommendedProxySettings = true;
-              proxyWebsockets = true;
-              extraConfig = ''
-                # Disable buffering when the nginx proxy gets very resource heavy upon streaming
-                proxy_buffering off;
-              '';
-            };
-
-            # location block for /web - This is purely for aesthetics so /web/#!/ works instead of having to go to /web/index.html/#!/
-            locations."= /web/" = {
-              proxyPass = "http://127.0.0.1:8096/web/index.html";
-              recommendedProxySettings = true;
-              extraConfig = ''
-                # Disable buffering when the nginx proxy gets very resource heavy upon streaming
-                proxy_buffering off;
-              '';
-            };
-          };
+        # Caddy
+        ggg.caddy.enable = true;
+        services.caddy.virtualHosts = {
+          "jellyfin.lan".extraConfig = "reverse_proxy http://127.0.0.1:8096";
+          "http://jellyfin.lan".extraConfig = "reverse_proxy http://127.0.0.1:8096";
         };
       };
   };

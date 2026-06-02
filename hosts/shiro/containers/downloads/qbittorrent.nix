@@ -16,12 +16,12 @@
       {
         protocol = "http";
         port = 80;
-        description = "Local NGINX";
+        description = "Caddy";
       }
       {
         protocol = "http";
         port = 443;
-        description = "Local Nginx";
+        description = "Caddy";
       }
     ];
   };
@@ -73,26 +73,10 @@
           web.port = config.shiro.ports.qbittorrent-web;
         };
 
-        # NGINX
-        modules.services.nginx = {
-          enable = true;
-          proxyTimeout = "12h";
-
-          virtualHosts."qbittorrent.lan" = {
-            ssl = true;
-            locations."/" = {
-              proxyPass = "http://127.0.0.1:${toString config.modules.services.qbittorrent.web.port}";
-              recommendedProxySettings = true;
-              proxyWebsockets = true;
-              # sso = true;
-              extraConfig = ''
-                client_max_body_size 0;
-                proxy_buffering off;
-                proxy_cache off;
-              '';
-            };
-          };
-        };
+        # Caddy
+        ggg.caddy.enable = true;
+        services.caddy.virtualHosts."qbittorrent.lan".extraConfig =
+          "reverse_proxy http://127.0.0.1:${toString config.services.qbittorrent.webuiPort}";
       };
   };
 }
