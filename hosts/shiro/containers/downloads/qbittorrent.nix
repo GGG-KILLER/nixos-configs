@@ -40,8 +40,8 @@
       h = true;
     };
     bindMounts = {
-      "/mnt/qbittorrent" = {
-        hostPath = "/var/lib/qbittorrent";
+      "/var/lib/qBittorrent" = {
+        hostPath = "/var/lib/qBittorrent";
         isReadOnly = false;
       };
     };
@@ -53,6 +53,7 @@
     config =
       {
         lib,
+        pkgs,
         config,
         ...
       }:
@@ -64,13 +65,13 @@
           ];
 
         # qBitTorrent
-        modules.services.qbittorrent = {
+        services.qbittorrent = {
           enable = true;
+          package = pkgs.qbittorrent-nox;
           user = "my-torrent";
           group = "data-members";
-          dataDir = "/mnt/qbittorrent/qbittorrent";
-
-          web.port = config.shiro.ports.qbittorrent-web;
+          profileDir = "/var/lib/qBittorrent";
+          webuiPort = config.shiro.ports.qbittorrent-web;
         };
 
         # Caddy
