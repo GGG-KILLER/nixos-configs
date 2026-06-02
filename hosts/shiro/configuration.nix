@@ -9,7 +9,7 @@
     self.nixosModules.server-profile
     self.nixosModules.angrr
     self.nixosModules.home-network-addrs
-    self.nixosModules.remote-build
+    self.nixosModules.caddy
     ./containers
     ./hardware
     ./services
