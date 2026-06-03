@@ -6,14 +6,13 @@
   ...
 }:
 let
-  inherit (lib) map mkMerge mkIf;
+  inherit (lib) mkMerge mkIf;
 
   imagesPath = "/storage/services/danbooru/images";
 
   defaultContainerFlags = [
     "--dns=${config.home.addrs.router}"
     "--ipc=none"
-    "--network=danbooru"
   ];
 
   danbooruContainerBase = rec {
@@ -34,6 +33,8 @@ let
       RAILS_LOG_LEVEL = "info";
     };
     environmentFiles = [ config.age.secrets."danbooru.env".path ];
+
+    networks = [ "danbooru" ];
 
     volumes = [
       "${./danbooru_local_config.rb}:/danbooru/config/danbooru_local_config.rb:ro"
@@ -57,41 +58,7 @@ let
 in
 {
   config = mkIf (!config.cost-saving.enable || !config.cost-saving.disable-downloaders) {
-    systemd.services."${config.virtualisation.oci-containers.backend}-danbooru-network" =
-      let
-        backend = config.virtualisation.oci-containers.backend;
-        containers = [
-          "danbooru-danbooru"
-          "danbooru-cron"
-          "danbooru-jobs"
-          "danbooru-iqdb"
-          "danbooru-redis"
-          "danbooru-nginx"
-          "danbooru-autotagger"
-        ];
-      in
-      {
-        wantedBy = [ "multi-user.target" ];
-        after = [
-          "docker.service"
-          "docker.socket"
-        ];
-        before = map (name: "${backend}-${name}.service") containers;
-        requiredBy = map (name: "${backend}-${name}.service") containers;
-
-        serviceConfig =
-          let
-            backendBin = "${config.virtualisation.${backend}.package}/bin/${backend}";
-          in
-          {
-            Type = "simple";
-            RemainAfterExit = "yes";
-
-            ExecStartPre = "-${backendBin} network rm danbooru";
-            ExecStart = "${backendBin} network create danbooru";
-            ExecStop = "${backendBin} network rm danbooru";
-          };
-      };
+    virtualisation.oci-containers.networks.danbooru = { };
 
     virtualisation.oci-containers.containers.danbooru-danbooru = mkMerge [
       danbooruContainerBase
@@ -155,6 +122,7 @@ in
         "/storage/services/danbooru/iqdb:/iqdb/data"
       ];
 
+      networks = [ "danbooru" ];
       extraOptions = defaultContainerFlags ++ [
         "--network-alias=iqdb"
       ];
@@ -164,6 +132,7 @@ in
       imageFile = self.packages.${system}.docker-images."redis:latest";
       image = imageFile.destNameTag;
 
+      networks = [ "danbooru" ];
       extraOptions = defaultContainerFlags ++ [
         "--network-alias=redis"
       ];
@@ -185,6 +154,7 @@ in
         inherit (danbooruContainerBase.environment) DANBOORU_REVERSE_PROXY DANBOORU_CANONICAL_URL;
       };
 
+      networks = [ "danbooru" ];
       volumes = [
         "${./nginx.conf}:/usr/local/nginx/conf/nginx.conf:ro"
         "${imagesPath}:/images"
@@ -199,6 +169,7 @@ in
       imageFile = self.packages.${system}.docker-images."ghcr.io/danbooru/autotagger:latest";
       image = imageFile.destNameTag;
 
+      networks = [ "danbooru" ];
       extraOptions = defaultContainerFlags ++ [
         "--network-alias=autotagger"
       ];

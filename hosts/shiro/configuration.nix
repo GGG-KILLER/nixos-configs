@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    self.nixosModules.oci-containers-networks
     self.nixosModules.server-profile
     self.nixosModules.angrr
     self.nixosModules.home-network-addrs
