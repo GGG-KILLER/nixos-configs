@@ -22,7 +22,7 @@
       "/var/lib/qbittorrent"
       "/var/lib/sonarr"
     ]
-    ++ lib.optionals (!config.cost-saving.enable) [
+    ++ lib.optionals (!config.cost-saving.enable || !config.cost-saving.disable-hdds) [
       "/storage/etc"
       "/storage/h"
       "/storage/series"
