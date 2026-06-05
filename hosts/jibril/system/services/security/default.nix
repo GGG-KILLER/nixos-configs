@@ -1,7 +1,8 @@
 { ... }:
 {
   imports = [
-    ./kanidm.nix
     ./acme.nix
+    ./kanidm.nix
+    ./vault.nix
   ];
 }

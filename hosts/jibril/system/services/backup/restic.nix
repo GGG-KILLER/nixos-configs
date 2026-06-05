@@ -51,6 +51,7 @@
             "/var/lib/pgsql-prd" # only prod is worth backing up
             "/var/lib/step-ca"
             "/var/lib/prometheus2"
+            "/var/lib/openbao"
           ];
           extraBackupArgs = [
             "--tag files"
