@@ -32,9 +32,6 @@
 
     # NOTE: Needs to be a fixed port since we can't statically configure this through nix
     mqtt = 61001;
-
-    # NOTE: Cannot be a dynamic port since it has an external dependency.
-    wireguard = 61235;
   }
   // (
     let

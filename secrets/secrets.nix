@@ -93,32 +93,6 @@ in
     jibril
   ];
 
-  # Jibril - Wireguard
-  "jibril/wireguard/private_key.age".publicKeys = [
-    ggg
-    jibril
-  ];
-  "jibril/wireguard/laptop_psk.age".publicKeys = [
-    ggg
-    jibril
-  ];
-  "jibril/wireguard/phone_psk.age".publicKeys = [
-    ggg
-    jibril
-  ];
-  "jibril/wireguard/coffee_psk.age".publicKeys = [
-    ggg
-    jibril
-  ];
-  "jibril/wireguard/coffee2_psk.age".publicKeys = [
-    ggg
-    jibril
-  ];
-  "jibril/wireguard/night_psk.age".publicKeys = [
-    ggg
-    jibril
-  ];
-
   # Jibril - CA
   "jibril/ca/intermediate.key.age".publicKeys = [
     ggg
