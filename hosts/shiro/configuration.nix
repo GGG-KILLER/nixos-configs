@@ -17,6 +17,7 @@
     ./users
     ./boot.nix
     ./cost-saving.nix
+    ./disk-encryption.nix
     ./hardware-configuration.nix
     ./nat.nix
     ./networking.nix

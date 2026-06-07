@@ -105,8 +105,7 @@ in
     device = "/dev/disk/by-uuid/A4DE-1888";
     fsType = "vfat";
     options = [
-      "fmask=0022"
-      "dmask=0022"
+      "umask=0077"
     ];
   };
 
@@ -114,30 +113,55 @@ in
     enable = enable-hdds;
     device = "storage/services/danbooru";
     fsType = "zfs";
+    options = [
+      "x-systemd.requires=zfs-load-vault-keys.service"
+      "x-systemd.after=zfs-load-vault-keys.service"
+      "nofail"
+    ];
   };
 
   fileSystems."/storage/series" = {
     enable = enable-hdds;
     device = "storage/series";
     fsType = "zfs";
+    options = [
+      "x-systemd.requires=zfs-load-vault-keys.service"
+      "x-systemd.after=zfs-load-vault-keys.service"
+      "nofail"
+    ];
   };
 
   fileSystems."/storage/h" = {
     enable = enable-hdds;
     device = "storage/h";
     fsType = "zfs";
+    options = [
+      "x-systemd.requires=zfs-load-vault-keys.service"
+      "x-systemd.after=zfs-load-vault-keys.service"
+      "nofail"
+    ];
   };
 
   fileSystems."/storage/etc" = {
     enable = enable-hdds;
     device = "storage/etc";
     fsType = "zfs";
+    options = [
+      "x-systemd.requires=zfs-load-vault-keys.service"
+      "x-systemd.after=zfs-load-vault-keys.service"
+      "nofail"
+    ];
   };
 
   fileSystems."/storage/animu" = {
     enable = enable-hdds;
     device = "storage/animu";
     fsType = "zfs";
+    options = [
+      "x-systemd.requires=zfs-load-vault-keys.service"
+      "x-systemd.after=zfs-load-vault-keys.service"
+      "nofail"
+    ];
   };
 
   swapDevices = [ ];

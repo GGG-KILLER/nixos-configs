@@ -6,6 +6,12 @@
     "danbooru.env".file = ../../secrets/shiro/danbooru.env.age;
     "mikochi.env".file = ../../secrets/shiro/mikochi.env.age;
 
+    "zfs_encryption_vault_creds.env" = {
+      file = ../../secrets/shiro/zfs_encryption_vault_creds.env.age;
+      owner = "root";
+      mode = "0600";
+    };
+
     containers_vpn-gateway_mullvad-privkey = {
       file = ../../secrets/shiro/vpn-gateway/mullvad_private_key.age;
       path = "/run/container-secrets/vpn-gateway/mullvad-privkey";
