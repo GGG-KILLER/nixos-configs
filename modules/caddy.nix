@@ -21,6 +21,11 @@ in
       type = with lib.types; nullOr str;
       default = "https://ca.lan/acme/home/directory";
     };
+    http-redirect = mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Globally redirect HTTP to HTTPS. Disable when clients cannot follow redirects to self-signed certs (e.g. Chromecast).";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -48,10 +53,12 @@ in
 
       # Server Options
       servers {
-        listener_wrappers {
-          http_redirect
-          tls
-        }
+        ${lib.optionalString cfg.http-redirect ''
+          listener_wrappers {
+            http_redirect
+            tls
+          }
+        ''}
 
         strict_sni_host on
       }
