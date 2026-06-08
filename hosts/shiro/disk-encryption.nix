@@ -1,5 +1,7 @@
 { pkgs, config, ... }:
 {
+  boot.zfs.requestEncryptionCredentials = false; # we'll provide the encryption keys
+
   systemd.services.zfs-load-vault-keys = {
     description = "Load ZFS encryption keys from Openbao";
     after = [
