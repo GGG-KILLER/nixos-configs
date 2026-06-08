@@ -13,6 +13,8 @@
 
     # Enable auto-snapshot
     services.zfs.autoSnapshot.enable = true;
+    services.zfs.autoSnapshot.frequent = 0;   # let the HDDs sleep
+    services.zfs.autoSnapshot.hourly = 0;     # same as above
 
     # Enable ZED's pushbullet compat
     services.zfs.zed.settings = {

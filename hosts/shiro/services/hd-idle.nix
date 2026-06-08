@@ -6,8 +6,13 @@
 
     serviceConfig = {
       Type = "simple";
-      ExecStart = "${lib.getExe pkgs.hd-idle} -i ${toString (5 * 60)} -c ata -l /var/log/hd-idle.log";
+      ExecStart = "${lib.getExe pkgs.hd-idle} -i ${toString (5 * 60)} -c ata -l /var/log/hd-idle/hd-idle.log";
       Restart = "always";
+
+      # ProtectSystem=strict makes /var/log read-only, which made hd-idle crash
+      # (log.Fatal) the first time it logged a spindown. LogsDirectory creates a
+      # writable /var/log/hd-idle owned by the DynamicUser.
+      LogsDirectory = "hd-idle";
 
       # Light Hardening
       PrivateTmp = true;
