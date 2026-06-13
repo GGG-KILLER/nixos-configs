@@ -119,4 +119,29 @@ in
 
   # Input Remapper to re-add dedicated / key
   services.input-remapper.enable = true;
+
+  # Steam
+  programs.gamemode.enable = true;
+  programs.steam.enable = true;
+  programs.steam.extraPackages = with pkgs; [
+    (mangohud.override {
+      nvidiaSupport = true;
+    })
+  ];
+  programs.steam.package = pkgs.steam.override {
+    # Sandbox home dir
+    extraBwrapArgs = [
+      # Blank out home inside the sandbox...
+      "--tmpfs $HOME"
+      # ...then re-expose only Steam's own data:
+      "--bind $HOME/.local/share/Steam $HOME/.local/share/Steam"
+      "--bind $HOME/.steam $HOME/.steam"
+    ];
+    extraEnv = {
+      MANGOHUD = true;
+    };
+  };
+  programs.steam.extest.enable = true;
+  programs.steam.localNetworkGameTransfers.openFirewall = true;
+  programs.steam.protontricks.enable = true;
 }
