@@ -13,6 +13,14 @@
     alsa.support32Bit = true;
     pulse.enable = true;
 
+    # Fix audio crackling during high CPU workloads and/or gaming while screensharing and voice chatting
+    extraConfig.pipewire."99-quantum" = {
+      "context.properties" = {
+        "default.clock.quantum" = 512;
+        "default.clock.min-quantum" = 512; # don't let games negotiate down (which is what causes the crackling)
+      };
+    };
+
     wireplumber = {
       enable = true;
       configPackages = [
