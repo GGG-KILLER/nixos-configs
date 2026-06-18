@@ -36,7 +36,7 @@ in
       plugins = [
         "github.com/greenpau/caddy-security@v1.1.31"
       ];
-      hash = "sha256-+zXOXf/T4Wma1gh+mVQSM2crScM/T1S6EBIv14ZrrYk=";
+      hash = "sha256-wg3aN4JioK94JJyFj7lzwU0/pzjrsYZD3mJjpXfQeLk=";
     };
 
     # https://caddyserver.com/docs/caddyfile/options
