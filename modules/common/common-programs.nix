@@ -21,8 +21,8 @@
 
     # Misc
     btop
-    dust
     dua
+    dust
     dysk
     fastfetch
     fd
@@ -37,6 +37,13 @@
     group = "root";
     capabilities = "cap_net_admin+p";
     source = lib.getExe pkgs.iotop-c;
+  };
+
+  security.wrappers.reptyr = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_sys_ptrace+eip";
+    source = lib.getExe pkgs.reptyr;
   };
 
   programs.bat.enable = true;
