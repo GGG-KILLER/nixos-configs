@@ -22,6 +22,7 @@
     ];
 
     programs = {
+      claude-code.enable = true;
       gh = {
         enable = true;
         gitCredentialHelper.enable = true;
