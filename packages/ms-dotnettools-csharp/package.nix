@@ -18,15 +18,15 @@ let
     {
       x86_64-linux = {
         arch = "linux-x64";
-        hash = "sha256-VnumPHydrDTcTYfHA0eHsHTPaSvOUvIOVB0hcRgSg0w=";
+        hash = "sha256-sf1FmsZW37bK7ydxbbDIsLzLkLrspCoOzEWaM+mC+d4=";
       };
       aarch64-linux = {
         arch = "linux-arm64";
-        hash = "sha256-JcAtT/TmfJlcLJknH5D+vX1Emi0+OP7O3+LkDaQ3sJ4=";
+        hash = "sha256-e9d73+q+TkszirjyXJznp9MTjrH09ruH8LB7bzOd1pc=";
       };
       aarch64-darwin = {
         arch = "darwin-arm64";
-        hash = "sha256-pY3J/fuRgrLGxcnmmBcQQyqNg70WgFxXYatGYM+ywo0=";
+        hash = "sha256-qPdFLQWkgJEY2FEp8U1k5+QEd4BLdx7/VrjAnOl3sE4=";
       };
     }
     .${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}")
@@ -48,7 +48,7 @@ vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = {
     name = "csharp";
     publisher = "ms-dotnettools";
-    version = "2.142.16";
+    version = "2.144.9";
     inherit (extInfo) hash arch;
   };
 
