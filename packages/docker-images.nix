@@ -1,16 +1,15 @@
-{ dockerTools }:
-{
+{ dockerTools }: {
   "eclipse-mosquitto:2.1-alpine" = dockerTools.pullImage {
     imageName = "eclipse-mosquitto";
-    imageDigest = "sha256:a908c65cc8e67ec9d292ef27c2c0360dbaaee7eb1b935cdd194e67697f15dea1";
-    hash = "sha256-ILI5MOApV9eNT7l4Vd6PqvTD/aBmd/QgVb/sgdTKXjM=";
+    imageDigest = "sha256:6f8d8a947c506f8a2290ec65cd4bd2bc7cb4d43fb5f6271f861cb013e2ef9797";
+    hash = "sha256-x0kJD3J/M9YgJOGRxrjG8D93HRgMSTvdupT++8ZZjPs=";
     finalImageName = "eclipse-mosquitto";
     finalImageTag = "2.1-alpine";
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:aa049e689e141a4358ad1d4562dc49c88a89fbab711fd8fcc33f684c80b26301";
-    hash = "sha256-9DqpGkaMKu8Rr64vHbtnxplp3KHxwVVUbW91JszY4P4=";
+    imageDigest = "sha256:0a972391db0b24ec336e35d1bc98b237237e26f82bf5120cf2f6b1688d1df973";
+    hash = "sha256-AdwKwlM6bEEmAgrwNDC08IW42oP+x+739WzKmBCPHNQ=";
     finalImageName = "redis";
     finalImageTag = "latest";
   };
@@ -19,6 +18,13 @@
     imageDigest = "sha256:3441fbe7b7e15da95624611c49821e457615bb5428cd9e08cb391a547c979622";
     hash = "sha256-eaLNlNBR3GEXI950QtcGzEj8hca+G/6XeUFwNLRIix8=";
     finalImageName = "evazion/iqdb";
+    finalImageTag = "latest";
+  };
+  "gggdotdev/netprobesharp:latest" = dockerTools.pullImage {
+    imageName = "gggdotdev/netprobesharp";
+    imageDigest = "sha256:7a3b13ccc9a4009fd00093de761ac576f3cfc8ae91c3f2c1dd664f2e13cee18f";
+    hash = "sha256-C1SCpMKj/yf5DqQFgu+ICRRTgkct3liuai16M/1YMyg=";
+    finalImageName = "gggdotdev/netprobesharp";
     finalImageTag = "latest";
   };
   "jlesage/jdownloader-2:latest" = dockerTools.pullImage {
@@ -72,22 +78,22 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:221efce04096e1b84170f26cfb59f97709c351bd040e9e6e3ebd1e5044a3af13";
-    hash = "sha256-U4eC8brU7ojXwCSHCCA/eUe9ASu5p0dZnn2tiPlXv5M=";
+    imageDigest = "sha256:0e8de2d600f2765ec4ac69e7033e0341f8f3dec7d5f13007d85ef67f21c07551";
+    hash = "sha256-ogBBIUrtWZFA7nBd2iMfObADwv8uOIVhfYeMl5QURlQ=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };
   "ghcr.io/home-assistant/home-assistant:stable" = dockerTools.pullImage {
     imageName = "ghcr.io/home-assistant/home-assistant";
-    imageDigest = "sha256:ceb1202133a5a036e8b03e20a10eb113186cc2f871968323c6fc6c3fc4205716";
-    hash = "sha256-9fKeywVIQtYE9kfUq9WHa6+PA6kQXRN2Ed5+m3RF/lk=";
+    imageDigest = "sha256:adb3341e31e03e0048e60d8c1cf952e118a381ae258bb921d3da12a3b27bf0c2";
+    hash = "sha256-psyA0XtBhxYu3EZiBilntmX7ZiWUrFXPjwoh/e3o1JA=";
     finalImageName = "ghcr.io/home-assistant/home-assistant";
     finalImageTag = "stable";
   };
   "ghcr.io/koenkk/zigbee2mqtt:latest" = dockerTools.pullImage {
     imageName = "ghcr.io/koenkk/zigbee2mqtt";
-    imageDigest = "sha256:67c26dcf8346aced02fe1380a6afd1b57268bcef10faae3f6057c13d5d3dfa80";
-    hash = "sha256-4Z+6Th9TE4Yp9Vw2nvJqdAXek5uOHfaHw7DN45DQyvk=";
+    imageDigest = "sha256:1debff565ab6841417bd9f7ce8ad44f8c5f25a8b02a24ce3fd79e4779a4763a5";
+    hash = "sha256-kdDMWUtI5IdwS7vMQ0f8TPzgUO9rUryMW0qrVn9FngM=";
     finalImageName = "ghcr.io/koenkk/zigbee2mqtt";
     finalImageTag = "latest";
   };
