@@ -16,15 +16,15 @@ let
     {
       x86_64-linux = {
         arch = "linux-x64";
-        hash = "sha256-TVri8/1qrVKVFiRs/5glg7snJQy5YacCKFS6KSIX+Pc=";
+        hash = "sha256-g3yw/M0g1S19SdBXLdgf8QoR8+6IbadGjaeu4RvOiEc=";
       };
       aarch64-linux = {
         arch = "linux-arm64";
-        hash = "sha256-7YtZkjNf16k1Uzq19PLBn7UzR3jndLuhwH00bBdN/Mc=";
+        hash = "sha256-xXjfM35UZtrhppG8Sdlh5XyybZDRTlpc188l2sJWH2U=";
       };
       aarch64-darwin = {
         arch = "darwin-arm64";
-        hash = "sha256-rWnhfDSeqpzFKBxLt6q3V6Lxw3jjUi11APDzEzPVNnE=";
+        hash = "sha256-wxD2jrEgkVLmHjMsLhN2An6E4yGtUkdTYTIg/vdZ59c=";
       };
     }
     .${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}")
@@ -34,7 +34,7 @@ vscode-utils.buildVscodeMarketplaceExtension {
   mktplcRef = {
     name = "csdevkit";
     publisher = "ms-dotnettools";
-    version = "3.20.199";
+    version = "3.21.226";
     inherit (extInfo) hash arch;
   };
   sourceRoot = "extension"; # This has more than one folder.
