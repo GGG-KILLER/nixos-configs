@@ -78,7 +78,7 @@ in
   ];
 
   # Jibril
-  "jibril/netprobe.env.age".publicKeys = [
+  "jibril/netprobesharp.env.age".publicKeys = [
     ggg
     jibril
   ];

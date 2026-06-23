@@ -1,59 +1,83 @@
 {
+  config,
+  pkgs,
   self,
   system,
-  config,
   ...
 }:
 let
-  imageFile = self.packages.${system}.docker-images."plaintextpackets/netprobe:latest";
+  imageFile = self.packages.${system}.docker-images."gggdotdev/netprobesharp:latest";
   image = imageFile.destNameTag;
 in
 {
-  jibril.dynamic-ports = [ "netprobe" ];
-
-  virtualisation.oci-containers.networks.netprobe = { };
-
-  virtualisation.oci-containers.containers.netprobe-redis = rec {
-    imageFile = self.packages.${system}.docker-images."redis:latest";
-    image = imageFile.destNameTag;
-
-    environmentFiles = [ config.age.secrets."netprobe.env".path ];
-    volumes = [ "${./redis.conf}:/etc/redis/redis.conf:ro" ];
-    networks = [ "netprobe" ];
-    extraOptions = [ "--ipc=none" ];
+  virtualisation.oci-containers.networks.netprobesh-mac = {
+    driver = "macvlan";
+    subnets = [ "10.0.0.0/8" ];
+    gateways = [ "10.0.0.1" ];
+    # 10.0.3.1 - 10.0.3.6
+    ipRanges = [ "10.0.3.0/29" ];
+    driverOptions = {
+      parent = "enp0s31f6";
+    };
   };
 
-  virtualisation.oci-containers.containers.netprobe-probe = {
-    inherit imageFile image;
-    environment = {
-      MODULE = "NETPROBE";
+  # macvlan containers aren't reachable from the host (the parent interface
+  # can't ARP its own macvlan children). Give the host a macvlan shim on the
+  # same parent/subnet so it can reach the containers' real IPs directly,
+  # instead of trying to publish ports (which doesn't work for macvlan).
+  systemd.services.netprobesh-shim = {
+    description = "macvlan shim for host access to netprobesh-mac containers";
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = [
+        "${pkgs.iproute2}/bin/ip link add netprobesh-shim link enp0s31f6 type macvlan mode bridge"
+        "${pkgs.iproute2}/bin/ip addr add 10.0.3.3/29 dev netprobesh-shim"
+        "${pkgs.iproute2}/bin/ip link set netprobesh-shim up"
+      ];
+      ExecStop = "${pkgs.iproute2}/bin/ip link del netprobesh-shim";
     };
-    environmentFiles = [ config.age.secrets."netprobe.env".path ];
-    volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
-    networks = [ "netprobe" ];
-    extraOptions = [ "--ipc=none" ];
   };
 
-  virtualisation.oci-containers.containers.netprobe-presentation = {
+  virtualisation.oci-containers.containers.netprobesharp-ti = {
     inherit imageFile image;
-    environment = {
-      MODULE = "PRESENTATION";
-    };
-    environmentFiles = [ config.age.secrets."netprobe.env".path ];
-    volumes = [ "/var/lib/netprobe:/netprobe_lite" ];
-    ports = [ "${toString config.jibril.ports.netprobe}:5000" ];
-    networks = [ "netprobe" ];
-    extraOptions = [ "--ipc=none" ];
+    environmentFiles = [ config.age.secrets."netprobesharp.env".path ];
+    networks = [ "netprobesh-mac" ];
+    extraOptions = [
+      "--ip=10.0.3.1"
+      "--ipc=none"
+    ];
+  };
+
+  virtualisation.oci-containers.containers.netprobesharp-co = {
+    inherit imageFile image;
+    environmentFiles = [ config.age.secrets."netprobesharp.env".path ];
+    networks = [ "netprobesh-mac" ];
+    extraOptions = [
+      "--ip=10.0.3.2"
+      "--ipc=none"
+    ];
   };
 
   services.prometheus.scrapeConfigs = [
     {
-      job_name = "netprobe";
+      job_name = "netprobesharp";
       static_configs = [
         {
-          targets = [ "127.0.0.1:${toString config.jibril.ports.netprobe}" ];
+          targets = [ "10.0.3.1:9464" ];
           labels = {
             inherit (config.my.constants.prometheus) instance;
+            isp = "Ti";
+          };
+        }
+        {
+          targets = [ "10.0.3.2:9464" ];
+          labels = {
+            inherit (config.my.constants.prometheus) instance;
+            isp = "Co";
           };
         }
       ];
