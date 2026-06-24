@@ -7,6 +7,7 @@
 }:
 {
   imports = [
+    ./fpga.nix
     ./vscode.nix
     ./xdg-mimeapps.nix
   ];
