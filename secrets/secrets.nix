@@ -71,11 +71,6 @@ in
     shiro
     jibril
   ];
-  "home/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age".publicKeys = [
-    ggg
-    shiro
-    jibril
-  ];
 
   # Jibril
   "jibril/netprobesharp.env.age".publicKeys = [

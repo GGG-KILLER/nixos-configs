@@ -6,7 +6,6 @@
     ./monitoring
     ./security
     ./btrfs.nix
-    ./cloudflared.nix
     ./cockpit.nix
     ./docker-registry.nix
     ./glorp.nix

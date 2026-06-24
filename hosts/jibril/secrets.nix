@@ -2,8 +2,6 @@
 {
   age.secrets = {
     "authentik/authentik.env".file = ../../secrets/jibril/authentik/authentik.env.age;
-    "cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json".file =
-      ../../secrets/home/cloudflared/3c1b8ea8-a43d-4a97-872c-37752de30b3f.json.age;
     "glorp.env".file = ../../secrets/jibril/glorp.env.age;
     "netprobesharp.env".file = ../../secrets/jibril/netprobesharp.env.age;
 
