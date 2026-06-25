@@ -110,6 +110,7 @@
       nixosModules.caddy = import ./modules/caddy.nix;
       nixosModules.common-programs = import ./modules/common/common-programs.nix;
       nixosModules.desktop-profile = import ./modules/desktop/profile.nix;
+      nixosModules.dns-cache = import ./modules/dns-cache.nix;
       nixosModules.ggg-password = import ./modules/common/ggg-password.nix;
       nixosModules.ggg-programs = import ./modules/common/ggg-programs.nix;
       nixosModules.groups = import ./modules/common/groups.nix;
