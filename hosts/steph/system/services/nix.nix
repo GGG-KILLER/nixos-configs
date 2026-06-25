@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ config, ... }:
 {
   nix.daemonCPUSchedPolicy = "idle";
   nix.daemonIOSchedClass = "idle";
@@ -7,43 +7,6 @@
   nix.extraOptions = ''
     !include ${config.age.secrets.nix-github-token.path}
   '';
-
-  # Use sora for builds, if available, since it has more computing power
-  nix.distributedBuilds = true;
-  nix.settings.builders-use-substitutes = true;
-  nix.buildMachines =
-    let
-      mkMachine =
-        {
-          hostName,
-          arch ? null,
-          maxJobs ? 1,
-        }:
-        {
-          protocol = "ssh-ng";
-          inherit hostName;
-          sshUser = "remotebld";
-          sshKey = "/root/.ssh/remotebld";
-          systems = [
-            "x86_64-linux"
-            "i686-linux"
-          ];
-          supportedFeatures = [
-            "nixos-test"
-            "benchmark"
-            "big-parallel"
-            "kvm"
-          ]
-          ++ lib.optional (arch != null) "gccarch-${arch}";
-          inherit maxJobs;
-        };
-    in
-    [
-      (mkMachine {
-        hostName = "sora.lan";
-        maxJobs = 32;
-      })
-    ];
 
   nix.settings = {
     # Substitution
