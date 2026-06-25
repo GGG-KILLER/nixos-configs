@@ -15,6 +15,7 @@
     self.nixosModules.home-network-addrs
     self.nixosModules.angrr
     self.nixosModules.caddy
+    self.nixosModules.dns-cache
     self.nixosModules.remote-build
     self.nixosModules.iperf3
     ./hardware
@@ -35,6 +36,9 @@
 
   # GC
   ggg.angrr.enable = true;
+
+  # DNS caching
+  ggg.dns-cache.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.kernelPackages = pkgs.linuxPackages_6_18;

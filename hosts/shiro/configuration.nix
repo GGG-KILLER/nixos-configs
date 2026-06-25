@@ -11,6 +11,7 @@
     self.nixosModules.angrr
     self.nixosModules.home-network-addrs
     self.nixosModules.caddy
+    self.nixosModules.dns-cache
     ./containers
     ./hardware
     ./services
@@ -33,6 +34,9 @@
 
   # GC
   ggg.angrr.enable = true;
+
+  # DNS caching
+  ggg.dns-cache.enable = true;
 
   # NVIDIA drivers are unfree.
   nixpkgs.config.allowUnfree = true;
