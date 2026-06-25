@@ -5,8 +5,10 @@
   services.prometheus = {
     enable = true;
     port = config.jibril.ports.prometheus;
+    checkConfig = true;
     retentionTime = "1y";
     webExternalUrl = "https://prometheus.jibril.lan";
+    extraFlags = [ "--web.enable-otlp-receiver" ];
     scrapeConfigs = [
       {
         job_name = "prometheus";
