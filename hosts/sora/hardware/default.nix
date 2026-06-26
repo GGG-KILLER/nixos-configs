@@ -20,6 +20,8 @@
     common-pc-ssd
   ]);
 
+  ggg.xbox-controller.enable = true;
+
   # Enable hardware
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;

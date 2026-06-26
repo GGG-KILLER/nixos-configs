@@ -111,8 +111,6 @@
       nixosModules.common-programs = import ./modules/common/common-programs.nix;
       nixosModules.desktop-profile = import ./modules/desktop/profile.nix;
       nixosModules.dns-cache = import ./modules/dns-cache.nix;
-      nixosModules.ggg-password = import ./modules/common/ggg-password.nix;
-      nixosModules.ggg-programs = import ./modules/common/ggg-programs.nix;
       nixosModules.groups = import ./modules/common/groups.nix;
       nixosModules.hm-cleanup = import ./modules/common/hm-cleanup.nix;
       nixosModules.home-network-addrs = import ./modules/home/network-addrs.nix;
@@ -124,7 +122,8 @@
       nixosModules.server-profile = import ./modules/server/profile.nix;
       nixosModules.server-services = import ./modules/server/services;
       nixosModules.sudo-rs = import ./modules/common/sudo-rs.nix;
-      nixosModules.users = import ./modules/common/users.nix;
+      nixosModules.users-service-users = import ./modules/common/users/service-users.nix;
+      nixosModules.users-ggg = import ./modules/common/users/ggg.nix;
       nixosModules.xbox-controller = import ./modules/xbox-controller.nix;
       nixosModules.zsh = import ./modules/common/zsh.nix;
 

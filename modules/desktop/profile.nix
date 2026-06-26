@@ -2,8 +2,6 @@
 {
   imports = with self.nixosModules; [
     common-programs
-    ggg-password
-    ggg-programs
     groups
     hm-cleanup
     i18n
@@ -11,9 +9,20 @@
     nixpkgs-wayland
     home-pki
     sudo-rs
-    users
+    users-ggg
+    users-service-users
     zsh
   ];
+
+  ggg.common-programs.enable = true;
+  ggg.groups.enable = true;
+  ggg.hm-cleanup.enable = true;
+  ggg.i18n.enable = true;
+  ggg.nix-settings.enable = true;
+  ggg.sudo-rs.enable = true;
+  ggg.users.ggg.enable = true;
+  ggg.users.service-users.enable = true;
+  ggg.zsh.enable = true;
 
   # Add the .lan to the end of the hostname in fqdn and dns searches
   networking.domain = "lan";

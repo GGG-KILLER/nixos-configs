@@ -127,7 +127,8 @@ with lib;
                 i18n
                 home-pki
                 server-services
-                users
+                users-ggg
+                users-service-users
                 zsh
                 caddy
                 ../../../common/secrets
@@ -158,6 +159,13 @@ with lib;
               };
 
               config = {
+                ggg.common-programs.enable = true;
+                ggg.groups.enable = true;
+                ggg.i18n.enable = true;
+                ggg.users.ggg.enable = true;
+                ggg.users.service-users.enable = true;
+                ggg.zsh.enable = true;
+
                 nixpkgs = {
                   inherit hostPlatform;
                 };

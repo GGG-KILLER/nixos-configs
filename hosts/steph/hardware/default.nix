@@ -13,6 +13,8 @@
     common-pc-laptop-ssd
   ]);
 
+  ggg.xbox-controller.enable = true;
+
   # Limit battery
   hardware.asus.battery = {
     chargeUpto = 80;

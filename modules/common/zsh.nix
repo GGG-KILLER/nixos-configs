@@ -1,12 +1,10 @@
 { lib, config, ... }:
 let
   inherit (lib) mkEnableOption mkIf;
-  cfg = config.my.programs.zsh;
+  cfg = config.ggg.zsh;
 in
 {
-  options.my.programs.zsh.enable = mkEnableOption "pre-configured zsh" // {
-    default = true;
-  };
+  options.ggg.zsh.enable = mkEnableOption "pre-configured zsh";
 
   config = mkIf cfg.enable {
     programs.zsh.enable = true;
