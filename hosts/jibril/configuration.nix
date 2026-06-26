@@ -16,7 +16,6 @@
     self.nixosModules.angrr
     self.nixosModules.caddy
     self.nixosModules.dns-cache
-    self.nixosModules.remote-build
     self.nixosModules.iperf3
     ./hardware
     ./system

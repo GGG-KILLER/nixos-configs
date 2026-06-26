@@ -121,7 +121,6 @@
       nixosModules.iperf3 = import ./modules/iperf3.nix;
       nixosModules.nix-settings = import ./modules/common/nix-settings.nix;
       nixosModules.nixpkgs-wayland = import ./modules/desktop/nixpkgs-wayland.nix;
-      nixosModules.remote-build = import ./modules/remote-build;
       nixosModules.server-profile = import ./modules/server/profile.nix;
       nixosModules.server-services = import ./modules/server/services;
       nixosModules.sudo-rs = import ./modules/common/sudo-rs.nix;
