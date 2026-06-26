@@ -8,10 +8,10 @@
 }:
 with lib;
 let
-  cfg = config.modules.services.lm-sensors-exporter;
+  cfg = config.ggg.lm-sensors-exporter;
 in
 {
-  options.modules.services.lm-sensors-exporter = {
+  options.ggg.lm-sensors-exporter = {
     enable = mkEnableOption "Whether to enable the prometheus-lm-sensors-exporter service.";
     port = mkOption {
       type = types.port;

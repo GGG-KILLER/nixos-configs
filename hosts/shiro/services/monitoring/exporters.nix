@@ -1,10 +1,10 @@
 { config, ... }:
 {
-  modules.services.lm-sensors-exporter.enable = true;
-  modules.services.lm-sensors-exporter.listenAddress = config.my.networking.shiro.mainAddr;
-  modules.services.lm-sensors-exporter.port = config.shiro.ports.prometheus-lm-sensors-exporter;
+  ggg.lm-sensors-exporter.enable = true;
+  ggg.lm-sensors-exporter.listenAddress = config.my.networking.shiro.mainAddr;
+  ggg.lm-sensors-exporter.port = config.shiro.ports.prometheus-lm-sensors-exporter;
   networking.firewall.extraCommands = ''
-    ip46tables -A nixos-fw -p tcp -m tcp -s ${config.home.addrs.jibril} --dport ${toString config.modules.services.lm-sensors-exporter.port} -m comment --comment lm-sensors-exporter -j nixos-fw-accept
+    ip46tables -A nixos-fw -p tcp -m tcp -s ${config.home.addrs.jibril} --dport ${toString config.ggg.lm-sensors-exporter.port} -m comment --comment lm-sensors-exporter -j nixos-fw-accept
   '';
 
   services.prometheus.exporters.node.enable = true;
