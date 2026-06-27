@@ -25,5 +25,15 @@
     security.pki.certificateFiles = [
       config.ggg.home-pki.root-certificate
     ];
+
+    environment.etc = {
+      "ssl/home-ca-chain.pem".text = ''
+        ${builtins.readFile ./intermediate.pem}
+        ${builtins.readFile ./root.pem}
+      '';
+      "ssl/home-ca-root.pem".source = ./root.pem;
+      "ssl/home-ca-intermediate.pem".source = ./intermediate.pem;
+    }
+    ;
   };
 }
