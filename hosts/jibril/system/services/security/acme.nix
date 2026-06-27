@@ -96,16 +96,6 @@
       ca home
       lifetime 36h
       resolvers 10.0.0.1
-
-      allow {
-        domains *.lan
-        domains *.shiro.lan
-        domains *.jibril.lan
-        domains *.sora.lan
-        domains *.steph.lan
-        domains *.hass.lan
-        domains *.router.lan
-      }
     }
   '';
 
