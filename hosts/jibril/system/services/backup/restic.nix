@@ -45,19 +45,19 @@
         {
           progressFps = 5;
           paths = [
-            "/var/lib/grafana/data"
-            "/var/lib/home-assistant/backups"
-            "/var/lib/kanidm/backups"
-            "/var/lib/pgsql-prd" # only prod is worth backing up
-            "/var/lib/step-ca"
-            "/var/lib/prometheus2"
-            "/var/lib/openbao"
+            "/home"
+            "/opt"
+            "/root"
+            "/var"
           ];
           extraBackupArgs = [
             "--tag files"
             "--exclude-file=${pkgs.writeText "restic-excludes.txt" ''
-              *.log
-              *.pid
+              /home/*/.cache
+              /root/.cache
+              /var/tmp
+              /var/cache
+              /var/log
               /var/lib/grafana/data/log
             ''}"
           ];
