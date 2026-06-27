@@ -20,12 +20,12 @@
     finalImageName = "evazion/iqdb";
     finalImageTag = "latest";
   };
-  "gggdotdev/netprobesharp:latest" = dockerTools.pullImage {
+  "gggdotdev/netprobesharp:dev" = dockerTools.pullImage {
     imageName = "gggdotdev/netprobesharp";
-    imageDigest = "sha256:47c481eced0c810d689b10d9cbe3e603fc15f50924eb1bdf8d89ceff2d75ad22";
-    hash = "sha256-OGKo12CVweBp6Pac1EQ9hMRlOeRcNZRXb+y8VNaE1RU=";
+    imageDigest = "sha256:21ca386c803b677df7aa545dd1b7e14244cf1cad5c680042a0d54bc169ecd1c2";
+    hash = "sha256-4IrPH8OhudrgoIf5BfgAcVpwml13FtRDL3BU/qTVyxE=";
     finalImageName = "gggdotdev/netprobesharp";
-    finalImageTag = "latest";
+    finalImageTag = "dev";
   };
   "jlesage/jdownloader-2:latest" = dockerTools.pullImage {
     imageName = "jlesage/jdownloader-2";

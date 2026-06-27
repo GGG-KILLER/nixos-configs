@@ -6,7 +6,7 @@
   ...
 }:
 let
-  imageFile = self.packages.${system}.docker-images."gggdotdev/netprobesharp:latest";
+  imageFile = self.packages.${system}.docker-images."gggdotdev/netprobesharp:dev";
   image = imageFile.destNameTag;
 in
 {
