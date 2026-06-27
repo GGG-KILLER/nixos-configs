@@ -1,6 +1,7 @@
 { ... }:
 {
   age.secrets = {
+    "dot1x.conf".file = ../../secrets/jibril/dot1x.conf.age;
     "authentik/authentik.env".file = ../../secrets/jibril/authentik/authentik.env.age;
     "glorp.env".file = ../../secrets/jibril/glorp.env.age;
     "netprobesharp.env".file = ../../secrets/jibril/netprobesharp.env.age;
