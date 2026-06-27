@@ -1,6 +1,7 @@
 { ... }:
 {
   age.secrets = {
+    "dot1x.conf".file = ../../secrets/shiro/dot1x.conf.age;
     "backup.env".file = ../../secrets/backup/restic-b2.env.age;
     "backup.key".file = ../../secrets/backup/restic-shiro-pass.age;
     "danbooru.env".file = ../../secrets/shiro/danbooru.env.age;

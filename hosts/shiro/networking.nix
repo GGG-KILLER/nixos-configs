@@ -101,13 +101,13 @@ in
       defaultGateway = config.home.addrs.router;
       nameservers = [ config.home.addrs.router ];
 
+      supplicant.enp6s0 = {
+        driver = "wired";
+        configFile.path = config.age.secrets."dot1x.conf".path;
+      };
+
       interfaces.enp6s0 = {
         ipv4.addresses = [ ];
-        wakeOnLan.enable = true;
-        wakeOnLan.policy = [
-          "magic"
-          "broadcast"
-        ];
       };
 
       macvlans.mv-enp6s0-host = {

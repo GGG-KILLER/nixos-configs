@@ -117,6 +117,10 @@ in
   ];
 
   # Shiro
+  "shiro/dot1x.conf.age".publicKeys = [
+    ggg
+    shiro
+  ];
   "shiro/zfs_encryption_vault_creds.env.age".publicKeys = [
     ggg
     shiro
