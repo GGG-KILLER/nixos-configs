@@ -5,9 +5,9 @@
   config = lib.mkIf config.ggg.dns-cache.enable {
     services.resolved = {
       enable = true;
-      dnssec = "false";
       settings.Resolve.Cache = "yes";
       settings.Resolve.CacheFromLocalhost = "no";
+      settings.Resolve.DNSSEC = false;
     };
   };
 }
