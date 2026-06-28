@@ -120,6 +120,12 @@ in
     jibril
   ];
 
+  # Jibril -  BookStack
+  "jibril/bookstack/app.key.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
   # Shiro
   "shiro/dot1x.conf.age".publicKeys = [
     ggg

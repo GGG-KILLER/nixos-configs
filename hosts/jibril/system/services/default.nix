@@ -5,6 +5,7 @@
     ./media
     ./monitoring
     ./security
+    ./bookstack.nix
     ./btrfs.nix
     ./cockpit.nix
     ./docker-registry.nix
