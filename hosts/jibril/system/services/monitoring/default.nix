@@ -6,5 +6,6 @@
     ./grafana.nix
     ./prometheus.nix
     ./smartd.nix
+    ./uptime-kuma.nix
   ];
 }
