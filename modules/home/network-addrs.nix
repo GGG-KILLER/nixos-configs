@@ -15,8 +15,5 @@
 
     # Shiro: 10.0.2.0/29
     shiro-main = "10.0.2.1";
-    shiro-vpn-gateway = "10.0.2.2";
-    shiro-qbittorrent = "10.0.2.3";
-    shiro-jellyfin = "10.0.2.4";
   };
 }

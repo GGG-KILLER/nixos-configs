@@ -78,6 +78,8 @@ let
     };
 in
 {
+  imports = [ ./vpn.nix ];
+
   options.my.networking = mkOption { type = with types; attrsOf (submodule networkingOptions); };
 
   config = rec {
@@ -99,29 +101,19 @@ in
       hostId = "14537a32";
 
       defaultGateway = config.home.addrs.router;
-      nameservers = [ config.home.addrs.router ];
+      # DNS is handled by systemd-resolved with split routing (see ./vpn.nix).
 
       supplicant.enp6s0 = {
         driver = "wired";
         configFile.path = config.age.secrets."dot1x.conf".path;
       };
 
-      interfaces.enp6s0 = {
-        ipv4.addresses = [ ];
-      };
-
-      macvlans.mv-enp6s0-host = {
-        interface = "enp6s0";
-        mode = "bridge";
-      };
-      interfaces.mv-enp6s0-host = {
-        ipv4.addresses = [
-          {
-            address = my.networking.shiro.mainAddr;
-            prefixLength = 16;
-          }
-        ];
-      };
+      interfaces.enp6s0.ipv4.addresses = [
+        {
+          address = my.networking.shiro.mainAddr;
+          prefixLength = 16;
+        }
+      ];
 
       hosts =
         let

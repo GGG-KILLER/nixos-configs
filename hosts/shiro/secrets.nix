@@ -13,11 +13,6 @@
       mode = "0600";
     };
 
-    containers_vpn-gateway_mullvad-privkey = {
-      file = ../../secrets/shiro/vpn-gateway/mullvad_private_key.age;
-      path = "/run/container-secrets/vpn-gateway/mullvad-privkey";
-      # We can't symlink as the container won't be able to follow it.
-      symlink = false;
-    };
+    "mullvad-privkey".file = ../../secrets/shiro/vpn-gateway/mullvad_private_key.age;
   };
 }

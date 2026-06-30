@@ -12,7 +12,6 @@
     self.nixosModules.home-network-addrs
     self.nixosModules.caddy
     self.nixosModules.dns-cache
-    ./containers
     ./hardware
     ./services
     ./users
@@ -20,8 +19,7 @@
     ./cost-saving.nix
     ./disk-encryption.nix
     ./hardware-configuration.nix
-    ./nat.nix
-    ./networking.nix
+    ./networking
     ./ports.nix
     ./secrets.nix
     ./store.nix

@@ -8,6 +8,7 @@
     ./cockpit.nix
     ./file-browser.nix
     ./hd-idle.nix
+    ./jellyfin.nix
     ./nginx.nix
     ./zfs.nix
   ];
