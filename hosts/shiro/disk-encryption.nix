@@ -5,10 +5,15 @@
   systemd.services.zfs-load-vault-keys = {
     description = "Load ZFS encryption keys from Openbao";
     after = [
-      "network-online.target"
-      "zfs-import.target"
+      "network.target" # Need network to call Openbao
+      "network-online.target" # Need network to call Openbao
+      "nss-lookup.target" # Need DNS to resolve vault.jibril.lan
+      "zfs-import.target" # Can't run before we've imported the pool
     ];
-    wants = [ "network-online.target" ];
+    wants = [
+      "network-online.target" # Need network to call Openbao
+      "nss-lookup.target" # Need DNS to resolve vault.jibril.lan
+    ];
     wantedBy = [ "multi-user.target" ];
 
     serviceConfig = {
