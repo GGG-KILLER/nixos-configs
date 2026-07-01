@@ -22,8 +22,8 @@
   };
   "gggdotdev/netprobesharp:dev" = dockerTools.pullImage {
     imageName = "gggdotdev/netprobesharp";
-    imageDigest = "sha256:f6a3addb93ffe850b2db704c672bf7d044282db9835198b1b0792f566bf8631b";
-    hash = "sha256-dbJlVRfEnBln6ESZ6NEJbKGAZ44m3IhNokrTbAZP5ME=";
+    imageDigest = "sha256:a97cfe80c4338388044e5bba3b03fae421951b11d4401cd7b8aae95be2fe4e7f";
+    hash = "sha256-uUx2iftGbq8rQ/QuBb6mJ5lm9XuhYY+6CLUzcjh8CeE=";
     finalImageName = "gggdotdev/netprobesharp";
     finalImageTag = "dev";
   };
