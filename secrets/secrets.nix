@@ -126,6 +126,12 @@ in
     jibril
   ];
 
+  # Jibril - Keycloak
+  "jibril/keycloak/db-password.age".publicKeys = [
+    ggg
+    jibril
+  ];
+
   # Shiro
   "shiro/dot1x.conf.age".publicKeys = [
     ggg
