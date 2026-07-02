@@ -11,9 +11,20 @@
     i18n
     nix-settings
     home-pki
-    users
+    users-service-users
+    users-ggg
     zsh
   ];
+
+  ggg.common-programs.enable = true;
+  ggg.groups.enable = true;
+  ggg.i18n.enable = true;
+  ggg.nix-settings.enable = true;
+  ggg.users.ggg.enable = true;
+  ggg.users.ggg.password = false; # no agenix
+  ggg.users.ggg.hm-defaults = false; # no home-manager
+  ggg.users.service-users.enable = true;
+  ggg.zsh.enable = true;
 
   # ISO Options
   isoImage.makeEfiBootable = true;
