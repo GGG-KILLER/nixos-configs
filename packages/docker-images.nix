@@ -41,32 +41,11 @@
     finalImageName = "klausmeyer/docker-registry-browser";
     finalImageTag = "latest";
   };
-  "plaintextpackets/netprobe:latest" = dockerTools.pullImage {
-    imageName = "plaintextpackets/netprobe";
-    imageDigest = "sha256:139ed2dcb004324ef7a8d24bbfdd252bfba0012aa2b70575ca92cc38cd2afd56";
-    hash = "sha256-3aY0INi+kpFvvp6btIE+E5prH2GofN7/mxcj9udYocI=";
-    finalImageName = "plaintextpackets/netprobe";
-    finalImageTag = "latest";
-  };
   "zer0tonin/mikochi:latest" = dockerTools.pullImage {
     imageName = "zer0tonin/mikochi";
     imageDigest = "sha256:0f2972346b7a6713563d875a7c30a97a2f45f72117573f65dfe8fd81fd44b016";
     hash = "sha256-I8HyIadY2AjUFE+G4QojSyU++kE/XEKtD+RKUAHWxZw=";
     finalImageName = "zer0tonin/mikochi";
-    finalImageTag = "latest";
-  };
-  "docker.lan/downloader/backend:latest" = dockerTools.pullImage {
-    imageName = "docker.lan/downloader/backend";
-    imageDigest = "sha256:98d75c28e2bbfd4a6be2114194cc9fd645a470cb0cea1dfe482e8ab99ab9c2f3";
-    hash = "sha256-j8reRST4+8woi2SdOnoUoisQPHtLrxxI7DAqxhtUy6Q=";
-    finalImageName = "docker.lan/downloader/backend";
-    finalImageTag = "latest";
-  };
-  "docker.lan/downloader/frontend:latest" = dockerTools.pullImage {
-    imageName = "docker.lan/downloader/frontend";
-    imageDigest = "sha256:b7cd81811271f91089cc161b10e9dd26fade9c99d893c8cc9b464424b2adf0d4";
-    hash = "sha256-64ihDXxrLowJrjbEYa1+aX46TDjrJmxZf8LnrKxRp0U=";
-    finalImageName = "docker.lan/downloader/frontend";
     finalImageTag = "latest";
   };
   "ghcr.io/danbooru/autotagger:latest" = dockerTools.pullImage {
@@ -95,13 +74,6 @@
     imageDigest = "sha256:80f7f04f72a99e4c4ef51ef7e98ee736edba6db0ecbb7abc626d0c4b0f1871f1";
     hash = "sha256-0NO+nhWnQ41RX/ix04kNBPnRMoPtr14a12JiTSPSF+M=";
     finalImageName = "ghcr.io/koenkk/zigbee2mqtt";
-    finalImageTag = "latest";
-  };
-  "ghcr.io/suwayomi/suwayomi-server:latest" = dockerTools.pullImage {
-    imageName = "ghcr.io/suwayomi/suwayomi-server";
-    imageDigest = "sha256:553eb2db2723c91717bc0f3e292fd2e80460a1658ad8d98f387440e53966ce67";
-    hash = "sha256-fd8xvgaoFuJukdlvnjTDEVnA+Hmv0PZvqUteP3YYtx8=";
-    finalImageName = "ghcr.io/suwayomi/suwayomi-server";
     finalImageTag = "latest";
   };
   "ghcr.io/thephaseless/byparr:latest" = dockerTools.pullImage {

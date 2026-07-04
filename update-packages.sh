@@ -1,5 +1,5 @@
 #! /usr/bin/env nix-shell
-#! nix-shell -i bash -p nix-update coreutils jq
+#! nix-shell -i bash -p coreutils jq
 # shellcheck shell=bash
 set -euo pipefail
 
@@ -64,7 +64,7 @@ changes="$(jq -rn \
 
 if [ -n "$changes" ]; then
     git add packages/docker-images.nix
-    git commit -m "$(printf 'docker-images.nix: update images\n%s' "$changes")"
+    git commit -m "$(printf 'docker-images: update images\n%s' "$changes")"
 else
-    echo "docker-images.nix: no changes."
+    echo "docker-images: no changes."
 fi
