@@ -11,7 +11,6 @@
     ./docker-registry.nix
     ./glorp.nix
     ./home-assistant.nix
-    #./n8n.nix
     ./postgres.nix
   ];
 

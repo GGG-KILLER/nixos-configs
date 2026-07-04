@@ -9,9 +9,6 @@
     "backup.env".file = ../../secrets/backup/restic-b2.env.age;
     "backup.key".file = ../../secrets/backup/restic-jibril-pass.age;
 
-    n8n-encryption-key.file = ../../secrets/jibril/n8n/encryption_key.age;
-    n8n-pgsql-password.file = ../../secrets/jibril/n8n/pgsql/password.age;
-
     grafana_secret_key = {
       file = ../../secrets/jibril/grafana/secret_key.age;
       owner = "grafana";

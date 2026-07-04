@@ -110,16 +110,6 @@ in
     jibril
   ];
 
-  # Jibril -  n8n
-  "jibril/n8n/encryption_key.age".publicKeys = [
-    ggg
-    jibril
-  ];
-  "jibril/n8n/pgsql/password.age".publicKeys = [
-    ggg
-    jibril
-  ];
-
   # Jibril -  BookStack
   "jibril/bookstack/app.key.age".publicKeys = [
     ggg
