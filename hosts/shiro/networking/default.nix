@@ -103,11 +103,6 @@ in
       defaultGateway = config.home.addrs.router;
       # DNS is handled by systemd-resolved with split routing (see ./vpn.nix).
 
-      supplicant.enp6s0 = {
-        driver = "wired";
-        configFile.path = config.age.secrets."dot1x.conf".path;
-      };
-
       interfaces.enp6s0.ipv4.addresses = [
         {
           address = my.networking.shiro.mainAddr;

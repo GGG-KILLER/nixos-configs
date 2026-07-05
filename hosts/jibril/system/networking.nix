@@ -8,11 +8,6 @@
     defaultGateway = config.home.addrs.router;
     nameservers = [ config.home.addrs.router ];
 
-    supplicant.enp0s31f6 = {
-      driver = "wired";
-      configFile.path = config.age.secrets."dot1x.conf".path;
-    };
-
     interfaces.enp0s31f6 = {
       ipv4.addresses = [
         {

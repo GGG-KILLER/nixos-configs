@@ -73,10 +73,6 @@ in
   ];
 
   # Jibril
-  "jibril/dot1x.conf.age".publicKeys = [
-    ggg
-    jibril
-  ];
   "jibril/netprobesharp.env.age".publicKeys = [
     ggg
     jibril
@@ -123,10 +119,6 @@ in
   ];
 
   # Shiro
-  "shiro/dot1x.conf.age".publicKeys = [
-    ggg
-    shiro
-  ];
   "shiro/zfs_encryption_vault_creds.env.age".publicKeys = [
     ggg
     shiro
