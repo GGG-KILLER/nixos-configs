@@ -4,6 +4,8 @@
     ./services
     ./networking.nix
     ./virtualisation.nix
+    ./luks.nix
+    ./disk-quirks.nix
   ];
 
   # Automatic garbage collect

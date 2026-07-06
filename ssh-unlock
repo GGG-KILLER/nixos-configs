@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+if [ -z "$1" ]; then
+    echo "usage: ssh-unlock <host>" >&2
+    exit 1
+fi
+
+ssh -p 22 -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no root@"$1"

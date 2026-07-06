@@ -24,62 +24,70 @@
           root = {
             size = "100%";
             content = {
-              type = "btrfs";
-              extraArgs = [ "-f" ]; # Override existing partition
-              mountpoint = "/partition-root";
-              subvolumes = {
-                "/rootfs" = {
-                  mountpoint = "/";
-                  mountOptions = [
-                    "compress=zstd"
-                  ];
-                };
-                "/etc" = {
-                  mountpoint = "/etc";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                };
-                "/nix" = {
-                  mountpoint = "/nix";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                };
-                "/var/lib" = {
-                  mountpoint = "/var/lib";
-                  mountOptions = [
-                    "compress=zstd"
-                  ];
-                };
-                "/var/log" = {
-                  mountpoint = "/var/log";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                };
-                "/var/spool" = {
-                  mountpoint = "/var/spool";
-                  mountOptions = [
-                    "compress=zstd"
-                  ];
-                };
-                "/home/root" = {
-                  mountpoint = "/root";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
-                };
-                "/home" = {
-                  mountpoint = "/home";
-                  mountOptions = [
-                    "compress=zstd"
-                    "noatime"
-                  ];
+              type = "luks";
+              name = "crypted-root";
+              settings = {
+                allowDiscards = true;
+                bypassWorkqueues = true;
+              };
+              content = {
+                type = "btrfs";
+                extraArgs = [ "-f" ]; # Override existing partition
+                mountpoint = "/partition-root";
+                subvolumes = {
+                  "/rootfs" = {
+                    mountpoint = "/";
+                    mountOptions = [
+                      "compress=zstd"
+                    ];
+                  };
+                  "/etc" = {
+                    mountpoint = "/etc";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/nix" = {
+                    mountpoint = "/nix";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/var/lib" = {
+                    mountpoint = "/var/lib";
+                    mountOptions = [
+                      "compress=zstd"
+                    ];
+                  };
+                  "/var/log" = {
+                    mountpoint = "/var/log";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/var/spool" = {
+                    mountpoint = "/var/spool";
+                    mountOptions = [
+                      "compress=zstd"
+                    ];
+                  };
+                  "/home/root" = {
+                    mountpoint = "/root";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
+                  "/home" = {
+                    mountpoint = "/home";
+                    mountOptions = [
+                      "compress=zstd"
+                      "noatime"
+                    ];
+                  };
                 };
               };
             };
