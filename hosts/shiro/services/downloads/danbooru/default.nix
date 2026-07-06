@@ -180,5 +180,19 @@ in
         header_up X-Forwarded-Port {http.request.local.port}
       }
     '';
+
+    systemd.services =
+      lib.genAttrs
+        (map (n: "docker-${n}") [
+          "danbooru-danbooru"
+          "danbooru-cron"
+          "danbooru-jobs"
+          "danbooru-nginx"
+          "danbooru-iqdb"
+        ])
+        (_: {
+          after = [ "storage-services-danbooru.mount" ];
+          requires = [ "storage-services-danbooru.mount" ];
+        });
   };
 }

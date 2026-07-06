@@ -76,4 +76,19 @@
       OnCalendar = "20:00";
     };
   };
+
+  systemd.services.restic-backups-filesystem =
+    lib.mkIf (!config.cost-saving.enable || !config.cost-saving.disable-hdds)
+      {
+        after = [
+          "storage-etc.mount"
+          "storage-h.mount"
+          "storage-series.mount"
+        ];
+        requires = [
+          "storage-etc.mount"
+          "storage-h.mount"
+          "storage-series.mount"
+        ];
+      };
 }

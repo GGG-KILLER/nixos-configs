@@ -12,6 +12,14 @@ in
   config = mkIf (!config.cost-saving.enable || !config.cost-saving.disable-downloaders) {
     systemd.services.megasync = {
       wantedBy = [ "network-online.target" ];
+      after = [
+        "storage-etc.mount"
+        "storage-h.mount"
+      ];
+      requires = [
+        "storage-etc.mount"
+        "storage-h.mount"
+      ];
       environment = {
         # Enable tiered compilation
         DOTNET_TieredCompilation = "1";
@@ -87,6 +95,7 @@ in
       extraGroups = [ "users" ];
     };
 
-    services.caddy.virtualHosts."mega.shiro.lan".extraConfig = "reverse_proxy unix//run/mega-sync/mega-sync.socket";
+    services.caddy.virtualHosts."mega.shiro.lan".extraConfig =
+      "reverse_proxy unix//run/mega-sync/mega-sync.socket";
   };
 }

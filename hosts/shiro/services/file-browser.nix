@@ -30,4 +30,15 @@
       flush_interval -1
     }
   '';
+
+  systemd.services."docker-mikochi" = {
+    after = [
+      "storage-etc.mount"
+      "storage-h.mount"
+    ];
+    requires = [
+      "storage-etc.mount"
+      "storage-h.mount"
+    ];
+  };
 }

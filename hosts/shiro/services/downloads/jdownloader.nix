@@ -53,5 +53,16 @@
         flush_interval -1
       }
     '';
+
+    systemd.services."docker-jdownloader" = {
+      after = [
+        "storage-animu.mount"
+        "storage-h.mount"
+      ];
+      requires = [
+        "storage-animu.mount"
+        "storage-h.mount"
+      ];
+    };
   };
 }

@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   inherit (lib) getExe';
 in
@@ -18,7 +23,19 @@ in
         cfg = config.services.jellyfin;
       in
       {
-        after = [ "network.target" ];
+        after = [
+          "network.target"
+          "storage-animu.mount"
+          "storage-etc.mount"
+          "storage-h.mount"
+          "storage-series.mount"
+        ];
+        requires = [
+          "storage-animu.mount"
+          "storage-etc.mount"
+          "storage-h.mount"
+          "storage-series.mount"
+        ];
         wantedBy = [ "multi-user.target" ];
 
         serviceConfig = rec {
