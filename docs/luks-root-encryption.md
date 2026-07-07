@@ -5,6 +5,10 @@ filesystem, including remote unlock over SSH during boot (before the OS
 proper starts). Applied so far to `steph` and `jibril`. Use this doc as a
 recipe to apply the same setup to another host.
 
+For automatic (non-interactive) unlock via Clevis + Tang instead of a manual
+passphrase/SSH prompt, see [`clevis-tang-shiro.md`](./clevis-tang-shiro.md) —
+a planned setup for `shiro` that builds on this doc's baseline.
+
 ## Overview
 
 - Root btrfs is wrapped in a LUKS2 container via [disko](https://github.com/nix-community/disko).
