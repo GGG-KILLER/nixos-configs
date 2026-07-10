@@ -101,6 +101,7 @@
         steph = mkConfig ./hosts/steph/configuration.nix;
         shiro = mkConfig ./hosts/shiro/configuration.nix;
         jibril = mkConfig ./hosts/jibril/configuration.nix;
+        izuna = mkConfig ./hosts/izuna/configuration.nix;
         live-cd-plasma6 = mkConfig ./media/live-cd-plasma6.nix;
         live-cd-minimal = mkConfig ./media/live-cd-minimal.nix;
       };

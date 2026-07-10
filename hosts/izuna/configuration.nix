@@ -1,0 +1,77 @@
+# Edit this configuration file to define what should be installed on
+# your system.  Help is available in the configuration.nix(5) man page
+# and in the NixOS manual (accessible by running ‘nixos-help’).
+{
+  self,
+  modulesPath,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    (modulesPath + "/installer/scan/not-detected.nix")
+    self.nixosModules.oci-containers-networks
+    self.nixosModules.server-profile
+    self.nixosModules.home-network-addrs
+    self.nixosModules.angrr
+    self.nixosModules.caddy
+    self.nixosModules.dns-cache
+    self.nixosModules.iperf3
+    ./system
+    ./users/ggg
+    ./disk-config.nix
+    ./hardware.nix
+    ./ports.nix
+    ./secrets.nix
+  ];
+
+  boot.supportedFilesystems = [ "btrfs" ];
+  nixpkgs.hostPlatform = "x86_64-linux";
+
+  # Facter
+  hardware.facter.reportPath = ./facter.json;
+  hardware.facter.detected.dhcp.enable = false; # static IP
+
+  # GC
+  ggg.angrr.enable = true;
+
+  # DNS caching
+  ggg.dns-cache.enable = true;
+
+  # Use the systemd-boot EFI boot loader.
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.editor = false;
+  boot.loader.systemd-boot.memtest86.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  # Allow unfree stuff.
+  nixpkgs.config.allowUnfree = true;
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  services.openssh.openFirewall = true;
+  programs.ssh.package = pkgs.openssh_hpn;
+
+  # Firmware
+  services.fwupd.enable = true;
+  hardware.cpu.intel.updateMicrocode = true;
+  hardware.cpu.intel.sgx.provision.enable = true;
+
+  # Since we can't manually respond to a panic, just reboot.
+  boot.kernelParams = [
+    "panic=1"
+    "boot.panic_on_fail"
+  ];
+
+  # Enable sysdig
+  programs.sysdig.enable = true;
+
+  # This value determines the NixOS release from which the default
+  # settings for stateful data, like file locations and database versions
+  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # this value at the release version of the first install of this system.
+  # Before changing this value read the documentation for this option
+  # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
+  system.stateVersion = "25.11"; # Did you read the comment?
+}

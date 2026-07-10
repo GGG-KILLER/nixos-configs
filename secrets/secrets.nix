@@ -4,6 +4,7 @@ let
   steph = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMF6zsTIgqKJKCMevMg9lnhasEcndKKBtYfQtz3GjkZK root@steph";
   shiro = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOYyYTusgW/GPy8qYBaS4gq71MEGWEY+U+m7rSUzn/xc root@shiro";
   jibril = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGxyqgY1bvf+PYelPm9Sz4f44g1Orp+/Bvz4v8N8MIV0 root@jibril";
+  izuna = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHFlhjNG6RXT+ig4fKre2Q0v/sgpHKBVqWmhZZE91pEq root@izuna";
 
   pcs = [
     ggg
@@ -14,6 +15,7 @@ let
     ggg
     shiro
     jibril
+    izuna
   ];
   all = [
     ggg
@@ -21,6 +23,7 @@ let
     steph
     shiro
     jibril
+    izuna
   ];
 in
 {
@@ -40,6 +43,7 @@ in
   "backup/restic-jibril-pass.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Steph
@@ -76,46 +80,54 @@ in
   "jibril/netprobesharp.env.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
   "jibril/glorp.env.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Jibril - Grafana
   "jibril/grafana/secret_key.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Jibril - CA
   "jibril/ca/intermediate.key.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Jibril - PostgreSQL
   "jibril/pgsql/prd_pass.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Jibril - Authentik
   "jibril/authentik/authentik.env.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Jibril -  BookStack
   "jibril/bookstack/app.key.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Jibril - Keycloak
   "jibril/keycloak/db-password.age".publicKeys = [
     ggg
     jibril
+    izuna
   ];
 
   # Shiro
