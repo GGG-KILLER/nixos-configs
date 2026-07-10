@@ -18,6 +18,6 @@
 
   # Static addressing in the initrd (DHCP is off on jibril). ip=client::gw:netmask:host:iface:autoconf
   boot.kernelParams = [
-    "ip=${config.home.addrs.jibril}::${config.home.addrs.router}:255.255.0.0::enp0s31f6:none"
+    "ip=${config.home.addrs.jibril}::${config.home.addrs.router}:255.255.0.0::eno1:none"
   ];
 }

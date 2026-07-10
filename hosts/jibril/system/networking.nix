@@ -8,7 +8,7 @@
     defaultGateway = config.home.addrs.router;
     nameservers = [ config.home.addrs.router ];
 
-    interfaces.enp0s31f6 = {
+    interfaces.eno1 = {
       ipv4.addresses = [
         {
           address = config.home.addrs.jibril;

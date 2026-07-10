@@ -28,12 +28,6 @@ in
     {
       enable = true;
 
-      # Only run the tests and stuff for the disks we list here
-      autodetect = false;
-      devices = [
-        { device = "/dev/disk/by-id/ata-SSD_PDJX20250204711"; }
-      ];
-
       notifications.mail.enable = false;
       notifications.wall.enable = false;
       notifications.x11.enable = false;

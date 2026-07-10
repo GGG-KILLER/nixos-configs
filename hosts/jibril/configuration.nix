@@ -17,11 +17,10 @@
     self.nixosModules.caddy
     self.nixosModules.dns-cache
     self.nixosModules.iperf3
-    ./hardware
     ./system
     ./users/ggg
     ./disk-config.nix
-    ./hardware-configuration.nix
+    ./hardware.nix
     ./ports.nix
     ./secrets.nix
   ];

@@ -1,27 +1,23 @@
-# Example to create a bios compatible gpt partition
-{ lib, ... }:
+{ ... }:
 {
   disko.devices = {
-    disk.disk1 = {
-      device = lib.mkDefault "/dev/disk/by-id/ata-SSD_PDJX20250204711";
+    disk.root = {
+      device = "/dev/disk/by-id/ata-SanDisk_SD9SB8W-256G-1006_1930CJ442415";
       type = "disk";
       content = {
         type = "gpt";
         partitions = {
-          boot = {
-            size = "1M";
-            type = "EF02";
-          };
           ESP = {
-            size = "500M";
             type = "EF00";
+            size = "1G";
             content = {
               type = "filesystem";
               format = "vfat";
               mountpoint = "/boot";
+              mountOptions = [ "umask=0077" ];
             };
           };
-          root = {
+          crypted-root = {
             size = "100%";
             content = {
               type = "luks";
@@ -39,12 +35,16 @@
                     mountpoint = "/";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                     ];
                   };
                   "/etc" = {
                     mountpoint = "/etc";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                       "noatime"
                     ];
                   };
@@ -52,6 +52,8 @@
                     mountpoint = "/nix";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                       "noatime"
                     ];
                   };
@@ -59,12 +61,16 @@
                     mountpoint = "/var/lib";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                     ];
                   };
                   "/var/log" = {
                     mountpoint = "/var/log";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                       "noatime"
                     ];
                   };
@@ -72,12 +78,16 @@
                     mountpoint = "/var/spool";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                     ];
                   };
                   "/home/root" = {
                     mountpoint = "/root";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                       "noatime"
                     ];
                   };
@@ -85,6 +95,8 @@
                     mountpoint = "/home";
                     mountOptions = [
                       "compress=zstd"
+                      "discard=async"
+                      "ssd"
                       "noatime"
                     ];
                   };
