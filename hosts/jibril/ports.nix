@@ -32,6 +32,9 @@
 
     # NOTE: Needs to be a fixed port since we can't statically configure this through nix
     mqtt = 61001;
+
+    # Tang's conventional/default port.
+    tang = 7654;
   }
   // (
     let

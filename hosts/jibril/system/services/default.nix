@@ -12,6 +12,7 @@
     ./glorp.nix
     ./home-assistant.nix
     ./postgres.nix
+    ./tang.nix
   ];
 
   # Enable Caddy
