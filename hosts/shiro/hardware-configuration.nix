@@ -114,8 +114,8 @@ in
     device = "storage/services/danbooru";
     fsType = "zfs";
     options = [
-      "x-systemd.requires=zfs-load-vault-keys.service"
-      "x-systemd.after=zfs-load-vault-keys.service"
+      "x-systemd.requires=zfs-load-clevis-keys.service"
+      "x-systemd.after=zfs-load-clevis-keys.service"
       "nofail"
     ];
   };
@@ -125,8 +125,8 @@ in
     device = "storage/series";
     fsType = "zfs";
     options = [
-      "x-systemd.requires=zfs-load-vault-keys.service"
-      "x-systemd.after=zfs-load-vault-keys.service"
+      "x-systemd.requires=zfs-load-clevis-keys.service"
+      "x-systemd.after=zfs-load-clevis-keys.service"
       "nofail"
     ];
   };
@@ -136,8 +136,8 @@ in
     device = "storage/h";
     fsType = "zfs";
     options = [
-      "x-systemd.requires=zfs-load-vault-keys.service"
-      "x-systemd.after=zfs-load-vault-keys.service"
+      "x-systemd.requires=zfs-load-clevis-keys.service"
+      "x-systemd.after=zfs-load-clevis-keys.service"
       "nofail"
     ];
   };
@@ -147,8 +147,8 @@ in
     device = "storage/etc";
     fsType = "zfs";
     options = [
-      "x-systemd.requires=zfs-load-vault-keys.service"
-      "x-systemd.after=zfs-load-vault-keys.service"
+      "x-systemd.requires=zfs-load-clevis-keys.service"
+      "x-systemd.after=zfs-load-clevis-keys.service"
       "nofail"
     ];
   };
@@ -158,8 +158,8 @@ in
     device = "storage/animu";
     fsType = "zfs";
     options = [
-      "x-systemd.requires=zfs-load-vault-keys.service"
-      "x-systemd.after=zfs-load-vault-keys.service"
+      "x-systemd.requires=zfs-load-clevis-keys.service"
+      "x-systemd.after=zfs-load-clevis-keys.service"
       "nofail"
     ];
   };

@@ -119,10 +119,6 @@ in
   ];
 
   # Shiro
-  "shiro/zfs_encryption_vault_creds.env.age".publicKeys = [
-    ggg
-    shiro
-  ];
   "shiro/danbooru.env.age".publicKeys = [
     ggg
     shiro
