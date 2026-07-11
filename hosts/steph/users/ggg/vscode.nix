@@ -115,11 +115,7 @@ in
               "timonwong.shellcheck"
             ];
           in
-          (pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names)
-          ++ [
-            self.packages.${system}.ms-dotnettools-csharp
-            self.packages.${system}.ms-dotnettools-csdevkit
-          ];
+          (pkgs.nix4vscode.forVscodeExtVersionPrerelease (getDecorators names) package.version names);
       };
 
       home.packages = with pkgs; [
