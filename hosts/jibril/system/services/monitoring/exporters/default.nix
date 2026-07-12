@@ -23,6 +23,6 @@ in
 
   config.my.constants.prometheus = {
     instance = "jibril";
-    scrape_interval = "5s";
+    scrape_interval = "15s";
   };
 }

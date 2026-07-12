@@ -3,6 +3,7 @@
   imports = [
     ./services
     ./networking.nix
+    ./power-saving.nix
     ./virtualisation.nix
     ./luks.nix
   ];

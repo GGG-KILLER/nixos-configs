@@ -7,15 +7,14 @@
   services.beesd.filesystems.root = {
     spec = "/";
     hashTableSizeMB = 512;
-    # extraOptions = [
-    #   "--timestamps"
-    #   "--thread-min"
-    #   "2"
-    #   "--loadavg-target"
-    #   "8.0"
-    #   "--throttle-factor"
-    #   "1"
-    # ];
+    extraOptions = [
+      "--thread-min"
+      "1"
+      "--loadavg-target"
+      "2.0"
+      "--throttle-factor"
+      "1"
+    ];
     # verbosity = "warning";
   };
 }
