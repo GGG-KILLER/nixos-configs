@@ -117,9 +117,6 @@ in
   programs.winbox.package = self.packages.${system}.winbox4;
   programs.winbox.openFirewall = true;
 
-  # Input Remapper to re-add dedicated / key
-  services.input-remapper.enable = true;
-
   # Steam
   programs.gamemode.enable = true;
   programs.steam.enable = true;
