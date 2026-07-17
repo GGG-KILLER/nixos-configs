@@ -69,14 +69,26 @@ to reason about. Verified by reading
 in the pinned nixpkgs (rev `3497aa5c9457a9d88d71fa93a4a8368816fbeeba`, the flake's
 current input at time of writing):
 
-- `boot.initrd.clevis.devices.<name>.secretFile` is a Nix **`path`**, not a
-  runtime file path. It gets resolved and copied into the Nix store **at build
-  time** and exposed inside the initrd at `/etc/clevis/<name>.jwe` (via
-  `boot.initrd.secrets`, same mechanism as the SSH host key). `<name>` must
-  match a key in `boot.initrd.luks.devices` — for shiro, `"crypted-root"`.
-- Because it's a build-time path, **the JWE file must exist in the repo** (or
-  somewhere else resolvable at eval time) — it can't be dropped onto the
-  running host out-of-band like the throwaway SSH host key is.
+- `boot.initrd.clevis.devices.<name>.secretFile` feeds `boot.initrd.secrets`
+  (same mechanism as the SSH host key), which exposes it inside the initrd at
+  `/etc/clevis/<name>.jwe`. `<name>` must match a key in
+  `boot.initrd.luks.devices` — for shiro, `"crypted-root"`.
+- **Do not point `secretFile` at a repo source path** (`./root.jwe`).
+  Initrd secrets are *not* embedded at build time: `append-initrd-secrets`
+  copies them into the initrd **at activation time on the target host**, from
+  a path recorded with its string context stripped (deliberately, so secrets
+  stay out of the closure). A `./root.jwe` reference therefore resolves to
+  the flake checkout's store path on the *build machine*, which doesn't exist
+  on the target — remote deploys fail at the bootloader-install step with
+  `cp: cannot stat '/nix/store/…-source/hosts/shiro/root.jwe'` (hit this
+  during the actual migration). Instead, ship the committed JWE through
+  `environment.etc` (which *is* part of the closure) and reference the
+  runtime path:
+  ```nix
+  environment.etc."clevis/root.jwe".source = ./root.jwe;
+  boot.initrd.clevis.devices."crypted-root".secretFile = "/etc/clevis/root.jwe";
+  ```
+  This mirrors how `storage.jwe` is already shipped for the ZFS unlock.
 - **The JWE is safe to commit.** Unlike the throwaway SSH host key (whose
   exposure via the world-readable ESP/initrd is the whole reason it's kept out
   of the repo and out of agenix), a Clevis JWE is only decryptable with Tang's
@@ -183,10 +195,12 @@ New file `hosts/shiro/luks.nix` (shiro's layout is flat — there is no
     "ip=${config.home.addrs.shiro-main}::${config.home.addrs.router}:255.255.0.0::enp6s0:none"
   ];
 
-  # c) Clevis auto-unlock.
+  # c) Clevis auto-unlock. The JWE ships via environment.etc, NOT as a
+  # source path — see "How it actually unlocks" for why.
+  environment.etc."clevis/root.jwe".source = ./root.jwe; # committed, see below
   boot.initrd.clevis.enable = true;
   boot.initrd.clevis.useTang = true;
-  boot.initrd.clevis.devices."crypted-root".secretFile = ./root.jwe; # committed, see below
+  boot.initrd.clevis.devices."crypted-root".secretFile = "/etc/clevis/root.jwe";
 }
 ```
 
