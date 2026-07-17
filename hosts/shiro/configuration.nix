@@ -19,6 +19,7 @@
     ./cost-saving.nix
     ./disk-encryption.nix
     ./hardware-configuration.nix
+    ./luks.nix
     ./networking
     ./ports.nix
     ./secrets.nix

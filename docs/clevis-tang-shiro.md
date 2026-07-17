@@ -11,13 +11,16 @@ shiro's Clevis/Tang setup; everything not mentioned here (disko wrapping style
 where applicable, the in-place `cryptsetup reencrypt` migration mechanics,
 header backup, etc.) follows that doc unchanged.
 
-**Status: not yet implemented.** This is a design write-up for future
-execution, not a record of a completed setup.
+**Status: Piece 1 (Tang on jibril) is implemented and deployed** (commit
+`f6f7aae`, and already proven working end-to-end by shiro's ZFS `storage`
+Clevis unlock). Pieces 2 and 3 (shiro's root LUKS config + migration) are not
+yet executed.
 
 ## Why Clevis + Tang, and why the passphrase stays
 
-Shiro's ZFS pool (`storage`) is already encrypted independently (keys fetched
-from Openbao/Vault post-boot over the network — see `hosts/shiro/disk-encryption.nix`).
+Shiro's ZFS pool (`storage`) is already encrypted independently (key loaded
+post-boot via Clevis against jibril's Tang, from the committed
+`hosts/shiro/storage.jwe` — see `hosts/shiro/disk-encryption.nix`).
 Only shiro's **root disk** is unencrypted today (a single btrfs filesystem
 declared by UUID in `hosts/shiro/hardware-configuration.nix` — shiro does not
 use disko, unlike `jibril`/`steph`).
@@ -80,7 +83,7 @@ current input at time of writing):
   live cooperation. Baking it into the Nix store — which is exactly as
   world-readable as the ESP — doesn't leak the LUKS passphrase by itself.
   **Do not** apply the SSH-host-key secrecy handling here; commit the JWE at
-  `hosts/shiro/system/shiro-root.jwe`.
+  `hosts/shiro/root.jwe` (alongside the existing `storage.jwe`).
 - When `boot.initrd.luks.devices."crypted-root"` exists and
   `boot.initrd.clevis.devices."crypted-root"` is set, nixpkgs' `luksroot.nix`
   (under `boot.initrd.systemd.enable`, this repo's default) generates a
@@ -93,9 +96,9 @@ current input at time of writing):
   nixpkgs itself add `wants`/`after = network-online.target` to that generated
   service — no manual systemd ordering needs to be hand-written.
 
-## Piece 1 — Tang server on jibril
+## Piece 1 — Tang server on jibril (done)
 
-New file `hosts/jibril/system/services/tang.nix`, imported from
+Implemented as `hosts/jibril/system/services/tang.nix`, imported from
 `hosts/jibril/system/services/default.nix`, following the repo's per-service
 pattern (fixed port like `postgres`/`mqtt`, not a Caddy-fronted or dynamic
 port):
@@ -116,7 +119,7 @@ port):
 }
 ```
 
-- Add a fixed `tang = 7654;` entry to `hosts/jibril/ports.nix`, alongside the
+- A fixed `tang = 7654;` entry exists in `hosts/jibril/ports.nix`, alongside the
   existing hard-coded entries (`dns=53`, `http=80`, `https=443`,
   `postgres=5432`, `mqtt=61001`). `7654` is Tang's own conventional default
   port (`services.tang.listenStream` defaults to `["7654"]` in nixpkgs) — reuse
@@ -147,8 +150,8 @@ btrfs UUID is unchanged**, so the existing `fileSystems.*` entries stay as-is
 and resolve automatically once the LUKS mapper device opens. Only the LUKS
 device wiring, initrd networking, and Clevis config are new.
 
-New file `hosts/shiro/system/luks.nix` (or added to the existing
-`disk-encryption.nix`), imported from `hosts/shiro/configuration.nix`:
+New file `hosts/shiro/luks.nix` (shiro's layout is flat — there is no
+`system/` subdirectory), imported from `hosts/shiro/configuration.nix`:
 
 ```nix
 { config, ... }:
@@ -183,7 +186,7 @@ New file `hosts/shiro/system/luks.nix` (or added to the existing
   # c) Clevis auto-unlock.
   boot.initrd.clevis.enable = true;
   boot.initrd.clevis.useTang = true;
-  boot.initrd.clevis.devices."crypted-root".secretFile = ./shiro-root.jwe; # committed, see below
+  boot.initrd.clevis.devices."crypted-root".secretFile = ./root.jwe; # committed, see below
 }
 ```
 
@@ -226,13 +229,13 @@ the JWE from it *before* building:
    first), provision the JWE from it:
    ```
    echo -n "<the chosen LUKS passphrase>" | \
-     clevis encrypt tang '{"url":"http://10.0.2.9:7654"}' > shiro-root.jwe
+     clevis encrypt tang '{"url":"http://10.0.2.2:7654"}' > hosts/shiro/root.jwe
    ```
-   `clevis encrypt` fetches Tang's advertisement and, since this is first
-   contact, prints the key thumbprint for confirmation (trust-on-first-use —
-   sanity-check it matches what `curl http://10.0.2.9:7654/adv` on jibril
-   reports). Commit `shiro-root.jwe` into the repo at the path referenced by
-   `secretFile` above.
+   `clevis encrypt` fetches Tang's advertisement and prints the key
+   thumbprint for confirmation — it should match the one already trusted
+   when `storage.jwe` was provisioned (sanity-check against
+   `curl http://10.0.2.2:7654/adv`). Commit `root.jwe` into the repo at the
+   path referenced by `secretFile` above.
 3. Make the config changes from Piece 2 (including the now-committed
    `secretFile` reference) and **build only** — reference doc step 2, never
    activate against the still-unencrypted disk.
@@ -286,7 +289,7 @@ Post-deploy (behavioural):
 
 ```bash
 # From another host on the LAN: Tang answers its advertisement
-curl -s http://10.0.2.9:7654/adv | jq .
+curl -s http://10.0.2.2:7654/adv | jq .
 
 # Happy path: reboot shiro with jibril already up → it should come back with
 # no interactive prompt (watch it come back on the network without an ssh-unlock).
