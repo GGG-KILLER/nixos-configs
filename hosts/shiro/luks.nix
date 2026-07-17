@@ -34,13 +34,18 @@
   # Clevis auto-unlock via jibril's Tang; falls back to the normal passphrase
   # prompt (console or initrd-SSH) whenever Tang is unreachable.
   #
-  # The JWE is shipped through environment.etc (part of the closure) rather
-  # than referenced as a source path: initrd secrets are appended to the
-  # initrd at *activation* time on the target from a context-stripped path,
-  # so a flake-source path breaks on remote deploys (the checkout only
-  # exists on the build machine).
+  # Exposed at /etc/clevis/root.jwe for consistency with storage.jwe; this
+  # entry also anchors the standalone store copy of the JWE (identical to
+  # the "${./root.jwe}" interpolation below) in the system closure.
   environment.etc."clevis/root.jwe".source = ./root.jwe;
   boot.initrd.clevis.enable = true;
   boot.initrd.clevis.useTang = true;
-  boot.initrd.clevis.devices."crypted-root".secretFile = "/etc/clevis/root.jwe";
+  # Interpolated store path, NOT a bare `./root.jwe`: append-initrd-secrets
+  # strips store context and toString's a bare path into a flake-source
+  # subpath that only exists on the eval machine, breaking remote deploys.
+  # "${...}" yields a standalone store copy that the etc entry above keeps
+  # in the closure, so it exists on the target whenever secrets are
+  # (re-)appended — including bootloader installs that run before
+  # activation.
+  boot.initrd.clevis.devices."crypted-root".secretFile = "${./root.jwe}";
 }

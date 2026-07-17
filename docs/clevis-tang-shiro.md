@@ -73,22 +73,33 @@ current input at time of writing):
   (same mechanism as the SSH host key), which exposes it inside the initrd at
   `/etc/clevis/<name>.jwe`. `<name>` must match a key in
   `boot.initrd.luks.devices` — for shiro, `"crypted-root"`.
-- **Do not point `secretFile` at a repo source path** (`./root.jwe`).
-  Initrd secrets are *not* embedded at build time: `append-initrd-secrets`
-  copies them into the initrd **at activation time on the target host**, from
-  a path recorded with its string context stripped (deliberately, so secrets
-  stay out of the closure). A `./root.jwe` reference therefore resolves to
-  the flake checkout's store path on the *build machine*, which doesn't exist
-  on the target — remote deploys fail at the bootloader-install step with
-  `cp: cannot stat '/nix/store/…-source/hosts/shiro/root.jwe'` (hit this
-  during the actual migration). Instead, ship the committed JWE through
-  `environment.etc` (which *is* part of the closure) and reference the
-  runtime path:
-  ```nix
-  environment.etc."clevis/root.jwe".source = ./root.jwe;
-  boot.initrd.clevis.devices."crypted-root".secretFile = "/etc/clevis/root.jwe";
+- **`secretFile` must be an *interpolated* store path — `"${./root.jwe}"` —
+  not a bare `./root.jwe`.** Initrd secrets are *not* embedded at build
+  time: `append-initrd-secrets` copies them into the initrd at
+  bootloader-install time **on the target host**, from a path recorded with
+  its store context stripped (deliberately, so secrets stay out of the
+  closure). Both naive options break, and both were hit during the actual
+  migration:
+  - A bare `./root.jwe` toString's to a subpath of the *flake checkout's*
+    store copy (`/nix/store/…-source/hosts/shiro/root.jwe`), which only
+    exists on the machine that ran the eval — remote deploys fail with
+    `cp: cannot stat '/nix/store/…-source/hosts/shiro/root.jwe'`.
+  - Referencing a runtime `/etc` path shipped via `environment.etc` fails
+    differently: the appender uses `cp -a`, which archives the
+    `/etc/static` **symlink** itself, dangling inside the initrd
+    (`cp: cannot stat '/.initrd-secrets/./etc/clevis/crypted-root.jwe'` at
+    boot; Clevis silently unavailable, passphrase fallback engages).
+
+  `"${./root.jwe}"` instead creates a standalone content-addressed store
+  copy (`/nix/store/<hash>-root.jwe`, a regular file). The context-strip
+  means the appender script itself doesn't hold it in the closure, so it
+  must be anchored some other way — the `environment.etc."clevis/root.jwe"`
+  entry (same interpolation → same store path) does that. Verify after
+  building:
   ```
-  This mirrors how `storage.jwe` is already shipped for the ZFS unlock.
+  nix path-info -r <toplevel> | grep -- -root.jwe   # must hit
+  grep clevis <appender>/bin/append-initrd-secrets   # cp source = that store path
+  ```
 - **The JWE is safe to commit.** Unlike the throwaway SSH host key (whose
   exposure via the world-readable ESP/initrd is the whole reason it's kept out
   of the repo and out of agenix), a Clevis JWE is only decryptable with Tang's
@@ -195,12 +206,13 @@ New file `hosts/shiro/luks.nix` (shiro's layout is flat — there is no
     "ip=${config.home.addrs.shiro-main}::${config.home.addrs.router}:255.255.0.0::enp6s0:none"
   ];
 
-  # c) Clevis auto-unlock. The JWE ships via environment.etc, NOT as a
-  # source path — see "How it actually unlocks" for why.
+  # c) Clevis auto-unlock. secretFile MUST be the interpolated form, and the
+  # etc entry anchors the JWE's store copy in the closure — see "How it
+  # actually unlocks" for the two failure modes this avoids.
   environment.etc."clevis/root.jwe".source = ./root.jwe; # committed, see below
   boot.initrd.clevis.enable = true;
   boot.initrd.clevis.useTang = true;
-  boot.initrd.clevis.devices."crypted-root".secretFile = "/etc/clevis/root.jwe";
+  boot.initrd.clevis.devices."crypted-root".secretFile = "${./root.jwe}";
 }
 ```
 
