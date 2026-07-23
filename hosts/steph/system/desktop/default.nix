@@ -7,7 +7,7 @@
 }:
 let
   audiorelay = pkgs.callPackage "${inputs.stackpkgs}/packages/audiorelay.nix" { };
-  inherit (self.packages.${system}) vivaldi-wayland;
+  inherit (self.packages.${system}) vivaldi-wayland moises-desktop;
 in
 {
   imports = [
@@ -22,6 +22,7 @@ in
     # Audio
     audiorelay
     crosspipe
+    moises-desktop
 
     # Android
     android-tools
