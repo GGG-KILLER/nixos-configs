@@ -78,6 +78,7 @@ in
     discord-canary
     mullvad-vpn
     vivaldi-wayland
+    zoom-us
 
     # Misc
     localsend
