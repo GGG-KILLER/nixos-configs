@@ -35,6 +35,9 @@ in
       # Allow traffic to our own addresses and to the LAN (SSH/Caddy/monitoring replies, router DNS).
       ${iptables} -A ${wg-interface}-killswitch -m addrtype --dst-type LOCAL -j RETURN
       ${iptables} -A ${wg-interface}-killswitch -d 10.0.0.0/8 -j RETURN
+      # Allow traffic to Docker's bridge networks (host <-> container, e.g. docker-proxy's
+      # backend connections for published ports). Never leaves the box, so no tunnel leak.
+      ${iptables} -A ${wg-interface}-killswitch -d 172.16.0.0/12 -j RETURN
       # Everything else may only leave through the tunnel.
       ${iptables} -A ${wg-interface}-killswitch ! -o ${wg-interface} -j REJECT
       ${iptables} -I OUTPUT -j ${wg-interface}-killswitch
