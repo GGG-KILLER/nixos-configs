@@ -8,8 +8,8 @@
   };
   "redis:latest" = dockerTools.pullImage {
     imageName = "redis";
-    imageDigest = "sha256:2838d5524559494f6f1cd66e97e76b200d64a633a8614200620755ed395daf32";
-    hash = "sha256-/Ay8okLgGQn7hmuxEZSLvBDP/lns3mJXZQVDgWbE2IA=";
+    imageDigest = "sha256:c88d347edef6249a6d2293f926f1eeb48bd40c57cbcd02c07f52e7f1fd2cb46b";
+    hash = "sha256-p/pCYtRkVQaNBkFOSj7+dOe2KdGbd+HkFuvhdscH9Tg=";
     finalImageName = "redis";
     finalImageTag = "latest";
   };
@@ -22,22 +22,22 @@
   };
   "gggdotdev/netprobesharp:dev" = dockerTools.pullImage {
     imageName = "gggdotdev/netprobesharp";
-    imageDigest = "sha256:880f336d13ed536c3f0dbce17f4364ede63fd277c655d201acbffe2f263a6bbe";
-    hash = "sha256-mBYbsu5vR+bbMft8itWBHIRD5gVPYZHBCAJUOXji6R0=";
+    imageDigest = "sha256:faa153810245373dfd68b899611953d9139c337a558448a69f09e8e96374fdd0";
+    hash = "sha256-4GRU2VYtL9Ti8CE+7IJAxyTkfCdqS3cT+UyG4H52EqA=";
     finalImageName = "gggdotdev/netprobesharp";
     finalImageTag = "dev";
   };
   "jlesage/jdownloader-2:latest" = dockerTools.pullImage {
     imageName = "jlesage/jdownloader-2";
-    imageDigest = "sha256:00729f90c5d057fa19c1883a3452e86a00857d2e59b0685fd6a0226f530b5bc9";
-    hash = "sha256-UYwqPinCKcJgO4Kvz5B4T5HB+RYQe7CLmZDzV76Yl+o=";
+    imageDigest = "sha256:47ee6c64917ca5326516ebe868714709c6bdd2e08ca0e33f6e80a943ef2019d2";
+    hash = "sha256-2Nchlz6pKW0TR1u/bS83qS60NVB1fbxkTmYd61VwyiE=";
     finalImageName = "jlesage/jdownloader-2";
     finalImageTag = "latest";
   };
   "klausmeyer/docker-registry-browser:latest" = dockerTools.pullImage {
     imageName = "klausmeyer/docker-registry-browser";
-    imageDigest = "sha256:78593b6cd4ddf12d335e7341a0aaca4a0ea9b781895ce0a536bdb801c700a4a5";
-    hash = "sha256-7LJ6rOObrKFpmahedt/aMwbn/eGiLWjs7+fb+p5U0h0=";
+    imageDigest = "sha256:b1b6a8ac182cbb346e5acb8bc80af50d0f59144758935cf59254ea799866060a";
+    hash = "sha256-xU9qdSX3hmm1Q8w6ry7Q1hTjLYPEYRN1jROuDeDcAkE=";
     finalImageName = "klausmeyer/docker-registry-browser";
     finalImageTag = "latest";
   };
@@ -57,15 +57,15 @@
   };
   "ghcr.io/danbooru/danbooru:master" = dockerTools.pullImage {
     imageName = "ghcr.io/danbooru/danbooru";
-    imageDigest = "sha256:0e8de2d600f2765ec4ac69e7033e0341f8f3dec7d5f13007d85ef67f21c07551";
-    hash = "sha256-ogBBIUrtWZFA7nBd2iMfObADwv8uOIVhfYeMl5QURlQ=";
+    imageDigest = "sha256:42d76bb35d0a98b08a3e4be0e7b0d272b44210737370ab6014e640f6790f53db";
+    hash = "sha256-vLCO47x9tQCcRYmSUfPrikqG3rCe4G+xZ2CSitUpyvE=";
     finalImageName = "ghcr.io/danbooru/danbooru";
     finalImageTag = "master";
   };
   "ghcr.io/home-assistant/home-assistant:stable" = dockerTools.pullImage {
     imageName = "ghcr.io/home-assistant/home-assistant";
-    imageDigest = "sha256:1476924357b46e80735c13e94232ba5c853cac052e9df4bb28d50fa56348097b";
-    hash = "sha256-NFCQA5CVY9+gvpxqpraZr38TJOUlDa3eCeIY4PM0Tno=";
+    imageDigest = "sha256:5a531753cea96444200158fc2b0ac7ccd739291ec50414877b396de6e0bb29b3";
+    hash = "sha256-QiY8JoqZqTlITRZXvrVFcpCeFMmZgKn8BtZ90Qpc7FM=";
     finalImageName = "ghcr.io/home-assistant/home-assistant";
     finalImageTag = "stable";
   };
