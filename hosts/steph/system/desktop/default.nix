@@ -67,6 +67,11 @@ in
     xca
     yubioath-flutter
 
+    # Games
+    r2modman
+    lutris
+    protonplus
+
     # Hardware
 
     # Media
