@@ -87,7 +87,7 @@ in
 
     # Misc
     localsend
-    metadata-cleaner
+    # metadata-cleaner # TODO: Uncomment once https://github.com/NixOS/nixpkgs/pull/552289 hits unstable
     bleachbit
     textpieces
     waydroid-helper
