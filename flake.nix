@@ -79,7 +79,7 @@
             (
               { ... }:
               {
-                nixpkgs.overlays = [ inputs.pog.overlays.${system}.default ];
+                nixpkgs.overlays = [ inputs.pog.overlays.default ];
               }
             )
             disko.nixosModules.disko
@@ -144,7 +144,7 @@
                     inherit system;
                     config.allowUnfree = true;
                     overlays = [
-                      inputs.pog.overlays.${system}.default
+                      inputs.pog.overlays.default
                       (
                         final: prev:
                         prev.lib.packagesFromDirectoryRecursive {
