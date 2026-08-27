@@ -29,9 +29,6 @@ in
 
   security.forcePageTableIsolation = true;
 
-  # This is required by podman to run containers in rootless mode.
-  security.unprivilegedUsernsClone = true;
-
   security.virtualisation.flushL1DataCache = "always";
 
   security.apparmor.enable = true;
