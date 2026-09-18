@@ -71,6 +71,7 @@ in
     r2modman
     lutris
     protonplus
+    itch
 
     # Hardware
 
