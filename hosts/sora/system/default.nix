@@ -46,11 +46,11 @@
   # Kernel
   boot.kernelPackages = pkgs.linuxPackages_6_18;
 
-  # Scheduler
-  services.scx.enable = true;
-  services.scx.package = pkgs.scx.rustscheds;
-  services.scx.scheduler = "scx_lavd";
-  services.scx.extraArgs = [ "--performance" ];
+  # # Scheduler
+  # services.scx.enable = true;
+  # services.scx.package = pkgs.scx.rustscheds;
+  # services.scx.scheduler = "scx_lavd";
+  # services.scx.extraArgs = [ "--performance" ];
 
   # ZFS boot settings.
   boot.supportedFilesystems = {
