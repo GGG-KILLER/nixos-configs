@@ -87,6 +87,10 @@ in
                       "sourceRoot"
                       "strictDeps"
                     ]
+                    # timonwong.shellcheck's nixpkgs postInstall assumes
+                    # contributes.configuration is an object; newer upstream
+                    # releases ship it as an array, breaking the jq patch.
+                    && !(name == "timonwong.shellcheck" && n == "postInstall")
                   ) nixpkgs-ext;
                 };
             getDecorators =
