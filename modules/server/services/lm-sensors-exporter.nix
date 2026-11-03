@@ -54,7 +54,7 @@ in
         '';
         Restart = mkDefault "always";
         PrivateTmp = mkDefault true;
-        WorkingDirectory = mkDefault /tmp;
+        WorkingDirectory = mkDefault "/tmp";
         DynamicUser = mkDefault true;
         User = mkDefault cfg.user;
         Group = cfg.group;
