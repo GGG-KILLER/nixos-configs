@@ -21,7 +21,7 @@ in
   environment.systemPackages = with pkgs; [
     # Games
     r2modman
-    lutris
+    # lutris # TODO: Uncomment once NixOS/nixpkgs#582210 hits unstable
     (makeAutostartItem {
       name = "steam";
       package = config.programs.steam.package;

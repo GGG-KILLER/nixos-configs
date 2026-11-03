@@ -69,7 +69,7 @@ in
 
     # Games
     r2modman
-    lutris
+    # lutris # TODO: Uncomment once NixOS/nixpkgs#582210 hits unstable
     protonplus
     itch
 
