@@ -7,7 +7,7 @@
 }:
 {
   imports = [
-    ./fpga.nix
+    # ./fpga.nix # TODO: Uncomment when issue with removed libpng12 has been fixed
     ./vscode.nix
     ./xdg-mimeapps.nix
   ];
